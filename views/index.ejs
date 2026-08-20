@@ -1,0 +1,189 @@
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-text">
+      <span class="eyebrow">Local Cleaning Service</span>
+      <h1>Get Your Home Cleaned <span class="highlight">Without Lifting a Finger</span></h1>
+      <p class="hero-lead">
+        Book your cleaning in 60 seconds. Trusted by hundreds of local homes and businesses.
+      </p>
+      <ul class="hero-checklist">
+        <li><span class="check">✓</span> Fully vetted &amp; insured cleaners</li>
+        <li><span class="check">✓</span> We bring all supplies &amp; equipment</li>
+        <li><span class="check">✓</span> Flat-rate pricing, no hidden fees</li>
+        <li><span class="check">✓</span> Not perfect? We re-clean it free.</li>
+      </ul>
+    </div>
+
+    <div class="quote-card">
+      <h3>Get Your Instant Price</h3>
+      <p class="quote-card-sub">Flat-rate &amp; hourly options. No surprises.</p>
+      <div class="quote-card-icon">🧴🧹</div>
+      <form action="/contact" method="GET" class="quote-form">
+        <input type="text" name="zip" placeholder="Enter your postcode" aria-label="Postcode" />
+        <button type="submit" class="btn btn-primary btn-block">Book Your Cleaning Now ➤</button>
+      </form>
+      <p class="quote-card-note">Takes 60 seconds • No payment required</p>
+      <div class="quote-card-badges">
+        <span>✓ Bonded</span>
+        <span>✓ Insured</span>
+        <span>✓ Vetted Staff</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section services-preview">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">What We Do</span>
+      <h2>Cleaning services for every space</h2>
+      <p>From a single room to a full office, we tailor every clean to what you actually need.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <% services.forEach(function(service) { %>
+        <a href="/services#<%= service.slug %>" class="card service-card">
+          <div class="service-icon"><%= service.icon %></div>
+          <h3><%= service.title %></h3>
+          <p><%= service.short_description %></p>
+          <span class="card-link">Learn more →</span>
+        </a>
+      <% }); %>
+    </div>
+
+    <div class="center-cta">
+      <a href="/services" class="btn btn-outline">See All Services</a>
+    </div>
+  </div>
+</section>
+
+<section class="section steps alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">How It Works</span>
+      <h2>Cleaning in 3 easy steps</h2>
+    </div>
+    <div class="grid grid-3 steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Choose Your Cleaning Service</h3>
+        <p>Let us know what you'd like cleaned and we'll give you the best price for the job.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Schedule Your Cleaning Time</h3>
+        <p>Pick a date and time that works for you — including next-day and weekend slots.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Enjoy a Clean, Tidy Space</h3>
+        <p>Sit back and relax while we make sure everything is spotless, top to bottom.</p>
+      </div>
+    </div>
+    <div class="center-cta">
+      <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+      <a href="/services" class="btn btn-text">View Services →</a>
+    </div>
+  </div>
+</section>
+
+<section class="section why-us">
+  <div class="container grid grid-2 align-center">
+    <div>
+      <span class="eyebrow">Why Choose Us</span>
+      <h2>Cleaning you can actually trust</h2>
+      <ul class="checklist">
+        <li><strong>Vetted & insured cleaners</strong> — every team member is trained, background-checked and fully insured.</li>
+        <li><strong>No subcontractors</strong> — cleaning is our core specialty, so every clean is done by our own trained staff.</li>
+        <li><strong>100% clean guarantee</strong> — not happy with an area? We'll come back and re-clean it, free.</li>
+        <li><strong>Latest tools & products</strong> — advanced equipment and eco-friendly products available on request.</li>
+      </ul>
+      <a href="/about" class="btn btn-primary">More About Us</a>
+    </div>
+    <div class="stat-card-grid">
+      <div class="stat-card"><strong>10+</strong><span>Years experience</span></div>
+      <div class="stat-card"><strong>4,500+</strong><span>Properties cleaned</span></div>
+      <div class="stat-card"><strong>1,580+</strong><span>Happy clients</span></div>
+      <div class="stat-card"><strong>100%</strong><span>Clean guarantee</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section everything-included alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Compare</span>
+      <h2>Everything Included. One Transparent Price.</h2>
+      <p>No hidden fees. No add-on charges. Here's how we compare to typical cleaners and franchises.</p>
+    </div>
+    <div class="compare-table">
+      <div class="compare-row compare-head">
+        <div>Included</div>
+        <div><%= site.name %></div>
+        <div>Typical Cleaner</div>
+        <div>Big Franchise</div>
+      </div>
+      <div class="compare-row"><div>Flat-rate pricing upfront</div><div>✓</div><div>✓</div><div></div></div>
+      <div class="compare-row"><div>Background-checked staff</div><div>✓</div><div></div><div>✓</div></div>
+      <div class="compare-row"><div>Bonded &amp; insured</div><div>✓</div><div></div><div>✓</div></div>
+      <div class="compare-row"><div>Eco-friendly supplies included</div><div>✓</div><div>✓</div><div></div></div>
+      <div class="compare-row"><div>No franchise markup</div><div>✓</div><div>✓</div><div></div></div>
+      <div class="compare-row"><div>Same cleaner every visit</div><div>✓</div><div></div><div></div></div>
+      <div class="compare-row"><div>Recurring service discounts</div><div>✓</div><div>✓</div><div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="section discounts">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Save More</span>
+      <h2>Exclusive discounts for recurring cleans</h2>
+    </div>
+    <div class="grid grid-3">
+      <div class="discount-card">
+        <div class="discount-percent">20%</div>
+        <p>Off weekly cleans</p>
+      </div>
+      <div class="discount-card">
+        <div class="discount-percent">15%</div>
+        <p>Off fortnightly cleans</p>
+      </div>
+      <div class="discount-card">
+        <div class="discount-percent">10%</div>
+        <p>Off monthly cleans</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section testimonials alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What our customers say</h2>
+    </div>
+    <div class="grid grid-3">
+      <% testimonials.forEach(function(t) { %>
+        <div class="card testimonial-card">
+          <div class="testimonial-top">
+            <div class="stars"><%= '★'.repeat(t.rating) %></div>
+            <span class="source-badge">Verified</span>
+          </div>
+          <p class="quote">"<%= t.quote %>"</p>
+          <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>Ready for a cleaner space?</h2>
+      <p>Get a free, no-obligation quote today — most enquiries answered within 24 hours.</p>
+    </div>
+    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+  </div>
+</section>

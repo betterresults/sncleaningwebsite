@@ -1,0 +1,33 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Gallery</span>
+    <h1>Recent work</h1>
+    <p>A look at some of our before &amp; after results. Add your own project photos here.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="grid grid-3 gallery-grid">
+      <% for (let i = 1; i <= 9; i++) { %>
+        <div class="gallery-item" style="--i: <%= i %>">
+          <span>Photo <%= i %></span>
+        </div>
+      <% } %>
+    </div>
+    <p class="gallery-note">
+      Placeholder gallery — replace the tiles in <code>views/gallery.ejs</code> with real
+      before/after photos from <code>public/images/</code> once available.
+    </p>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>Like what you see?</h2>
+      <p>Let's get your space looking just as good.</p>
+    </div>
+    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+  </div>
+</section>

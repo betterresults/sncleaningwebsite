@@ -1,0 +1,235 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Our Services</span>
+    <h1><%= service.icon %> <%= service.title %></h1>
+    <p><%= service.short_description %></p>
+    <div class="quote-card-badges" style="margin-top:18px;">
+      <span>✓ Bonded</span>
+      <span>✓ Insured</span>
+      <span>✓ Vetted Staff</span>
+      <span>✓ 100% Clean Guarantee</span>
+    </div>
+    <div style="margin-top:24px;">
+      <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<section class="section">
+  <div class="container">
+    <div class="service-detail">
+      <div class="service-detail-media">
+        <% if (page.images && page.images.length) { %>
+          <img src="<%= page.images[0] %>" alt="<%= service.title %>" style="width:100%; border-radius:16px;" />
+        <% } else { %>
+          <div class="service-icon-lg"><%= service.icon %></div>
+        <% } %>
+      </div>
+      <div class="service-detail-text">
+        <h2>About This Service</h2>
+        <p><%= page.full_description %></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- What's Included, by room -->
+<% if (page.included_tasks && page.included_tasks.length) { %>
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">What's Included</span>
+      <h2>Exactly what we cover</h2>
+      <p>A full breakdown of what's included in every <%= service.title.toLowerCase() %> booking.</p>
+    </div>
+    <div class="grid grid-2">
+      <% page.included_tasks.forEach(function(group) { %>
+        <div class="card">
+          <h3><%= group.room %></h3>
+          <ul class="checklist">
+            <% group.tasks.forEach(function(task) { %>
+              <li><%= task %></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Why choose us -->
+<section class="section">
+  <div class="container grid grid-2 align-center">
+    <div>
+      <span class="eyebrow">Why Choose Us</span>
+      <h2>Cleaning you can actually trust</h2>
+      <ul class="checklist">
+        <li><strong>Vetted &amp; insured cleaners</strong> — every team member is trained, background-checked and fully insured.</li>
+        <li><strong>No subcontractors</strong> — cleaning is our core specialty, so every clean is done by our own trained staff.</li>
+        <li><strong>100% clean guarantee</strong> — not happy with an area? We'll come back and re-clean it, free.</li>
+        <li><strong>Latest tools &amp; products</strong> — advanced equipment and eco-friendly products available on request.</li>
+      </ul>
+      <a href="/about" class="btn btn-primary">More About Us</a>
+    </div>
+    <div class="stat-card-grid">
+      <div class="stat-card"><strong>10+</strong><span>Years experience</span></div>
+      <div class="stat-card"><strong>4,500+</strong><span>Properties cleaned</span></div>
+      <div class="stat-card"><strong>1,580+</strong><span>Happy clients</span></div>
+      <div class="stat-card"><strong>100%</strong><span>Clean guarantee</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section steps alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">How It Works</span>
+      <h2>Booking your <%= service.title.toLowerCase() %> in 3 easy steps</h2>
+    </div>
+    <div class="grid grid-3 steps-grid">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Get Your Quote</h3>
+        <p>Tell us about your space and get an instant, flat-rate price — no call needed.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Pick a Time</h3>
+        <p>Choose a date and time that works for you, including next-day and weekend slots.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>We Take It From There</h3>
+        <p>A vetted, insured cleaner arrives with everything needed to get the job done right.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Gallery -->
+<% if (page.images && page.images.length > 1) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Gallery</span>
+      <h2>Recent <%= service.title %> work</h2>
+    </div>
+    <div class="gallery-grid">
+      <% page.images.slice(1).forEach(function(img) { %>
+        <img src="<%= img %>" alt="<%= service.title %>" style="width:100%; border-radius:12px;" />
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Pricing -->
+<% if (page.pricing_note) { %>
+<section class="section alt-bg">
+  <div class="container" style="max-width:820px;">
+    <div class="section-heading">
+      <span class="eyebrow">Pricing</span>
+      <h2>What does it cost?</h2>
+    </div>
+    <p><%= page.pricing_note %></p>
+    <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary" style="margin-top:12px;">Get Your Instant Quote</a>
+  </div>
+</section>
+<% } %>
+
+<!-- Areas we cover -->
+<% if (typeof coverageAreas !== 'undefined' && coverageAreas.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Coverage</span>
+      <h2><%= service.title %> across London &amp; Essex</h2>
+      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+    </div>
+    <div class="area-tags">
+      <% coverageAreas.forEach(function(area) { %>
+        <span class="area-tag"><%= area %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Testimonials -->
+<% if (typeof testimonials !== 'undefined' && testimonials.length) { %>
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What our customers say</h2>
+    </div>
+    <div class="grid grid-3">
+      <% testimonials.forEach(function(t) { %>
+        <div class="card testimonial-card">
+          <div class="testimonial-top">
+            <div class="stars"><%= '★'.repeat(t.rating) %></div>
+            <span class="source-badge">Verified</span>
+          </div>
+          <p class="quote">"<%= t.quote %>"</p>
+          <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- FAQs -->
+<% if (page.faqs && page.faqs.length) { %>
+<section class="section alt-bg">
+  <div class="container" style="max-width:820px;">
+    <div class="section-heading">
+      <span class="eyebrow">FAQs</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <% page.faqs.forEach(function(faq) { %>
+        <div class="faq-item" style="margin-bottom:24px;">
+          <h3 style="font-size:1.05rem;"><%= faq.question %></h3>
+          <p><%= faq.answer %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Related services -->
+<% if (typeof relatedServices !== 'undefined' && relatedServices.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Related</span>
+      <h2>You might also need</h2>
+    </div>
+    <div class="grid grid-3">
+      <% relatedServices.forEach(function(s) { %>
+        <a href="/services/<%= s.slug %>" class="card service-card">
+          <div class="service-icon"><%= s.icon %></div>
+          <h3><%= s.title %></h3>
+          <p><%= s.short_description %></p>
+          <span class="card-link">Learn more →</span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>Ready to book <%= service.title.toLowerCase() %>?</h2>
+      <p>Tell us about your space and we'll recommend the right schedule.</p>
+    </div>
+    <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary btn-lg">Get a Free Quote</a>
+  </div>
+</section>

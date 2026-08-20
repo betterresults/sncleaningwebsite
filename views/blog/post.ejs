@@ -1,0 +1,18 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Blog</span>
+    <h1><%= post.title %></h1>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="max-width:760px;">
+    <% if (post.cover_image) { %>
+      <img src="<%= post.cover_image %>" alt="<%= post.title %>" style="width:100%; border-radius:16px; margin-bottom:32px;" />
+    <% } %>
+    <div class="blog-content">
+      <%- post.content %>
+    </div>
+    <a href="/blog" class="btn btn-primary" style="margin-top:32px;">← Back to Blog</a>
+  </div>
+</section>

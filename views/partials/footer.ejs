@@ -1,0 +1,52 @@
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col">
+      <a href="/" class="logo">
+        <span class="logo-mark">✦</span>
+        <span class="logo-text"><%= site.name %></span>
+      </a>
+      <p class="footer-tagline">Professional, reliable cleaning for homes and businesses. Fully insured, vetted cleaners you can trust.</p>
+      <div class="footer-social">
+        <a href="<%= site.social.facebook %>" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
+        <a href="<%= site.social.instagram %>" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="/services#residential-cleaning">Residential Cleaning</a></li>
+        <li><a href="/services#end-of-tenancy-cleaning">End of Tenancy</a></li>
+        <li><a href="/services#airbnb-cleaning">Airbnb Cleaning</a></li>
+        <li><a href="/services#office-cleaning">Office Cleaning</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Get in Touch</h4>
+      <ul class="footer-contact">
+        <li>📞 <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
+        <li>✉️ <a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+        <li>📍 <%= site.address %></li>
+        <li>🕒 <%= site.hours %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container">
+      <p>&copy; <%= new Date().getFullYear() %> <%= site.name %>. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

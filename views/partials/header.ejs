@@ -1,0 +1,40 @@
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">
+      <span class="logo-mark">✦</span>
+      <span class="logo-text"><%= site.name %></span>
+    </a>
+
+    <nav class="main-nav" id="main-nav">
+      <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a>
+
+      <div class="nav-dropdown">
+        <a href="/services" class="<%= currentPath.startsWith('/services') ? 'active' : '' %>">
+          Services <span class="nav-dropdown-caret">▾</span>
+        </a>
+        <% if (typeof navServices !== 'undefined' && navServices.length) { %>
+          <div class="nav-dropdown-menu">
+            <% navServices.forEach(function(s) { %>
+              <a href="<%= s.hasDetailPage ? '/services/' + s.slug : '/services#' + s.slug %>">
+                <span class="nav-dropdown-icon"><%= s.icon %></span> <%= s.title %>
+              </a>
+            <% }); %>
+          </div>
+        <% } %>
+      </div>
+
+      <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a>
+      <a href="/gallery" class="<%= currentPath === '/gallery' ? 'active' : '' %>">Gallery</a>
+      <a href="/blog" class="<%= currentPath.startsWith('/blog') ? 'active' : '' %>">Blog</a>
+      <a href="/contact" class="<%= currentPath === '/contact' ? 'active' : '' %>">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="header-phone">📞 <%= site.phone %></a>
+      <a href="/contact" class="btn btn-primary">Get a Free Quote</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>

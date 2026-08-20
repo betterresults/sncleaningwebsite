@@ -1,0 +1,46 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Our Services</span>
+    <h1>Cleaning services tailored to you</h1>
+    <p>Pick a single service or combine a few — every clean is scoped to your space and schedule.</p>
+  </div>
+</section>
+
+<%- include('partials/cleaning-checklist') %>
+
+<section class="section">
+  <div class="container services-list">
+    <% services.forEach(function(service, i) { %>
+      <div class="service-detail <%= i % 2 === 1 ? 'reverse' : '' %>" id="<%= service.slug %>">
+        <div class="service-detail-media">
+          <div class="service-icon-lg"><%= service.icon %></div>
+        </div>
+        <div class="service-detail-text">
+          <h2><%= service.title %></h2>
+          <p><%= service.short_description %></p>
+          <ul class="feature-list">
+            <% (service.features || []).forEach(function(f) { %>
+              <li><%= f %></li>
+            <% }); %>
+          </ul>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request This Service</a>
+            <% if (service.hasDetailPage) { %>
+              <a href="/services/<%= service.slug %>" class="btn btn-outline">Learn More</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+</section>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>Not sure what you need?</h2>
+      <p>Tell us about your space and we'll recommend the right service and schedule.</p>
+    </div>
+    <a href="/contact" class="btn btn-primary btn-lg">Talk To Us</a>
+  </div>
+</section>

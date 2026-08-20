@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><%= title %> | <%= site.name %></title>
+  <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
+</head>
+<body>
+  <%- include('../partials/header') %>
+
+  <main>
+    <%- body %>
+  </main>
+
+  <%- include('../partials/footer') %>
+
+  <div class="sticky-bar">
+    <div class="container sticky-bar-inner">
+      <span class="sticky-bar-label"><span class="pulse-dot"></span> Book Your Cleaning</span>
+      <form action="/contact" method="GET" class="sticky-bar-form">
+        <input type="text" name="zip" placeholder="Postcode" aria-label="Postcode" />
+        <button type="submit" class="btn btn-primary">Go ➤</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="/js/main.js?v=<%= assetVersion %>"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow">Blog</span>
+    <h1>Cleaning tips & news</h1>
+    <p>Advice, guides and updates from the SN Cleaning Services team.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <% if (!posts.length) { %>
+      <p>No posts published yet — check back soon.</p>
+    <% } else { %>
+      <div class="services-grid">
+        <% posts.forEach(function(post) { %>
+          <a href="/blog/<%= post.slug %>" class="service-card">
+            <% if (post.cover_image) { %>
+              <img src="<%= post.cover_image %>" alt="<%= post.title %>" style="width:100%; border-radius:12px; margin-bottom:14px;" />
+            <% } %>
+            <h3><%= post.title %></h3>
+            <p><%= post.excerpt %></p>
+          </a>
+        <% }); %>
+      </div>
+    <% } %>
+  </div>
+</section>
