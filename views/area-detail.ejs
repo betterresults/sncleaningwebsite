@@ -1,0 +1,160 @@
+<section class="page-hero">
+  <div class="container">
+    <span class="eyebrow"><%= parent ? service.title + ' · Part of ' + parent.name : service.title %></span>
+    <h1><%= service.title %> in <%= region.name %></h1>
+    <p><%= page.meta_description || `${service.title} in ${region.name}.` %></p>
+    <div class="quote-card-badges" style="margin-top:18px;">
+      <span>✓ Bonded</span>
+      <span>✓ Insured</span>
+      <span>✓ Vetted Staff</span>
+      <span>✓ 100% Clean Guarantee</span>
+    </div>
+    <div style="margin-top:24px;">
+      <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- Overview -->
+<% if (page.intro) { %>
+<section class="section">
+  <div class="container" style="max-width:820px;">
+    <p><%= page.intro %></p>
+  </div>
+</section>
+<% } %>
+
+<!-- Why choose us -->
+<section class="section alt-bg">
+  <div class="container grid grid-2 align-center">
+    <div>
+      <span class="eyebrow">Why Choose Us</span>
+      <h2>Cleaning you can actually trust</h2>
+      <ul class="checklist">
+        <li><strong>Vetted &amp; insured cleaners</strong> — every team member is trained, background-checked and fully insured.</li>
+        <li><strong>No subcontractors</strong> — cleaning is our core specialty, so every clean is done by our own trained staff.</li>
+        <li><strong>100% clean guarantee</strong> — not happy with an area? We'll come back and re-clean it, free.</li>
+        <li><strong>Latest tools &amp; products</strong> — advanced equipment and eco-friendly products available on request.</li>
+      </ul>
+      <a href="/about" class="btn btn-primary">More About Us</a>
+    </div>
+    <div class="stat-card-grid">
+      <div class="stat-card"><strong>10+</strong><span>Years experience</span></div>
+      <div class="stat-card"><strong>4,500+</strong><span>Properties cleaned</span></div>
+      <div class="stat-card"><strong>1,580+</strong><span>Happy clients</span></div>
+      <div class="stat-card"><strong>100%</strong><span>Clean guarantee</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Other services available here -->
+<% var otherServices = (typeof services !== 'undefined' ? services : []).filter(function(s) { return s.slug !== service.slug; }); %>
+<% if (otherServices.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Also Available in <%= region.name %></span>
+      <h2>Other cleaning services we offer here</h2>
+    </div>
+    <div class="grid grid-3">
+      <% otherServices.forEach(function(s) { %>
+        <a href="/<%= s.slug %>" class="card service-card">
+          <div class="service-icon"><%= s.icon %></div>
+          <h3><%= s.title %></h3>
+          <p><%= s.short_description %></p>
+          <span class="card-link">Learn more →</span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Related areas -->
+<% if (typeof relatedAreas !== 'undefined' && relatedAreas.length) { %>
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Nearby</span>
+      <h2><%= service.title %> near <%= region.name %></h2>
+    </div>
+    <div class="area-tags">
+      <% relatedAreas.forEach(function(a) { %>
+        <a href="<%= a.url %>" class="area-tag"><%= a.name %></a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Full coverage -->
+<% if (typeof coverageAreas !== 'undefined' && coverageAreas.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Coverage</span>
+      <h2>All the areas we cover</h2>
+      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+    </div>
+    <div class="area-tags">
+      <% coverageAreas.forEach(function(area) { %>
+        <span class="area-tag"><%= area %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Testimonials -->
+<% if (typeof testimonials !== 'undefined' && testimonials.length) { %>
+<section class="section alt-bg testimonials">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Testimonials</span>
+      <h2>What our customers say</h2>
+    </div>
+    <div class="grid grid-3">
+      <% testimonials.forEach(function(t) { %>
+        <div class="card testimonial-card">
+          <div class="testimonial-top">
+            <div class="stars"><%= '★'.repeat(t.rating) %></div>
+            <span class="source-badge">Verified</span>
+          </div>
+          <p class="quote">"<%= t.quote %>"</p>
+          <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- FAQs -->
+<% if (page.faqs && page.faqs.length) { %>
+<section class="section faq">
+  <div class="container" style="max-width:820px;">
+    <div class="section-heading">
+      <span class="eyebrow">FAQs</span>
+      <h2>Frequently Asked Questions</h2>
+    </div>
+    <div class="faq-list">
+      <% page.faqs.forEach(function(faq) { %>
+        <div class="faq-item">
+          <h3><%= faq.question %></h3>
+          <p><%= faq.answer %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<section class="section cta-band">
+  <div class="container cta-band-inner">
+    <div>
+      <h2>Ready to book <%= service.title.toLowerCase() %> in <%= region.name %>?</h2>
+      <p>Get a free, no-obligation quote today — most enquiries answered within 24 hours.</p>
+    </div>
+    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+  </div>
+</section>

@@ -42,7 +42,7 @@
 
     <div class="grid grid-3">
       <% services.forEach(function(service) { %>
-        <a href="/services#<%= service.slug %>" class="card service-card">
+        <a href="/<%= service.slug %>" class="card service-card">
           <div class="service-icon"><%= service.icon %></div>
           <h3><%= service.title %></h3>
           <p><%= service.short_description %></p>
@@ -52,7 +52,7 @@
     </div>
 
     <div class="center-cta">
-      <a href="/services" class="btn btn-outline">See All Services</a>
+      <a href="/our-services" class="btn btn-outline">See All Services</a>
     </div>
   </div>
 </section>
@@ -82,10 +82,12 @@
     </div>
     <div class="center-cta">
       <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
-      <a href="/services" class="btn btn-text">View Services →</a>
+      <a href="/our-services" class="btn btn-text">View Services →</a>
     </div>
   </div>
 </section>
+
+<%- include('partials/cleaning-checklist') %>
 
 <section class="section why-us">
   <div class="container grid grid-2 align-center">
@@ -134,6 +136,47 @@
   </div>
 </section>
 
+<% if (typeof coverageAreas !== 'undefined' && coverageAreas.length) { %>
+<section class="section coverage alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Coverage</span>
+      <h2>Areas we cover across London &amp; Essex</h2>
+      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+    </div>
+    <div class="area-tags">
+      <% coverageAreas.forEach(function(area) { %>
+        <span class="area-tag"><%= area %></span>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<% if (typeof featuredAreaGroups !== 'undefined' && featuredAreaGroups.length) { %>
+<section class="section area-guides">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Local Guides</span>
+      <h2>Cleaning services near you</h2>
+      <p>Dedicated guides for specific areas we cover — we're adding more regularly.</p>
+    </div>
+    <div class="grid grid-3">
+      <% featuredAreaGroups.forEach(function(group) { %>
+        <div class="card area-guide-card">
+          <h3><%= group.parentName %></h3>
+          <ul class="area-guide-list">
+            <% group.areas.forEach(function(area) { %>
+              <li><a href="<%= area.url %>"><%= area.serviceTitle %> in <%= area.name %> →</a></li>
+            <% }); %>
+          </ul>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
 <section class="section discounts">
   <div class="container">
     <div class="section-heading">
@@ -177,6 +220,26 @@
     </div>
   </div>
 </section>
+
+<% if (typeof faqs !== 'undefined' && faqs.length) { %>
+<section class="section faq">
+  <div class="container" style="max-width:820px;">
+    <div class="section-heading">
+      <span class="eyebrow">FAQs</span>
+      <h2>Frequently asked questions</h2>
+      <p>Everything you need to know before booking. Don't see your question? Just get in touch.</p>
+    </div>
+    <div class="faq-list">
+      <% faqs.forEach(function(faq) { %>
+        <div class="faq-item">
+          <h3><%= faq.question %></h3>
+          <p><%= faq.answer %></p>
+        </div>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
 
 <section class="section cta-band">
   <div class="container cta-band-inner">

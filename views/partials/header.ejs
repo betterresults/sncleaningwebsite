@@ -1,21 +1,22 @@
 <header class="site-header">
-  <div class="container header-inner">
-    <a href="/" class="logo">
-      <span class="logo-mark">✦</span>
-      <span class="logo-text"><%= site.name %></span>
-    </a>
+  <div class="header-inner">
+    <div class="header-left">
+      <a href="/" class="logo">
+        <img src="/images/logo.png?v=<%= assetVersion %>" alt="<%= site.name %>" class="logo-img" />
+      </a>
+    </div>
 
     <nav class="main-nav" id="main-nav">
       <a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a>
 
       <div class="nav-dropdown">
-        <a href="/services" class="<%= currentPath.startsWith('/services') ? 'active' : '' %>">
+        <a href="/our-services" class="<%= currentPath.startsWith('/our-services') ? 'active' : '' %>">
           Services <span class="nav-dropdown-caret">▾</span>
         </a>
         <% if (typeof navServices !== 'undefined' && navServices.length) { %>
           <div class="nav-dropdown-menu">
             <% navServices.forEach(function(s) { %>
-              <a href="<%= s.hasDetailPage ? '/services/' + s.slug : '/services#' + s.slug %>">
+              <a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>">
                 <span class="nav-dropdown-icon"><%= s.icon %></span> <%= s.title %>
               </a>
             <% }); %>
@@ -31,7 +32,7 @@
 
     <div class="header-actions">
       <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="header-phone">📞 <%= site.phone %></a>
-      <a href="/contact" class="btn btn-primary">Get a Free Quote</a>
+      <a href="/contact" class="btn btn-primary header-quote-btn">Get a Free Quote</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>

@@ -4,6 +4,10 @@
  * (or any static host) with zero server required — the contact form is handled
  * by Netlify Forms instead (see views/contact.ejs).
  *
+ * Also generates dist/robots.txt and dist/sitemap.xml straight from the same
+ * route list and the same SITE_URL used for canonical tags — so all three can
+ * never drift out of sync with each other or with what's actually published.
+ *
  * Run with: npm run build
  */
 const http = require('http');
@@ -12,38 +16,68 @@ const path = require('path');
 
 const app = require('../server');
 const content = require('../data/content');
+const { SITE_URL } = require('../lib/site-config');
 const DIST = path.join(__dirname, '..', 'dist');
 const PORT = 4521;
 
 // Fixed routes, plus one route per published service page and blog post
 // (pulled live from Supabase at build time — this is what makes "add a row,
 // get a page" work: every build re-reads the tables and generates a page for
-// whatever is published right now).
+// whatever is published right now). `sitemap: false` keeps low-value/private
+// pages (the 404 capture route, the post-submit thank-you page) out of the
+// sitemap without excluding them from the site itself.
 async function buildRoutes() {
   const fixed = [
-    { url: '/', out: 'index.html' },
-    { url: '/services', out: 'services/index.html' },
-    { url: '/about', out: 'about/index.html' },
-    { url: '/gallery', out: 'gallery/index.html' },
-    { url: '/blog', out: 'blog/index.html' },
-    { url: '/contact', out: 'contact/index.html' },
-    { url: '/contact/success', out: 'contact/success/index.html' },
-    { url: '/this-page-does-not-exist', out: '404.html' } // captures our custom 404 view
+    { url: '/', out: 'index.html', sitemap: true },
+    // /our-services (not /services) to match the exact URL already indexed
+    // on sncleaningservices.co.uk — see server.js for the route itself.
+    { url: '/our-services', out: 'our-services/index.html', sitemap: true },
+    { url: '/about', out: 'about/index.html', sitemap: true },
+    { url: '/gallery', out: 'gallery/index.html', sitemap: true },
+    { url: '/blog', out: 'blog/index.html', sitemap: true },
+    { url: '/contact', out: 'contact/index.html', sitemap: true },
+    { url: '/contact/success', out: 'contact/success/index.html', sitemap: false },
+    { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view
   ];
 
-  const [servicePages, blogPosts] = await Promise.all([content.getServicePages(), content.getBlogPosts()]);
+  const [servicePages, blogPosts, areaPages] = await Promise.all([
+    content.getServicePages(),
+    content.getBlogPosts(),
+    content.getAreaPages()
+  ]);
 
+  // Service hub pages live at site root (/{slug}/, not /services/{slug}/) —
+  // matching the exact URLs already indexed on sncleaningservices.co.uk
+  // (e.g. /office-cleaning/, /domestic-cleaning/) so this build can take
+  // over those pages with no redirect needed once the domain moves.
   const serviceRoutes = servicePages.map((p) => ({
-    url: `/services/${p.slug}`,
-    out: `services/${p.slug}/index.html`
+    url: `/${p.slug}`,
+    out: `${p.slug}/index.html`,
+    sitemap: true,
+    lastmod: p.updated_at
   }));
 
   const blogRoutes = blogPosts.map((p) => ({
     url: `/blog/${p.slug}`,
-    out: `blog/${p.slug}/index.html`
+    out: `blog/${p.slug}/index.html`,
+    sitemap: true,
+    lastmod: p.updated_at
   }));
 
-  return [...fixed, ...serviceRoutes, ...blogRoutes];
+  // Each area page belongs to one service, so its URL is /{service-slug}/{area-slug}/
+  // — matching the pattern already live and indexed at sncleaningservices.co.uk
+  // (e.g. /end-of-tenancy-cleaning/camden/) so this build can take over those
+  // exact URLs with no redirects needed once it goes live.
+  const areaRoutes = areaPages
+    .filter((p) => p.services)
+    .map((p) => ({
+      url: `/${p.services.slug}/${p.slug}`,
+      out: `${p.services.slug}/${p.slug}/index.html`,
+      sitemap: true,
+      lastmod: p.updated_at
+    }));
+
+  return [...fixed, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
 }
 
 function fetchHtml(url) {
@@ -64,6 +98,27 @@ function writeFile(relPath, content) {
   fs.writeFileSync(fullPath, content);
 }
 
+function writeSitemap(routes) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = routes
+    .filter((r) => r.sitemap)
+    .map((r) => {
+      const lastmod = (r.lastmod ? new Date(r.lastmod).toISOString().slice(0, 10) : today);
+      return `  <url>\n    <loc>${SITE_URL}${r.url}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+    })
+    .join('\n');
+
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  writeFile('sitemap.xml', xml);
+  console.log(`Wrote dist/sitemap.xml (${routes.filter((r) => r.sitemap).length} URLs)`);
+}
+
+function writeRobotsTxt() {
+  const txt = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  writeFile('robots.txt', txt);
+  console.log('Wrote dist/robots.txt');
+}
+
 async function main() {
   // Fresh dist/
   fs.rmSync(DIST, { recursive: true, force: true });
@@ -80,6 +135,9 @@ async function main() {
         writeFile(route.out, body);
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
+
+      writeSitemap(ROUTES);
+      writeRobotsTxt();
 
       // Copy static assets (css/js/images) so absolute paths like /css/style.css resolve.
       const publicDir = path.join(__dirname, '..', 'public');

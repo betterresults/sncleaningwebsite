@@ -26,7 +26,7 @@
           <div style="display:flex; gap:12px; flex-wrap:wrap;">
             <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request This Service</a>
             <% if (service.hasDetailPage) { %>
-              <a href="/services/<%= service.slug %>" class="btn btn-outline">Learn More</a>
+              <a href="/<%= service.slug %>" class="btn btn-outline">Learn More</a>
             <% } %>
           </div>
         </div>
@@ -41,6 +41,6 @@
       <h2>Not sure what you need?</h2>
       <p>Tell us about your space and we'll recommend the right service and schedule.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Talk To Us</a>
+    <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary btn-lg">Talk To Us</a>
   </div>
 </section>

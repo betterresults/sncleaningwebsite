@@ -212,7 +212,7 @@
     </div>
     <div class="grid grid-3">
       <% relatedServices.forEach(function(s) { %>
-        <a href="/services/<%= s.slug %>" class="card service-card">
+        <a href="/<%= s.slug %>" class="card service-card">
           <div class="service-icon"><%= s.icon %></div>
           <h3><%= s.title %></h3>
           <p><%= s.short_description %></p>

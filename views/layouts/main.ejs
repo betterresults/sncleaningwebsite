@@ -5,9 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><%= title %> | <%= site.name %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
+  <link rel="canonical" href="<%= canonicalUrl %>" />
+  <% if (typeof noindex !== 'undefined' && noindex) { %>
+    <meta name="robots" content="noindex, nofollow" />
+  <% } %>
+
+  <!-- Favicons -->
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=<%= assetVersion %>" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=<%= assetVersion %>" />
+  <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png?v=<%= assetVersion %>" />
+
+  <!-- Open Graph / Twitter -->
+  <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
+  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.'; %>
+  <meta property="og:type" content="<%= typeof post !== 'undefined' ? 'article' : 'website' %>" />
+  <meta property="og:site_name" content="<%= site.name %>" />
+  <meta property="og:title" content="<%= ogTitle %>" />
+  <meta property="og:description" content="<%= ogDesc %>" />
+  <meta property="og:url" content="<%= canonicalUrl %>" />
+  <% if (typeof ogImage !== 'undefined' && ogImage) { %>
+    <meta property="og:image" content="<%= ogImage %>" />
+  <% } %>
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="<%= ogTitle %>" />
+  <meta name="twitter:description" content="<%= ogDesc %>" />
+  <% if (typeof ogImage !== 'undefined' && ogImage) { %>
+    <meta name="twitter:image" content="<%= ogImage %>" />
+  <% } %>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
+
+  <!-- Structured data -->
+  <% if (typeof structuredData !== 'undefined') { %>
+    <% structuredData.filter(Boolean).forEach(function(block) { %>
+      <script type="application/ld+json"><%- JSON.stringify(block) %></script>
+    <% }); %>
+  <% } %>
 </head>
 <body>
   <%- include('../partials/header') %>
