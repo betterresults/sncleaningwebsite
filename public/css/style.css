@@ -125,9 +125,20 @@ img { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding: 16px 40px;
   gap: 24px;
+  /* Full-width header bar (not boxed into the same 1180px container as the
+     rest of the page) — on wide screens the site content stays readable-width,
+     but the header itself uses the full browser width. */
+  width: 100%;
+  max-width: 1800px;
+  margin: 0 auto;
+}
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-shrink: 0;
 }
 .logo {
   display: flex;
@@ -137,6 +148,17 @@ img { max-width: 100%; display: block; }
   font-weight: 700;
   font-size: 1.15rem;
   color: var(--color-dark);
+  white-space: nowrap;
+}
+.logo-img {
+  height: 52px;
+  width: auto;
+  display: block;
+}
+.header-quote-btn {
+  padding: 9px 18px;
+  font-size: 0.88rem;
+  white-space: nowrap;
 }
 .logo-mark {
   display: inline-flex;
@@ -156,7 +178,7 @@ img { max-width: 100%; display: block; }
   justify-content: center;
 }
 .main-nav a {
-  font-weight: 500;
+  font-weight: 700;
   color: var(--color-text);
   padding: 8px 2px;
   border-bottom: 2px solid transparent;
@@ -170,6 +192,7 @@ img { max-width: 100%; display: block; }
   position: relative;
   display: flex;
   align-items: center;
+  white-space: nowrap; /* "Services ▾" must never wrap to 2 lines and grow the header */
 }
 .nav-dropdown-caret {
   font-size: 0.7em;
@@ -208,17 +231,17 @@ img { max-width: 100%; display: block; }
   background: var(--color-primary-light);
 }
 .nav-dropdown-icon { font-size: 1.05rem; }
-/* Matches the .main-nav collapse breakpoint below (720px) — the dropdown must
+/* Matches the .main-nav collapse breakpoint below (1040px) — the dropdown must
    switch to a static, tap-to-open block at exactly the same width the nav
    itself collapses into the hamburger menu, or there's a gap where the nav
    is still a horizontal bar but the dropdown is already stacking in place. */
-@media (max-width: 720px) {
+@media (max-width: 1040px) {
   .nav-dropdown-menu { position: static; transform: none; box-shadow: none; display: none; padding-left: 14px; }
   .nav-dropdown { flex-direction: column; align-items: flex-start; }
   .nav-dropdown:hover .nav-dropdown-menu, .nav-dropdown.open .nav-dropdown-menu { display: flex; }
 }
 .header-actions { display: flex; align-items: center; gap: 18px; }
-.header-phone { font-weight: 600; font-size: 0.9rem; color: var(--color-dark); }
+.header-phone { font-weight: 700; font-size: 0.9rem; color: var(--color-dark); }
 .nav-toggle {
   display: none;
   flex-direction: column;
@@ -422,6 +445,28 @@ img { max-width: 100%; display: block; }
   font-size: 0.88rem;
   font-weight: 500;
 }
+a.area-tag {
+  transition: background 0.15s ease, color 0.15s ease;
+}
+a.area-tag:hover {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+/* Local area guide cards (homepage) */
+.area-guide-card h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.area-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 14px;
+}
+.area-guide-list a {
+  color: var(--color-primary);
+  font-weight: 600;
+  font-size: 0.94rem;
+}
+.area-guide-list a:hover { color: var(--color-primary-dark); }
 .gallery-item {
   height: 200px;
   border-radius: var(--radius);
@@ -556,6 +601,18 @@ input:focus, select:focus, textarea:focus {
   color: var(--color-primary);
 }
 .discount-card p { color: var(--color-dark); font-weight: 500; margin: 0; }
+
+/* FAQ */
+.faq-list { display: flex; flex-direction: column; gap: 4px; }
+.faq-item {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+  margin-bottom: 14px;
+}
+.faq-item h3 { font-size: 1.05rem; margin-bottom: 8px; }
+.faq-item p { margin: 0; }
 
 /* Testimonials source badge */
 .testimonial-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
@@ -728,14 +785,18 @@ input:focus, select:focus, textarea:focus {
   .quote-card { max-width: 420px; }
 }
 
-@media (max-width: 720px) {
+/* Nav collapses to the hamburger menu at 1040px rather than 720px — with the
+   logo, full nav bar, Services dropdown, quote button and phone number all in
+   one row, the header has no room to breathe below ~1040px and was overflowing
+   the viewport (forcing the whole page to scroll horizontally) at common
+   tablet widths like 800-900px. */
+@media (max-width: 1040px) {
   .main-nav { display: none; }
   .header-phone { display: none; }
-  .grid-3 { grid-template-columns: 1fr; }
-  .form-row-group { grid-template-columns: 1fr; }
-  .hero h1 { font-size: 2.2rem; }
-  .cta-band-inner { flex-direction: column; align-items: flex-start; text-align: left; }
-  .footer-grid { grid-template-columns: 1fr; }
+  /* The quote button is redundant with the sticky "Book Your Cleaning" bar at
+     the bottom of the screen once the nav is hamburger-collapsed, and there
+     isn't room for logo + button + hamburger side by side at narrow widths. */
+  .header-quote-btn { display: none; }
   .nav-toggle { display: flex; }
 
   /* The hamburger toggles this class on — .main-nav is display:none above by
@@ -755,4 +816,14 @@ input:focus, select:focus, textarea:focus {
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
   }
   .main-nav.nav-open a { padding: 10px 0; width: 100%; }
+}
+
+@media (max-width: 720px) {
+  .header-inner { padding: 14px 16px; }
+  .logo-img { height: 40px; }
+  .grid-3 { grid-template-columns: 1fr; }
+  .form-row-group { grid-template-columns: 1fr; }
+  .hero h1 { font-size: 2.2rem; }
+  .cta-band-inner { flex-direction: column; align-items: flex-start; text-align: left; }
+  .footer-grid { grid-template-columns: 1fr; }
 }

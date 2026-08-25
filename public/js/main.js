@@ -9,11 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Services dropdown: tap-to-open on mobile (hover doesn't work on touch).
-  // 720px matches the .main-nav collapse breakpoint in style.css — must stay in sync.
+  // Services dropdown: tap-to-open on mobile/tablet (hover doesn't work on touch).
+  // 1040px matches the .main-nav collapse breakpoint in style.css — must stay in sync.
   document.querySelectorAll('.nav-dropdown > a').forEach((link) => {
     link.addEventListener('click', (e) => {
-      if (window.innerWidth <= 720) {
+      if (window.innerWidth <= 1040) {
         e.preventDefault();
         link.parentElement.classList.toggle('open');
       }
