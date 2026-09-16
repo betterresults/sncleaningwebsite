@@ -70,7 +70,7 @@ h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
 .warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:1150px;font-size:14.5px}
+table{border-collapse:collapse;width:100%;min-width:1250px;font-size:14.5px}
 thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 10px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
 tbody td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 tr.row{cursor:pointer}
@@ -94,6 +94,9 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .bar form{margin:0}
 .bar button{width:auto;margin:0;font-size:14px;padding:9px 14px}
 .ok{background:var(--good-soft);color:var(--good);padding:10px 13px;border-radius:3px;margin:0 0 16px;font-size:14.5px}
+.car{white-space:nowrap}
+.hascar{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;background:var(--good-soft);color:var(--good);padding:4px 9px;border-radius:2px}
+.nocar{font-size:13px;color:var(--ink-soft)}
 .gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
 .note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -164,6 +167,19 @@ function verdictClass(v) {
   return "b-none";
 }
 
+const TRAVEL = {
+  "Own car": ["Car", true],
+  "Yes, I have my own car": ["Car", true],
+  "Motorbike or scooter": ["Motorbike", false],
+  "Bicycle": ["Bicycle", false],
+  "Public transport": ["Bus / train", false],
+  "No - public transport": ["Bus / train", false],
+  "Drives but no car at the moment": ["Drives, no car", false],
+  "I drive but no car right now": ["Drives, no car", false],
+  "Gets a lift": ["Gets a lift", false],
+  "On foot": ["On foot", false]
+};
+
 const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" };
 
 function rows(app, scored, i) {
@@ -207,6 +223,12 @@ function rows(app, scored, i) {
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
     <td>${esc(d["based-in"] || "")}</td>
     <td><div class="days">${days || '<span class="dt">none given</span>'}</div></td>
+    <td class="car">${(() => {
+      const t = d.transport || d.drives || "";
+      const m = TRAVEL[t];
+      if (!t) return "";
+      return m && m[1] ? `<span class="hascar">Car</span>` : `<span class="nocar">${esc(m ? m[0] : t)}</span>`;
+    })()}</td>
     <td class="ar">${esc(areas)}</td>
     <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
     <td class="sc">${esc(s.score || "")}</td>
@@ -214,7 +236,7 @@ function rows(app, scored, i) {
       <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1">Delete</button></form></td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
-  <tr class="detail" id="${id}"><td colspan="10">
+  <tr class="detail" id="${id}"><td colspan="11">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
     <div class="facts">${facts}</div>
@@ -395,7 +417,7 @@ exports.handler = async (event) => {
       ? `<div class="scroll"><table>
           <thead><tr>
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
-            <th>Areas covered</th><th>Sent</th><th>Score</th><th></th><th>Fit &amp; notes</th>
+            <th>Car?</th><th>Areas covered</th><th>Sent</th><th>Score</th><th></th><th>Fit &amp; notes</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
