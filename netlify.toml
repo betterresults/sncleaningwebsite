@@ -16,6 +16,12 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
+  from = "/applicants"
+  to = "/.netlify/functions/applicants"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
