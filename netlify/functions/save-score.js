@@ -45,7 +45,8 @@ exports.handler = async (event) => {
     verdict: pick(data, ["verdict", "fit", "decision", "recommendation"]),
     summary: pick(data, ["summary", "notes", "reason", "reasoning", "note"]),
     flags: pick(data, ["flags", "ask", "ask_about", "concerns"]),
-    honesty: pick(data, ["honesty", "signals"])
+    honesty: pick(data, ["honesty", "signals"]),
+    authenticity: pick(data, ["authenticity", "own_words", "ownWords", "ai_check", "aiCheck"])
   };
 
   if (!fields.applicant) {
