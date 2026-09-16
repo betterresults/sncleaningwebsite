@@ -194,6 +194,7 @@ function rows(app, scored, i) {
     <td class="ar">${esc(areas)}</td>
     <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
     <td class="sc">${esc(s.score || "")}</td>
+    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit">Re-run</button></form></td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
   <tr class="detail" id="${id}"><td colspan="10">
