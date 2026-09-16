@@ -69,7 +69,7 @@ h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
 .warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:1080px;font-size:14.5px}
+table{border-collapse:collapse;width:100%;min-width:1130px;font-size:14.5px}
 thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
 tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
 tr.row{cursor:pointer}
@@ -82,6 +82,7 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .ar{max-width:210px;color:var(--ink-soft);font-size:13.5px}
 .tick{font-size:17px;font-weight:700}
 .yes{color:var(--good)}.no{color:var(--bad)}
+.gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
 .note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
 .note.ask{color:var(--marigold);-webkit-line-clamp:2}
@@ -179,6 +180,7 @@ function rows(app, scored, i) {
 
   return `<tr class="row" data-for="${id}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
+    <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "\u2013" : "")}</td>
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
     <td>${esc(d["based-in"] || "")}</td>
     <td><div class="days">${days || '<span class="dt">none given</span>'}</div></td>
@@ -187,7 +189,7 @@ function rows(app, scored, i) {
     <td class="sc">${esc(s.score || "")}</td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
-  <tr class="detail" id="${id}"><td colspan="8">
+  <tr class="detail" id="${id}"><td colspan="9">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
     <div class="facts">${facts}</div>
@@ -247,7 +249,7 @@ exports.handler = async (event) => {
     const body = list.length
       ? `<div class="scroll"><table>
           <thead><tr>
-            <th>Name</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
+            <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
             <th>Areas covered</th><th>Sent</th><th>Score</th><th>Fit &amp; notes</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
