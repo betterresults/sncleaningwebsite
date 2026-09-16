@@ -58,13 +58,16 @@ exports.handler = async (event) => {
     try {
       const res = await fetch(ROUTINE_URL, {
         method: "POST",
-        headers: {
-          "content-type": "application/json",
-          "authorization": "Bearer " + token,
-          "x-api-key": token,
-          "anthropic-version": "2023-06-01",
-          "anthropic-beta": "oauth-2025-04-20"
-        },
+        // Exactly one credential: OAuth tokens go in Authorization, API keys in x-api-key.
+        headers: Object.assign(
+          {
+            "content-type": "application/json",
+            "anthropic-version": "2023-06-01"
+          },
+          token.startsWith("sk-ant-oat")
+            ? { "authorization": "Bearer " + token, "anthropic-beta": "oauth-2025-04-20" }
+            : { "x-api-key": token }
+        ),
         body: JSON.stringify({ text: message })
       });
       const text = await res.text();
