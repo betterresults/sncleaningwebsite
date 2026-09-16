@@ -507,7 +507,7 @@ exports.handler = async (event) => {
       ? `<div class="scroll"><table>
           <thead><tr>
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
-            <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Action</th>
+            <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Status</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
