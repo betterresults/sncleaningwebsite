@@ -64,14 +64,14 @@ function shell(title, inner) {
 @media(prefers-color-scheme:dark){:root:not([data-theme=light]){--ground:#121A1D;--surface:#1A2429;--surface-2:#202C32;--ink:#EAEDEB;--ink-soft:#A2B2B7;--ink-faint:#7A8A8F;--line:#2C3A40;--line-strong:#43555C;--petrol:#6FC4D0;--petrol-soft:#16333A;--marigold:#F0B54A;--marigold-soft:#33280F;--good:#6FD39B;--good-soft:#17331F;--bad:#F09A88;--bad-soft:#35201C;color-scheme:dark}}
 *{box-sizing:border-box}
 body{background:var(--ground);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;margin:0;font-size:16px;line-height:1.55}
-.wrap{max-width:900px;margin:0 auto;padding:28px 18px 64px}
+.wrap{max-width:1680px;margin:0 auto;padding:26px 20px 64px}
 h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:-.02em;margin:0 0 4px}
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
 .warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:1230px;font-size:14.5px}
-thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
-tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+table{border-collapse:collapse;width:100%;min-width:1150px;font-size:14.5px}
+thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 10px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
+tbody td{padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:top}
 tr.row{cursor:pointer}
 tr.row:hover td{background:var(--surface-2)}
 .nm{font-weight:600;font-size:15px;display:block}
@@ -85,6 +85,10 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .act{white-space:nowrap}
 .mini{width:auto;margin:0;font-size:12px;font-weight:600;padding:6px 10px;background:transparent;color:var(--petrol);border:1px solid var(--line-strong);border-radius:2px;cursor:pointer}
 .mini:hover{background:var(--petrol-soft)}
+.mini.danger{color:var(--bad);margin-top:6px}
+.mini.danger:hover{background:var(--bad-soft)}
+.mini.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
+.act form{margin:0}
 .bar{display:flex;gap:10px;align-items:center;margin:0 0 16px;flex-wrap:wrap}
 .bar form{margin:0}
 .bar button{width:auto;margin:0;font-size:14px;padding:9px 14px}
@@ -121,6 +125,17 @@ button{width:100%;margin-top:12px;font-family:Archivo,sans-serif;font-size:16px;
 </style></head><body><div class="wrap">${inner}</div>
 <script>
 document.addEventListener("click",function(e){
+  var del=e.target.closest("button[data-confirm]");
+  if(del){
+    if(del.getAttribute("data-armed")!=="1"){
+      e.preventDefault();
+      del.setAttribute("data-armed","1");
+      del.classList.add("armed");
+      del.textContent="Delete for good?";
+      setTimeout(function(){del.removeAttribute("data-armed");del.classList.remove("armed");del.textContent="Delete";},4000);
+      return;
+    }
+  }
   var row=e.target.closest("tr.row");
   if(!row)return;
   if(e.target.closest("a")||e.target.closest("form")||e.target.closest("button"))return;
@@ -194,7 +209,8 @@ function rows(app, scored, i) {
     <td class="ar">${esc(areas)}</td>
     <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
     <td class="sc">${esc(s.score || "")}</td>
-    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit">Re-run</button></form></td>
+    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit">Re-run</button></form>
+      <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1">Delete</button></form></td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
   <tr class="detail" id="${id}"><td colspan="10">
@@ -211,6 +227,14 @@ const ROUTINE_URL =
   process.env.CLAUDE_ROUTINE_URL ||
   "https://api.anthropic.com/v1/claude_code/routines/trig_01J9HNhNVxmx8homMMU2EjfJ/fire";
 const SKIP = ["ip", "user_agent", "referrer", "bot-field"];
+
+async function apiDelete(path, key) {
+  const res = await fetch("https://api.netlify.com/api/v1" + path, {
+    method: "DELETE",
+    headers: { authorization: "Bearer " + key }
+  });
+  return res.ok;
+}
 
 async function fireRoutine(sub) {
   const d = sub.data || {};
@@ -274,6 +298,31 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === "POST") {
     const params = new URLSearchParams(event.body || "");
+
+    if (authed && params.get("delete")) {
+      const key2 = process.env.NETLIFY_API_TOKEN;
+      const id = params.get("delete");
+      const who = (params.get("who") || "").trim().toLowerCase();
+      try {
+        await apiDelete("/submissions/" + id, key2);
+        // remove any score rows for the same person so nothing is left orphaned
+        if (who) {
+          const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
+          const sc = forms.find((f) => f.name === SCORED_FORM);
+          if (sc) {
+            const scores = await api("/forms/" + sc.id + "/submissions?per_page=200", key2);
+            for (const s of scores) {
+              if (((s.data || {}).applicant || "").trim().toLowerCase() === who) {
+                await apiDelete("/submissions/" + s.id, key2);
+              }
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Delete failed", err);
+      }
+      return { statusCode: 302, headers: { location: "/applicants?deleted=1" }, body: "" };
+    }
 
     if (authed && (params.get("resend") || params.get("resend-all"))) {
       const key2 = process.env.NETLIFY_API_TOKEN;
@@ -353,7 +402,7 @@ exports.handler = async (event) => {
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
+      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
