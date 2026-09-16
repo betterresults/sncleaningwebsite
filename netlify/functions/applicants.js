@@ -97,6 +97,12 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .car{white-space:nowrap}
 .hascar{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;background:var(--good-soft);color:var(--good);padding:4px 9px;border-radius:2px}
 .nocar{font-size:13px;color:var(--ink-soft)}
+.action-col{white-space:nowrap}
+.action-col form{margin:0}
+.act-select{width:auto;font:inherit;font-size:13px;font-weight:600;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink);cursor:pointer}
+.act-select.a-contacted{border-color:var(--petrol);color:var(--petrol)}
+.act-select.a-trial{border-color:var(--good);color:var(--good)}
+.act-select.a-rejected,.act-select.a-fit{border-color:var(--bad);color:var(--bad)}
 .gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
 .note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -217,9 +223,18 @@ function rows(app, scored, i) {
 
   const id = "d" + i;
 
+  const action = s.action || "";
+  const actClass = action === "Contacted" ? "a-contacted"
+    : action === "Trial booked" ? "a-trial"
+    : action === "Rejected" ? "a-rejected"
+    : action === "Not a good fit" ? "a-fit" : "";
+  const actionOpts = ["", "Contacted", "Trial booked", "Rejected", "Not a good fit"]
+    .map((o) => `<option value="${esc(o)}"${action === o ? " selected" : ""}>${o ? esc(o) : "–"}</option>`)
+    .join("");
+
   return `<tr class="row" data-for="${id}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
-    <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "\u2013" : "")}</td>
+    <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "–" : "")}</td>
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
     <td>${esc(d["based-in"] || "")}</td>
     <td><div class="days">${days || '<span class="dt">none given</span>'}</div></td>
@@ -230,11 +245,11 @@ function rows(app, scored, i) {
       return m && m[1] ? `<span class="hascar">Car</span>` : `<span class="nocar">${esc(m ? m[0] : t)}</span>`;
     })()}</td>
     <td class="ar">${esc(areas)}</td>
-    <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
     <td class="sc">${esc(s.score || "")}</td>
-    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit">Re-run</button></form>
-      <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1">Delete</button></form></td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
+    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>
+      <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1" title="Delete">&#128465; Delete</button></form></td>
+    <td class="action-col"><form method="POST"><input type="hidden" name="set-action" value="${esc(app.id)}"><select name="action" class="act-select ${actClass}" onchange="this.form.submit()">${actionOpts}</select></form></td>
   </tr>
   <tr class="detail" id="${id}"><td colspan="11">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
@@ -347,6 +362,50 @@ exports.handler = async (event) => {
       return { statusCode: 302, headers: { location: "/applicants?deleted=1" }, body: "" };
     }
 
+    if (authed && params.get("set-action")) {
+      const key2 = process.env.NETLIFY_API_TOKEN;
+      const appId = params.get("set-action");
+      const action = (params.get("action") || "").trim();
+      try {
+        const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
+        const src = forms.find((f) => f.name === SOURCE_FORM);
+        const sc = forms.find((f) => f.name === SCORED_FORM);
+        const [apps, scores] = await Promise.all([
+          api("/forms/" + src.id + "/submissions?per_page=200", key2),
+          sc ? api("/forms/" + sc.id + "/submissions?per_page=200", key2) : []
+        ]);
+        const app = apps.find((a) => a.id === appId);
+        if (app) {
+          const name = (app.data || {}).name || "";
+          const nameKey = name.trim().toLowerCase();
+          const existing = scores
+            .filter((s) => ((s.data || {}).applicant || "").trim().toLowerCase() === nameKey)
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+          const prior = (existing && existing.data) || {};
+          const site = process.env.URL || "https://sncleaningwebsite.netlify.app";
+          await fetch(site + "/", {
+            method: "POST",
+            headers: { "content-type": "application/x-www-form-urlencoded" },
+            body: new URLSearchParams({
+              "form-name": SCORED_FORM,
+              applicant: name,
+              phone: prior.phone || (app.data || {}).phone || "",
+              "based-in": prior["based-in"] || (app.data || {})["based-in"] || "",
+              score: prior.score || "",
+              verdict: prior.verdict || "",
+              summary: prior.summary || "",
+              flags: prior.flags || "",
+              honesty: prior.honesty || "",
+              action
+            }).toString()
+          });
+        }
+      } catch (err) {
+        console.error("Set action failed", err);
+      }
+      return { statusCode: 302, headers: { location: "/applicants" }, body: "" };
+    }
+
     if (authed && (params.get("resend") || params.get("resend-all"))) {
       const key2 = process.env.NETLIFY_API_TOKEN;
       try {
@@ -417,11 +476,11 @@ exports.handler = async (event) => {
       ? `<div class="scroll"><table>
           <thead><tr>
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
-            <th>Car?</th><th>Areas covered</th><th>Sent</th><th>Score</th><th></th><th>Fit &amp; notes</th>
+            <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Action</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
-        <p class="hint">Click any row to open that person's full answers. This page refreshes itself every 45 seconds. &#10003; means their application reached the scoring routine.</p>`
+        <p class="hint">Click any row to open that person's full answers. This page refreshes itself every 45 seconds.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
