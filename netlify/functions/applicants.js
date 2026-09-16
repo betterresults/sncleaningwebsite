@@ -67,40 +67,57 @@ body{background:var(--ground);color:var(--ink);font-family:"Public Sans",system-
 .wrap{max-width:900px;margin:0 auto;padding:28px 18px 64px}
 h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:-.02em;margin:0 0 4px}
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:18px 18px 16px;margin-bottom:14px}
-.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
-.who{font-family:Archivo,sans-serif;font-size:19px;font-weight:700;margin:0 0 2px;letter-spacing:-.01em}
-.meta{font-size:14px;color:var(--ink-soft)}
-.meta a{color:var(--petrol)}
-.badge{font-family:Archivo,sans-serif;font-size:13px;font-weight:700;padding:5px 11px;border-radius:2px;white-space:nowrap;letter-spacing:.01em}
+.warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:860px;font-size:14.5px}
+thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
+tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
+tr.row{cursor:pointer}
+tr.row:hover td{background:var(--surface-2)}
+.nm{font-weight:600;font-size:15px;display:block}
+.dt{color:var(--ink-faint);font-size:12.5px}
+td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
+.days{display:flex;flex-wrap:wrap;gap:4px;max-width:230px}
+.d{font-size:12px;background:var(--petrol-soft);color:var(--petrol);border-radius:2px;padding:2px 6px;white-space:nowrap}
+.ar{max-width:210px;color:var(--ink-soft);font-size:13.5px}
+.tick{font-size:17px;font-weight:700}
+.yes{color:var(--good)}.no{color:var(--bad)}
+.sc{font-family:Archivo,sans-serif;font-variant-numeric:tabular-nums;font-weight:700;font-size:17px;color:var(--petrol);white-space:nowrap}
+.badge{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;padding:4px 9px;border-radius:2px;white-space:nowrap}
 .b-trial{background:var(--good-soft);color:var(--good)}
 .b-phone{background:var(--marigold-soft);color:var(--marigold)}
 .b-no{background:var(--bad-soft);color:var(--bad)}
 .b-none{background:var(--surface-2);color:var(--ink-faint)}
-.score{font-family:Archivo,sans-serif;font-variant-numeric:tabular-nums;font-size:22px;font-weight:700;color:var(--petrol);margin-left:10px}
-.summary{margin:12px 0 0;padding:11px 13px;background:var(--petrol-soft);border-radius:3px;font-size:15px}
-.flags{margin:8px 0 0;padding:11px 13px;background:var(--marigold-soft);border-left:3px solid var(--marigold);border-radius:0 3px 3px 0;font-size:14.5px}
-.facts{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
-.chip{font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:2px;padding:4px 9px;color:var(--ink-soft)}
+tr.detail{display:none}
+tr.detail.open{display:table-row}
+tr.detail td{background:var(--surface-2);padding:18px 16px}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.chip{font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:2px;padding:4px 9px;color:var(--ink-soft)}
 .chip strong{color:var(--ink);font-weight:600}
-details{margin:12px 0 0;border-top:1px solid var(--line);padding-top:10px}
-summary{cursor:pointer;font-size:14px;color:var(--petrol);font-weight:600;list-style:none}
-summary::-webkit-details-marker{display:none}
-summary::before{content:"▸ ";}
-details[open] summary::before{content:"▾ ";}
-.qa{margin:12px 0 0}
-.q{font-size:13.5px;color:var(--ink-faint);margin:10px 0 2px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
-.a{font-size:15px;white-space:pre-wrap;margin:0}
-.honesty{font-size:13px;color:var(--ink-faint);margin-top:12px;border-top:1px solid var(--line);padding-top:9px}
+.summary{margin:0 0 10px;padding:11px 13px;background:var(--petrol-soft);border-radius:3px;font-size:14.5px}
+.flags{margin:0 0 12px;padding:11px 13px;background:var(--marigold-soft);border-left:3px solid var(--marigold);border-radius:0 3px 3px 0;font-size:14px}
+.q{font-size:12.5px;color:var(--ink-faint);margin:12px 0 2px;text-transform:uppercase;letter-spacing:.06em;font-weight:600}
+.a{font-size:14.5px;white-space:pre-wrap;margin:0}
+.honesty{font-size:12.5px;color:var(--ink-faint);margin-top:14px;border-top:1px solid var(--line);padding-top:9px}
 .empty{background:var(--surface);border:1px dashed var(--line-strong);border-radius:4px;padding:40px 20px;text-align:center;color:var(--ink-soft)}
+.hint{font-size:13px;color:var(--ink-faint);margin:10px 0 0}
 form.login{max-width:340px;margin:12vh auto;background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:26px 24px}
 label{display:block;font-weight:600;margin-bottom:8px;font-size:15px}
 input[type=password]{width:100%;font:inherit;font-size:16px;padding:11px 12px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink)}
 button{width:100%;margin-top:12px;font-family:Archivo,sans-serif;font-size:16px;font-weight:600;padding:13px;border:0;border-radius:2px;background:var(--petrol);color:var(--ground);cursor:pointer}
 @media(prefers-color-scheme:dark){button{color:#0C1417}}
 .err{color:var(--bad);font-size:14px;margin:10px 0 0}
-.warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
-</style></head><body><div class="wrap">${inner}</div></body></html>`;
+</style></head><body><div class="wrap">${inner}</div>
+<script>
+document.addEventListener("click",function(e){
+  var row=e.target.closest("tr.row");
+  if(!row)return;
+  if(e.target.closest("a"))return;
+  var d=document.getElementById(row.getAttribute("data-for"));
+  if(d)d.classList.toggle("open");
+});
+</script>
+</body></html>`;
 }
 
 function loginPage(msg) {
@@ -116,19 +133,29 @@ function verdictClass(v) {
   const s = (v || "").toLowerCase();
   if (s.includes("trial")) return "b-trial";
   if (s.includes("phone")) return "b-phone";
-  if (s.includes("not interview") || s.includes("do not")) return "b-no";
+  if (s.includes("do not")) return "b-no";
   return "b-none";
 }
 
-function card(app, scored) {
+const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" };
+
+function rows(app, scored, i) {
   const d = app.data || {};
   const s = (scored && scored.data) || {};
-  const days = DAYS
-    .map((day) => d["availability-" + day])
-    .filter(Boolean)
-    .map((v) => `<span class="chip">${esc(v)}</span>`).join("");
+
+  const delivery = (s.summary || "");
+  const sent = delivery.startsWith("Routine fired OK");
+  const statusV = (s.verdict || "");
+  const isRealVerdict = /trial|phone|do not/i.test(statusV);
+
+  const days = Object.keys(SHORT)
+    .map((k) => [SHORT[k], d["availability-" + k]])
+    .filter((p) => p[1])
+    .map((p) => `<span class="d">${esc(p[0])} ${esc(String(p[1]).split(":").pop().trim())}</span>`)
+    .join("");
+
   const areas = Array.isArray(d.areas) ? d.areas.join(", ") : (d.areas || "");
-  const when = new Date(app.created_at).toLocaleString("en-GB", { dateStyle: "medium", timeStyle: "short" });
+  const when = new Date(app.created_at).toLocaleString("en-GB", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" });
 
   const facts = [
     ["Experience", d["experience-level"]],
@@ -137,31 +164,33 @@ function card(app, scored) {
     ["Ambition", d.growth],
     ["Travel", d.transport || d.drives],
     ["DBS", d.dbs],
-    ["Right to work", d["right-to-work"]]
+    ["Right to work", d["right-to-work"]],
+    ["Other areas", d["areas-other"]]
   ].filter((f) => f[1]).map((f) => `<span class="chip">${esc(f[0])}: <strong>${esc(f[1])}</strong></span>`).join("");
 
   const qa = QUESTIONS.filter(([k]) => d[k]).map(
     ([k, label]) => `<p class="q">${esc(label)}</p><p class="a">${esc(d[k])}</p>`
   ).join("");
 
-  return `<div class="card">
-    <div class="top">
-      <div>
-        <p class="who">${esc(d.name || "Unnamed")}</p>
-        <p class="meta">${esc(d["based-in"] || "")}${d.phone ? ` &middot; <a href="tel:${esc(d.phone)}">${esc(d.phone)}</a>` : ""} &middot; ${esc(when)}</p>
-      </div>
-      <div style="display:flex;align-items:center">
-        <span class="badge ${verdictClass(s.verdict)}">${esc(s.verdict || "Not scored yet")}</span>
-        ${s.score ? `<span class="score">${esc(s.score)}</span>` : ""}
-      </div>
-    </div>
-    ${s.summary ? `<p class="summary">${esc(s.summary)}</p>` : ""}
+  const id = "d" + i;
+
+  return `<tr class="row" data-for="${id}">
+    <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
+    <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
+    <td>${esc(d["based-in"] || "")}</td>
+    <td><div class="days">${days || '<span class="dt">none given</span>'}</div></td>
+    <td class="ar">${esc(areas)}</td>
+    <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
+    <td class="sc">${esc(s.score || "")}</td>
+    <td>${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}</td>
+  </tr>
+  <tr class="detail" id="${id}"><td colspan="8">
+    ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
-    <div class="facts">${facts}${areas ? `<span class="chip">Covers: <strong>${esc(areas)}</strong></span>` : ""}</div>
-    ${days ? `<div class="facts">${days}</div>` : ""}
-    ${qa ? `<details><summary>Read their answers</summary><div class="qa">${qa}</div></details>` : ""}
-    <p class="honesty">${esc([d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join("  |  "))}</p>
-  </div>`;
+    <div class="facts">${facts}</div>
+    ${qa}
+    <p class="honesty">${esc([d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join("  |  "))}${sent ? "" : "  |  Delivery: " + esc(delivery || "not sent to the routine")}</p>
+  </td></tr>`;
 }
 
 exports.handler = async (event) => {
@@ -209,15 +238,22 @@ exports.handler = async (event) => {
     });
 
     const list = apps
-      .filter((a) => !/^zz /i.test(((a.data || {}).name || "")))
+      .filter((a) => !/^zz |test application|pipeline test/i.test(((a.data || {}).name || "")))
       .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     const body = list.length
-      ? list.map((a) => card(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()])).join("")
+      ? `<div class="scroll"><table>
+          <thead><tr>
+            <th>Name</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
+            <th>Areas covered</th><th>Sent</th><th>Score</th><th>Fit</th>
+          </tr></thead>
+          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
+        </table></div>
+        <p class="hint">Click any row to open that person's full answers. &#10003; means their application reached the scoring routine.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test rows are hidden.</p>${body}`) };
+      body: shell("Applicants", `<h1>Applicants</h1><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
