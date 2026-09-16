@@ -69,7 +69,7 @@ h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
 .warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:1130px;font-size:14.5px}
+table{border-collapse:collapse;width:100%;min-width:1230px;font-size:14.5px}
 thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
 tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
 tr.row{cursor:pointer}
@@ -82,6 +82,13 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .ar{max-width:210px;color:var(--ink-soft);font-size:13.5px}
 .tick{font-size:17px;font-weight:700}
 .yes{color:var(--good)}.no{color:var(--bad)}
+.act{white-space:nowrap}
+.mini{width:auto;margin:0;font-size:12px;font-weight:600;padding:6px 10px;background:transparent;color:var(--petrol);border:1px solid var(--line-strong);border-radius:2px;cursor:pointer}
+.mini:hover{background:var(--petrol-soft)}
+.bar{display:flex;gap:10px;align-items:center;margin:0 0 16px;flex-wrap:wrap}
+.bar form{margin:0}
+.bar button{width:auto;margin:0;font-size:14px;padding:9px 14px}
+.ok{background:var(--good-soft);color:var(--good);padding:10px 13px;border-radius:3px;margin:0 0 16px;font-size:14.5px}
 .gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
 .note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -116,7 +123,7 @@ button{width:100%;margin-top:12px;font-family:Archivo,sans-serif;font-size:16px;
 document.addEventListener("click",function(e){
   var row=e.target.closest("tr.row");
   if(!row)return;
-  if(e.target.closest("a"))return;
+  if(e.target.closest("a")||e.target.closest("form")||e.target.closest("button"))return;
   var d=document.getElementById(row.getAttribute("data-for"));
   if(d)d.classList.toggle("open");
 });
@@ -189,13 +196,69 @@ function rows(app, scored, i) {
     <td class="sc">${esc(s.score || "")}</td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
-  <tr class="detail" id="${id}"><td colspan="9">
+  <tr class="detail" id="${id}"><td colspan="10">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
     <div class="facts">${facts}</div>
     ${qa}
     <p class="honesty">${esc([d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join("  |  "))}${sent ? "" : "  |  Delivery: " + esc(delivery || "not sent to the routine")}</p>
   </td></tr>`;
+}
+
+
+const ROUTINE_URL =
+  process.env.CLAUDE_ROUTINE_URL ||
+  "https://api.anthropic.com/v1/claude_code/routines/trig_01J9HNhNVxmx8homMMU2EjfJ/fire";
+const SKIP = ["ip", "user_agent", "referrer", "bot-field"];
+
+async function fireRoutine(sub) {
+  const d = sub.data || {};
+  const tok = process.env.CLAUDE_ROUTINE_TOKEN || process.env.ANTHROPIC_API_KEY;
+  if (!tok) return "No token set in Netlify.";
+
+  const answers = Object.keys(d).filter((k) => !SKIP.includes(k))
+    .map((k) => k + ": " + (Array.isArray(d[k]) ? d[k].join(", ") : d[k])).join("\n");
+
+  const message = "A cleaner application is being re-sent for scoring. " +
+    "Rate this applicant against the scoring rules and save the result.\n\n" +
+    "Submitted: " + (sub.created_at || "") + "\nNetlify submission id: " + (sub.id || "") + "\n\n" + answers;
+
+  let outcome;
+  try {
+    const res = await fetch(ROUTINE_URL, {
+      method: "POST",
+      headers: Object.assign(
+        { "content-type": "application/json", "anthropic-version": "2023-06-01" },
+        tok.startsWith("sk-ant-oat")
+          ? { "authorization": "Bearer " + tok, "anthropic-beta": "oauth-2025-04-20" }
+          : { "x-api-key": tok }
+      ),
+      body: JSON.stringify({ text: message })
+    });
+    const t = await res.text();
+    outcome = res.ok ? "Routine fired OK (" + res.status + "). " + t.slice(0, 200)
+                     : "Routine call failed with " + res.status + ". " + t.slice(0, 400);
+  } catch (err) {
+    outcome = "Routine call threw: " + String(err).slice(0, 300);
+  }
+
+  const site = process.env.URL || "https://sncleaningwebsite.netlify.app";
+  try {
+    await fetch(site + "/", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        "form-name": SCORED_FORM,
+        applicant: d.name || "Unknown",
+        phone: d.phone || "",
+        "based-in": d["based-in"] || "",
+        score: "", verdict: outcome.startsWith("Routine fired OK") ? "Sent to routine" : "Not sent",
+        summary: outcome, flags: "",
+        honesty: [d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join(" | ")
+      }).toString()
+    });
+  } catch (err) { /* logged below */ }
+  return outcome;
 }
 
 exports.handler = async (event) => {
@@ -210,6 +273,37 @@ exports.handler = async (event) => {
 
   if (event.httpMethod === "POST") {
     const params = new URLSearchParams(event.body || "");
+
+    if (authed && (params.get("resend") || params.get("resend-all"))) {
+      const key2 = process.env.NETLIFY_API_TOKEN;
+      try {
+        const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
+        const src = forms.find((f) => f.name === SOURCE_FORM);
+        const sc = forms.find((f) => f.name === SCORED_FORM);
+        const [apps, scores] = await Promise.all([
+          api("/forms/" + src.id + "/submissions?per_page=200", key2),
+          sc ? api("/forms/" + sc.id + "/submissions?per_page=200", key2) : []
+        ]);
+
+        let targets;
+        if (params.get("resend")) {
+          targets = apps.filter((a) => a.id === params.get("resend"));
+        } else {
+          const scoredNames = new Set(scores
+            .filter((s) => /trial|phone|do not/i.test((s.data || {}).verdict || ""))
+            .map((s) => ((s.data || {}).applicant || "").trim().toLowerCase()));
+          targets = apps
+            .filter((a) => !/^zz |test application|pipeline test/i.test(((a.data || {}).name || "")))
+            .filter((a) => !scoredNames.has((((a.data || {}).name) || "").trim().toLowerCase()))
+            .slice(0, 10);
+        }
+        for (const t of targets) await fireRoutine(t);
+      } catch (err) {
+        console.error("Re-send failed", err);
+      }
+      return { statusCode: 302, headers: { location: "/applicants?sent=1" }, body: "" };
+    }
+
     if (params.get("password") === pw) {
       return { statusCode: 302, headers: {
         "set-cookie": COOKIE + "=" + token(pw) + "; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=604800",
@@ -250,7 +344,7 @@ exports.handler = async (event) => {
       ? `<div class="scroll"><table>
           <thead><tr>
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
-            <th>Areas covered</th><th>Sent</th><th>Score</th><th>Fit &amp; notes</th>
+            <th>Areas covered</th><th>Sent</th><th>Score</th><th></th><th>Fit &amp; notes</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
@@ -258,7 +352,7 @@ exports.handler = async (event) => {
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
+      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
