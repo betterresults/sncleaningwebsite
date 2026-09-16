@@ -340,6 +340,51 @@
   .opt-text { font-size: 15.5px; line-height: 1.4; }
   .opt-text em { display: block; font-style: normal; font-size: 13.5px; color: var(--ink-soft); margin-top: 1px; }
 
+  /* day-by-day availability */
+  .days { gap: 6px; }
+  .day {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    padding: 9px 11px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--surface-2);
+  }
+  .day-name {
+    flex: 0 0 84px;
+    font-weight: 600;
+    font-size: 15px;
+  }
+  .slots { display: flex; gap: 6px; flex: 1 1 auto; flex-wrap: wrap; }
+  .slot {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: 78px;
+    text-align: center;
+    padding: 8px 6px;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    background: var(--surface);
+    font-size: 14px;
+    cursor: pointer;
+    transition: background .15s, border-color .15s, color .15s;
+  }
+  .slot input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .slot:has(input:checked) {
+    background: var(--petrol);
+    border-color: var(--petrol);
+    color: var(--btn-fg);
+    font-weight: 600;
+  }
+  @media (max-width: 420px) {
+    .day-name { flex: 1 1 100%; }
+  }
+
+  .cols2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 460px) { .cols2 { grid-template-columns: 1fr; } }
+
   /* ---------- submit ---------- */
   .submit-zone {
     margin-top: 32px;
@@ -562,14 +607,39 @@
   </div>
 
   <div class="field" data-req>
-    <label class="q">When can you work?</label>
-    <span class="hint">Tick everything that suits you.</span>
-    <div class="opts" data-q="Availability">
-      <label class="opt"><input type="checkbox" name="availability" value="Weekday mornings"><span class="dot"></span><span class="opt-text">Weekday mornings</span></label>
-      <label class="opt"><input type="checkbox" name="availability" value="Weekday afternoons"><span class="dot"></span><span class="opt-text">Weekday afternoons</span></label>
-      <label class="opt"><input type="checkbox" name="availability" value="Evenings"><span class="dot"></span><span class="opt-text">Evenings</span></label>
-      <label class="opt"><input type="checkbox" name="availability" value="Weekends"><span class="dot"></span><span class="opt-text">Weekends</span></label>
+    <label class="q">Which days can you work, and when?</label>
+    <span class="hint">Tap the times that suit you. Leave a day blank if you cannot work it, and tap a choice again to undo it.</span>
+    <div class="opts days" data-q="Availability">
+      <div class="day"><span class="day-name">Monday</span><div class="slots"><label class="slot"><input type="radio" name="availability-monday" value="Monday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-monday" value="Monday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-monday" value="Monday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Tuesday</span><div class="slots"><label class="slot"><input type="radio" name="availability-tuesday" value="Tuesday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-tuesday" value="Tuesday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-tuesday" value="Tuesday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Wednesday</span><div class="slots"><label class="slot"><input type="radio" name="availability-wednesday" value="Wednesday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-wednesday" value="Wednesday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-wednesday" value="Wednesday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Thursday</span><div class="slots"><label class="slot"><input type="radio" name="availability-thursday" value="Thursday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-thursday" value="Thursday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-thursday" value="Thursday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Friday</span><div class="slots"><label class="slot"><input type="radio" name="availability-friday" value="Friday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-friday" value="Friday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-friday" value="Friday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Saturday</span><div class="slots"><label class="slot"><input type="radio" name="availability-saturday" value="Saturday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-saturday" value="Saturday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-saturday" value="Saturday: all day"><span>All day</span></label></div></div>
+      <div class="day"><span class="day-name">Sunday</span><div class="slots"><label class="slot"><input type="radio" name="availability-sunday" value="Sunday: morning"><span>Morning</span></label><label class="slot"><input type="radio" name="availability-sunday" value="Sunday: afternoon"><span>Afternoon</span></label><label class="slot"><input type="radio" name="availability-sunday" value="Sunday: all day"><span>All day</span></label></div></div>
     </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">Which areas are you happy to cover?</label>
+    <span class="hint">Tick everywhere you would travel to. The more you tick, the more work we can put your way, but only tick what is realistic for you.</span>
+    <div class="opts cols2" data-q="Areas covered">
+      <label class="opt"><input type="checkbox" name="areas" value="Upminster"><span class="dot"></span><span class="opt-text">Upminster</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Hornchurch"><span class="dot"></span><span class="opt-text">Hornchurch</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Emerson Park"><span class="dot"></span><span class="opt-text">Emerson Park</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Romford"><span class="dot"></span><span class="opt-text">Romford</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Harold Wood"><span class="dot"></span><span class="opt-text">Harold Wood</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Brentwood"><span class="dot"></span><span class="opt-text">Brentwood</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Shenfield"><span class="dot"></span><span class="opt-text">Shenfield</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Ingatestone"><span class="dot"></span><span class="opt-text">Ingatestone</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Billericay"><span class="dot"></span><span class="opt-text">Billericay</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Chelmsford"><span class="dot"></span><span class="opt-text">Chelmsford</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Writtle"><span class="dot"></span><span class="opt-text">Writtle</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Ongar"><span class="dot"></span><span class="opt-text">Ongar</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Basildon"><span class="dot"></span><span class="opt-text">Basildon</span></label>
+      <label class="opt"><input type="checkbox" name="areas" value="Grays and Thurrock"><span class="dot"></span><span class="opt-text">Grays and Thurrock</span></label>
+    </div>
+    <textarea id="areas-other" name="areas-other" data-q="Other areas or travel notes" placeholder="Anywhere else you would cover, or how far you are willing to travel (optional)"></textarea>
   </div>
 
   <div class="field" data-req>
@@ -917,6 +987,23 @@
 
   /* Counts how often the page was left mid-application. Someone hopping out to
      an AI and back shows up here as a run of switches. */
+  /* Tapping the same slot again clears that day. */
+  Array.prototype.forEach.call(document.querySelectorAll(".slot input"), function (inp) {
+    inp.addEventListener("click", function () {
+      if (inp.getAttribute("data-was") === "1") {
+        inp.checked = false;
+        inp.setAttribute("data-was", "0");
+      } else {
+        Array.prototype.forEach.call(document.getElementsByName(inp.name), function (g) {
+          g.setAttribute("data-was", "0");
+        });
+        inp.setAttribute("data-was", "1");
+      }
+      refresh();
+      saveDraft();
+    });
+  });
+
   var tabSwitches = 0;
   document.addEventListener("visibilitychange", function () {
     if (document.hidden) tabSwitches++;
