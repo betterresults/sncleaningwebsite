@@ -439,16 +439,22 @@
     <input type="tel" id="f-phone" name="phone" data-q="Phone / WhatsApp" placeholder="07..." autocomplete="tel">
   </div>
 
-  <div class="grid-2">
-    <div class="field" data-req>
-      <label class="q" for="f-area">Where are you based?</label>
-      <span class="hint">Town or postcode.</span>
-      <input type="text" id="f-area" name="based-in" data-q="Based in" placeholder="e.g. Upminster, RM14">
-    </div>
-    <div class="field" data-req>
-      <label class="q" for="f-years">Years of cleaning experience</label>
-      <span class="hint">Roughly is fine.</span>
-      <input type="text" id="f-years" name="years-experience" data-q="Years of experience" placeholder="e.g. 4 years">
+  <div class="field" data-req>
+    <label class="q" for="f-area">Where are you based?</label>
+    <span class="hint">Town or postcode.</span>
+    <input type="text" id="f-area" name="based-in" data-q="Based in" placeholder="e.g. Upminster, RM14">
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">How much cleaning experience do you have?</label>
+    <span class="hint">Please be straight with us. Having none does not count against you &mdash; we take people with no experience and train them properly. We only ask so we know where to start you.</span>
+    <div class="opts" data-q="Experience level">
+      <label class="opt"><input type="radio" name="experience-level" value="None - first cleaning job"><span class="dot"></span><span class="opt-text">None &mdash; this would be my first cleaning job<em>Completely fine, we train from scratch</em></span></label>
+      <label class="opt"><input type="radio" name="experience-level" value="Own home, family and friends only"><span class="dot"></span><span class="opt-text">Only my own home, or helping family and friends</span></label>
+      <label class="opt"><input type="radio" name="experience-level" value="Less than a year paid"><span class="dot"></span><span class="opt-text">Less than a year of paid cleaning</span></label>
+      <label class="opt"><input type="radio" name="experience-level" value="1-3 years"><span class="dot"></span><span class="opt-text">1&ndash;3 years</span></label>
+      <label class="opt"><input type="radio" name="experience-level" value="3-5 years"><span class="dot"></span><span class="opt-text">3&ndash;5 years</span></label>
+      <label class="opt"><input type="radio" name="experience-level" value="More than 5 years"><span class="dot"></span><span class="opt-text">More than 5 years</span></label>
     </div>
   </div>
 
@@ -461,6 +467,18 @@
       <label class="opt"><input type="radio" name="work-type" value="Regular part-time work"><span class="dot"></span><span class="opt-text">Regular part-time work<em>A set number of hours each week</em></span></label>
       <label class="opt"><input type="radio" name="work-type" value="Long-term with one company"><span class="dot"></span><span class="opt-text">A long-term place with one company<em>Somewhere to settle and build up</em></span></label>
       <label class="opt"><input type="radio" name="work-type" value="Full-time, as many hours as possible"><span class="dot"></span><span class="opt-text">Full-time &mdash; as many hours as you have<em>Cleaning is my main work</em></span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">In a year or two, where would you like to be?</label>
+    <span class="hint">We're building a team, so there is room to move up. Wanting to stay hands-on is just as good an answer as wanting to lead.</span>
+    <div class="opts" data-q="Where they want to be in 1-2 years">
+      <label class="opt"><input type="radio" name="growth" value="Still cleaning - happy hands-on"><span class="dot"></span><span class="opt-text">Still cleaning &mdash; it's what I enjoy<em>A good answer, not a lesser one</em></span></label>
+      <label class="opt"><input type="radio" name="growth" value="Cleaning with more responsibility"><span class="dot"></span><span class="opt-text">Cleaning, but trusted with more<em>Harder jobs, new clients, helping train others</em></span></label>
+      <label class="opt"><input type="radio" name="growth" value="Supervisor - leading a small team"><span class="dot"></span><span class="opt-text">Running a small team as a supervisor</span></label>
+      <label class="opt"><input type="radio" name="growth" value="Manager - running teams"><span class="dot"></span><span class="opt-text">Managing teams properly, longer term</span></label>
+      <label class="opt"><input type="radio" name="growth" value="Not sure yet but open to growing"><span class="dot"></span><span class="opt-text">Not sure yet, but I'd like the chance to grow</span></label>
     </div>
   </div>
 
@@ -492,7 +510,7 @@
     </div>
   </div>
 
-  <div class="section-head"><h2>Nine questions</h2></div>
+  <div class="section-head"><h2>Eleven questions</h2></div>
 
   <div class="field" data-req>
     <span class="q-num">01</span>
@@ -558,6 +576,24 @@
     <span class="q-num">09</span>
     <label class="q" for="q9">What would make you leave a cleaning job?</label>
     <textarea id="q9" name="q9-would-leave" data-q="Q9 - What would make you leave a cleaning job?"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">10</span>
+    <label class="q">We train everyone on our products and our way of working &mdash; including people with ten years behind them. If on your first day we showed you a different way to do something you have always done, how would that sit with you?</label>
+    <div class="opts" data-q="Q10 - Reaction to being trained a different way">
+      <label class="opt"><input type="radio" name="q10-training-reaction" value="Happy to learn our way"><span class="dot"></span><span class="opt-text">Good &mdash; I'd want to learn your way properly<em>There is always something I have not come across</em></span></label>
+      <label class="opt"><input type="radio" name="q10-training-reaction" value="Do it our way and ask why"><span class="dot"></span><span class="opt-text">I'd do it your way, and ask why, so it sticks</span></label>
+      <label class="opt"><input type="radio" name="q10-training-reaction" value="Would try it but say if mine works better"><span class="dot"></span><span class="opt-text">I'd try it, but I'd speak up if I thought my way was better</span></label>
+      <label class="opt"><input type="radio" name="q10-training-reaction" value="Prefers to stick with own method"><span class="dot"></span><span class="opt-text">I'd rather stick with what I know works</span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">11</span>
+    <label class="q" for="q11">Walk us through what you would actually use on a kitchen worktop, and on a bathroom.</label>
+    <span class="hint">Just what you'd normally reach for &mdash; product, cloth, however you do it. There is no right answer and nothing here is a trick. It only tells us what to train you on.</span>
+    <textarea id="q11" name="q11-products-used" data-q="Q11 - Products and method used on worktops and bathrooms"></textarea>
   </div>
 
   <div class="submit-zone">
