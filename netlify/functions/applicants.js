@@ -51,10 +51,11 @@ const QUESTIONS = [
 
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
-function shell(title, inner) {
+function shell(title, inner, refresh) {
   return `<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+${refresh ? '<meta http-equiv="refresh" content="45">' : ""}
 <title>${title}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -398,11 +399,11 @@ exports.handler = async (event) => {
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
-        <p class="hint">Click any row to open that person's full answers. &#10003; means their application reached the scoring routine.</p>`
+        <p class="hint">Click any row to open that person's full answers. This page refreshes itself every 45 seconds. &#10003; means their application reached the scoring routine.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`) };
+      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`, true) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
