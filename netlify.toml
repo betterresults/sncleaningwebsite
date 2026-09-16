@@ -16,6 +16,12 @@
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
+  from = "/save-score"
+  to = "/.netlify/functions/save-score"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/applicants"
   to = "/.netlify/functions/applicants"
   status = 200
