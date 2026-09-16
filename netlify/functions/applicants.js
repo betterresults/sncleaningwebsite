@@ -69,7 +69,7 @@ h1{font-family:Archivo,sans-serif;font-size:clamp(26px,5vw,34px);letter-spacing:
 .sub{color:var(--ink-soft);margin:0 0 24px;font-size:15px}
 .warn{background:var(--bad-soft);color:var(--bad);border-radius:3px;padding:12px 14px;margin:0 0 18px;font-size:15px}
 .scroll{overflow-x:auto;border:1px solid var(--line);border-radius:4px;background:var(--surface)}
-table{border-collapse:collapse;width:100%;min-width:860px;font-size:14.5px}
+table{border-collapse:collapse;width:100%;min-width:1080px;font-size:14.5px}
 thead th{position:sticky;top:0;background:var(--surface-2);text-align:left;font-family:Archivo,sans-serif;font-size:12px;letter-spacing:.07em;text-transform:uppercase;color:var(--ink-soft);padding:11px 12px;border-bottom:1px solid var(--line-strong);white-space:nowrap}
 tbody td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top}
 tr.row{cursor:pointer}
@@ -82,6 +82,9 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .ar{max-width:210px;color:var(--ink-soft);font-size:13.5px}
 .tick{font-size:17px;font-weight:700}
 .yes{color:var(--good)}.no{color:var(--bad)}
+.fit{min-width:280px;max-width:320px}
+.note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.note.ask{color:var(--marigold);-webkit-line-clamp:2}
 .sc{font-family:Archivo,sans-serif;font-variant-numeric:tabular-nums;font-weight:700;font-size:17px;color:var(--petrol);white-space:nowrap}
 .badge{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;padding:4px 9px;border-radius:2px;white-space:nowrap}
 .b-trial{background:var(--good-soft);color:var(--good)}
@@ -182,7 +185,7 @@ function rows(app, scored, i) {
     <td class="ar">${esc(areas)}</td>
     <td class="tick ${sent ? "yes" : "no"}">${sent ? "&#10003;" : "&#10007;"}</td>
     <td class="sc">${esc(s.score || "")}</td>
-    <td>${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}</td>
+    <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
   </tr>
   <tr class="detail" id="${id}"><td colspan="8">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
@@ -245,7 +248,7 @@ exports.handler = async (event) => {
       ? `<div class="scroll"><table>
           <thead><tr>
             <th>Name</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
-            <th>Areas covered</th><th>Sent</th><th>Score</th><th>Fit</th>
+            <th>Areas covered</th><th>Sent</th><th>Score</th><th>Fit &amp; notes</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
         </table></div>
