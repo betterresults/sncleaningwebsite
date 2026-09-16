@@ -182,6 +182,31 @@
     color: var(--petrol);
   }
   .perks ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
+  .pay {
+    margin: 12px 0 0;
+    padding: 18px 20px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+  }
+  .pay h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 6px;
+    color: var(--ink-soft);
+  }
+  .pay-range {
+    font-family: "Archivo", sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--petrol);
+    margin: 0 0 10px;
+  }
+  .pay p { margin: 0 0 8px; font-size: 15px; color: var(--ink-soft); }
+  .pay p:last-child { margin-bottom: 0; color: var(--ink); font-weight: 600; }
   .perks li { font-size: 15px; color: var(--ink); }
 
   /* ---------- sections ---------- */
@@ -443,6 +468,13 @@
       </ul>
     </div>
 
+    <div class="pay">
+      <h2>What we pay</h2>
+      <p class="pay-range">&pound;16 &ndash; &pound;20 an hour</p>
+      <p>It depends on the job. Regular weekly cleans start at &pound;16 an hour. Fortnightly and monthly cleans pay &pound;17 and up, because a home that has gone longer between cleans is harder work. Jobs that need you to bring equipment and products, or that take extra care, pay towards the top of the range.</p>
+      <p>Paid weekly, every week.</p>
+    </div>
+
   </header>
 
   <form name="cleaner-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="app-form" action="/">
@@ -497,6 +529,18 @@
   </div>
 
   <div class="field" data-req>
+    <label class="q">Does &pound;16 to &pound;20 an hour work for you?</label>
+    <span class="hint">Said plainly up front so nobody wastes their time. Most cleaners start at &pound;16 on regular weekly work and move up as the jobs and the trust build.</span>
+    <div class="opts" data-q="Happy with the pay range">
+      <label class="opt"><input type="radio" name="pay-ok" value="Yes, that works"><span class="dot"></span><span class="opt-text">Yes, that works for me</span></label>
+      <label class="opt"><input type="radio" name="pay-ok" value="Yes, aiming for the higher end"><span class="dot"></span><span class="opt-text">Yes &mdash; and I'd like to work up towards the higher end<em>Happy to start at the bottom and earn it</em></span></label>
+      <label class="opt"><input type="radio" name="pay-ok" value="Would want to discuss it"><span class="dot"></span><span class="opt-text">I'd want to talk it through first</span></label>
+      <label class="opt"><input type="radio" name="pay-ok" value="Below what they need"><span class="dot"></span><span class="opt-text">No &mdash; that's below what I need<em>Better we both know now</em></span></label>
+    </div>
+    <textarea id="pay-note" name="pay-note" data-q="Rate they are looking for" placeholder="If you have a rate in mind, put it here (optional)"></textarea>
+  </div>
+
+  <div class="field" data-req>
     <label class="q">In a year or two, where would you like to be?</label>
     <span class="hint">We're building a team, so there is room to move up. Wanting to stay hands-on is just as good an answer as wanting to lead.</span>
     <div class="opts" data-q="Where they want to be in 1-2 years">
@@ -543,6 +587,17 @@
       <label class="opt"><input type="radio" name="gender" value="Female"><span class="dot"></span><span class="opt-text">Female</span></label>
       <label class="opt"><input type="radio" name="gender" value="Male"><span class="dot"></span><span class="opt-text">Male</span></label>
       <label class="opt"><input type="radio" name="gender" value="Prefer not to say"><span class="dot"></span><span class="opt-text">I'd rather not say</span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">Do you have a DBS check?</label>
+    <span class="hint">We are in people's homes, often while they are out, so every cleaner we take on needs a DBS check once they have passed their trial. Not having one now is completely normal and we will walk you through getting it.</span>
+    <div class="opts" data-q="DBS check">
+      <label class="opt"><input type="radio" name="dbs" value="Yes - current DBS"><span class="dot"></span><span class="opt-text">Yes, I have a current DBS certificate</span></label>
+      <label class="opt"><input type="radio" name="dbs" value="Had one before, now out of date"><span class="dot"></span><span class="opt-text">I've had one before, but it's out of date now</span></label>
+      <label class="opt"><input type="radio" name="dbs" value="No - happy to get one if taken on"><span class="dot"></span><span class="opt-text">No, but I'm happy to get one if you take me on<em>The usual answer, and absolutely fine</em></span></label>
+      <label class="opt"><input type="radio" name="dbs" value="Not willing to have a DBS check"><span class="dot"></span><span class="opt-text">No, and I'd rather not have one done</span></label>
     </div>
   </div>
 
