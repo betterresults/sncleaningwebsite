@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Cleaner Application &mdash; SN Cleaning Services</title>
 <meta name="description" content="Apply to join SN Cleaning Services as a domestic cleaner in Upminster, Brentwood, Chelmsford and the surrounding areas.">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,6 +68,11 @@
   * { box-sizing: border-box; }
 
   body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
     background: var(--ground);
     color: var(--ink);
     font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -248,6 +254,13 @@
     margin-top: 6px;
   }
   textarea { min-height: 92px; resize: vertical; line-height: 1.5; }
+  input, textarea {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+    -webkit-touch-callout: default;
+  }
   input::placeholder, textarea::placeholder { color: var(--ink-faint); }
   input:focus-visible, textarea:focus-visible,
   button:focus-visible, a:focus-visible, .opt:has(:focus-visible) {
@@ -437,6 +450,7 @@
   <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
   <input type="hidden" name="time-taken" id="meta-time">
   <input type="hidden" name="typed-or-pasted" id="meta-paste">
+  <input type="hidden" name="left-the-page" id="meta-away">
 
   <div class="section-head"><h2>About you</h2></div>
 
@@ -832,6 +846,27 @@
     t.addEventListener("drop", blockPaste);
   });
 
+  /* The questions themselves are not copyable, so they cannot be lifted into an
+     AI in one gesture. Selection, copy, cut and the right-click menu are off
+     everywhere except the boxes the applicant types into. */
+  function blockCopy(e) {
+    if (e.target && e.target.id === "copybox") return;
+    e.preventDefault();
+  }
+  document.addEventListener("copy", blockCopy);
+  document.addEventListener("cut", blockCopy);
+  document.addEventListener("contextmenu", function (e) {
+    if (e.target && e.target.closest && e.target.closest("input, textarea")) return;
+    e.preventDefault();
+  });
+
+  /* Counts how often the page was left mid-application. Someone hopping out to
+     an AI and back shows up here as a run of switches. */
+  var tabSwitches = 0;
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) tabSwitches++;
+  });
+
   function stampMeta() {
     var secs = Math.round((Date.now() - startedAt) / 1000);
     var mins = Math.floor(secs / 60);
@@ -839,6 +874,8 @@
       (mins ? mins + " min " : "") + (secs % 60) + " sec on the page";
     document.getElementById("meta-paste").value =
       pasteAttempts === 0 ? "Typed - no paste attempts" : "Tried to paste " + pasteAttempts + " time(s)";
+    document.getElementById("meta-away").value =
+      tabSwitches === 0 ? "Stayed on the page throughout" : "Left the page " + tabSwitches + " time(s) while filling it in";
   }
 
   loadDraft();
