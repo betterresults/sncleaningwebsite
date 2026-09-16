@@ -13,7 +13,7 @@
 
 const SOURCE_FORM = "cleaner-application";
 const TARGET_FORM = "scored-application";
-const MODEL = process.env.ANTHROPIC_MODEL || "claude-sonnet-4-5";
+const MODEL = process.env.ANTHROPIC_MODEL || "claude-sonnet-5";
 
 const RUBRIC = `You are screening applicants for SN Cleaning Services, a domestic cleaning company in Essex (Upminster, Brentwood, Chelmsford and nearby). Silvia, the owner, values attitude far above experience. She actively welcomes people with no cleaning experience and trains them. What she cannot work with is a cleaner who believes they already know everything.
 
