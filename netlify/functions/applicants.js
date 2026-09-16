@@ -15,6 +15,28 @@ const crypto = require("crypto");
 const SOURCE_FORM = "cleaner-application";
 const SCORED_FORM = "scored-application";
 const COOKIE = "sn_applicants";
+const PENDING = "sn_pending";
+
+/* Netlify's form API takes a few seconds to index a newly written submission.
+   Without this, a status you just set vanishes on the next page load and comes
+   back a minute later. We remember what was just set in a short-lived cookie
+   and show that, so the status never flickers. */
+function readPending(cookieHeader) {
+  const raw = (cookieHeader || "").split(";").map((c) => c.trim())
+    .find((c) => c.indexOf(PENDING + "=") === 0);
+  if (!raw) return {};
+  try {
+    return JSON.parse(Buffer.from(decodeURIComponent(raw.slice(PENDING.length + 1)), "base64").toString("utf8")) || {};
+  } catch (e) { return {}; }
+}
+
+function writePending(obj) {
+  const keys = Object.keys(obj).slice(-60);
+  const trimmed = {};
+  keys.forEach((k) => { trimmed[k] = obj[k]; });
+  const v = encodeURIComponent(Buffer.from(JSON.stringify(trimmed), "utf8").toString("base64"));
+  return PENDING + "=" + v + "; Path=/; Max-Age=1800; SameSite=Lax";
+}
 
 function token(pw) {
   return crypto.createHash("sha256").update("sn-applicants:" + pw).digest("hex");
@@ -220,7 +242,7 @@ const TRAVEL = {
 
 const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" };
 
-function rows(app, scored, i) {
+function rows(app, scored, i, pending) {
   const d = app.data || {};
   const s = (scored && scored.data) || {};
 
@@ -255,7 +277,8 @@ function rows(app, scored, i) {
 
   const id = "d" + i;
 
-  const action = s.action || "";
+  const p = pending || {};
+  const action = Object.prototype.hasOwnProperty.call(p, app.id) ? p[app.id] : (s.action || "");
   const actClass = action === "Contacted" ? "a-contacted"
     : action === "Trial booked" ? "a-trial"
     : action === "Rejected" ? "a-rejected"
@@ -436,7 +459,9 @@ exports.handler = async (event) => {
       } catch (err) {
         console.error("Set action failed", err);
       }
-      return { statusCode: 302, headers: { location: "/applicants" }, body: "" };
+      const pend = readPending(cookies);
+      pend[appId] = action;
+      return { statusCode: 302, headers: { location: "/applicants", "set-cookie": writePending(pend) }, body: "" };
     }
 
     if (authed && (params.get("resend") || params.get("resend-all"))) {
@@ -494,6 +519,8 @@ exports.handler = async (event) => {
       sc ? api("/forms/" + sc.id + "/submissions?per_page=200", key) : []
     ]);
 
+    const pending = readPending(cookies);
+
     const byName = {};
     scores.forEach((s) => {
       const n = ((s.data || {}).applicant || "").trim().toLowerCase();
@@ -511,9 +538,9 @@ exports.handler = async (event) => {
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
             <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Status</th>
           </tr></thead>
-          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i)).join("")}</tbody>
+          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i, pending)).join("")}</tbody>
         </table></div>
-        <p class="hint">Click any row to open that person's full answers. This page refreshes itself every 45 seconds.</p>`
+        <p class="hint">Click any row to open that person's full answers. The page stays still until you press Refresh.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     const filters = `<div class="filters">
@@ -532,12 +559,13 @@ exports.handler = async (event) => {
         <option value="over75">Over 75</option>
       </select></label>
       <label><input type="checkbox" id="f-car"> Has a car</label>
+      <button type="button" class="mini" onclick="location.href='/applicants'">&#8635; Refresh</button>
     </div>`;
 
     const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.length}</span></div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`, true) };
+      body: shell("Applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
