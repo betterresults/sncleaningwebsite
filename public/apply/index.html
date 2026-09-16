@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Cleaner Application &mdash; SN Cleaning Services</title>
+<meta name="description" content="Apply to join SN Cleaning Services as a domestic cleaner in Upminster, Brentwood, Chelmsford and the surrounding areas.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Public+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ground: #F5F4EF;
+    --surface: #FFFFFF;
+    --surface-2: #EFEEE7;
+    --ink: #16242B;
+    --ink-soft: #55676E;
+    --ink-faint: #839499;
+    --btn-fg: #FFFFFF;
+    --line: #DDDCD3;
+    --line-strong: #C3C2B7;
+    --petrol: #0E4F5C;
+    --petrol-soft: #E2EDEE;
+    --marigold: #D9930B;
+    --marigold-soft: #FBF0DA;
+    --focus: #0E4F5C;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ground: #121A1D;
+      --surface: #1A2429;
+      --surface-2: #202C32;
+      --ink: #EAEDEB;
+      --ink-soft: #A2B2B7;
+      --ink-faint: #7A8A8F;
+      --line: #2C3A40;
+      --line-strong: #43555C;
+      --petrol: #6FC4D0;
+      --petrol-soft: #16333A;
+      --marigold: #F0B54A;
+      --marigold-soft: #33280F;
+      --focus: #6FC4D0;
+      --btn-fg: #0C1417;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --ground: #121A1D;
+    --surface: #1A2429;
+    --surface-2: #202C32;
+    --ink: #EAEDEB;
+    --ink-soft: #A2B2B7;
+    --ink-faint: #7A8A8F;
+    --line: #2C3A40;
+    --line-strong: #43555C;
+    --petrol: #6FC4D0;
+    --petrol-soft: #16333A;
+    --marigold: #F0B54A;
+    --marigold-soft: #33280F;
+    --focus: #6FC4D0;
+    --btn-fg: #0C1417;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--ground);
+    color: var(--ink);
+    font-family: "Public Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  img { max-width: 100%; }
+  [hidden] { display: none !important; }
+
+  .wrap {
+    max-width: 660px;
+    margin: 0 auto;
+    padding-inline: 18px;
+    padding-block: 0 64px;
+  }
+
+  /* ---------- progress ---------- */
+  .progress {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: var(--ground);
+    border-bottom: 1px solid var(--line);
+    padding-block: 10px 9px;
+    padding-inline: 18px;
+  }
+  .progress-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: 660px;
+    margin: 0 auto;
+  }
+  .progress-label {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .progress-count {
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .track {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--line);
+    margin-top: 8px;
+    overflow: hidden;
+    max-width: 660px;
+    margin-inline: auto;
+  }
+  .bar {
+    height: 100%;
+    width: 0%;
+    background: var(--petrol);
+    transition: width .35s cubic-bezier(.2,.7,.3,1);
+  }
+  @media (prefers-reduced-motion: reduce) { .bar { transition: none; } }
+
+  /* ---------- header ---------- */
+  header.intro { padding-block: 34px 8px; }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--petrol);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-family: "Archivo", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 700;
+    font-size: clamp(30px, 7vw, 42px);
+    line-height: 1.08;
+    letter-spacing: -0.022em;
+    margin: 0 0 16px;
+    text-wrap: balance;
+  }
+  .lede {
+    font-size: 17px;
+    color: var(--ink-soft);
+    margin: 0 0 8px;
+    max-width: 54ch;
+  }
+
+  .perks {
+    margin: 26px 0 0;
+    padding: 18px 20px;
+    background: var(--petrol-soft);
+    border-radius: 3px;
+  }
+  .perks h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    color: var(--petrol);
+  }
+  .perks ul { margin: 0; padding-left: 18px; display: grid; gap: 5px; }
+  .perks li { font-size: 15px; color: var(--ink); }
+
+  /* ---------- sections ---------- */
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 46px 0 18px;
+  }
+  .section-head h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .section-head::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  /* ---------- fields ---------- */
+  .field {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    padding: 18px 18px 19px;
+    margin-bottom: 12px;
+  }
+  .field.answered { border-color: var(--line-strong); }
+  .q-num {
+    font-family: "Archivo", sans-serif;
+    font-variant-numeric: tabular-nums;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--marigold);
+    letter-spacing: 0.04em;
+    display: block;
+    margin-bottom: 5px;
+  }
+  label.q {
+    display: block;
+    font-weight: 600;
+    font-size: 16.5px;
+    line-height: 1.35;
+    margin: 0 0 4px;
+    text-wrap: pretty;
+  }
+  .hint {
+    display: block;
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 12px;
+  }
+
+  input[type="text"], input[type="tel"], textarea {
+    width: 100%;
+    font: inherit;
+    font-size: 16px;
+    color: var(--ink);
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 10px 12px;
+    margin-top: 6px;
+  }
+  textarea { min-height: 92px; resize: vertical; line-height: 1.5; }
+  input::placeholder, textarea::placeholder { color: var(--ink-faint); }
+  input:focus-visible, textarea:focus-visible,
+  button:focus-visible, a:focus-visible, .opt:has(:focus-visible) {
+    outline: 2px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 460px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  /* choice rows */
+  .opts { display: grid; gap: 7px; margin-top: 10px; }
+  .opt {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 12px 13px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: var(--surface-2);
+    cursor: pointer;
+    transition: border-color .15s, background .15s;
+  }
+  .opt input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+  .dot {
+    flex: 0 0 auto;
+    width: 17px; height: 17px;
+    margin-top: 2px;
+    border-radius: 50%;
+    border: 1.5px solid var(--line-strong);
+    background: var(--surface);
+    display: grid;
+    place-items: center;
+  }
+  .opt input[type="checkbox"] ~ .dot { border-radius: 3px; }
+  .dot::after {
+    content: "";
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: transparent;
+    transition: background .12s;
+  }
+  .opt input[type="checkbox"] ~ .dot::after { border-radius: 1px; }
+  .opt:has(input:checked) { border-color: var(--petrol); background: var(--petrol-soft); }
+  .opt:has(input:checked) .dot { border-color: var(--petrol); }
+  .opt:has(input:checked) .dot::after { background: var(--petrol); }
+  .opt-text { font-size: 15.5px; line-height: 1.4; }
+  .opt-text em { display: block; font-style: normal; font-size: 13.5px; color: var(--ink-soft); margin-top: 1px; }
+
+  /* ---------- submit ---------- */
+  .submit-zone {
+    margin-top: 32px;
+    background: var(--surface);
+    border: 1px solid var(--line-strong);
+    border-radius: 3px;
+    padding: 22px 20px;
+  }
+  .submit-zone h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 19px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .submit-zone p { margin: 0 0 16px; color: var(--ink-soft); font-size: 15px; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    font-family: "Archivo", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    padding: 14px 18px;
+    border-radius: 2px;
+    border: 1px solid transparent;
+    background: var(--petrol);
+    color: var(--btn-fg);
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .btn.secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--line-strong);
+    margin-top: 9px;
+    font-weight: 500;
+  }
+  .btn[disabled] { opacity: .55; cursor: default; }
+  .missing {
+    display: none;
+    margin: 0 0 14px;
+    padding: 11px 13px;
+    border-left: 3px solid var(--marigold);
+    background: var(--marigold-soft);
+    font-size: 14.5px;
+    color: var(--ink);
+    border-radius: 0 2px 2px 0;
+  }
+  .missing.show { display: block; }
+
+  .copybox {
+    width: 100%;
+    min-height: 150px;
+    margin-top: 14px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+  .fallback { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
+  .fallback a { color: var(--petrol); }
+
+  .thanks {
+    margin-top: 32px;
+    background: var(--petrol-soft);
+    border: 1px solid var(--petrol);
+    border-radius: 3px;
+    padding: 28px 22px;
+    text-align: center;
+  }
+  .thanks h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: 22px;
+    margin: 0 0 8px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .thanks p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
+
+  footer {
+    margin-top: 34px;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+</style>
+</head>
+<body>
+<div class="progress">
+  <div class="progress-row">
+    <span class="progress-label">Your application</span>
+    <span class="progress-count"><span id="done">0</span> / <span id="total">0</span> answered</span>
+  </div>
+  <div class="track"><div class="bar" id="bar"></div></div>
+</div>
+
+<div class="wrap">
+
+  <header class="intro">
+    <p class="eyebrow">SN Cleaning Services &middot; Essex</p>
+    <h1>Domestic cleaners wanted in Upminster, Brentwood, Chelmsford and nearby</h1>
+    <p class="lede">We clean people's homes across Essex and we're taking on cleaners now. Fill this in and we'll come back to you.</p>
+    <p class="lede">It takes about ten minutes. Answer honestly &mdash; there are no trick questions and we're not looking for perfect people.</p>
+
+    <div class="perks">
+      <h2>What you get working with us</h2>
+      <ul>
+        <li>Paid weekly, on time, every week</li>
+        <li>All products and equipment supplied &mdash; you bring yourself</li>
+        <li>Proper training, and someone to call when a job throws something odd at you</li>
+        <li>Regular clients and regular hours, not scraps</li>
+        <li>More hours as you prove yourself</li>
+      </ul>
+    </div>
+
+  </header>
+
+  <form name="cleaner-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="app-form" action="/">
+  <input type="hidden" name="form-name" value="cleaner-application">
+  <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+
+  <div class="section-head"><h2>About you</h2></div>
+
+  <div class="field" data-req>
+    <label class="q" for="f-name">Your name</label>
+    <input type="text" id="f-name" name="name" data-q="Name" placeholder="First and last name" autocomplete="name">
+  </div>
+
+  <div class="field" data-req>
+    <label class="q" for="f-phone">Phone or WhatsApp number</label>
+    <span class="hint">So we can get back to you quickly.</span>
+    <input type="tel" id="f-phone" name="phone" data-q="Phone / WhatsApp" placeholder="07..." autocomplete="tel">
+  </div>
+
+  <div class="grid-2">
+    <div class="field" data-req>
+      <label class="q" for="f-area">Where are you based?</label>
+      <span class="hint">Town or postcode.</span>
+      <input type="text" id="f-area" name="based-in" data-q="Based in" placeholder="e.g. Upminster, RM14">
+    </div>
+    <div class="field" data-req>
+      <label class="q" for="f-years">Years of cleaning experience</label>
+      <span class="hint">Roughly is fine.</span>
+      <input type="text" id="f-years" name="years-experience" data-q="Years of experience" placeholder="e.g. 4 years">
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">What kind of work are you looking for?</label>
+    <span class="hint">There's no wrong answer &mdash; we just need to know what we're offering you.</span>
+    <div class="opts" data-q="Type of work wanted">
+      <label class="opt"><input type="radio" name="work-type" value="One-off job only"><span class="dot"></span><span class="opt-text">Just a one-off job<em>Something to tide me over right now</em></span></label>
+      <label class="opt"><input type="radio" name="work-type" value="A few jobs here and there"><span class="dot"></span><span class="opt-text">A few jobs here and there<em>Whenever they come up, alongside other work</em></span></label>
+      <label class="opt"><input type="radio" name="work-type" value="Regular part-time work"><span class="dot"></span><span class="opt-text">Regular part-time work<em>A set number of hours each week</em></span></label>
+      <label class="opt"><input type="radio" name="work-type" value="Long-term with one company"><span class="dot"></span><span class="opt-text">A long-term place with one company<em>Somewhere to settle and build up</em></span></label>
+      <label class="opt"><input type="radio" name="work-type" value="Full-time, as many hours as possible"><span class="dot"></span><span class="opt-text">Full-time &mdash; as many hours as you have<em>Cleaning is my main work</em></span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">Do you drive?</label>
+    <div class="opts" data-q="Drives">
+      <label class="opt"><input type="radio" name="drives" value="Yes, I have my own car"><span class="dot"></span><span class="opt-text">Yes, I have my own car</span></label>
+      <label class="opt"><input type="radio" name="drives" value="I drive but no car right now"><span class="dot"></span><span class="opt-text">I drive, but no car right now</span></label>
+      <label class="opt"><input type="radio" name="drives" value="No - public transport"><span class="dot"></span><span class="opt-text">No &mdash; I use public transport</span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">When can you work?</label>
+    <span class="hint">Tick everything that suits you.</span>
+    <div class="opts" data-q="Availability">
+      <label class="opt"><input type="checkbox" name="availability" value="Weekday mornings"><span class="dot"></span><span class="opt-text">Weekday mornings</span></label>
+      <label class="opt"><input type="checkbox" name="availability" value="Weekday afternoons"><span class="dot"></span><span class="opt-text">Weekday afternoons</span></label>
+      <label class="opt"><input type="checkbox" name="availability" value="Evenings"><span class="dot"></span><span class="opt-text">Evenings</span></label>
+      <label class="opt"><input type="checkbox" name="availability" value="Weekends"><span class="dot"></span><span class="opt-text">Weekends</span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">Do you have the right to work in the UK?</label>
+    <div class="opts" data-q="Right to work in UK">
+      <label class="opt"><input type="radio" name="right-to-work" value="Yes"><span class="dot"></span><span class="opt-text">Yes</span></label>
+      <label class="opt"><input type="radio" name="right-to-work" value="Not sure / happy to discuss"><span class="dot"></span><span class="opt-text">Not sure &mdash; happy to discuss</span></label>
+    </div>
+  </div>
+
+  <div class="section-head"><h2>Nine questions</h2></div>
+
+  <div class="field" data-req>
+    <span class="q-num">01</span>
+    <label class="q" for="q1">What do you enjoy most about cleaning?</label>
+    <textarea id="q1" name="q1-enjoy" data-q="Q1 - What do you enjoy most about cleaning?" placeholder="Whatever comes to mind first."></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">02</span>
+    <label class="q" for="q2">Tell us about a time a customer wasn't happy with your work. What did you do?</label>
+    <span class="hint">It happens to everyone. We're interested in what you did next.</span>
+    <textarea id="q2" name="q2-unhappy-customer" data-q="Q2 - Unhappy customer, what did you do?"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">03</span>
+    <label class="q" for="q3">A client asks you to clean something a way you think is wrong. What do you do?</label>
+    <textarea id="q3" name="q3-wrong-method" data-q="Q3 - Client asks for a method you think is wrong"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">04</span>
+    <label class="q" for="q4">What's one thing you've learned about cleaning in the last year?</label>
+    <span class="hint">A product, a surface, a trick, a mistake &mdash; anything.</span>
+    <textarea id="q4" name="q4-learned" data-q="Q4 - Something learned in the last year"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">05</span>
+    <label class="q" for="q5">How do you know a job is finished?</label>
+    <textarea id="q5" name="q5-job-finished" data-q="Q5 - How do you know a job is finished?"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">06</span>
+    <label class="q">Thinking about your recent cleaning jobs &mdash; when did you usually arrive?</label>
+    <span class="hint">Be straight with us. Everyone has traffic; we just want to know what normal looks like for you.</span>
+    <div class="opts" data-q="Q6 - Usual arrival time at recent jobs">
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="5-10 minutes early, most days"><span class="dot"></span><span class="opt-text">5&ndash;10 minutes early, most days<em>I like a few minutes to set up</em></span></label>
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="Right on time"><span class="dot"></span><span class="opt-text">Right on time<em>Bang on the hour, in the door</em></span></label>
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="A few minutes late fairly often"><span class="dot"></span><span class="opt-text">A few minutes late, fairly often<em>Five or ten minutes here and there</em></span></label>
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="Often late - transport or traffic"><span class="dot"></span><span class="opt-text">Often late &mdash; transport or traffic<em>It's out of my hands a lot of the time</em></span></label>
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="It varied a lot"><span class="dot"></span><span class="opt-text">It varied a lot<em>Depended on the job and the day</em></span></label>
+      <label class="opt"><input type="radio" name="q6-usual-arrival" value="Other"><span class="dot"></span><span class="opt-text">Something else<em>Tell us below</em></span></label>
+    </div>
+    <textarea id="q6b" name="q6b-arrival-notes" data-q="Q6b - Anything to add about arrival times" placeholder="Anything you'd like to add about that? (optional)"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">07</span>
+    <label class="q" for="q7">You're stuck in traffic and running 30 minutes late. What happens next?</label>
+    <textarea id="q7" name="q7-running-late" data-q="Q7 - Running 30 minutes late, what happens next?"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">08</span>
+    <label class="q" for="q8">Which products or surfaces are you least confident with?</label>
+    <span class="hint">Everyone has something. Telling us means we can train you on it.</span>
+    <textarea id="q8" name="q8-least-confident" data-q="Q8 - Least confident products or surfaces"></textarea>
+  </div>
+
+  <div class="field" data-req>
+    <span class="q-num">09</span>
+    <label class="q" for="q9">What would make you leave a cleaning job?</label>
+    <textarea id="q9" name="q9-would-leave" data-q="Q9 - What would make you leave a cleaning job?"></textarea>
+  </div>
+
+  <div class="submit-zone">
+    <h2>Ready to send?</h2>
+    <p>Check it over, then send it to us. We read every one and come back to you.</p>
+    <div class="missing" id="missing"></div>
+    <button class="btn" id="send" type="button">Submit my application</button>
+    <div class="fallback" id="fallback" hidden>
+      <p id="fallback-msg">Something went wrong sending it. Copy everything below and email it to <a id="mail-link" href="mailto:info@sncleaningservices.co.uk">info@sncleaningservices.co.uk</a>.</p>
+      <textarea class="copybox" id="copybox" readonly></textarea>
+      <button class="btn secondary" id="copy" type="button">Copy my answers</button>
+    </div>
+  </div>
+
+  </form>
+
+  <div class="thanks" id="thanks" hidden>
+    <h2>Thank you &mdash; that's sent.</h2>
+    <p>We've got your application. If it looks like a good fit we'll call or WhatsApp you within a few days.</p>
+  </div>
+
+  <footer>
+    SN Cleaning Services &mdash; domestic cleaning in Upminster, Brentwood, Chelmsford and the surrounding areas. Your answers come straight to us and go no further.
+  </footer>
+</div>
+
+<script>
+(function () {
+  /* Applications are collected by Netlify Forms (form name: "cleaner-application").
+     Set the notified email address in Netlify:
+     Site configuration > Forms > Form notifications.
+     The address below is only used in the manual fallback message. */
+  var TO = "info@sncleaningservices.co.uk";
+  var DRAFT_KEY = "snclean-application-draft-v1";
+
+  var fields = Array.prototype.slice.call(document.querySelectorAll(".field"));
+  var textInputs = Array.prototype.slice.call(document.querySelectorAll("input[type=text],input[type=tel],textarea"));
+  var doneEl = document.getElementById("done");
+  var totalEl = document.getElementById("total");
+  var bar = document.getElementById("bar");
+  var missing = document.getElementById("missing");
+  var fallback = document.getElementById("fallback");
+  var copybox = document.getElementById("copybox");
+  var sendBtn = document.getElementById("send");
+  var thanks = document.getElementById("thanks");
+
+  var required = fields.filter(function (f) { return f.hasAttribute("data-req"); });
+  totalEl.textContent = required.length;
+
+  function groupValues(box) {
+    return Array.prototype.slice.call(box.querySelectorAll("input:checked")).map(function (i) { return i.value; });
+  }
+
+  function fieldState(f) {
+    var box = f.querySelector(".opts");
+    if (box) return { label: box.getAttribute("data-q"), value: groupValues(box).join(", ") };
+    var input = f.querySelector("input[type=text],input[type=tel],textarea");
+    if (!input) return { label: "", value: "" };
+    return { label: input.getAttribute("data-q"), value: input.value.trim() };
+  }
+
+  function label(f) {
+    var l = f.querySelector("label.q");
+    return l ? l.textContent.replace(/\s+/g, " ").trim() : "this question";
+  }
+
+  function refresh() {
+    var n = 0;
+    required.forEach(function (f) {
+      var filled = fieldState(f).value.length > 0;
+      if (filled) n++;
+      f.classList.toggle("answered", filled);
+    });
+    doneEl.textContent = n;
+    bar.style.width = (required.length ? (n / required.length) * 100 : 0) + "%";
+  }
+
+  function collectText() {
+    var lines = [];
+    fields.forEach(function (f) {
+      var s = fieldState(f);
+      if (!s.label) return;
+      lines.push(s.label);
+      lines.push(s.value || "(no answer)");
+      lines.push("");
+      if (f.contains(document.getElementById("q6b"))) {
+        var add = document.getElementById("q6b").value.trim();
+        if (add) {
+          lines.push("Q6b - Anything to add about arrival times");
+          lines.push(add);
+          lines.push("");
+        }
+      }
+    });
+    var name = document.getElementById("f-name").value.trim() || "Applicant";
+    return { text: lines.join("\n"), name: name };
+  }
+
+  function unanswered() {
+    return required.filter(function (f) { return fieldState(f).value.length === 0; });
+  }
+
+  function showFallback(built, msg) {
+    copybox.value = built.text;
+    if (msg) document.getElementById("fallback-msg").textContent = msg;
+    document.getElementById("mail-link").href =
+      "mailto:" + TO
+      + "?subject=" + encodeURIComponent("Cleaner application - " + built.name)
+      + "&body=" + encodeURIComponent(built.text);
+    fallback.hidden = false;
+  }
+
+  function succeed() {
+    document.querySelector(".submit-zone").hidden = true;
+    thanks.hidden = false;
+    try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
+    thanks.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  document.addEventListener("input", function () { refresh(); saveDraft(); });
+  document.addEventListener("change", function () { refresh(); saveDraft(); });
+
+  sendBtn.addEventListener("click", function () {
+    var gaps = unanswered();
+    if (gaps.length) {
+      missing.classList.add("show");
+      missing.textContent = gaps.length === 1
+        ? "One left: " + label(gaps[0])
+        : gaps.length + " still to answer, starting with: " + label(gaps[0]);
+      gaps[0].scrollIntoView({ behavior: "smooth", block: "center" });
+      var first = gaps[0].querySelector("input,textarea");
+      if (first) first.focus({ preventScroll: true });
+      return;
+    }
+    missing.classList.remove("show");
+
+    var built = collectText();
+    sendBtn.disabled = true;
+    sendBtn.textContent = "Sending...";
+
+    var form = document.getElementById("app-form");
+    var body = new URLSearchParams(new FormData(form)).toString();
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body
+    })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); succeed(); })
+      .catch(function () {
+        try { form.submit(); return; } catch (err) { /* fall through */ }
+        sendBtn.disabled = false;
+        sendBtn.textContent = "Try sending again";
+        showFallback(built, "That didn't go through. Tap the address below to email it instead, or copy your answers and send them to " + TO + ".");
+      });
+  });
+
+  document.getElementById("copy").addEventListener("click", function () {
+    copybox.focus();
+    copybox.select();
+    var ok = false;
+    try { ok = document.execCommand("copy"); } catch (err) { ok = false; }
+    this.textContent = ok ? "Copied" : "Select the text above and copy it";
+  });
+
+  function saveDraft() {
+    try {
+      var data = {};
+      textInputs.forEach(function (i) { if (i.id) data[i.id] = i.value; });
+      document.querySelectorAll(".opts input:checked").forEach(function (i) {
+        data["__" + i.name] = (data["__" + i.name] || []).concat(i.value);
+      });
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(data));
+    } catch (err) { /* private browsing - draft just isn't kept */ }
+  }
+
+  function loadDraft() {
+    try {
+      var raw = localStorage.getItem(DRAFT_KEY);
+      if (!raw) return;
+      var data = JSON.parse(raw);
+      textInputs.forEach(function (i) { if (i.id && typeof data[i.id] === "string") i.value = data[i.id]; });
+      document.querySelectorAll(".opts input").forEach(function (i) {
+        var picked = data["__" + i.name];
+        if (Array.isArray(picked) && picked.indexOf(i.value) !== -1) i.checked = true;
+      });
+    } catch (err) { /* ignore */ }
+  }
+
+  loadDraft();
+  refresh();
+})();
+</script>
+
+</body>
+</html>
