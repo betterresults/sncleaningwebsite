@@ -8,6 +8,7 @@
  *
  * Environment variables to set in Netlify:
  *   CLAUDE_ROUTINE_TOKEN  - the token from the routine page (starts sk-ant-oat01-)
+ *                           ANTHROPIC_API_KEY is accepted as a fallback name
  *   CLAUDE_ROUTINE_URL    - optional, defaults to the routine below
  */
 
@@ -34,7 +35,8 @@ exports.handler = async (event) => {
   }
 
   const data = payload.data || {};
-  const token = process.env.CLAUDE_ROUTINE_TOKEN;
+  // Accept either name so whichever variable is saved in Netlify works.
+  const token = process.env.CLAUDE_ROUTINE_TOKEN || process.env.ANTHROPIC_API_KEY;
 
   const answers = Object.keys(data)
     .filter((k) => !SKIP.includes(k))
@@ -51,7 +53,7 @@ exports.handler = async (event) => {
   let outcome = "";
 
   if (!token) {
-    outcome = "CLAUDE_ROUTINE_TOKEN is not set in Netlify - the routine was not fired.";
+    outcome = "No token found. Set CLAUDE_ROUTINE_TOKEN or ANTHROPIC_API_KEY in Netlify.";
   } else {
     try {
       const res = await fetch(ROUTINE_URL, {
