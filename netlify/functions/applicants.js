@@ -99,6 +99,10 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .nocar{font-size:13px;color:var(--ink-soft)}
 .action-col{white-space:nowrap}
 .action-col form{margin:0}
+.filters{display:flex;gap:14px;align-items:center;margin:0 0 16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:12px 14px}
+.filters label{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-soft);margin:0}
+.filters select{font:inherit;font-size:13.5px;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink)}
+.filters input[type=checkbox]{width:auto;margin:0}
 .act-select{width:auto;font:inherit;font-size:13px;font-weight:600;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink);cursor:pointer}
 .act-select.a-contacted{border-color:var(--petrol);color:var(--petrol)}
 .act-select.a-trial{border-color:var(--good);color:var(--good)}
@@ -152,6 +156,23 @@ document.addEventListener("click",function(e){
   var d=document.getElementById(row.getAttribute("data-for"));
   if(d)d.classList.toggle("open");
 });
+(function(){
+  var fs=document.getElementById("f-status"), fc=document.getElementById("f-car");
+  if(!fs||!fc)return;
+  function apply(){
+    var status=fs.value, carOnly=fc.checked;
+    document.querySelectorAll("tr.row").forEach(function(r){
+      var okStatus = !status || (status==="__none__" ? r.dataset.action==="" : r.dataset.action===status);
+      var okCar = !carOnly || r.dataset.car==="1";
+      var show = okStatus && okCar;
+      r.style.display = show ? "" : "none";
+      var d=document.getElementById(r.getAttribute("data-for"));
+      if(d && !show) d.classList.remove("open");
+    });
+  }
+  fs.addEventListener("change",apply);
+  fc.addEventListener("change",apply);
+})();
 </script>
 </body></html>`;
 }
@@ -232,21 +253,20 @@ function rows(app, scored, i) {
     .map((o) => `<option value="${esc(o)}"${action === o ? " selected" : ""}>${o ? esc(o) : "–"}</option>`)
     .join("");
 
-  return `<tr class="row" data-for="${id}">
+  const travelKey = d.transport || d.drives || "";
+  const travelInfo = TRAVEL[travelKey];
+  const hasCar = !!(travelInfo && travelInfo[1]);
+
+  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
     <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "–" : "")}</td>
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
     <td>${esc(d["based-in"] || "")}</td>
     <td><div class="days">${days || '<span class="dt">none given</span>'}</div></td>
-    <td class="car">${(() => {
-      const t = d.transport || d.drives || "";
-      const m = TRAVEL[t];
-      if (!t) return "";
-      return m && m[1] ? `<span class="hascar">Car</span>` : `<span class="nocar">${esc(m ? m[0] : t)}</span>`;
-    })()}</td>
+    <td class="car">${!travelKey ? "" : hasCar ? `<span class="hascar">Car</span>` : `<span class="nocar">${esc(travelInfo ? travelInfo[0] : travelKey)}</span>`}</td>
     <td class="ar">${esc(areas)}</td>
     <td class="sc">${esc(s.score || "")}</td>
-    <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : `<span class="badge b-none">Not scored</span>`}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
+    <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : ""}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
     <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>
       <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1" title="Delete">&#128465; Delete</button></form></td>
     <td class="action-col"><form method="POST"><input type="hidden" name="set-action" value="${esc(app.id)}"><select name="action" class="act-select ${actClass}" onchange="this.form.submit()">${actionOpts}</select></form></td>
@@ -483,8 +503,20 @@ exports.handler = async (event) => {
         <p class="hint">Click any row to open that person's full answers. This page refreshes itself every 45 seconds.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
+    const filters = `<div class="filters">
+      <label>Status <select id="f-status">
+        <option value="">All</option>
+        <option value="__none__">No status</option>
+        <option value="Contacted">Contacted</option>
+        <option value="Trial booked">Trial booked</option>
+        <option value="Rejected">Rejected</option>
+        <option value="Not a good fit">Not a good fit</option>
+      </select></label>
+      <label><input type="checkbox" id="f-car"> Has a car</label>
+    </div>`;
+
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).sent ? `<p class="ok">Sent to the routine. Scores appear here once it writes them back &mdash; refresh in a minute.</p>` : ""}${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}<div class="bar"><form method="POST"><input type="hidden" name="resend-all" value="1"><button type="submit">Re-run everyone not scored</button></form></div><p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`, true) };
+      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${filters}<p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`, true) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
