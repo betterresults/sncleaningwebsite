@@ -114,7 +114,9 @@ function writeSitemap(routes) {
 }
 
 function writeRobotsTxt() {
-  const txt = `User-agent: *\nAllow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  const aiBots = ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'ClaudeBot', 'Claude-User', 'anthropic-ai', 'PerplexityBot', 'Perplexity-User', 'CCBot', 'Google-Extended', 'Applebot-Extended', 'Bytespider', 'meta-externalagent'];
+  const aiBlock = aiBots.map((b) => `User-agent: ${b}\nDisallow: /\n`).join('\n');
+  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\n\n${aiBlock}\nSitemap: ${SITE_URL}/sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
