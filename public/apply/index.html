@@ -483,22 +483,35 @@
   .fallback { margin-top: 16px; font-size: 14px; color: var(--ink-soft); }
   .fallback a { color: var(--petrol); }
 
-  .thanks {
-    margin-top: 32px;
-    background: var(--petrol-soft);
-    border: 1px solid var(--petrol);
-    border-radius: 3px;
-    padding: 28px 22px;
+  .done {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: var(--petrol);
+    color: var(--btn-fg);
+    display: grid;
+    place-items: center;
+    padding: 32px 24px;
     text-align: center;
   }
-  .thanks h2 {
-    font-family: "Archivo", sans-serif;
-    font-size: 22px;
-    margin: 0 0 8px;
-    color: var(--ink);
-    letter-spacing: -0.01em;
+  .done-inner { max-width: 30ch; }
+  .done-tick {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 20px;
+    display: block;
+    color: var(--btn-fg);
   }
-  .thanks p { margin: 0; color: var(--ink-soft); font-size: 15.5px; }
+  .done h2 {
+    font-family: "Archivo", sans-serif;
+    font-size: clamp(30px, 8vw, 40px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin: 0 0 12px;
+    color: var(--btn-fg);
+  }
+  .done p { margin: 0 0 10px; font-size: 18px; opacity: .95; }
+  .done .done-note { font-size: 16px; opacity: .8; margin-bottom: 0; }
 
   footer {
     margin-top: 34px;
@@ -818,9 +831,16 @@
 
   </form>
 
-  <div class="thanks" id="thanks" hidden>
-    <h2>Thank you &mdash; that's sent.</h2>
-    <p>We've got your application. If it looks like a good fit we'll call or WhatsApp you within a few days.</p>
+  <div class="done" id="thanks" hidden>
+    <div class="done-inner">
+      <svg class="done-tick" viewBox="0 0 64 64" aria-hidden="true">
+        <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="3"></circle>
+        <path d="M19 33.5 L28 42.5 L45 23" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+      </svg>
+      <h2>That's sent.</h2>
+      <p>Thank you &mdash; we have got your application.</p>
+      <p class="done-note">We read every one ourselves, and we will be in touch shortly.</p>
+    </div>
   </div>
 
   <footer>
@@ -915,10 +935,10 @@
   }
 
   function succeed() {
-    document.querySelector(".submit-zone").hidden = true;
     thanks.hidden = false;
+    document.body.style.overflow = "hidden";
+    window.scrollTo(0, 0);
     try { localStorage.removeItem(DRAFT_KEY); } catch (err) { /* ignore */ }
-    thanks.scrollIntoView({ behavior: "smooth", block: "center" });
   }
 
   document.addEventListener("input", function () { refresh(); saveDraft(); });
