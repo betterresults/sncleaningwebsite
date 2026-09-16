@@ -218,7 +218,17 @@
     white-space: nowrap;
   }
   .pay .rate + p { margin-top: 12px; }
-  .pay-lead { font-size: 15px; margin: 0 0 10px; }
+  .pay-lead { font-size: 15px; margin: 0 0 16px; color: var(--ink); }
+  .pay-lead strong { color: var(--ink); font-weight: 700; }
+  .pay-sub {
+    font-family: "Archivo", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+  }
   .pay p { margin: 0 0 8px; font-size: 15px; color: var(--ink-soft); }
   .pay p:last-child { margin-bottom: 0; color: var(--ink); font-weight: 600; }
   .perks li { font-size: 15px; color: var(--ink); }
@@ -529,7 +539,9 @@
 
     <div class="pay">
       <h2>What we pay</h2>
-      <p class="pay-lead">Everyone starts on &pound;16 an hour. The rate then depends on the type of job:</p>
+      <p class="pay-lead"><strong>While you are new, it is &pound;16 an hour on every job.</strong> Whatever we send you to. If that is a deep clean or an Airbnb clean in your first few weeks, it is still &pound;16 &mdash; because it is a starting rate, not the job rate.</p>
+
+      <p class="pay-sub">Once you are established, the rate follows the job</p>
       <div class="rate">
         <span class="rate-job">Weekly cleans</span>
         <span class="rate-amt">&pound;16 an hour</span>
@@ -546,7 +558,7 @@
         <span class="rate-job">Deep cleans</span>
         <span class="rate-amt">&pound;18 &ndash; &pound;20 an hour</span>
       </div>
-      <p>Everyone starts on &pound;16 an hour on the regular weekly cleans. Once you have shown us you work to our standard and can be trusted on your own in someone's home, we start putting the better-paid jobs your way &mdash; the fortnightly cleans, the one-offs and the deep cleans. That is how you earn more with us.</p>
+      <p>You move onto those rates once you have shown us you work to our standard and can be trusted on your own in someone's home. Nobody is kept on the starting rate longer than they have earned.</p>
       <p>The rate is shown on every job offer before you accept it, so you always know exactly what you are earning before you say yes.</p>
       <p>Paid weekly, every week.</p>
     </div>
@@ -605,10 +617,10 @@
   </div>
 
   <div class="field" data-req>
-    <label class="q">Weekly cleans are &pound;16 an hour. Does that work for you?</label>
-    <span class="hint">Said plainly so nobody wastes their time. &pound;16 is the starting rate and the rate for weekly cleans. The better-paid deep cleans and one-off jobs come once you have shown us what you can do.</span>
+    <label class="q">You would start on &pound;16 an hour. Does that work for you?</label>
+    <span class="hint">Said plainly so nobody wastes their time. &pound;16 is what everyone starts on, on every type of job. The higher rates come once you have shown us what you can do.</span>
     <div class="opts" data-q="Happy with the pay range">
-      <label class="opt"><input type="radio" name="pay-ok" value="Yes, 16 works"><span class="dot"></span><span class="opt-text">Yes, &pound;16 works for me</span></label>
+      <label class="opt"><input type="radio" name="pay-ok" value="Yes, 16 works"><span class="dot"></span><span class="opt-text">Yes, &pound;16 to start works for me</span></label>
       <label class="opt"><input type="radio" name="pay-ok" value="Yes, and wants the deep cleans"><span class="dot"></span><span class="opt-text">Yes &mdash; and I'd like to earn the deep cleans too<em>Happy to start on &pound;16 and prove myself</em></span></label>
       <label class="opt"><input type="radio" name="pay-ok" value="Would want to discuss it"><span class="dot"></span><span class="opt-text">I'd want to talk it through first</span></label>
       <label class="opt"><input type="radio" name="pay-ok" value="16 is below what they need"><span class="dot"></span><span class="opt-text">No &mdash; &pound;16 is below what I need<em>Better we both know now</em></span></label>
