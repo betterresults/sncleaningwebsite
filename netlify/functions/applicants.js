@@ -116,6 +116,7 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .note.ask{color:var(--marigold);-webkit-line-clamp:2}
 .sc{font-family:Archivo,sans-serif;font-variant-numeric:tabular-nums;font-weight:700;font-size:17px;color:var(--petrol);white-space:nowrap}
 .badge{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;padding:4px 9px;border-radius:2px;white-space:nowrap}
+.b-strong{background:var(--good);color:#fff}
 .b-trial{background:var(--good-soft);color:var(--good)}
 .b-phone{background:var(--marigold-soft);color:var(--marigold)}
 .b-no{background:var(--bad-soft);color:var(--bad)}
@@ -197,9 +198,10 @@ function loginPage(msg) {
 
 function verdictClass(v) {
   const s = (v || "").toLowerCase();
+  if (s.includes("strong fit")) return "b-strong";
   if (s.includes("trial")) return "b-trial";
-  if (s.includes("phone")) return "b-phone";
-  if (s.includes("do not")) return "b-no";
+  if (s.includes("worth a call") || s.includes("phone")) return "b-phone";
+  if (s.includes("weak") || s.includes("do not")) return "b-no";
   return "b-none";
 }
 
@@ -225,7 +227,7 @@ function rows(app, scored, i) {
   const delivery = (s.summary || "");
   const sent = delivery.startsWith("Routine fired OK");
   const statusV = (s.verdict || "");
-  const isRealVerdict = /trial|phone|do not/i.test(statusV);
+  const isRealVerdict = /strong fit|trial|worth a call|weak|phone|do not/i.test(statusV);
 
   const days = Object.keys(SHORT)
     .map((k) => [SHORT[k], d["availability-" + k]])
@@ -453,7 +455,7 @@ exports.handler = async (event) => {
           targets = apps.filter((a) => a.id === params.get("resend"));
         } else {
           const scoredNames = new Set(scores
-            .filter((s) => /trial|phone|do not/i.test((s.data || {}).verdict || ""))
+            .filter((s) => /strong fit|trial|worth a call|weak|phone|do not/i.test((s.data || {}).verdict || ""))
             .map((s) => ((s.data || {}).applicant || "").trim().toLowerCase()));
           targets = apps
             .filter((a) => !/^zz |test application|pipeline test/i.test(((a.data || {}).name || "")))
