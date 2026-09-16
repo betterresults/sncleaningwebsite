@@ -99,10 +99,13 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .nocar{font-size:13px;color:var(--ink-soft)}
 .action-col{white-space:nowrap}
 .action-col form{margin:0}
-.filters{display:flex;gap:14px;align-items:center;margin:0 0 16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:12px 14px}
+.topbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
+.topbar h1{margin:0;font-size:21px;white-space:nowrap}
+.filters{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
 .filters label{display:flex;align-items:center;gap:7px;font-size:13.5px;font-weight:600;color:var(--ink-soft);margin:0}
 .filters select{font:inherit;font-size:13.5px;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink)}
 .filters input[type=checkbox]{width:auto;margin:0}
+.count{margin-left:auto;font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--ink-soft);white-space:nowrap}
 .act-select{width:auto;font:inherit;font-size:13px;font-weight:600;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink);cursor:pointer}
 .act-select.a-contacted{border-color:var(--petrol);color:var(--petrol)}
 .act-select.a-trial{border-color:var(--good);color:var(--good)}
@@ -157,14 +160,19 @@ document.addEventListener("click",function(e){
   if(d)d.classList.toggle("open");
 });
 (function(){
-  var fs=document.getElementById("f-status"), fc=document.getElementById("f-car");
-  if(!fs||!fc)return;
+  var fs=document.getElementById("f-status"), fc=document.getElementById("f-car"), fsc=document.getElementById("f-score");
+  if(!fs||!fc||!fsc)return;
   function apply(){
-    var status=fs.value, carOnly=fc.checked;
+    var status=fs.value, carOnly=fc.checked, bucket=fsc.value;
     document.querySelectorAll("tr.row").forEach(function(r){
       var okStatus = !status || (status==="__none__" ? r.dataset.action==="" : r.dataset.action===status);
       var okCar = !carOnly || r.dataset.car==="1";
-      var show = okStatus && okCar;
+      var sc = r.dataset.score===""?null:parseInt(r.dataset.score,10);
+      var okScore = true;
+      if(bucket==="under50") okScore = sc!==null && sc<50;
+      else if(bucket==="50-75") okScore = sc!==null && sc>=50 && sc<=75;
+      else if(bucket==="over75") okScore = sc!==null && sc>75;
+      var show = okStatus && okCar && okScore;
       r.style.display = show ? "" : "none";
       var d=document.getElementById(r.getAttribute("data-for"));
       if(d && !show) d.classList.remove("open");
@@ -172,6 +180,7 @@ document.addEventListener("click",function(e){
   }
   fs.addEventListener("change",apply);
   fc.addEventListener("change",apply);
+  fsc.addEventListener("change",apply);
 })();
 </script>
 </body></html>`;
@@ -256,8 +265,10 @@ function rows(app, scored, i) {
   const travelKey = d.transport || d.drives || "";
   const travelInfo = TRAVEL[travelKey];
   const hasCar = !!(travelInfo && travelInfo[1]);
+  const scoreMatch = /\d+/.exec(s.score || "");
+  const scoreNum = scoreMatch ? scoreMatch[0] : "";
 
-  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}">
+  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}" data-score="${scoreNum}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
     <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "–" : "")}</td>
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
@@ -512,11 +523,19 @@ exports.handler = async (event) => {
         <option value="Rejected">Rejected</option>
         <option value="Not a good fit">Not a good fit</option>
       </select></label>
+      <label>Score <select id="f-score">
+        <option value="">All</option>
+        <option value="under50">Under 50</option>
+        <option value="50-75">50&ndash;75</option>
+        <option value="over75">Over 75</option>
+      </select></label>
       <label><input type="checkbox" id="f-car"> Has a car</label>
     </div>`;
 
+    const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.length}</span></div>`;
+
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `<h1>Applicants</h1>${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${filters}<p class="sub">${list.length} application${list.length === 1 ? "" : "s"}, newest first. Test entries are hidden.</p>${body}`, true) };
+      body: shell("Applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`, true) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
