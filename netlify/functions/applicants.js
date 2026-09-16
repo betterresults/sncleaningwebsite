@@ -129,8 +129,10 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .filters input[type=checkbox]{width:auto;margin:0}
 .count{margin-left:auto;font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--ink-soft);white-space:nowrap}
 .act-select{width:auto;font:inherit;font-size:13px;font-weight:600;padding:6px 8px;border:1px solid var(--line-strong);border-radius:2px;background:var(--surface-2);color:var(--ink);cursor:pointer}
-.act-select.a-contacted{border-color:var(--petrol);color:var(--petrol)}
-.act-select.a-trial{border-color:var(--good);color:var(--good)}
+.act-select.a-contacted,.act-select.a-done{border-color:var(--petrol);color:var(--petrol)}
+.act-select.a-booked{border-color:var(--marigold);color:var(--marigold)}
+.act-select.a-started{border-color:var(--good);color:var(--good);background:var(--good-soft);font-weight:700}
+.act-select.a-noreply{border-color:var(--line-strong);color:var(--ink-faint)}
 .act-select.a-rejected,.act-select.a-fit{border-color:var(--bad);color:var(--bad)}
 .gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
@@ -240,6 +242,16 @@ const TRAVEL = {
   "On foot": ["On foot", false]
 };
 
+const STATUSES = [
+  ["Contacted", "a-contacted"],
+  ["No reply", "a-noreply"],
+  ["Trial booked", "a-booked"],
+  ["Trial done", "a-done"],
+  ["Started with us", "a-started"],
+  ["Not a good fit", "a-fit"],
+  ["Rejected", "a-rejected"]
+];
+
 const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" };
 
 function rows(app, scored, i, pending) {
@@ -279,11 +291,9 @@ function rows(app, scored, i, pending) {
 
   const p = pending || {};
   const action = Object.prototype.hasOwnProperty.call(p, app.id) ? p[app.id] : (s.action || "");
-  const actClass = action === "Contacted" ? "a-contacted"
-    : action === "Trial booked" ? "a-trial"
-    : action === "Rejected" ? "a-rejected"
-    : action === "Not a good fit" ? "a-fit" : "";
-  const actionOpts = ["", "Contacted", "Trial booked", "Rejected", "Not a good fit"]
+  const actMatch = STATUSES.find((st) => st[0] === action);
+  const actClass = actMatch ? actMatch[1] : "";
+  const actionOpts = [""].concat(STATUSES.map((st) => st[0]))
     .map((o) => `<option value="${esc(o)}"${action === o ? " selected" : ""}>${o ? esc(o) : "–"}</option>`)
     .join("");
 
@@ -547,10 +557,7 @@ exports.handler = async (event) => {
       <label>Status <select id="f-status">
         <option value="">All</option>
         <option value="__none__">No status</option>
-        <option value="Contacted">Contacted</option>
-        <option value="Trial booked">Trial booked</option>
-        <option value="Rejected">Rejected</option>
-        <option value="Not a good fit">Not a good fit</option>
+        ${STATUSES.map((st) => `<option value="${esc(st[0])}">${esc(st[0])}</option>`).join("")}
       </select></label>
       <label>Score <select id="f-score">
         <option value="">All</option>
