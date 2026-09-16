@@ -355,6 +355,16 @@
   }
   .missing.show { display: block; }
 
+  .no-paste {
+    margin: 10px 0 0;
+    padding: 9px 11px;
+    border-left: 3px solid var(--marigold);
+    background: var(--marigold-soft);
+    font-size: 14px;
+    color: var(--ink);
+    border-radius: 0 2px 2px 0;
+  }
+
   .copybox {
     width: 100%;
     min-height: 150px;
@@ -425,6 +435,8 @@
   <form name="cleaner-application" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="app-form" action="/">
   <input type="hidden" name="form-name" value="cleaner-application">
   <p hidden><label>Leave this empty: <input name="bot-field"></label></p>
+  <input type="hidden" name="time-taken" id="meta-time">
+  <input type="hidden" name="typed-or-pasted" id="meta-paste">
 
   <div class="section-head"><h2>About you</h2></div>
 
@@ -507,6 +519,16 @@
     <div class="opts" data-q="Right to work in UK">
       <label class="opt"><input type="radio" name="right-to-work" value="Yes"><span class="dot"></span><span class="opt-text">Yes</span></label>
       <label class="opt"><input type="radio" name="right-to-work" value="Not sure / happy to discuss"><span class="dot"></span><span class="opt-text">Not sure &mdash; happy to discuss</span></label>
+    </div>
+  </div>
+
+  <div class="field" data-req>
+    <label class="q">Are you female or male?</label>
+    <span class="hint">We ask because some clients specifically request a female cleaner, so it helps us match you to work. It plays no part in whether you are offered a job.</span>
+    <div class="opts" data-q="Gender">
+      <label class="opt"><input type="radio" name="gender" value="Female"><span class="dot"></span><span class="opt-text">Female</span></label>
+      <label class="opt"><input type="radio" name="gender" value="Male"><span class="dot"></span><span class="opt-text">Male</span></label>
+      <label class="opt"><input type="radio" name="gender" value="Prefer not to say"><span class="dot"></span><span class="opt-text">I'd rather not say</span></label>
     </div>
   </div>
 
@@ -731,6 +753,7 @@
     missing.classList.remove("show");
 
     var built = collectText();
+    stampMeta();
     sendBtn.disabled = true;
     sendBtn.textContent = "Sending...";
 
@@ -781,6 +804,41 @@
         if (Array.isArray(picked) && picked.indexOf(i.value) !== -1) i.checked = true;
       });
     } catch (err) { /* ignore */ }
+  }
+
+  /* We want the applicant's own words, so pasting into the written answers is
+     blocked and both the attempt count and the time taken are sent with the form.
+     A determined person can still retype something, but this catches the easy case
+     and tells us when eleven answers arrived in ninety seconds. */
+  var startedAt = Date.now();
+  var pasteAttempts = 0;
+
+  function blockPaste(e) {
+    e.preventDefault();
+    pasteAttempts++;
+    var f = e.target.closest(".field");
+    if (!f) return;
+    var w = f.querySelector(".no-paste");
+    if (!w) {
+      w = document.createElement("p");
+      w.className = "no-paste";
+      f.appendChild(w);
+    }
+    w.textContent = "Please type this one in your own words. Short and honest is what we want \u2014 we are not marking spelling or grammar.";
+  }
+
+  Array.prototype.forEach.call(document.querySelectorAll("textarea:not([readonly])"), function (t) {
+    t.addEventListener("paste", blockPaste);
+    t.addEventListener("drop", blockPaste);
+  });
+
+  function stampMeta() {
+    var secs = Math.round((Date.now() - startedAt) / 1000);
+    var mins = Math.floor(secs / 60);
+    document.getElementById("meta-time").value =
+      (mins ? mins + " min " : "") + (secs % 60) + " sec on the page";
+    document.getElementById("meta-paste").value =
+      pasteAttempts === 0 ? "Typed - no paste attempts" : "Tried to paste " + pasteAttempts + " time(s)";
   }
 
   loadDraft();
