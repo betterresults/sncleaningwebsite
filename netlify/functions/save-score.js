@@ -38,6 +38,7 @@ exports.handler = async (event) => {
 
   const fields = {
     "form-name": TARGET_FORM,
+    "source-id": pick(data, ["source-id", "source_id", "sourceId", "submission_id", "submissionId"]),
     applicant: pick(data, ["applicant", "name", "applicant_name", "applicantName"]),
     phone: pick(data, ["phone", "telephone", "mobile"]),
     "based-in": pick(data, ["based-in", "based_in", "basedIn", "area", "town", "postcode"]),

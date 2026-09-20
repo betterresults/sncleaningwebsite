@@ -48,6 +48,32 @@ function esc(v) {
     .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
 }
 
+/* Scored-application rows are matched to their applicant by "source-id" (the
+   originating cleaner-application submission's own id) when present. Older
+   rows written before this field existed fall back to a name match, same as
+   before - but two applicants who happen to share a name never cross-
+   contaminate each other's status once source-id is set. */
+function indexScores(scores) {
+  const byId = {};
+  const byName = {};
+  scores.forEach((s) => {
+    const d = s.data || {};
+    const when = new Date(s.created_at);
+    const sid = (d["source-id"] || "").trim();
+    if (sid) {
+      if (!byId[sid] || when > new Date(byId[sid].created_at)) byId[sid] = s;
+    } else {
+      const n = (d.applicant || "").trim().toLowerCase();
+      if (n && (!byName[n] || when > new Date(byName[n].created_at))) byName[n] = s;
+    }
+  });
+  return { byId, byName };
+}
+
+function scoreFor(index, appId, nameKey) {
+  return index.byId[appId] || index.byName[nameKey];
+}
+
 async function api(path, key) {
   const res = await fetch("https://api.netlify.com/api/v1" + path, {
     headers: { authorization: "Bearer " + key }
@@ -121,6 +147,7 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .nocar{font-size:13px;color:var(--ink-soft)}
 .action-col{white-space:nowrap}
 .action-col form{margin:0}
+.action-col .note{white-space:normal;max-width:190px;margin:6px 0 0}
 .topbar{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:0 0 18px;padding-bottom:14px;border-bottom:1px solid var(--line)}
 .topbar h1{margin:0;font-size:21px;white-space:nowrap}
 .filters{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
@@ -207,6 +234,13 @@ document.addEventListener("click",function(e){
   fc.addEventListener("change",apply);
   fsc.addEventListener("change",apply);
 })();
+function askNoteAndSubmit(sel){
+  var form=sel.form;
+  var noteField=form.querySelector(".note-field");
+  var note=window.prompt("Add a note for this status change (optional):","");
+  noteField.value = note===null ? "" : note;
+  form.submit();
+}
 </script>
 </body></html>`;
 }
@@ -315,11 +349,17 @@ function rows(app, scored, i, pending) {
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : ""}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
     <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>
       <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1" title="Delete">&#128465; Delete</button></form></td>
-    <td class="action-col"><form method="POST"><input type="hidden" name="set-action" value="${esc(app.id)}"><select name="action" class="act-select ${actClass}" onchange="this.form.submit()">${actionOpts}</select></form></td>
+    <td class="action-col"><form method="POST" class="status-form">
+      <input type="hidden" name="set-action" value="${esc(app.id)}">
+      <input type="hidden" name="note" class="note-field">
+      <select name="action" class="act-select ${actClass}" onchange="askNoteAndSubmit(this)">${actionOpts}</select>
+      ${s["status-note"] ? `<p class="note" title="${esc(s["status-note"])}">${esc(s["status-note"])}</p>` : ""}
+    </form></td>
   </tr>
   <tr class="detail" id="${id}"><td colspan="11">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
+    ${s["status-note"] ? `<p class="flags"><strong>Status note:</strong> ${esc(s["status-note"])}</p>` : ""}
     <div class="facts">${facts}</div>
     ${qa}
     <p class="honesty">${esc([d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join("  |  "))}${sent ? "" : "  |  Delivery: " + esc(delivery || "not sent to the routine")}</p>
@@ -340,7 +380,7 @@ async function apiDelete(path, key) {
   return res.ok;
 }
 
-async function fireRoutine(sub) {
+async function fireRoutine(sub, scoreIndex) {
   const d = sub.data || {};
   const tok = process.env.CLAUDE_ROUTINE_TOKEN || process.env.ANTHROPIC_API_KEY;
   if (!tok) return "No token set in Netlify.";
@@ -371,6 +411,9 @@ async function fireRoutine(sub) {
     outcome = "Routine call threw: " + String(err).slice(0, 300);
   }
 
+  const nameKey = (d.name || "").trim().toLowerCase();
+  const prior = (scoreIndex && (scoreFor(scoreIndex, sub.id, nameKey) || {}).data) || {};
+
   const site = process.env.URL || "https://sncleaningwebsite.netlify.app";
   try {
     await fetch(site + "/", {
@@ -378,12 +421,17 @@ async function fireRoutine(sub) {
       headers: { "content-type": "application/x-www-form-urlencoded" },
       body: new URLSearchParams({
         "form-name": SCORED_FORM,
+        "source-id": sub.id,
         applicant: d.name || "Unknown",
         phone: d.phone || "",
         "based-in": d["based-in"] || "",
         score: "", verdict: outcome.startsWith("Routine fired OK") ? "Sent to routine" : "Not sent",
         summary: outcome, flags: "",
-        honesty: [d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join(" | ")
+        honesty: [d["time-taken"], d["typed-or-pasted"], d["left-the-page"]].filter(Boolean).join(" | "),
+        // A re-run is about re-scoring, not about the status - never let it
+        // silently drop a status/note someone already set on this applicant.
+        action: prior.action || "",
+        "status-note": prior["status-note"] || ""
       }).toString()
     });
   } catch (err) { /* logged below */ }
@@ -409,17 +457,19 @@ exports.handler = async (event) => {
       const who = (params.get("who") || "").trim().toLowerCase();
       try {
         await apiDelete("/submissions/" + id, key2);
-        // remove any score rows for the same person so nothing is left orphaned
-        if (who) {
-          const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
-          const sc = forms.find((f) => f.name === SCORED_FORM);
-          if (sc) {
-            const scores = await api("/forms/" + sc.id + "/submissions?per_page=200", key2);
-            for (const s of scores) {
-              if (((s.data || {}).applicant || "").trim().toLowerCase() === who) {
-                await apiDelete("/submissions/" + s.id, key2);
-              }
-            }
+        // remove any score rows for this applicant so nothing is left orphaned.
+        // Prefer the source-id link; only fall back to a name match for older
+        // rows written before that field existed (name alone risks catching a
+        // different person who happens to share the name).
+        const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
+        const sc = forms.find((f) => f.name === SCORED_FORM);
+        if (sc) {
+          const scores = await api("/forms/" + sc.id + "/submissions?per_page=200", key2);
+          for (const s of scores) {
+            const sd = s.data || {};
+            const sid = (sd["source-id"] || "").trim();
+            const matches = sid ? sid === id : (who && (sd.applicant || "").trim().toLowerCase() === who);
+            if (matches) await apiDelete("/submissions/" + s.id, key2);
           }
         }
       } catch (err) {
@@ -432,6 +482,7 @@ exports.handler = async (event) => {
       const key2 = process.env.NETLIFY_API_TOKEN;
       const appId = params.get("set-action");
       const action = (params.get("action") || "").trim();
+      const noteInput = (params.get("note") || "").trim();
       try {
         const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
         const src = forms.find((f) => f.name === SOURCE_FORM);
@@ -444,9 +495,7 @@ exports.handler = async (event) => {
         if (app) {
           const name = (app.data || {}).name || "";
           const nameKey = name.trim().toLowerCase();
-          const existing = scores
-            .filter((s) => ((s.data || {}).applicant || "").trim().toLowerCase() === nameKey)
-            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))[0];
+          const existing = scoreFor(indexScores(scores), appId, nameKey);
           const prior = (existing && existing.data) || {};
           const site = process.env.URL || "https://sncleaningwebsite.netlify.app";
           await fetch(site + "/", {
@@ -454,6 +503,7 @@ exports.handler = async (event) => {
             headers: { "content-type": "application/x-www-form-urlencoded" },
             body: new URLSearchParams({
               "form-name": SCORED_FORM,
+              "source-id": appId,
               applicant: name,
               phone: prior.phone || (app.data || {}).phone || "",
               "based-in": prior["based-in"] || (app.data || {})["based-in"] || "",
@@ -462,7 +512,8 @@ exports.handler = async (event) => {
               summary: prior.summary || "",
               flags: prior.flags || "",
               honesty: prior.honesty || "",
-              action
+              action,
+              "status-note": noteInput || prior["status-note"] || ""
             }).toString()
           });
         }
@@ -497,7 +548,8 @@ exports.handler = async (event) => {
             .filter((a) => !scoredNames.has((((a.data || {}).name) || "").trim().toLowerCase()))
             .slice(0, 10);
         }
-        for (const t of targets) await fireRoutine(t);
+        const scoreIndex = indexScores(scores);
+        for (const t of targets) await fireRoutine(t, scoreIndex);
       } catch (err) {
         console.error("Re-send failed", err);
       }
@@ -530,13 +582,7 @@ exports.handler = async (event) => {
     ]);
 
     const pending = readPending(cookies);
-
-    const byName = {};
-    scores.forEach((s) => {
-      const n = ((s.data || {}).applicant || "").trim().toLowerCase();
-      if (!n) return;
-      if (!byName[n] || new Date(s.created_at) > new Date(byName[n].created_at)) byName[n] = s;
-    });
+    const scoreIndex = indexScores(scores);
 
     const list = apps
       .filter((a) => !/^zz |test application|pipeline test/i.test(((a.data || {}).name || "")))
@@ -548,7 +594,7 @@ exports.handler = async (event) => {
             <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
             <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Status</th>
           </tr></thead>
-          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i, pending)).join("")}</tbody>
+          <tbody>${list.map((a, i) => rows(a, scoreFor(scoreIndex, a.id, (((a.data || {}).name) || "").trim().toLowerCase()), i, pending)).join("")}</tbody>
         </table></div>
         <p class="hint">Click any row to open that person's full answers. The page stays still until you press Refresh.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
