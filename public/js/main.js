@@ -3,9 +3,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav = document.getElementById('main-nav');
 
   if (toggle && nav) {
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('nav-open');
-      toggle.classList.toggle('active');
+    const setOpen = (open) => {
+      nav.classList.toggle('nav-open', open);
+      toggle.classList.toggle('active', open);
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', open);
+    };
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.addEventListener('click', () => setOpen(!nav.classList.contains('nav-open')));
+    nav.querySelectorAll('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth > 1040) return;
+        if (link.parentElement.classList.contains('nav-dropdown')) return;
+        setOpen(false);
+      });
     });
   }
 
@@ -20,23 +31,77 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // "What Cleaning Consists Of" tab switcher
-  const tabs = document.querySelectorAll('.checklist-tab');
-  const panels = document.querySelectorAll('.checklist-panel-wrap');
-  tabs.forEach((tab) => {
-    tab.addEventListener('click', () => {
-      const target = tab.getAttribute('data-target');
-      tabs.forEach((t) => {
-        t.classList.remove('active');
-        t.setAttribute('aria-selected', 'false');
+  // Room photo carousel — tabs, arrows, dots and swipe all share one scroll position
+  const track = document.getElementById('checklist-track');
+  if (track) {
+    const slides = [...track.querySelectorAll('.checklist-slide')];
+    const tabs = [...document.querySelectorAll('.checklist-tab')];
+    const pagers = [...document.querySelectorAll('.checklist-pager')];
+    const prevBtn = document.querySelector('.checklist-nav-btn[data-dir="-1"]');
+    const nextBtn = document.querySelector('.checklist-nav-btn[data-dir="1"]');
+    let activeIndex = 0;
+
+    const goTo = (index) => {
+      const next = Math.max(0, Math.min(slides.length - 1, index));
+      const origin = slides[0].offsetLeft;
+      track.scrollTo({ left: slides[next].offsetLeft - origin, behavior: 'auto' });
+      setActive(next);
+    };
+
+    const setActive = (index) => {
+      activeIndex = index;
+      tabs.forEach((tab, i) => {
+        const on = i === index;
+        tab.classList.toggle('active', on);
+        tab.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (on && tab.parentElement) {
+          const scroller = tab.parentElement;
+          const left = tab.offsetLeft - (scroller.clientWidth - tab.offsetWidth) / 2;
+          scroller.scrollTo({ left: Math.max(0, left), behavior: 'auto' });
+        }
       });
-      tab.classList.add('active');
-      tab.setAttribute('aria-selected', 'true');
-      panels.forEach((p) => {
-        p.classList.toggle('hidden', p.getAttribute('data-panel') !== target);
+      pagers.forEach((pager, i) => {
+        const on = i === index;
+        pager.classList.toggle('active', on);
+        if (on) pager.setAttribute('aria-current', 'true');
+        else pager.removeAttribute('aria-current');
       });
+      if (prevBtn) prevBtn.disabled = index === 0;
+      if (nextBtn) nextBtn.disabled = index === slides.length - 1;
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => goTo(Number(tab.dataset.index)));
     });
-  });
+    pagers.forEach((pager) => {
+      pager.addEventListener('click', () => goTo(Number(pager.dataset.index)));
+    });
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(activeIndex - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(activeIndex + 1));
+    if (prevBtn) prevBtn.disabled = true;
+
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(activeIndex + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(activeIndex - 1); }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(Number(visible.target.dataset.index));
+      },
+      { root: track, threshold: [0.45, 0.7, 0.9] }
+    );
+    slides.forEach((slide) => observer.observe(slide));
+
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => goTo(activeIndex), 80);
+    });
+  }
 
   // Prefill contact form from sticky/hero quote links (?postcode= or legacy ?zip=)
   const params = new URLSearchParams(window.location.search);

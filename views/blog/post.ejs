@@ -2,17 +2,28 @@
   <div class="container">
     <span class="eyebrow">Blog</span>
     <h1><%= post.title %></h1>
+    <% if (post.published_at) { %>
+      <p>
+        <time datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+      </p>
+    <% } %>
   </div>
 </section>
 
-<section class="section">
-  <div class="container" style="max-width:760px;">
+<section class="section blog-post">
+  <div class="container blog-post-inner">
     <% if (post.cover_image) { %>
-      <img src="<%= post.cover_image %>" alt="<%= post.title %>" style="width:100%; border-radius:16px; margin-bottom:32px;" />
+      <img class="blog-post-cover" src="<%= post.cover_image %>?v=<%= assetVersion %>" alt="" />
     <% } %>
     <div class="blog-content">
       <%- post.content %>
     </div>
-    <a href="/blog" class="btn btn-primary" style="margin-top:32px;">← Back to Blog</a>
+    <div class="blog-post-cta">
+      <p>Need a clean in London or Essex? Send your postcode and we will quote you — usually the same weekday.</p>
+      <div class="blog-post-cta-actions">
+        <a href="/contact" class="btn btn-primary">Request a quote</a>
+        <a href="/blog" class="btn btn-outline">All posts</a>
+      </div>
+    </div>
   </div>
 </section>

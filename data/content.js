@@ -2,6 +2,23 @@
 // Falls back to empty arrays (never throws) so a Supabase hiccup can't take the
 // whole site down; routes below handle empty state gracefully.
 const supabase = require('../lib/supabase');
+const localBlogPosts = require('./blog-posts');
+
+function publishedLocalPosts() {
+  return localBlogPosts
+    .filter((p) => p.published !== false)
+    .slice()
+    .sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+}
+
+function mergeBlogPosts(remote) {
+  const bySlug = new Map();
+  publishedLocalPosts().forEach((p) => bySlug.set(p.slug, p));
+  (remote || []).forEach((p) => bySlug.set(p.slug, p));
+  return Array.from(bySlug.values()).sort(
+    (a, b) => new Date(b.published_at || 0) - new Date(a.published_at || 0)
+  );
+}
 
 async function getServices() {
   const { data, error } = await supabase
@@ -54,9 +71,9 @@ async function getBlogPosts() {
 
   if (error) {
     console.error('Error fetching blog posts:', error.message);
-    return [];
+    return publishedLocalPosts();
   }
-  return data || [];
+  return mergeBlogPosts(data);
 }
 
 async function getBlogPostBySlug(slug) {
@@ -69,9 +86,9 @@ async function getBlogPostBySlug(slug) {
 
   if (error) {
     console.error('Error fetching blog post:', error.message);
-    return null;
   }
-  return data;
+  if (data) return data;
+  return publishedLocalPosts().find((p) => p.slug === slug) || null;
 }
 
 // Sitewide business info (name, phone, address, hours, socials) — a single

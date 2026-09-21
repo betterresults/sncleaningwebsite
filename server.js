@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 3000;
 // never serve a stale cached copy after a deploy — required because netlify.toml
 // caches /css/* and /js/* for a full year as "immutable" (safe for performance,
 // but only if the URL itself changes whenever the file's contents change).
-const ASSET_VERSION = Date.now().toString(36);
+const ASSET_VERSION = Date.now().toString(36); // bust CSS/JS after gallery copy change
 app.locals.assetVersion = ASSET_VERSION;
 
 // ---------- View engine ----------

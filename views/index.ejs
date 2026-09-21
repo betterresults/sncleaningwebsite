@@ -2,7 +2,7 @@
   <div class="container hero-inner">
     <div class="hero-text">
       <span class="eyebrow">London &amp; Essex</span>
-      <h1>Cleaning for real homes, done by our own team</h1>
+      <h1>Cleaning for real homes,<br class="break-mobile" /> done by our own team</h1>
       <p class="hero-lead">
         Domestic, end of tenancy and Airbnb cleans across London and Essex.
         Insured, DBS-checked staff — not a gig app. Tell us about the property and we'll quote you the same weekday.
@@ -16,7 +16,7 @@
       <div class="hero-actions">
         <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call <%= site.phone %></a>
         <% if (site.whatsappUrl) { %>
-          <a href="<%= site.whatsappUrl %>" class="btn btn-text" target="_blank" rel="noopener">WhatsApp us</a>
+          <a href="<%= site.whatsappUrl %>" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp us</a>
         <% } %>
       </div>
     </div>
