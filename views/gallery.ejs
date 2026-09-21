@@ -1,23 +1,24 @@
-<section class="page-hero">
+<section class="page-hero page-hero--photo page-hero--gallery">
   <div class="container">
     <span class="eyebrow">Gallery</span>
-    <h1>Recent work</h1>
-    <p>A look at some of our before &amp; after results. Add your own project photos here.</p>
+    <h1>The finish we work to</h1>
+    <p>Supporting interiors for now. Before-and-after photos from our actual jobs will replace these.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="grid grid-3 gallery-grid">
-      <% for (let i = 1; i <= 9; i++) { %>
-        <div class="gallery-item" style="--i: <%= i %>">
-          <span>Photo <%= i %></span>
-        </div>
-      <% } %>
+      <% gallery.forEach(function(item) { %>
+        <figure class="gallery-item">
+          <img src="<%= item.src %>?v=<%= assetVersion %>" alt="<%= item.caption %>" />
+          <figcaption><%= item.caption %></figcaption>
+        </figure>
+      <% }); %>
     </div>
     <p class="gallery-note">
-      Placeholder gallery — replace the tiles in <code>views/gallery.ejs</code> with real
-      before/after photos from <code>public/images/</code> once available.
+      These are not photos of SN jobs yet. If you have a property like one of these,
+      <a href="/contact">ask for a quote</a> and we can talk through similar work.
     </p>
   </div>
 </section>
@@ -25,9 +26,9 @@
 <section class="section cta-band">
   <div class="container cta-band-inner">
     <div>
-      <h2>Like what you see?</h2>
-      <p>Let's get your space looking just as good.</p>
+      <h2>Want this standard in your place?</h2>
+      <p>Send the postcode and the type of clean.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
   </div>
 </section>

@@ -26,15 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
   tabs.forEach((tab) => {
     tab.addEventListener('click', () => {
       const target = tab.getAttribute('data-target');
-      tabs.forEach((t) => t.classList.remove('active'));
+      tabs.forEach((t) => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
       tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
       panels.forEach((p) => {
         p.classList.toggle('hidden', p.getAttribute('data-panel') !== target);
       });
     });
   });
 
-  // Auto-select service in contact form if passed via ?service= query param
+  // Prefill contact form from sticky/hero quote links (?postcode= or legacy ?zip=)
   const params = new URLSearchParams(window.location.search);
   const serviceParam = params.get('service');
   const serviceSelect = document.getElementById('service');
@@ -42,5 +46,10 @@ document.addEventListener('DOMContentLoaded', () => {
     [...serviceSelect.options].forEach((opt) => {
       if (opt.value === serviceParam) opt.selected = true;
     });
+  }
+  const postcodeParam = params.get('postcode') || params.get('zip');
+  const postcodeInput = document.getElementById('postcode');
+  if (postcodeParam && postcodeInput) {
+    postcodeInput.value = postcodeParam;
   }
 });

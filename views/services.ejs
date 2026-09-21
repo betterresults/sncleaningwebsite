@@ -1,8 +1,8 @@
-<section class="page-hero">
+<section class="page-hero page-hero--photo page-hero--services">
   <div class="container">
-    <span class="eyebrow">Our Services</span>
-    <h1>Cleaning services tailored to you</h1>
-    <p>Pick a single service or combine a few — every clean is scoped to your space and schedule.</p>
+    <span class="eyebrow">Services</span>
+    <h1>What we actually clean</h1>
+    <p>Homes, tenancy handovers, guest changeovers, offices and the deep cleans in between — scoped to the property, not a franchise package.</p>
   </div>
 </section>
 
@@ -13,7 +13,7 @@
     <% services.forEach(function(service, i) { %>
       <div class="service-detail <%= i % 2 === 1 ? 'reverse' : '' %>" id="<%= service.slug %>">
         <div class="service-detail-media">
-          <div class="service-icon-lg"><%= service.icon %></div>
+          <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>" alt="<%= service.title %>" />
         </div>
         <div class="service-detail-text">
           <h2><%= service.title %></h2>
@@ -23,10 +23,10 @@
               <li><%= f %></li>
             <% }); %>
           </ul>
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request This Service</a>
+          <div class="service-detail-actions">
+            <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request a quote</a>
             <% if (service.hasDetailPage) { %>
-              <a href="/<%= service.slug %>" class="btn btn-outline">Learn More</a>
+              <a href="/<%= service.slug %>" class="btn btn-outline">What's included</a>
             <% } %>
           </div>
         </div>
@@ -39,8 +39,8 @@
   <div class="container cta-band-inner">
     <div>
       <h2>Not sure what you need?</h2>
-      <p>Tell us about your space and we'll recommend the right service and schedule.</p>
+      <p>Tell us about the property and we'll recommend the right clean.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Talk To Us</a>
+    <a href="/contact" class="btn btn-primary btn-lg">Talk to us</a>
   </div>
 </section>

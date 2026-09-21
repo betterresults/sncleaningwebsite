@@ -7,6 +7,7 @@ const nodemailer = require('nodemailer');
 
 const { SITE_URL } = require('./lib/site-config');
 const schema = require('./lib/schema');
+const { isPlaceholderSocial, whatsappHref } = require('./lib/site-helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -39,12 +40,13 @@ const SITE_DEFAULTS = {
   address: 'Serving London & Essex',
   hours: 'Phone: Mon - Sat, 8am - 5pm · WhatsApp: Mon - Sun, 8am - 9pm',
   social: {
-    facebook: 'https://facebook.com',
-    instagram: 'https://instagram.com'
+    facebook: '',
+    instagram: ''
   },
   googleBusinessUrl: null,
   logoUrl: '/images/logo.png',
-  defaultOgImage: null
+  defaultOgImage: null,
+  whatsappUrl: whatsappHref('020 3835 5033')
 };
 
 // ---------- Data ----------
@@ -52,6 +54,9 @@ const content = require('./data/content'); // live content from Supabase (servic
 const testimonials = require('./data/testimonials');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
+const { serviceImage, GALLERY } = require('./data/media');
+
+app.locals.serviceImage = serviceImage;
 
 // Runs on every request. Sets up everything every page needs regardless of
 // route: current path, canonical URL, the nav dropdown's service list, sitewide
@@ -76,22 +81,27 @@ app.use(async (req, res, next) => {
       hasDetailPage: detailSlugs.has(s.slug)
     }));
 
+    const phone = (settings && settings.phone) || SITE_DEFAULTS.phone;
+    const facebook = settings && settings.facebook_url;
+    const instagram = settings && settings.instagram_url;
+
     res.locals.site = settings
       ? {
           name: settings.business_name || SITE_DEFAULTS.name,
-          phone: settings.phone || SITE_DEFAULTS.phone,
+          phone,
           email: settings.email || SITE_DEFAULTS.email,
           address: settings.address_area || SITE_DEFAULTS.address,
           hours: settings.hours_note || SITE_DEFAULTS.hours,
           social: {
-            facebook: settings.facebook_url || SITE_DEFAULTS.social.facebook,
-            instagram: settings.instagram_url || SITE_DEFAULTS.social.instagram
+            facebook: isPlaceholderSocial(facebook) ? '' : facebook,
+            instagram: isPlaceholderSocial(instagram) ? '' : instagram
           },
           googleBusinessUrl: settings.google_business_url || null,
           logoUrl: settings.logo_url || SITE_DEFAULTS.logoUrl,
-          defaultOgImage: settings.default_og_image || null
+          defaultOgImage: settings.default_og_image || null,
+          whatsappUrl: whatsappHref(phone)
         }
-      : SITE_DEFAULTS;
+      : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
 
     res.locals.coverageAreas = coverageAreas || [];
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
@@ -113,19 +123,18 @@ app.use(async (req, res, next) => {
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
-  const [services, featuredAreaGroups] = await Promise.all([content.getServices(), content.getFeaturedAreaGroups()]);
+  const services = await content.getServices();
   const faqPage = schema.buildFaqPage(faqs);
 
   res.render('index', {
     title: 'Professional Cleaning Services in London & Essex',
     metaDescription:
-      'Flat-rate home and office cleaning across London & Essex — vetted, insured cleaners, a 100% clean guarantee, and an instant quote in 60 seconds.',
-    services: services.slice(0, 6),
+      'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
+    services: services.slice(0, 4),
     testimonials,
     checklist,
     faqs,
     coverageAreas: res.locals.coverageAreas,
-    featuredAreaGroups,
     structuredData: [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])]
   });
 });
@@ -141,7 +150,7 @@ app.get('/our-services', async (req, res) => {
   res.render('services', {
     title: 'Cleaning Services We Offer',
     metaDescription:
-      'Residential, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery, mattress and office cleaning — flat-rate pricing across London & Essex.',
+      'Residential, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery, mattress and office cleaning across London & Essex.',
     services: services.map((s) => ({ ...s, hasDetailPage: detailSlugs.has(s.slug) })),
     checklist,
     breadcrumbs,
@@ -198,6 +207,7 @@ app.get('/gallery', (req, res) => {
   res.render('gallery', {
     title: 'Our Work',
     metaDescription: 'A look at the standard of work from SN Cleaning Services, serving London & Essex with professional home and office cleaning.',
+    gallery: GALLERY,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
   });
@@ -206,9 +216,9 @@ app.get('/gallery', (req, res) => {
 app.get('/contact', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Contact', url: '/contact' }];
   res.render('contact', {
-    title: 'Contact Us & Get a Free Quote',
+    title: 'Contact',
     metaDescription:
-      'Get in touch with SN Cleaning Services for a free, no-obligation cleaning quote. Call, message, or book online — most enquiries answered within 24 hours.',
+      'Request a quote from SN Cleaning Services. Send your postcode, call or WhatsApp — we quote the same weekday.',
     success: false,
     error: null,
     breadcrumbs,
@@ -228,7 +238,7 @@ app.get('/contact/success', (req, res) => {
 // submissions are intercepted and handled entirely by Netlify Forms (no server needed) —
 // see the "contact" form's data-netlify attribute in views/contact.ejs.
 app.post('/contact', async (req, res) => {
-  const { name, email, phone, service, message } = req.body;
+  const { name, email, phone, postcode, service, message } = req.body;
 
   if (!name || !email || !message) {
     return res.status(400).render('contact', {
@@ -256,11 +266,11 @@ app.post('/contact', async (req, res) => {
         to: process.env.CONTACT_TO || process.env.SMTP_USER,
         replyTo: email,
         subject: `New enquiry from ${name} (${service || 'General'})`,
-        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nService: ${service || 'N/A'}\n\nMessage:\n${message}`
+        text: `Name: ${name}\nEmail: ${email}\nPhone: ${phone || 'N/A'}\nPostcode: ${postcode || 'N/A'}\nService: ${service || 'N/A'}\n\nMessage:\n${message}`
       });
     } else {
       console.log('New contact form submission (SMTP not configured, logging only):', {
-        name, email, phone, service, message
+        name, email, phone, postcode, service, message
       });
     }
 

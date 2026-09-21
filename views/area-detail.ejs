@@ -1,16 +1,16 @@
-<section class="page-hero">
+<section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>')">
   <div class="container">
-    <span class="eyebrow"><%= parent ? service.title + ' · Part of ' + parent.name : service.title %></span>
+    <span class="eyebrow"><%= parent ? service.title + ' · ' + parent.name : service.title %></span>
     <h1><%= service.title %> in <%= region.name %></h1>
     <p><%= page.meta_description || `${service.title} in ${region.name}.` %></p>
     <div class="quote-card-badges" style="margin-top:18px;">
-      <span>✓ Bonded</span>
-      <span>✓ Insured</span>
-      <span>✓ Vetted Staff</span>
-      <span>✓ 100% Clean Guarantee</span>
+      <span>Insured</span>
+      <span>DBS-checked</span>
+      <span>Own staff</span>
+      <span>Re-clean guarantee</span>
     </div>
-    <div style="margin-top:24px;">
-      <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    <div class="page-hero-actions">
+      <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
     </div>
   </div>
 </section>
@@ -28,21 +28,21 @@
 <section class="section alt-bg">
   <div class="container grid grid-2 align-center">
     <div>
-      <span class="eyebrow">Why Choose Us</span>
-      <h2>Cleaning you can actually trust</h2>
+      <span class="eyebrow">Why SN</span>
+      <h2>A local team, not a franchise script</h2>
       <ul class="checklist">
-        <li><strong>Vetted &amp; insured cleaners</strong> — every team member is trained, background-checked and fully insured.</li>
-        <li><strong>No subcontractors</strong> — cleaning is our core specialty, so every clean is done by our own trained staff.</li>
-        <li><strong>100% clean guarantee</strong> — not happy with an area? We'll come back and re-clean it, free.</li>
-        <li><strong>Latest tools &amp; products</strong> — advanced equipment and eco-friendly products available on request.</li>
+        <li><strong>Our cleaners, every job</strong> — we don't send subcontractors into your home.</li>
+        <li><strong>Insured and DBS-checked</strong> — trained staff you can leave a key with.</li>
+        <li><strong>Re-clean guarantee</strong> — tell us within 24 hours and we'll come back, free.</li>
+        <li><strong>We bring the supplies</strong> — including eco-friendly products on request.</li>
       </ul>
-      <a href="/about" class="btn btn-primary">More About Us</a>
+      <a href="/about" class="btn btn-primary">About the company</a>
     </div>
     <div class="stat-card-grid">
-      <div class="stat-card"><strong>10+</strong><span>Years experience</span></div>
-      <div class="stat-card"><strong>4,500+</strong><span>Properties cleaned</span></div>
-      <div class="stat-card"><strong>1,580+</strong><span>Happy clients</span></div>
-      <div class="stat-card"><strong>100%</strong><span>Clean guarantee</span></div>
+      <div class="stat-card"><strong>10+</strong><span>Years in the area</span></div>
+      <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
+      <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
+      <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
     </div>
   </div>
 </section>
@@ -59,10 +59,14 @@
     <div class="grid grid-3">
       <% otherServices.forEach(function(s) { %>
         <a href="/<%= s.slug %>" class="card service-card">
-          <div class="service-icon"><%= s.icon %></div>
-          <h3><%= s.title %></h3>
-          <p><%= s.short_description %></p>
-          <span class="card-link">Learn more →</span>
+          <div class="service-card-photo">
+            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %>" />
+          </div>
+          <div class="service-card-body">
+            <h3><%= s.title %></h3>
+            <p><%= s.short_description %></p>
+            <span class="card-link">What's included</span>
+          </div>
         </a>
       <% }); %>
     </div>
@@ -118,7 +122,6 @@
         <div class="card testimonial-card">
           <div class="testimonial-top">
             <div class="stars"><%= '★'.repeat(t.rating) %></div>
-            <span class="source-badge">Verified</span>
           </div>
           <p class="quote">"<%= t.quote %>"</p>
           <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
@@ -153,8 +156,8 @@
   <div class="container cta-band-inner">
     <div>
       <h2>Ready to book <%= service.title.toLowerCase() %> in <%= region.name %>?</h2>
-      <p>Get a free, no-obligation quote today — most enquiries answered within 24 hours.</p>
+      <p>Tell us the postcode and we'll come back with a quote.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
   </div>
 </section>
