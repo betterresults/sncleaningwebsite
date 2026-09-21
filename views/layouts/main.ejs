@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title><%= title %> | <%= site.name %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
@@ -45,7 +45,7 @@
     <% }); %>
   <% } %>
 </head>
-<body>
+<body class="<%= (currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %>">
   <%- include('../partials/header') %>
 
   <main>
@@ -54,15 +54,17 @@
 
   <%- include('../partials/footer') %>
 
+  <% if (currentPath !== '/contact' && currentPath.indexOf('/contact/') !== 0) { %>
   <div class="sticky-bar">
     <div class="container sticky-bar-inner">
-      <span class="sticky-bar-label"><span class="pulse-dot"></span> Book Your Cleaning</span>
+      <span class="sticky-bar-label"><span class="pulse-dot"></span> Need a quote?</span>
       <form action="/contact" method="GET" class="sticky-bar-form">
-        <input type="text" name="zip" placeholder="Postcode" aria-label="Postcode" />
-        <button type="submit" class="btn btn-primary">Go ➤</button>
+        <input type="text" name="postcode" placeholder="Postcode" aria-label="Postcode" autocomplete="postal-code" />
+        <button type="submit" class="btn btn-primary">Quote</button>
       </form>
     </div>
   </div>
+  <% } %>
 
   <script src="/js/main.js?v=<%= assetVersion %>"></script>
 </body>

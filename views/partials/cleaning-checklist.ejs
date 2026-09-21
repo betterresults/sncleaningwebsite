@@ -2,32 +2,73 @@
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">The Details</span>
-      <h2>What Cleaning Consists Of</h2>
-      <p>A closer look at what's included, room by room, on every standard clean.</p>
+      <h2>What cleaning consists of</h2>
+      <p>Swipe through the rooms. Each number sits on the thing we actually clean.</p>
     </div>
 
-    <div class="checklist-tabs" role="tablist">
-      <% checklist.forEach(function(cat, i) { %>
-        <button
-          type="button"
-          class="checklist-tab <%= i === 0 ? 'active' : '' %>"
-          data-target="<%= cat.key %>"
-        ><%= cat.label %></button>
-      <% }); %>
-    </div>
+    <div class="checklist-carousel">
+      <div class="checklist-tabs" role="tablist" aria-label="Rooms">
+        <% checklist.forEach(function(cat, i) { %>
+          <button
+            type="button"
+            class="checklist-tab <%= i === 0 ? 'active' : '' %>"
+            data-index="<%= i %>"
+            role="tab"
+            aria-selected="<%= i === 0 ? 'true' : 'false' %>"
+            aria-controls="checklist-slide-<%= cat.key %>"
+          ><span class="tab-label-full"><%= cat.label %></span><span class="tab-label-short"><%= cat.shortLabel || cat.label %></span></button>
+        <% }); %>
+      </div>
 
-    <% checklist.forEach(function(cat, i) { %>
-      <div class="checklist-panel-wrap <%= i === 0 ? '' : 'hidden' %>" data-panel="<%= cat.key %>">
-        <div class="checklist-panel checklist-panel--<%= cat.key %>">
-          <div class="checklist-panel-icon"><%= cat.icon %></div>
-          <% cat.points.forEach(function(p) { %>
-            <div class="checklist-point" style="top: <%= p.top %>; left: <%= p.left %>;">
-              <span class="checklist-dot"></span>
-              <span class="checklist-label"><%= p.text %></span>
+      <div class="checklist-track" id="checklist-track" tabindex="0" aria-label="Room photos">
+        <% checklist.forEach(function(cat, i) { %>
+          <article
+            class="checklist-slide"
+            id="checklist-slide-<%= cat.key %>"
+            data-index="<%= i %>"
+            role="tabpanel"
+            aria-label="<%= cat.label %>"
+          >
+            <div class="checklist-scene">
+              <img
+                src="<%= cat.image %>?v=<%= assetVersion %>"
+                alt="<%= cat.alt %>"
+                class="checklist-photo"
+              />
+              <% cat.points.forEach(function(p, pi) { %>
+                <div
+                  class="checklist-point checklist-point--<%= p.align || 'left' %>"
+                  style="top: <%= p.top %>; left: <%= p.left %>;"
+                >
+                  <span class="checklist-dot" aria-hidden="true"><%= pi + 1 %></span>
+                  <span class="checklist-label"><%= p.text %></span>
+                </div>
+              <% }); %>
             </div>
+            <ol class="checklist-legend">
+              <% cat.points.forEach(function(p) { %>
+                <li><%= p.text %></li>
+              <% }); %>
+            </ol>
+          </article>
+        <% }); %>
+      </div>
+
+      <div class="checklist-nav">
+        <button type="button" class="checklist-nav-btn" data-dir="-1" aria-label="Previous room">‹</button>
+        <div class="checklist-dots" role="tablist" aria-label="Room position">
+          <% checklist.forEach(function(cat, i) { %>
+            <button
+              type="button"
+              class="checklist-pager <%= i === 0 ? 'active' : '' %>"
+              data-index="<%= i %>"
+              aria-label="<%= cat.label %>"
+              <%= i === 0 ? 'aria-current="true"' : '' %>
+            ></button>
           <% }); %>
         </div>
+        <button type="button" class="checklist-nav-btn" data-dir="1" aria-label="Next room">›</button>
       </div>
-    <% }); %>
+    </div>
   </div>
 </section>

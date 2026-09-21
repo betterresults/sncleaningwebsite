@@ -1,32 +1,43 @@
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="eyebrow">Local Cleaning Service</span>
-      <h1>Get Your Home Cleaned <span class="highlight">Without Lifting a Finger</span></h1>
+      <span class="eyebrow">London &amp; Essex</span>
+      <h1>Cleaning for real homes,<br class="break-mobile" /> done by our own team</h1>
       <p class="hero-lead">
-        Book your cleaning in 60 seconds. Trusted by hundreds of local homes and businesses.
+        Domestic, end of tenancy and Airbnb cleans across London and Essex.
+        Insured, DBS-checked staff — not a gig app. Tell us about the property and we'll quote you the same weekday.
       </p>
       <ul class="hero-checklist">
-        <li><span class="check">✓</span> Fully vetted &amp; insured cleaners</li>
-        <li><span class="check">✓</span> We bring all supplies &amp; equipment</li>
-        <li><span class="check">✓</span> Flat-rate pricing, no hidden fees</li>
-        <li><span class="check">✓</span> Not perfect? We re-clean it free.</li>
+        <li><span class="check">✓</span> Our own cleaners, not subcontractors</li>
+        <li><span class="check">✓</span> Insured and background-checked</li>
+        <li><span class="check">✓</span> We bring the supplies</li>
+        <li><span class="check">✓</span> Something missed? We come back and re-clean it free</li>
       </ul>
+      <div class="hero-actions">
+        <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call <%= site.phone %></a>
+        <% if (site.whatsappUrl) { %>
+          <a href="<%= site.whatsappUrl %>" class="btn btn-outline" target="_blank" rel="noopener">WhatsApp us</a>
+        <% } %>
+      </div>
     </div>
 
     <div class="quote-card">
-      <h3>Get Your Instant Price</h3>
-      <p class="quote-card-sub">Flat-rate &amp; hourly options. No surprises.</p>
-      <div class="quote-card-icon">🧴🧹</div>
+      <img
+        src="/images/hero-living-room.jpg?v=<%= assetVersion %>"
+        alt="A bright, freshly cleaned living room"
+        class="quote-card-photo"
+      />
+      <h3>Request a quote</h3>
+      <p class="quote-card-sub">We'll come back to you with a price — no payment to enquire.</p>
       <form action="/contact" method="GET" class="quote-form">
-        <input type="text" name="zip" placeholder="Enter your postcode" aria-label="Postcode" />
-        <button type="submit" class="btn btn-primary btn-block">Book Your Cleaning Now ➤</button>
+        <input type="text" name="postcode" placeholder="Your postcode" aria-label="Postcode" autocomplete="postal-code" />
+        <button type="submit" class="btn btn-primary btn-block">Request a quote</button>
       </form>
-      <p class="quote-card-note">Takes 60 seconds • No payment required</p>
+      <p class="quote-card-note">Most weekday enquiries answered the same day</p>
       <div class="quote-card-badges">
-        <span>✓ Bonded</span>
-        <span>✓ Insured</span>
-        <span>✓ Vetted Staff</span>
+        <span>Insured</span>
+        <span>DBS-checked</span>
+        <span>Own staff</span>
       </div>
     </div>
   </div>
@@ -36,113 +47,65 @@
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">What We Do</span>
-      <h2>Cleaning services for every space</h2>
-      <p>From a single room to a full office, we tailor every clean to what you actually need.</p>
+      <h2>The cleans people book us for</h2>
+      <p>Regular homes, move-outs, guest changeovers and the deep cleans in between.</p>
     </div>
 
-    <div class="grid grid-3">
+    <div class="grid grid-2">
       <% services.forEach(function(service) { %>
         <a href="/<%= service.slug %>" class="card service-card">
-          <div class="service-icon"><%= service.icon %></div>
-          <h3><%= service.title %></h3>
-          <p><%= service.short_description %></p>
-          <span class="card-link">Learn more →</span>
+          <div class="service-card-photo">
+            <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>" alt="<%= service.title %>" />
+          </div>
+          <div class="service-card-body">
+            <h3><%= service.title %></h3>
+            <p><%= service.short_description %></p>
+            <span class="card-link">What's included</span>
+          </div>
         </a>
       <% }); %>
     </div>
 
     <div class="center-cta">
-      <a href="/our-services" class="btn btn-outline">See All Services</a>
-    </div>
-  </div>
-</section>
-
-<section class="section steps alt-bg">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">How It Works</span>
-      <h2>Cleaning in 3 easy steps</h2>
-    </div>
-    <div class="grid grid-3 steps-grid">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h3>Choose Your Cleaning Service</h3>
-        <p>Let us know what you'd like cleaned and we'll give you the best price for the job.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h3>Schedule Your Cleaning Time</h3>
-        <p>Pick a date and time that works for you — including next-day and weekend slots.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h3>Enjoy a Clean, Tidy Space</h3>
-        <p>Sit back and relax while we make sure everything is spotless, top to bottom.</p>
-      </div>
-    </div>
-    <div class="center-cta">
-      <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
-      <a href="/our-services" class="btn btn-text">View Services →</a>
+      <a href="/our-services" class="btn btn-outline">All services</a>
     </div>
   </div>
 </section>
 
 <%- include('partials/cleaning-checklist') %>
 
-<section class="section why-us">
+<section class="section why-us alt-bg">
   <div class="container grid grid-2 align-center">
     <div>
-      <span class="eyebrow">Why Choose Us</span>
-      <h2>Cleaning you can actually trust</h2>
+      <span class="eyebrow">Why SN</span>
+      <h2>A local team, not a franchise script</h2>
       <ul class="checklist">
-        <li><strong>Vetted & insured cleaners</strong> — every team member is trained, background-checked and fully insured.</li>
-        <li><strong>No subcontractors</strong> — cleaning is our core specialty, so every clean is done by our own trained staff.</li>
-        <li><strong>100% clean guarantee</strong> — not happy with an area? We'll come back and re-clean it, free.</li>
-        <li><strong>Latest tools & products</strong> — advanced equipment and eco-friendly products available on request.</li>
+        <li><strong>Our cleaners, every job</strong> — we don't send subcontractors into your home.</li>
+        <li><strong>Insured and DBS-checked</strong> — trained staff you can leave a key with.</li>
+        <li><strong>End of tenancy that stands up to agents</strong> — the checklist landlords actually walk through.</li>
+        <li><strong>Re-clean guarantee</strong> — tell us within 24 hours and we'll come back, free.</li>
       </ul>
-      <a href="/about" class="btn btn-primary">More About Us</a>
+      <a href="/about" class="btn btn-primary">About the company</a>
     </div>
-    <div class="stat-card-grid">
-      <div class="stat-card"><strong>10+</strong><span>Years experience</span></div>
-      <div class="stat-card"><strong>4,500+</strong><span>Properties cleaned</span></div>
-      <div class="stat-card"><strong>1,580+</strong><span>Happy clients</span></div>
-      <div class="stat-card"><strong>100%</strong><span>Clean guarantee</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section everything-included alt-bg">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">Compare</span>
-      <h2>Everything Included. One Transparent Price.</h2>
-      <p>No hidden fees. No add-on charges. Here's how we compare to typical cleaners and franchises.</p>
-    </div>
-    <div class="compare-table">
-      <div class="compare-row compare-head">
-        <div>Included</div>
-        <div><%= site.name %></div>
-        <div>Typical Cleaner</div>
-        <div>Big Franchise</div>
+    <div class="why-us-media">
+      <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="An SN Cleaning Services cleaner" />
+      <div class="stat-card-grid stat-card-grid--overlay">
+        <div class="stat-card"><strong>10+</strong><span>Years in the area</span></div>
+        <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
+        <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
+        <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
       </div>
-      <div class="compare-row"><div>Flat-rate pricing upfront</div><div>✓</div><div>✓</div><div></div></div>
-      <div class="compare-row"><div>Background-checked staff</div><div>✓</div><div></div><div>✓</div></div>
-      <div class="compare-row"><div>Bonded &amp; insured</div><div>✓</div><div></div><div>✓</div></div>
-      <div class="compare-row"><div>Eco-friendly supplies included</div><div>✓</div><div>✓</div><div></div></div>
-      <div class="compare-row"><div>No franchise markup</div><div>✓</div><div>✓</div><div></div></div>
-      <div class="compare-row"><div>Same cleaner every visit</div><div>✓</div><div></div><div></div></div>
-      <div class="compare-row"><div>Recurring service discounts</div><div>✓</div><div>✓</div><div></div></div>
     </div>
   </div>
 </section>
 
 <% if (typeof coverageAreas !== 'undefined' && coverageAreas.length) { %>
-<section class="section coverage alt-bg">
+<section class="section coverage">
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">Coverage</span>
-      <h2>Areas we cover across London &amp; Essex</h2>
-      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+      <h2>London and Essex</h2>
+      <p>If you don't see your area, ask — we often can. Recurring weekly, fortnightly and monthly cleans are discounted.</p>
     </div>
     <div class="area-tags">
       <% coverageAreas.forEach(function(area) { %>
@@ -153,66 +116,17 @@
 </section>
 <% } %>
 
-<% if (typeof featuredAreaGroups !== 'undefined' && featuredAreaGroups.length) { %>
-<section class="section area-guides">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">Local Guides</span>
-      <h2>Cleaning services near you</h2>
-      <p>Dedicated guides for specific areas we cover — we're adding more regularly.</p>
-    </div>
-    <div class="grid grid-3">
-      <% featuredAreaGroups.forEach(function(group) { %>
-        <div class="card area-guide-card">
-          <h3><%= group.parentName %></h3>
-          <ul class="area-guide-list">
-            <% group.areas.forEach(function(area) { %>
-              <li><a href="<%= area.url %>"><%= area.serviceTitle %> in <%= area.name %> →</a></li>
-            <% }); %>
-          </ul>
-        </div>
-      <% }); %>
-    </div>
-  </div>
-</section>
-<% } %>
-
-<section class="section discounts">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">Save More</span>
-      <h2>Exclusive discounts for recurring cleans</h2>
-    </div>
-    <div class="grid grid-3">
-      <div class="discount-card">
-        <div class="discount-percent">20%</div>
-        <p>Off weekly cleans</p>
-      </div>
-      <div class="discount-card">
-        <div class="discount-percent">15%</div>
-        <p>Off fortnightly cleans</p>
-      </div>
-      <div class="discount-card">
-        <div class="discount-percent">10%</div>
-        <p>Off monthly cleans</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="section testimonials alt-bg">
   <div class="container">
     <div class="section-heading">
-      <span class="eyebrow">Testimonials</span>
-      <h2>What our customers say</h2>
+      <span class="eyebrow">Customers</span>
+      <h2>What people tell us</h2>
+      <p>A few comments from jobs around London. <% if (site.googleBusinessUrl) { %><a href="<%= site.googleBusinessUrl %>" target="_blank" rel="noopener">Read recent Google reviews</a>.<% } else { %>Ask us for recent Google reviews when you enquire.<% } %></p>
     </div>
     <div class="grid grid-3">
       <% testimonials.forEach(function(t) { %>
         <div class="card testimonial-card">
-          <div class="testimonial-top">
-            <div class="stars"><%= '★'.repeat(t.rating) %></div>
-            <span class="source-badge">Verified</span>
-          </div>
+          <div class="stars"><%= '★'.repeat(t.rating) %></div>
           <p class="quote">"<%= t.quote %>"</p>
           <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
         </div>
@@ -226,15 +140,14 @@
   <div class="container" style="max-width:820px;">
     <div class="section-heading">
       <span class="eyebrow">FAQs</span>
-      <h2>Frequently asked questions</h2>
-      <p>Everything you need to know before booking. Don't see your question? Just get in touch.</p>
+      <h2>Before you book</h2>
     </div>
     <div class="faq-list">
       <% faqs.forEach(function(faq) { %>
-        <div class="faq-item">
-          <h3><%= faq.question %></h3>
+        <details class="faq-item">
+          <summary><h3><%= faq.question %></h3></summary>
           <p><%= faq.answer %></p>
-        </div>
+        </details>
       <% }); %>
     </div>
   </div>
@@ -244,9 +157,14 @@
 <section class="section cta-band">
   <div class="container cta-band-inner">
     <div>
-      <h2>Ready for a cleaner space?</h2>
-      <p>Get a free, no-obligation quote today — most enquiries answered within 24 hours.</p>
+      <h2>Need a clean in London or Essex?</h2>
+      <p>Send the postcode and what you need. We'll quote you — usually the same weekday.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    <div class="cta-band-actions">
+      <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+      <% if (site.whatsappUrl) { %>
+        <a href="<%= site.whatsappUrl %>" class="btn btn-outline btn-lg" target="_blank" rel="noopener">WhatsApp</a>
+      <% } %>
+    </div>
   </div>
 </section>

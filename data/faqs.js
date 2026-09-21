@@ -1,46 +1,42 @@
-// Site-wide FAQs shown on the homepage. Distinct from the per-service FAQs
-// stored in Supabase's service_pages.faqs (those answer service-specific
-// questions on each service page; these answer general "should I book" and
-// "how does this work" questions before someone commits).
 module.exports = [
   {
     question: 'What areas do you cover?',
     answer:
-      "We cover London and Essex — see the full list of boroughs and towns below. If you're just outside these areas, get in touch and we'll do our best to accommodate you."
+      "London and Essex. If you're just outside the list on this page, still get in touch — we often can."
   },
   {
     question: 'How much does a cleaning cost?',
     answer:
-      "Pricing is flat-rate based on the size of your space and the type of clean, so there are no hidden fees or surprise add-ons. Enter your postcode above or get in touch for an instant, no-obligation quote."
+      "It depends on the size of the property and the type of clean. Send your postcode and what you need, or WhatsApp us, and we'll quote you — usually the same weekday. No hidden add-on fees after that."
   },
   {
     question: 'Are your cleaners insured and background-checked?',
     answer:
-      'Yes. Every cleaner is fully vetted, background-checked, trained and covered by our insurance before they ever visit a property.'
+      'Yes. Every cleaner is DBS-checked, trained and insured before they visit a property. We do not use subcontractors.'
   },
   {
     question: 'Do I need to provide cleaning supplies or equipment?',
     answer:
-      "No — we bring everything needed for the job, including eco-friendly products on request. Just let us know if you'd prefer we use your own supplies."
+      "No — we bring what we need, including eco-friendly products on request. Say if you'd rather we used yours."
   },
   {
     question: "What if I'm not happy with the clean?",
     answer:
-      "Let us know within 24 hours and we'll come back and re-clean the area free of charge — that's our 100% clean guarantee."
+      "Tell us within 24 hours and we'll come back and re-clean the area free of charge."
   },
   {
-    question: 'How do I book, and how far in advance?',
+    question: 'How do I book?',
     answer:
-      'Booking takes about 60 seconds online, or you can call or message us directly. We offer next-day and weekend slots, so you rarely need to book far ahead.'
+      'Request a quote online, call, or WhatsApp. We can often do next-day and weekend slots.'
   },
   {
     question: 'Can I get a discount for recurring cleaning?',
     answer:
-      'Yes — weekly, fortnightly and monthly recurring cleans all come with an automatic discount, and you get the same cleaner each visit whenever possible.'
+      'Yes — weekly, fortnightly and monthly visits are discounted, and we try to send the same cleaner each time.'
   },
   {
     question: 'Can I cancel or reschedule a booking?',
     answer:
-      'Absolutely — just give us as much notice as you can and we\'ll move your booking to a time that works better for you, free of charge.'
+      "Yes — give us as much notice as you can and we'll move it, free of charge."
   }
 ];

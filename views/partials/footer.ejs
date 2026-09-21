@@ -2,14 +2,20 @@
   <div class="container footer-grid">
     <div class="footer-col">
       <a href="/" class="logo">
-        <span class="logo-mark">✦</span>
+        <img src="/images/logo-mark.svg?v=<%= assetVersion %>" alt="" class="logo-img logo-img--footer" />
         <span class="logo-text"><%= site.name %></span>
       </a>
-      <p class="footer-tagline">Professional, reliable cleaning for homes and businesses. Fully insured, vetted cleaners you can trust.</p>
-      <div class="footer-social">
-        <a href="<%= site.social.facebook %>" aria-label="Facebook" target="_blank" rel="noopener">FB</a>
-        <a href="<%= site.social.instagram %>" aria-label="Instagram" target="_blank" rel="noopener">IG</a>
-      </div>
+      <p class="footer-tagline">Domestic, end of tenancy and commercial cleaning across London and Essex. Our own insured staff.</p>
+      <% if (site.social.facebook || site.social.instagram) { %>
+        <div class="footer-social">
+          <% if (site.social.facebook) { %>
+            <a href="<%= site.social.facebook %>" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
+          <% } %>
+          <% if (site.social.instagram) { %>
+            <a href="<%= site.social.instagram %>" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+          <% } %>
+        </div>
+      <% } %>
     </div>
 
     <div class="footer-col">
@@ -19,6 +25,7 @@
         <li><a href="/our-services">Services</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/gallery">Gallery</a></li>
+        <li><a href="/blog">Blog</a></li>
         <li><a href="/contact">Contact</a></li>
       </ul>
     </div>
@@ -36,10 +43,13 @@
     <div class="footer-col">
       <h4>Get in Touch</h4>
       <ul class="footer-contact">
-        <li>📞 <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
-        <li>✉️ <a href="mailto:<%= site.email %>"><%= site.email %></a></li>
-        <li>📍 <%= site.address %></li>
-        <li>🕒 <%= site.hours %></li>
+        <li><a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
+        <% if (site.whatsappUrl) { %>
+          <li><a href="<%= site.whatsappUrl %>" target="_blank" rel="noopener">WhatsApp</a></li>
+        <% } %>
+        <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+        <li><%= site.address %></li>
+        <li><%= site.hours %></li>
       </ul>
     </div>
   </div>

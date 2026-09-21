@@ -1,8 +1,8 @@
-<section class="page-hero">
+<section class="page-hero page-hero--plain">
   <div class="container">
     <span class="eyebrow">Blog</span>
-    <h1>Cleaning tips & news</h1>
-    <p>Advice, guides and updates from the SN Cleaning Services team.</p>
+    <h1>Cleaning tips &amp; news</h1>
+    <p>Notes from the SN team in London and Essex: how we quote, what a move-out covers, and how often to book.</p>
   </div>
 </section>
 
@@ -11,14 +11,22 @@
     <% if (!posts.length) { %>
       <p>No posts published yet — check back soon.</p>
     <% } else { %>
-      <div class="services-grid">
+      <div class="grid grid-3">
         <% posts.forEach(function(post) { %>
-          <a href="/blog/<%= post.slug %>" class="service-card">
+          <a href="/blog/<%= post.slug %>" class="card service-card">
             <% if (post.cover_image) { %>
-              <img src="<%= post.cover_image %>" alt="<%= post.title %>" style="width:100%; border-radius:12px; margin-bottom:14px;" />
+              <div class="service-card-photo">
+                <img src="<%= post.cover_image %>?v=<%= assetVersion %>" alt="<%= post.title %>" />
+              </div>
             <% } %>
-            <h3><%= post.title %></h3>
-            <p><%= post.excerpt %></p>
+            <div class="service-card-body">
+              <% if (post.published_at) { %>
+                <time class="blog-card-date" datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+              <% } %>
+              <h3><%= post.title %></h3>
+              <p><%= post.excerpt %></p>
+              <span class="card-link">Read more →</span>
+            </div>
           </a>
         <% }); %>
       </div>

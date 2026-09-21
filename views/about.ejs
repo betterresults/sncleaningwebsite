@@ -1,27 +1,28 @@
-<section class="page-hero">
+<section class="page-hero page-hero--photo page-hero--about">
   <div class="container">
-    <span class="eyebrow">About Us</span>
-    <h1>Cleaning, done properly.</h1>
-    <p><%= site.name %> was built on a simple idea: cleaning should be reliable, thorough, and hassle-free.</p>
+    <span class="eyebrow">About</span>
+    <h1>A London &amp; Essex cleaning company, not a franchise.</h1>
+    <p>Our own staff. Ten years of jobs for homes, landlords, agents and workplaces.</p>
   </div>
 </section>
 
 <section class="section">
   <div class="container grid grid-2 align-center">
-    <div class="about-media" role="img" aria-label="Cleaning team"></div>
+    <div class="about-media">
+      <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="A professional cleaner from SN Cleaning Services" />
+    </div>
     <div>
-      <span class="eyebrow">Our Story</span>
-      <h2>Built on trust and attention to detail</h2>
+      <span class="eyebrow">The company</span>
+      <h2>Built on turning up and doing the list</h2>
       <p>
-        For over 10 years, <%= site.name %> has provided professional cleaning across London and
-        Essex — with around 4,500 properties cleaned and more than 1,580 satisfied clients along
-        the way. We never use subcontractors: cleaning is our core specialty, so every job is done
-        by our own trained, vetted and insured staff.
+        For over 10 years, <%= site.name %> has cleaned homes, tenancy handovers and workplaces
+        across London and Essex. We never use subcontractors: every job is done by our own trained,
+        DBS-checked and insured staff.
       </p>
       <p>
-        Today we work with homeowners, landlords, letting agents, schools, nurseries and businesses
-        across the area, offering everything from a quick weekly tidy to a full end-of-tenancy deep
-        clean — backed by a 100% clean guarantee and the latest tools and products in the industry.
+        We work with homeowners, landlords, letting agents, schools, nurseries and businesses —
+        from a weekly tidy to a full end-of-tenancy deep clean. If we miss something, tell us
+        within 24 hours and we come back and re-clean it, free.
       </p>
     </div>
   </div>
@@ -34,18 +35,15 @@
       <h2>What guides how we work</h2>
     </div>
     <div class="grid grid-3">
-      <div class="card">
-        <div class="service-icon">🛡️</div>
+      <div class="card value-card">
         <h3>Reliability</h3>
         <p>We show up on time, every time, and communicate clearly if anything ever changes.</p>
       </div>
-      <div class="card">
-        <div class="service-icon">🔍</div>
+      <div class="card value-card">
         <h3>Attention to Detail</h3>
         <p>We don't cut corners — every clean follows a checklist so nothing gets missed.</p>
       </div>
-      <div class="card">
-        <div class="service-icon">🤝</div>
+      <div class="card value-card">
         <h3>Trust</h3>
         <p>Background-checked, insured cleaners you can feel comfortable letting into your home or office.</p>
       </div>
@@ -53,12 +51,27 @@
   </div>
 </section>
 
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">The basics</span>
+      <h2>What we stand on</h2>
+    </div>
+    <div class="stat-card-grid stat-card-grid--wide">
+      <div class="stat-card"><strong>10+</strong><span>Years in the area</span></div>
+      <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
+      <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
+      <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
+    </div>
+  </div>
+</section>
+
 <section class="section cta-band">
   <div class="container cta-band-inner">
     <div>
-      <h2>Want to work with us?</h2>
-      <p>Get a free quote and see the difference a properly done clean makes.</p>
+      <h2>Need a team you can leave a key with?</h2>
+      <p>Tell us about the property. We'll quote you — usually the same weekday.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Get a Free Quote</a>
+    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
   </div>
 </section>

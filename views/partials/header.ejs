@@ -2,7 +2,13 @@
   <div class="header-inner">
     <div class="header-left">
       <a href="/" class="logo">
-        <img src="/images/logo.png?v=<%= assetVersion %>" alt="<%= site.name %>" class="logo-img" />
+        <% const customLogo = site.logoUrl && /^https?:\/\//.test(site.logoUrl); %>
+        <% if (customLogo) { %>
+          <img src="<%= site.logoUrl %>" alt="<%= site.name %>" class="logo-img logo-img--full" />
+        <% } else { %>
+          <img src="/images/logo-mark.svg?v=<%= assetVersion %>" alt="" class="logo-img" />
+          <span class="logo-text"><%= site.name %></span>
+        <% } %>
       </a>
     </div>
 
@@ -17,7 +23,7 @@
           <div class="nav-dropdown-menu">
             <% navServices.forEach(function(s) { %>
               <a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>">
-                <span class="nav-dropdown-icon"><%= s.icon %></span> <%= s.title %>
+                <%= s.title %>
               </a>
             <% }); %>
           </div>
@@ -31,8 +37,8 @@
     </nav>
 
     <div class="header-actions">
-      <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="header-phone">📞 <%= site.phone %></a>
-      <a href="/contact" class="btn btn-primary header-quote-btn">Get a Free Quote</a>
+      <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="header-phone"><%= site.phone %></a>
+      <a href="/contact" class="btn btn-primary header-quote-btn">Request a quote</a>
       <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation">
         <span></span><span></span><span></span>
       </button>

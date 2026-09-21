@@ -1,8 +1,8 @@
-<section class="page-hero">
+<section class="page-hero page-hero--plain">
   <div class="container">
-    <span class="eyebrow">Contact Us</span>
-    <h1>Get your free quote</h1>
-    <p>Tell us a bit about your space and we'll get back to you within 24 hours.</p>
+    <span class="eyebrow">Contact</span>
+    <h1>Tell us about the property</h1>
+    <p>We'll send a quote — usually the same weekday. Or call / WhatsApp if that's easier.</p>
   </div>
 </section>
 
@@ -11,7 +11,7 @@
     <div class="contact-form-wrap">
       <% if (success) { %>
         <div class="alert alert-success">
-          Thanks — your message has been sent! We'll be in touch within 24 hours.
+          Thanks — your message has been sent. We'll be in touch within a weekday.
         </div>
       <% } %>
       <% if (error) { %>
@@ -32,56 +32,73 @@
         </p>
         <div class="form-row">
           <label for="name">Full Name *</label>
-          <input type="text" id="name" name="name" required />
+          <input type="text" id="name" name="name" required autocomplete="name" />
         </div>
         <div class="form-row-group">
           <div class="form-row">
             <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required />
+            <input type="email" id="email" name="email" required autocomplete="email" />
           </div>
           <div class="form-row">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" />
+            <input type="tel" id="phone" name="phone" autocomplete="tel" />
+          </div>
+        </div>
+        <div class="form-row-group">
+          <div class="form-row">
+            <label for="postcode">Postcode</label>
+            <input type="text" id="postcode" name="postcode" autocomplete="postal-code" />
+          </div>
+          <div class="form-row">
+            <label for="service">Service</label>
+            <select id="service" name="service">
+              <option value="">Select a service</option>
+              <option value="Residential Cleaning">Residential Cleaning</option>
+              <option value="End of Tenancy Cleaning">End of Tenancy Cleaning</option>
+              <option value="Airbnb Cleaning">Airbnb Cleaning</option>
+              <option value="Deep House Cleaning">Deep House Cleaning</option>
+              <option value="After Builders Cleaning">After Builders Cleaning</option>
+              <option value="Carpet, Upholstery & Mattress Cleaning">Carpet, Upholstery &amp; Mattress Cleaning</option>
+              <option value="Office Cleaning">Office Cleaning</option>
+              <option value="School Cleaning">School Cleaning</option>
+              <option value="Nursery Cleaning">Nursery Cleaning</option>
+              <option value="Other">Other / Not Sure</option>
+            </select>
           </div>
         </div>
         <div class="form-row">
-          <label for="service">Service Interested In</label>
-          <select id="service" name="service">
-            <option value="">Select a service</option>
-            <option value="Residential Cleaning">Residential Cleaning</option>
-            <option value="End of Tenancy Cleaning">End of Tenancy Cleaning</option>
-            <option value="Airbnb Cleaning">Airbnb Cleaning</option>
-            <option value="Deep House Cleaning">Deep House Cleaning</option>
-            <option value="After Builders Cleaning">After Builders Cleaning</option>
-            <option value="Carpet, Upholstery & Mattress Cleaning">Carpet, Upholstery &amp; Mattress Cleaning</option>
-            <option value="Office Cleaning">Office Cleaning</option>
-            <option value="School Cleaning">School Cleaning</option>
-            <option value="Nursery Cleaning">Nursery Cleaning</option>
-            <option value="Other">Other / Not Sure</option>
-          </select>
-        </div>
-        <div class="form-row">
           <label for="message">Message *</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Tell us about your space, how often you'd like it cleaned, and any specific needs."></textarea>
+          <textarea id="message" name="message" rows="5" required placeholder="Property type, how often, and anything we should know."></textarea>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg">Send Enquiry</button>
+        <button type="submit" class="btn btn-primary btn-lg">Send enquiry</button>
       </form>
     </div>
 
     <div class="contact-info">
+      <div class="contact-photo">
+        <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="Speak with SN Cleaning Services" />
+      </div>
       <div class="contact-info-card">
-        <h3>Contact Details</h3>
+        <h3>Reach us</h3>
         <ul>
-          <li>📞 <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
-          <li>✉️ <a href="mailto:<%= site.email %>"><%= site.email %></a></li>
-          <li>📍 <%= site.address %></li>
-          <li>🕒 <%= site.hours %></li>
+          <li><a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
+          <% if (site.whatsappUrl) { %>
+            <li><a href="<%= site.whatsappUrl %>" target="_blank" rel="noopener">WhatsApp</a></li>
+          <% } %>
+          <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
+          <li><%= site.address %></li>
+          <li><%= site.hours %></li>
         </ul>
       </div>
       <div class="contact-info-card">
-        <h3>Prefer to call?</h3>
-        <p>We're happy to talk through what you need and give you a quote over the phone — no obligation.</p>
-        <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call Now</a>
+        <h3>Prefer to talk it through?</h3>
+        <p>Call or WhatsApp with the postcode and what you need. No obligation.</p>
+        <div class="contact-info-actions">
+          <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call</a>
+          <% if (site.whatsappUrl) { %>
+            <a href="<%= site.whatsappUrl %>" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp</a>
+          <% } %>
+        </div>
       </div>
     </div>
   </div>
