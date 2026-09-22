@@ -1,121 +1,272 @@
+<%
+// Per-service, per-area landing page — e.g. /end-of-tenancy-cleaning/romford/.
+//
+// Every block below is driven by a column on area_pages and hides itself when
+// that column is empty, so a sparse row still renders a clean page and a fully
+// populated row renders the complete one. That is deliberate: these pages are
+// generated in bulk, and the difference between a useful local page and a
+// doorway page Google demotes is whether the area-specific fields
+// (postcodes, neighbourhoods, local_intro) are actually filled in.
+const areaName = region.name;
+const serviceName = service.title;
+const tiers = (page.pricing_tiers && page.pricing_tiers.length) ? page.pricing_tiers : [];
+const addOns = (page.add_ons && page.add_ons.length) ? page.add_ons : [];
+const postcodes = (page.postcodes && page.postcodes.length) ? page.postcodes : [];
+const hoods = (page.neighbourhoods && page.neighbourhoods.length) ? page.neighbourhoods : [];
+// Room-by-room checklist: the area row wins, otherwise inherit the parent
+// service page so a brand-new area still shows what the clean covers.
+const rooms = (page.included_tasks && page.included_tasks.length)
+  ? page.included_tasks
+  : (typeof serviceIncludedTasks !== 'undefined' ? serviceIncludedTasks : []);
+const priceFrom = page.price_from || (tiers.length ? Math.min.apply(null, tiers.map(t => t.price)) : null);
+%>
+
+<!-- Breadcrumb ---------------------------------------------------------- -->
+<nav class="breadcrumb-bar" aria-label="Breadcrumb">
+  <div class="container">
+    <ol class="breadcrumb">
+      <li><a href="/">Home</a></li>
+      <li><a href="/<%= service.slug %>"><%= serviceName %></a></li>
+      <li aria-current="page"><%= areaName %></li>
+    </ol>
+  </div>
+</nav>
+
+<!-- Hero ---------------------------------------------------------------- -->
 <section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>')">
   <div class="container">
-    <span class="eyebrow"><%= parent ? service.title + ' · ' + parent.name : service.title %></span>
-    <h1><%= service.title %> in <%= region.name %></h1>
-    <p><%= page.meta_description || `${service.title} in ${region.name}.` %></p>
+    <span class="eyebrow"><%= parent ? parent.name : 'London &amp; Essex' %></span>
+    <h1><%= serviceName %> in <%= areaName %></h1>
+    <p><%= page.meta_description || `${serviceName} in ${areaName}, carried out by our own insured, DBS-checked staff.` %></p>
+
+    <% if (priceFrom) { %>
+      <p class="hero-price">From <strong>&pound;<%= priceFrom %></strong> &middot; fixed price, quoted before we start</p>
+    <% } %>
+
     <div class="quote-card-badges" style="margin-top:18px;">
-      <span>Insured</span>
-      <span>DBS-checked</span>
-      <span>Own staff</span>
-      <span>Re-clean guarantee</span>
+      <span>Fully insured</span>
+      <span>DBS-checked staff</span>
+      <span>Deposit-back guarantee</span>
+      <% if (postcodes.length) { %><span><%= postcodes.slice(0, 3).join(', ') %><%= postcodes.length > 3 ? '+' : '' %></span><% } %>
     </div>
+
     <div class="page-hero-actions">
-      <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a fixed quote</a>
+      <% if (site.phone) { %>
+        <a href="tel:<%= site.phone.replace(/[^0-9+]/g, '') %>" class="btn btn-outline btn-lg">Call <%= site.phone %></a>
+      <% } %>
     </div>
   </div>
 </section>
 
-<!-- Overview -->
-<% if (page.intro) { %>
+<!-- Quick answer (featured-snippet / AI-answer target) -------------------- -->
+<% if (page.quick_answer) { %>
+<section class="section quick-answer-section">
+  <div class="container" style="max-width:820px;">
+    <div class="quick-answer">
+      <h2>How much is <%= serviceName.toLowerCase() %> in <%= areaName %>?</h2>
+      <p><%= page.quick_answer %></p>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Local context -------------------------------------------------------- -->
+<% if (page.local_intro || page.intro) { %>
 <section class="section">
   <div class="container" style="max-width:820px;">
-    <p><%= page.intro %></p>
+    <% if (page.local_intro) { %>
+      <h2><%= serviceName %> for <%= areaName %> properties</h2>
+      <p><%= page.local_intro %></p>
+    <% } %>
+    <% if (page.intro) { %><p><%= page.intro %></p><% } %>
   </div>
 </section>
 <% } %>
 
-<!-- Why choose us -->
+<!-- Pricing table -------------------------------------------------------- -->
+<% if (tiers.length) { %>
 <section class="section alt-bg">
-  <div class="container grid grid-2 align-center">
-    <div>
-      <span class="eyebrow">Why SN</span>
-      <h2>A local team, not a franchise script</h2>
-      <ul class="checklist">
-        <li><strong>Our cleaners, every job</strong> — we don't send subcontractors into your home.</li>
-        <li><strong>Insured and DBS-checked</strong> — trained staff you can leave a key with.</li>
-        <li><strong>Re-clean guarantee</strong> — tell us within 24 hours and we'll come back, free.</li>
-        <li><strong>We bring the supplies</strong> — including eco-friendly products on request.</li>
-      </ul>
-      <a href="/about" class="btn btn-primary">About the company</a>
+  <div class="container" style="max-width:900px;">
+    <div class="section-heading">
+      <span class="eyebrow">Pricing</span>
+      <h2><%= serviceName %> prices in <%= areaName %></h2>
+      <p>Fixed prices agreed before we start — not hourly rates that creep up on the day.</p>
     </div>
-    <div class="stat-card-grid">
-      <div class="stat-card"><strong>10+</strong><span>Years in the area</span></div>
-      <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
-      <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
-      <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
-    </div>
+
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th scope="col">Property</th>
+          <th scope="col">From</th>
+          <th scope="col">Typical time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% tiers.forEach(function(t) { %>
+          <tr>
+            <th scope="row"><%= t.property %></th>
+            <td class="price-cell">&pound;<%= t.price %></td>
+            <td><%= t.hours ? t.hours + ' hrs' : '—' %></td>
+          </tr>
+        <% }); %>
+      </tbody>
+    </table>
+
+    <p class="price-note">
+      Prices assume the property is empty of furniture and belongings. Heavily soiled properties
+      are quoted individually — we will always tell you before the day, never after.
+    </p>
   </div>
 </section>
+<% } %>
 
-<!-- Other services available here -->
-<% var otherServices = (typeof services !== 'undefined' ? services : []).filter(function(s) { return s.slug !== service.slug; }); %>
-<% if (otherServices.length) { %>
+<!-- What's included: room by room ---------------------------------------- -->
+<% if (rooms.length) { %>
 <section class="section">
   <div class="container">
     <div class="section-heading">
-      <span class="eyebrow">Also Available in <%= region.name %></span>
-      <h2>Other cleaning services we offer here</h2>
+      <span class="eyebrow">What's included</span>
+      <h2>Every room, against the agent's checklist</h2>
+      <p>The same scope on every <%= areaName %> job — nothing held back as an optional extra.</p>
     </div>
-    <div class="grid grid-3">
-      <% otherServices.forEach(function(s) { %>
-        <a href="/<%= s.slug %>" class="card service-card">
-          <div class="service-card-photo">
-            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %>" />
-          </div>
-          <div class="service-card-body">
-            <h3><%= s.title %></h3>
-            <p><%= s.short_description %></p>
-            <span class="card-link">What's included</span>
-          </div>
-        </a>
+    <div class="grid grid-2 room-grid">
+      <% rooms.forEach(function(room) { %>
+        <div class="card room-card">
+          <h3><%= room.room || room.title %></h3>
+          <ul class="checklist">
+            <% (room.tasks || []).forEach(function(task) { %>
+              <li><%= task %></li>
+            <% }); %>
+          </ul>
+        </div>
       <% }); %>
     </div>
   </div>
 </section>
 <% } %>
 
-<!-- Related areas -->
-<% if (typeof relatedAreas !== 'undefined' && relatedAreas.length) { %>
+<!-- Add-ons -------------------------------------------------------------- -->
+<% if (addOns.length) { %>
 <section class="section alt-bg">
   <div class="container">
     <div class="section-heading">
-      <span class="eyebrow">Nearby</span>
-      <h2><%= service.title %> near <%= region.name %></h2>
+      <span class="eyebrow">Optional extras</span>
+      <h2>Add-ons for <%= areaName %> tenancies</h2>
+      <p>Booked alongside the main clean, so it's one visit and one invoice.</p>
     </div>
-    <div class="area-tags">
-      <% relatedAreas.forEach(function(a) { %>
-        <a href="<%= a.url %>" class="area-tag"><%= a.name %></a>
+    <div class="grid grid-3">
+      <% addOns.forEach(function(a) { %>
+        <div class="card addon-card">
+          <h3><%= a.name %></h3>
+          <p class="addon-price">
+            <% if (a.price) { %>&pound;<%= a.price %><% } else { %>On quote<% } %>
+            <% if (a.note) { %><span><%= a.note %></span><% } %>
+          </p>
+          <% if (a.description) { %><p><%= a.description %></p><% } %>
+        </div>
       <% }); %>
     </div>
   </div>
 </section>
 <% } %>
 
-<!-- Full coverage -->
-<% if (typeof coverageAreas !== 'undefined' && coverageAreas.length) { %>
+<!-- Guarantee ------------------------------------------------------------ -->
+<section class="section guarantee-section">
+  <div class="container grid grid-2 align-center">
+    <div>
+      <span class="eyebrow">Our guarantee</span>
+      <h2>If the agent isn't happy, we come back free</h2>
+      <p>
+        Inventory clerks in <%= areaName %> check against a written schedule, and occasionally
+        they flag something. Tell us within 72 hours of your check-out and we return and
+        re-clean whatever was raised at no cost — no argument, no re-booking fee.
+      </p>
+      <ul class="checklist">
+        <li><strong>Our own staff, every job</strong> — never subcontracted to gig workers.</li>
+        <li><strong>Fully insured and DBS-checked</strong> — safe to hand a key to.</li>
+        <li><strong>All products and equipment supplied</strong> — including eco-friendly on request.</li>
+        <li><strong>Fixed price agreed up front</strong> — no hourly-rate surprises.</li>
+      </ul>
+    </div>
+    <div class="stat-card-grid">
+      <div class="stat-card"><strong>72 hrs</strong><span>Re-clean window</span></div>
+      <div class="stat-card"><strong>10+</strong><span>Years cleaning London &amp; Essex</span></div>
+      <div class="stat-card"><strong>Own staff</strong><span>No subcontractors</span></div>
+      <div class="stat-card"><strong>Insured</strong><span>Public liability cover</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works --------------------------------------------------------- -->
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">How it works</span>
+      <h2>Booking a clean in <%= areaName %></h2>
+    </div>
+    <div class="steps steps-grid">
+      <div class="step">
+        <span class="step-number">1</span>
+        <h3>Tell us the property</h3>
+        <p>Bedrooms, bathrooms, and your check-out date. Takes about a minute.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">2</span>
+        <h3>Get a fixed price</h3>
+        <p>A firm quote — not an hourly estimate — usually back the same day.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">3</span>
+        <h3>We clean</h3>
+        <p>Our team arrives with everything needed and works the full checklist.</p>
+      </div>
+      <div class="step">
+        <span class="step-number">4</span>
+        <h3>You hand back the keys</h3>
+        <p>If the inventory flags anything within 72 hours, we return free.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Local coverage — the genuinely area-specific block -------------------- -->
+<% if (postcodes.length || hoods.length) { %>
 <section class="section">
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">Coverage</span>
-      <h2>All the areas we cover</h2>
-      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+      <h2>Where we clean in <%= areaName %></h2>
     </div>
-    <div class="area-tags">
-      <% coverageAreas.forEach(function(area) { %>
-        <span class="area-tag"><%= area %></span>
-      <% }); %>
-    </div>
+
+    <% if (postcodes.length) { %>
+      <h3 class="coverage-subhead">Postcodes covered</h3>
+      <div class="area-tags">
+        <% postcodes.forEach(function(pc) { %><span class="area-tag postcode-tag"><%= pc %></span><% }); %>
+      </div>
+    <% } %>
+
+    <% if (hoods.length) { %>
+      <h3 class="coverage-subhead">Neighbourhoods we work in</h3>
+      <div class="area-tags">
+        <% hoods.forEach(function(h) { %><span class="area-tag"><%= h %></span><% }); %>
+      </div>
+    <% } %>
+
+    <p class="price-note">
+      Not listed? We almost certainly still cover it — <a href="/contact">ask us</a> and we'll confirm same day.
+    </p>
   </div>
 </section>
 <% } %>
 
-<!-- Testimonials -->
+<!-- Testimonials --------------------------------------------------------- -->
 <% if (typeof testimonials !== 'undefined' && testimonials.length) { %>
 <section class="section alt-bg testimonials">
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">Testimonials</span>
-      <h2>What our customers say</h2>
+      <h2>What customers say</h2>
     </div>
     <div class="grid grid-3">
       <% testimonials.forEach(function(t) { %>
@@ -132,32 +283,82 @@
 </section>
 <% } %>
 
-<!-- FAQs -->
+<!-- FAQs ----------------------------------------------------------------- -->
 <% if (page.faqs && page.faqs.length) { %>
 <section class="section faq">
   <div class="container" style="max-width:820px;">
     <div class="section-heading">
       <span class="eyebrow">FAQs</span>
-      <h2>Frequently Asked Questions</h2>
+      <h2><%= serviceName %> in <%= areaName %> — your questions</h2>
     </div>
     <div class="faq-list">
       <% page.faqs.forEach(function(faq) { %>
-        <div class="faq-item">
-          <h3><%= faq.question %></h3>
+        <details class="faq-item">
+          <summary><h3><%= faq.question %></h3></summary>
           <p><%= faq.answer %></p>
-        </div>
+        </details>
       <% }); %>
     </div>
   </div>
 </section>
 <% } %>
 
+<!-- Nearby areas --------------------------------------------------------- -->
+<% if (typeof relatedAreas !== 'undefined' && relatedAreas.length) { %>
+<section class="section alt-bg">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Nearby</span>
+      <h2><%= serviceName %> near <%= areaName %></h2>
+    </div>
+    <div class="area-tags">
+      <% relatedAreas.forEach(function(a) { %>
+        <a href="<%= a.url %>" class="area-tag"><%= a.name %></a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Other services in this area ------------------------------------------ -->
+<% var otherServices = (typeof services !== 'undefined' ? services : []).filter(function(s) { return s.slug !== service.slug; }); %>
+<% if (otherServices.length) { %>
+<section class="section">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Also available in <%= areaName %></span>
+      <h2>Other cleaning we do here</h2>
+    </div>
+    <div class="grid grid-3">
+      <% otherServices.forEach(function(s) { %>
+        <a href="/<%= s.slug %>" class="card service-card">
+          <div class="service-card-photo">
+            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %> in <%= areaName %>" loading="lazy" />
+          </div>
+          <div class="service-card-body">
+            <h3><%= s.title %></h3>
+            <p><%= s.short_description %></p>
+            <span class="card-link">What's included</span>
+          </div>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- Final CTA ------------------------------------------------------------ -->
 <section class="section cta-band">
   <div class="container cta-band-inner">
     <div>
-      <h2>Ready to book <%= service.title.toLowerCase() %> in <%= region.name %>?</h2>
-      <p>Tell us the postcode and we'll come back with a quote.</p>
+      <h2>Book <%= serviceName.toLowerCase() %> in <%= areaName %></h2>
+      <p>Tell us the postcode and check-out date — we'll come back with a fixed price.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+    <div class="cta-band-actions">
+      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a fixed quote</a>
+      <% if (site.phone) { %>
+        <a href="tel:<%= site.phone.replace(/[^0-9+]/g, '') %>" class="btn btn-outline btn-lg"><%= site.phone %></a>
+      <% } %>
+    </div>
   </div>
 </section>
