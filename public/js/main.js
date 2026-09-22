@@ -118,3 +118,42 @@ document.addEventListener('DOMContentLoaded', () => {
     postcodeInput.value = postcodeParam;
   }
 });
+
+// ---------------------------------------------------------------------------
+// Postcode forms (the sticky quote bar, the homepage hero).
+// Stops a malformed postcode being carried through to a booking form, and says
+// why. Whether we actually COVER a postcode is checked on the service page,
+// where the per-service coverage list is known.
+// ---------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', function () {
+  var FULL = /^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$/;
+  var OUTWARD = /^[A-Z]{1,2}[0-9][A-Z0-9]?$/;
+
+  function looksLikePostcode(value) {
+    var v = String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    return v === '' || FULL.test(v) || OUTWARD.test(v);
+  }
+
+  document.querySelectorAll('.js-postcode-form').forEach(function (form) {
+    var input = form.querySelector('.js-postcode');
+    if (!input) return;
+
+    var msg = form.parentNode.querySelector('.js-postcode-msg');
+
+    form.addEventListener('submit', function (e) {
+      if (looksLikePostcode(input.value)) return;
+      e.preventDefault();
+      if (msg) {
+        msg.textContent = 'That does not look like a UK postcode.';
+        msg.hidden = false;
+      }
+      input.setAttribute('aria-invalid', 'true');
+      input.focus();
+    });
+
+    input.addEventListener('input', function () {
+      input.removeAttribute('aria-invalid');
+      if (msg) msg.hidden = true;
+    });
+  });
+});

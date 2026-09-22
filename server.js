@@ -7,7 +7,7 @@ const nodemailer = require('nodemailer');
 
 const { SITE_URL } = require('./lib/site-config');
 const schema = require('./lib/schema');
-const { isPlaceholderSocial, whatsappHref } = require('./lib/site-helpers');
+const { isPlaceholderSocial, whatsappHref, bookHref } = require('./lib/site-helpers');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -57,6 +57,7 @@ const faqs = require('./data/faqs');
 const { serviceImage, GALLERY } = require('./data/media');
 
 app.locals.serviceImage = serviceImage;
+app.locals.bookHref = bookHref;
 
 // Runs on every request. Sets up everything every page needs regardless of
 // route: current path, canonical URL, the nav dropdown's service list, sitewide

@@ -16,43 +16,15 @@
       for you to do is enjoy it.
     </p>
 
-    <form class="home-quote" action="/book" method="GET" id="home-quote">
+    <form class="home-quote js-postcode-form" action="/book" method="GET" id="home-quote">
       <label for="home-postcode" class="visually-hidden">Your postcode</label>
       <input id="home-postcode" name="postcode" type="text" inputmode="text"
-             autocomplete="postal-code" placeholder="Your postcode" aria-describedby="home-quote-msg" />
+             autocomplete="postal-code" placeholder="Your postcode" aria-describedby="home-quote-msg" class="js-postcode" />
       <button type="submit" class="btn btn-primary btn-lg">Get a quote</button>
     </form>
-    <p class="home-quote-msg" id="home-quote-msg" role="status" hidden></p>
+    <p class="home-quote-msg js-postcode-msg" id="home-quote-msg" role="status" hidden></p>
   </div>
 </section>
-
-<script>
-  // Format-check the postcode before sending anyone on. Whether we cover it is
-  // decided on the service page, because coverage differs by service.
-  (function () {
-    var form = document.getElementById('home-quote');
-    var input = document.getElementById('home-postcode');
-    var msg = document.getElementById('home-quote-msg');
-    if (!form || !input) return;
-
-    var FULL = /^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$/;
-    var OUTWARD = /^[A-Z]{1,2}[0-9][A-Z0-9]?$/;
-
-    form.addEventListener('submit', function (e) {
-      var v = String(input.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
-      if (v && !FULL.test(v) && !OUTWARD.test(v)) {
-        e.preventDefault();
-        if (msg) {
-          msg.textContent = 'That does not look like a UK postcode.';
-          msg.hidden = false;
-        }
-        input.focus();
-      }
-    });
-    input.addEventListener('input', function () { if (msg) msg.hidden = true; });
-  })();
-</script>
-
 <section class="section services-preview">
   <div class="container">
     <div class="section-heading">
@@ -171,7 +143,7 @@
       <p>Send the postcode and what you need. We'll quote you — usually the same weekday.</p>
     </div>
     <div class="cta-band-actions">
-      <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+      <a href="/book" class="btn btn-primary btn-lg">Request a quote</a>
       <% if (site.whatsappUrl) { %>
         <a href="<%= site.whatsappUrl %>" class="btn btn-outline btn-lg" target="_blank" rel="noopener">WhatsApp</a>
       <% } %>

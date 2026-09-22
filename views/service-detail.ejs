@@ -10,7 +10,7 @@
       <span>Re-clean guarantee</span>
     </div>
     <div class="page-hero-actions">
-      <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary btn-lg">Request a quote</a>
+      <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>
     </div>
   </div>
 </section>
@@ -132,7 +132,7 @@
       <h2>What does it cost?</h2>
     </div>
     <p><%= page.pricing_note %></p>
-    <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary" style="margin-top:12px;">Get a quote</a>
+    <a href="<%= bookHref(service) %>" class="btn btn-primary" style="margin-top:12px;">Get a quote</a>
   </div>
 </section>
 <% } %>
@@ -230,6 +230,6 @@
       <h2>Ready to book <%= service.title.toLowerCase() %>?</h2>
       <p>Tell us about your space and we'll recommend the right schedule.</p>
     </div>
-    <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary btn-lg">Request a quote</a>
+    <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>
   </div>
 </section>

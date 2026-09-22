@@ -24,7 +24,7 @@
             <% }); %>
           </ul>
           <div class="service-detail-actions">
-            <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request a quote</a>
+            <a href="<%= bookHref(service) %>" class="btn btn-primary">Get a quote</a>
             <% if (service.hasDetailPage) { %>
               <a href="/<%= service.slug %>" class="btn btn-outline">What's included</a>
             <% } %>
@@ -41,6 +41,6 @@
       <h2>Not sure what you need?</h2>
       <p>Tell us about the property and we'll recommend the right clean.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Talk to us</a>
+    <a href="/book" class="btn btn-primary btn-lg">Get a quote</a>
   </div>
 </section>
