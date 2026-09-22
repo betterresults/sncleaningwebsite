@@ -3,7 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title><%= title %> | <%= site.name %></title>
+  <% // A page that supplies its own meta_title has already been written as a
+     // complete title tag (brand included). Appending site.name again produces
+     // "... | SN Cleaning | SN Cleaning Services" and pushes it past the length
+     // Google will display, so titleExact opts that page out of the suffix. %>
+  <% const pageTitle = (typeof titleExact !== 'undefined' && titleExact) ? title : `${title} | ${site.name}`; %>
+  <title><%= pageTitle %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
   <% if (typeof noindex !== 'undefined' && noindex) { %>

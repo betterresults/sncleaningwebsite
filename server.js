@@ -348,6 +348,9 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
 
   const region = page.coverage_regions;
   const service = page.services;
+  // Customer-facing place name. coverage_regions.name is an internal grouping
+  // label ("Essex - Romford / Thurrock Edge") and must never reach a title tag.
+  const areaName = region.display_name || region.name;
   const [allRegions, areaPagesForService, allServices, servicePage] = await Promise.all([
     content.getAllCoverageRegions(),
     content.getAreaPagesForService(service.slug),
@@ -364,18 +367,20 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
   // each page sitting isolated.
   const relatedAreas = areaPagesForService
     .filter((ap) => ap.id !== page.id && ap.coverage_regions && ap.coverage_regions.parent_id === region.parent_id)
-    .map((ap) => ({ name: ap.coverage_regions.name, url: `/${service.slug}/${ap.slug}` }));
+    .map((ap) => ({ name: ap.coverage_regions.display_name || ap.coverage_regions.name, url: `/${service.slug}/${ap.slug}` }));
 
   const breadcrumbs = [
     ...res.locals.breadcrumbs,
     { name: service.title, url: `/${service.slug}` },
-    { name: region.name, url: `/${service.slug}/${page.slug}` }
+    { name: areaName, url: `/${service.slug}/${page.slug}` }
   ];
   const faqPage = schema.buildFaqPage(page.faqs);
 
   res.render('area-detail', {
-    title: page.meta_title || `${service.title} in ${region.name}`,
-    metaDescription: page.meta_description || `${service.title} in ${region.name}.`,
+    title: page.meta_title || `${service.title} in ${areaName}`,
+    // meta_title is authored as a complete title tag; don't append the brand twice.
+    titleExact: Boolean(page.meta_title),
+    metaDescription: page.meta_description || `${service.title} in ${areaName}.`,
     page,
     region,
     service,

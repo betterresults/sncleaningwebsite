@@ -7,7 +7,11 @@
 // generated in bulk, and the difference between a useful local page and a
 // doorway page Google demotes is whether the area-specific fields
 // (postcodes, neighbourhoods, local_intro) are actually filled in.
-const areaName = region.name;
+// coverage_regions.name is an internal ops label ("Essex - Romford / Thurrock
+// Edge"); display_name is the customer-facing place name ("Romford"). Always
+// render the latter where it is set.
+const areaName = region.display_name || region.name;
+const parentName = parent ? (parent.display_name || parent.name) : null;
 const serviceName = service.title;
 const tiers = (page.pricing_tiers && page.pricing_tiers.length) ? page.pricing_tiers : [];
 const addOns = (page.add_ons && page.add_ons.length) ? page.add_ons : [];
@@ -35,7 +39,7 @@ const priceFrom = page.price_from || (tiers.length ? Math.min.apply(null, tiers.
 <!-- Hero ---------------------------------------------------------------- -->
 <section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>')">
   <div class="container">
-    <span class="eyebrow"><%= parent ? parent.name : 'London &amp; Essex' %></span>
+    <span class="eyebrow"><%= parentName ? parentName : 'London &amp; Essex' %></span>
     <h1><%= serviceName %> in <%= areaName %></h1>
     <p><%= page.meta_description || `${serviceName} in ${areaName}, carried out by our own insured, DBS-checked staff.` %></p>
 
