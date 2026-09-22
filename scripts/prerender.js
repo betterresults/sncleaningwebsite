@@ -36,6 +36,7 @@ async function buildRoutes() {
     { url: '/gallery', out: 'gallery/index.html', sitemap: true },
     { url: '/blog', out: 'blog/index.html', sitemap: true },
     { url: '/contact', out: 'contact/index.html', sitemap: true },
+    { url: '/book', out: 'book/index.html', sitemap: true },
     { url: '/contact/success', out: 'contact/success/index.html', sitemap: false },
     { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view
   ];

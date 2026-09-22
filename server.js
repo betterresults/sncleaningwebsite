@@ -350,6 +350,24 @@ app.get('/:slug', async (req, res, next) => {
   });
 });
 
+// Service chooser — /book. The homepage quote button lands here rather than on
+// a booking form, because a postcode alone does not say what someone wants
+// cleaned. Whatever they typed travels through in the query string.
+app.get('/book', async (req, res) => {
+  const services = await content.getServices();
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Get a quote', url: '/book' }];
+
+  res.render('book-index', {
+    title: 'Get a cleaning quote',
+    metaDescription:
+      'Choose the cleaning you need and get a price. Domestic, end of tenancy, Airbnb, deep, after builders, carpet and office cleaning across London & Essex.',
+    services,
+    postcode: typeof req.query.postcode === 'string' ? req.query.postcode.slice(0, 12) : '',
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
 // Booking page — /book/{service-slug}. Hosts the service's embedded booking
 // form inside our own page, so the customer keeps the header, footer and phone
 // number around them rather than being sent off-site.

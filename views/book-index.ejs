@@ -1,0 +1,55 @@
+<%
+// Service chooser — /book. The step between "I want a quote" and an actual
+// booking form, because a postcode alone does not tell us what someone wants
+// cleaned. Anything they have already typed travels with them in the query
+// string so they are never asked for it twice.
+// Named apart from the `postcode` local the route passes in: re-declaring it
+// with const here would be a temporal-dead-zone error at render time.
+const enteredPostcode = (typeof postcode !== 'undefined' && postcode) ? String(postcode) : '';
+function bookHref(s) {
+  const base = s.booking_embed_url ? `/book/${s.slug}` : `/contact?service=${s.slug}`;
+  if (!enteredPostcode) return base;
+  return `${base}${base.indexOf('?') === -1 ? '?' : '&'}postcode=${encodeURIComponent(enteredPostcode)}`;
+}
+%>
+
+<section class="chooser">
+  <div class="container">
+    <nav class="crumbs crumbs--light" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <span aria-current="page">Get a quote</span>
+    </nav>
+
+    <div class="chooser-head">
+      <h1>What do you need cleaned?</h1>
+      <p>
+        Pick the service and we&rsquo;ll take you straight to its booking form, with your price
+        before you confirm.
+        <% if (enteredPostcode) { %><span class="chooser-pc">Quoting for <strong><%= enteredPostcode.toUpperCase() %></strong>.</span><% } %>
+      </p>
+    </div>
+
+    <ul class="chooser-grid">
+      <% services.forEach(function(s) { %>
+        <li>
+          <a href="<%= bookHref(s) %>">
+            <span class="chooser-photo">
+              <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %>"
+                   loading="lazy" width="1280" height="720" />
+            </span>
+            <span class="chooser-body">
+              <span class="chooser-title"><%= s.title %></span>
+              <span class="chooser-desc"><%= s.short_description %></span>
+              <span class="chooser-cta"><%= s.booking_embed_url ? 'Book online' : 'Ask for a price' %></span>
+            </span>
+          </a>
+        </li>
+      <% }); %>
+    </ul>
+
+    <p class="chooser-help">
+      Not sure which you need, or after something that is not listed?
+      <a href="/contact">Tell us about the property</a> and we&rsquo;ll advise.
+    </p>
+  </div>
+</section>
