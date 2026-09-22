@@ -1,159 +1,100 @@
 /* ---------------------------------------------------------------------------
    Area landing pages (/{service}/{area}/)
-   Used only by views/area-detail.ejs. Loaded after style.css and reusing its
+   Used only by views/area-detail.ejs. Loaded after style.css, reusing its
    tokens (--color-primary, --font-heading, …).
 
-   The page is deliberately flat: sections separated by space and hairline
-   rules rather than a card around every block, so it reads as one document
-   instead of a grid of competing tiles. Only three things are allowed to lift
-   off the page — the booking rail, the guarantee callout and the add-on promo
-   — because those are the three the page is actually trying to land.
+   Two rules hold the design together:
+   1. The two-column split happens once, in the top section. Everything after
+      it is full width.
+   2. Photography carries the page; chrome does not. No badge rows, no card
+      around every block — bands of space, one tint, and real images.
 --------------------------------------------------------------------------- */
 
-/* --- Shared bits ---------------------------------------------------------- */
-.area-block { margin: 0 0 56px; }
-.area-block > h2 {
-  font-size: clamp(1.5rem, 1.15rem + 1.5vw, 2rem);
-  margin: 0 0 18px;
+.narrow { max-width: 760px; }
+.center { text-align: center; }
+.center p { margin-left: auto; margin-right: auto; }
+
+/* Bands ------------------------------------------------------------------- */
+.band { padding-block: clamp(48px, 7vw, 96px); }
+.band--alt { background: var(--color-bg-alt); }
+.band--tint { background: var(--color-primary-light); }
+.band > .container > h2,
+.band-head h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.4rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
   text-wrap: balance;
 }
-.area-block > p { max-width: 62ch; }
+.band-head { max-width: 680px; margin: 0 0 40px; }
+.band-head p:last-child { margin-bottom: 0; }
+.band p { max-width: 68ch; }
 
-/* Small uppercase label above each section heading. */
 .eyebrow,
-.promo-eyebrow,
 .book-eyebrow,
-.area-kicker {
+.kicker {
   display: block;
   font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-primary);
-  margin: 0 0 8px;
+  margin: 0 0 10px;
 }
 
 .fineprint {
   font-size: 0.85rem;
   color: var(--color-muted);
-  max-width: 62ch;
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
-/* --- Hero ----------------------------------------------------------------- */
-.area-hero {
-  position: relative;
-  background: var(--color-dark);
-  color: #fff;
-  padding-block: clamp(32px, 6vw, 64px);
-  overflow: hidden;
+/* 1 · Top section — the only two-column band ------------------------------ */
+.top { padding-block: clamp(36px, 5vw, 72px); }
+.top-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: clamp(32px, 4vw, 64px);
+  align-items: start;
 }
-.area-hero-media {
-  position: absolute;
-  inset: 0;
-  background-size: cover;
-  background-position: center;
-  opacity: 0.28;
-}
-/* Keeps hero text legible over any photograph. */
-.area-hero::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(105deg, var(--color-dark) 32%, rgba(18, 38, 36, 0.62) 100%);
-}
-.area-hero-inner { position: relative; z-index: 1; max-width: 720px; }
-.area-hero h1 {
-  color: #fff;
-  font-size: clamp(1.9rem, 1.2rem + 3vw, 3rem);
-  margin: 0 0 14px;
+.top-copy h1 {
+  font-size: clamp(2rem, 1.3rem + 3.4vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  margin: 0 0 18px;
   text-wrap: balance;
 }
-.area-hero .area-kicker { color: #9fd4cf; }
-.area-hero-lead {
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 1.05rem;
-  max-width: 58ch;
-  margin: 0 0 24px;
+.top-copy .lead {
+  font-size: clamp(1.02rem, 0.98rem + 0.3vw, 1.18rem);
+  color: var(--color-muted);
+  max-width: 54ch;
+  margin: 0 0 26px;
 }
-
-.crumbs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  align-items: center;
-  margin: 0 0 22px;
-  font-size: 0.8rem;
+.from-line {
+  font-size: 1rem;
+  color: var(--color-text);
+  margin: 0 0 26px;
 }
-.crumbs a,
-.crumbs span {
-  padding: 5px 12px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.92);
-}
-.crumbs a:hover { background: rgba(255, 255, 255, 0.22); }
-.crumbs span { background: transparent; border: 1px solid rgba(255, 255, 255, 0.28); }
-
-.hero-price-box {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: var(--radius);
-  padding: 18px 20px;
-  margin: 0 0 20px;
-  max-width: 52ch;
-}
-.hero-price-head {
+.from-line strong {
   font-family: var(--font-heading);
-  font-size: 1.1rem;
-  color: #fff;
-  margin: 0 0 6px;
+  font-size: 1.9rem;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
 }
-.hero-price-head strong { font-size: 1.5rem; }
-.hero-price-sub {
-  margin: 0;
-  font-size: 0.88rem;
-  color: rgba(255, 255, 255, 0.78);
+.from-line span { color: var(--color-muted); font-size: 0.9rem; display: block; margin-top: 2px; }
+
+.top-prose { margin-top: 40px; padding-top: 32px; border-top: 1px solid var(--color-border); }
+.top-prose p { max-width: 62ch; }
+.top-prose p:last-child { margin-bottom: 0; }
+
+.top-side { display: grid; gap: 20px; }
+.top-photo {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  max-width: 100%;
 }
 
-.hero-pills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin: 0 0 18px;
-  padding: 0;
-  list-style: none;
-}
-.hero-pills li {
-  font-size: 0.8rem;
-  padding: 6px 14px;
-  border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  color: rgba(255, 255, 255, 0.92);
-}
-.hero-rating {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.88);
-  margin: 0 0 22px;
-}
-.hero-rating strong { color: #fff; }
-.hero-rating .stars { color: var(--color-accent); }
-
-/* --- Two-column layout ---------------------------------------------------- */
-.area-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 48px;
-  align-items: start;
-  padding-block: clamp(36px, 5vw, 64px);
-}
-.area-main { min-width: 0; }
-
-.book-rail { position: sticky; top: 92px; }
 .book-card {
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -163,11 +104,12 @@
 }
 .book-price {
   font-family: var(--font-heading);
-  font-size: 2.2rem;
+  font-size: 2.3rem;
   font-weight: 600;
   color: var(--color-dark);
+  letter-spacing: -0.02em;
   line-height: 1.1;
-  margin: 0 0 16px;
+  margin: 0 0 18px;
 }
 .book-price span {
   display: block;
@@ -175,44 +117,39 @@
   font-size: 0.82rem;
   font-weight: 400;
   color: var(--color-muted);
+  letter-spacing: 0;
   margin-top: 6px;
 }
-.book-note,
-.book-postcodes {
-  font-size: 0.82rem;
+.book-note { font-size: 0.82rem; color: var(--color-muted); margin: 14px 0 0; }
+
+.side-questions-head {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--color-muted);
-  margin: 14px 0 0;
+  margin: 0 0 6px;
 }
-.book-postcodes {
-  padding-top: 14px;
-  border-top: 1px solid var(--color-border);
-}
-
-/* --- Guarantee callout ---------------------------------------------------- */
-.promise {
-  border-left: 3px solid var(--color-primary);
-  background: var(--color-primary-light);
-  border-radius: 0 var(--radius) var(--radius) 0;
-  padding: 20px 24px;
-  margin: 0 0 56px;
-}
-.promise h3 { font-size: 1.05rem; margin: 0 0 8px; }
-.promise p { margin: 0; color: var(--color-text); font-size: 0.95rem; max-width: 62ch; }
-
-.lead-answer {
-  font-size: 1.08rem;
+.side-questions ul { margin: 0; padding: 0; list-style: none; }
+.side-questions li { border-bottom: 1px solid var(--color-border); }
+.side-questions a {
+  display: block;
+  padding: 12px 0;
+  font-size: 0.92rem;
   color: var(--color-text);
-  max-width: 62ch;
 }
+.side-questions a:hover { color: var(--color-primary); }
 
-/* --- Price rows ----------------------------------------------------------- */
+/* Answer / prices --------------------------------------------------------- */
+.answer { font-size: 1.1rem; color: var(--color-text); }
+
 .price-rows { margin: 0; padding: 0; list-style: none; }
 .price-rows li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 20px;
-  padding: 16px 0;
+  padding: 18px 0;
   border-bottom: 1px solid var(--color-border);
 }
 .price-rows li:first-child { border-top: 1px solid var(--color-border); }
@@ -226,27 +163,44 @@
 }
 .price-value {
   font-family: var(--font-heading);
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 600;
   color: var(--color-primary);
+  letter-spacing: -0.02em;
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
 
-/* --- Tick list ------------------------------------------------------------ */
+/* Room photography -------------------------------------------------------- */
+.shots {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0 0 44px;
+}
+.shots figure { margin: 0; }
+.shots img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.shots figcaption {
+  font-size: 0.82rem;
+  color: var(--color-muted);
+  margin-top: 10px;
+}
+
 .tick-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px 32px;
-  margin: 22px 0 0;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px 32px;
+  margin: 0;
   padding: 0;
   list-style: none;
 }
-.tick-list li {
-  position: relative;
-  padding-left: 26px;
-  font-size: 0.95rem;
-}
+.tick-list li { position: relative; padding-left: 26px; font-size: 0.94rem; }
 .tick-list li::before {
   content: '✓';
   position: absolute;
@@ -256,26 +210,37 @@
   font-weight: 700;
 }
 
-/* --- Add-on promo --------------------------------------------------------- */
+/* Add-on promo ------------------------------------------------------------ */
 .promo {
   background: var(--color-dark);
   color: #fff;
-  border-radius: var(--radius);
-  padding: clamp(24px, 4vw, 36px);
-  margin: 0 0 56px;
+  padding-block: clamp(44px, 6vw, 80px);
 }
-.promo h2 { color: #fff; font-size: clamp(1.3rem, 1rem + 1.2vw, 1.7rem); margin: 0 0 10px; text-wrap: balance; }
-.promo > p { color: rgba(255, 255, 255, 0.82); max-width: 58ch; margin: 0 0 20px; }
+.promo-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(28px, 4vw, 64px);
+  align-items: center;
+}
+.promo h2 {
+  color: #fff;
+  font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.promo p { color: rgba(255, 255, 255, 0.78); margin: 0; max-width: 46ch; }
 .promo-eyebrow { color: var(--color-accent); }
-.promo-list { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.promo-list { margin: 0; padding: 0; list-style: none; }
 .promo-list li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
-  padding: 12px 0;
+  padding: 16px 0;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
+.promo-list li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
 .promo-list strong { font-weight: 500; }
 .promo-list span {
   font-family: var(--font-heading);
@@ -284,24 +249,23 @@
   white-space: nowrap;
 }
 
-/* --- Steps ---------------------------------------------------------------- */
+/* Steps ------------------------------------------------------------------- */
 .steps-row {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 28px;
-  margin: 24px 0 0;
+  gap: clamp(24px, 3vw, 44px);
+  margin: 0;
   padding: 0;
   list-style: none;
-  counter-reset: none;
 }
-.steps-row h3 { font-size: 1.02rem; margin: 12px 0 6px; }
+.steps-row h3 { font-size: 1.05rem; margin: 14px 0 8px; }
 .steps-row p { font-size: 0.92rem; margin: 0; }
 .step-num {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 999px;
   background: var(--color-primary);
   color: #fff;
@@ -309,41 +273,34 @@
   font-weight: 600;
 }
 
-/* --- Local manager -------------------------------------------------------- */
-.manager-card {
+/* Manager ----------------------------------------------------------------- */
+.manager-grid {
   display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: 28px;
-  align-items: start;
-  margin-top: 22px;
+  grid-template-columns: 280px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: center;
 }
-.manager-photo { border-radius: var(--radius); width: 100%; }
-.manager-body h3 { font-size: 1.15rem; margin: 0 0 4px; }
-.manager-role {
-  font-size: 0.85rem;
-  color: var(--color-primary);
-  margin: 0 0 12px;
-}
+.manager-photo { width: 100%; border-radius: var(--radius); max-width: 100%; }
+.manager-role { color: var(--color-primary); font-size: 0.9rem; margin: 0 0 14px; }
 
-/* --- Reviews -------------------------------------------------------------- */
+/* Reviews ----------------------------------------------------------------- */
 .review-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
-  margin-top: 22px;
 }
 .review {
   margin: 0;
-  padding: 20px 22px;
+  padding: 24px;
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
   background: #fff;
 }
-.review .stars { color: var(--color-accent); font-size: 0.95rem; }
-.review p { margin: 10px 0 14px; font-size: 0.95rem; color: var(--color-text); }
+.review .stars { color: var(--color-accent); }
+.review p { margin: 12px 0 16px; font-size: 0.95rem; color: var(--color-text); }
 .review cite { font-style: normal; font-size: 0.85rem; color: var(--color-muted); }
 
-/* --- Coverage ------------------------------------------------------------- */
+/* Coverage ---------------------------------------------------------------- */
 .cover-subhead {
   font-size: 0.78rem;
   font-family: var(--font-body);
@@ -351,14 +308,16 @@
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--color-muted);
-  margin: 28px 0 12px;
+  margin: 36px 0 14px;
 }
+.cover-subhead:first-of-type { margin-top: 0; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 .chips li {
   font-size: 0.85rem;
-  padding: 6px 13px;
+  padding: 7px 14px;
   border-radius: 999px;
   border: 1px solid var(--color-border);
+  background: #fff;
   color: var(--color-text);
 }
 .chips--code li {
@@ -370,52 +329,67 @@
   border-color: transparent;
 }
 
-.nearby,
-.other-services { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; }
-.nearby a,
-.other-services a {
+.link-rows { margin: 0; padding: 0; list-style: none; }
+.link-rows a {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  padding: 15px 0;
+  padding: 16px 0;
   border-bottom: 1px solid var(--color-border);
   font-weight: 500;
   color: var(--color-dark);
 }
-.nearby li:first-child a,
-.other-services li:first-child a { border-top: 1px solid var(--color-border); }
-.nearby em,
-.other-services em {
-  font-style: normal;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--color-primary);
-}
-.nearby a:hover span,
-.other-services a:hover span { color: var(--color-primary); }
+.link-rows li:first-child a { border-top: 1px solid var(--color-border); }
+.link-rows em { font-style: normal; font-size: 0.82rem; font-weight: 600; color: var(--color-primary); }
+.link-rows a:hover span { color: var(--color-primary); }
 
-/* --- Closing CTA ---------------------------------------------------------- */
-.area-closing {
+/* Other services ---------------------------------------------------------- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 22px;
+}
+.tile { display: block; color: inherit; }
+.tile img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  max-width: 100%;
+}
+.tile-body { display: block; padding-top: 14px; }
+.tile-title { display: block; font-family: var(--font-heading); font-weight: 600; color: var(--color-dark); }
+.tile-desc { display: block; font-size: 0.88rem; color: var(--color-muted); margin-top: 4px; }
+.tile:hover .tile-title { color: var(--color-primary); }
+
+/* Closing ----------------------------------------------------------------- */
+.closing {
   background: var(--color-primary-light);
-  padding-block: clamp(36px, 5vw, 56px);
-  text-align: center;
+  padding-block: clamp(48px, 6vw, 88px);
 }
-.area-closing h2 { margin: 0 0 10px; text-wrap: balance; }
-.area-closing p { max-width: 52ch; margin: 0 auto 22px; }
+.closing h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.2rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 12px;
+  text-wrap: balance;
+}
+.closing p { margin: 0 auto 26px; }
 
-/* --- Narrow screens ------------------------------------------------------- */
-@media (max-width: 900px) {
-  /* Booking card moves above the content rather than to the bottom of it. */
-  .area-layout { grid-template-columns: minmax(0, 1fr); gap: 32px; }
-  .book-rail { position: static; order: -1; }
-  .steps-row { grid-template-columns: minmax(0, 1fr); gap: 22px; }
-  .manager-card { grid-template-columns: minmax(0, 1fr); gap: 18px; }
-  .manager-photo { max-width: 200px; }
+/* Narrow screens ---------------------------------------------------------- */
+@media (max-width: 960px) {
+  .top-grid { grid-template-columns: minmax(0, 1fr); }
+  /* Photo and booking card lead on mobile, copy follows. */
+  .top-side { order: -1; }
+  .promo-grid,
+  .manager-grid { grid-template-columns: minmax(0, 1fr); }
+  .tick-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps-row { grid-template-columns: minmax(0, 1fr); }
+  .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .manager-photo { max-width: 260px; }
 }
 
 @media (max-width: 560px) {
   .tick-list { grid-template-columns: minmax(0, 1fr); }
   .price-rows li { gap: 12px; }
-  .area-block { margin-bottom: 42px; }
 }
