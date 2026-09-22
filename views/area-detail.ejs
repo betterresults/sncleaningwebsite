@@ -55,10 +55,7 @@ const priceFrom = page.price_from || (tiers.length ? Math.min.apply(null, tiers.
     </div>
 
     <div class="page-hero-actions">
-      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a fixed quote</a>
-      <% if (site.phone) { %>
-        <a href="tel:<%= site.phone.replace(/[^0-9+]/g, '') %>" class="btn btn-outline btn-lg">Call <%= site.phone %></a>
-      <% } %>
+      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a quote</a>
     </div>
   </div>
 </section>
@@ -359,10 +356,7 @@ const priceFrom = page.price_from || (tiers.length ? Math.min.apply(null, tiers.
       <p>Tell us the postcode and check-out date — we'll come back with a fixed price.</p>
     </div>
     <div class="cta-band-actions">
-      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a fixed quote</a>
-      <% if (site.phone) { %>
-        <a href="tel:<%= site.phone.replace(/[^0-9+]/g, '') %>" class="btn btn-outline btn-lg"><%= site.phone %></a>
-      <% } %>
+      <a href="/contact?area=<%= encodeURIComponent(areaName) %>&amp;service=<%= service.slug %>" class="btn btn-primary btn-lg">Get a quote</a>
     </div>
   </div>
 </section>
