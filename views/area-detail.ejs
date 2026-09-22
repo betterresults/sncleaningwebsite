@@ -74,7 +74,9 @@ const roomShots = [
   <div class="container hero-area-grid">
 
     <div class="hero-area-copy">
-      <p class="hero-kicker"><%= parentName ? parentName : 'London &amp; Essex' %></p>
+      <%# <%= escapes its output, so an HTML entity written here would be
+          double-escaped and shown as literal text. Use the character itself. %>
+      <p class="hero-kicker"><%= parentName ? parentName : 'London & Essex' %></p>
       <h1><%= serviceName %> in <%= areaName %></h1>
       <p class="hero-lead-text"><%= page.meta_description || `${serviceName} in ${areaName}, carried out by our own insured, DBS-checked staff.` %></p>
 
