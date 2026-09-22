@@ -1,0 +1,148 @@
+/* ---------------------------------------------------------------------------
+   Area landing pages (/{service}/{area}/)
+   Components used only by views/area-detail.ejs. Everything else on that page
+   reuses the sitewide classes in style.css, which this file loads after.
+--------------------------------------------------------------------------- */
+
+/* Breadcrumb */
+.breadcrumb-bar {
+  border-bottom: 1px solid var(--color-border);
+  background: #fff;
+  padding: 12px 0;
+  font-size: 0.87rem;
+}
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin: 0;
+  color: var(--color-muted);
+}
+.breadcrumb li { display: flex; align-items: center; gap: 8px; }
+.breadcrumb li + li::before {
+  content: '/';
+  color: var(--color-border);
+}
+.breadcrumb a { color: var(--color-primary); }
+.breadcrumb a:hover { text-decoration: underline; }
+.breadcrumb [aria-current='page'] { color: var(--color-text); font-weight: 500; }
+
+/* "From £X" line in the hero */
+.hero-price {
+  margin: 14px 0 0;
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.92);
+}
+.hero-price strong {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: #fff;
+}
+
+/* Featured-snippet answer block. Deliberately plain and high-contrast: this is
+   the block we want Google and AI answer engines to lift verbatim. */
+.quick-answer {
+  border-left: 4px solid var(--color-primary);
+  background: var(--color-primary-light);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 24px 28px;
+}
+.quick-answer h2 { font-size: 1.25rem; margin-bottom: 10px; }
+.quick-answer p { margin: 0; color: var(--color-text); font-size: 1.03rem; }
+
+/* Price table */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.price-table th,
+.price-table td {
+  text-align: left;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--color-border);
+}
+.price-table thead th {
+  background: var(--color-dark);
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+.price-table tbody tr:last-child th,
+.price-table tbody tr:last-child td { border-bottom: none; }
+.price-table tbody th { font-weight: 600; color: var(--color-dark); }
+.price-table td { color: var(--color-muted); }
+.price-table .price-cell {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.price-note {
+  margin-top: 16px;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+.price-note a { color: var(--color-primary); text-decoration: underline; }
+
+/* Room-by-room checklist cards */
+.room-grid { gap: 20px; }
+.room-card { padding: 24px; }
+.room-card h3 {
+  font-size: 1.1rem;
+  padding-bottom: 12px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--color-border);
+}
+.room-card .checklist li { font-size: 0.95rem; }
+
+/* Add-on cards */
+.addon-card { padding: 24px; text-align: center; }
+.addon-card h3 { font-size: 1.05rem; }
+.addon-price {
+  font-family: var(--font-heading);
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+.addon-price span {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--color-muted);
+}
+
+/* Coverage section */
+.coverage-subhead {
+  font-size: 1rem;
+  margin: 24px 0 12px;
+  color: var(--color-muted);
+  font-family: var(--font-body);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.coverage-subhead:first-of-type { margin-top: 0; }
+.postcode-tag {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border-color: transparent;
+}
+
+@media (max-width: 640px) {
+  /* Let the price table scroll rather than squash on narrow screens */
+  .price-table { display: block; overflow-x: auto; white-space: nowrap; }
+  .hero-price strong { font-size: 1.3rem; }
+}
