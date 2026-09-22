@@ -39,6 +39,17 @@
     <meta name="twitter:image" content="<%= ogImage %>" />
   <% } %>
 
+  <% // DNS and TLS to the booking-form host are done while the visitor reads,
+     // so clicking a quote button lands on a form that is already connectable
+     // rather than starting a cold handshake. %>
+  <% (typeof preconnectOrigins !== 'undefined' ? preconnectOrigins : []).forEach(function(origin) { %>
+    <link rel="preconnect" href="<%= origin %>" crossorigin>
+    <link rel="dns-prefetch" href="<%= origin %>">
+  <% }); %>
+  <% if (typeof prefetchUrl !== 'undefined' && prefetchUrl) { %>
+    <link rel="prefetch" href="<%= prefetchUrl %>" as="document">
+  <% } %>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />

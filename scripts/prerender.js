@@ -64,6 +64,18 @@ async function buildRoutes() {
     lastmod: p.updated_at
   }));
 
+  // One booking page per service that has an embedded form. Kept out of the
+  // sitemap: it is a form in an iframe with nothing for Google to rank, and it
+  // would only compete with the service and area pages.
+  const services = await content.getServices();
+  const bookingRoutes = services
+    .filter((s) => s.booking_embed_url)
+    .map((s) => ({
+      url: `/book/${s.slug}`,
+      out: `book/${s.slug}/index.html`,
+      sitemap: false
+    }));
+
   // Each area page belongs to one service, so its URL is /{service-slug}/{area-slug}/
   // — matching the pattern already live and indexed at sncleaningservices.co.uk
   // (e.g. /end-of-tenancy-cleaning/camden/) so this build can take over those
@@ -77,7 +89,7 @@ async function buildRoutes() {
       lastmod: p.updated_at
     }));
 
-  return [...fixed, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
+  return [...fixed, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...bookingRoutes];
 }
 
 function fetchHtml(url) {

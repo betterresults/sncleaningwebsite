@@ -1,0 +1,86 @@
+<%
+// Booking page — /book/{service-slug}. Wraps the external Dilvon booking form
+// in our own page so the customer keeps the header, footer and phone number
+// around them instead of being sent off-site.
+//
+// The iframe is the whole point of the page, so it is the first thing in the
+// markup and starts loading immediately; the surrounding copy is deliberately
+// short.
+const formOrigin = (function () {
+  try { return new URL(service.booking_embed_url).origin; } catch (e) { return null; }
+})();
+%>
+
+<section class="book-page">
+  <div class="container">
+    <nav class="crumbs crumbs--light" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <a href="/<%= service.slug %>"><%= service.title %></a>
+      <span aria-current="page">Book</span>
+    </nav>
+
+    <h1>Book <%= service.title.toLowerCase() %></h1>
+    <p class="book-lead">
+      Tell us about the property and pick a slot. You will see the price before you confirm, and
+      nothing is charged on this page.
+    </p>
+
+    <div class="book-frame">
+      <iframe
+        id="booking-form"
+        src="<%= service.booking_embed_url %>"
+        title="<%= service.title %> booking form"
+        style="width:100%;border:0;min-height:600px;display:block;"
+      ></iframe>
+      <noscript>
+        <p class="book-fallback">
+          The booking form needs JavaScript. You can
+          <a href="<%= service.booking_embed_url %>" target="_blank" rel="noopener">open it in a new tab</a>
+          or <a href="/contact">send us a message</a> instead.
+        </p>
+      </noscript>
+    </div>
+
+    <p class="book-help">
+      Something not fitting? <a href="/contact">Send us a message</a><% if (site.phone) { %> or call
+      <a href="tel:<%= site.phone.replace(/[^0-9+]/g, '') %>"><%= site.phone %></a><% } %>.
+    </p>
+  </div>
+</section>
+
+<% if (formOrigin) { %>
+<script>
+  // Sizing and redirects for the embedded booking form. Messages are accepted
+  // only from the form's own origin, and a redirect is followed only to this
+  // site or back to the form - anything else is ignored.
+  (function () {
+    var FORM_ORIGIN = <%- JSON.stringify(formOrigin) %>;
+    var frame = document.getElementById('booking-form');
+    if (!frame) return;
+
+    // The form uses embed_origin to know who is hosting it.
+    try {
+      var src = new URL(frame.getAttribute('src'));
+      src.searchParams.set('embed_origin', window.location.origin);
+      frame.setAttribute('src', src.toString());
+    } catch (e) { /* leave the original src in place */ }
+
+    window.addEventListener('message', function (e) {
+      if (e.origin !== FORM_ORIGIN || !e.data) return;
+
+      if (e.data.type === 'lovable-form-resize' && typeof e.data.height === 'number') {
+        frame.style.height = e.data.height + 'px';
+        return;
+      }
+
+      if (e.data.type === 'lovable-form-redirect' && typeof e.data.url === 'string') {
+        try {
+          var target = new URL(e.data.url, window.location.href);
+          if (target.origin !== window.location.origin && target.origin !== FORM_ORIGIN) return;
+          window.location.href = target.toString();
+        } catch (err) { /* ignore a malformed redirect */ }
+      }
+    });
+  })();
+</script>
+<% } %>

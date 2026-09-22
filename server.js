@@ -104,6 +104,22 @@ app.use(async (req, res, next) => {
       : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
 
     res.locals.coverageAreas = coverageAreas || [];
+    // Origins of any embedded booking form. Preconnecting from every page means
+    // DNS and TLS to the form host are already done before anyone clicks a
+    // quote button, so the booking page renders the form immediately.
+    res.locals.preconnectOrigins = Array.from(
+      new Set(
+        services
+          .map((s) => {
+            try {
+              return s.booking_embed_url ? new URL(s.booking_embed_url).origin : null;
+            } catch (err) {
+              return null;
+            }
+          })
+          .filter(Boolean)
+      )
+    );
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas })];
@@ -112,6 +128,7 @@ app.use(async (req, res, next) => {
   } catch (err) {
     console.error('Error loading nav services / site settings:', err);
     res.locals.navServices = [];
+    res.locals.preconnectOrigins = [];
     res.locals.site = SITE_DEFAULTS;
     res.locals.coverageAreas = [];
     res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.logoUrl);
@@ -333,6 +350,35 @@ app.get('/:slug', async (req, res, next) => {
   });
 });
 
+// Booking page — /book/{service-slug}. Hosts the service's embedded booking
+// form inside our own page, so the customer keeps the header, footer and phone
+// number around them rather than being sent off-site.
+//
+// Registered BEFORE the two-segment area route below, which would otherwise
+// match /book/{slug} and 404.
+app.get('/book/:serviceSlug', async (req, res, next) => {
+  const services = await content.getServices();
+  const service = services.find((s) => s.slug === req.params.serviceSlug);
+  if (!service || !service.booking_embed_url) return next();
+
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: service.title, url: `/${service.slug}` },
+    { name: 'Book', url: `/book/${service.slug}` }
+  ];
+
+  res.render('booking', {
+    title: `Book ${service.title}`,
+    metaDescription: `Book ${service.title.toLowerCase()} with SN Cleaning Services. See your price before you confirm.`,
+    // A form page has nothing for Google to rank and would only compete with
+    // the service and area pages, so it stays out of the index.
+    noindex: true,
+    service,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
 // Per-service area/borough landing page — e.g. /end-of-tenancy-cleaning/camden/,
 // /airbnb-cleaning/hillingdon/. This matches the exact URL shape already live
 // and indexed on sncleaningservices.co.uk (service slug, then area slug, both
@@ -388,6 +434,8 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
     relatedAreas,
     services: allServices.slice(0, 6),
     serviceIncludedTasks: (servicePage && servicePage.included_tasks) || [],
+    // Warm the booking page while the visitor is still reading.
+    prefetchUrl: service.booking_url && service.booking_url.startsWith('/') ? service.booking_url : null,
     testimonials,
     coverageAreas: res.locals.coverageAreas,
     breadcrumbs,
