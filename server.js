@@ -348,10 +348,14 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
 
   const region = page.coverage_regions;
   const service = page.services;
-  const [allRegions, areaPagesForService, allServices] = await Promise.all([
+  const [allRegions, areaPagesForService, allServices, servicePage] = await Promise.all([
     content.getAllCoverageRegions(),
     content.getAreaPagesForService(service.slug),
-    content.getServices()
+    content.getServices(),
+    // Parent service page — an area row with no included_tasks of its own
+    // inherits the service's room-by-room checklist, so a newly added area
+    // still shows what the clean actually covers.
+    content.getServicePageBySlug(service.slug)
   ]);
   const parent = region.parent_id ? allRegions.find((r) => r.id === region.parent_id) : null;
 
@@ -378,6 +382,7 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
     parent,
     relatedAreas,
     services: allServices.slice(0, 6),
+    serviceIncludedTasks: (servicePage && servicePage.included_tasks) || [],
     testimonials,
     coverageAreas: res.locals.coverageAreas,
     breadcrumbs,
