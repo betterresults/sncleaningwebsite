@@ -43,6 +43,23 @@
 
 .fineprint { font-size: 0.85rem; color: var(--color-muted); margin-top: 20px; }
 
+/* Buttons. The sitewide .btn is a full 999px pill; on these pages it reads as
+   oversized and bubbly, so area pages square it off and tighten the padding. */
+.hero-area .btn,
+.band .btn,
+.extras .btn,
+.closing .btn,
+.areas .btn,
+.quoter .btn {
+  border-radius: 8px;
+  padding: 11px 20px;
+  font-size: 0.92rem;
+  border-width: 1px;
+}
+.hero-area .btn-lg,
+.band .btn-lg,
+.closing .btn-lg { padding: 13px 24px; font-size: 0.95rem; }
+
 /* 1 · Hero ---------------------------------------------------------------- */
 .hero-area {
   position: relative;
@@ -254,38 +271,38 @@
   font-weight: 700;
 }
 
-/* 6 · Add-on promo -------------------------------------------------------- */
-.promo { background: var(--color-dark); color: #fff; padding-block: clamp(44px, 6vw, 80px); }
-.promo-grid {
+/* 6 · Optional extras ----------------------------------------------------- */
+/* Previously a near-black band, which was too heavy this far down the page and
+   left white-on-white labels. Now a light tinted band on the page's own palette. */
+.extras { background: var(--color-primary-light); padding-block: clamp(44px, 6vw, 80px); }
+.extras-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(28px, 4vw, 64px);
   align-items: center;
 }
-.promo h2 {
-  color: #fff;
+.extras h2 {
   font-size: clamp(1.5rem, 1.1rem + 1.6vw, 2.1rem);
   letter-spacing: -0.02em;
   margin: 0 0 12px;
   text-wrap: balance;
 }
-.promo p { color: rgba(255, 255, 255, 0.78); margin: 0; max-width: 46ch; }
-.promo-eyebrow { color: var(--color-accent); }
-.promo-list { margin: 0; padding: 0; list-style: none; }
-.promo-list li {
+.extras > .container > div > p { color: var(--color-text); margin: 0; max-width: 46ch; }
+.extras-list { margin: 0; padding: 0; list-style: none; }
+.extras-list li {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
   gap: 16px;
   padding: 16px 0;
-  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  border-top: 1px solid rgba(44, 125, 121, 0.22);
 }
-.promo-list li:last-child { border-bottom: 1px solid rgba(255, 255, 255, 0.16); }
-.promo-list strong { font-weight: 500; }
-.promo-list span {
+.extras-list li:last-child { border-bottom: 1px solid rgba(44, 125, 121, 0.22); }
+.extras-list strong { font-weight: 600; color: var(--color-dark); }
+.extras-list span {
   font-family: var(--font-heading);
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--color-primary-dark);
   white-space: nowrap;
 }
 
@@ -339,6 +356,38 @@
 .review .stars { color: var(--color-accent); }
 .review p { margin: 12px 0 16px; font-size: 0.95rem; color: var(--color-text); }
 .review cite { font-style: normal; font-size: 0.85rem; color: var(--color-muted); }
+
+/* 10 · FAQ beside the assistant ------------------------------------------- */
+.faq-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: clamp(28px, 4vw, 56px);
+  align-items: start;
+}
+.ask {
+  background: var(--color-dark);
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 26px;
+  position: sticky;
+  top: 92px;
+}
+.ask-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--color-accent);
+  font-size: 1.1rem;
+  margin-bottom: 14px;
+}
+.ask h3 { color: #fff; font-size: 1.15rem; margin: 0 0 10px; }
+.ask p { color: rgba(255, 255, 255, 0.78); font-size: 0.92rem; margin: 0 0 18px; }
+.ask .btn { border-radius: 8px; }
+.ask-note { font-size: 0.76rem !important; color: rgba(255, 255, 255, 0.55) !important; margin: 12px 0 0 !important; }
 
 /* 11 · Areas -------------------------------------------------------------- */
 .areas-top {
@@ -442,18 +491,47 @@
   grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
   gap: 22px;
 }
-.tile { display: block; color: inherit; }
+/* Each service reads as its own boxed product with its own call to action,
+   rather than a loose image with a caption under it. */
+.tile {
+  display: flex;
+  flex-direction: column;
+  color: inherit;
+  background: #fff;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.tile-photo { display: block; }
 .tile img {
   width: 100%;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: var(--radius);
   max-width: 100%;
 }
-.tile-body { display: block; padding-top: 14px; }
-.tile-title { display: block; font-family: var(--font-heading); font-weight: 600; color: var(--color-dark); }
-.tile-desc { display: block; font-size: 0.88rem; color: var(--color-muted); margin-top: 4px; }
-.tile:hover .tile-title { color: var(--color-primary); }
+.tile-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 20px;
+  flex: 1 1 auto;
+}
+.tile-title { display: block; font-family: var(--font-heading); font-weight: 600; font-size: 1.05rem; color: var(--color-dark); }
+.tile-desc { display: block; font-size: 0.88rem; color: var(--color-muted); flex: 1 1 auto; }
+.tile-cta {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--color-primary);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+.tile:hover { border-color: var(--color-primary); box-shadow: var(--shadow); }
+.tile:hover .tile-cta { background: var(--color-primary); color: #fff; }
 
 /* 13 · Closing ------------------------------------------------------------ */
 .closing { background: var(--color-primary-light); padding-block: clamp(48px, 6vw, 88px); }
@@ -470,9 +548,11 @@
   .hero-area-grid { grid-template-columns: minmax(0, 1fr); }
   .hero-area::before { background: linear-gradient(180deg, rgba(31, 38, 36, 0.88) 0%, rgba(31, 38, 36, 0.8) 100%); }
   .split,
-  .promo-grid,
+  .extras-grid,
   .manager-grid,
-  .areas-top { grid-template-columns: minmax(0, 1fr); }
+  .areas-top,
+  .faq-grid { grid-template-columns: minmax(0, 1fr); }
+  .ask { position: static; }
   .tick-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .steps-row { grid-template-columns: minmax(0, 1fr); }
   .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }

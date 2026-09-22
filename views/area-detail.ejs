@@ -8,14 +8,15 @@
 //   3. Promise     — the deposit-back guarantee.
 //   4. Pricing     — "from" prices by bedroom count.
 //   5. Included    — room photography plus the full checklist.
-//   6. Add-ons     — oven and carpet, on a dark band.
+//   6. Add-ons     — oven and carpet, on a light tinted band.
 //   7. Steps       — how a booking runs.
-//   8. Manager     — a real named local person, when the row has one.
-//   9. Reviews
-//  10. Questions   — the page's only FAQ block.
-//  11. Areas       — postcodes, neighbourhoods, nearby area pages.
-//  12. Services    — other work we do here.
-//  13. Closing CTA
+//   8. Content     — long-form local sections from content_sections.
+//   9. Manager     — a real named local person, when the row has one.
+//  10. Reviews
+//  11. Questions   — the page's only FAQ block, with the assistant beside it.
+//  12. Areas       — postcodes, neighbourhoods, nearby area pages.
+//  13. Services    — other work we do here.
+//  14. Closing CTA
 //
 // Blocks hide themselves when their column is empty, so a sparse row renders
 // short rather than padded out with filler.
@@ -55,13 +56,13 @@ const roomShots = [
       <h1><%= serviceName %> in <%= areaName %></h1>
       <p class="hero-lead-text"><%= page.meta_description || `${serviceName} in ${areaName}, carried out by our own insured, DBS-checked staff.` %></p>
 
-      <% if (page.rating && page.review_count) { %>
+      <% if (page.rating) { %>
         <% var ratingHref = page.review_url || null; %>
         <<%= ratingHref ? 'a' : 'div' %> class="gbadge"<% if (ratingHref) { %> href="<%= ratingHref %>" target="_blank" rel="noopener"<% } %>>
           <span class="gbadge-mark" aria-hidden="true">G</span>
           <span class="gbadge-body">
             <span class="gbadge-score"><%= page.rating %> <span class="stars"><%= '★'.repeat(Math.round(page.rating)) %></span></span>
-            <span class="gbadge-sub">Google reviews &middot; <%= page.review_count %> ratings</span>
+            <span class="gbadge-sub">Rated on Google</span>
           </span>
         </<%= ratingHref ? 'a' : 'div' %>>
       <% } %>
@@ -212,14 +213,14 @@ const roomShots = [
 
 <!-- 6 · Add-ons ========================================================== -->
 <% if (addOns.length) { %>
-<section class="promo">
-  <div class="container promo-grid">
+<section class="extras">
+  <div class="container extras-grid">
     <div>
-      <p class="eyebrow promo-eyebrow">Optional extras</p>
+      <p class="eyebrow">Optional extras</p>
       <h2>Add oven or carpet cleaning to your clean</h2>
       <p>Booked alongside the main clean, so it is one visit, one team and one invoice.</p>
     </div>
-    <ul class="promo-list">
+    <ul class="extras-list">
       <% addOns.forEach(function(a) { %>
         <li>
           <strong><%= a.name %></strong>
@@ -257,6 +258,19 @@ const roomShots = [
     </ol>
   </div>
 </section>
+
+<!-- 7b · Long-form local content. Each entry is its own section, so an area
+         can carry as much genuine local detail as it has. ================== -->
+<% if (page.content_sections && page.content_sections.length) { %>
+<% page.content_sections.forEach(function(block, i) { %>
+<section class="band<%= i % 2 === 1 ? ' band--alt' : '' %>">
+  <div class="container narrow">
+    <h2><%= block.heading %></h2>
+    <% (block.body || []).forEach(function(para) { %><p><%= para %></p><% }); %>
+  </div>
+</section>
+<% }); %>
+<% } %>
 
 <!-- 8 · Local manager. Renders only with a real person on the row. ======== -->
 <% if (page.manager_name && page.manager_note) { %>
@@ -296,20 +310,30 @@ const roomShots = [
 </section>
 <% } %>
 
-<!-- 10 · Questions — the page's only FAQ block =========================== -->
+<!-- 10 · Questions — the page's only FAQ block, with the assistant beside it -->
 <% if (page.faqs && page.faqs.length) { %>
 <section class="band band--alt" id="faq">
-  <div class="container narrow">
-    <p class="eyebrow">FAQ</p>
-    <h2><%= serviceName %> questions</h2>
-    <div class="faq-list">
-      <% page.faqs.forEach(function(faq, i) { %>
-        <details class="faq-item" id="faq-<%= i %>">
-          <summary><h3><%= faq.question %></h3></summary>
-          <p><%= faq.answer %></p>
-        </details>
-      <% }); %>
+  <div class="container faq-grid">
+    <div>
+      <p class="eyebrow">FAQ</p>
+      <h2><%= serviceName %> questions</h2>
+      <div class="faq-list">
+        <% page.faqs.forEach(function(faq, i) { %>
+          <details class="faq-item" id="faq-<%= i %>">
+            <summary><h3><%= faq.question %></h3></summary>
+            <p><%= faq.answer %></p>
+          </details>
+        <% }); %>
+      </div>
     </div>
+
+    <aside class="ask">
+      <span class="ask-mark" aria-hidden="true">✦</span>
+      <h3>Still have a question?</h3>
+      <p>Ask our assistant about anything not covered here — what is included, how long your property will take, or whether we can fit your check-out date.</p>
+      <a href="<%= quoteHref %>" class="btn btn-primary btn-block">Ask a question</a>
+      <p class="ask-note">Answers come back by email while the live assistant is being set up.</p>
+    </aside>
   </div>
 </section>
 <% } %>
@@ -361,10 +385,11 @@ const roomShots = [
     <div class="tiles">
       <% otherServices.forEach(function(s) { %>
         <a class="tile" href="/<%= s.slug %>">
-          <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %> in <%= areaName %>" loading="lazy" width="1280" height="720" />
+          <span class="tile-photo"><img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %> in <%= areaName %>" loading="lazy" width="1280" height="720" /></span>
           <span class="tile-body">
             <span class="tile-title"><%= s.title %></span>
             <span class="tile-desc"><%= s.short_description %></span>
+            <span class="tile-cta">Find out more</span>
           </span>
         </a>
       <% }); %>
@@ -376,8 +401,8 @@ const roomShots = [
 <!-- 13 · Closing ========================================================= -->
 <section class="closing">
   <div class="container narrow center">
-    <h2>Book <%= serviceName.toLowerCase() %> in <%= areaName %></h2>
-    <p>Tell us the postcode and your check-out date, and we will come back with a fixed price.</p>
+    <h2>Your price for <%= areaName %>, in about a minute</h2>
+    <p>Tell us the postcode and your check-out date. We come back with a fixed price, usually the same working day.</p>
     <a href="<%= quoteHref %>" class="btn btn-primary btn-lg">Get a quote</a>
   </div>
 </section>
