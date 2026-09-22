@@ -198,6 +198,10 @@
 }
 .quoter-note { font-size: 0.76rem; color: var(--color-muted); margin: 12px 0 0; }
 
+/* Two fields side by side keeps the four-field form from running long. */
+.quoter-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.quoter-row > div { min-width: 0; }
+
 /* Postcode coverage result. Colour is a reinforcement, not the only signal -
    the message itself always says what happened. */
 .quoter-msg {
@@ -253,6 +257,43 @@
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
+
+/* The real price list: property size against furnishing level. Scrolls rather
+   than squashing on a narrow screen. */
+.price-table-wrap { overflow-x: auto; margin: 24px 0 0; }
+.price-grid {
+  width: 100%;
+  min-width: 460px;
+  border-collapse: collapse;
+  font-variant-numeric: tabular-nums;
+}
+.price-grid th,
+.price-grid td {
+  text-align: right;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--color-border);
+  white-space: nowrap;
+}
+.price-grid thead th {
+  text-align: right;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  border-bottom-width: 2px;
+}
+.price-grid th:first-child,
+.price-grid thead th:first-child { text-align: left; }
+.price-grid tbody th {
+  font-weight: 600;
+  color: var(--color-dark);
+  white-space: nowrap;
+}
+.price-grid tbody td { color: var(--color-text); }
+.price-grid tbody tr:hover td,
+.price-grid tbody tr:hover th { background: var(--color-bg-alt); }
 
 /* 5 · Room photography + checklist ---------------------------------------- */
 .shots {
