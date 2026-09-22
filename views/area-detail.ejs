@@ -39,6 +39,11 @@ const allTasks = rooms.reduce(function (acc, r) { return acc.concat(r.tasks || [
 const extraBathroom = page.extra_bathroom_price || 25;
 // Tiers the calculator can price from — only those tagged with a bedroom count.
 const calcTiers = tiers.filter(function (t) { return typeof t.beds === 'number'; });
+// Postcode areas this service covers, e.g. ["RM","CM","E"]. An empty list
+// means no check runs and any postcode is accepted.
+const coverAreas = (service.coverage_postcode_areas && service.coverage_postcode_areas.length)
+  ? service.coverage_postcode_areas
+  : [];
 const roomShots = [
   { src: '/images/rooms/kitchen.jpg', label: 'Kitchens' },
   { src: '/images/rooms/bathroom.jpg', label: 'Bathrooms' },
@@ -92,7 +97,9 @@ const roomShots = [
 
       <label for="q-postcode">Postcode</label>
       <input id="q-postcode" name="postcode" type="text" inputmode="text" autocomplete="postal-code"
-             placeholder="<%= postcodes.length ? postcodes[0] + ' 1AA' : 'e.g. RM1 1AA' %>" />
+             placeholder="<%= postcodes.length ? postcodes[0] + ' 1AA' : 'e.g. RM1 1AA' %>"
+             aria-describedby="q-msg" />
+      <p class="quoter-msg" id="q-msg" role="status" hidden></p>
 
       <% if (calcTiers.length) { %>
         <output class="quoter-out" for="q-beds q-baths" id="q-out">
@@ -108,30 +115,81 @@ const roomShots = [
   </div>
 </section>
 
-<% if (calcTiers.length) { %>
 <script>
-  // Live estimate in the hero calculator. Progressive enhancement: with JS off
-  // the form still submits to /contact with the same fields.
+  // Hero quote form: live price estimate, plus a real postcode coverage check.
+  // Progressive enhancement throughout - with JavaScript off the form still
+  // submits to /contact carrying the same fields.
   (function () {
     var tiers = <%- JSON.stringify(calcTiers.map(function (t) { return { beds: t.beds, price: t.price }; })) %>;
+    var areas = <%- JSON.stringify(coverAreas) %>;
     var extraBath = <%= extraBathroom %>;
+
+    var form = document.getElementById('quoter');
     var beds = document.getElementById('q-beds');
     var baths = document.getElementById('q-baths');
     var out = document.getElementById('q-price');
-    if (!beds || !baths || !out) return;
+    var pc = document.getElementById('q-postcode');
+    var msg = document.getElementById('q-msg');
+    if (!form) return;
 
-    function update() {
+    // --- price -----------------------------------------------------------
+    function price() {
+      if (!beds || !baths || !out || !tiers.length) return;
       var b = Number(beds.value);
       var match = tiers.filter(function (t) { return t.beds <= b; }).pop() || tiers[0];
-      var total = match.price + (Number(baths.value) - 1) * extraBath;
-      out.textContent = '£' + total;
+      out.textContent = '£' + (match.price + (Number(baths.value) - 1) * extraBath);
     }
-    beds.addEventListener('change', update);
-    baths.addEventListener('change', update);
-    update();
+    if (beds) beds.addEventListener('change', price);
+    if (baths) baths.addEventListener('change', price);
+    price();
+
+    // --- postcode --------------------------------------------------------
+    // A UK postcode is an outward code (area letters + district digits) and an
+    // inward code (digit + two letters). We accept either the outward code on
+    // its own or the full postcode, and match on the area letters only.
+    var FULL = /^[A-Z]{1,2}[0-9][A-Z0-9]?[0-9][A-Z]{2}$/;
+    var OUTWARD = /^[A-Z]{1,2}[0-9][A-Z0-9]?$/;
+
+    function parse(value) {
+      var v = String(value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+      if (!v) return { state: 'empty' };
+      var code = FULL.test(v) ? v.slice(0, v.length - 3) : (OUTWARD.test(v) ? v : null);
+      if (!code) return { state: 'invalid' };
+      var area = code.match(/^[A-Z]{1,2}/)[0];
+      if (!areas.length) return { state: 'ok', code: code };
+      return { state: areas.indexOf(area) === -1 ? 'outside' : 'ok', code: code, area: area };
+    }
+
+    function show(state, text) {
+      if (!msg) return;
+      msg.textContent = text || '';
+      msg.className = 'quoter-msg' + (state ? ' is-' + state : '');
+      msg.hidden = !text;
+    }
+
+    function check(quiet) {
+      var r = parse(pc && pc.value);
+      if (r.state === 'empty') { show(null, quiet ? '' : 'Enter your postcode so we can check we cover you.'); return r; }
+      if (r.state === 'invalid') { show('bad', quiet ? '' : 'That does not look like a UK postcode.'); return r; }
+      if (r.state === 'outside') { show('bad', 'Sorry, ' + r.code + ' is outside the area we cover. Send us a message and we will tell you who can help.'); return r; }
+      show('ok', 'Good news — we cover ' + r.code + '.');
+      return r;
+    }
+
+    if (pc) {
+      pc.addEventListener('blur', function () { check(true); });
+      pc.addEventListener('input', function () { if (msg && !msg.hidden) check(true); });
+    }
+
+    form.addEventListener('submit', function (e) {
+      var r = check(false);
+      if (r.state !== 'ok') {
+        e.preventDefault();
+        if (pc) pc.focus();
+      }
+    });
   })();
 </script>
-<% } %>
 
 <!-- 2 · Local intro ====================================================== -->
 <% if (page.local_intro || page.intro) { %>

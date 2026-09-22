@@ -198,6 +198,24 @@
 }
 .quoter-note { font-size: 0.76rem; color: var(--color-muted); margin: 12px 0 0; }
 
+/* Postcode coverage result. Colour is a reinforcement, not the only signal -
+   the message itself always says what happened. */
+.quoter-msg {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  margin: -8px 0 16px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--color-bg-alt);
+  color: var(--color-muted);
+}
+.quoter-msg.is-ok {
+  background: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  font-weight: 500;
+}
+.quoter-msg.is-bad { background: #fdf0ec; color: #9a3412; }
+
 /* 2 · Split section (copy beside a photo) --------------------------------- */
 .split {
   display: grid;

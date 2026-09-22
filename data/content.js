@@ -144,7 +144,7 @@ async function getAllCoverageRegions() {
 async function getAreaPages() {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, display_name, parent_id), services(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id), services(id, title, slug, icon, short_description, coverage_postcode_areas)')
     .eq('published', true);
 
   if (error) {
@@ -160,7 +160,7 @@ async function getAreaPages() {
 async function getAreaPageBySlug(serviceSlug, areaSlug) {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, display_name, parent_id), services!inner(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id), services!inner(id, title, slug, icon, short_description, coverage_postcode_areas)')
     .eq('slug', areaSlug)
     .eq('services.slug', serviceSlug)
     .eq('published', true)
