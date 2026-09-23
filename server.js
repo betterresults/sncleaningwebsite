@@ -63,6 +63,11 @@ app.locals.servicePrice = servicePrice;
 // Where a "Get a quote" for a service should go: its own booking form when it
 // has one (services.booking_embed_url), otherwise the service chooser at /book.
 const BOOKING_LANDING_EMBED = 'https://dilvon.com/book/sn-cleaning-services/main-landing-1790164444462?embedded=true';
+// Commercial work lives on the SN Clean site. Office and nursery cleaning are
+// listed there, not here; the link is tagged so SN Clean can see the referral.
+const COMMERCIAL_SLUGS = ['office-cleaning', 'nursery-cleaning'];
+app.locals.commercialUrl = 'https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=domestic_site';
+const isDomestic = (s) => !COMMERCIAL_SLUGS.includes(s.slug);
 app.locals.bookHref = (service) => (service && service.booking_embed_url ? `/book/${service.slug}` : '/book');
 
 // Runs on every request. Sets up everything every page needs regardless of
@@ -83,7 +88,7 @@ app.use(async (req, res, next) => {
       content.getCoverageAreas()
     ]);
     const detailSlugs = new Set(servicePages.map((p) => p.slug));
-    res.locals.navServices = services.map((s) => ({
+    res.locals.navServices = services.filter(isDomestic).map((s) => ({
       ...s,
       hasDetailPage: detailSlugs.has(s.slug)
     }));
@@ -187,8 +192,8 @@ app.get('/our-services', async (req, res) => {
   res.render('services', {
     title: 'Cleaning Services We Offer',
     metaDescription:
-      'Residential, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery, mattress and office cleaning across London & Essex.',
-    services: services.map((s) => ({ ...s, hasDetailPage: detailSlugs.has(s.slug) })),
+      'Domestic, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery and mattress cleaning across London & Essex.',
+    services: services.filter(isDomestic).map((s) => ({ ...s, hasDetailPage: detailSlugs.has(s.slug) })),
     checklist,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]

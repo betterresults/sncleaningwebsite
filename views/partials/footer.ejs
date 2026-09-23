@@ -33,10 +33,10 @@
     <div class="footer-col">
       <h4>Services</h4>
       <ul>
-        <li><a href="/domestic-cleaning">Domestic Cleaning</a></li>
-        <li><a href="/end-of-tenancy-cleaning">End of Tenancy</a></li>
-        <li><a href="/airbnb-cleaning">Airbnb Cleaning</a></li>
-        <li><a href="/deep-house-cleaning">Deep Cleaning</a></li>
+        <% (typeof navServices !== 'undefined' ? navServices : []).forEach(function (s) { %>
+          <li><a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>"><%= s.title %></a></li>
+        <% }); %>
+        <li><a href="<%= commercialUrl %>" target="_blank" rel="noopener">Commercial Cleaning ↗</a></li>
       </ul>
     </div>
 
