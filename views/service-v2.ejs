@@ -1,0 +1,306 @@
+<%# Service page — new design (home.css h- classes + s- classes). Used for the
+    services listed in SERVICE_V2 in server.js; the rest still use
+    service-detail.ejs until they are redesigned. %>
+<%
+  const name = service.title;
+  const lower = name.toLowerCase();
+  const price = servicePrice(service.slug);
+  const heroImg = (page.images && page.images.length) ? page.images[0] : serviceImage(service.slug);
+  const roomIcons = {
+    kitchen: '<path d="M4 10h16v10H4z"/><path d="M4 14h16M8 6v4M12 4v6M16 6v4"/>',
+    bathroom: '<path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-3Z"/><path d="M6 12V6a2 2 0 0 1 4 0"/><path d="M7 20l-1 2M17 20l1 2"/>',
+    living: '<path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M3 12h18v5H3z"/><path d="M5 17v2M19 17v2"/>',
+    general: '<path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/>'
+  };
+  const iconFor = (room) => {
+    const r = room.toLowerCase();
+    if (r.includes('kitchen')) return roomIcons.kitchen;
+    if (r.includes('bath')) return roomIcons.bathroom;
+    if (r.includes('living') || r.includes('bed')) return roomIcons.living;
+    return roomIcons.general;
+  };
+%>
+
+<!-- ============ HERO ============ -->
+<section class="h-hero s-hero">
+  <img class="h-hero-bg" src="<%= heroImg %>?v=<%= assetVersion %>" alt="" fetchpriority="high" width="1152" height="864" />
+  <div class="h-wrap h-hero-inner">
+    <div class="h-hero-copy">
+      <nav class="s-crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><a href="/our-services">Services</a><span aria-current="page"><%= name %></span>
+      </nav>
+      <p class="h-eyebrow h-eyebrow--light"><%= name %> · London &amp; Essex</p>
+      <h1 class="h-display">Domestic cleaning, done <em>properly</em></h1>
+      <p class="h-lead">
+        Regular or one-off cleaning for your home by our own trained, insured and DBS-checked team.
+        We bring professional products and equipment, and work to a checklist for every room.
+      </p>
+      <div class="s-hero-meta">
+        <% if (price) { %><span class="s-price"><%= price %></span><% } %>
+        <% if (site.googleBusinessUrl) { %>
+          <p class="h-rating"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google reviews</p>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="h-quote" id="quote">
+      <h2 class="h-quote-title">Get a <%= lower %> quote</h2>
+      <p class="h-quote-sub">Enter your postcode and email and we'll take you straight to the booking form.</p>
+      <form name="quote" method="GET" action="/book/<%= service.slug %>" data-netlify="true" netlify-honeypot="bot-field"
+            class="h-form" data-quote-form>
+        <input type="hidden" name="form-name" value="quote" />
+        <input type="hidden" name="service" value="<%= service.booking_embed_url ? service.slug : '' %>" />
+        <p class="hidden-field"><label>Leave this empty <input name="bot-field" /></label></p>
+        <div class="h-field">
+          <label for="q-postcode">Postcode</label>
+          <input id="q-postcode" name="postcode" type="text" required autocomplete="postal-code"
+                 autocapitalize="characters" placeholder="e.g. RM3 0SH"
+                 pattern="\s*[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s*[0-9][A-Za-z]{2}\s*" aria-describedby="q-postcode-error" />
+          <span class="h-error" id="q-postcode-error">Please enter a full UK postcode, e.g. RM3 0SH</span>
+        </div>
+        <div class="h-field">
+          <label for="q-email">Email</label>
+          <input id="q-email" name="email" type="email" required autocomplete="email"
+                 placeholder="you@example.com" aria-describedby="q-email-error" />
+          <span class="h-error" id="q-email-error">Please enter a valid email address</span>
+        </div>
+        <button type="submit" class="h-btn h-btn--primary h-btn--block">Get my quote <span aria-hidden="true">→</span></button>
+      </form>
+    </div>
+  </div>
+
+  <div class="h-wrap">
+    <ul class="h-trust" aria-label="Why customers choose us">
+      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>Insured &amp; DBS-checked</li>
+      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.3 3.3 0 0 1 0 6.4M18 14.8c2 .6 3.2 2.3 3.5 5.2"/></svg></span>Our own team</li>
+      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 21h10M9 21V10h6v11M9 10 8 5h8l-1 5M10 5V3h4v2"/></svg></span>Professional products</li>
+      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></span>Free re-clean guarantee</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HOW OFTEN ============ -->
+<section class="h-section h-sand">
+  <div class="h-wrap s-often">
+    <div class="h-head">
+      <p class="h-eyebrow">Your schedule</p>
+      <h2 class="h-title">A clean home, as often as you need it</h2>
+      <p class="s-intro">
+        Book a regular visit and we'll send the same cleaner wherever we can, so they get to know your home.
+        Or book a one-off clean before guests arrive, after a busy few weeks, or whenever you need a hand.
+      </p>
+    </div>
+    <ul class="s-freq">
+      <li class="h-reveal"><strong>Weekly</strong><span>Your home stays on top, every week</span></li>
+      <li class="h-reveal"><strong>Fortnightly</strong><span>Regular help without the weekly commitment</span></li>
+      <li class="h-reveal"><strong>Monthly</strong><span>A thorough reset once a month</span></li>
+      <li class="h-reveal"><strong>One-off</strong><span>Whenever you need a hand</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<% if (page.included_tasks && page.included_tasks.length) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">What's included</p>
+      <h2 class="h-title">Room by room, nothing left to memory</h2>
+    </div>
+    <div class="s-rooms">
+      <% page.included_tasks.forEach(function (group) { %>
+        <article class="s-room h-reveal">
+          <div class="s-room-head">
+            <span class="h-ico h-ico--dark" aria-hidden="true"><svg viewBox="0 0 24 24"><%- iconFor(group.room) %></svg></span>
+            <h3><%= group.room %></h3>
+          </div>
+          <ul>
+            <% group.tasks.forEach(function (task) { %><li><%= task %></li><% }); %>
+          </ul>
+        </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ WHY US ============ -->
+<section class="h-section h-sand h-section--tight">
+  <div class="h-wrap">
+    <div class="h-panel h-why">
+      <div class="h-why-media h-reveal">
+        <img src="/images/silvia.webp?v=<%= assetVersion %>" alt="Silvia Nedeva, owner of SN Cleaning Services" loading="lazy" width="720" height="960" />
+        <div class="h-why-badge"><strong>12</strong><span>years in<br />business</span></div>
+      </div>
+      <div class="h-why-copy">
+        <p class="h-eyebrow h-eyebrow--light">Why SN</p>
+        <h2 class="h-title h-title--light">People you can trust with your key</h2>
+        <ul class="h-principles">
+          <li class="h-reveal">
+            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.3 3.3 0 0 1 0 6.4M18 14.8c2 .6 3.2 2.3 3.5 5.2"/></svg></span>
+            <div><strong>Our own cleaners</strong><p>Trained by us — never subcontractors or gig workers.</p></div>
+          </li>
+          <li class="h-reveal">
+            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>
+            <div><strong>Insured and DBS-checked</strong><p>The same cleaner wherever we can, so you never explain your home twice.</p></div>
+          </li>
+          <li class="h-reveal">
+            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 21h10M9 21V10h6v11M9 10 8 5h8l-1 5M10 5V3h4v2"/></svg></span>
+            <div><strong>Professional products</strong><p>The right product for every surface — we even make our own limescale remover.</p></div>
+          </li>
+          <li class="h-reveal">
+            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></span>
+            <div><strong>Re-clean guarantee</strong><p>Tell us within 24 hours if something was missed and we come back, free.</p></div>
+          </li>
+        </ul>
+        <a href="/about" class="h-btn h-btn--light">About the company</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">How it works</p>
+      <h2 class="h-title">Booked in a few minutes</h2>
+    </div>
+    <ol class="h-steps">
+      <li class="h-step h-reveal">
+        <span class="h-step-num">1</span>
+        <h3>Tell us about your home</h3>
+        <p>Your postcode, the number of rooms and how often you'd like us to come.</p>
+      </li>
+      <li class="h-step h-reveal">
+        <span class="h-step-num">2</span>
+        <h3>See your price, pick a date</h3>
+        <p>The booking form works out your price as you go. No hidden add-ons later.</p>
+      </li>
+      <li class="h-step h-reveal">
+        <span class="h-step-num">3</span>
+        <h3>Come home to a clean house</h3>
+        <p>Your cleaner arrives with everything needed and follows the checklist.</p>
+      </li>
+    </ol>
+    <div class="h-center">
+      <a href="#quote" class="h-btn h-btn--primary">Get a quote</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<% if (typeof testimonials !== 'undefined' && testimonials.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Google reviews</p>
+        <h2 class="h-title">What our customers say</h2>
+        <p class="h-rating h-rating--dark"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google · real reviews, word for word</p>
+      </div>
+      <% if (site.googleBusinessUrl) { %>
+        <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <% } %>
+    </div>
+    <div class="h-reviews">
+      <% testimonials.slice(0, 3).forEach(function (t) { %>
+        <figure class="h-review h-reveal">
+          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ COVERAGE MAP ============ -->
+<% if (mapLink) { %>
+<section class="h-section h-white" id="areas">
+  <div class="h-wrap h-cov">
+    <div class="h-cov-copy">
+      <p class="h-eyebrow">Areas we cover</p>
+      <h2 class="h-title"><%= name %> across London and Essex</h2>
+      <div class="h-cov-stats">
+        <div><strong>32</strong><span>London boroughs</span></div>
+        <div><strong>7</strong><span>Essex areas</span></div>
+      </div>
+      <p class="h-cov-hint">Tap your area on the map, or check your postcode to get your price.</p>
+      <a href="#quote" class="h-btn h-btn--primary">Check your postcode</a>
+      <ul class="h-legend" aria-hidden="true">
+        <li><span class="h-swatch h-swatch--london"></span>London</li>
+        <li><span class="h-swatch h-swatch--essex"></span>Essex</li>
+        <li><span class="h-swatch h-swatch--other"></span>Not covered</li>
+      </ul>
+    </div>
+    <div class="h-cov-map" data-cov-map>
+      <%- include('partials/coverage-map') %>
+      <div class="h-cov-tip" role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ FAQ ============ -->
+<% if (page.faqs && page.faqs.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap h-faq-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">FAQs</p>
+      <h2 class="h-title">Questions about <%= lower %></h2>
+    </div>
+    <div class="h-faq">
+      <% page.faqs.forEach(function (faq) { %>
+        <details class="h-faq-item">
+          <summary><h3><%= faq.question %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+          <p><%= faq.answer %></p>
+        </details>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ OTHER SERVICES ============ -->
+<% if (typeof relatedServices !== 'undefined' && relatedServices.length) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Other services</p>
+        <h2 class="h-title">You might also need</h2>
+      </div>
+      <a href="/our-services" class="h-btn h-btn--primary">See all services</a>
+    </div>
+    <div class="h-svc-grid">
+      <% relatedServices.forEach(function (s) { %>
+        <a href="/<%= s.slug %>" class="h-svc h-reveal">
+          <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="" loading="lazy" width="1152" height="864" />
+          <span class="h-svc-card">
+            <span class="h-svc-name"><%= s.title %></span>
+            <span class="h-svc-meta">
+              <span><%= servicePrice(s.slug) || 'Get a price' %></span>
+              <span class="h-arrow" aria-hidden="true">→</span>
+            </span>
+          </span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="h-section h-sand h-section--tight">
+  <div class="h-wrap">
+    <div class="h-panel h-final">
+      <div>
+        <h2 class="h-title h-title--light">Ready for a cleaner home?</h2>
+        <p>Tell us about your home, see your price and choose a date that suits you.</p>
+      </div>
+      <a href="<%= bookHref(service) %>" class="h-btn h-btn--light">Book <%= lower %></a>
+    </div>
+  </div>
+</section>

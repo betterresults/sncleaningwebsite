@@ -133,6 +133,34 @@ app.use(async (req, res, next) => {
   }
 });
 
+// Coverage map links: each map area links to its local page when one exists
+// (matched by coverage region, or by the parent region of a sub-area),
+// preferring services earlier in `servicePref`. Areas with no page link to
+// the quote form (#quote) on the same page.
+function buildMapLink(areaPages, regions, servicePref, { onlyThese = false } = {}) {
+  const regionById = new Map(regions.map((r) => [r.id, r]));
+  const areaLinks = {};
+  areaPages
+    .filter((p) => p.services && p.coverage_regions && (!onlyThese || servicePref.includes(p.services.slug)))
+    .forEach((p) => {
+      const reg = p.coverage_regions;
+      const names = [reg.name];
+      if (reg.parent_id && regionById.get(reg.parent_id)) names.push(regionById.get(reg.parent_id).name);
+      const url = `/${p.services.slug}/${p.slug}`;
+      const rank = servicePref.indexOf(p.services.slug) === -1 ? 99 : servicePref.indexOf(p.services.slug);
+      names.forEach((n) => {
+        // an exact region match beats a parent match; then service preference
+        const score = (n === reg.name ? 0 : 100) + rank;
+        if (!areaLinks[n] || score < areaLinks[n].score) areaLinks[n] = { url, score };
+      });
+    });
+  return (regionName) => (areaLinks[regionName] ? areaLinks[regionName].url : '#quote');
+}
+
+// Service pages already moved to the new design (views/service-v2.ejs).
+// The rest still use views/service-detail.ejs until they are redesigned.
+const SERVICE_V2 = ['domestic-cleaning'];
+
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
   const [services, areaPages, regions] = await Promise.all([
@@ -142,28 +170,7 @@ app.get('/', async (req, res) => {
   ]);
   const faqPage = schema.buildFaqPage(faqs);
 
-  // Coverage map: each map area links to its local page when one exists
-  // (matched by coverage region, or by the parent region of a sub-area),
-  // preferring domestic > deep > end of tenancy > Airbnb pages. Areas with
-  // no page yet link to the quote form.
-  const SERVICE_PREF = ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning'];
-  const regionById = new Map(regions.map((r) => [r.id, r]));
-  const areaLinks = {};
-  areaPages
-    .filter((p) => p.services && p.coverage_regions)
-    .forEach((p) => {
-      const reg = p.coverage_regions;
-      const names = [reg.name];
-      if (reg.parent_id && regionById.get(reg.parent_id)) names.push(regionById.get(reg.parent_id).name);
-      const url = `/${p.services.slug}/${p.slug}`;
-      const rank = SERVICE_PREF.indexOf(p.services.slug) === -1 ? 99 : SERVICE_PREF.indexOf(p.services.slug);
-      names.forEach((n) => {
-        // an exact region match beats a parent match; then service preference
-        const score = (n === reg.name ? 0 : 100) + rank;
-        if (!areaLinks[n] || score < areaLinks[n].score) areaLinks[n] = { url, score };
-      });
-    });
-  const mapLink = (regionName) => (areaLinks[regionName] ? areaLinks[regionName].url : '#quote');
+  const mapLink = buildMapLink(areaPages, regions, ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning']);
 
   res.render('index', {
     title: 'Professional Cleaning Services in London & Essex',
@@ -388,7 +395,7 @@ app.get('/:slug', async (req, res, next) => {
   const page = await content.getServicePageBySlug(req.params.slug);
   if (!page) return next(); // not a real service slug — falls through to the area route, then 404
 
-  const allServices = await content.getServices();
+  const allServices = (await content.getServices()).filter(isDomestic);
   const relatedServices = allServices.filter((s) => s.slug !== page.slug).slice(0, 3);
   const service = page.services;
   const coverageAreas = res.locals.coverageAreas;
@@ -400,7 +407,16 @@ app.get('/:slug', async (req, res, next) => {
   ];
   const faqPage = schema.buildFaqPage(page.faqs);
 
-  res.render('service-detail', {
+  const v2 = SERVICE_V2.includes(page.slug);
+  let mapLink = null;
+  if (v2) {
+    const [areaPages, regions] = await Promise.all([content.getAreaPages(), content.getAllCoverageRegions()]);
+    mapLink = buildMapLink(areaPages, regions, [page.slug], { onlyThese: true });
+  }
+
+  res.render(v2 ? 'service-v2' : 'service-detail', {
+    designV2: v2,
+    mapLink,
     title: page.meta_title || service.title,
     metaDescription: page.meta_description || service.short_description,
     page,

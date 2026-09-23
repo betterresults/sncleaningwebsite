@@ -527,3 +527,56 @@
 @media (max-width: 600px) {
   .b-frame { border-radius: 16px; padding: 4px; margin-inline: -6px; }
 }
+
+/* ==========================================================================
+   SERVICE PAGES (new design) — s- classes, views/service-v2.ejs
+   ========================================================================== */
+.s-crumbs { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 22px; font-size: .85rem; color: #b9ccc2; }
+.s-crumbs a { color: #d9e5dc; text-decoration: none; }
+.s-crumbs a:hover { color: #fff; text-decoration: underline; }
+.s-crumbs a::after { content: "/"; margin-left: 8px; color: rgba(217, 229, 220, .45); }
+.s-hero .h-display em { font-style: italic; color: var(--h-sage); }
+.s-hero-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 14px 20px; }
+.s-price {
+  display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 999px;
+  background: var(--h-sage); color: var(--h-ink); font-weight: 700; font-size: .95rem;
+}
+
+.s-often { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
+.s-often .h-head { margin-bottom: 0; }
+.s-intro { margin: 18px 0 0; color: var(--h-text); font-size: 1.05rem; line-height: 1.7; }
+.s-freq { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.s-freq li {
+  display: grid; gap: 6px; padding: 22px 22px 24px; border-radius: 18px;
+  background: #fff; border: 1px solid var(--h-line);
+}
+.s-freq li:first-child { background: var(--h-deep); border-color: var(--h-deep); }
+.s-freq li:first-child strong { color: #fff; }
+.s-freq li:first-child span { color: #c9d9cf; }
+.s-freq strong { font-family: var(--h-serif); font-weight: 500; font-size: 1.45rem; color: var(--h-ink); }
+.s-freq span { color: var(--h-muted); font-size: .93rem; line-height: 1.5; }
+
+.s-rooms { display: grid; grid-template-columns: repeat(2, 1fr); gap: clamp(14px, 2vw, 22px); }
+.s-room {
+  padding: clamp(22px, 3vw, 30px); border-radius: var(--h-radius);
+  background: var(--h-sand); border: 1px solid var(--h-line);
+}
+.s-room-head { display: flex; align-items: center; gap: 14px; margin-bottom: 16px; }
+.s-room-head h3 { margin: 0; font-family: var(--h-serif); font-weight: 500; font-size: 1.35rem; color: var(--h-ink); }
+.s-room ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.s-room li { position: relative; padding-left: 30px; color: var(--h-text); line-height: 1.5; }
+.s-room li::before {
+  content: ""; position: absolute; left: 0; top: .15em; width: 20px; height: 20px; border-radius: 50%;
+  background: var(--h-primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'%3E%3Cpath d='m6 10.5 2.6 2.6L14.5 7' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/100% no-repeat;
+}
+
+@media (max-width: 1000px) {
+  .s-often { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .s-freq { gap: 10px; }
+  .s-freq li { padding: 16px; }
+  .s-freq strong { font-size: 1.2rem; }
+  .s-rooms { grid-template-columns: 1fr; }
+  .s-hero .h-hero-bg { object-position: 50% 40%; }
+}
