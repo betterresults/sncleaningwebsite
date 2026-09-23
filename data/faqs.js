@@ -22,7 +22,7 @@ module.exports = [
   {
     question: "What if I'm not happy with the clean?",
     answer:
-      "Tell us within 24 hours and we'll come back and re-clean the area free of charge."
+      "Tell us within 24 hours and we'll come back and re-clean the area free of charge. For end of tenancy cleans it's 72 hours, so your agent or landlord has time to inspect."
   },
   {
     question: 'How do I book?',

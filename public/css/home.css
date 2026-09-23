@@ -580,12 +580,3 @@
   .s-rooms { grid-template-columns: 1fr; }
   .s-hero .h-hero-bg { object-position: 50% 40%; }
 }
-
-/* Buttons read clearly as buttons: solid edge + a small raised base that presses in */
-.h-btn { border: 2px solid transparent; }
-.h-btn--primary { border-color: var(--h-ink); box-shadow: 0 3px 0 var(--h-ink), 0 10px 22px rgba(23, 82, 78, .22); }
-.h-btn--primary:hover { box-shadow: 0 4px 0 var(--h-ink), 0 12px 24px rgba(23, 82, 78, .26); }
-.h-btn--light { border-color: #fff; box-shadow: 0 3px 0 rgba(255, 255, 255, .55); }
-.h-btn--light:hover { box-shadow: 0 4px 0 rgba(255, 255, 255, .7); }
-.h-btn:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--h-ink); transition-duration: .06s; }
-.h-btn--light:active { box-shadow: 0 1px 0 rgba(255, 255, 255, .55); }

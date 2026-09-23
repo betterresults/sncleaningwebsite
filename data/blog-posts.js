@@ -37,7 +37,7 @@ module.exports = [
 <p>We will quote you the same weekday in most cases. There is no online price because two two-bed flats are never the same job.</p>
 
 <h2>What we will not promise</h2>
-<p>We cannot guarantee a deposit back. That sits with the landlord, the agent and the condition when you moved in. What we can do is a proper clean, and come back free if you tell us within 24 hours that we missed something.</p>
+<p>We cannot guarantee a deposit back. That sits with the landlord, the agent and the condition when you moved in. What we can do is a proper clean, and come back free if you or your agent tell us within 72 hours that we missed something.</p>
 <p><a href="/end-of-tenancy-cleaning">See what our end of tenancy clean covers</a>, or <a href="/contact">send the postcode and checkout date</a> and we will come back with a price.</p>
 `
   },
@@ -75,7 +75,7 @@ module.exports = [
 <ul>
   <li>Our own DBS-checked, insured staff — not a gig app sending whoever is free.</li>
   <li>We bring professional products and kit.</li>
-  <li>If we miss something, tell us within 24 hours and we come back and re-clean it free.</li>
+  <li>If we miss something, tell us within 24 hours (72 hours for end of tenancy) and we come back and re-clean it free.</li>
 </ul>
 <p>Weekly and fortnightly visits are usually less per clean than a one-off, because we already know the property. We will put that in the quote rather than hide it behind a “from” price on the homepage.</p>
 <p><a href="/contact">Request a quote</a> — postcode and a line about the property is enough to start.</p>

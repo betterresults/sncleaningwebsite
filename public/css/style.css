@@ -1386,8 +1386,17 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
   body:not(.no-sticky) .wa-float { bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
 }
 
-/* Buttons read clearly as buttons (matches home.css .h-btn) */
-.btn-primary { border: 2px solid #14302c; box-shadow: 0 3px 0 #14302c; }
-.btn-primary:hover { border-color: #14302c; }
-.btn-primary:active { transform: translateY(2px); box-shadow: 0 1px 0 #14302c; }
-.btn-outline { border-width: 2px; }
+/* Header "Call us": one bordered pill so icon + label + number read as a single button */
+.hdr-call {
+  border: 1.5px solid var(--color-primary); background: #fff;
+  padding: 3px 16px 3px 3px; height: 44px;
+}
+.hdr-call:hover { background: var(--color-primary-light); border-color: var(--color-primary-dark); }
+.hdr-call .hdr-ico { width: 36px; height: 36px; background: var(--color-primary); color: #fff; }
+@media (max-width: 1240px) {
+  .hdr-call { padding: 0; width: 44px; justify-content: center; }
+}
+@media (max-width: 600px) {
+  .hdr-call { width: 40px; height: 40px; }
+  .hdr-call .hdr-ico { width: 34px; height: 34px; }
+}
