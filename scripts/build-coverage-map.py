@@ -53,6 +53,19 @@ def proj(lon, lat):
 
 TOL = (fx1 - fx0) / 900  # simplification tolerance in degrees (~1px)
 
+def compact_ring(pts):
+    """Whole-unit coordinates, relative moves: ~half the size of absolute
+    one-decimal paths, with no visible difference at the sizes the map shows."""
+    q = [(round(x), round(y)) for x, y in pts]
+    d = [f'M{q[0][0]} {q[0][1]}']
+    px, py = q[0]
+    for x, y in q[1:]:
+        if (x, y) == (px, py):
+            continue
+        d.append(f'l{x - px} {y - py}'.replace(' -', '-'))
+        px, py = x, y
+    return ''.join(d) + 'z'
+
 def path_d(g):
     g = g.simplify(TOL, preserve_topology=True)
     polys = [g] if g.geom_type == 'Polygon' else list(getattr(g, 'geoms', []))
@@ -62,7 +75,7 @@ def path_d(g):
             continue
         for ring in [p.exterior, *p.interiors]:
             pts = [proj(x, y) for x, y in ring.coords]
-            out.append('M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in pts) + 'Z')
+            out.append(compact_ring(pts))
     return ''.join(out)
 
 # Context: every other district touching the frame, muted and not clickable.
