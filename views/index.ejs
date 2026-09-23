@@ -32,12 +32,6 @@
       <h2 class="h-quote-title">Get a quote</h2>
       <p class="h-quote-sub">Enter your postcode and we'll take you straight to the right booking form.</p>
 
-      <div class="h-area-tags" aria-label="Areas we cover">
-        <span class="h-tag">London</span>
-        <span class="h-tag">Essex</span>
-        <a class="h-tag h-tag--link" href="#areas">See all areas</a>
-      </div>
-
       <%# Goes to /book/{service}?postcode=&email= (or /book when no service is
           chosen). The postcode and email are also saved to the Netlify "quote"
           form in the background, so an enquiry is never lost if someone stops
@@ -50,7 +44,7 @@
         <div class="h-field">
           <label for="q-service">Service <span class="h-opt">(optional)</span></label>
           <select id="q-service" name="service">
-            <option value="">Not sure — see all services</option>
+            <option value="">Not selected</option>
             <% (bookable || []).forEach(function (s) { %>
               <option value="<%= s.slug %>"><%= s.title %></option>
             <% }); %>
@@ -99,7 +93,7 @@
       <a href="/our-services" class="h-btn h-btn--primary">See all services</a>
     </div>
 
-    <div class="h-svc-grid">
+    <div class="h-svc-grid<%= services.length === 5 ? ' h-svc-grid--5' : '' %>">
       <% services.forEach(function(service) { %>
         <a href="/<%= service.slug %>" class="h-svc h-reveal">
           <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(service.slug), '(max-width: 1000px) 50vw, 400px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />

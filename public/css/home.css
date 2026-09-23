@@ -597,3 +597,14 @@
   content-visibility: auto;
   contain-intrinsic-size: auto none auto 800px;
 }
+
+/* Five service cards: 3 on the top row, 2 wider ones below (desktop);
+   on phones the first card runs full width, then 2 x 2. */
+.h-svc-grid--5 { grid-template-columns: repeat(6, 1fr); }
+.h-svc-grid--5 > .h-svc { grid-column: span 2; }
+.h-svc-grid--5 > .h-svc:nth-child(n+4) { grid-column: span 3; aspect-ratio: 4 / 2.9; }
+@media (max-width: 1000px) {
+  .h-svc-grid--5 { grid-template-columns: repeat(2, 1fr); }
+  .h-svc-grid--5 > .h-svc, .h-svc-grid--5 > .h-svc:nth-child(n+4) { grid-column: span 1; aspect-ratio: 3 / 4; }
+  .h-svc-grid--5 > .h-svc:first-child { grid-column: span 2; aspect-ratio: 16 / 10; }
+}

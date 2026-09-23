@@ -197,7 +197,10 @@ app.get('/', async (req, res) => {
     title: 'Professional Cleaning Services in London & Essex',
     metaDescription:
       'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
-    services: services.slice(0, 6),
+    // Homepage service cards, in this order.
+    services: ['domestic-cleaning', 'end-of-tenancy-cleaning', 'deep-house-cleaning', 'carpet-cleaning-services', 'after-builders-cleaning']
+      .map((slug) => services.find((s) => s.slug === slug))
+      .filter(Boolean),
     bookable: services.filter((s) => s.booking_embed_url),
     testimonials,
     checklist,

@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded', () => {
     link.addEventListener('click', (e) => {
       if (window.innerWidth <= 1040) {
         e.preventDefault();
-        link.parentElement.classList.toggle('open');
+        const open = link.parentElement.classList.toggle('open');
+        link.setAttribute('aria-expanded', open ? 'true' : 'false');
       }
     });
   });
