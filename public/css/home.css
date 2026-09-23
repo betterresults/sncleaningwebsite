@@ -411,6 +411,10 @@
 .a-note { display: grid; grid-template-columns: auto 1fr; gap: clamp(20px, 4vw, 48px); align-items: start; max-width: 980px; }
 .a-note-mark { width: 88px; height: 88px; border-radius: 50%; background: #fff; display: grid; place-items: center; box-shadow: 0 10px 24px rgba(20, 48, 44, .1); }
 .a-note-mark img { width: 58px; height: 58px; }
+.a-note-mark--photo { overflow: hidden; border: 3px solid #fff; }
+.a-note-mark--photo { display: block; }
+.a-note-mark--photo img { display: block; width: 170%; height: auto; max-width: none; margin: -2px 0 0 -24%; }
+.a-hero-media img { object-position: 50% 18%; }
 .a-note-quote { margin: 0; font-family: var(--h-serif); font-size: clamp(1.35rem, 2.4vw, 1.9rem); line-height: 1.4; color: var(--h-ink); }
 .a-note-sign { margin: 22px 0 0; color: var(--h-muted); }
 .a-note-sign strong { color: var(--h-ink); }
