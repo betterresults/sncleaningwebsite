@@ -19,7 +19,7 @@
     </div>
 
     <div class="footer-col">
-      <h4>Quick Links</h4>
+      <h2 class="footer-heading">Quick Links</h2>
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/our-services">Services</a></li>
@@ -31,7 +31,7 @@
     </div>
 
     <div class="footer-col">
-      <h4>Services</h4>
+      <h2 class="footer-heading">Services</h2>
       <ul>
         <% (typeof navServices !== 'undefined' ? navServices : []).forEach(function (s) { %>
           <li><a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>"><%= s.title %></a></li>
@@ -41,7 +41,7 @@
     </div>
 
     <div class="footer-col">
-      <h4>Get in Touch</h4>
+      <h2 class="footer-heading">Get in Touch</h2>
       <ul class="footer-contact">
         <li><a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
         <% if (site.whatsappUrl) { %>

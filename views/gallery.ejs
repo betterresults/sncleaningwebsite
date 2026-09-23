@@ -11,7 +11,7 @@
     <div class="grid grid-3 gallery-grid">
       <% gallery.forEach(function(item) { %>
         <figure class="gallery-item">
-          <img src="<%= item.src %>?v=<%= assetVersion %>" alt="<%= item.caption %>" />
+          <img src="<%= item.src %>?v=<%= assetVersion %>"<%- rs(item.src, '(max-width: 600px) 100vw, (max-width: 1000px) 50vw, 380px') %> alt="<%= item.caption %>" loading="lazy" decoding="async" width="1152" height="864" />
           <figcaption><%= item.caption %></figcaption>
         </figure>
       <% }); %>

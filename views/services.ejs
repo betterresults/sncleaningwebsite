@@ -13,7 +13,7 @@
     <% services.forEach(function(service, i) { %>
       <div class="service-detail <%= i % 2 === 1 ? 'reverse' : '' %>" id="<%= service.slug %>">
         <div class="service-detail-media">
-          <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>" alt="<%= service.title %>" />
+          <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(service.slug), '(max-width: 800px) 100vw, 600px') %> loading="lazy" decoding="async" alt="<%= service.title %>" />
         </div>
         <div class="service-detail-text">
           <h2><%= service.title %></h2>

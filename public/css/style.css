@@ -5,7 +5,7 @@
   --color-accent: #f4a300;
   --color-dark: #122624;
   --color-text: #2c3a36;
-  --color-muted: #6b7a76;
+  --color-muted: #56645f;
   --color-bg-alt: #f6f9f8;
   --color-border: #e3e9e7;
   --font-heading: 'Poppins', sans-serif;
@@ -62,7 +62,7 @@ img { max-width: 100%; height: auto; display: block; }
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-primary);
+  color: var(--color-primary-dark);
   background: var(--color-primary-light);
   padding: 6px 14px;
   border-radius: 999px;
@@ -485,7 +485,7 @@ body.nav-open { overflow: hidden; }
 .testimonial-author { color: var(--color-dark); margin: 0; }
 
 /* CTA band */
-.cta-band { background: var(--color-primary); }
+.cta-band { background: var(--color-primary-dark); }
 .cta-band-inner {
   display: flex;
   align-items: center;
@@ -521,6 +521,7 @@ body.nav-open { overflow: hidden; }
   padding: 88px 0 72px;
   background-color: var(--color-dark);
   background-image: url('/images/hero-living-room.jpg');
+  background-image: image-set(url('/images/_r/hero-living-room-1200.webp') type('image/webp'), url('/images/hero-living-room.jpg') type('image/jpeg'));
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -532,9 +533,11 @@ body.nav-open { overflow: hidden; }
 }
 .page-hero--gallery {
   background-image: url('/images/rooms/kitchen.jpg');
+  background-image: image-set(url('/images/_r/rooms/kitchen-1200.webp') type('image/webp'), url('/images/rooms/kitchen.jpg') type('image/jpeg'));
 }
 .page-hero--services {
   background-image: url('/images/services/domestic.jpg');
+  background-image: image-set(url('/images/_r/services/domestic-1200.webp') type('image/webp'), url('/images/services/domestic.jpg') type('image/jpeg'));
 }
 .page-hero--plain {
   text-align: left;
@@ -736,7 +739,7 @@ input:focus, select:focus, textarea:focus {
   font-weight: 600;
 }
 .footer-social a:hover { color: #fff; }
-.footer-col h4 { color: #fff; font-size: 0.95rem; margin-bottom: 16px; }
+.footer-col h4, .footer-col .footer-heading { color: #fff; font-size: 0.95rem; margin: 0 0 16px; font-family: var(--font-heading); font-weight: 700; }
 .footer-col ul li { margin-bottom: 10px; font-size: 0.92rem; color: #b9cbc4; line-height: 1.5; }
 .footer-col a { color: #b9cbc4; font-size: 0.92rem; }
 .footer-col a:hover { color: #fff; }
@@ -745,7 +748,7 @@ input:focus, select:focus, textarea:focus {
   padding: 20px 0;
   text-align: center;
   font-size: 0.85rem;
-  color: #7f938c;
+  color: #a9bcb5;
 }
 
 .not-found { text-align: center; padding: 140px 0; }
@@ -1084,16 +1087,22 @@ body.no-sticky { padding-bottom: 0; }
   cursor: default;
 }
 .checklist-dots { display: flex; gap: 8px; }
+.checklist-dots { gap: 2px; }
 .checklist-pager {
-  width: 9px;
-  height: 9px;
+  position: relative;
+  min-width: 24px;
+  height: 24px;
   padding: 0;
   border: none;
-  border-radius: 50%;
-  background: var(--color-border);
+  background: transparent;
   cursor: pointer;
 }
-.checklist-pager.active { background: var(--color-primary); width: 22px; border-radius: 999px; }
+.checklist-pager::before {
+  content: ""; position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 9px; height: 9px; border-radius: 50%; background: #9aa8a4;
+}
+.checklist-pager.active { min-width: 30px; }
+.checklist-pager.active::before { background: var(--color-primary); width: 22px; border-radius: 999px; }
 
 .blog-card-date {
   display: block;
@@ -1400,3 +1409,7 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
   .hdr-call { width: 40px; height: 40px; }
   .hdr-call .hdr-ico { width: 34px; height: 34px; }
 }
+.footer-bottom p { color: #a9bcb5; }
+.contact-info-card h2.h3 { font-size: 1.17rem; }
+.service-card h2.h3 { font-size: 1.17rem; }
+.blog-post-cta .btn-outline { color: var(--color-primary-dark); border-color: var(--color-primary-dark); }

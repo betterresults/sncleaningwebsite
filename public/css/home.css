@@ -1,3 +1,12 @@
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 500;
+  font-display: swap;
+  src: url('/fonts/fraunces-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 /* ==========================================================================
    Homepage only (loaded when isHome). Every class is prefixed h- so nothing
    here can affect other pages. Palette drawn from the SN logo: deep navy-green
@@ -411,7 +420,7 @@
 .h-ico--dark { background: rgba(31, 107, 102, .12); color: var(--h-primary); }
 
 .a-hero { background: var(--h-sand); padding: clamp(40px, 6vw, 88px) 0 clamp(48px, 6vw, 80px); overflow: hidden; }
-.a-hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 80px); align-items: center; }
+.a-hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
 .a-display {
   font-family: var(--h-serif); font-weight: 400; color: var(--h-ink);
   font-size: clamp(2.2rem, 5vw, 4.1rem); line-height: 1.05; letter-spacing: -0.015em; margin: 0;
@@ -579,4 +588,12 @@
   .s-freq strong { font-size: 1.2rem; }
   .s-rooms { grid-template-columns: 1fr; }
   .s-hero .h-hero-bg { object-position: 50% 40%; }
+}
+
+/* Heavy below-the-fold sections (the map and the room carousel): the browser
+   skips their layout/paint until they are about to scroll into view. */
+.is-home main > #areas,
+.is-home main > .h-checklist {
+  content-visibility: auto;
+  contain-intrinsic-size: auto none auto 800px;
 }

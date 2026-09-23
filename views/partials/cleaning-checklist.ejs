@@ -22,7 +22,7 @@
 
       <div class="checklist-track" id="checklist-track" tabindex="0" aria-label="Room photos">
         <% checklist.forEach(function(cat, i) { %>
-          <article
+          <div
             class="checklist-slide"
             id="checklist-slide-<%= cat.key %>"
             data-index="<%= i %>"
@@ -31,9 +31,11 @@
           >
             <div class="checklist-scene">
               <img
-                src="<%= cat.image %>?v=<%= assetVersion %>"
+                src="<%= cat.image %>?v=<%= assetVersion %>"<%- rs(cat.image, '(max-width: 1200px) 100vw, 1100px') %>
                 alt="<%= cat.alt %>"
                 class="checklist-photo"
+                width="1280" height="720"
+                loading="lazy" decoding="async"
               />
               <% cat.points.forEach(function(p, pi) { %>
                 <div
@@ -50,13 +52,13 @@
                 <li><%= p.text %></li>
               <% }); %>
             </ol>
-          </article>
+          </div>
         <% }); %>
       </div>
 
       <div class="checklist-nav">
         <button type="button" class="checklist-nav-btn" data-dir="-1" aria-label="Previous room">‹</button>
-        <div class="checklist-dots" role="tablist" aria-label="Room position">
+        <div class="checklist-dots" role="group" aria-label="Room position">
           <% checklist.forEach(function(cat, i) { %>
             <button
               type="button"

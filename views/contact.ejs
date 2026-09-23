@@ -27,8 +27,8 @@
         class="contact-form"
       >
         <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden-field" aria-hidden="true">
-          <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+        <p class="hidden-field">
+          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
         </p>
         <div class="form-row">
           <label for="name">Full Name *</label>
@@ -76,10 +76,10 @@
 
     <div class="contact-info">
       <div class="contact-photo">
-        <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="Speak with SN Cleaning Services" />
+        <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>"<%- rs('/images/about-cleaner.jpg', '(max-width: 900px) 100vw, 520px') %> alt="Speak with SN Cleaning Services" width="1152" height="864" decoding="async" />
       </div>
       <div class="contact-info-card">
-        <h3>Reach us</h3>
+        <h2 class="h3">Reach us</h2>
         <ul>
           <li><a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
           <% if (site.whatsappUrl) { %>
@@ -91,7 +91,7 @@
         </ul>
       </div>
       <div class="contact-info-card">
-        <h3>Prefer to talk it through?</h3>
+        <h2 class="h3">Prefer to talk it through?</h2>
         <p>Call or WhatsApp with the postcode and what you need. No obligation.</p>
         <div class="contact-info-actions">
           <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call</a>

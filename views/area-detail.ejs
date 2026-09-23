@@ -1,4 +1,5 @@
-<section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>')">
+<% const _heroWebp = serviceImage(service.slug).replace(/^\/images\//, '/images/_r/').replace(/\.(jpe?g|png)$/i, '-1200.webp'); %>
+<section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>'); background-image: image-set(url('<%= _heroWebp %>') type('image/webp'), url('<%= serviceImage(service.slug) %>') type('image/jpeg'));">
   <div class="container">
     <span class="eyebrow"><%= parent ? service.title + ' · ' + parent.name : service.title %></span>
     <h1><%= service.title %> in <%= region.name %></h1>
@@ -60,7 +61,7 @@
       <% otherServices.forEach(function(s) { %>
         <a href="/<%= s.slug %>" class="card service-card">
           <div class="service-card-photo">
-            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="<%= s.title %>" />
+            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(s.slug), '(max-width: 800px) 100vw, 600px') %> loading="lazy" decoding="async" alt="<%= s.title %>" />
           </div>
           <div class="service-card-body">
             <h3><%= s.title %></h3>

@@ -13,7 +13,7 @@
 <section class="section blog-post">
   <div class="container blog-post-inner">
     <% if (post.cover_image) { %>
-      <img class="blog-post-cover" src="<%= post.cover_image %>?v=<%= assetVersion %>" alt="" />
+      <img class="blog-post-cover" src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 900px) 100vw, 860px') %> alt="" fetchpriority="high" decoding="async" />
     <% } %>
     <div class="blog-content">
       <%- post.content %>

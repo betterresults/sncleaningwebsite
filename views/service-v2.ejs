@@ -75,7 +75,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="h-hero s-hero">
-  <img class="h-hero-bg" src="<%= heroImg %>?v=<%= assetVersion %>" alt="" fetchpriority="high" width="1152" height="864" />
+  <img class="h-hero-bg" src="<%= heroImg %>?v=<%= assetVersion %>"<%- rs(heroImg, '100vw') %> alt="" decoding="async" fetchpriority="high" width="1152" height="864" />
   <div class="h-wrap h-hero-inner">
     <div class="h-hero-copy">
       <nav class="s-crumbs" aria-label="Breadcrumb">
@@ -101,7 +101,7 @@
             class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
         <input type="hidden" name="service" value="<%= service.booking_embed_url ? service.slug : '' %>" />
-        <p class="hidden-field"><label>Leave this empty <input name="bot-field" /></label></p>
+        <p class="hidden-field"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
         <div class="h-field">
           <label for="q-postcode">Postcode</label>
           <input id="q-postcode" name="postcode" type="text" required autocomplete="postal-code"
@@ -176,7 +176,7 @@
   <div class="h-wrap">
     <div class="h-panel h-why">
       <div class="h-why-media h-reveal">
-        <img src="/images/silvia.webp?v=<%= assetVersion %>" alt="Silvia Nedeva, owner of SN Cleaning Services" loading="lazy" width="720" height="960" />
+        <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '(max-width: 1000px) 90vw, 560px') %> alt="Silvia Nedeva, owner of SN Cleaning Services" loading="lazy" decoding="async" width="720" height="960" />
         <div class="h-why-badge"><strong>12</strong><span>years in<br />business</span></div>
       </div>
       <div class="h-why-copy">
@@ -316,7 +316,7 @@
     <div class="h-svc-grid">
       <% relatedServices.forEach(function (s) { %>
         <a href="/<%= s.slug %>" class="h-svc h-reveal">
-          <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>" alt="" loading="lazy" width="1152" height="864" />
+          <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(s.slug), '(max-width: 1000px) 50vw, 400px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />
           <span class="h-svc-card">
             <span class="h-svc-name"><%= s.title %></span>
             <span class="h-svc-meta">

@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const express = require('express');
 const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser');
@@ -58,6 +59,22 @@ const { serviceImage, GALLERY } = require('./data/media');
 const { servicePrice } = require('./data/prices');
 
 app.locals.serviceImage = serviceImage;
+
+// Responsive photos: scripts/build-images.js writes WebP copies at 480/800/1200px
+// into public/images/_r/. rs(src, sizes) returns the srcset + sizes attributes
+// for a local photo, or nothing if no copies exist (e.g. external images).
+const RS_WIDTHS = [480, 800, 1200];
+const rsCache = new Map();
+app.locals.rs = (src, sizes) => {
+  if (!src || !src.startsWith('/images/')) return '';
+  if (!rsCache.has(src)) {
+    const base = src.replace(/^\/images\//, '').replace(/\.(jpe?g|png|webp)$/i, '');
+    const have = RS_WIDTHS.filter((w) => fs.existsSync(path.join(__dirname, 'public/images/_r', `${base}-${w}.webp`)));
+    rsCache.set(src, have.length ? have.map((w) => `/images/_r/${base}-${w}.webp?v=${ASSET_VERSION} ${w}w`).join(', ') : '');
+  }
+  const set = rsCache.get(src);
+  return set ? ` srcset="${set}" sizes="${sizes || '100vw'}"` : '';
+};
 app.locals.servicePrice = servicePrice;
 
 // Where a "Get a quote" for a service should go: its own booking form when it
@@ -186,6 +203,7 @@ app.get('/', async (req, res) => {
     checklist,
     faqs,
     mapLink,
+    heroPreload: '/images/hero-living-room.jpg',
     isHome: true,
     coverageAreas: res.locals.coverageAreas,
     structuredData: [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])]
@@ -420,6 +438,7 @@ app.get('/:slug', async (req, res, next) => {
 
   res.render(v2 ? 'service-v2' : 'service-detail', {
     designV2: v2,
+    heroPreload: v2 ? ((page.images && page.images.length) ? page.images[0] : serviceImage(page.slug)) : null,
     mapLink,
     mapPages: mapLink ? mapLink.count : 0,
     title: page.meta_title || service.title,

@@ -134,6 +134,26 @@ function writeRobotsTxt() {
   console.log('Wrote dist/robots.txt');
 }
 
+// Inline our own stylesheets into every page so nothing blocks the first
+// paint (saves a round trip per file on mobile). Lightly minified.
+const cssCache = {};
+function inlineCss(html) {
+  return html.replace(/<link rel="stylesheet" href="\/css\/([a-z0-9-]+\.css)\?v=[^"]*"\s*\/?>/g, (tag, file) => {
+    const p = path.join(__dirname, '..', 'public', 'css', file);
+    if (!fs.existsSync(p)) return tag;
+    if (!cssCache[file]) {
+      cssCache[file] = fs.readFileSync(p, 'utf8')
+        .replace(/\/\*[\s\S]*?\*\//g, '')
+        .replace(/\s+/g, ' ')
+        .replace(/\s*([{}:;,>])\s*/g, '$1')
+        .replace(/;}/g, '}')
+        .replace(/<\/style/gi, '<\\/style')
+        .trim();
+    }
+    return `<style>${cssCache[file]}</style>`;
+  });
+}
+
 async function main() {
   // Fresh dist/
   fs.rmSync(DIST, { recursive: true, force: true });
@@ -147,7 +167,7 @@ async function main() {
         if (status !== 200 && status !== 404) {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
-        writeFile(route.out, body);
+        writeFile(route.out, inlineCss(body));
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
 

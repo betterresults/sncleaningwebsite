@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="a-hero-media">
-      <img src="/images/silvia.webp?v=<%= assetVersion %>" alt="Silvia Nedeva, owner of SN Cleaning Services"
+      <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '(max-width: 900px) 90vw, 520px') %> alt="Silvia Nedeva, owner of SN Cleaning Services"
            fetchpriority="high" width="720" height="960" />
       <div class="a-float a-float--top">
         <span class="h-stars" aria-hidden="true">★★★★★</span>
@@ -29,7 +29,7 @@
 <section class="h-section h-sand">
   <div class="h-wrap a-note">
     <div class="a-note-mark a-note-mark--photo" aria-hidden="true">
-      <img src="/images/silvia.webp?v=<%= assetVersion %>" alt="" width="720" height="960" loading="lazy" />
+      <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '240px') %> alt="" width="720" height="960" loading="lazy" decoding="async" />
     </div>
     <div>
       <p class="h-eyebrow">A note from the owner</p>
@@ -66,7 +66,7 @@
 
     <div class="a-bento">
       <article class="a-tile a-tile--photo a-tile--wide h-reveal">
-        <img src="/images/services/deep.jpg?v=<%= assetVersion %>" alt="" loading="lazy" width="1152" height="864" />
+        <img src="/images/services/deep.jpg?v=<%= assetVersion %>"<%- rs('/images/services/deep.jpg', '(max-width: 900px) 100vw, 800px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />
         <div class="a-tile-body">
           <h3>Professional products — even our own</h3>
           <p>We bring professional-grade products and equipment to every job. We even make our own SN limescale remover, because shop-bought wasn't good enough.</p>

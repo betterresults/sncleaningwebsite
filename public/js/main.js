@@ -60,9 +60,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return link && link.getAttribute('href');
     };
     const start = () => { const h = primaryBookingHref(); if (h) warmBooking(h); };
-    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
-    if (document.readyState === 'complete') idle(start, { timeout: 3000 });
-    else window.addEventListener('load', () => idle(start, { timeout: 3000 }));
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 300));
+    // Start as soon as the visitor does anything (scroll, tap, mouse, key), so
+    // the page itself always finishes loading first.
+    const kick = () => {
+      ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'].forEach((t) => window.removeEventListener(t, kick, { passive: true }));
+      idle(start, { timeout: 1500 });
+    };
+    ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'].forEach((t) => window.addEventListener(t, kick, { passive: true }));
     // A service picked in the homepage form: get that form ready too.
     document.addEventListener('change', (e) => {
       if (e.target.matches && e.target.matches('form[data-quote-form] select[name="service"]') && e.target.value) {
