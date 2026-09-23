@@ -125,17 +125,46 @@ app.use(async (req, res, next) => {
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
-  const services = await content.getServices();
+  const [services, areaPages, regions] = await Promise.all([
+    content.getServices(),
+    content.getAreaPages(),
+    content.getAllCoverageRegions()
+  ]);
   const faqPage = schema.buildFaqPage(faqs);
+
+  // Coverage map: each map area links to its local page when one exists
+  // (matched by coverage region, or by the parent region of a sub-area),
+  // preferring domestic > deep > end of tenancy > Airbnb pages. Areas with
+  // no page yet link to the quote form.
+  const SERVICE_PREF = ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning'];
+  const regionById = new Map(regions.map((r) => [r.id, r]));
+  const areaLinks = {};
+  areaPages
+    .filter((p) => p.services && p.coverage_regions)
+    .forEach((p) => {
+      const reg = p.coverage_regions;
+      const names = [reg.name];
+      if (reg.parent_id && regionById.get(reg.parent_id)) names.push(regionById.get(reg.parent_id).name);
+      const url = `/${p.services.slug}/${p.slug}`;
+      const rank = SERVICE_PREF.indexOf(p.services.slug) === -1 ? 99 : SERVICE_PREF.indexOf(p.services.slug);
+      names.forEach((n) => {
+        // an exact region match beats a parent match; then service preference
+        const score = (n === reg.name ? 0 : 100) + rank;
+        if (!areaLinks[n] || score < areaLinks[n].score) areaLinks[n] = { url, score };
+      });
+    });
+  const mapLink = (regionName) => (areaLinks[regionName] ? areaLinks[regionName].url : '#quote');
 
   res.render('index', {
     title: 'Professional Cleaning Services in London & Essex',
     metaDescription:
       'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
-    services: services.slice(0, 4),
+    services: services.slice(0, 6),
     testimonials,
     checklist,
     faqs,
+    mapLink,
+    isHome: true,
     coverageAreas: res.locals.coverageAreas,
     structuredData: [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])]
   });

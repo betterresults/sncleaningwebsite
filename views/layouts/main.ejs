@@ -37,6 +37,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
+  <% if (typeof isHome !== 'undefined' && isHome) { %>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css?v=<%= assetVersion %>" />
+  <% } %>
 
   <!-- Structured data -->
   <% if (typeof structuredData !== 'undefined') { %>
@@ -45,7 +49,8 @@
     <% }); %>
   <% } %>
 </head>
-<body class="<%= (currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %>">
+<% const isHomePage = typeof isHome !== 'undefined' && isHome; %>
+<body class="<%= (isHomePage || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %>">
   <%- include('../partials/header') %>
 
   <main>
@@ -54,7 +59,7 @@
 
   <%- include('../partials/footer') %>
 
-  <% if (currentPath !== '/contact' && currentPath.indexOf('/contact/') !== 0) { %>
+  <% if (!isHomePage && currentPath !== '/contact' && currentPath.indexOf('/contact/') !== 0) { %>
   <div class="sticky-bar">
     <div class="container sticky-bar-inner">
       <span class="sticky-bar-label"><span class="pulse-dot"></span> Need a quote?</span>
@@ -67,5 +72,6 @@
   <% } %>
 
   <script src="/js/main.js?v=<%= assetVersion %>"></script>
+  <% if (isHomePage) { %><script src="/js/home.js?v=<%= assetVersion %>" defer></script><% } %>
 </body>
 </html>
