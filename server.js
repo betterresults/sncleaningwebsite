@@ -154,12 +154,14 @@ function buildMapLink(areaPages, regions, servicePref, { onlyThese = false } = {
         if (!areaLinks[n] || score < areaLinks[n].score) areaLinks[n] = { url, score };
       });
     });
-  return (regionName) => (areaLinks[regionName] ? areaLinks[regionName].url : '#quote');
+  const link = (regionName) => (areaLinks[regionName] ? areaLinks[regionName].url : '#quote');
+  link.count = Object.keys(areaLinks).length;
+  return link;
 }
 
 // Service pages already moved to the new design (views/service-v2.ejs).
 // The rest still use views/service-detail.ejs until they are redesigned.
-const SERVICE_V2 = ['domestic-cleaning'];
+const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning'];
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
@@ -417,6 +419,7 @@ app.get('/:slug', async (req, res, next) => {
   res.render(v2 ? 'service-v2' : 'service-detail', {
     designV2: v2,
     mapLink,
+    mapPages: mapLink ? mapLink.count : 0,
     title: page.meta_title || service.title,
     metaDescription: page.meta_description || service.short_description,
     page,

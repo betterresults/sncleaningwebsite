@@ -12,6 +12,58 @@
     living: '<path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M3 12h18v5H3z"/><path d="M5 17v2M19 17v2"/>',
     general: '<path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/>'
   };
+  // Page copy per service. Only true, confirmed claims go here.
+  const COPY = {
+    'domestic-cleaning': {
+      h1: 'Domestic cleaning, done <em>properly</em>',
+      lead: 'Regular or one-off cleaning for your home by our own trained, insured and DBS-checked team. We bring professional products and equipment, and work to a checklist for every room.',
+      tilesEyebrow: 'Your schedule',
+      tilesTitle: 'A clean home, as often as you need it',
+      tilesIntro: "Book a regular visit and we'll send the same cleaner wherever we can, so they get to know your home. Or book a one-off clean before guests arrive, after a busy few weeks, or whenever you need a hand.",
+      tiles: [
+        ['Weekly', 'Your home stays on top, every week'],
+        ['Fortnightly', 'Regular help without the weekly commitment'],
+        ['Monthly', 'A thorough reset once a month'],
+        ['One-off', 'Whenever you need a hand']
+      ],
+      stepsTitle: 'Booked in a few minutes',
+      steps: [
+        ['Tell us about your home', "Your postcode, the number of rooms and how often you'd like us to come."],
+        ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
+        ['Come home to a clean house', 'Your cleaner arrives with everything needed and follows the checklist.']
+      ],
+      reviewMatch: /regular|weekly|clean/i,
+      finalTitle: 'Ready for a cleaner home?',
+      finalText: 'Tell us about your home, see your price and choose a date that suits you.'
+    },
+    'end-of-tenancy-cleaning': {
+      h1: 'End of tenancy cleaning, <em>ready for inspection</em>',
+      lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against — inside the oven, limescale, skirting boards and all — so you can hand back the keys with confidence.',
+      tilesEyebrow: 'Who we clean for',
+      tilesTitle: 'Moving out, moving in, or between tenants',
+      tilesIntro: 'Agents check the same things every time: the oven, limescale in the bathroom, skirting boards, marks on walls and doors. We pay extra attention to all of them, and we work to your moving day.',
+      tiles: [
+        ['Tenants', 'Moving out and want to hand back the keys with confidence'],
+        ['Landlords', 'Getting the property ready for the next tenant'],
+        ['Letting agents', 'A reliable team for check-outs and changeovers'],
+        ['Moving in', 'A fresh, clean start in your new home']
+      ],
+      stepsTitle: 'From quote to keys handed back',
+      steps: [
+        ['Tell us about the property', 'Your postcode, the number of bedrooms and bathrooms, and any extras like carpets.'],
+        ['See your price, pick your date', 'The booking form works out your price as you go. We work to your moving day.'],
+        ['Hand back the keys', 'We clean every room to the inspection checklist, so the property is ready for check-out.']
+      ],
+      reviewMatch: /tenancy/i,
+      finalTitle: 'Moving out soon?',
+      finalText: 'Tell us about the property, see your price and book the clean for your moving day.'
+    }
+  };
+  const copy = COPY[service.slug] || COPY['domestic-cleaning'];
+  const article = /^[aeiou]/i.test(name) ? 'an' : 'a';
+  const reviews = (typeof testimonials !== 'undefined' ? testimonials : []).slice()
+    .sort((a, b) => (copy.reviewMatch.test(b.quote) ? 1 : 0) - (copy.reviewMatch.test(a.quote) ? 1 : 0))
+    .slice(0, 3);
   const iconFor = (room) => {
     const r = room.toLowerCase();
     if (r.includes('kitchen')) return roomIcons.kitchen;
@@ -30,10 +82,9 @@
         <a href="/">Home</a><a href="/our-services">Services</a><span aria-current="page"><%= name %></span>
       </nav>
       <p class="h-eyebrow h-eyebrow--light"><%= name %> · London &amp; Essex</p>
-      <h1 class="h-display">Domestic cleaning, done <em>properly</em></h1>
+      <h1 class="h-display"><%- copy.h1 %></h1>
       <p class="h-lead">
-        Regular or one-off cleaning for your home by our own trained, insured and DBS-checked team.
-        We bring professional products and equipment, and work to a checklist for every room.
+        <%= copy.lead %>
       </p>
       <div class="s-hero-meta">
         <% if (price) { %><span class="s-price"><%= price %></span><% } %>
@@ -44,7 +95,7 @@
     </div>
 
     <div class="h-quote" id="quote">
-      <h2 class="h-quote-title">Get a <%= lower %> quote</h2>
+      <h2 class="h-quote-title">Get <%= article %> <%= lower %> quote</h2>
       <p class="h-quote-sub">Enter your postcode and email and we'll take you straight to the booking form.</p>
       <form name="quote" method="GET" action="/book/<%= service.slug %>" data-netlify="true" netlify-honeypot="bot-field"
             class="h-form" data-quote-form>
@@ -74,7 +125,7 @@
       <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m8.5 12 2.5 2.5 4.5-5"/></svg></span>Insured &amp; DBS-checked</li>
       <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.3 3.3 0 0 1 0 6.4M18 14.8c2 .6 3.2 2.3 3.5 5.2"/></svg></span>Our own team</li>
       <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 21h10M9 21V10h6v11M9 10 8 5h8l-1 5M10 5V3h4v2"/></svg></span>Professional products</li>
-      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4L12 3Z"/><path d="M18.5 15.5l.8 2 2 .7-2 .7-.8 2-.8-2-2-.7 2-.7.8-2Z"/></svg></span>A proper clean, not a quick wipe</li>
+      <li><span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></span>Free re-clean guarantee</li>
     </ul>
   </div>
 </section>
@@ -83,18 +134,14 @@
 <section class="h-section h-sand">
   <div class="h-wrap s-often">
     <div class="h-head">
-      <p class="h-eyebrow">Your schedule</p>
-      <h2 class="h-title">A clean home, as often as you need it</h2>
-      <p class="s-intro">
-        Book a regular visit and we'll send the same cleaner wherever we can, so they get to know your home.
-        Or book a one-off clean before guests arrive, after a busy few weeks, or whenever you need a hand.
-      </p>
+      <p class="h-eyebrow"><%= copy.tilesEyebrow %></p>
+      <h2 class="h-title"><%= copy.tilesTitle %></h2>
+      <p class="s-intro"><%= copy.tilesIntro %></p>
     </div>
     <ul class="s-freq">
-      <li class="h-reveal"><strong>Weekly</strong><span>Your home stays on top, every week</span></li>
-      <li class="h-reveal"><strong>Fortnightly</strong><span>Regular help without the weekly commitment</span></li>
-      <li class="h-reveal"><strong>Monthly</strong><span>A thorough reset once a month</span></li>
-      <li class="h-reveal"><strong>One-off</strong><span>Whenever you need a hand</span></li>
+      <% copy.tiles.forEach(function (t) { %>
+        <li class="h-reveal"><strong><%= t[0] %></strong><span><%= t[1] %></span></li>
+      <% }); %>
     </ul>
   </div>
 </section>
@@ -149,8 +196,8 @@
             <div><strong>Professional products</strong><p>The right product for every surface — we even make our own limescale remover.</p></div>
           </li>
           <li class="h-reveal">
-            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 4.6L18.5 9l-4.7 1.4L12 15l-1.8-4.6L5.5 9l4.7-1.4L12 3Z"/><path d="M18.5 15.5l.8 2 2 .7-2 .7-.8 2-.8-2-2-.7 2-.7.8-2Z"/></svg></span>
-            <div><strong>Trained to a professional standard</strong><p>Not someone sent to wipe and dust — cleaners with the knowledge and tools to get results you can see.</p></div>
+            <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></span>
+            <div><strong>Re-clean guarantee</strong><p>Tell us within 24 hours if something was missed and we come back, free.</p></div>
           </li>
         </ul>
         <a href="/about" class="h-btn h-btn--light">About the company</a>
@@ -164,24 +211,16 @@
   <div class="h-wrap">
     <div class="h-head h-head--center">
       <p class="h-eyebrow">How it works</p>
-      <h2 class="h-title">Booked in a few minutes</h2>
+      <h2 class="h-title"><%= copy.stepsTitle %></h2>
     </div>
     <ol class="h-steps">
-      <li class="h-step h-reveal">
-        <span class="h-step-num">1</span>
-        <h3>Tell us about your home</h3>
-        <p>Your postcode, the number of rooms and how often you'd like us to come.</p>
-      </li>
-      <li class="h-step h-reveal">
-        <span class="h-step-num">2</span>
-        <h3>See your price, pick a date</h3>
-        <p>The booking form works out your price as you go. No hidden add-ons later.</p>
-      </li>
-      <li class="h-step h-reveal">
-        <span class="h-step-num">3</span>
-        <h3>Come home to a clean house</h3>
-        <p>Your cleaner arrives with everything needed and follows the checklist.</p>
-      </li>
+      <% copy.steps.forEach(function (st, i) { %>
+        <li class="h-step h-reveal">
+          <span class="h-step-num"><%= i + 1 %></span>
+          <h3><%= st[0] %></h3>
+          <p><%= st[1] %></p>
+        </li>
+      <% }); %>
     </ol>
     <div class="h-center">
       <a href="#quote" class="h-btn h-btn--primary">Get a quote</a>
@@ -190,7 +229,7 @@
 </section>
 
 <!-- ============ REVIEWS ============ -->
-<% if (typeof testimonials !== 'undefined' && testimonials.length) { %>
+<% if (reviews.length) { %>
 <section class="h-section h-sand">
   <div class="h-wrap">
     <div class="h-head h-head--split">
@@ -204,7 +243,7 @@
       <% } %>
     </div>
     <div class="h-reviews">
-      <% testimonials.slice(0, 3).forEach(function (t) { %>
+      <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">
           <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
           <blockquote>“<%= t.quote %>”</blockquote>
@@ -227,7 +266,7 @@
         <div><strong>32</strong><span>London boroughs</span></div>
         <div><strong>7</strong><span>Essex areas</span></div>
       </div>
-      <p class="h-cov-hint">Tap your area on the map, or check your postcode to get your price.</p>
+      <p class="h-cov-hint"><%= (typeof mapPages !== 'undefined' && mapPages > 3) ? 'Tap your area on the map to see our local ' + lower + ' page.' : 'Tap your area on the map, or check your postcode to get your price.' %></p>
       <a href="#quote" class="h-btn h-btn--primary">Check your postcode</a>
       <ul class="h-legend" aria-hidden="true">
         <li><span class="h-swatch h-swatch--london"></span>London</li>
@@ -297,8 +336,8 @@
   <div class="h-wrap">
     <div class="h-panel h-final">
       <div>
-        <h2 class="h-title h-title--light">Ready for a cleaner home?</h2>
-        <p>Tell us about your home, see your price and choose a date that suits you.</p>
+        <h2 class="h-title h-title--light"><%= copy.finalTitle %></h2>
+        <p><%= copy.finalText %></p>
       </div>
       <a href="<%= bookHref(service) %>" class="h-btn h-btn--light">Book <%= lower %></a>
     </div>
