@@ -7,6 +7,7 @@ const SERVICE_IMAGES = {
   'after-builders-cleaning': '/images/services/builders.jpg',
   'carpet-upholstery-mattress-cleaning': '/images/services/carpet.jpg',
   'carpet-cleaning': '/images/services/carpet.jpg',
+  'mattress-cleaning': '/images/rooms/room.jpg',
   'office-cleaning': '/images/services/office.jpg',
   'school-cleaning': '/images/services/school.jpg',
   'nursery-cleaning': '/images/services/nursery.jpg'

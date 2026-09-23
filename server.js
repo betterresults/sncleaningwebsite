@@ -87,7 +87,18 @@ const BOOKING_LANDING_EMBED = 'https://dilvon.com/book/sn-cleaning-services/main
 const COMMERCIAL_SLUGS = ['office-cleaning', 'nursery-cleaning'];
 app.locals.commercialUrl = 'https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=domestic_site';
 const isDomestic = (s) => !COMMERCIAL_SLUGS.includes(s.slug);
-app.locals.bookHref = (service) => (service && service.booking_embed_url ? `/book/${service.slug}` : '/book');
+// Upholstery and mattress cleaning are booked through the carpet form (Dilvon
+// lists them together as "Carpet, Upholstery and Mattress Cleaning").
+const BOOK_ALIAS = { 'upholstery-cleaning': 'carpet-cleaning-services', 'mattress-cleaning': 'carpet-cleaning-services' };
+// The slug of the online booking form for a service, or null if it has none.
+app.locals.bookSlug = (service) => (!service ? null : service.booking_embed_url ? service.slug : BOOK_ALIAS[service.slug] || null);
+// Where "Get a quote" goes: the service's booking form, or (no online form)
+// the quote request form on the service's own page.
+app.locals.bookHref = (service) => {
+  if (!service) return '/book';
+  const slug = app.locals.bookSlug(service);
+  return slug ? `/book/${slug}` : `/${service.slug}#quote`;
+};
 
 // Runs on every request. Sets up everything every page needs regardless of
 // route: current path, canonical URL, the nav dropdown's service list, sitewide
@@ -180,7 +191,7 @@ function buildMapLink(areaPages, regions, servicePref, { onlyThese = false } = {
 
 // Service pages already moved to the new design (views/service-v2.ejs).
 // The rest still use views/service-detail.ejs until they are redesigned.
-const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning'];
+const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
