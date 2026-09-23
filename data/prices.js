@@ -2,8 +2,8 @@
 // Services domestic price list. Hourly rates are per cleaner per hour.
 // Services not listed here simply show no price.
 const FROM_PRICES = {
-  'domestic-cleaning': 'From £22/hour',
-  'residential-cleaning': 'From £22/hour',
+  'domestic-cleaning': 'From £23/hour',
+  'residential-cleaning': 'From £23/hour',
   'deep-house-cleaning': 'From £23/hour',
   'end-of-tenancy-cleaning': 'From £179',
   'carpet-cleaning-services': 'From £20',

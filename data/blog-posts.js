@@ -74,7 +74,7 @@ module.exports = [
 <h2>What the price covers</h2>
 <ul>
   <li>Our own DBS-checked, insured staff — not a gig app sending whoever is free.</li>
-  <li>We bring the products and kit, including eco-friendly supplies if you ask.</li>
+  <li>We bring professional products and kit.</li>
   <li>If we miss something, tell us within 24 hours and we come back and re-clean it free.</li>
 </ul>
 <p>Weekly and fortnightly visits are usually less per clean than a one-off, because we already know the property. We will put that in the quote rather than hide it behind a “from” price on the homepage.</p>
