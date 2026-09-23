@@ -55,8 +55,10 @@ const testimonials = require('./data/testimonials');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
 const { serviceImage, GALLERY } = require('./data/media');
+const { servicePrice } = require('./data/prices');
 
 app.locals.serviceImage = serviceImage;
+app.locals.servicePrice = servicePrice;
 
 // Runs on every request. Sets up everything every page needs regardless of
 // route: current path, canonical URL, the nav dropdown's service list, sitewide

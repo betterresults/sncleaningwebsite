@@ -359,14 +359,18 @@ body.nav-open { overflow: hidden; }
   margin: 0 0 18px;
 }
 .quote-form { display: flex; flex-direction: column; gap: 12px; }
-.quote-form input {
+.quote-form input,
+.quote-form select {
   padding: 13px 16px;
   border: 1.5px solid var(--color-border);
   border-radius: 10px;
   font-size: 16px;
   text-align: center;
 }
-.quote-form input:focus { outline: none; border-color: var(--color-primary); }
+.quote-form input:focus,
+.quote-form select:focus { outline: none; border-color: var(--color-primary); }
+.quote-form select { background: #fff; color: var(--color-dark); font-family: inherit; text-align-last: center; }
+.service-card-price { display: inline-block; margin-top: 10px; font-weight: 600; font-size: 0.9rem; color: var(--color-dark); }
 .quote-card-note { font-size: 0.78rem; color: var(--color-muted); margin: 14px 0 18px; }
 .quote-card-badges {
   display: flex;
@@ -732,7 +736,7 @@ input:focus, select:focus, textarea:focus {
 }
 .footer-social a:hover { color: #fff; }
 .footer-col h4 { color: #fff; font-size: 0.95rem; margin-bottom: 16px; }
-.footer-col ul li { margin-bottom: 10px; }
+.footer-col ul li { margin-bottom: 10px; font-size: 0.92rem; color: #b9cbc4; line-height: 1.5; }
 .footer-col a { color: #b9cbc4; font-size: 0.92rem; }
 .footer-col a:hover { color: #fff; }
 .footer-bottom {

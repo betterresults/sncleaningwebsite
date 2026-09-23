@@ -1,8 +1,8 @@
 <section class="hero">
   <div class="container hero-inner">
     <div class="hero-text">
-      <span class="eyebrow">London &amp; Essex</span>
-      <h1>Cleaning for real homes,<br class="break-mobile" /> done by our own team</h1>
+      <span class="eyebrow">12 years in business · London &amp; Essex</span>
+      <h1>Professional cleaning services in London &amp; Essex</h1>
       <p class="hero-lead">
         Domestic, end of tenancy and Airbnb cleans across London and Essex.
         Insured, DBS-checked staff — not a gig app. Tell us about the property and we'll quote you the same weekday.
@@ -30,6 +30,16 @@
       <h3>Request a quote</h3>
       <p class="quote-card-sub">We'll come back to you with a price — no payment to enquire.</p>
       <form action="/contact" method="GET" class="quote-form">
+        <select name="service" aria-label="Type of cleaning">
+          <option value="">What type of cleaning?</option>
+          <option value="Residential Cleaning">Domestic / regular cleaning</option>
+          <option value="End of Tenancy Cleaning">End of tenancy cleaning</option>
+          <option value="Deep House Cleaning">Deep cleaning</option>
+          <option value="Airbnb Cleaning">Airbnb cleaning</option>
+          <option value="After Builders Cleaning">After builders cleaning</option>
+          <option value="Carpet, Upholstery &amp; Mattress Cleaning">Carpet, upholstery or mattress</option>
+          <option value="Other">Something else</option>
+        </select>
         <input type="text" name="postcode" placeholder="Your postcode" aria-label="Postcode" autocomplete="postal-code" />
         <button type="submit" class="btn btn-primary btn-block">Request a quote</button>
       </form>
@@ -60,6 +70,7 @@
           <div class="service-card-body">
             <h3><%= service.title %></h3>
             <p><%= service.short_description %></p>
+            <% if (servicePrice(service.slug)) { %><span class="service-card-price"><%= servicePrice(service.slug) %></span><% } %>
             <span class="card-link">What's included</span>
           </div>
         </a>
@@ -90,7 +101,7 @@
     <div class="why-us-media">
       <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="An SN Cleaning Services cleaner" />
       <div class="stat-card-grid stat-card-grid--overlay">
-        <div class="stat-card"><strong>10+</strong><span>Years in the area</span></div>
+        <div class="stat-card"><strong>12</strong><span>Years in business</span></div>
         <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
         <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
         <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
