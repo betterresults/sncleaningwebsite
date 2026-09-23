@@ -55,8 +55,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <%# Web fonts load without blocking the first paint (text shows in a fallback font, then swaps). %>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap"></noscript>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=optional" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=optional"></noscript>
   <% if (typeof heroPreload !== 'undefined' && heroPreload) { %>
     <link rel="preload" as="image" href="<%= heroPreload %>?v=<%= assetVersion %>" imagesrcset="<%= (rs(heroPreload, '100vw').match(/srcset="([^"]+)"/) || [,''])[1] %>" imagesizes="100vw" fetchpriority="high">
   <% } %>
@@ -102,7 +102,7 @@
   </a>
   <% } %>
 
-  <script src="/js/main.js?v=<%= assetVersion %>"></script>
+  <script src="/js/main.js?v=<%= assetVersion %>" defer></script>
   <% if (isHomePage) { %><script src="/js/home.js?v=<%= assetVersion %>" defer></script><% } %>
 </body>
 </html>
