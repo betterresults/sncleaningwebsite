@@ -43,7 +43,7 @@ const SITE_DEFAULTS = {
     facebook: '',
     instagram: ''
   },
-  googleBusinessUrl: null,
+  googleBusinessUrl: 'https://share.google/aZm6Leu555SOn4IvZ',
   logoUrl: '/images/logo.png',
   defaultOgImage: '/images/og-image.jpg',
   whatsappUrl: whatsappHref('020 3835 5033')
@@ -96,7 +96,7 @@ app.use(async (req, res, next) => {
             facebook: isPlaceholderSocial(facebook) ? '' : facebook,
             instagram: isPlaceholderSocial(instagram) ? '' : instagram
           },
-          googleBusinessUrl: settings.google_business_url || null,
+          googleBusinessUrl: settings.google_business_url || SITE_DEFAULTS.googleBusinessUrl,
           logoUrl: settings.logo_url || SITE_DEFAULTS.logoUrl,
           defaultOgImage: settings.default_og_image || SITE_DEFAULTS.defaultOgImage,
           whatsappUrl: whatsappHref(phone)

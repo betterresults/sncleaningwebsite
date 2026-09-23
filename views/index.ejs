@@ -119,9 +119,9 @@
 <section class="section testimonials alt-bg">
   <div class="container">
     <div class="section-heading">
-      <span class="eyebrow">Customers</span>
-      <h2>What people tell us</h2>
-      <p>A few comments from jobs around London. <% if (site.googleBusinessUrl) { %><a href="<%= site.googleBusinessUrl %>" target="_blank" rel="noopener">Read recent Google reviews</a>.<% } else { %>Ask us for recent Google reviews when you enquire.<% } %></p>
+      <span class="eyebrow">Google reviews</span>
+      <h2>What our customers say</h2>
+      <p><strong>Rated 5.0 ★ on Google.</strong> Real reviews, word for word.</p>
     </div>
     <div class="grid grid-3">
       <% testimonials.forEach(function(t) { %>
@@ -132,6 +132,11 @@
         </div>
       <% }); %>
     </div>
+    <% if (site.googleBusinessUrl) { %>
+    <div class="center-cta">
+      <a href="<%= site.googleBusinessUrl %>" class="btn btn-outline" target="_blank" rel="noopener">Read all our reviews on Google</a>
+    </div>
+    <% } %>
   </div>
 </section>
 
