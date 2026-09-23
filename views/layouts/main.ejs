@@ -34,6 +34,24 @@
     <meta name="twitter:image" content="<%= ogImage %>" />
   <% } %>
 
+  <!-- Booking forms (Dilvon) and their data: connect early so forms open fast -->
+  <link rel="preconnect" href="https://dilvon.com" />
+  <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
+  <!-- Instant page changes: booking pages are prepared as soon as a page with a
+       booking link loads; every other internal page is prepared on hover/touch. -->
+  <script type="speculationrules">
+  {
+    "prerender": [
+      { "tag": "booking", "where": { "href_matches": "/book{/*}?" }, "eagerness": "immediate" },
+      { "tag": "site", "where": { "and": [
+          { "href_matches": "/*" },
+          { "not": { "href_matches": "/book{/*}?" } },
+          { "not": { "href_matches": "/contact/success{/*}?" } },
+          { "not": { "selector_matches": "[target=_blank], [download]" } }
+        ] }, "eagerness": "moderate" }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />

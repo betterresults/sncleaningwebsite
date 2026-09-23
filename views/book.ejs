@@ -29,7 +29,7 @@
     <div class="b-frame">
       <iframe
         id="booking-frame"
-        src="<%= embedUrl %>"
+        data-src="<%= embedUrl %>"
         data-form-origin="<%= formOrigin %>"
         title="<%= embedTitle %>"
         style="width:100%;border:0;min-height:720px;display:block;"
@@ -48,4 +48,5 @@
   </div>
 </section>
 
-<script src="/js/book.js?v=<%= assetVersion %>"></script>
+<%# Inline so the form starts loading the moment the iframe is parsed. %>
+<script><%- bookScript %></script>

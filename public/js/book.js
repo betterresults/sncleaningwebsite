@@ -8,8 +8,9 @@
   var FORM_ORIGIN = frame.getAttribute('data-form-origin');
   var here = new URLSearchParams(window.location.search);
 
+  var base = frame.getAttribute('data-src') || frame.getAttribute('src');
   try {
-    var src = new URL(frame.getAttribute('src'));
+    var src = new URL(base);
     // Dilvon pre-fills from prefill_email / prefill_postcode; the plain names
     // are passed too in case a form reads those.
     ['postcode', 'email'].forEach(function (key) {
@@ -21,7 +22,7 @@
     });
     src.searchParams.set('embed_origin', window.location.origin);
     frame.setAttribute('src', src.toString());
-  } catch (e) { /* keep the original src */ }
+  } catch (e) { frame.setAttribute('src', base); }
 
   // "Quoting for RM3 0SH" under the heading when a postcode came with them.
   var pc = (here.get('postcode') || '').trim().toUpperCase();

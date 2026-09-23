@@ -20,6 +20,57 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Booking forms load in advance. The forms are hosted by Dilvon inside our
+  // /book pages; loading the booking page once in a hidden frame puts the
+  // form's files in the browser cache, so when the customer clicks
+  // "Get a quote" the form opens almost instantly. Skipped on data-saver and
+  // very slow connections, and on the booking pages themselves.
+  const warmed = new Set();
+  const warmBooking = (href) => {
+    try {
+      const url = new URL(href, location.href);
+      if (url.origin !== location.origin || !/^\/book(\/|$)/.test(url.pathname)) return;
+      const key = url.pathname.replace(/\/?$/, '/');
+      if (warmed.has(key)) return;
+      warmed.add(key);
+      try { if (sessionStorage.getItem('warm:' + key)) return; } catch (_) {}
+      const f = document.createElement('iframe');
+      f.src = key;
+      f.setAttribute('aria-hidden', 'true');
+      f.tabIndex = -1;
+      f.title = '';
+      f.style.cssText = 'position:absolute;left:-9999px;top:0;width:400px;height:600px;border:0;opacity:0;pointer-events:none;';
+      f.addEventListener('load', () => {
+        try { sessionStorage.setItem('warm:' + key, '1'); } catch (_) {}
+        setTimeout(() => f.remove(), 8000); // let the form finish loading its files
+      });
+      document.body.appendChild(f);
+    } catch (_) { /* never block the page */ }
+  };
+  const conn = navigator.connection || {};
+  const slow = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
+  if (!slow && !/^\/book(\/|$)/.test(location.pathname)) {
+    const primaryBookingHref = () => {
+      const form = document.querySelector('form[data-quote-form]');
+      if (form) {
+        const svc = form.elements.service && form.elements.service.value;
+        return svc ? '/book/' + svc : form.getAttribute('action');
+      }
+      const link = document.querySelector('a[href^="/book"]');
+      return link && link.getAttribute('href');
+    };
+    const start = () => { const h = primaryBookingHref(); if (h) warmBooking(h); };
+    const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 1500));
+    if (document.readyState === 'complete') idle(start, { timeout: 3000 });
+    else window.addEventListener('load', () => idle(start, { timeout: 3000 }));
+    // A service picked in the homepage form: get that form ready too.
+    document.addEventListener('change', (e) => {
+      if (e.target.matches && e.target.matches('form[data-quote-form] select[name="service"]') && e.target.value) {
+        warmBooking('/book/' + e.target.value);
+      }
+    });
+  }
+
   // Card click feedback: a soft ripple from the tap point (CSS does the press).
   if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
     document.addEventListener('pointerdown', (e) => {

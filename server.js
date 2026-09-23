@@ -62,6 +62,8 @@ app.locals.servicePrice = servicePrice;
 
 // Where a "Get a quote" for a service should go: its own booking form when it
 // has one (services.booking_embed_url), otherwise the service chooser at /book.
+const BOOK_SCRIPT = require('fs').readFileSync(require('path').join(__dirname, 'public/js/book.js'), 'utf8');
+app.locals.bookScript = BOOK_SCRIPT;
 const BOOKING_LANDING_EMBED = 'https://dilvon.com/book/sn-cleaning-services/main-landing-1790164444462?embedded=true';
 // Commercial work lives on the SN Clean site. Office and nursery cleaning are
 // listed there, not here; the link is tagged so SN Clean can see the referral.
