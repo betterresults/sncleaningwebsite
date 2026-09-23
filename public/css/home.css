@@ -496,7 +496,7 @@
 
 @media (max-width: 1000px) {
   .a-hero-inner, .a-who { grid-template-columns: 1fr; }
-  .a-hero-media { max-width: 520px; margin-inline: auto; }
+  .a-hero-media { width: 100%; max-width: 520px; margin-inline: auto; } /* full width before the photo loads, so nothing jumps */
   .a-num-grid { grid-template-columns: repeat(2, 1fr); row-gap: 28px; }
   .a-bento { grid-template-columns: 1fr 1fr; }
 }
