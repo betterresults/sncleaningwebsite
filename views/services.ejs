@@ -24,7 +24,7 @@
             <% }); %>
           </ul>
           <div class="service-detail-actions">
-            <a href="/contact?service=<%= encodeURIComponent(service.title) %>" class="btn btn-primary">Request a quote</a>
+            <a href="<%= bookHref(service) %>" class="btn btn-primary">Get a quote</a>
             <% if (service.hasDetailPage) { %>
               <a href="/<%= service.slug %>" class="btn btn-outline">What's included</a>
             <% } %>

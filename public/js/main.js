@@ -20,6 +20,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Card click feedback: a soft ripple from the tap point (CSS does the press).
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.addEventListener('pointerdown', (e) => {
+      const card = e.target.closest('a.h-svc, a.service-card');
+      if (!card || e.button > 0) return;
+      const r = card.getBoundingClientRect();
+      const dot = document.createElement('span');
+      dot.className = 'tap-ripple';
+      dot.style.left = (e.clientX - r.left) + 'px';
+      dot.style.top = (e.clientY - r.top) + 'px';
+      card.appendChild(dot);
+      dot.addEventListener('animationend', () => dot.remove());
+    });
+  }
+
   // Services dropdown: tap-to-open on mobile/tablet (hover doesn't work on touch).
   // 1040px matches the .main-nav collapse breakpoint in style.css — must stay in sync.
   document.querySelectorAll('.nav-dropdown > a').forEach((link) => {

@@ -40,11 +40,20 @@ async function buildRoutes() {
     { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view
   ];
 
-  const [servicePages, blogPosts, areaPages] = await Promise.all([
+  const [servicePages, blogPosts, areaPages, services] = await Promise.all([
     content.getServicePages(),
     content.getBlogPosts(),
-    content.getAreaPages()
+    content.getAreaPages(),
+    content.getServices()
   ]);
+
+  // Booking pages: the chooser, plus one per service that has an online form.
+  const bookRoutes = [
+    { url: '/book', out: 'book/index.html', sitemap: false },
+    ...services
+      .filter((s) => s.booking_embed_url)
+      .map((s) => ({ url: `/book/${s.slug}`, out: `book/${s.slug}/index.html`, sitemap: false }))
+  ];
 
   // Service hub pages live at site root (/{slug}/, not /services/{slug}/) —
   // matching the exact URLs already indexed on sncleaningservices.co.uk
@@ -77,7 +86,7 @@ async function buildRoutes() {
       lastmod: p.updated_at
     }));
 
-  return [...fixed, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
+  return [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
 }
 
 function fetchHtml(url) {

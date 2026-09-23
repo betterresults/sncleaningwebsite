@@ -10,7 +10,7 @@
       <span>Re-clean guarantee</span>
     </div>
     <div class="page-hero-actions">
-      <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+      <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>
     </div>
   </div>
 </section>
@@ -158,6 +158,6 @@
       <h2>Ready to book <%= service.title.toLowerCase() %> in <%= region.name %>?</h2>
       <p>Tell us the postcode and we'll come back with a quote.</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+    <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>
   </div>
 </section>

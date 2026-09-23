@@ -153,6 +153,8 @@
   transition: border-color .15s, box-shadow .15s;
 }
 .h-field textarea { resize: vertical; min-height: 84px; }
+.h-opt { font-weight: 400; color: var(--h-muted); }
+.h-field input[type="email"]:user-invalid + .h-error { display: block; }
 .h-field input:focus, .h-field select:focus, .h-field textarea:focus {
   outline: none; border-color: var(--h-primary); box-shadow: 0 0 0 4px rgba(31, 107, 102, .14); background: #fff;
 }
@@ -183,6 +185,17 @@
 .h-svc img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2, .7, .2, 1); }
 .h-svc::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 30, 27, .35), transparent 45%); }
 .h-svc:hover img { transform: scale(1.05); }
+/* press feedback: card dips, label lifts, arrow shoots right (ripple from main.js) */
+.h-svc { transition: transform .3s cubic-bezier(.2, .7, .2, 1), box-shadow .3s; }
+.h-svc:hover { box-shadow: 0 18px 38px rgba(10, 30, 27, .16); }
+.h-svc:active { transform: scale(.965); box-shadow: 0 6px 14px rgba(10, 30, 27, .14); transition-duration: .09s; }
+.h-svc:active .h-svc-card { transform: translateY(-4px); }
+.h-svc:active .h-arrow { transform: translateX(6px) scale(1.08); }
+.h-svc-card { transition: transform .2s cubic-bezier(.2, .7, .2, 1); }
+@media (prefers-reduced-motion: reduce) {
+  .h-svc, .h-svc img, .h-svc-card, .h-arrow { transition: none; }
+  .h-svc:active, .h-svc:active .h-svc-card, .h-svc:active .h-arrow { transform: none; }
+}
 .h-svc-card {
   position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 1;
   display: grid; gap: 10px;
@@ -363,7 +376,20 @@
   .h-step:not(:last-child)::after { display: none; }
 }
 @media (max-width: 600px) {
-  .h-hero::before { background: linear-gradient(180deg, rgba(20, 48, 44, .93), rgba(20, 48, 44, .97)); }
+  /* Photo shows at the top, fading into the dark panel behind the form */
+  .h-hero { padding-top: 110px; }
+  .h-hero-bg { height: 560px; object-position: 55% 60%; }
+  .h-hero::before {
+    background: linear-gradient(180deg,
+      rgba(20, 48, 44, .10) 0,
+      rgba(20, 48, 44, .55) 110px,
+      rgba(20, 48, 44, .86) 300px,
+      rgba(29, 63, 59, .97) 460px,
+      var(--h-deep) 560px);
+  }
+  .h-hero-points { display: none; }
+  .h-rating { margin-bottom: 4px; }
+  .h-hero .h-display { text-shadow: 0 2px 18px rgba(8, 25, 22, .45); }
   .h-field-row { grid-template-columns: 1fr; }
   .h-trust { gap: 14px; }
   .h-trust li { font-size: .88rem; }
@@ -471,4 +497,33 @@
   .a-bento { grid-template-columns: 1fr; }
   .a-tile--wide { grid-column: auto; }
   .a-who-list { grid-template-columns: 1fr; }
+}
+
+
+/* ==========================================================================
+   BOOKING PAGES (/book, /book/{service}) — b- classes
+   ========================================================================== */
+.b-page { padding-block: clamp(28px, 5vw, 56px) clamp(56px, 8vw, 96px); }
+.b-crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: .85rem; color: var(--h-muted); margin-bottom: clamp(20px, 3vw, 32px); }
+.b-crumbs a { color: var(--h-primary); text-decoration: none; }
+.b-crumbs a::after { content: "/"; margin-left: 8px; color: var(--h-line); }
+.b-head { max-width: 720px; margin: 0 auto clamp(24px, 3vw, 36px); text-align: center; }
+.b-lead { margin: 14px 0 0; color: var(--h-text); font-size: 1.05rem; line-height: 1.6; }
+.b-for {
+  display: inline-flex; align-items: center; gap: 6px; margin: 16px 0 0;
+  padding: 6px 14px; border-radius: 999px; background: var(--h-sage-soft); color: var(--h-ink); font-size: .9rem;
+}
+.b-for[hidden] { display: none; }
+.b-frame {
+  max-width: 980px; margin-inline: auto;
+  background: #fff; border-radius: var(--h-radius);
+  padding: clamp(6px, 1.5vw, 16px);
+  box-shadow: 0 24px 60px rgba(20, 48, 44, .1);
+  border: 1px solid var(--h-line);
+}
+.b-fallback { padding: 24px; text-align: center; }
+.b-help { text-align: center; margin: 24px 0 0; color: var(--h-muted); font-size: .95rem; }
+.b-help a { color: var(--h-primary); font-weight: 600; }
+@media (max-width: 600px) {
+  .b-frame { border-radius: 16px; padding: 4px; margin-inline: -6px; }
 }

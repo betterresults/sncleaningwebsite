@@ -15,7 +15,7 @@
       <h1 class="h-display">Professional cleaning services in London &amp; Essex</h1>
       <p class="h-lead">
         Domestic, end of tenancy and deep cleaning by our own insured, DBS-checked team.
-        Tell us about the property and we'll send you a price — usually the same weekday.
+        Choose your service, tell us about the property and get your price online.
       </p>
       <ul class="h-hero-points">
         <li>Our own cleaners, never subcontractors</li>
@@ -28,8 +28,8 @@
     </div>
 
     <div class="h-quote" id="quote">
-      <h2 class="h-quote-title">Request a quote</h2>
-      <p class="h-quote-sub">No payment to enquire. We reply with a price, usually the same weekday.</p>
+      <h2 class="h-quote-title">Get a quote</h2>
+      <p class="h-quote-sub">Enter your postcode and we'll take you straight to the right booking form.</p>
 
       <div class="h-area-tags" aria-label="Areas we cover">
         <span class="h-tag">London</span>
@@ -37,28 +37,22 @@
         <a class="h-tag h-tag--link" href="#areas">See all areas</a>
       </div>
 
-      <form
-        name="quote"
-        method="POST"
-        action="/contact/success"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        class="h-form"
-      >
+      <%# Goes to /book/{service}?postcode=&email= (or /book when no service is
+          chosen). The postcode and email are also saved to the Netlify "quote"
+          form in the background, so an enquiry is never lost if someone stops
+          half-way through the booking form (see home.js). %>
+      <form name="quote" method="GET" action="/book" data-netlify="true" netlify-honeypot="bot-field"
+            class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
         <p class="hidden-field"><label>Leave this empty <input name="bot-field" /></label></p>
 
         <div class="h-field">
-          <label for="q-service">Type of cleaning</label>
-          <select id="q-service" name="service" required>
-            <option value="">Choose one</option>
-            <option>Domestic / regular cleaning</option>
-            <option>End of tenancy cleaning</option>
-            <option>Deep cleaning</option>
-            <option>Airbnb cleaning</option>
-            <option>After builders cleaning</option>
-            <option>Carpet, upholstery or mattress</option>
-            <option>Something else</option>
+          <label for="q-service">Service <span class="h-opt">(optional)</span></label>
+          <select id="q-service" name="service">
+            <option value="">Not sure — see all services</option>
+            <% (bookable || []).forEach(function (s) { %>
+              <option value="<%= s.slug %>"><%= s.title %></option>
+            <% }); %>
           </select>
         </div>
 
@@ -66,27 +60,19 @@
           <div class="h-field">
             <label for="q-postcode">Postcode</label>
             <input id="q-postcode" name="postcode" type="text" required autocomplete="postal-code"
+                   autocapitalize="characters" placeholder="e.g. RM3 0SH"
                    pattern="\s*[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s*[0-9][A-Za-z]{2}\s*" aria-describedby="q-postcode-error" />
             <span class="h-error" id="q-postcode-error">Please enter a full UK postcode, e.g. RM3 0SH</span>
           </div>
           <div class="h-field">
-            <label for="q-name">Your name</label>
-            <input id="q-name" name="name" type="text" required autocomplete="name" />
+            <label for="q-email">Email</label>
+            <input id="q-email" name="email" type="email" required autocomplete="email"
+                   placeholder="you@example.com" aria-describedby="q-email-error" />
+            <span class="h-error" id="q-email-error">Please enter a valid email address</span>
           </div>
         </div>
 
-        <div class="h-field">
-          <label for="q-contact">Phone or email</label>
-          <input id="q-contact" name="contact" type="text" required autocomplete="tel" />
-        </div>
-
-        <div class="h-field">
-          <label for="q-details">Tell us about the job</label>
-          <textarea id="q-details" name="details" rows="3" required
-                    placeholder="e.g. 2-bed flat, weekly clean, we have a cat"></textarea>
-        </div>
-
-        <button type="submit" class="h-btn h-btn--primary h-btn--block">Request a quote</button>
+        <button type="submit" class="h-btn h-btn--primary h-btn--block">Get my quote <span aria-hidden="true">→</span></button>
       </form>
     </div>
   </div>
@@ -185,7 +171,7 @@
       <li class="h-step h-reveal">
         <span class="h-step-num">2</span>
         <h3>Get a clear price</h3>
-        <p>We reply with a quote — usually the same weekday. No hidden add-ons later.</p>
+        <p>The booking form works out your price as you go. No hidden add-ons later.</p>
       </li>
       <li class="h-step h-reveal">
         <span class="h-step-num">3</span>
@@ -194,7 +180,7 @@
       </li>
     </ol>
     <div class="h-center">
-      <a href="#quote" class="h-btn h-btn--primary">Request a quote</a>
+      <a href="#quote" class="h-btn h-btn--primary">Get a quote</a>
     </div>
   </div>
 </section>
@@ -275,9 +261,9 @@
     <div class="h-panel h-final">
       <div>
         <h2 class="h-title h-title--light">Ready for a cleaner home?</h2>
-        <p>Send your postcode and what you need — we'll come back with a price, usually the same weekday.</p>
+        <p>Choose your service, add a few details about the property and get your price online.</p>
       </div>
-      <a href="#quote" class="h-btn h-btn--light">Request a quote</a>
+      <a href="/book" class="h-btn h-btn--light">Get a quote</a>
     </div>
   </div>
 </section>

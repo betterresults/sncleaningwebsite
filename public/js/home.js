@@ -66,11 +66,35 @@
     form.addEventListener('change', (e) => sync(e.target));
   }
 
-  // "Request a quote" buttons further down the page: scroll up and focus the form.
+  // Quote form -> booking form. Service chosen: /book/{slug}; none: /book
+  // (the chooser). Postcode and email travel as URL params, which the booking
+  // forms pre-fill. A copy goes to Netlify Forms in the background so the lead
+  // is kept even if the booking form is never finished.
+  const qf = document.querySelector('[data-quote-form]');
+  if (qf) {
+    qf.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!qf.reportValidity()) return;
+      const service = qf.elements.service.value;
+      const postcode = qf.elements.postcode.value.trim().toUpperCase().replace(/\s+/g, ' ');
+      const email = qf.elements.email.value.trim();
+      if (qf.elements['bot-field'].value) return;
+
+      try {
+        const body = new URLSearchParams({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email });
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
+      } catch (_) { /* never block the redirect */ }
+
+      const params = new URLSearchParams({ postcode, email });
+      window.location.href = (service ? '/book/' + encodeURIComponent(service) : '/book') + '?' + params.toString();
+    });
+  }
+
+  // "Get a quote" buttons further down the page: scroll up and focus the form.
   document.querySelectorAll('a[href="#quote"]').forEach((link) => {
     link.addEventListener('click', () => {
       setTimeout(() => {
-        const first = document.getElementById('q-service');
+        const first = document.getElementById('q-postcode');
         if (first) first.focus({ preventScroll: true });
       }, 450);
     });

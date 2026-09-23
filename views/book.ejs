@@ -1,0 +1,51 @@
+<%# Booking pages — /book (choose a service) and /book/{slug} (one service's form).
+    Styles: b- classes in public/css/home.css · Behaviour: public/js/book.js %>
+<% const formOrigin = (function () { try { return new URL(embedUrl).origin; } catch (e) { return ''; } })(); %>
+
+<section class="b-page">
+  <div class="h-wrap">
+    <nav class="b-crumbs" aria-label="Breadcrumb">
+      <a href="/">Home</a>
+      <% if (service) { %>
+        <a href="/book">Get a quote</a>
+        <span aria-current="page"><%= service.title %></span>
+      <% } else { %>
+        <span aria-current="page">Get a quote</span>
+      <% } %>
+    </nav>
+
+    <div class="b-head">
+      <p class="h-eyebrow">Get a quote</p>
+      <% if (service) { %>
+        <h1 class="h-title">Book <%= service.title.toLowerCase() %></h1>
+        <p class="b-lead">Fill in a few details about the property and choose a date that suits you.</p>
+      <% } else { %>
+        <h1 class="h-title">Which service do you need?</h1>
+        <p class="b-lead">Choose a service below and fill in a few details about the property.</p>
+      <% } %>
+      <p class="b-for" data-book-for hidden></p>
+    </div>
+
+    <div class="b-frame">
+      <iframe
+        id="booking-frame"
+        src="<%= embedUrl %>"
+        data-form-origin="<%= formOrigin %>"
+        title="<%= embedTitle %>"
+        style="width:100%;border:0;min-height:720px;display:block;"
+      ></iframe>
+      <noscript>
+        <p class="b-fallback">The booking form needs JavaScript.
+          <a href="<%= embedUrl %>" target="_blank" rel="noopener">Open it in a new tab</a> instead.</p>
+      </noscript>
+    </div>
+
+    <p class="b-help">
+      Questions first?
+      <% if (site.whatsappUrl) { %><a href="<%= site.whatsappUrl %>" target="_blank" rel="noopener">Message us on WhatsApp</a> or call<% } else { %>Call<% } %>
+      <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a>.
+    </p>
+  </div>
+</section>
+
+<script src="/js/book.js?v=<%= assetVersion %>"></script>

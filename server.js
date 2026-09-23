@@ -60,6 +60,11 @@ const { servicePrice } = require('./data/prices');
 app.locals.serviceImage = serviceImage;
 app.locals.servicePrice = servicePrice;
 
+// Where a "Get a quote" for a service should go: its own booking form when it
+// has one (services.booking_embed_url), otherwise the service chooser at /book.
+const BOOKING_LANDING_EMBED = 'https://dilvon.com/book/sn-cleaning-services/main-landing-1790164444462?embedded=true';
+app.locals.bookHref = (service) => (service && service.booking_embed_url ? `/book/${service.slug}` : '/book');
+
 // Runs on every request. Sets up everything every page needs regardless of
 // route: current path, canonical URL, the nav dropdown's service list, sitewide
 // business info (from Supabase's site_settings), real coverage areas (for
@@ -160,6 +165,7 @@ app.get('/', async (req, res) => {
     metaDescription:
       'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
     services: services.slice(0, 6),
+    bookable: services.filter((s) => s.booking_embed_url),
     testimonials,
     checklist,
     faqs,
@@ -263,6 +269,48 @@ app.get('/contact/success', (req, res) => {
   res.render('thank-you', {
     title: 'Thank You',
     noindex: true,
+    structuredData: []
+  });
+});
+
+// ---------- Booking ----------
+// /book is the "choose a service" landing (generic "Get a quote"); /book/{slug}
+// is one service's own booking form. Both embed the Dilvon forms. Any postcode
+// and email in the page URL are passed on to the form by public/js/book.js
+// (the pages are prerendered, so this has to happen in the browser).
+app.get('/book', (req, res) => {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Get a quote', url: '/book' }];
+  res.render('book', {
+    title: 'Get a Quote — Choose Your Cleaning Service',
+    metaDescription: 'Choose the cleaning service you need and book online with SN Cleaning Services, London & Essex.',
+    embedUrl: BOOKING_LANDING_EMBED,
+    embedTitle: 'Choose a service',
+    service: null,
+    breadcrumbs,
+    noindex: true,
+    designV2: true,
+    structuredData: []
+  });
+});
+
+app.get('/book/:serviceSlug', async (req, res, next) => {
+  const services = await content.getServices();
+  const service = services.find((s) => s.slug === req.params.serviceSlug && s.booking_embed_url);
+  if (!service) return next();
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Get a quote', url: '/book' },
+    { name: service.title, url: `/book/${service.slug}` }
+  ];
+  res.render('book', {
+    title: `Book ${service.title}`,
+    metaDescription: `Book ${service.title.toLowerCase()} online with SN Cleaning Services, London & Essex.`,
+    embedUrl: service.booking_embed_url,
+    embedTitle: `${service.title} booking form`,
+    service,
+    breadcrumbs,
+    noindex: true,
+    designV2: true,
     structuredData: []
   });
 });

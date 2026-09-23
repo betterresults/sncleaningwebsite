@@ -393,6 +393,7 @@ body.nav-open { overflow: hidden; }
 }
 .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 .service-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -1279,3 +1280,86 @@ body.no-sticky { padding-bottom: 0; }
   .container { padding: 0 12px; }
   .checklist-tab { padding: 8px 4px; font-size: 0.6rem; letter-spacing: 0; }
 }
+
+/* ==========================================================================
+   Header actions (redesign): call, WhatsApp, Get a quote
+   ========================================================================== */
+.header-actions { gap: 10px; }
+.hdr-call {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: var(--color-dark); text-decoration: none; padding: 4px 8px 4px 4px; border-radius: 999px;
+  transition: background-color .2s;
+}
+.hdr-call:hover { background: var(--color-primary-light); color: var(--color-dark); }
+.hdr-ico {
+  flex: none; display: inline-grid; place-items: center;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: var(--color-primary-light); color: var(--color-primary);
+}
+.hdr-ico svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.hdr-call-text { display: grid; line-height: 1.15; font-weight: 700; font-size: .92rem; white-space: nowrap; }
+.hdr-call-text small { font-weight: 500; font-size: .72rem; color: var(--color-muted); letter-spacing: .02em; }
+.hdr-wa {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 42px; padding: 0 16px 0 12px; border-radius: 999px;
+  border: 1.5px solid #cfe9d8; background: #f1faf4; color: #146c3a;
+  font-weight: 700; font-size: .88rem; text-decoration: none; white-space: nowrap;
+  transition: background-color .2s, border-color .2s, transform .2s;
+}
+.hdr-wa svg { width: 22px; height: 22px; color: #25d366; }
+.hdr-wa:hover { background: #e3f6ea; border-color: #25d366; color: #0f5a30; transform: translateY(-1px); }
+.header-quote-btn { height: 42px; display: inline-flex; align-items: center; padding: 0 20px; border-radius: 999px; }
+.hdr-call:focus-visible, .hdr-wa:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 2px; }
+.nav-mobile-actions { display: none; }
+
+@media (max-width: 1240px) {
+  .hdr-call-text { display: none; }
+  .hdr-call { padding: 0; }
+}
+@media (max-width: 1040px) {
+  .header-quote-btn { display: inline-flex; }
+  .header-actions { gap: 8px; }
+  .nav-mobile-actions {
+    display: grid; gap: 10px; width: 100%;
+    margin-top: 10px; padding-top: 14px; border-top: 1px solid var(--color-border);
+  }
+  .main-nav.nav-open .nav-mobile-actions a.btn { justify-content: center; padding: 12px 18px; }
+  .nav-mobile-link { display: inline-flex !important; align-items: center; gap: 10px; font-weight: 700; }
+}
+@media (max-width: 600px) {
+  .header-inner { gap: 10px; padding-block: 12px; }
+  .logo { white-space: normal; gap: 8px; }
+  .logo-img { width: 38px; height: 38px; }
+  .logo-text { font-size: .88rem; line-height: 1.1; max-width: 6.6em; }
+  .hdr-call { display: none; }
+  .hdr-wa { width: 40px; height: 40px; padding: 0; justify-content: center; }
+  .hdr-wa-text { display: none; }
+  .header-quote-btn { height: 40px; padding: 0 14px; font-size: .82rem; }
+  .nav-toggle { width: 40px; margin-right: -6px; }
+}
+
+/* ==========================================================================
+   Click feedback on cards + smooth page change
+   ========================================================================== */
+.service-card { transition: transform .25s cubic-bezier(.2, .7, .2, 1), box-shadow .25s; }
+.service-card:active { transform: scale(.975); transition-duration: .08s; }
+.tap-ripple {
+  position: absolute; z-index: 3; pointer-events: none;
+  width: 16px; height: 16px; margin: -8px 0 0 -8px; border-radius: 50%;
+  background: rgba(255, 255, 255, .55);
+  animation: tap-ripple .6s ease-out forwards;
+}
+@keyframes tap-ripple { to { transform: scale(40); opacity: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root) { animation: vt-out .22s ease both; }
+  ::view-transition-new(root) { animation: vt-in .32s ease both; }
+  @keyframes vt-out { to { opacity: 0; transform: translateY(-6px); } }
+  @keyframes vt-in { from { opacity: 0; transform: translateY(8px); } }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tap-ripple { display: none; }
+  .service-card:active { transform: none; }
+}
+.main-nav .nav-mobile-actions a.btn, .main-nav .nav-mobile-actions a.btn:hover { color: #fff; border-bottom: 0; }
+.main-nav .nav-mobile-actions a.nav-mobile-link { border-bottom: 0; color: var(--color-dark); }
