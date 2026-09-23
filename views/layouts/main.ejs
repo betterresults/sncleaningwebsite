@@ -37,7 +37,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
-  <% if (typeof isHome !== 'undefined' && isHome) { %>
+  <% if ((typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2)) { %>
     <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/home.css?v=<%= assetVersion %>" />
   <% } %>
@@ -49,7 +49,7 @@
     <% }); %>
   <% } %>
 </head>
-<% const isHomePage = typeof isHome !== 'undefined' && isHome; %>
+<% const isHomePage = (typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2); /* pages on the new design system */ %>
 <body class="<%= (isHomePage || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %>">
   <%- include('../partials/header') %>
 

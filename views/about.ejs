@@ -1,77 +1,147 @@
-<section class="page-hero page-hero--photo page-hero--about">
-  <div class="container">
-    <span class="eyebrow">About</span>
-    <h1>A London &amp; Essex cleaning company, not a franchise.</h1>
-    <p>Our own staff. Ten years of jobs for homes, landlords, agents and workplaces.</p>
-  </div>
-</section>
+<%# About page — new design system (public/css/home.css, a- classes at the end of that file) %>
 
-<section class="section">
-  <div class="container grid grid-2 align-center">
-    <div class="about-media">
-      <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="A professional cleaner from SN Cleaning Services" />
-    </div>
-    <div>
-      <span class="eyebrow">The company</span>
-      <h2>Built on turning up and doing the list</h2>
-      <p>
-        For over 10 years, <%= site.name %> has cleaned homes, tenancy handovers and workplaces
-        across London and Essex. We never use subcontractors: every job is done by our own trained,
-        DBS-checked and insured staff.
-      </p>
-      <p>
-        We work with homeowners, landlords, letting agents, schools, nurseries and businesses —
-        from a weekly tidy to a full end-of-tenancy deep clean. If we miss something, tell us
-        within 24 hours and we come back and re-clean it, free.
+<!-- ============ HERO (light, editorial) ============ -->
+<section class="a-hero">
+  <div class="h-wrap a-hero-inner">
+    <div class="a-hero-copy">
+      <p class="h-eyebrow">About SN Cleaning Services</p>
+      <h1 class="a-display">Twelve years of cleaning London &amp; Essex homes <em>properly</em>.</h1>
+      <p class="a-lead">
+        We're a local cleaning company with our own team — not a franchise, not an app,
+        not a list of subcontractors. The same people, the same standards, every visit.
       </p>
     </div>
-  </div>
-</section>
-
-<section class="section alt-bg">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">Our Values</span>
-      <h2>What guides how we work</h2>
-    </div>
-    <div class="grid grid-3">
-      <div class="card value-card">
-        <h3>Reliability</h3>
-        <p>We show up on time, every time, and communicate clearly if anything ever changes.</p>
+    <div class="a-hero-media">
+      <img src="/images/about-cleaner.jpg?v=<%= assetVersion %>" alt="An SN Cleaning Services cleaner at work"
+           fetchpriority="high" width="1152" height="864" />
+      <div class="a-float a-float--top">
+        <span class="h-stars" aria-hidden="true">★★★★★</span>
+        <strong>5.0 on Google</strong>
       </div>
-      <div class="card value-card">
-        <h3>Attention to Detail</h3>
-        <p>We don't cut corners — every clean follows a checklist so nothing gets missed.</p>
-      </div>
-      <div class="card value-card">
-        <h3>Trust</h3>
-        <p>Background-checked, insured cleaners you can feel comfortable letting into your home or office.</p>
+      <div class="a-float a-float--bottom">
+        <strong>12</strong><span>years in<br />business</span>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-    <div class="section-heading">
-      <span class="eyebrow">The basics</span>
-      <h2>What we stand on</h2>
+<!-- ============ OWNER NOTE ============ -->
+<section class="h-section h-sand">
+  <div class="h-wrap a-note">
+    <div class="a-note-mark" aria-hidden="true">
+      <img src="/images/logo-mark.png?v=<%= assetVersion %>" alt="" width="96" height="96" loading="lazy" />
     </div>
-    <div class="stat-card-grid stat-card-grid--wide">
-      <div class="stat-card"><strong>12</strong><span>Years in business</span></div>
-      <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
-      <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
-      <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
-    </div>
-  </div>
-</section>
-
-<section class="section cta-band">
-  <div class="container cta-band-inner">
     <div>
-      <h2>Need a team you can leave a key with?</h2>
-      <p>Tell us about the property. We'll quote you — usually the same weekday.</p>
+      <p class="h-eyebrow">A note from the owner</p>
+      <blockquote class="a-note-quote">
+        “I started SN because people deserve a cleaner they can trust with their key and
+        their home. Twelve years on, that's still the whole idea: our own trained team,
+        professional products and tools, and if we ever miss something, we come back and put it right.”
+      </blockquote>
+      <p class="a-note-sign"><strong>Silvia Nedeva</strong> · Owner, SN Cleaning Services</p>
     </div>
-    <a href="/contact" class="btn btn-primary btn-lg">Request a quote</a>
+  </div>
+</section>
+
+<!-- ============ NUMBERS ============ -->
+<section class="a-numbers">
+  <div class="h-wrap">
+    <ul class="a-num-grid">
+      <li class="h-reveal"><strong>12</strong><span>years cleaning homes</span></li>
+      <li class="h-reveal"><strong>5.0</strong><span>Google rating</span></li>
+      <li class="h-reveal"><strong>39</strong><span>London boroughs &amp; Essex areas</span></li>
+      <li class="h-reveal"><strong>0</strong><span>subcontractors, ever</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHAT MAKES US DIFFERENT (bento) ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">What makes us different</p>
+      <h2 class="h-title">The things we refuse to cut corners on</h2>
+    </div>
+
+    <div class="a-bento">
+      <article class="a-tile a-tile--photo a-tile--wide h-reveal">
+        <img src="/images/services/deep.jpg?v=<%= assetVersion %>" alt="" loading="lazy" width="1152" height="864" />
+        <div class="a-tile-body">
+          <h3>Professional products — even our own</h3>
+          <p>We bring professional-grade products and equipment to every job. We even make our own SN limescale remover, because shop-bought wasn't good enough.</p>
+        </div>
+      </article>
+
+      <article class="a-tile a-tile--deep h-reveal">
+        <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.2-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><path d="M16 4.8a3.3 3.3 0 0 1 0 6.4M18 14.8c2 .6 3.2 2.3 3.5 5.2"/></svg></span>
+        <h3>Our own team</h3>
+        <p>Every cleaner is ours — trained, insured and DBS-checked. We try to send the same person each time.</p>
+      </article>
+
+      <article class="a-tile a-tile--sage h-reveal">
+        <span class="h-ico h-ico--dark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/></svg></span>
+        <h3>A checklist for every room</h3>
+        <p>Nothing is left to memory. Kitchens, bathrooms, bedrooms and hallways each have their own list.</p>
+      </article>
+
+      <article class="a-tile a-tile--sand h-reveal">
+        <span class="h-ico h-ico--dark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></span>
+        <h3>Free re-clean guarantee</h3>
+        <p>Tell us within 24 hours if something was missed and we come back and fix it, at no cost.</p>
+      </article>
+
+      <article class="a-tile a-tile--deep h-reveal">
+        <span class="h-ico" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10Z"/></svg></span>
+        <h3>No judgement — we're here to help</h3>
+        <p>Life gets busy and homes get away from all of us. Whatever state the property is in, we turn up to help, not to judge.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE CLEAN FOR ============ -->
+<section class="h-section h-sand">
+  <div class="h-wrap a-who">
+    <div>
+      <p class="h-eyebrow">Who we clean for</p>
+      <h2 class="h-title">From a weekly clean to a full move-out</h2>
+      <p class="a-who-lead">We look after busy households, landlords and letting agents, Airbnb hosts and local workplaces across London and Essex.</p>
+    </div>
+    <ul class="a-who-list">
+      <li class="h-reveal"><strong>Homeowners &amp; tenants</strong><span>Regular, deep and one-off cleans</span></li>
+      <li class="h-reveal"><strong>Landlords &amp; letting agents</strong><span>End of tenancy cleans that pass inspection</span></li>
+      <li class="h-reveal"><strong>Airbnb hosts</strong><span>Guest-ready changeovers</span></li>
+      <li class="h-reveal"><strong>Workplaces</strong><span>Offices, schools and nurseries</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ REVIEW HIGHLIGHT ============ -->
+<% const featured = (typeof testimonials !== 'undefined') ? (testimonials.find(function (t) { return /Silvia/.test(t.quote); }) || testimonials[0]) : null; %>
+<% if (featured) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <figure class="a-quote h-reveal">
+      <div class="h-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <blockquote>“<%= featured.quote %>”</blockquote>
+      <figcaption><strong><%= featured.name %></strong> · <%= featured.location %></figcaption>
+      <% if (site.googleBusinessUrl) { %>
+        <a href="<%= site.googleBusinessUrl %>" class="a-quote-link" target="_blank" rel="noopener">Read all our Google reviews →</a>
+      <% } %>
+    </figure>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="h-section h-sand h-section--tight a-last">
+  <div class="h-wrap">
+    <div class="h-panel h-final">
+      <div>
+        <h2 class="h-title h-title--light">Need a team you can leave a key with?</h2>
+        <p>Tell us about the property and we'll come back with a price — usually the same weekday.</p>
+      </div>
+      <a href="/#quote" class="h-btn h-btn--light">Get a quote</a>
+    </div>
   </div>
 </section>

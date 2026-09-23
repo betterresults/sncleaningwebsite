@@ -225,10 +225,12 @@ app.get('/blog/:slug', async (req, res, next) => {
 app.get('/about', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }];
   res.render('about', {
-    title: 'About Us',
+    title: 'About Us — 12 Years Cleaning London & Essex',
     metaDescription:
-      'Meet the team behind SN Cleaning Services — a fully insured, vetted cleaning company serving London & Essex homes and businesses.',
+      'SN Cleaning Services has cleaned London & Essex homes for 12 years with its own insured, DBS-checked team, professional products and a free re-clean guarantee.',
     breadcrumbs,
+    testimonials,
+    designV2: true,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
   });
 });
