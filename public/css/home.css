@@ -205,7 +205,7 @@
 .h-panel { background: var(--h-deep); color: #d9e5dc; border-radius: clamp(24px, 4vw, 36px); }
 .h-why { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(28px, 5vw, 72px); align-items: center; padding: clamp(24px, 5vw, 64px); }
 .h-why-media { position: relative; }
-.h-why-media img { width: 100%; aspect-ratio: 1 / 1.05; object-fit: cover; border-radius: 22px; display: block; }
+.h-why-media img { width: 100%; aspect-ratio: 1 / 1.05; object-fit: cover; object-position: 50% 20%; border-radius: 22px; display: block; }
 .h-why-badge {
   position: absolute; right: -14px; bottom: 24px;
   display: flex; align-items: center; gap: 10px;
