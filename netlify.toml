@@ -27,6 +27,19 @@
   status = 200
   force = true
 
+# Send the Netlify subdomain to the real domain so Google only sees one copy.
+[[redirects]]
+  from = "https://sncleaningwebsite.netlify.app/*"
+  to = "https://sncleaningservices.co.uk/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://www.sncleaningservices.co.uk/*"
+  to = "https://sncleaningservices.co.uk/:splat"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/404.html"

@@ -114,9 +114,10 @@ function writeSitemap(routes) {
 }
 
 function writeRobotsTxt() {
-  const aiBots = ['GPTBot', 'ChatGPT-User', 'OAI-SearchBot', 'ClaudeBot', 'Claude-User', 'anthropic-ai', 'PerplexityBot', 'Perplexity-User', 'CCBot', 'Google-Extended', 'Applebot-Extended', 'Bytespider', 'meta-externalagent'];
-  const aiBlock = aiBots.map((b) => `User-agent: ${b}\nDisallow: /\n`).join('\n');
-  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\n\n${aiBlock}\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  // AI search/answer bots (ChatGPT, Claude, Perplexity, Google AI) are allowed
+  // so the business can be found and recommended in AI search. Only
+  // Bytespider (a bulk scraper, not a search engine) is kept out.
+  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }

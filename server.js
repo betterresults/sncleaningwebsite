@@ -45,7 +45,7 @@ const SITE_DEFAULTS = {
   },
   googleBusinessUrl: null,
   logoUrl: '/images/logo.png',
-  defaultOgImage: null,
+  defaultOgImage: '/images/og-image.jpg',
   whatsappUrl: whatsappHref('020 3835 5033')
 };
 
@@ -98,7 +98,7 @@ app.use(async (req, res, next) => {
           },
           googleBusinessUrl: settings.google_business_url || null,
           logoUrl: settings.logo_url || SITE_DEFAULTS.logoUrl,
-          defaultOgImage: settings.default_og_image || null,
+          defaultOgImage: settings.default_og_image || SITE_DEFAULTS.defaultOgImage,
           whatsappUrl: whatsappHref(phone)
         }
       : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
@@ -114,7 +114,7 @@ app.use(async (req, res, next) => {
     res.locals.navServices = [];
     res.locals.site = SITE_DEFAULTS;
     res.locals.coverageAreas = [];
-    res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.logoUrl);
+    res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.defaultOgImage);
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [];
     next();
