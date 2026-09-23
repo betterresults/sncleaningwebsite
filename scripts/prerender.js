@@ -86,7 +86,10 @@ async function buildRoutes() {
       lastmod: p.updated_at
     }));
 
-  return [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes];
+  // Office and nursery cleaning now live on snclean.co.uk (301s in netlify.toml),
+  // so they are not built here or listed in the sitemap.
+  const MOVED = /^\/(office-cleaning|nursery-cleaning)(\/|$)/;
+  return [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes].filter((r) => !MOVED.test(r.url));
 }
 
 function fetchHtml(url) {

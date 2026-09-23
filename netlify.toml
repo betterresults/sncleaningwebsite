@@ -40,6 +40,20 @@
   status = 301
   force = true
 
+# Commercial services moved to the SN Clean site (tagged so SN Clean can see
+# the referral). Covers the service pages and any area pages under them.
+[[redirects]]
+  from = "/office-cleaning/*"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=office_cleaning_redirect"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/nursery-cleaning/*"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=nursery_cleaning_redirect"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
