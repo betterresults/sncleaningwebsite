@@ -1385,3 +1385,9 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
   .wa-float-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
   body:not(.no-sticky) .wa-float { bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
 }
+
+/* Buttons read clearly as buttons (matches home.css .h-btn) */
+.btn-primary { border: 2px solid #14302c; box-shadow: 0 3px 0 #14302c; }
+.btn-primary:hover { border-color: #14302c; }
+.btn-primary:active { transform: translateY(2px); box-shadow: 0 1px 0 #14302c; }
+.btn-outline { border-width: 2px; }
