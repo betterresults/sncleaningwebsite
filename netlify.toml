@@ -64,11 +64,6 @@
   status = 301
   force = true
 
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-
 # Old / mistyped area addresses Google knows -> the real page (no force: only when no page exists at that exact address).
 [[redirects]]
   from = "/after-builders-cleaning-barnet"
@@ -470,3 +465,9 @@
   to = "/end-of-tenancy-cleaning/redbridge/"
   status = 301
 
+
+# Anything else: the 404 page. Must stay LAST.
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
