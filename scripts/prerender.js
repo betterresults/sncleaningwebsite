@@ -67,8 +67,8 @@ async function buildRoutes() {
   }));
 
   const blogRoutes = blogPosts.map((p) => ({
-    url: `/blog/${p.slug}`,
-    out: `blog/${p.slug}/index.html`,
+    url: p.legacy_root ? `/${p.slug}` : `/blog/${p.slug}`,
+    out: p.legacy_root ? `${p.slug}/index.html` : `blog/${p.slug}/index.html`,
     sitemap: true,
     lastmod: p.updated_at
   }));

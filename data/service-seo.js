@@ -272,7 +272,7 @@ module.exports = {
   },
 
   'upholstery-cleaning': {
-    metaTitle: 'Sofa & Upholstery Cleaning London & Essex',
+    metaTitle: 'Sofa & Upholstery Cleaning London & Essex | From £69',
     metaDescription:
       'Sofa, armchair and upholstery cleaning in London & Essex with fabric-safe products, priced per item. Book online.',
     prices: [],
@@ -306,7 +306,7 @@ module.exports = {
   },
 
   'mattress-cleaning': {
-    metaTitle: 'Mattress Cleaning London & Essex',
+    metaTitle: 'Mattress Cleaning London & Essex | From £39',
     metaDescription:
       'Professional mattress cleaning in London & Essex. Stains, odours and dust mites treated, priced by size. Book online.',
     prices: [],

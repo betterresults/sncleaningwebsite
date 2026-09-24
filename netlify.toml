@@ -466,6 +466,1078 @@
   status = 301
 
 
+# Old WordPress pages Google knows -> best matching page (commercial topics -> snclean.co.uk).
+[[redirects]]
+  from = "/10-end-of-tenancy-cleaning-tips-to-ensure-your-deposits-return"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/10-end-of-tenancy-cleaning-tips-to-ensure-your-deposits-return/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/2024/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2025/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/about-us"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/about-us/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/accreditations"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/accreditations/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning-checklist-for-london-hosts-essential-tasks-for-sparkling-spaces"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning-checklist-for-london-hosts-essential-tasks-for-sparkling-spaces/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/airbnb-cleaning-location"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/airbnb-cleaning-location/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/allergy-friendly-carpet-cleaning-techniques"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/allergy-friendly-carpet-cleaning-techniques/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/area/croydon"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area/croydon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area/denmark-hill"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/denmark-hill/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/essex"
+  to = "/end-of-tenancy-cleaning/essex/"
+  status = 301
+
+[[redirects]]
+  from = "/area/essex/"
+  to = "/end-of-tenancy-cleaning/essex/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hillingdon"
+  to = "/airbnb-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hillingdon/"
+  to = "/airbnb-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area/southwark"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/southwark/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/spitalfields"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/spitalfields/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/balancing-efficiency-and-thoroughness-in-office-cleaning"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/balancing-efficiency-and-thoroughness-in-office-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/benefits-of-commercial-carpet-cleaning-tools"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/benefits-of-commercial-carpet-cleaning-tools/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/best-cleaning-products-for-airbnb-in-london"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/best-cleaning-products-for-airbnb-in-london/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/best-practices-for-daily-nursery-cleaning-routines"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/best-practices-for-daily-nursery-cleaning-routines/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/blog-all"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog-all/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/book-after-builders-cleaning"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/book-after-builders-cleaning/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/book-deep-house-cleaning"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/book-deep-house-cleaning/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/london"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/london/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/budget-friendly-cleaning-tips-for-holiday-let-owners-in-the-uk"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/budget-friendly-cleaning-tips-for-holiday-let-owners-in-the-uk/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-and-upholstery-cleaning"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-and-upholstery-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/carpet-cleaning-location"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/carpet-cleaning-location/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/category/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/child-safe-disinfectants-what-every-nursery-needs-to-know"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/child-safe-disinfectants-what-every-nursery-needs-to-know/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/cleaner-sign-up"
+  to = "/apply/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaner-sign-up/"
+  to = "/apply/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning-comparison-end-of-tenancy-cleaning-vs-regular-domestic-cleaning"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning-comparison-end-of-tenancy-cleaning-vs-regular-domestic-cleaning/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/collaborative-approaches-to-school-cleaning"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/collaborative-approaches-to-school-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-carpet-cleaning-methods-and-best-practices"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-carpet-cleaning-methods-and-best-practices/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-cleaning-contracts-what-you-need-to-know"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-cleaning-contracts-what-you-need-to-know/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/common-bathroom-remodeling-mistakes-to-avoid"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/common-bathroom-remodeling-mistakes-to-avoid/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/common-tile-and-grout-cleaning-mistakes-you-should-avoid"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/common-tile-and-grout-cleaning-mistakes-you-should-avoid/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/customizing-your-commercial-cleaning-plan-for-your-business"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/customizing-your-commercial-cleaning-plan-for-your-business/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/deep-cleaning-services"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-cleaning-services/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/diy-natural-cleaning-solutions-for-everyday-use"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/diy-natural-cleaning-solutions-for-everyday-use/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/eco-friendly-commercial-cleaning-practices-and-their-benefits"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/eco-friendly-commercial-cleaning-practices-and-their-benefits/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/efficient-cleaning-schedules-tailored-for-london-airbnb-hosts"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/efficient-cleaning-schedules-tailored-for-london-airbnb-hosts/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/elementor-15409"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/elementor-15409/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-business-customers-quote"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-business-customers-quote/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-a-landlords-guide-to-preparing-properties"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-a-landlords-guide-to-preparing-properties/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-guide-for-students-in-london"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-guide-for-students-in-london/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-in-the-era-of-covid-19-safety-and-standards"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-in-the-era-of-covid-19-safety-and-standards/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/engaging-students-in-school-cleaning-practices"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/engaging-students-in-school-cleaning-practices/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/ensuring-cleaning-and-hygiene-standards"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/ensuring-cleaning-and-hygiene-standards/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/essential-equipment-for-carpet-cleaning-at-home"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/essential-equipment-for-carpet-cleaning-at-home/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/essential-nursery-cleaning-tips-for-safe-childcare"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/essential-nursery-cleaning-tips-for-safe-childcare/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/green-your-clean-top-eco-friendly-products-for-home"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/green-your-clean-top-eco-friendly-products-for-home/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-regular-office-cleaning-can-boost-employee-morale"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/how-regular-office-cleaning-can-boost-employee-morale/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-choose-the-right-nursery-cleaning-service"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-choose-the-right-nursery-cleaning-service/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-effectively-soundproof-wood-floors-in-your-home"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-effectively-soundproof-wood-floors-in-your-home/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-prevent-water-damage-from-leaking-appliances"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-prevent-water-damage-from-leaking-appliances/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/hygiene-standards-for-airbnb-rentals-in-london-a-comprehensive-approach"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/hygiene-standards-for-airbnb-rentals-in-london-a-comprehensive-approach/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/implementing-a-school-cleaning-programme-a-step-by-step-guide"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/implementing-a-school-cleaning-programme-a-step-by-step-guide/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/innovative-commercial-cleaning-technologies-transforming-businesses"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/innovative-commercial-cleaning-technologies-transforming-businesses/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/innovative-office-cleaning-techniques-for-modern-workplaces"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/innovative-office-cleaning-techniques-for-modern-workplaces/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/is-end-of-tenancy-cleaning-mandatory"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/is-end-of-tenancy-cleaning-mandatory/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/keeping-nurseries-clean-the-role-of-parents-and-staff"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/keeping-nurseries-clean-the-role-of-parents-and-staff/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/leather-vs-fabric-upholstery-cleaning-and-maintenance-tips-for-each"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/leather-vs-fabric-upholstery-cleaning-and-maintenance-tips-for-each/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/location/carshalton-beeches"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/carshalton-beeches/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/pratts-bottom/5"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/pratts-bottom/5/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/redbridge"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/location/redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/managing-cleaning-and-disinfection-in-child-care-settings"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/managing-cleaning-and-disinfection-in-child-care-settings/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/maximising-productivity-the-impact-of-office-cleaning-on-work-efficiency"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/maximising-productivity-the-impact-of-office-cleaning-on-work-efficiency/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/navigating-the-challenges-of-commercial-cleaning-in-healthcare-facilities"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/navigating-the-challenges-of-commercial-cleaning-in-healthcare-facilities/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/nursery-bathroom-cleaning-guidelines"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/nursery-bathroom-cleaning-guidelines/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/carpet-cleaning"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/deep-cleaning"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/deep-cleaning/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw11"
+  to = "/airbnb-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw11/"
+  to = "/airbnb-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/preparing-your-home-for-end-of-tenancy-cleaning-a-step-by-step-guide"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/preparing-your-home-for-end-of-tenancy-cleaning-a-step-by-step-guide/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/professional-cleaning-services-in-london"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/professional-cleaning-services-in-london/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/professional-cleaning-services-to-enhance-your-london-airbnb-experience"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/professional-cleaning-services-to-enhance-your-london-airbnb-experience/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/quick-and-easy-carpet-cleaning-hacks"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/quick-and-easy-carpet-cleaning-hacks/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/revamp-your-bathroom-on-a-budget-5-simple-tips-for-big-results"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/revamp-your-bathroom-on-a-budget-5-simple-tips-for-big-results/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/revitalize-your-furniture-with-sofa-cleaning-singapore-service"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/revitalize-your-furniture-with-sofa-cleaning-singapore-service/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/safe-and-effective-cleaning-solutions-for-pet-owners"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/safe-and-effective-cleaning-solutions-for-pet-owners/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/school-cleaning"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/school-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/school-cleaning-standards-and-regulations-explained"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/school-cleaning-standards-and-regulations-explained/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/seasonal-deep-cleaning-refreshing-your-home-for-spring"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/seasonal-deep-cleaning-refreshing-your-home-for-spring/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/selecting-the-best-after-tenancy-cleaning-company-a-step-by-step-guide"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/selecting-the-best-after-tenancy-cleaning-company-a-step-by-step-guide/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services"
+  to = "/our-services/"
+  status = 301
+
+[[redirects]]
+  from = "/services/"
+  to = "/our-services/"
+  status = 301
+
+[[redirects]]
+  from = "/services/after-builders"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/after-builders/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/airbnb"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/airbnb/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/carpet"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/services/carpet/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/services/commercial"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/services/commercial/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/services/deep-cleaning"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/deep-cleaning/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/domestic"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/domestic/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/end-of-tenancy"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/end-of-tenancy/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/office"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/services/office/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/stress-free-moving-how-end-of-tenancy-cleaning-eases-the-process"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/stress-free-moving-how-end-of-tenancy-cleaning-eases-the-process/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/summer-cleaning-tips-for-schools"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/summer-cleaning-tips-for-schools/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/tag/*"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/testimonials/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/the-best-eco-friendly-products-for-holiday-let-cleaning"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-best-eco-friendly-products-for-holiday-let-cleaning/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-environmental-impact-of-cleaning-products-how-to-clean-responsibly-at-the-end-of-your-tenancy"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-environmental-impact-of-cleaning-products-how-to-clean-responsibly-at-the-end-of-your-tenancy/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-impact-of-clean-schools-on-teacher-satisfaction"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-impact-of-clean-schools-on-teacher-satisfaction/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-importance-of-regular-window-cleaning-in-commercial-buildings"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-importance-of-regular-window-cleaning-in-commercial-buildings/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-latest-cleaning-gadgets-to-transform-your-routine"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-latest-cleaning-gadgets-to-transform-your-routine/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-link-between-office-cleaning-and-productivity"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-link-between-office-cleaning-and-productivity/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-minimalist-approach-to-keeping-a-clean-home"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-minimalist-approach-to-keeping-a-clean-home/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-psychology-of-clean-how-office-cleaning-affects-employee-performance"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-psychology-of-clean-how-office-cleaning-affects-employee-performance/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-ultimate-end-of-tenancy-cleaning-checklist"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-ultimate-end-of-tenancy-cleaning-checklist/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-ultimate-guide-to-commercial-cleaning-services-in-the-uk"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-ultimate-guide-to-commercial-cleaning-services-in-the-uk/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-zen-of-cleaning-mindful-techniques-for-your-home"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-zen-of-cleaning-mindful-techniques-for-your-home/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/time-saving-tips-for-end-of-tenancy-cleaning"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/time-saving-tips-for-end-of-tenancy-cleaning/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/where-to-start-when-decluttering-your-living-space-before-renovation"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/where-to-start-when-decluttering-your-living-space-before-renovation/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/why-regular-janitorial-cleaning-is-essential-for-any-business"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/why-regular-janitorial-cleaning-is-essential-for-any-business/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/write-for-us"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/write-for-us/"
+  to = "/blog/"
+  status = 301
+
+
 # Anything else: the 404 page. Must stay LAST.
 [[redirects]]
   from = "/*"

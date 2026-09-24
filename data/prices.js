@@ -9,8 +9,9 @@ const FROM_PRICES = {
   'end-of-tenancy-cleaning': 'From £179',
   'after-builders-cleaning': 'From £179',
   'airbnb-cleaning': 'From £24/hour',
-  'carpet-cleaning-services': 'From £49'
-  // upholstery-cleaning and mattress-cleaning: no "from" price shown (Get a price)
+  'carpet-cleaning-services': 'From £49',
+  'upholstery-cleaning': 'From £69',
+  'mattress-cleaning': 'From £39'
 };
 
 function servicePrice(slug) {

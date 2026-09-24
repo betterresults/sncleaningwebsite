@@ -76,6 +76,9 @@ app.locals.rs = (src, sizes) => {
   return set ? ` srcset="${set}" sizes="${sizes || '100vw'}"` : '';
 };
 app.locals.servicePrice = servicePrice;
+// Blog posts rebuilt at their old WordPress address (/{slug}/) keep it; others live under /blog/.
+const postUrl = (p) => (p.legacy_root ? `/${p.slug}/` : `/blog/${p.slug}`);
+app.locals.postUrl = postUrl;
 
 // Where a "Get a quote" for a service should go: its own booking form when it
 // has one (services.booking_embed_url), otherwise the service chooser at /book.
@@ -262,9 +265,12 @@ app.get('/blog', async (req, res) => {
 
 app.get('/blog/:slug', async (req, res, next) => {
   const post = await content.getBlogPostBySlug(req.params.slug);
-  if (!post) return next();
+  if (!post || post.legacy_root) return next();
+  renderPost(req, res, post);
+});
 
-  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: post.title, url: `/blog/${post.slug}` }];
+function renderPost(req, res, post) {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: post.title, url: postUrl(post) }];
 
   res.render('blog/post', {
     title: post.meta_title || post.title,
@@ -278,7 +284,7 @@ app.get('/blog/:slug', async (req, res, next) => {
       schema.buildArticle({ post, site: res.locals.site })
     ]
   });
-});
+}
 
 app.get('/about', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }];
@@ -433,7 +439,12 @@ app.post('/contact', async (req, res) => {
 // next() and falls through to the area route below, then to 404.
 app.get('/:slug', async (req, res, next) => {
   const page = await content.getServicePageBySlug(req.params.slug);
-  if (!page) return next(); // not a real service slug — falls through to the area route, then 404
+  if (!page) {
+    // Old blog posts rebuilt at their original WordPress address (/{slug}/).
+    const post = await content.getBlogPostBySlug(req.params.slug);
+    if (post && post.legacy_root) return renderPost(req, res, post);
+    return next(); // not a real service slug — falls through to the area route, then 404
+  }
 
   const allServices = (await content.getServices()).filter(isDomestic);
   const relatedServices = allServices.filter((s) => s.slug !== page.slug).slice(0, 3);

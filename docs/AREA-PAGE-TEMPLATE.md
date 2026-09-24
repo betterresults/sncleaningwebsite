@@ -60,7 +60,7 @@ Main service page     /end-of-tenancy-cleaning/            map: London + Essex
 ## Rules for content (to avoid duplicate / doorway pages)
 
 1. **True only.** No invented claims, statistics, local stories or prices.
-   - **Price rule (whole site): only ONE price per service, the "from" price.** End of tenancy £179, domestic £23/hour, deep cleaning £27/hour, Airbnb £24/hour, after builders £179, carpet £49; upholstery and mattress show no price. Never write prices for bedrooms, rooms, ovens, rugs or extras — customers get the exact price with Get a quote. The from prices live in `data/prices.js`.
+   - **Price rule (whole site): only ONE price per service, the "from" price.** End of tenancy £179, domestic £23/hour, deep cleaning £27/hour, Airbnb £24/hour, after builders £179, carpet £49, upholstery £69, mattress £39. Never write prices for bedrooms, rooms, ovens, rugs or extras — customers get the exact price with Get a quote. The from prices live in `data/prices.js`.
    - The oven is cleaned as part of every end of tenancy clean and priced by its size (don't list the oven prices).
    - Re-clean window: 72 hours for end of tenancy, 24 hours for everything else.
 2. **Unique where it matters.** `quick_answer`, `local_intro`, `intro`, `content_sections` and `faqs` must be written for that area. Never copy them from another page and swap the town name.

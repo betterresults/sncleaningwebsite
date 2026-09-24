@@ -13,7 +13,7 @@
     <% } else { %>
       <div class="grid grid-3">
         <% posts.forEach(function(post) { %>
-          <a href="/blog/<%= post.slug %>" class="card service-card">
+          <a href="<%= postUrl(post) %>" class="card service-card">
             <% if (post.cover_image) { %>
               <div class="service-card-photo">
                 <img src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 800px) 100vw, 400px') %> alt="<%= post.title %>" decoding="async" width="1152" height="864" />
