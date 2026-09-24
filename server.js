@@ -456,7 +456,7 @@ app.get('/:slug', async (req, res, next) => {
     mapLink = buildMapLink(areaPages, regions, [page.slug], { onlyThese: true });
     // This service's local area pages, for the "Areas we cover" links.
     localPages = areaPages
-      .filter((p) => p.services && p.services.slug === page.slug && p.coverage_regions)
+      .filter((p) => p.services && p.services.slug === page.slug && p.coverage_regions && p.coverage_regions.level !== 'town')
       .map((p) => ({ name: p.coverage_regions.name, url: `/${page.slug}/${p.slug}` }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }
@@ -495,8 +495,13 @@ app.get('/:slug', async (req, res, next) => {
 // Registered LAST, right before the 404 handler, so every more specific route
 // above (/:slug, /blog/:slug, /contact, etc.) always matches first —
 // otherwise this catch-all two-segment route would shadow them.
-app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
-  const page = await content.getAreaPageBySlug(req.params.serviceSlug, req.params.areaSlug);
+// Town pages nested under a borough keep the address Google already knows,
+// e.g. /end-of-tenancy-cleaning/redbridge/wanstead/ (area_pages.slug = 'redbridge/wanstead').
+app.get('/:serviceSlug/:areaSlug/:subSlug', (req, res, next) => renderArea(req, res, next, `${req.params.areaSlug}/${req.params.subSlug}`));
+app.get('/:serviceSlug/:areaSlug', (req, res, next) => renderArea(req, res, next, req.params.areaSlug));
+
+async function renderArea(req, res, next, areaSlug) {
+  const page = await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug);
   if (!page) return next(); // not a real service+area combo — falls through to 404
 
   const region = page.coverage_regions;
@@ -530,16 +535,26 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
       const up = !here && parent ? allAreaPages.find((ap) => ap.services.slug === s.slug && ap.region_id === parent.id) : null;
       return { ...s, url: here ? pageUrl(here) : up ? pageUrl(up) : `/${s.slug}`, local: !!here };
     });
+    // Every level above this area that has a page for this service
+    // (e.g. London > Havering > Elm Park).
+    const ancestors = [];
+    for (let r = parent; r; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) {
+      const ap = allAreaPages.find((x) => x.services.slug === service.slug && x.region_id === r.id);
+      if (ap) ancestors.unshift({ name: areaName(r), url: pageUrl(ap) });
+    }
     const crumbs = [
       ...res.locals.breadcrumbs,
       { name: service.title, url: `/${service.slug}` },
-      ...(parentPage ? [{ name: areaName(parent), url: pageUrl(parentPage) }] : []),
+      ...ancestors,
       { name: place, url: `/${service.slug}/${page.slug}` }
     ];
     const servicePage = await content.getServicePageBySlug(service.slug);
     const faqs = page.faqs || [];
     const faq = schema.buildFaqPage(faqs);
+    // London / Essex pages: coverage map linking to this service's borough pages.
+    const mapLink = region.level === 'region' ? buildMapLink(allAreaPages, allRegions, [service.slug], { onlyThese: true }) : null;
     return res.render('area-v2', {
+      mapLink,
       designV2: true,
       heroPreload: serviceImage(service.slug),
       title: page.meta_title || `${service.title} in ${place}`,
@@ -594,7 +609,7 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
       ...(faqPage ? [faqPage] : [])
     ]
   });
-});
+}
 
 // ---------- 404 ----------
 app.use((req, res) => {

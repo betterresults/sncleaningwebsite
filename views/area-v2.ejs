@@ -52,7 +52,7 @@
   <div class="h-wrap h-hero-inner">
     <div class="h-hero-copy">
       <nav class="s-crumbs" aria-label="Breadcrumb">
-        <a href="/">Home</a><a href="/<%= service.slug %>"><%= name %></a><% if (parentLink) { %><a href="<%= parentLink.url %>"><%= parentLink.name %></a><% } %><span aria-current="page"><%= place %></span>
+        <% breadcrumbs.slice(0, -1).forEach(function (c) { %><a href="<%= c.url %>"><%= c.name %></a><% }); %><span aria-current="page"><%= place %></span>
       </nav>
       <p class="h-eyebrow h-eyebrow--light"><%= parentLink ? place + ', ' + parentLink.name : 'Local service' %></p>
       <h1 class="h-display"><%= name %> in <%= place %></h1>
@@ -241,8 +241,27 @@
 <% } %>
 
 <!-- ============ AREAS (children / nearby / parent) ============ -->
-<% if (children.length || nearby.length || parentLink) { %>
+<% if (children.length || nearby.length || parentLink || mapLink) { %>
 <section class="h-section h-white" id="areas">
+  <% if (mapLink) { %>
+  <div class="h-wrap h-cov">
+    <div class="h-cov-copy">
+      <p class="h-eyebrow">Areas we cover</p>
+      <h2 class="h-title"><%= name %> across <%= place %></h2>
+      <p class="h-cov-hint">Tap your area on the map to see our local <%= lower %> page.</p>
+      <a href="#quote" class="h-btn h-btn--primary">Check your postcode</a>
+      <ul class="h-legend" aria-hidden="true">
+        <li><span class="h-swatch h-swatch--london"></span>London</li>
+        <li><span class="h-swatch h-swatch--essex"></span>Essex</li>
+        <li><span class="h-swatch h-swatch--other"></span>Not covered</li>
+      </ul>
+    </div>
+    <div class="h-cov-map" data-cov-map>
+      <%- include('partials/coverage-map', { mapLink: mapLink }) %>
+      <div class="h-cov-tip" role="status" aria-live="polite" hidden></div>
+    </div>
+  </div>
+  <% } %>
   <div class="h-wrap s-areas">
     <p class="h-eyebrow">Areas</p>
     <% if (children.length) { %>

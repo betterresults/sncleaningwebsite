@@ -105,8 +105,8 @@ async function getSiteSettings() {
   return data;
 }
 
-// The flat "Areas We Cover" tag list — top-level boroughs/towns only
-// (parent_id is null). Specific local areas nested under one of these (e.g.
+// The flat "Areas We Cover" list — London boroughs and Essex districts
+// (level = 'borough'; these are also the shapes on the coverage map). Specific local areas nested under one of these (e.g.
 // Shenfield under Essex - Brentwood) are surfaced separately by
 // getFeaturedAreaGroups() below instead of duplicated in this list.
 async function getCoverageAreas() {
@@ -114,7 +114,7 @@ async function getCoverageAreas() {
     .from('coverage_regions')
     .select('name')
     .eq('is_active', true)
-    .is('parent_id', null)
+    .eq('level', 'borough')
     .order('display_order', { ascending: true });
 
   if (error) {
@@ -127,7 +127,7 @@ async function getCoverageAreas() {
 // Every coverage region including sub-areas, used internally to resolve a
 // sub-area's parent borough name (id, name, parent_id only — not the display list).
 async function getAllCoverageRegions() {
-  const { data, error } = await supabase.from('coverage_regions').select('id, name, display_name, parent_id');
+  const { data, error } = await supabase.from('coverage_regions').select('id, name, display_name, parent_id, level');
 
   if (error) {
     console.error('Error fetching coverage regions:', error.message);
@@ -144,7 +144,7 @@ async function getAllCoverageRegions() {
 async function getAreaPages() {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, display_name, parent_id), services(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id, level), services(id, title, slug, icon, short_description)')
     .eq('published', true);
 
   if (error) {
@@ -160,7 +160,7 @@ async function getAreaPages() {
 async function getAreaPageBySlug(serviceSlug, areaSlug) {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, display_name, parent_id), services!inner(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id, level), services!inner(id, title, slug, icon, short_description)')
     .eq('slug', areaSlug)
     .eq('services.slug', serviceSlug)
     .eq('published', true)

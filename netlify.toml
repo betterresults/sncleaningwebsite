@@ -68,3 +68,405 @@
   from = "/*"
   to = "/404.html"
   status = 404
+
+# Old / mistyped area addresses Google knows -> the real page (no force: only when no page exists at that exact address).
+[[redirects]]
+  from = "/after-builders-cleaning-barnet"
+  to = "/after-builders-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-barnet/"
+  to = "/after-builders-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-bexley"
+  to = "/after-builders-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-bexley/"
+  to = "/after-builders-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-enfield"
+  to = "/after-builders-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-enfield/"
+  to = "/after-builders-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-greenwich"
+  to = "/after-builders-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-greenwich/"
+  to = "/after-builders-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hackney"
+  to = "/after-builders-cleaning/hackney/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hackney/"
+  to = "/after-builders-cleaning/hackney/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hammersmith-and-fulham"
+  to = "/after-builders-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hammersmith-and-fulham/"
+  to = "/after-builders-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-harrow"
+  to = "/after-builders-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-harrow/"
+  to = "/after-builders-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-havering"
+  to = "/after-builders-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-havering/"
+  to = "/after-builders-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hillingdon"
+  to = "/after-builders-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hillingdon/"
+  to = "/after-builders-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hounslow"
+  to = "/after-builders-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-hounslow/"
+  to = "/after-builders-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-islington"
+  to = "/after-builders-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-islington/"
+  to = "/after-builders-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-kensington-and-chelsea"
+  to = "/after-builders-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-kensington-and-chelsea/"
+  to = "/after-builders-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-kingston"
+  to = "/after-builders-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-kingston/"
+  to = "/after-builders-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-lewisham"
+  to = "/after-builders-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-lewisham/"
+  to = "/after-builders-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-redbridge"
+  to = "/after-builders-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-redbridge/"
+  to = "/after-builders-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-richmond"
+  to = "/after-builders-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-richmond/"
+  to = "/after-builders-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-sutton"
+  to = "/after-builders-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-sutton/"
+  to = "/after-builders-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-waltham-forest"
+  to = "/after-builders-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-waltham-forest/"
+  to = "/after-builders-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Barking%20and%20Dagenham"
+  to = "/airbnb-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Barking%20and%20Dagenham/"
+  to = "/airbnb-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Harrow"
+  to = "/airbnb-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Harrow/"
+  to = "/airbnb-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Islington"
+  to = "/airbnb-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Islington/"
+  to = "/airbnb-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Redbridge"
+  to = "/airbnb-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Redbridge/"
+  to = "/airbnb-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Sutton"
+  to = "/airbnb-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Sutton/"
+  to = "/airbnb-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/London"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/London/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Croydon"
+  to = "/carpet-cleaning-services/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Croydon/"
+  to = "/carpet-cleaning-services/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/merton"
+  to = "/carpet-cleaning-services/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/merton/"
+  to = "/carpet-cleaning-services/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Greenwich"
+  to = "/deep-house-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Greenwich/"
+  to = "/deep-house-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Haringey"
+  to = "/deep-house-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Haringey/"
+  to = "/deep-house-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Havering"
+  to = "/deep-house-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Havering/"
+  to = "/deep-house-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Hillingdon"
+  to = "/deep-house-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Hillingdon/"
+  to = "/deep-house-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/London"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/London/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Westminster"
+  to = "/deep-house-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/Westminster/"
+  to = "/deep-house-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Camden"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Camden/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Havering"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Havering/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Islington"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Islington/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Newham"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/Newham/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Barking%20and%20Dagenham"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Barking%20and%20Dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Bromley"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Bromley/"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Essex"
+  to = "/end-of-tenancy-cleaning/essex/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Essex/"
+  to = "/end-of-tenancy-cleaning/essex/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Redbridge"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/Redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+

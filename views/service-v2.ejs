@@ -245,10 +245,6 @@
       <h3><%= name %> near you</h3>
       <ul class="s-area-links"><% _local.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= _clean(l.name) %></a></li><% }); %></ul>
     <% } %>
-    <% if (_others.length) { %>
-      <h3><%= _local.length ? 'We also cover' : 'Areas we cover' %></h3>
-      <p class="s-area-list"><%= _others.map(_clean).join(', ') %></p>
-    <% } %>
   </div>
 </section>
 <% } %>
