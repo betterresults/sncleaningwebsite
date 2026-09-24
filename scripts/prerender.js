@@ -116,7 +116,7 @@ function writeSitemap(routes) {
     .filter((r) => r.sitemap)
     .map((r) => {
       const lastmod = (r.lastmod ? new Date(r.lastmod).toISOString().slice(0, 10) : today);
-      return `  <url>\n    <loc>${SITE_URL}${r.url}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+      return `  <url>\n    <loc>${SITE_URL}${r.url === '/' ? '/' : r.url.replace(/\/?$/, '/')}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
     })
     .join('\n');
 

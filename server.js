@@ -107,7 +107,9 @@ app.locals.bookHref = (service) => {
 // social-share image and structured data that routes can override below.
 app.use(async (req, res, next) => {
   res.locals.currentPath = req.path;
-  res.locals.canonicalUrl = `${SITE_URL}${req.path}`;
+  // Pages are served with a trailing slash (Netlify redirects /x to /x/), so
+  // canonicals point at the final URL, not at a redirect.
+  res.locals.canonicalUrl = `${SITE_URL}${req.path === '/' || /\.[a-z0-9]+$/i.test(req.path) ? req.path : req.path.replace(/\/?$/, '/')}`;
   res.locals.noindex = false;
 
   try {
@@ -207,7 +209,7 @@ app.get('/', async (req, res) => {
   const mapLink = buildMapLink(areaPages, regions, ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning']);
 
   res.render('index', {
-    title: 'Professional Cleaning Services in London & Essex',
+    title: 'Cleaning Services London & Essex',
     metaDescription:
       'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
     // Homepage service cards, in this order.
@@ -557,7 +559,8 @@ async function renderArea(req, res, next, areaSlug) {
       mapLink,
       designV2: true,
       heroPreload: serviceImage(service.slug),
-      title: page.meta_title || `${service.title} in ${place}`,
+      // Title format (keyword first, then price, then trust): fits Google's ~60 characters.
+      title: [`${service.title} ${place} | ${servicePrice(service.slug) || 'Free Quote'} | 5★ Rated`, `${service.title} ${place} | ${servicePrice(service.slug) || 'Free Quote'}`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
       metaDescription: page.meta_description || `${service.title} in ${place}.`,
       page, region, service: fullService, parent, place,
       servicePage: servicePage || {},

@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title><%= title %> | <%= site.name %></title>
+  <% const fullTitle = (title + ' | ' + site.name).length <= 60 ? title + ' | ' + site.name : title; /* keep under ~60 chars so Google shows it in full */ %>
+  <title><%= fullTitle %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
   <% if (typeof noindex !== 'undefined' && noindex) { %>
