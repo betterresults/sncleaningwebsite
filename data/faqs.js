@@ -7,7 +7,7 @@ module.exports = [
   {
     question: 'How much does a cleaning cost?',
     answer:
-      "Domestic and deep cleaning start from £23 an hour, and end of tenancy cleaning from £179 for a studio flat. The final price depends on the size of the property and the type of clean. Send your postcode and what you need, or WhatsApp us, and we'll quote you — usually the same weekday. No hidden add-on fees after that."
+      "Domestic cleaning starts from £23 an hour, deep cleaning from £27 an hour and end of tenancy cleaning from £179. The final price depends on the size of the property and the type of clean. Send your postcode and what you need, or WhatsApp us, and we'll quote you — usually the same weekday. No hidden add-on fees after that."
   },
   {
     question: 'Are your cleaners insured and background-checked?',

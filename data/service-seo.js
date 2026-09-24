@@ -9,19 +9,7 @@ module.exports = {
     metaTitle: 'Domestic Cleaning London & Essex | From £23/hour',
     metaDescription:
       'Weekly, fortnightly, monthly or one-off domestic cleaning in London & Essex by our own insured, DBS-checked cleaners. From £23 an hour. Book online.',
-    prices: [
-      {
-        title: 'Domestic cleaning prices (per hour)',
-        note: 'Hourly rate per cleaner. The rate depends on how often we visit and whether we bring the products and equipment.',
-        columns: ['How often', 'We bring cleaning products', 'We bring products & equipment'],
-        rows: [
-          ['Weekly', '£23', '£26'],
-          ['Fortnightly', '£24', '£27'],
-          ['Monthly', '£27', '£30'],
-          ['One-off', '£29', '£35']
-        ]
-      }
-    ],
+    prices: [],
     guide: [
       {
         h: 'What is domestic cleaning?',
@@ -33,7 +21,7 @@ module.exports = {
       {
         h: 'How much does domestic cleaning cost in London and Essex?',
         p: [
-          'Our domestic cleaning starts from £23 an hour for a weekly clean where we bring the cleaning products. Regular visits cost less per hour than a one-off, and the rate goes up slightly if you would like us to bring our own equipment as well. The full price table is above, and the booking form shows your exact price before you confirm.'
+          'Our domestic cleaning starts from £23 an hour. Regular visits cost less per hour than a one-off clean. Click Get a quote, enter your postcode and email, and the booking form shows your exact price before you confirm.'
         ]
       },
       {
@@ -52,7 +40,7 @@ module.exports = {
     extraFaqs: [
       {
         question: 'How much is a cleaner per hour in London and Essex?',
-        answer: 'Our domestic cleaning starts from £23 an hour for a weekly clean with our cleaning products. Fortnightly is £24, monthly £27 and a one-off clean £29 an hour. Add £3 to £6 an hour if you would like us to bring our own equipment as well.'
+        answer: 'Our domestic cleaning starts from £23 an hour. The rate depends on how often we visit and whether we bring equipment as well as products, and the booking form shows your exact price.'
       },
       {
         question: 'Which areas do you cover for domestic cleaning?',
@@ -64,49 +52,8 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London & Essex | From £179',
     metaDescription:
-      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Fixed prices from £179 for a studio. 72-hour re-clean if the agent flags anything.',
-    prices: [
-      {
-        title: 'End of tenancy cleaning prices',
-        note: 'Fixed price by property size and how furnished it is.',
-        columns: ['Property', 'Unfurnished', 'Part furnished', 'Furnished'],
-        rows: [
-          ['Studio flat', '£179', '£199', '£215'],
-          ['1 bed flat', '£205', '£225', '£245'],
-          ['2 bed flat', '£229', '£249', '£275'],
-          ['3 bed flat', '£275', '£299', '£329'],
-          ['4 bed flat', '£319', '£349', '£385'],
-          ['1 bed house', '£229', '£249', '£275'],
-          ['2 bed house', '£259', '£285', '£309'],
-          ['3 bed house', '£305', '£335', '£365'],
-          ['4 bed house', '£349', '£385', '£439'],
-          ['5 bed house', '£385', '£425', '£489']
-        ]
-      },
-      {
-        title: 'Oven cleaning',
-        note: 'Part of every end of tenancy clean, priced by the size of your oven.',
-        columns: ['Oven', 'Price'],
-        rows: [
-          ['Single oven', '£49'],
-          ['Double oven', '£79'],
-          ['Single & convection oven', '£79'],
-          ['Range oven', '£98'],
-          ['AGA oven', '£129']
-        ]
-      },
-      {
-        title: 'Extra rooms',
-        columns: ['Room', 'Unfurnished', 'Part furnished', 'Furnished'],
-        rows: [
-          ['Extra bathroom', '£35', '£38.50', '£42'],
-          ['Extra toilet', '£18', '£19.80', '£21.60'],
-          ['Living or dining room', '£35', '£38.50', '£42'],
-          ['Utility or study room', '£26', '£28.60', '£31.20'],
-          ['Conservatory', '£62', '£68.20', '£74.40']
-        ]
-      }
-    ],
+      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Fixed prices from £179. 72-hour re-clean if the agent flags anything.',
+    prices: [],
     guide: [
       {
         h: 'What is an end of tenancy clean?',
@@ -132,7 +79,7 @@ module.exports = {
       {
         h: 'How much does end of tenancy cleaning cost?',
         p: [
-          'Our end of tenancy cleaning is a fixed price based on the size of the property and how furnished it is, starting from £179 for an unfurnished studio flat. A 2 bed flat is from £229 and a 3 bed house from £305. The oven is cleaned as part of the job and priced by its size, extra bathrooms and rooms are added on top, and the booking form shows your full price before you confirm.'
+          'Our end of tenancy cleaning starts from £179. It is a fixed price based on the size of the property and how furnished it is, and the oven is cleaned as part of the job, priced by its size. Click Get a quote and the booking form shows your full price before you confirm.'
         ]
       },
       {
@@ -150,8 +97,8 @@ module.exports = {
     ],
     extraFaqs: [
       {
-        question: 'How much is an end of tenancy clean for a 2 bed flat?',
-        answer: 'An end of tenancy clean for a 2 bed flat is £229 unfurnished, £249 part furnished and £275 furnished. The oven is cleaned as part of the job and priced by size, from £49 for a single oven.'
+        question: 'Is the price fixed for an end of tenancy clean?',
+        answer: 'Yes. The price is fixed before we start, based on the number of bedrooms and bathrooms, how furnished the property is and the size of the oven. It starts from £179, and the booking form shows your exact price.'
       },
       {
         question: 'Do I need to be there for the end of tenancy clean?',
@@ -161,7 +108,7 @@ module.exports = {
   },
 
   'airbnb-cleaning': {
-    metaTitle: 'Airbnb Cleaning London & Essex | Guest Turnovers',
+    metaTitle: 'Airbnb Cleaning London & Essex | From £24/hour',
     metaDescription:
       'Airbnb and short-let cleaning in London & Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
     guide: [
@@ -207,21 +154,10 @@ module.exports = {
   },
 
   'deep-house-cleaning': {
-    metaTitle: 'Deep Cleaning London & Essex | From £23/hour',
+    metaTitle: 'Deep Cleaning London & Essex | From £27/hour',
     metaDescription:
-      'Deep house cleaning in London & Essex: inside the oven, grout, tiles, skirting boards and behind furniture. Own insured, DBS-checked team. From £23 an hour.',
-    prices: [
-      {
-        title: 'Deep cleaning prices (per hour)',
-        note: 'Hourly rate per cleaner for a one-off deep clean.',
-        columns: ['Option', 'Price per hour'],
-        rows: [
-          ['Cleaning only (your products)', '£23.00'],
-          ['We bring the cleaning products', '£24.90'],
-          ['We bring products & equipment', '£25.90']
-        ]
-      }
-    ],
+      'Deep house cleaning in London & Essex: inside the oven, grout, tiles, skirting boards and behind furniture. Own insured, DBS-checked team. From £27 an hour.',
+    prices: [],
     guide: [
       {
         h: 'What is a deep clean?',
@@ -239,7 +175,7 @@ module.exports = {
       {
         h: 'How much does a deep clean cost?',
         p: [
-          'Deep cleaning is charged by the hour, from £23 an hour if you provide the products, £24.90 if we bring the products and £25.90 if we bring the products and equipment. The time needed depends on the size of the home and its condition. Tell us about your home in the form above and we will send you a price.'
+          'Deep cleaning is charged by the hour, from £27 an hour. The time needed depends on the size of the home and its condition. Tell us about your home in the form above and we will send you a price.'
         ]
       },
       {
@@ -252,13 +188,13 @@ module.exports = {
     extraFaqs: [
       {
         question: 'How much is a deep clean per hour?',
-        answer: 'Our deep cleaning is £23 an hour if you provide the products, £24.90 if we bring the cleaning products and £25.90 if we bring products and equipment.'
+        answer: 'Our deep cleaning starts from £27 an hour. How many hours it takes depends on the size and condition of the home, so we send you a price once you tell us about it.'
       }
     ]
   },
 
   'after-builders-cleaning': {
-    metaTitle: 'After Builders Cleaning London & Essex',
+    metaTitle: 'After Builders Cleaning London & Essex | From £179',
     metaDescription:
       'After builders and post-renovation cleaning in London & Essex. Building dust removed from every surface, ready to move in or hand over. Request a quote.',
     guide: [
@@ -296,26 +232,10 @@ module.exports = {
   },
 
   'carpet-cleaning-services': {
-    metaTitle: 'Carpet Cleaning London & Essex | From £20',
+    metaTitle: 'Carpet Cleaning London & Essex | From £49',
     metaDescription:
-      'Professional carpet and rug cleaning in London & Essex. Stains pre-treated, fast-dry method, priced per room from £20. Book online.',
-    prices: [
-      {
-        title: 'Carpet cleaning prices',
-        columns: ['Room or item', 'Price'],
-        rows: [
-          ['Hallway', '£20'],
-          ['Single bedroom', '£45'],
-          ['Double bedroom', '£59'],
-          ['Master bedroom', '£79'],
-          ['Living room', '£79'],
-          ['Dining room', '£69'],
-          ['Staircase', '£49'],
-          ['Small or medium rug', '£29'],
-          ['Large rug', '£59']
-        ]
-      }
-    ],
+      'Professional carpet and rug cleaning in London & Essex. Stains pre-treated, fast-dry method, from £49. Book online.',
+    prices: [],
     guide: [
       {
         h: 'How does professional carpet cleaning work?',
@@ -327,7 +247,7 @@ module.exports = {
       {
         h: 'How much does carpet cleaning cost?',
         p: [
-          'Carpet cleaning is priced per room, from £20 for a hallway, £45 for a single bedroom and £79 for a living room. A staircase is £49 and rugs start at £29. The full price list is above.'
+          'Carpet cleaning starts from £49. The price depends on the rooms, stairs and rugs you need cleaned, and the booking form shows your exact price before you confirm.'
         ]
       },
       {
@@ -345,33 +265,17 @@ module.exports = {
     ],
     extraFaqs: [
       {
-        question: 'How much does it cost to clean a living room carpet?',
-        answer: 'Cleaning a living room carpet costs £79. A single bedroom is £45, a double bedroom £59 and a hallway £20.'
+        question: 'How is carpet cleaning priced?',
+        answer: 'By room, so you only pay for what you need cleaned. It starts from £49, and adding stairs or rugs is simple in the booking form.'
       }
     ]
   },
 
   'upholstery-cleaning': {
-    metaTitle: 'Sofa & Upholstery Cleaning London & Essex | From £12',
+    metaTitle: 'Sofa & Upholstery Cleaning London & Essex',
     metaDescription:
-      'Sofa, armchair and upholstery cleaning in London & Essex with fabric-safe products. 3-seater sofa £89, armchair £29, dining chair £12. Book online.',
-    prices: [
-      {
-        title: 'Upholstery cleaning prices',
-        columns: ['Item', 'Price'],
-        rows: [
-          ['2-seater sofa', '£69'],
-          ['3-seater sofa', '£89'],
-          ['Corner sofa', '£119'],
-          ['Armchair', '£29'],
-          ['Dining chair', '£12'],
-          ['Ottoman', '£29'],
-          ['Headboard', '£25'],
-          ['Curtains (half)', '£29'],
-          ['Curtains (full)', '£49']
-        ]
-      }
-    ],
+      'Sofa, armchair and upholstery cleaning in London & Essex with fabric-safe products, priced per item. Book online.',
+    prices: [],
     guide: [
       {
         h: 'How is a sofa professionally cleaned?',
@@ -383,7 +287,7 @@ module.exports = {
       {
         h: 'How much does sofa cleaning cost?',
         p: [
-          'Upholstery cleaning is priced per item: £69 for a 2-seater sofa, £89 for a 3-seater and £119 for a corner sofa. Armchairs are £29 and dining chairs £12. The full price list is above.'
+          'Upholstery cleaning is priced per item, so the cost depends on what you need cleaned: sofas, armchairs, dining chairs, headboards or curtains. Click Get a quote and the booking form shows your exact price.'
         ]
       },
       {
@@ -395,28 +299,17 @@ module.exports = {
     ],
     extraFaqs: [
       {
-        question: 'How much is it to clean a 3-seater sofa?',
-        answer: 'Cleaning a 3-seater sofa costs £89. A 2-seater is £69 and a corner sofa £119.'
+        question: 'How is sofa cleaning priced?',
+        answer: 'Per item, based on the size of the sofa or chair. Add each piece in the booking form and it shows your exact price before you confirm.'
       }
     ]
   },
 
   'mattress-cleaning': {
-    metaTitle: 'Mattress Cleaning London & Essex | From £39',
+    metaTitle: 'Mattress Cleaning London & Essex',
     metaDescription:
-      'Professional mattress cleaning in London & Essex. Stains, odours and dust mites treated. Single £39, double £49, king £59. Book online.',
-    prices: [
-      {
-        title: 'Mattress cleaning prices',
-        columns: ['Mattress size', 'Price'],
-        rows: [
-          ['Single', '£39'],
-          ['Double', '£49'],
-          ['King', '£59'],
-          ['Super king', '£69']
-        ]
-      }
-    ],
+      'Professional mattress cleaning in London & Essex. Stains, odours and dust mites treated, priced by size. Book online.',
+    prices: [],
     guide: [
       {
         h: 'Why get a mattress professionally cleaned?',
@@ -428,7 +321,7 @@ module.exports = {
       {
         h: 'How much does mattress cleaning cost?',
         p: [
-          'Mattress cleaning is priced by size: £39 for a single, £49 for a double, £59 for a king and £69 for a super king.'
+          'Mattress cleaning is priced by the size of the mattress. Click Get a quote and the booking form shows your exact price.'
         ]
       },
       {
@@ -440,8 +333,8 @@ module.exports = {
     ],
     extraFaqs: [
       {
-        question: 'How much does it cost to clean a double mattress?',
-        answer: 'Cleaning a double mattress costs £49. A single is £39, a king £59 and a super king £69.'
+        question: 'How is mattress cleaning priced?',
+        answer: 'By size, from single to super king. Choose yours in the booking form and it shows the exact price before you confirm.'
       }
     ]
   }

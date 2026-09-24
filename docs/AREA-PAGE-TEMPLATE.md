@@ -31,25 +31,19 @@ from area_page_template order by display_order;
 
 ## Page structure (top to bottom)
 
-1. **Hero:** breadcrumbs, H1 "{Service} in {Area}", `quick_answer`, "From £" badge, quote form.
-2. **Local:** `local_intro` + `intro`, with `postcodes` and `neighbourhoods` boxes.
-3. **What's included:** `included_tasks`, or the main service page's list if empty.
-4. **Guide section 1:** first item in `content_sections`, with the "Why book with us" box.
-5. **Reviews:** automatic. Reviews that mention the area show first.
-6. **How it works:** automatic, per service.
-7. **FAQs:** `faqs`, also output as FAQ schema.
-8. **Guide sections 2+:** the rest of `content_sections`.
-9. **Other services in {Area}:** automatic. Links to the same area for each other service, or the next level up if that page doesn't exist.
-10. **Areas:** automatic, from `coverage_regions.parent_id`. Borough pages list their towns. Town pages list the other towns in the same borough and link back up.
+People first (sections 1-4 decide whether a visitor books), local detail for Google after that.
+
+1. **Hero** — breadcrumbs, H1 "{Service} in {Area}", `quick_answer` (people/benefit-focused), the one "From £" badge, quote form.
+2. **Why people in {Area} book with us** — 4 benefits (automatic).
+3. **What's included** — `included_tasks`, or the main service page's list if empty.
+4. **Reviews** — automatic; reviews that mention the area show first.
+5. **How it works** — automatic, per service.
+6. **Local** — `local_intro` + `intro`, with `postcodes` and `neighbourhoods`.
+7. **Guide** — all `content_sections`.
+8. **FAQs** — `faqs` (also output as FAQ schema).
+9. **Other services in {Area}** — automatic, links to the same area for each other service (or the next level up if that page doesn't exist).
+10. **Areas** — automatic from `coverage_regions.parent_id` (map on London/Essex pages).
 11. **Final call to action.**
-
-The page deliberately does **not** show:
-
-- the full price list (customers click *Get a quote* for an exact price)
-- extras / add-ons
-- the "People you can trust" section
-
-These live on the main service page. Repeating them on every area page only adds duplicate text.
 
 ## Structure and URLs
 
@@ -66,8 +60,8 @@ Main service page     /end-of-tenancy-cleaning/            map: London + Essex
 ## Rules for content (to avoid duplicate / doorway pages)
 
 1. **True only.** No invented claims, statistics, local stories or prices.
-   - Prices come from the price list: end of tenancy from £179, domestic from £23/hour, carpet from £20 (rooms from £45).
-   - The oven is cleaned as part of every end of tenancy clean and priced by size: £49 single, £79 double, £98 range, £129 AGA.
+   - **Price rule (whole site): only ONE price per service, the "from" price.** End of tenancy £179, domestic £23/hour, deep cleaning £27/hour, Airbnb £24/hour, after builders £179, carpet £49; upholstery and mattress show no price. Never write prices for bedrooms, rooms, ovens, rugs or extras — customers get the exact price with Get a quote. The from prices live in `data/prices.js`.
+   - The oven is cleaned as part of every end of tenancy clean and priced by its size (don't list the oven prices).
    - Re-clean window: 72 hours for end of tenancy, 24 hours for everything else.
 2. **Unique where it matters.** `quick_answer`, `local_intro`, `intro`, `content_sections` and `faqs` must be written for that area. Never copy them from another page and swap the town name.
 3. **Local, specific detail.** Real neighbourhoods, postcodes, property types and street/area names that someone from there would recognise.
