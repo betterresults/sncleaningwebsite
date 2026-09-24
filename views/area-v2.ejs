@@ -1,0 +1,274 @@
+<%# Area page — new design. One template for every service + area
+    TEMPLATE: every area page for every service uses this file. Rules and
+    field guide: docs/AREA-PAGE-TEMPLATE.md and Supabase table area_page_template.
+    (/end-of-tenancy-cleaning/romford/, /domestic-cleaning/havering/ ...).
+    Content comes from the area_pages row; anything missing falls back to the
+    service's own content, so a new row with just a region still renders. %>
+<%
+  const name = service.title;
+  const lower = name.toLowerCase().replace('airbnb', 'Airbnb');
+  const copy = serviceContent[service.slug] || serviceContent['domestic-cleaning'];
+  const article = /^[aeiou]/i.test(name) ? 'an' : 'a';
+  const formSlug = bookSlug(service);
+  const heroImg = serviceImage(service.slug);
+  const price = page.price_from ? 'From £' + page.price_from : servicePrice(service.slug);
+  const lead = page.quick_answer || copy.lead;
+  const localText = [page.local_intro, page.intro].filter(Boolean);
+  const tasks = (page.included_tasks && page.included_tasks.length) ? page.included_tasks : (servicePage.included_tasks || []);
+  const guide = (page.content_sections && page.content_sections.length)
+    ? page.content_sections.map(function (c) { return { h: c.heading, p: c.body || [] }; })
+    : [];
+  const reclean = service.slug === 'end-of-tenancy-cleaning' ? 72 : 24;
+  const benefits = [
+    ['Our own team', 'Trained, insured and DBS-checked cleaners, never subcontractors.'],
+    ['Professional products and equipment', 'We bring everything needed for the job.'],
+    ['A proper clean, not a quick wipe', 'Every room worked through against a checklist.'],
+    ['Re-clean within ' + reclean + ' hours', 'If anything is missed, tell us within ' + reclean + ' hours and we come back.']
+  ];
+  // Reviews: ones that mention this area first, then ones about this service.
+  const placeRe = new RegExp(place.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+  const score = (t) => (placeRe.test(t.quote + ' ' + (t.location || '')) ? 2 : 0) + (copy.reviewMatch.test(t.quote) ? 1 : 0);
+  const reviews = (typeof testimonials !== 'undefined' ? testimonials : []).slice()
+    .sort((a, b) => score(b) - score(a))
+    .slice(0, 3);
+  const roomIcons = {
+    kitchen: '<path d="M4 10h16v10H4z"/><path d="M4 14h16M8 6v4M12 4v6M16 6v4"/>',
+    bathroom: '<path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5v-3Z"/><path d="M6 12V6a2 2 0 0 1 4 0"/><path d="M7 20l-1 2M17 20l1 2"/>',
+    living: '<path d="M4 12V9a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3"/><path d="M3 12h18v5H3z"/><path d="M5 17v2M19 17v2"/>',
+    general: '<path d="M4 4h16v16H4z"/><path d="m8 12 3 3 5-6"/>'
+  };
+  const iconFor = (room) => {
+    const r = room.toLowerCase();
+    if (r.includes('kitchen')) return roomIcons.kitchen;
+    if (r.includes('bath')) return roomIcons.bathroom;
+    if (r.includes('living') || r.includes('bed')) return roomIcons.living;
+    return roomIcons.general;
+  };
+%>
+
+<!-- ============ HERO ============ -->
+<section class="h-hero s-hero">
+  <img class="h-hero-bg" src="<%= heroImg %>?v=<%= assetVersion %>"<%- rs(heroImg, '100vw') %> alt="" decoding="async" fetchpriority="high" width="1152" height="864" />
+  <div class="h-wrap h-hero-inner">
+    <div class="h-hero-copy">
+      <nav class="s-crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a><a href="/<%= service.slug %>"><%= name %></a><% if (parentLink) { %><a href="<%= parentLink.url %>"><%= parentLink.name %></a><% } %><span aria-current="page"><%= place %></span>
+      </nav>
+      <p class="h-eyebrow h-eyebrow--light"><%= parentLink ? place + ', ' + parentLink.name : 'Local service' %></p>
+      <h1 class="h-display"><%= name %> in <%= place %></h1>
+      <p class="h-lead"><%= lead %></p>
+      <div class="s-hero-meta">
+        <% if (price) { %><span class="s-price"><%= price %></span><% } %>
+        <% if (site.googleBusinessUrl) { %>
+          <p class="h-rating"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google reviews</p>
+        <% } %>
+      </div>
+    </div>
+<%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
+  </div>
+<%- include('partials/trust-strip') %>
+</section>
+
+<!-- ============ LOCAL ============ -->
+<% if (localText.length || (page.postcodes && page.postcodes.length) || (page.neighbourhoods && page.neighbourhoods.length)) { %>
+<section class="h-section h-white">
+  <div class="h-wrap s-local">
+    <div class="s-local-copy">
+      <p class="h-eyebrow">Local to <%= place %></p>
+      <h2 class="h-title"><%= name %> across <%= place %></h2>
+      <% localText.forEach(function (t) { %><p><%= t %></p><% }); %>
+    </div>
+    <aside class="s-local-card">
+      <% if (page.postcodes && page.postcodes.length) { %>
+        <h3>Postcodes we cover</h3>
+        <ul class="s-chips"><% page.postcodes.forEach(function (p) { %><li><%= p %></li><% }); %></ul>
+      <% } %>
+      <% if (page.neighbourhoods && page.neighbourhoods.length) { %>
+        <h3>Neighbourhoods</h3>
+        <ul class="s-chips s-chips--soft"><% page.neighbourhoods.forEach(function (n) { %><li><%= n %></li><% }); %></ul>
+      <% } %>
+      <a href="#quote" class="h-btn h-btn--primary h-btn--block">Check your postcode</a>
+    </aside>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ WHAT'S INCLUDED ============ -->
+<% if (tasks.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">What's included</p>
+      <h2 class="h-title"><%= copy.includedTitle || 'Room by room, nothing left to memory' %></h2>
+    </div>
+    <div class="s-rooms">
+      <% tasks.forEach(function (group) { %>
+        <article class="s-room h-reveal">
+          <div class="s-room-head">
+            <span class="h-ico h-ico--dark" aria-hidden="true"><svg viewBox="0 0 24 24"><%- iconFor(group.room) %></svg></span>
+            <h3><%= group.room %></h3>
+          </div>
+          <ul><% group.tasks.forEach(function (task) { %><li><%= task %></li><% }); %></ul>
+        </article>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ GUIDE + BENEFITS ============ -->
+<section class="h-section h-white" id="guide">
+  <div class="h-wrap s-guide<%= guide.length ? '' : ' s-guide--solo' %>">
+    <% if (guide.length) { %>
+    <article class="s-article">
+      <p class="h-eyebrow"><%= name %> in <%= place %></p>
+      <% guide.slice(0, 1).forEach(function (g) { %>
+        <h2><%= g.h %></h2>
+        <% g.p.forEach(function (para) { %><p><%= para %></p><% }); %>
+      <% }); %>
+    </article>
+    <% } %>
+    <aside class="s-prices s-benefits" aria-label="Why book with us">
+      <div class="s-price-card">
+        <h3>Why book with us in <%= place %></h3>
+        <ul class="s-benefit-list">
+          <% benefits.forEach(function (bf) { %><li><strong><%= bf[0] %></strong><span><%= bf[1] %></span></li><% }); %>
+        </ul>
+      </div>
+      <a href="<%= formSlug ? bookHref(service) : '#quote' %>" class="h-btn h-btn--primary h-btn--block">Get your price</a>
+    </aside>
+  </div>
+</section>
+
+<!-- ============ REVIEWS ============ -->
+<% if (reviews.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Google reviews</p>
+        <h2 class="h-title">What our customers say</h2>
+        <p class="h-rating h-rating--dark"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google · real reviews, word for word</p>
+      </div>
+      <% if (site.googleBusinessUrl) { %>
+        <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <% } %>
+    </div>
+    <div class="h-reviews">
+      <% reviews.forEach(function (t) { %>
+        <figure class="h-review h-reveal">
+          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">How it works</p>
+      <h2 class="h-title"><%= copy.stepsTitle %></h2>
+    </div>
+    <ol class="h-steps">
+      <% copy.steps.forEach(function (st, i) { %>
+        <li class="h-step h-reveal"><span class="h-step-num"><%= i + 1 %></span><h3><%= st[0] %></h3><p><%= st[1] %></p></li>
+      <% }); %>
+    </ol>
+    <div class="h-center"><a href="#quote" class="h-btn h-btn--primary">Get a quote</a></div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<% if (page.faqs && page.faqs.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap h-faq-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">FAQs</p>
+      <h2 class="h-title"><%= name %> in <%= place %>: your questions</h2>
+    </div>
+    <div class="h-faq">
+      <% page.faqs.forEach(function (faq) { %>
+        <details class="h-faq-item">
+          <summary><h3><%= faq.question %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+          <p><%= faq.answer %></p>
+        </details>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ GUIDE (rest) ============ -->
+<% if (guide.length > 1) { %>
+<section class="h-section h-white">
+  <div class="h-wrap s-guide s-guide--solo">
+    <article class="s-article">
+      <% guide.slice(1).forEach(function (g) { %>
+        <h2><%= g.h %></h2>
+        <% g.p.forEach(function (para) { %><p><%= para %></p><% }); %>
+      <% }); %>
+    </article>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ OTHER SERVICES IN THIS AREA ============ -->
+<% if (otherServices.length) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">Also in <%= place %></p>
+      <h2 class="h-title">Other services we offer in <%= place %></h2>
+    </div>
+    <div class="h-svc-grid s-svc-grid--area">
+      <% otherServices.forEach(function (s) { %>
+        <a href="<%= s.url %>" class="h-svc h-reveal">
+          <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(s.slug), '(max-width: 1000px) 50vw, 300px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />
+          <span class="h-svc-card">
+            <span class="h-svc-name"><%= s.title %></span>
+            <span class="h-svc-meta"><span><%= servicePrice(s.slug) || 'Get a price' %></span><span class="h-arrow" aria-hidden="true">→</span></span>
+          </span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ AREAS (children / nearby / parent) ============ -->
+<% if (children.length || nearby.length || parentLink) { %>
+<section class="h-section h-white" id="areas">
+  <div class="h-wrap s-areas">
+    <p class="h-eyebrow">Areas</p>
+    <% if (children.length) { %>
+      <h2 class="h-title">Areas we cover in <%= place %></h2>
+      <ul class="s-area-links"><% children.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= l.name %></a></li><% }); %></ul>
+    <% } %>
+    <% if (nearby.length) { %>
+      <h2 class="h-title"><%= parentLink ? 'Other areas in ' + parentLink.name : 'Nearby areas' %></h2>
+      <ul class="s-area-links"><% nearby.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= l.name %></a></li><% }); %></ul>
+    <% } %>
+    <% if (parentLink) { %>
+      <p class="s-area-up"><a href="<%= parentLink.url %>">All <%= lower %> in <%= parentLink.name %> →</a></p>
+    <% } %>
+  </div>
+</section>
+<% } %>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="h-section h-sand h-section--tight">
+  <div class="h-wrap">
+    <div class="h-panel h-final">
+      <div>
+        <h2 class="h-title h-title--light">Ready to book <%= lower %> in <%= place %>?</h2>
+        <p><%= copy.finalText %></p>
+      </div>
+      <a href="<%= formSlug ? bookHref(service) : '#quote' %>" class="h-btn h-btn--light"><%= formSlug ? 'Book ' + lower : 'Get a quote' %></a>
+    </div>
+  </div>
+</section>

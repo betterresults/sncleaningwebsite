@@ -127,7 +127,7 @@ async function getCoverageAreas() {
 // Every coverage region including sub-areas, used internally to resolve a
 // sub-area's parent borough name (id, name, parent_id only — not the display list).
 async function getAllCoverageRegions() {
-  const { data, error } = await supabase.from('coverage_regions').select('id, name, parent_id');
+  const { data, error } = await supabase.from('coverage_regions').select('id, name, display_name, parent_id');
 
   if (error) {
     console.error('Error fetching coverage regions:', error.message);
@@ -144,7 +144,7 @@ async function getAllCoverageRegions() {
 async function getAreaPages() {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, parent_id), services(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id), services(id, title, slug, icon, short_description)')
     .eq('published', true);
 
   if (error) {
@@ -160,7 +160,7 @@ async function getAreaPages() {
 async function getAreaPageBySlug(serviceSlug, areaSlug) {
   const { data, error } = await supabase
     .from('area_pages')
-    .select('*, coverage_regions(id, name, parent_id), services!inner(id, title, slug, icon, short_description)')
+    .select('*, coverage_regions(id, name, display_name, parent_id), services!inner(id, title, slug, icon, short_description)')
     .eq('slug', areaSlug)
     .eq('services.slug', serviceSlug)
     .eq('published', true)

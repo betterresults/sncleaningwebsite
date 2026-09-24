@@ -508,6 +508,59 @@ app.get('/:serviceSlug/:areaSlug', async (req, res, next) => {
   ]);
   const parent = region.parent_id ? allRegions.find((r) => r.id === region.parent_id) : null;
 
+  if (SERVICE_V2.includes(service.slug)) {
+    // New design. Area name: display_name, else the region name cleaned of
+    // map labels like "Essex - " and " / Thurrock Edge".
+    const areaName = (r) => r ? (r.display_name || String(r.name).replace(/^Essex - /, '').replace(/\s*\/.*$/, '')) : '';
+    const place = areaName(region);
+    const fullService = allServices.find((s) => s.slug === service.slug) || service; // has booking_embed_url
+    const allAreaPages = await content.getAreaPages();
+    const pageUrl = (ap) => `/${ap.services.slug}/${ap.slug}`;
+    // Parent page for this service (e.g. Havering for Romford), if it exists.
+    const parentPage = parent ? allAreaPages.find((ap) => ap.services.slug === service.slug && ap.region_id === parent.id) : null;
+    // Nearby: same service, same parent. Children: same service, this area is the parent.
+    const nearby = region.parent_id
+      ? allAreaPages.filter((ap) => ap.id !== page.id && ap.services.slug === service.slug && ap.coverage_regions && ap.coverage_regions.parent_id === region.parent_id)
+      : [];
+    const children = allAreaPages.filter((ap) => ap.services.slug === service.slug && ap.coverage_regions && ap.coverage_regions.parent_id === region.id);
+    // Other services in this same area: link to that service's page for this
+    // area, else its parent-area page, else the main service page.
+    const otherServices = allServices.filter(isDomestic).filter((s) => s.slug !== service.slug && SERVICE_V2.includes(s.slug)).map((s) => {
+      const here = allAreaPages.find((ap) => ap.services.slug === s.slug && ap.region_id === region.id);
+      const up = !here && parent ? allAreaPages.find((ap) => ap.services.slug === s.slug && ap.region_id === parent.id) : null;
+      return { ...s, url: here ? pageUrl(here) : up ? pageUrl(up) : `/${s.slug}`, local: !!here };
+    });
+    const crumbs = [
+      ...res.locals.breadcrumbs,
+      { name: service.title, url: `/${service.slug}` },
+      ...(parentPage ? [{ name: areaName(parent), url: pageUrl(parentPage) }] : []),
+      { name: place, url: `/${service.slug}/${page.slug}` }
+    ];
+    const servicePage = await content.getServicePageBySlug(service.slug);
+    const faqs = page.faqs || [];
+    const faq = schema.buildFaqPage(faqs);
+    return res.render('area-v2', {
+      designV2: true,
+      heroPreload: serviceImage(service.slug),
+      title: page.meta_title || `${service.title} in ${place}`,
+      metaDescription: page.meta_description || `${service.title} in ${place}.`,
+      page, region, service: fullService, parent, place,
+      servicePage: servicePage || {},
+      parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
+      nearby: nearby.map((ap) => ({ name: areaName(ap.coverage_regions), url: pageUrl(ap) })).sort((a, b) => a.name.localeCompare(b.name)),
+      children: children.map((ap) => ({ name: areaName(ap.coverage_regions), url: pageUrl(ap) })).sort((a, b) => a.name.localeCompare(b.name)),
+      otherServices,
+      testimonials,
+      breadcrumbs: crumbs,
+      structuredData: [
+        ...res.locals.structuredData,
+        schema.buildBreadcrumbList(crumbs),
+        schema.buildServiceAreaPage({ service, page, region }),
+        ...(faq ? [faq] : [])
+      ]
+    });
+  }
+
   // Other area pages for this SAME service under the same parent borough —
   // internal linking between nearby areas for the same service, rather than
   // each page sitting isolated.

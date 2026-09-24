@@ -1,0 +1,58 @@
+<%# Hero quote card. Needs: formSlug, article, lower, name. %>
+    <div class="h-quote" id="quote">
+      <h2 class="h-quote-title">Get <%= article %> <%= lower %> quote</h2>
+<% if (formSlug) { %>
+      <p class="h-quote-sub">Enter your postcode and email and we'll take you straight to the booking form.</p>
+      <form name="quote" method="GET" action="/book/<%= formSlug %>" data-netlify="true" netlify-honeypot="bot-field"
+            class="h-form" data-quote-form>
+        <input type="hidden" name="form-name" value="quote" />
+        <input type="hidden" name="service" value="<%= formSlug %>" />
+        <p class="hidden-field"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="h-field">
+          <label for="q-postcode">Postcode</label>
+          <input id="q-postcode" name="postcode" type="text" required autocomplete="postal-code"
+                 autocapitalize="characters" placeholder="e.g. RM3 0SH"
+                 pattern="\s*[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s*[0-9][A-Za-z]{2}\s*" aria-describedby="q-postcode-error" />
+          <span class="h-error" id="q-postcode-error">Please enter a full UK postcode, e.g. RM3 0SH</span>
+        </div>
+        <div class="h-field">
+          <label for="q-email">Email</label>
+          <input id="q-email" name="email" type="email" required autocomplete="email"
+                 placeholder="you@example.com" aria-describedby="q-email-error" />
+          <span class="h-error" id="q-email-error">Please enter a valid email address</span>
+        </div>
+        <button type="submit" class="h-btn h-btn--primary h-btn--block">Get my quote <span aria-hidden="true">→</span></button>
+      </form>
+      <% } else { %>
+      <p class="h-quote-sub">Tell us about the job and we’ll send you a price.</p>
+      <form name="service-quote" method="POST" action="/contact/success" data-netlify="true" netlify-honeypot="bot-field" class="h-form">
+        <input type="hidden" name="form-name" value="service-quote" />
+        <input type="hidden" name="service" value="<%= name %>" />
+        <p class="hidden-field"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="h-field-row">
+          <div class="h-field">
+            <label for="q-postcode">Postcode</label>
+            <input id="q-postcode" name="postcode" type="text" required autocomplete="postal-code"
+                   autocapitalize="characters" placeholder="e.g. RM3 0SH"
+                   pattern="\s*[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s*[0-9][A-Za-z]{2}\s*" aria-describedby="q-postcode-error" />
+            <span class="h-error" id="q-postcode-error">Please enter a full UK postcode, e.g. RM3 0SH</span>
+          </div>
+          <div class="h-field">
+            <label for="q-phone">Phone</label>
+            <input id="q-phone" name="phone" type="tel" required autocomplete="tel" placeholder="07…" />
+          </div>
+        </div>
+        <div class="h-field">
+          <label for="q-email">Email</label>
+          <input id="q-email" name="email" type="email" required autocomplete="email"
+                 placeholder="you@example.com" aria-describedby="q-email-error" />
+          <span class="h-error" id="q-email-error">Please enter a valid email address</span>
+        </div>
+        <div class="h-field">
+          <label for="q-details">About the job</label>
+          <textarea id="q-details" name="details" rows="3" required placeholder="e.g. 3-bed house, kitchen and 2 bathrooms"></textarea>
+        </div>
+        <button type="submit" class="h-btn h-btn--primary h-btn--block">Request a quote <span aria-hidden="true">→</span></button>
+      </form>
+      <% } %>
+    </div>

@@ -84,7 +84,8 @@ module.exports = {
         ]
       },
       {
-        title: 'Oven cleaning add-on',
+        title: 'Oven cleaning',
+        note: 'Part of every end of tenancy clean, priced by the size of your oven.',
         columns: ['Oven', 'Price'],
         rows: [
           ['Single oven', '£49'],
@@ -131,7 +132,7 @@ module.exports = {
       {
         h: 'How much does end of tenancy cleaning cost?',
         p: [
-          'Our end of tenancy cleaning is a fixed price based on the size of the property and how furnished it is, starting from £179 for an unfurnished studio flat. A 2 bed flat is from £229 and a 3 bed house from £305. Oven cleaning, extra bathrooms and extra rooms can be added, and the booking form shows your full price before you confirm.'
+          'Our end of tenancy cleaning is a fixed price based on the size of the property and how furnished it is, starting from £179 for an unfurnished studio flat. A 2 bed flat is from £229 and a 3 bed house from £305. The oven is cleaned as part of the job and priced by its size, extra bathrooms and rooms are added on top, and the booking form shows your full price before you confirm.'
         ]
       },
       {
@@ -150,7 +151,7 @@ module.exports = {
     extraFaqs: [
       {
         question: 'How much is an end of tenancy clean for a 2 bed flat?',
-        answer: 'An end of tenancy clean for a 2 bed flat is £229 unfurnished, £249 part furnished and £275 furnished. Oven cleaning is an extra £49 for a single oven.'
+        answer: 'An end of tenancy clean for a 2 bed flat is £229 unfurnished, £249 part furnished and £275 furnished. The oven is cleaned as part of the job and priced by size, from £49 for a single oven.'
       },
       {
         question: 'Do I need to be there for the end of tenancy clean?',
