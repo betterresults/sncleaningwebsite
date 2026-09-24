@@ -191,6 +191,8 @@ function buildMapLink(areaPages, regions, servicePref, { onlyThese = false } = {
 
 // Service pages already moved to the new design (views/service-v2.ejs).
 // The rest still use views/service-detail.ejs until they are redesigned.
+const serviceContent = require('./data/service-content');
+app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
 
 // ---------- Routes ----------
@@ -441,13 +443,22 @@ app.get('/:slug', async (req, res, next) => {
     { name: 'Services', url: '/our-services' },
     { name: service.title, url: `/${page.slug}` }
   ];
-  const faqPage = schema.buildFaqPage(page.faqs);
-
   const v2 = SERVICE_V2.includes(page.slug);
+  const extra = (v2 && serviceContent[page.slug]) || {};
+  // Database FAQs plus the service's extra FAQs (data/service-seo.js).
+  const allFaqs = [...(page.faqs || []), ...(extra.extraFaqs || [])];
+  const faqPage = schema.buildFaqPage(allFaqs);
+
   let mapLink = null;
+  let localPages = [];
   if (v2) {
     const [areaPages, regions] = await Promise.all([content.getAreaPages(), content.getAllCoverageRegions()]);
     mapLink = buildMapLink(areaPages, regions, [page.slug], { onlyThese: true });
+    // This service's local area pages, for the "Areas we cover" links.
+    localPages = areaPages
+      .filter((p) => p.services && p.services.slug === page.slug && p.coverage_regions)
+      .map((p) => ({ name: p.coverage_regions.name, url: `/${page.slug}/${p.slug}` }))
+      .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   res.render(v2 ? 'service-v2' : 'service-detail', {
@@ -455,8 +466,10 @@ app.get('/:slug', async (req, res, next) => {
     heroPreload: v2 ? ((page.images && page.images.length) ? page.images[0] : serviceImage(page.slug)) : null,
     mapLink,
     mapPages: mapLink ? mapLink.count : 0,
-    title: page.meta_title || service.title,
-    metaDescription: page.meta_description || service.short_description,
+    localPages,
+    allFaqs,
+    title: page.meta_title || extra.metaTitle || service.title,
+    metaDescription: page.meta_description || extra.metaDescription || service.short_description,
     page,
     service,
     relatedServices,
