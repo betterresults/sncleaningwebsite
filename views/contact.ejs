@@ -10,13 +10,13 @@
   <div class="container grid grid-2 contact-grid">
     <div class="contact-form-wrap">
       <iframe id="booking-form-contact-us-1790515395831"
-        src="https://app.dilvon.com/book/sn-cleaning-services/contact-us-1790515395831?embedded=true"
-        style="width:100%;border:0;min-height:600px;display:block;" loading="lazy" title="Contact Us"></iframe>
+        data-src="https://app.dilvon.com/book/sn-cleaning-services/contact-us-1790515395831?embedded=true"
+        style="width:100%;border:0;min-height:600px;display:block;" title="Contact Us"></iframe>
       <script>
         (function () {
           var formOrigin = new URL("https://app.dilvon.com/book/sn-cleaning-services/contact-us-1790515395831?embedded=true").origin;
           var f = document.getElementById('booking-form-contact-us-1790515395831');
-          if (f) { var src = new URL(f.getAttribute('src')); src.searchParams.set('embed_origin', window.location.origin); f.setAttribute('src', src.toString()); }
+          if (f) { var src = new URL(f.getAttribute('data-src')); src.searchParams.set('embed_origin', window.location.origin); f.setAttribute('src', src.toString()); }
           window.addEventListener('message', function (e) {
             if (e.origin !== formOrigin) return; if (!e.data) return;
             if (e.data.type === 'lovable-form-resize') { if (f && typeof e.data.height === 'number') { f.style.height = e.data.height + 'px'; } }

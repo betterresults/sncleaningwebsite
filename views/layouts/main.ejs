@@ -38,15 +38,16 @@
   <!-- Booking forms (Dilvon) and their data: connect early so forms open fast -->
   <link rel="preconnect" href="https://dilvon.com" />
   <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
-  <!-- Instant page changes: booking pages are prepared as soon as a page with a
-       booking link loads; every other internal page is prepared on hover/touch. -->
+  <!-- Instant page changes: booking and contact pages are prepared as soon as a page
+       linking to them loads; every other internal page is prepared on hover/touch. -->
   <script type="speculationrules">
   {
     "prerender": [
-      { "tag": "booking", "where": { "href_matches": "/book{/*}?" }, "eagerness": "eager" },
+      { "tag": "booking", "where": { "or": [ { "href_matches": "/book{/*}?" }, { "href_matches": "/contact{/}?" } ] }, "eagerness": "eager" },
       { "tag": "site", "where": { "and": [
           { "href_matches": "/*" },
           { "not": { "href_matches": "/book{/*}?" } },
+          { "not": { "href_matches": "/contact{/}?" } },
           { "not": { "href_matches": "/contact/success{/*}?" } },
           { "not": { "selector_matches": "[target=_blank], [download]" } }
         ] }, "eagerness": "moderate" }

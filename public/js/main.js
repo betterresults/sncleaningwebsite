@@ -20,58 +20,72 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Booking forms load in advance. The forms are hosted by Dilvon inside our
-  // /book pages; loading the booking page once in a hidden frame puts the
-  // form's files in the browser cache, so when the customer clicks
-  // "Get a quote" the form opens almost instantly. Skipped on data-saver and
-  // very slow connections, and on the booking pages themselves.
+  // Forms load in advance. The quote/booking forms (Dilvon) sit inside our
+  // /book pages and the contact page. As soon as a page has finished loading,
+  // every form page it links to is opened once in a hidden frame, one after
+  // another, so the form's files are already in the browser cache when the
+  // customer clicks and the form appears almost instantly. Skipped on
+  // data-saver and very slow connections.
+  const isFormPage = (path) => /^\/(book|contact)(\/|$)/.test(path) && !/^\/contact\/success/.test(path);
   const warmed = new Set();
-  const warmBooking = (href) => {
+  const queue = [];
+  let busy = false;
+  const next = () => {
+    if (busy || !queue.length) return;
+    busy = true;
+    const key = queue.shift();
+    const f = document.createElement('iframe');
+    f.src = key;
+    f.setAttribute('aria-hidden', 'true');
+    f.tabIndex = -1;
+    f.title = '';
+    f.style.cssText = 'position:absolute;left:-9999px;top:0;width:400px;height:600px;border:0;opacity:0;pointer-events:none;';
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      try { sessionStorage.setItem('warm:' + key, '1'); } catch (_) {}
+      // Give the form inside a few seconds to fetch its files, then move on.
+      setTimeout(() => { f.remove(); busy = false; next(); }, 5000);
+    };
+    f.addEventListener('load', finish);
+    setTimeout(finish, 10000); // never get stuck on one page
+    document.body.appendChild(f);
+  };
+  const warmForm = (href) => {
     try {
       const url = new URL(href, location.href);
-      if (url.origin !== location.origin || !/^\/book(\/|$)/.test(url.pathname)) return;
+      if (url.origin !== location.origin || !isFormPage(url.pathname)) return;
       const key = url.pathname.replace(/\/?$/, '/');
-      if (warmed.has(key)) return;
+      if (key === location.pathname.replace(/\/?$/, '/') || warmed.has(key)) return;
       warmed.add(key);
       try { if (sessionStorage.getItem('warm:' + key)) return; } catch (_) {}
-      const f = document.createElement('iframe');
-      f.src = key;
-      f.setAttribute('aria-hidden', 'true');
-      f.tabIndex = -1;
-      f.title = '';
-      f.style.cssText = 'position:absolute;left:-9999px;top:0;width:400px;height:600px;border:0;opacity:0;pointer-events:none;';
-      f.addEventListener('load', () => {
-        try { sessionStorage.setItem('warm:' + key, '1'); } catch (_) {}
-        setTimeout(() => f.remove(), 8000); // let the form finish loading its files
-      });
-      document.body.appendChild(f);
+      queue.push(key);
+      next();
     } catch (_) { /* never block the page */ }
   };
   const conn = navigator.connection || {};
   const slow = conn.saveData || /(^|-)2g$/.test(conn.effectiveType || '');
-  if (!slow && !/^\/book(\/|$)/.test(location.pathname)) {
-    const primaryBookingHref = () => {
+  if (!slow && window.self === window.top) {
+    const warmAll = () => {
+      const hrefs = [];
       const form = document.querySelector('form[data-quote-form]');
       if (form) {
         const svc = form.elements.service && form.elements.service.value;
-        return svc ? '/book/' + svc : form.getAttribute('action');
+        hrefs.push(svc ? '/book/' + svc : form.getAttribute('action'));
       }
-      const link = document.querySelector('a[href^="/book"]');
-      return link && link.getAttribute('href');
+      document.querySelectorAll('a[href^="/book"], a[href^="/contact"]').forEach((a) => hrefs.push(a.getAttribute('href')));
+      hrefs.filter(Boolean).slice(0, 12).forEach(warmForm);
     };
-    const start = () => { const h = primaryBookingHref(); if (h) warmBooking(h); };
     const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 300));
-    // Start as soon as the visitor does anything (scroll, tap, mouse, key), so
-    // the page itself always finishes loading first.
-    const kick = () => {
-      ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'].forEach((t) => window.removeEventListener(t, kick, { passive: true }));
-      idle(start, { timeout: 1500 });
-    };
-    ['pointerdown', 'pointermove', 'touchstart', 'scroll', 'keydown'].forEach((t) => window.addEventListener(t, kick, { passive: true }));
-    // A service picked in the homepage form: get that form ready too.
+    const start = () => idle(warmAll, { timeout: 2000 });
+    if (document.readyState === 'complete') start();
+    else window.addEventListener('load', start, { once: true });
+    // A service picked in the homepage form: get that form ready first.
     document.addEventListener('change', (e) => {
       if (e.target.matches && e.target.matches('form[data-quote-form] select[name="service"]') && e.target.value) {
-        warmBooking('/book/' + e.target.value);
+        const key = '/book/' + e.target.value + '/';
+        if (!warmed.has(key)) { warmForm(key); const i = queue.indexOf(key); if (i > 0) { queue.splice(i, 1); queue.unshift(key); } }
       }
     });
   }
