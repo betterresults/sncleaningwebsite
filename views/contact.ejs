@@ -9,69 +9,25 @@
 <section class="section">
   <div class="container grid grid-2 contact-grid">
     <div class="contact-form-wrap">
-      <% if (success) { %>
-        <div class="alert alert-success">
-          Thanks — your message has been sent. We'll be in touch within a weekday.
-        </div>
-      <% } %>
-      <% if (error) { %>
-        <div class="alert alert-error"><%= error %></div>
-      <% } %>
-
-      <form
-        name="contact"
-        method="POST"
-        action="/contact/success"
-        data-netlify="true"
-        netlify-honeypot="bot-field"
-        class="contact-form"
-      >
-        <input type="hidden" name="form-name" value="contact" />
-        <p class="hidden-field">
-          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off" /></label>
-        </p>
-        <div class="form-row">
-          <label for="name">Full Name *</label>
-          <input type="text" id="name" name="name" required autocomplete="name" />
-        </div>
-        <div class="form-row-group">
-          <div class="form-row">
-            <label for="email">Email *</label>
-            <input type="email" id="email" name="email" required autocomplete="email" />
-          </div>
-          <div class="form-row">
-            <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel" />
-          </div>
-        </div>
-        <div class="form-row-group">
-          <div class="form-row">
-            <label for="postcode">Postcode</label>
-            <input type="text" id="postcode" name="postcode" autocomplete="postal-code" />
-          </div>
-          <div class="form-row">
-            <label for="service">Service</label>
-            <select id="service" name="service">
-              <option value="">Select a service</option>
-              <option value="Residential Cleaning">Residential Cleaning</option>
-              <option value="End of Tenancy Cleaning">End of Tenancy Cleaning</option>
-              <option value="Airbnb Cleaning">Airbnb Cleaning</option>
-              <option value="Deep House Cleaning">Deep House Cleaning</option>
-              <option value="After Builders Cleaning">After Builders Cleaning</option>
-              <option value="Carpet, Upholstery & Mattress Cleaning">Carpet, Upholstery &amp; Mattress Cleaning</option>
-              <option value="Office Cleaning">Office Cleaning</option>
-              <option value="School Cleaning">School Cleaning</option>
-              <option value="Nursery Cleaning">Nursery Cleaning</option>
-              <option value="Other">Other / Not Sure</option>
-            </select>
-          </div>
-        </div>
-        <div class="form-row">
-          <label for="message">Message *</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Property type, how often, and anything we should know."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary btn-lg">Send enquiry</button>
-      </form>
+      <iframe id="booking-form-contact-us-1790515395831"
+        src="https://app.dilvon.com/book/sn-cleaning-services/contact-us-1790515395831?embedded=true"
+        style="width:100%;border:0;min-height:600px;display:block;" loading="lazy" title="Contact Us"></iframe>
+      <script>
+        (function () {
+          var formOrigin = new URL("https://app.dilvon.com/book/sn-cleaning-services/contact-us-1790515395831?embedded=true").origin;
+          var f = document.getElementById('booking-form-contact-us-1790515395831');
+          if (f) { var src = new URL(f.getAttribute('src')); src.searchParams.set('embed_origin', window.location.origin); f.setAttribute('src', src.toString()); }
+          window.addEventListener('message', function (e) {
+            if (e.origin !== formOrigin) return; if (!e.data) return;
+            if (e.data.type === 'lovable-form-resize') { if (f && typeof e.data.height === 'number') { f.style.height = e.data.height + 'px'; } }
+            if (e.data.type === 'lovable-form-redirect' && typeof e.data.url === 'string') {
+              try { var target = new URL(e.data.url, window.location.href);
+                if (target.origin !== window.location.origin && target.origin !== formOrigin) return;
+                window.location.href = target.toString(); } catch (_) {}
+            }
+          });
+        })();
+      </script>
     </div>
 
     <div class="contact-info">
