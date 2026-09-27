@@ -1,7 +1,7 @@
 // Legal pages: /privacy-policy, /terms-and-conditions, /cookies-policy.
 // Plain HTML content rendered by views/legal.ejs. Keep every statement true to
 // how the site and business actually work; update the "Last updated" date when editing.
-const UPDATED = '25 September 2026';
+const UPDATED = '27 September 2026';
 const EMAIL = 'info@sncleaningservices.co.uk';
 
 module.exports = {
@@ -19,6 +19,7 @@ module.exports = {
   <li><strong>Messages:</strong> anything you send us by email, phone or WhatsApp.</li>
   <li><strong>Job applications:</strong> the information you give us when you apply to work as a cleaner, such as your contact details, experience, availability and right-to-work and DBS information.</li>
   <li><strong>Technical information:</strong> like any website, the servers that host our site receive your IP address and basic browser information when you visit.</li>
+  <li><strong>Website usage:</strong> our analytics service records which pages you visit, how you arrived at the site, and your device, browser and approximate location.</li>
 </ul>
 
 <h2>How we use your information</h2>
@@ -28,6 +29,7 @@ module.exports = {
   <li>To handle any re-clean request, complaint or question about a job.</li>
   <li>To assess job applications and contact applicants.</li>
   <li>To keep financial records we are required to keep by law.</li>
+  <li>To understand how people use our website so we can improve it.</li>
 </ul>
 <p>We do not sell your information, and we do not use it for marketing unless you have asked to hear from us.</p>
 
@@ -46,6 +48,7 @@ module.exports = {
   <li><strong>Our invoicing software:</strong> used to create quotes and invoices.</li>
   <li><strong>WhatsApp:</strong> if you choose to message us there.</li>
   <li><strong>Google Fonts:</strong> our website loads its fonts from Google, which receives your IP address when the page loads.</li>
+  <li><strong>Visitor Tracking (visitortracking.com):</strong> a website analytics service that records how visitors use our site, such as the pages viewed, the device and browser used, and the approximate location and organisation linked to the IP address.</li>
   <li><strong>AI assistance:</strong> job applications may be reviewed with the help of an AI tool to summarise and score them. A person at SN Cleaning Services makes every hiring decision.</li>
   <li><strong>Our cleaners:</strong> receive the address and details they need to do your clean.</li>
 </ul>
@@ -80,11 +83,12 @@ module.exports = {
 <p>Cookies are small files a website saves in your browser. This page explains what our website uses and why.</p>
 
 <h2>Cookies we set</h2>
-<p>Our website does not set advertising or analytics cookies, and we do not track you across other websites.</p>
+<p>Our website does not set advertising cookies.</p>
 <p>To make pages load faster, the site stores a small note in your browser's session storage once the booking form has been pre-loaded. It contains no personal information and is cleared when you close the browser tab.</p>
 
 <h2>Cookies set by other services</h2>
 <ul>
+  <li><strong>Analytics (Visitor Tracking):</strong> we use visitortracking.com to understand how visitors use our website. It may set cookies or use similar technology to recognise returning visitors and record the pages viewed.</li>
   <li><strong>Booking form:</strong> our online booking form is embedded from our booking system. It may use cookies or browser storage that it needs to work, for example to keep your answers while you fill it in.</li>
   <li><strong>Google Fonts:</strong> our fonts load from Google's servers. Google receives your IP address but does not set cookies for this.</li>
   <li><strong>Links to other sites:</strong> if you click through to WhatsApp or Google reviews, those sites use their own cookies under their own policies.</li>

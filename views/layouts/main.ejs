@@ -106,5 +106,28 @@
 
   <script src="/js/main.js?v=<%= assetVersion %>" defer></script>
   <% if (isHomePage) { %><script src="/js/home.js?v=<%= assetVersion %>" defer></script><% } %>
+  <!-- Visitor tracking (visitortracking.com) -->
+  <script>
+    function init_tracer() {
+      var tracer = new Tracer({
+        websiteId: "d5f93dc4-95a2-4357-8c54-6d14039e43b6",
+        async: true,
+        debug: false
+      });
+    }
+    // Load the tracker only for real visits: not inside the hidden frames that
+    // pre-load the forms, and not while Chrome prepares a page in advance.
+    (function () {
+      if (window.self !== window.top) return;
+      var load = function () {
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = 'https://app.visitortracking.com/assets/js/tracer.js';
+        document.body.appendChild(s);
+      };
+      if (document.prerendering) document.addEventListener('prerenderingchange', load, { once: true });
+      else load();
+    })();
+  </script>
 </body>
 </html>
