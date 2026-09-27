@@ -1,5 +1,6 @@
 <%# Booking pages — /book (choose a service) and /book/{slug} (one service's form).
     Styles: b- classes in public/css/home.css · Behaviour: public/js/book.js %>
+<% embedUrl = String(embedUrl || '').replace('https://dilvon.com/', 'https://app.dilvon.com/'); %>
 <% const formOrigin = (function () { try { return new URL(embedUrl).origin; } catch (e) { return ''; } })(); %>
 
 <section class="b-page">

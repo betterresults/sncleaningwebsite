@@ -34,15 +34,19 @@
   }
 
   window.addEventListener('message', function (e) {
-    if (!FORM_ORIGIN || e.origin !== FORM_ORIGIN || !e.data) return;
+    // dilvon.com forms are served from app.dilvon.com, so accept both.
+    var ok = FORM_ORIGIN && (e.origin === FORM_ORIGIN || e.origin === 'https://app.dilvon.com' || e.origin === 'https://dilvon.com');
+    if (!ok || !e.data) return;
     if (e.data.type === 'lovable-form-resize' && typeof e.data.height === 'number') {
+      // Grow or shrink to exactly the form's height, so the page has no inner scroll.
+      frame.style.minHeight = '0';
       frame.style.height = e.data.height + 'px';
       return;
     }
     if (e.data.type === 'lovable-form-redirect' && typeof e.data.url === 'string') {
       try {
         var target = new URL(e.data.url, window.location.href);
-        if (target.origin !== window.location.origin && target.origin !== FORM_ORIGIN) return;
+        if (target.origin !== window.location.origin && target.origin !== FORM_ORIGIN && target.origin !== e.origin) return;
         window.location.href = target.toString();
       } catch (err) { /* ignore a malformed redirect */ }
     }
