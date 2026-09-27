@@ -1416,3 +1416,7 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 .contact-info-card h2.h3 { font-size: 1.17rem; }
 .service-card h2.h3 { font-size: 1.17rem; }
 .blog-post-cta .btn-outline { color: var(--color-primary-dark); border-color: var(--color-primary-dark); }
+
+.footer-legal { margin-left: 12px; }
+.footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+@media (max-width: 600px) { .footer-legal { display: block; margin: 6px 0 0; } }

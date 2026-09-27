@@ -1538,6 +1538,27 @@
   status = 301
 
 
+[[redirects]]
+  from = "/terms"
+  to = "/terms-and-conditions/"
+  status = 301
+
+[[redirects]]
+  from = "/terms/"
+  to = "/terms-and-conditions/"
+  status = 301
+
+[[redirects]]
+  from = "/cookies"
+  to = "/cookies-policy/"
+  status = 301
+
+[[redirects]]
+  from = "/cookies/"
+  to = "/cookies-policy/"
+  status = 301
+
+
 # Anything else: the 404 page. Must stay LAST.
 [[redirects]]
   from = "/*"

@@ -286,6 +286,22 @@ function renderPost(req, res, post) {
   });
 }
 
+// Legal pages (content in data/legal.js).
+const legalDocs = require('./data/legal');
+Object.keys(legalDocs).forEach((slug) => {
+  app.get(`/${slug}`, (req, res) => {
+    const doc = legalDocs[slug];
+    const breadcrumbs = [...res.locals.breadcrumbs, { name: doc.title, url: `/${slug}` }];
+    res.render('legal', {
+      title: doc.title,
+      metaDescription: doc.metaDescription,
+      doc,
+      breadcrumbs,
+      structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+    });
+  });
+});
+
 app.get('/about', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }];
   res.render('about', {

@@ -15,14 +15,7 @@
     </nav>
 
     <div class="b-head">
-      <p class="h-eyebrow">Get a quote</p>
-      <% if (service) { %>
-        <h1 class="h-title">Book <%= service.title.toLowerCase() %></h1>
-        <p class="b-lead">Fill in a few details about the property and choose a date that suits you.</p>
-      <% } else { %>
-        <h1 class="h-title">Which service do you need?</h1>
-        <p class="b-lead">Choose a service below and fill in a few details about the property.</p>
-      <% } %>
+      <h1 class="h-eyebrow b-title">Get a quote<% if (service) { %> · <%= service.title %><% } %></h1>
       <p class="b-for" data-book-for hidden></p>
     </div>
 
@@ -40,11 +33,6 @@
       </noscript>
     </div>
 
-    <p class="b-help">
-      Questions first?
-      <% if (site.whatsappUrl) { %><a href="<%= site.whatsappUrl %>" target="_blank" rel="noopener">Message us on WhatsApp</a> or call<% } else { %>Call<% } %>
-      <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a>.
-    </p>
   </div>
 </section>
 

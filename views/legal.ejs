@@ -1,0 +1,15 @@
+<%# Legal pages (privacy, cookies, terms). Content: data/legal.js %>
+<section class="page-hero page-hero--plain">
+  <div class="container blog-post-inner">
+    <h1><%= doc.title %></h1>
+    <p>Last updated: <%= doc.updated %></p>
+  </div>
+</section>
+
+<section class="section blog-post">
+  <div class="container blog-post-inner">
+    <div class="blog-content">
+      <%- doc.content %>
+    </div>
+  </div>
+</section>

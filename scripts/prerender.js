@@ -35,6 +35,9 @@ async function buildRoutes() {
     { url: '/about', out: 'about/index.html', sitemap: true },
     { url: '/gallery', out: 'gallery/index.html', sitemap: true },
     { url: '/blog', out: 'blog/index.html', sitemap: true },
+    { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true },
+    { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true },
+    { url: '/cookies-policy', out: 'cookies-policy/index.html', sitemap: true },
     { url: '/contact', out: 'contact/index.html', sitemap: true },
     { url: '/contact/success', out: 'contact/success/index.html', sitemap: false },
     { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view

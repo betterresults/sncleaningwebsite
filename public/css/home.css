@@ -512,11 +512,12 @@
 /* ==========================================================================
    BOOKING PAGES (/book, /book/{service}) — b- classes
    ========================================================================== */
-.b-page { padding-block: clamp(28px, 5vw, 56px) clamp(56px, 8vw, 96px); }
-.b-crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: .85rem; color: var(--h-muted); margin-bottom: clamp(20px, 3vw, 32px); }
+.b-page { padding-block: 14px clamp(40px, 6vw, 72px); }
+.b-crumbs { display: flex; flex-wrap: wrap; gap: 8px; font-size: .85rem; color: var(--h-muted); margin-bottom: 10px; }
 .b-crumbs a { color: var(--h-primary); text-decoration: none; }
 .b-crumbs a::after { content: "/"; margin-left: 8px; color: var(--h-line); }
-.b-head { max-width: 720px; margin: 0 auto clamp(24px, 3vw, 36px); text-align: center; }
+.b-head { max-width: 720px; margin: 0 auto 14px; text-align: center; }
+.b-title { margin: 0; }
 .b-lead { margin: 14px 0 0; color: var(--h-text); font-size: 1.05rem; line-height: 1.6; }
 .b-for {
   display: inline-flex; align-items: center; gap: 6px; margin: 16px 0 0;
