@@ -104,6 +104,10 @@
   </a>
   <% } %>
 
+  <div class="cookie-note" id="cookie-note" role="region" aria-label="Cookies" hidden>
+    <p>We use cookies to understand how visitors use our website. <a href="/cookies-policy/">Cookies Policy</a></p>
+    <button type="button" class="cookie-note-btn" id="cookie-note-ok">OK</button>
+  </div>
   <script src="/js/main.js?v=<%= assetVersion %>" defer></script>
   <% if (isHomePage) { %><script src="/js/home.js?v=<%= assetVersion %>" defer></script><% } %>
   <!-- Visitor tracking (visitortracking.com) -->

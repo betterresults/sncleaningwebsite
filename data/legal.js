@@ -84,6 +84,7 @@ module.exports = {
 
 <h2>Cookies we set</h2>
 <p>Our website does not set advertising cookies.</p>
+<p>When you click OK on our cookie notice, the site remembers this in your browser so the notice doesn't show again.</p>
 <p>To make pages load faster, the site stores a small note in your browser's session storage once the booking form has been pre-loaded. It contains no personal information and is cleared when you close the browser tab.</p>
 
 <h2>Cookies set by other services</h2>

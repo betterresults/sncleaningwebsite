@@ -1,4 +1,18 @@
 document.addEventListener('DOMContentLoaded', () => {
+  // Cookie notice: shown until the visitor clicks OK (remembered in this browser).
+  const note = document.getElementById('cookie-note');
+  if (note && window.self === window.top) {
+    let seen = false;
+    try { seen = localStorage.getItem('cookie-note-ok') === '1'; } catch (_) {}
+    if (!seen) {
+      note.hidden = false;
+      document.getElementById('cookie-note-ok').addEventListener('click', () => {
+        note.hidden = true;
+        try { localStorage.setItem('cookie-note-ok', '1'); } catch (_) {}
+      });
+    }
+  }
+
   const toggle = document.getElementById('nav-toggle');
   const nav = document.getElementById('main-nav');
 
