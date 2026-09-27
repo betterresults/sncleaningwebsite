@@ -11,14 +11,12 @@
   var base = frame.getAttribute('data-src') || frame.getAttribute('src');
   try {
     var src = new URL(base);
-    // Dilvon pre-fills from prefill_email / prefill_postcode; the plain names
-    // are passed too in case a form reads those.
+    // Dilvon pre-fills only from the prefill_* names (prefill_email, prefill_postcode).
     ['postcode', 'email'].forEach(function (key) {
       var v = (here.get(key) || '').trim();
       if (!v) return;
       if (key === 'postcode') v = v.toUpperCase();
       src.searchParams.set('prefill_' + key, v);
-      src.searchParams.set(key, v);
     });
     src.searchParams.set('embed_origin', window.location.origin);
     frame.setAttribute('src', src.toString());
