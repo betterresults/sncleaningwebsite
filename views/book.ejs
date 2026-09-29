@@ -25,6 +25,7 @@
         id="booking-frame"
         data-src="<%= embedUrl %>"
         data-form-origin="<%= formOrigin %>"
+        data-form-map="<%= JSON.stringify(typeof formMap !== 'undefined' ? formMap : {}) %>"
         title="<%= embedTitle %>"
         style="width:100%;border:0;min-height:720px;display:block;"
       ></iframe>
