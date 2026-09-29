@@ -48,19 +48,12 @@
         var target = new URL(e.data.url, window.location.href);
         if (target.origin !== window.location.origin && target.origin !== FORM_ORIGIN && target.origin !== e.origin) return;
         // Keep the customer's postcode and email when the landing form sends
-        // them on to a service form. A Dilvon form we also host on /book/{slug}
-        // opens here; any other form gets them as prefill_* parameters.
+        // them on to a service form in the booking app (as prefill_* parameters).
         var carry = {};
         ['postcode', 'email'].forEach(function (k) { var v = (here.get(k) || '').trim(); if (v) carry[k] = v; });
-        if (target.origin !== window.location.origin) {
-          var map = {};
-          try { map = JSON.parse(frame.getAttribute('data-form-map') || '{}'); } catch (_) {}
-          var local = map[target.pathname.replace(/\/$/, '')];
-          if (local) target = new URL(local, window.location.href);
-        }
         Object.keys(carry).forEach(function (k) {
           if (target.origin === window.location.origin) target.searchParams.set(k, carry[k]);
-          else target.searchParams.set('prefill_' + k, k === 'postcode' ? carry[k].toUpperCase() : carry[k]);
+          else if (!target.searchParams.get('prefill_' + k)) target.searchParams.set('prefill_' + k, k === 'postcode' ? carry[k].toUpperCase() : carry[k]);
         });
         window.location.href = target.toString();
       } catch (err) { /* ignore a malformed redirect */ }

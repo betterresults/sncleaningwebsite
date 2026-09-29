@@ -352,17 +352,9 @@ app.get('/contact/success', (req, res) => {
 // is one service's own booking form. Both embed the Dilvon forms. Any postcode
 // and email in the page URL are passed on to the form by public/js/book.js
 // (the pages are prerendered, so this has to happen in the browser).
-app.get('/book', async (req, res) => {
+app.get('/book', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Get a quote', url: '/book' }];
-  // Dilvon form path -> our booking page, so a service picked in the landing
-  // form opens on this site (keeping the postcode/email) instead of on Dilvon.
-  const formMap = {};
-  (await content.getServices()).forEach((s) => {
-    if (!s.booking_embed_url) return;
-    try { formMap[new URL(s.booking_embed_url).pathname.replace(/\/$/, '')] = `/book/${s.slug}/`; } catch (e) { /* skip */ }
-  });
   res.render('book', {
-    formMap,
     title: 'Get a Quote — Choose Your Cleaning Service',
     metaDescription: 'Choose the cleaning service you need and book online with SN Cleaning Services, London & Essex.',
     embedUrl: BOOKING_LANDING_EMBED,
@@ -389,7 +381,6 @@ app.get('/book/:serviceSlug', async (req, res, next) => {
     metaDescription: `Book ${service.title.toLowerCase()} online with SN Cleaning Services, London & Essex.`,
     embedUrl: service.booking_embed_url,
     embedTitle: `${service.title} booking form`,
-    formMap: {},
     service,
     breadcrumbs,
     noindex: true,
