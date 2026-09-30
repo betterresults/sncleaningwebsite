@@ -1561,6 +1561,16 @@
 
 # Anything else: the 404 page. Must stay LAST.
 [[redirects]]
+  from = "/quote"
+  to = "https://form.sncleaningservices.co.uk/domestic"
+  status = 301
+
+[[redirects]]
+  from = "/quote/"
+  to = "https://form.sncleaningservices.co.uk/domestic"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/404.html"
   status = 404
