@@ -347,6 +347,27 @@ app.get('/contact/success', (req, res) => {
   });
 });
 
+// ---------- Meta ads funnel ----------
+// /quote qualifies visitors (area, type of clean, price) before sending them
+// to the matching Dilvon booking form. Not indexed and not in the sitemap.
+app.get('/quote', (req, res) => {
+  const form = (slug) => `https://app.dilvon.com/book/sn-cleaning-services/${slug}`;
+  res.render('quote', {
+    title: 'Home Cleaning in Essex & London',
+    metaDescription: 'Regular and one-time home cleaning by our own insured, DBS-checked team. See if we cover your area.',
+    funnel: true,
+    noindex: true,
+    waNumber: '442038355033',
+    forms: {
+      regular: form('domestic-cleaning'),
+      deep: form('deep-cleaning'),
+      eot: form('end-of-tenancy-cleaning'),
+      builders: form('main-landing-1790164444462')
+    },
+    structuredData: []
+  });
+});
+
 // ---------- Booking ----------
 // /book is the "choose a service" landing (generic "Get a quote"); /book/{slug}
 // is one service's own booking form. Both embed the Dilvon forms. Any postcode

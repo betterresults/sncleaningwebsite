@@ -1,0 +1,334 @@
+<%#
+  /quote — Meta ads funnel (domestic, Essex & London). Qualifies visitors with a
+  few tap questions, keeps good-fit visitors as a lead (Netlify form "funnel-lead")
+  and sends them to the right Dilvon booking form with their details pre-filled,
+  or to WhatsApp with a ready-made message. Everything on this page must be true.
+%>
+<style>
+  @font-face { font-family: 'Fraunces'; font-style: normal; font-weight: 400 500; font-display: swap; src: url('/fonts/fraunces-latin.woff2') format('woff2'); }
+  .qf { --ink: #122624; --muted: #56645f; --teal: #1f6b66; --teal-d: #185652; --soft: #e9f5f4; --line: #d8e4e0; --bg: #f6f9f8;
+    min-height: 100svh; background: var(--bg); color: var(--ink); font-family: 'Inter', system-ui, sans-serif; display: flex; flex-direction: column; }
+  .qf-top { display: flex; align-items: center; gap: 10px; padding: 14px 18px; }
+  .qf-top img { width: 34px; height: 34px; border-radius: 8px; }
+  .qf-top span { font-weight: 600; font-size: .95rem; }
+  .qf-bar { height: 4px; background: var(--line); margin: 0 18px; border-radius: 99px; overflow: hidden; }
+  .qf-bar i { display: block; height: 100%; width: 0; background: var(--teal); transition: width .35s ease; }
+  .qf-main { flex: 1; width: 100%; max-width: 560px; margin: 0 auto; padding: 22px 18px 40px; }
+  .qf-step { display: none; animation: qf-in .3s ease both; }
+  .qf-step.is-on { display: block; }
+  @keyframes qf-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @media (prefers-reduced-motion: reduce) { .qf-step { animation: none; } .qf-bar i { transition: none; } }
+  .qf h1, .qf h2 { font-family: 'Fraunces', Georgia, serif; font-weight: 500; line-height: 1.15; margin: 0 0 12px; color: var(--ink); }
+  .qf h1 { font-size: clamp(1.9rem, 7vw, 2.6rem); }
+  .qf h2 { font-size: clamp(1.5rem, 5.5vw, 1.9rem); }
+  .qf p { color: var(--muted); line-height: 1.55; margin: 0 0 14px; font-size: 1rem; }
+  .qf-hero { border-radius: 16px; overflow: hidden; margin: 0 0 18px; aspect-ratio: 16 / 10; background: var(--soft); }
+  .qf-hero img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .qf-trust { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0 22px; padding: 0; list-style: none; }
+  .qf-trust li { background: #fff; border: 1px solid var(--line); border-radius: 99px; padding: 6px 12px; font-size: .85rem; font-weight: 500; color: var(--ink); }
+  .qf-btn { display: flex; width: 100%; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 14px; padding: 17px 20px; background: var(--teal); color: #fff; font: 600 1.05rem 'Inter', sans-serif; cursor: pointer; text-decoration: none; }
+  .qf-btn:hover { background: var(--teal-d); color: #fff; }
+  .qf-btn:focus-visible, .qf-opt:focus-visible, .qf-back:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .qf-opts { display: grid; gap: 10px; margin: 18px 0; }
+  .qf-opt { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: #fff; border: 2px solid var(--line); border-radius: 14px; padding: 15px 16px; font: 500 1rem 'Inter', sans-serif; color: var(--ink); cursor: pointer; transition: border-color .15s, background .15s; }
+  .qf-opt:hover { border-color: var(--teal); }
+  .qf-opt[aria-pressed="true"] { border-color: var(--teal); background: var(--soft); }
+  .qf-opt small { display: block; color: var(--muted); font-weight: 400; font-size: .85rem; margin-top: 2px; }
+  .qf-opt .qf-tick { flex: none; width: 22px; height: 22px; border-radius: 6px; border: 2px solid var(--line); display: grid; place-items: center; }
+  .qf-opt[aria-pressed="true"] .qf-tick { background: var(--teal); border-color: var(--teal); }
+  .qf-opt[aria-pressed="true"] .qf-tick::after { content: ''; width: 6px; height: 11px; border: solid #fff; border-width: 0 2.5px 2.5px 0; transform: rotate(45deg) translate(-1px, -1px); }
+  .qf-back { background: none; border: 0; color: var(--muted); font: 500 .9rem 'Inter', sans-serif; padding: 6px 0; margin-bottom: 8px; cursor: pointer; }
+  .qf-card { background: #fff; border: 1px solid var(--line); border-radius: 16px; padding: 18px; margin: 16px 0; }
+  .qf-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .qf-card li { position: relative; padding-left: 28px; color: var(--ink); line-height: 1.45; }
+  .qf-card li::before { content: ''; position: absolute; left: 4px; top: 5px; width: 6px; height: 11px; border: solid var(--teal); border-width: 0 2.5px 2.5px 0; transform: rotate(45deg); }
+  .qf-price { font-family: 'Fraunces', Georgia, serif; font-size: 2rem; color: var(--teal); margin: 6px 0 2px; }
+  .qf-field { display: grid; gap: 6px; margin-bottom: 14px; }
+  .qf-field label { font-weight: 600; font-size: .92rem; }
+  .qf-field label span { font-weight: 400; color: var(--muted); }
+  .qf-field input { font: 1rem 'Inter', sans-serif; padding: 14px; border: 2px solid var(--line); border-radius: 12px; background: #fff; color: var(--ink); }
+  .qf-field input:focus { outline: none; border-color: var(--teal); }
+  .qf-field input:user-invalid { border-color: #b3261e; }
+  .qf-small { font-size: .85rem; color: var(--muted); text-align: center; margin-top: 12px; }
+  .qf-link { display: block; text-align: center; margin-top: 14px; color: var(--teal); font-weight: 600; text-decoration: underline; }
+  .qf-hidden { display: none; }
+</style>
+
+<div class="qf" id="qf"
+     data-wa="<%= waNumber %>"
+     data-forms='<%- JSON.stringify(forms) %>'>
+  <div class="qf-top">
+    <img src="/images/logo-mark-84.webp?v=<%= assetVersion %>" alt="" width="34" height="34" />
+    <span>SN Cleaning Services</span>
+  </div>
+  <div class="qf-bar" aria-hidden="true"><i id="qf-progress"></i></div>
+
+  <div class="qf-main">
+
+    <!-- 1. Hook -->
+    <section class="qf-step is-on" data-step="intro">
+      <h1>Tired of cleaners who rush, cancel or don't show up?</h1>
+      <p>We clean the parts others skip: under the sofa, under the rugs, behind the furniture. Our own trained team, not subcontractors.</p>
+      <div class="qf-hero"><img src="/images/hero-living-room.jpg?v=<%= assetVersion %>" alt="A clean, tidy living room" width="1152" height="720" fetchpriority="high" /></div>
+      <ul class="qf-trust">
+        <li>★ 5.0 on Google</li>
+        <li>12 years</li>
+        <li>Insured &amp; DBS-checked</li>
+      </ul>
+      <button type="button" class="qf-btn" data-go="area">See if we cover you</button>
+    </section>
+
+    <!-- 2. Area -->
+    <section class="qf-step" data-step="area">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>Where is your home?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="area=Essex" data-go="type">Essex<small>e.g. Brentwood, Chelmsford, Billericay, Basildon, Upminster</small></button>
+        <button type="button" class="qf-opt" data-set="area=London" data-go="type">London</button>
+        <button type="button" class="qf-opt" data-set="area=Other" data-go="out-area">Somewhere else</button>
+      </div>
+    </section>
+
+    <section class="qf-step" data-step="out-area">
+      <h2>Sorry, we don't cover your area yet</h2>
+      <p>We only clean homes in Essex and London, so we can't help this time. Thank you for thinking of us.</p>
+    </section>
+
+    <!-- 3. Regular or one-time -->
+    <section class="qf-step" data-step="type">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>What kind of help do you need?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="service=regular" data-go="freq">Regular cleaning<small>Weekly, every two weeks or monthly</small></button>
+        <button type="button" class="qf-opt" data-go="oneoff">A one-time clean</button>
+      </div>
+    </section>
+
+    <section class="qf-step" data-step="oneoff">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>What kind of one-time clean?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="service=deep" data-go="before">Deep clean of the home I live in</button>
+        <button type="button" class="qf-opt" data-set="service=eot" data-go="matters">Moving out: end of tenancy clean</button>
+        <button type="button" class="qf-opt" data-set="service=builders" data-go="matters">After builders or renovation</button>
+      </div>
+    </section>
+
+    <!-- 4. Frequency (regular only) -->
+    <section class="qf-step" data-step="freq">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>How often would you like us to come?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="frequency=Weekly" data-go="before">Weekly</button>
+        <button type="button" class="qf-opt" data-set="frequency=Every two weeks" data-go="before">Every two weeks</button>
+        <button type="button" class="qf-opt" data-set="frequency=Monthly" data-go="before">Monthly</button>
+      </div>
+    </section>
+
+    <!-- 5. Cleaner before -->
+    <section class="qf-step" data-step="before">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>Have you had a cleaner before?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="before=Yes, it didn't work out" data-go="missed">Yes, but it didn't work out</button>
+        <button type="button" class="qf-opt" data-set="before=Yes, looking for better" data-go="missed">Yes, and I'm looking for better</button>
+        <button type="button" class="qf-opt" data-set="before=No, first time" data-go="missed">No, this would be my first</button>
+      </div>
+    </section>
+
+    <!-- 6. Missed areas (multi-select) -->
+    <section class="qf-step" data-step="missed">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>Which areas usually get missed?</h2>
+      <p>Tick all that apply.</p>
+      <div class="qf-opts" data-multi="missed">
+        <button type="button" class="qf-opt" aria-pressed="false" data-val="Under the sofa and cushions"><span class="qf-tick"></span>Under the sofa and cushions</button>
+        <button type="button" class="qf-opt" aria-pressed="false" data-val="Under the rugs"><span class="qf-tick"></span>Under the rugs</button>
+        <button type="button" class="qf-opt" aria-pressed="false" data-val="Behind and under small furniture"><span class="qf-tick"></span>Behind and under small furniture</button>
+        <button type="button" class="qf-opt" aria-pressed="false" data-val="Skirting boards"><span class="qf-tick"></span>Skirting boards</button>
+        <button type="button" class="qf-opt" aria-pressed="false" data-val="Something else"><span class="qf-tick"></span>Something else</button>
+      </div>
+      <button type="button" class="qf-btn" data-go="reassure">Continue</button>
+    </section>
+
+    <section class="qf-step" data-step="reassure">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>That's exactly what we're there for</h2>
+      <p>You can wipe the surfaces yourself. We're there for the parts you don't have time for.</p>
+      <div class="qf-card">
+        <ul>
+          <li>We lift the cushions and clean under the sofa</li>
+          <li>We move small furniture and clean under the rugs</li>
+          <li>Our own trained cleaners, insured and DBS-checked</li>
+          <li>We bring professional products and equipment</li>
+          <li>Anything not right? We come back within 24 hours and re-clean it free</li>
+        </ul>
+      </div>
+      <button type="button" class="qf-btn" data-go="matters">Continue</button>
+    </section>
+
+    <!-- 7. What matters most -->
+    <section class="qf-step" data-step="matters">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>What matters most to you?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="matters=Someone I can trust in my home" data-go="price">Someone I can trust in my home</button>
+        <button type="button" class="qf-opt" data-set="matters=A proper, thorough clean" data-go="price">A proper, thorough clean</button>
+        <button type="button" class="qf-opt" data-set="matters=Reliable, turns up when booked" data-go="price">Reliable: turns up when booked</button>
+        <button type="button" class="qf-opt" data-set="matters=The cheapest price" data-go="out-price">The cheapest price</button>
+      </div>
+    </section>
+
+    <!-- 8. Price check -->
+    <section class="qf-step" data-step="price">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>Here's what it costs</h2>
+      <div class="qf-card">
+        <div data-for="regular"><div class="qf-price">£23–£24 an hour</div><p>Regular cleaning. We always bring the cleaning products.</p></div>
+        <div data-for="deep"><div class="qf-price">From £25 an hour</div><p>One-time deep clean. The exact price depends on the clean you need.</p></div>
+        <div data-for="eot"><div class="qf-price">From £179</div><p>End of tenancy clean, oven included. The exact price depends on the size of the property.</p></div>
+        <div data-for="builders"><div class="qf-price">From £179</div><p>After builders clean. The exact price depends on the size of the property.</p></div>
+      </div>
+      <h2>Does that work for you?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-go="start">Yes, a proper clean matters more</button>
+        <button type="button" class="qf-opt" data-go="out-price">I'm looking for something cheaper</button>
+      </div>
+    </section>
+
+    <section class="qf-step" data-step="out-price">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>We're probably not the right fit</h2>
+      <p>We're not the cheapest, because we take the time to clean properly, bring professional products and use our own insured team. Thank you for being honest, and good luck finding the right help.</p>
+    </section>
+
+    <!-- 9. When -->
+    <section class="qf-step" data-step="start">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>When would you like to start?</h2>
+      <div class="qf-opts">
+        <button type="button" class="qf-opt" data-set="start=This week" data-go="details">This week</button>
+        <button type="button" class="qf-opt" data-set="start=In the next two weeks" data-go="details">In the next two weeks</button>
+        <button type="button" class="qf-opt" data-set="start=Just looking for now" data-go="details">I'm just looking for now</button>
+      </div>
+    </section>
+
+    <!-- 10. Details (lead) -->
+    <section class="qf-step" data-step="details">
+      <button type="button" class="qf-back" data-back>← Back</button>
+      <h2>Good news, we cover your area and you're a great fit</h2>
+      <p>Where should we send your booking details?</p>
+      <form id="qf-form" name="funnel-lead" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <input type="hidden" name="form-name" value="funnel-lead" />
+        <p class="qf-hidden"><label>Leave empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
+        <input type="hidden" name="area" />
+        <input type="hidden" name="service" />
+        <input type="hidden" name="frequency" />
+        <input type="hidden" name="before" />
+        <input type="hidden" name="missed" />
+        <input type="hidden" name="matters" />
+        <input type="hidden" name="start" />
+        <div class="qf-field"><label for="qf-name">First name</label><input id="qf-name" name="first_name" required autocomplete="given-name" /></div>
+        <div class="qf-field"><label for="qf-phone">Mobile number</label><input id="qf-phone" name="phone" type="tel" required minlength="10" autocomplete="tel" placeholder="07..." /></div>
+        <div class="qf-field"><label for="qf-postcode">Postcode</label><input id="qf-postcode" name="postcode" required autocomplete="postal-code" placeholder="e.g. CM14 4AB"
+          pattern="\s*[A-Za-z]{1,2}[0-9][A-Za-z0-9]?\s*[0-9][A-Za-z]{2}\s*" title="A full UK postcode, e.g. CM14 4AB" /></div>
+        <div class="qf-field"><label for="qf-email">Email <span>(optional, for your booking confirmation)</span></label><input id="qf-email" name="email" type="email" autocomplete="email" /></div>
+        <button type="submit" class="qf-btn">Continue to booking</button>
+        <p class="qf-small">No payment needed at this step.</p>
+      </form>
+    </section>
+
+    <!-- 11. Book -->
+    <section class="qf-step" data-step="done">
+      <h2 id="qf-done-title">Thanks! Pick your date</h2>
+      <p>Your details are already filled in. Choose a date that suits you and see your exact price.</p>
+      <a class="qf-btn" id="qf-book" href="#">Book now</a>
+      <a class="qf-link" id="qf-wa" href="#" target="_blank" rel="noopener">Prefer WhatsApp? Message us</a>
+      <p class="qf-small">Or call <a href="tel:02038355033">020 3835 5033</a></p>
+    </section>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var root = document.getElementById('qf');
+  if (!root) return;
+  var forms = JSON.parse(root.getAttribute('data-forms'));
+  var WA = root.getAttribute('data-wa');
+  var answers = {};
+  var history = [];
+  var order = ['intro', 'area', 'type', 'freq', 'before', 'missed', 'matters', 'price', 'start', 'details', 'done'];
+  var bar = document.getElementById('qf-progress');
+  var labels = { regular: 'regular cleaning', deep: 'a one-time deep clean', eot: 'an end of tenancy clean', builders: 'an after builders clean' };
+
+  function track(name, data) { try { if (window.fbq) window.fbq('track', name, data || {}); } catch (_) {} }
+
+  function show(step, isBack) {
+    var cur = root.querySelector('.qf-step.is-on');
+    if (cur && !isBack) history.push(cur.getAttribute('data-step'));
+    root.querySelectorAll('.qf-step').forEach(function (s) { s.classList.toggle('is-on', s.getAttribute('data-step') === step); });
+    if (step === 'price') {
+      root.querySelectorAll('[data-for]').forEach(function (el) { el.hidden = el.getAttribute('data-for') !== answers.service; });
+    }
+    var i = order.indexOf(step);
+    bar.style.width = (i < 0 ? (step === 'reassure' ? 55 : step === 'oneoff' ? 25 : 100) : Math.round(i / (order.length - 1) * 100)) + '%';
+    window.scrollTo(0, 0);
+    var h = root.querySelector('.qf-step.is-on h1, .qf-step.is-on h2');
+    if (h) { h.setAttribute('tabindex', '-1'); h.focus({ preventScroll: true }); }
+  }
+
+  root.addEventListener('click', function (e) {
+    var multi = e.target.closest('[data-multi] .qf-opt');
+    if (multi) { multi.setAttribute('aria-pressed', multi.getAttribute('aria-pressed') === 'true' ? 'false' : 'true'); return; }
+    if (e.target.closest('[data-back]')) { var prev = history.pop(); if (prev) show(prev, true); return; }
+    var btn = e.target.closest('[data-go]');
+    if (!btn) return;
+    var set = btn.getAttribute('data-set');
+    if (set) { var kv = set.split('='); answers[kv[0]] = kv.slice(1).join('='); }
+    var go = btn.getAttribute('data-go');
+    if (go === 'reassure') {
+      answers.missed = Array.prototype.map.call(root.querySelectorAll('[data-multi] .qf-opt[aria-pressed="true"]'), function (b) { return b.getAttribute('data-val'); }).join(', ');
+    }
+    if (go === 'intro' || go === 'area') track('ViewContent');
+    show(go);
+  });
+
+  var form = document.getElementById('qf-form');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (!form.reportValidity()) return;
+    if (form.elements['bot-field'].value) return;
+    ['area', 'service', 'frequency', 'before', 'missed', 'matters', 'start'].forEach(function (k) {
+      form.elements[k].value = k === 'service' ? (labels[answers.service] || '') : (answers[k] || '');
+    });
+    var name = form.elements.first_name.value.trim();
+    var phone = form.elements.phone.value.trim();
+    var postcode = form.elements.postcode.value.trim().toUpperCase().replace(/\s+/g, ' ');
+    var email = form.elements.email.value.trim();
+    form.elements.postcode.value = postcode;
+
+    try {
+      fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form)).toString(), keepalive: true }).catch(function () {});
+    } catch (_) {}
+    track('Lead', { content_name: labels[answers.service] || 'cleaning' });
+
+    var url = new URL(forms[answers.service] || forms.regular);
+    url.searchParams.set('prefill_first_name', name);
+    url.searchParams.set('prefill_phone', phone);
+    url.searchParams.set('prefill_postcode', postcode);
+    if (email) url.searchParams.set('prefill_email', email);
+    document.getElementById('qf-book').href = url.toString();
+
+    var msg = 'Hi, I\'m ' + name + ' from ' + postcode + '. I\'m looking for ' + (labels[answers.service] || 'a clean') +
+      (answers.frequency ? ' (' + answers.frequency.toLowerCase() + ')' : '') + '. Can you help?';
+    document.getElementById('qf-wa').href = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(msg);
+    document.getElementById('qf-done-title').textContent = 'Thanks, ' + name + '! Pick your date';
+    show('done');
+  });
+
+  document.getElementById('qf-wa').addEventListener('click', function () { track('Contact'); });
+  document.getElementById('qf-book').addEventListener('click', function () { track('InitiateCheckout'); });
+})();
+</script>

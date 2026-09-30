@@ -53,6 +53,7 @@ async function buildRoutes() {
   // Booking pages: the chooser, plus one per service that has an online form.
   const bookRoutes = [
     { url: '/book', out: 'book/index.html', sitemap: false },
+    { url: '/quote', out: 'quote/index.html', sitemap: false },
     ...services
       .filter((s) => s.booking_embed_url)
       .map((s) => ({ url: `/book/${s.slug}`, out: `book/${s.slug}/index.html`, sitemap: false }))
