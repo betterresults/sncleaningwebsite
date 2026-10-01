@@ -13,6 +13,7 @@
 const crypto = require("crypto");
 
 const SOURCE_FORM = "cleaner-application";
+const REP_FORM = "rep-application"; // door to door representatives
 const SCORED_FORM = "scored-application";
 const COOKIE = "sn_applicants";
 const PENDING = "sn_pending";
@@ -70,6 +71,20 @@ const QUESTIONS = [
   ["q10-training-reaction", "Being trained a different way"],
   ["q11-products-used", "What they actually use"]
 ];
+
+const REP_QUESTIONS = [
+  ["q1-strangers", "Talking to strangers"],
+  ["q2-not-interested", "Told 'not interested' at the front desk"],
+  ["q3-twenty-nos", "Twenty no's in a row"],
+  ["q4-busy", "Interested but busy"],
+  ["q5-rain", "Rain, 30 minutes left, nobody checking"],
+  ["q6-matters", "What matters most"],
+  ["q7-no-to-yes", "Got a yes after a no"],
+  ["q8-why", "Why this job appeals"],
+  ["q9-three-words", "Three words friends would use"]
+];
+
+const JOBS = { [SOURCE_FORM]: "Cleaner", [REP_FORM]: "Door to door rep" };
 
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
@@ -134,6 +149,9 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .act-select.a-started{border-color:var(--good);color:var(--good);background:var(--good-soft);font-weight:700}
 .act-select.a-noreply{border-color:var(--line-strong);color:var(--ink-faint)}
 .act-select.a-rejected,.act-select.a-fit{border-color:var(--bad);color:var(--bad)}
+.job{display:inline-block;font-family:Archivo,sans-serif;font-size:12px;font-weight:700;padding:4px 9px;border-radius:2px;white-space:nowrap}
+.job-clean{background:var(--petrol-soft);color:var(--petrol)}
+.job-rep{background:var(--marigold-soft);color:var(--marigold)}
 .gen{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;color:var(--petrol);text-align:center}
 .fit{min-width:280px;max-width:320px}
 .note{font-size:12.5px;line-height:1.45;color:var(--ink-soft);margin:7px 0 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
@@ -185,10 +203,10 @@ document.addEventListener("click",function(e){
   if(d)d.classList.toggle("open");
 });
 (function(){
-  var fs=document.getElementById("f-status"), fc=document.getElementById("f-car"), fsc=document.getElementById("f-score");
-  if(!fs||!fc||!fsc)return;
+  var fs=document.getElementById("f-status"), fc=document.getElementById("f-car"), fsc=document.getElementById("f-score"), fj=document.getElementById("f-job");
+  if(!fs||!fc||!fsc||!fj)return;
   function apply(){
-    var status=fs.value, carOnly=fc.checked, bucket=fsc.value;
+    var status=fs.value, carOnly=fc.checked, bucket=fsc.value, job=fj.value;
     document.querySelectorAll("tr.row").forEach(function(r){
       var okStatus = !status || (status==="__none__" ? r.dataset.action==="" : r.dataset.action===status);
       var okCar = !carOnly || r.dataset.car==="1";
@@ -197,7 +215,8 @@ document.addEventListener("click",function(e){
       if(bucket==="under50") okScore = sc!==null && sc<50;
       else if(bucket==="50-75") okScore = sc!==null && sc>=50 && sc<=75;
       else if(bucket==="over75") okScore = sc!==null && sc>75;
-      var show = okStatus && okCar && okScore;
+      var okJob = !job || r.dataset.job===job;
+      var show = okStatus && okCar && okScore && okJob;
       r.style.display = show ? "" : "none";
       var d=document.getElementById(r.getAttribute("data-for"));
       if(d && !show) d.classList.remove("open");
@@ -206,6 +225,9 @@ document.addEventListener("click",function(e){
   fs.addEventListener("change",apply);
   fc.addEventListener("change",apply);
   fsc.addEventListener("change",apply);
+  fj.addEventListener("change",apply);
+  try{var saved=localStorage.getItem("sn-job-filter");if(saved){fj.value=saved;apply();}}catch(e){}
+  fj.addEventListener("change",function(){try{localStorage.setItem("sn-job-filter",fj.value);}catch(e){}});
 })();
 </script>
 </body></html>`;
@@ -239,7 +261,9 @@ const TRAVEL = {
   "Drives but no car at the moment": ["Drives, no car", false],
   "I drive but no car right now": ["Drives, no car", false],
   "Gets a lift": ["Gets a lift", false],
-  "On foot": ["On foot", false]
+  "On foot": ["On foot", false],
+  "Bicycle or scooter": ["Bike / scooter", false],
+  "On foot or gets a lift": ["On foot / lift", false]
 };
 
 const STATUSES = [
@@ -257,6 +281,8 @@ const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu"
 function rows(app, scored, i, pending) {
   const d = app.data || {};
   const s = (scored && scored.data) || {};
+  const isRep = app.__form === REP_FORM;
+  const job = JOBS[app.__form] || "Cleaner";
 
   const delivery = (s.summary || "");
   const sent = delivery.startsWith("Routine fired OK");
@@ -280,10 +306,12 @@ function rows(app, scored, i, pending) {
     ["Travel", d.transport || d.drives],
     ["DBS", d.dbs],
     ["Right to work", d["right-to-work"]],
-    ["Other areas", d["areas-other"]]
+    ["Other areas", d["areas-other"]],
+    ["How long", d.commitment],
+    ["Public-facing experience", d.experience]
   ].filter((f) => f[1]).map((f) => `<span class="chip">${esc(f[0])}: <strong>${esc(f[1])}</strong></span>`).join("");
 
-  const qa = QUESTIONS.filter(([k]) => d[k]).map(
+  const qa = (isRep ? REP_QUESTIONS : QUESTIONS).filter(([k]) => d[k]).map(
     ([k, label]) => `<p class="q">${esc(label)}</p><p class="a">${esc(d[k])}</p>`
   ).join("");
 
@@ -303,8 +331,9 @@ function rows(app, scored, i, pending) {
   const scoreMatch = /\d+/.exec(s.score || "");
   const scoreNum = scoreMatch ? scoreMatch[0] : "";
 
-  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}" data-score="${scoreNum}">
+  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}" data-score="${scoreNum}" data-job="${esc(job)}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
+    <td><span class="job ${isRep ? "job-rep" : "job-clean"}">${esc(job)}</span></td>
     <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "–" : "")}</td>
     <td>${d.phone ? `<a href="tel:${esc(String(d.phone).replace(/\s/g, ""))}">${esc(d.phone)}</a>` : ""}</td>
     <td>${esc(d["based-in"] || "")}</td>
@@ -313,11 +342,11 @@ function rows(app, scored, i, pending) {
     <td class="ar">${esc(areas)}</td>
     <td class="sc">${esc(s.score || "")}</td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : ""}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
-    <td class="act"><form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>
+    <td class="act">${isRep ? "" : `<form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>`}
       <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1" title="Delete">&#128465; Delete</button></form></td>
     <td class="action-col"><form method="POST"><input type="hidden" name="set-action" value="${esc(app.id)}"><select name="action" class="act-select ${actClass}" onchange="this.form.submit()">${actionOpts}</select></form></td>
   </tr>
-  <tr class="detail" id="${id}"><td colspan="11">
+  <tr class="detail" id="${id}"><td colspan="12">
     ${s.summary && isRealVerdict ? `<p class="summary">${esc(s.summary)}</p>` : ""}
     ${s.flags && s.flags !== "None" ? `<p class="flags"><strong>Ask about:</strong> ${esc(s.flags)}</p>` : ""}
     <div class="facts">${facts}</div>
@@ -331,6 +360,17 @@ const ROUTINE_URL =
   process.env.CLAUDE_ROUTINE_URL ||
   "https://api.anthropic.com/v1/claude_code/routines/trig_01J9HNhNVxmx8homMMU2EjfJ/fire";
 const SKIP = ["ip", "user_agent", "referrer", "bot-field"];
+
+/* Every application from both forms, each tagged with the form it came from. */
+async function allApps(forms, key) {
+  const lists = await Promise.all([SOURCE_FORM, REP_FORM].map(async (name) => {
+    const f = forms.find((x) => x.name === name);
+    if (!f) return [];
+    const subs = await api("/forms/" + f.id + "/submissions?per_page=200", key);
+    return subs.map((s) => Object.assign(s, { __form: name }));
+  }));
+  return [].concat.apply([], lists);
+}
 
 async function apiDelete(path, key) {
   const res = await fetch("https://api.netlify.com/api/v1" + path, {
@@ -434,10 +474,9 @@ exports.handler = async (event) => {
       const action = (params.get("action") || "").trim();
       try {
         const forms = await api("/sites/" + process.env.SITE_ID + "/forms", key2);
-        const src = forms.find((f) => f.name === SOURCE_FORM);
         const sc = forms.find((f) => f.name === SCORED_FORM);
         const [apps, scores] = await Promise.all([
-          api("/forms/" + src.id + "/submissions?per_page=200", key2),
+          allApps(forms, key2),
           sc ? api("/forms/" + sc.id + "/submissions?per_page=200", key2) : []
         ]);
         const app = apps.find((a) => a.id === appId);
@@ -521,11 +560,10 @@ exports.handler = async (event) => {
   try {
     const siteId = process.env.SITE_ID;
     const forms = await api("/sites/" + siteId + "/forms", key);
-    const src = forms.find((f) => f.name === SOURCE_FORM);
     const sc = forms.find((f) => f.name === SCORED_FORM);
 
     const [apps, scores] = await Promise.all([
-      src ? api("/forms/" + src.id + "/submissions?per_page=200", key) : [],
+      allApps(forms, key),
       sc ? api("/forms/" + sc.id + "/submissions?per_page=200", key) : []
     ]);
 
@@ -545,7 +583,7 @@ exports.handler = async (event) => {
     const body = list.length
       ? `<div class="scroll"><table>
           <thead><tr>
-            <th>Name</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
+            <th>Name</th><th>Job</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
             <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Status</th>
           </tr></thead>
           <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i, pending)).join("")}</tbody>
@@ -554,6 +592,11 @@ exports.handler = async (event) => {
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
 
     const filters = `<div class="filters">
+      <label>Job <select id="f-job">
+        <option value="">All</option>
+        <option value="Cleaner">Cleaner</option>
+        <option value="Door to door rep">Door to door rep</option>
+      </select></label>
       <label>Status <select id="f-status">
         <option value="">All</option>
         <option value="__none__">No status</option>

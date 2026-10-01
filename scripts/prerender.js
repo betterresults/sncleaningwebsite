@@ -132,7 +132,7 @@ function writeRobotsTxt() {
   // AI search/answer bots (ChatGPT, Claude, Perplexity, Google AI) are allowed
   // so the business can be found and recommended in AI search. Only
   // Bytespider (a bulk scraper, not a search engine) is kept out.
-  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
