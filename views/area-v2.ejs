@@ -85,6 +85,9 @@
   </div>
 </section>
 
+<!-- ============ VIDEO (Essex pages) ============ -->
+<% if (typeof video !== 'undefined' && video) { %><%- include('partials/team-video', { video: video, heading: 'Meet the team who clean homes in ' + place }) %><% } %>
+
 <!-- ============ WHAT'S INCLUDED ============ -->
 <% if (tasks.length) { %>
 <section class="h-section h-white">

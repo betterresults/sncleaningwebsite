@@ -1,0 +1,27 @@
+<%# Team video: YouTube thumbnail first, the player loads only when tapped (keeps pages fast). %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">See us at work</p>
+      <h2 class="h-title"><%= heading %></h2>
+    </div>
+    <div class="s-video">
+      <button type="button" class="s-video-btn" data-yt="<%= video.id %>" aria-label="Play video: <%= video.title %>">
+        <img src="https://i.ytimg.com/vi/<%= video.id %>/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
+        <span class="s-video-play" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('[data-yt]');
+  if (!b) return;
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&rel=0&playsinline=1';
+  f.title = b.getAttribute('aria-label').replace('Play video: ', '');
+  f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture; fullscreen';
+  f.allowFullscreen = true;
+  b.replaceWith(f);
+});
+</script>

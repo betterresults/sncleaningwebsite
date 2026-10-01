@@ -681,3 +681,13 @@
 .s-benefit-list strong { display: block; color: var(--h-ink); font-weight: 600; }
 .s-benefit-list span { color: var(--h-text); font-size: .93rem; line-height: 1.5; }
 .h-sand .s-local-card { background: #fff; }
+
+/* Team video (domestic cleaning, Essex area pages): thumbnail first, YouTube loads on tap */
+.s-video { max-width: 860px; margin: 0 auto; aspect-ratio: 16 / 9; border-radius: 18px; overflow: hidden; background: #0f1f1d; box-shadow: 0 20px 50px rgba(18, 38, 36, .18); }
+.s-video iframe, .s-video-btn { display: block; width: 100%; height: 100%; border: 0; }
+.s-video-btn { position: relative; padding: 0; cursor: pointer; background: #0f1f1d; }
+.s-video-btn img { width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: opacity .2s; }
+.s-video-btn:hover img { opacity: 1; }
+.s-video-play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(31, 107, 102, .92); box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+.s-video-play::after { content: ''; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #fff; }
+.s-video-btn:focus-visible { outline: 3px solid #1f6b66; outline-offset: 3px; }

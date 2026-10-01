@@ -582,8 +582,19 @@ async function renderArea(req, res, next, areaSlug) {
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
     const mapLink = region.level === 'region' ? buildMapLink(allAreaPages, allRegions, [service.slug], { onlyThese: true }) : null;
+    // Every page in Essex (any service), plus domestic cleaning in Havering
+    // (Romford, Upminster), shows the team video.
+    let inEssex = false;
+    for (let r = region; r && !inEssex; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) {
+      if (/^essex\b/i.test(String(r.slug || '')) || /^essex\b/i.test(String(r.name || ''))) inEssex = true;
+    }
+    const inHavering = [region, parent].some((r) => r && /^havering/i.test(String(r.name || '')));
+    const video = inEssex || (service.slug === 'domestic-cleaning' && inHavering)
+      ? { id: 'G8cOOI3hErg', title: 'Domestic cleaning in Essex by our in-house trained cleaners' }
+      : null;
     return res.render('area-v2', {
       mapLink,
+      video,
       designV2: true,
       heroPreload: serviceImage(service.slug),
       // Title format (keyword first, then price, then trust): fits Google's ~60 characters.

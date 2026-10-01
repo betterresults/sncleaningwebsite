@@ -70,6 +70,8 @@
   </div>
 </section>
 
+<% if (service && service.slug === 'domestic-cleaning') { %><%- include('partials/team-video', { video: { id: 'G8cOOI3hErg', title: 'Domestic cleaning in Essex by our in-house trained cleaners' }, heading: 'See our team at work' }) %><% } %>
+
 <!-- ============ WHAT'S INCLUDED ============ -->
 <% if (page.included_tasks && page.included_tasks.length) { %>
 <section class="h-section h-white">
