@@ -2,7 +2,7 @@
  * Fires automatically the moment someone submits a form on this site.
  * Netlify invokes this by filename - nothing to configure.
  *
- * On a cleaner application it calls Silvia's Claude routine
+ * On a cleaner or door-to-door rep application it calls Silvia's Claude routine
  * ("Cleaners Form Submission") which does the rating, and records the outcome
  * of that call in the "scored-application" form so there is always a trail.
  *
@@ -13,6 +13,7 @@
  */
 
 const SOURCE_FORM = "cleaner-application";
+const REP_FORM = "rep-application"; // door to door representatives
 const TARGET_FORM = "scored-application";
 const ROUTINE_URL =
   process.env.CLAUDE_ROUTINE_URL ||
@@ -30,7 +31,8 @@ exports.handler = async (event) => {
 
   const payload = body.payload || {};
   // Ignore the contact form, and our own scored posts, so nothing loops.
-  if (payload.form_name !== SOURCE_FORM) {
+  const isRep = payload.form_name === REP_FORM;
+  if (payload.form_name !== SOURCE_FORM && !isRep) {
     return { statusCode: 200, body: "ignored" };
   }
 
@@ -44,8 +46,11 @@ exports.handler = async (event) => {
     .join("\n");
 
   const message =
-    "A new cleaner application has just come in through the website. " +
-    "Rate this applicant against the scoring rules and report the result.\n\n" +
+    (isRep
+      ? "JOB: DOOR TO DOOR REP. A new door-to-door representative application has just come in " +
+        "through the website. Score it with the DOOR TO DOOR REP rules (not the cleaner rules) and report the result.\n\n"
+      : "JOB: CLEANER. A new cleaner application has just come in through the website. " +
+        "Rate this applicant against the cleaner scoring rules and report the result.\n\n") +
     "Submitted: " + (payload.created_at || new Date().toISOString()) + "\n" +
     "Netlify submission id: " + (payload.id || "unknown") + "\n\n" +
     answers;
