@@ -83,14 +83,15 @@ module.exports = {
 <p>Cookies are small files a website saves in your browser. This page explains what our website uses and why.</p>
 
 <h2>Cookies we set</h2>
-<p>Our website does not set advertising cookies.</p>
-<p>When you click OK on our cookie notice, the site remembers this in your browser so the notice doesn't show again.</p>
+<p>When you first visit, we ask whether you accept or reject optional cookies. Your choice is saved in your browser so we don't ask again. You can change it at any time by clearing this site's data in your browser.</p>
+<p>If you accept, our quote pages (addresses starting /go/) remember which advert or link brought you to us, so we can see which of our adverts lead to real bookings. If you reject, this is not kept after you leave the page.</p>
 <p>To make pages load faster, the site stores a small note in your browser's session storage once the booking form has been pre-loaded. It contains no personal information and is cleared when you close the browser tab.</p>
 
 <h2>Cookies set by other services</h2>
 <ul>
-  <li><strong>Analytics (Visitor Tracking):</strong> we use visitortracking.com to understand how visitors use our website. It may set cookies or use similar technology to recognise returning visitors and record the pages viewed.</li>
-  <li><strong>Booking form:</strong> our online booking form is embedded from our booking system. It may use cookies or browser storage that it needs to work, for example to keep your answers while you fill it in.</li>
+  <li><strong>Analytics (Visitor Tracking):</strong> only if you accept cookies, we use visitortracking.com to understand how visitors use our website. It may set cookies or use similar technology to recognise returning visitors and record the pages viewed.</li>
+  <li><strong>Meta (Facebook and Instagram) advertising:</strong> only if you accept cookies, our quote pages use the Meta Pixel and Meta's Conversions API. These tell Meta when someone who saw our advert asks for a quote or books, so we can measure our adverts and show them to people more likely to need us. Your email and phone number are scrambled (hashed) before they are sent. If you reject cookies, nothing about you is sent to Meta.</li>
+  <li><strong>Booking form:</strong> our online booking form comes from our booking system. It may use cookies or browser storage that it needs to work, for example to keep your answers while you fill it in.</li>
   <li><strong>Google Fonts:</strong> our fonts load from Google's servers. Google receives your IP address but does not set cookies for this.</li>
   <li><strong>Links to other sites:</strong> if you click through to WhatsApp or Google reviews, those sites use their own cookies under their own policies.</li>
 </ul>

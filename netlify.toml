@@ -37,6 +37,23 @@
   status = 200
   force = true
 
+[[redirects]]
+  from = "/leads"
+  to = "/.netlify/functions/leads"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/funnel"
+  to = "/.netlify/functions/funnel-api"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/go/*"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
 # Send the Netlify subdomain to the real domain so Google only sees one copy.
 [[redirects]]
   from = "https://sncleaningwebsite.netlify.app/*"

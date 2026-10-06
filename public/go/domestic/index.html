@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tired of cleaners who rush, cancel or don't show up? | SN Cleaning Services</title>
+<meta name="description" content="Proper, thorough home cleaning in Essex and London. Our own insured, DBS-checked team. Get your quote in 60 seconds.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Tired of cleaners who rush, cancel or don't show up?">
+<meta property="og:description" content="Get the clean your home deserves: proper, thorough, and done properly every time.">
+<meta property="og:image" content="https://sncleaningservices.co.uk/images/og-image.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="/go/funnel.css">
+</head>
+<body>
+
+<header class="top"><div class="top-in">
+  <span class="brand"><img src="/images/logo-mark-84.webp" alt="" width="34" height="34">SN Cleaning Services</span>
+  <span class="spacer"></span>
+</div></header>
+
+<main id="app" aria-live="polite"></main>
+
+<p class="foot">SN Cleaning Services · <a href="/privacy-policy/">Privacy</a> · <a href="/cookies-policy/">Cookies</a></p>
+
+<div class="consent" id="consent" role="region" aria-label="Cookies" hidden>
+  <p>We'd like to use optional cookies to measure our adverts and improve this page. <a href="/cookies-policy/">Cookies Policy</a></p>
+  <div class="cbtns">
+    <button type="button" class="alt" data-consent="rejected">Reject</button>
+    <button type="button" data-consent="accepted">Accept</button>
+  </div>
+</div>
+
+<!-- Lets Netlify Forms know this form exists, so each lead also arrives as a
+     normal form submission (with email notifications if switched on). -->
+<form name="funnel-lead" data-netlify="true" hidden>
+  <input name="page"><input name="first_name"><input name="email"><input name="phone">
+  <textarea name="answers"></textarea><input name="request"><input name="lead_id">
+</form>
+
+<script>
+window.FUNNEL = {
+  page: "domestic",
+  start: "intro",
+  screens: {
+    intro: {
+      type: "intro",
+      html:
+        '<h1>Tired of cleaners who rush, cancel or don’t show up?</h1>' +
+        '<p class="lead">Get the clean your home deserves: proper, thorough, and done properly every time.</p>' +
+        '<div class="points">' +
+          '<p><strong>A proper clean, not a quick wipe.</strong> We lift the cushions, move the rugs and clean underneath.</p>' +
+          '<p><strong>No cancelled cleans.</strong> If your cleaner can’t make it, we send a replacement.</p>' +
+          '<p><strong>No surprises.</strong> We track every visit, so we know before you do if something changes.</p>' +
+        '</div>' +
+        '<div class="pics"><img src="/images/rooms/kitchen.jpg" alt="Clean kitchen" width="1280" height="720"><img src="/images/rooms/bathroom.jpg" alt="Clean bathroom" width="1280" height="720"></div>' +
+        '<div class="reviews">' +
+          '<div class="review"><div class="stars" aria-label="5 stars">★★★★★</div><q>They arrived right on time; the service was excellent, thorough and efficient.</q><div class="who">Qingzi J. · Google review</div></div>' +
+          '<div class="review"><div class="stars" aria-label="5 stars">★★★★★</div><q>Cleaning service is reliable and efficient… Receive weekly confirmation by text of next cleaning date.</q><div class="who">Sally W. · Google review</div></div>' +
+          '<div class="review"><div class="stars" aria-label="5 stars">★★★★★</div><q>Punctual and did an excellent job… She’s also consistently good which is why I ask for specifically!</q><div class="who">Lovanya · Google review</div></div>' +
+        '</div>' +
+        '<p class="proof"><b>★</b> 5.0 on Google · 12 years · Insured &amp; DBS-checked</p>' +
+        '<button type="button" class="btn btn-block" data-start="price">Get my quote</button>' +
+        '<p class="small">Takes 60 seconds. A few quick questions.</p>'
+    },
+    price: {
+      type: "single", name: "Price check", key: "Price check",
+      title: "Our prices, upfront",
+      text: "Regular cleaning starts from £23 an hour, with cleaning products included. Deep cleaning starts from £25 an hour.",
+      question: "Does that work for you?",
+      options: [
+        { label: "Yes, that's completely fine", next: "location" },
+        { label: "It's a bit more than I expected", next: "location" },
+        { label: "I'm looking for something much cheaper", next: "notfit" }
+      ]
+    },
+    location: {
+      type: "single", name: "Location", key: "Location",
+      title: "Where is your home?",
+      text: "We only cover Essex and London, so our cleaners are always local to you.",
+      options: [
+        { label: "Essex", sub: "Brentwood, Chelmsford, Billericay, Basildon, Romford, Southend-on-Sea and nearby", next: "had" },
+        { label: "Other Essex town", next: "had" },
+        { label: "London", next: "had" },
+        { label: "Somewhere else", next: "notcovered" }
+      ]
+    },
+    had: {
+      type: "single", name: "Had cleaner", key: "Had a cleaner before",
+      title: "Have you had a cleaner before?",
+      options: [
+        { label: "Yes, but it didn't work out", next: "missed" },
+        { label: "Yes, and I'm looking for better", next: "missed" },
+        { label: "No, this would be my first", next: "missed" }
+      ]
+    },
+    missed: {
+      type: "multi", name: "Missed areas", key: "Areas usually missed",
+      title: "Which areas usually get missed?",
+      text: "Tick all that apply.",
+      options: ["Under the sofa and cushions", "Under the rugs", "Behind and under small furniture", "Skirting boards", "Something else"],
+      next: "reassurance"
+    },
+    reassurance: {
+      type: "info", name: "Reassurance",
+      title: "That's exactly what we're there for",
+      text: "You can wipe the surfaces yourself. We're there for the parts you don't have time for.",
+      ticks: [
+        "We lift the cushions and clean under the sofa",
+        "We move small furniture and clean under the rugs",
+        "Our own trained cleaners, insured and DBS-checked",
+        "We bring professional products and equipment",
+        "Anything not right? We come back and re-clean it free"
+      ],
+      next: "matters"
+    },
+    matters: {
+      type: "multi", name: "Matters most", key: "What matters most",
+      title: "What matters most to you?",
+      text: "Tick all that apply.",
+      options: ["Someone I can trust in my home", "A proper, thorough clean", "Reliable: turns up when booked", "Good communication", "DBS-checked and insured cleaners", "Professional cleaning products"],
+      next: "details"
+    },
+    details: {
+      type: "details", name: "Your details",
+      title: "Who's the cleaning for?",
+      text: "Next, choose how you'd like to get your quote.",
+      ticks: ["Our own insured, DBS-checked team", "Professional products and equipment, brought by us", "Free re-clean if anything is missed"],
+      button: "Next",
+      next: "method"
+    },
+    method: {
+      type: "single", name: "Quote method", key: "Quote method",
+      title: "How would you like your quote?",
+      options: [
+        { label: "Book online", sub: "Choose your clean, see your price and pick a date", next: "bookservice" },
+        { label: "WhatsApp", sub: "Chat with us and we'll send your quote", next: "whatsapp" },
+        { label: "Phone", sub: "Speak to our team", next: "phone" }
+      ]
+    },
+    bookservice: {
+      type: "links", name: "Booking service",
+      title: "Which clean would you like to book?",
+      text: "Tap your clean to see your quote and available dates.",
+      options: [
+        { label: "Regular domestic cleaning", service: "domestic-cleaning" },
+        { label: "Deep house cleaning", service: "deep-cleaning" },
+        { label: "End of tenancy cleaning", service: "end-of-tenancy-cleaning" },
+        { label: "After builders cleaning", service: "after-builders-cleaning" },
+        { label: "Airbnb cleaning", service: "airbnb-cleaning" },
+        { label: "Carpet, upholstery or mattress cleaning", service: "carpet-cleaning" },
+        { label: "Something else", next: "help" }
+      ]
+    },
+    help: {
+      type: "single", name: "Help me choose", key: "Help choosing",
+      title: "No problem, we'll help you find the right clean",
+      text: "How would you like to talk to us?",
+      options: [
+        { label: "WhatsApp", next: "whatsapp" },
+        { label: "Phone", next: "phone" }
+      ]
+    },
+    whatsapp: {
+      type: "whatsapp", name: "WhatsApp chat",
+      title: "Get your quote on WhatsApp",
+      text: "Tap below to send us a message and we'll reply with your quote. We reply every day, 8am to 9pm.",
+      button: "Start WhatsApp chat",
+      waText: "Hi, I'd like a quote for cleaning"
+    },
+    phone: {
+      type: "phone", name: "Phone",
+      title: "Speak to our team",
+      text: "Call us now, or we can call you back.",
+      callbackNext: "callback"
+    },
+    callback: {
+      type: "end", name: "Call back",
+      title: "Thank you! We'll call you back within 1 hour",
+      text: "Phone hours: Monday to Saturday, 8am to 5pm."
+    },
+    notfit: {
+      type: "end", name: "Not the right fit",
+      title: "We're probably not the right fit",
+      text: "We're not the cheapest, because we take the time to clean properly, bring professional products and use our own insured team. Thank you for being honest, and good luck finding the right help."
+    },
+    notcovered: {
+      type: "end", name: "Not covered",
+      title: "Sorry, we don't cover your area yet",
+      text: "We only clean homes in Essex and London. Thank you for thinking of us."
+    }
+  }
+};
+</script>
+<script src="/go/funnel.js"></script>
+</body>
+</html>

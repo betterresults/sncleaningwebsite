@@ -106,8 +106,11 @@
   <% } %>
 
   <div class="cookie-note" id="cookie-note" role="region" aria-label="Cookies" hidden>
-    <p>We use cookies to understand how visitors use our website. <a href="/cookies-policy/">Cookies Policy</a></p>
-    <button type="button" class="cookie-note-btn" id="cookie-note-ok">OK</button>
+    <p>We'd like to use optional cookies to understand how visitors use our website. <a href="/cookies-policy/">Cookies Policy</a></p>
+    <div class="cookie-note-btns">
+      <button type="button" class="cookie-note-btn cookie-note-btn-alt" id="cookie-reject">Reject</button>
+      <button type="button" class="cookie-note-btn" id="cookie-accept">Accept</button>
+    </div>
   </div>
   <script src="/js/main.js?v=<%= assetVersion %>" defer></script>
   <% if (isHomePage) { %><script src="/js/home.js?v=<%= assetVersion %>" defer></script><% } %>
@@ -122,8 +125,10 @@
     }
     // Load the tracker only for real visits: not inside the hidden frames that
     // pre-load the forms, and not while Chrome prepares a page in advance.
-    (function () {
-      if (window.self !== window.top) return;
+    // Only after the visitor accepts optional cookies (see main.js).
+    window.snLoadTracker = function () {
+      if (window.self !== window.top || window.__snTracker) return;
+      window.__snTracker = true;
       var load = function () {
         var s = document.createElement('script');
         s.async = true;
@@ -132,7 +137,8 @@
       };
       if (document.prerendering) document.addEventListener('prerenderingchange', load, { once: true });
       else load();
-    })();
+    };
+    try { if (localStorage.getItem('sn-consent') === 'accepted') window.snLoadTracker(); } catch (e) {}
   </script>
 </body>
 </html>

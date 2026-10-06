@@ -1,15 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Cookie notice: shown until the visitor clicks OK (remembered in this browser).
+  // Cookie banner: Accept / Reject, remembered in this browser ('sn-consent').
+  // Optional tracking only starts after Accept. Shared with the /go/ quote pages.
   const note = document.getElementById('cookie-note');
   if (note && window.self === window.top) {
-    let seen = false;
-    try { seen = localStorage.getItem('cookie-note-ok') === '1'; } catch (_) {}
-    if (!seen) {
+    let choice = null;
+    try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
+    if (choice !== 'accepted' && choice !== 'rejected') {
       note.hidden = false;
-      document.getElementById('cookie-note-ok').addEventListener('click', () => {
+      const pick = (value) => {
         note.hidden = true;
-        try { localStorage.setItem('cookie-note-ok', '1'); } catch (_) {}
-      });
+        try { localStorage.setItem('sn-consent', value); } catch (_) {}
+        if (value === 'accepted' && window.snLoadTracker) window.snLoadTracker();
+      };
+      document.getElementById('cookie-accept').addEventListener('click', () => pick('accepted'));
+      document.getElementById('cookie-reject').addEventListener('click', () => pick('rejected'));
     }
   }
 
