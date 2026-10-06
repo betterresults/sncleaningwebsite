@@ -39,16 +39,16 @@
   <link rel="preconnect" href="https://app.sncleaningservices.co.uk" />
   <link rel="preconnect" href="https://app.dilvon.com" />
   <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
-  <!-- Instant page changes: the contact page is prepared as soon as a page linking to
-       it loads; booking forms (app. subdomain) and every other internal page are
-       prepared on hover/touch. Booking forms are also fetched early. -->
+  <!-- Instant page changes: booking forms (app. subdomain) and the contact page are
+       prepared in the background as soon as a page linking to them loads; every
+       other internal page is prepared on hover/touch. -->
   <script type="speculationrules">
   {
     "prefetch": [
-      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "eager" }
+      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }
     ],
     "prerender": [
-      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "moderate" },
+      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },
       { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },
       { "tag": "site", "where": { "and": [
           { "href_matches": "/*" },

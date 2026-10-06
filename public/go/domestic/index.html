@@ -15,12 +15,12 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <link rel="stylesheet" href="/go/funnel.css">
 <link rel="preconnect" href="https://app.sncleaningservices.co.uk">
-<!-- Booking form links (shown after the details step) are fetched early and
-     fully prepared on hover/press, so the form opens straight away (Chrome/Edge/Android). -->
+<!-- Booking form links (shown after the details step) are prepared in the
+     background as soon as they appear, so the form opens straight away (Chrome/Edge/Android). -->
 <script type="speculationrules">
 {
-  "prefetch": [ { "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "eager" } ],
-  "prerender": [ { "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "moderate" } ]
+  "prefetch": [ { "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" } ],
+  "prerender": [ { "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" } ]
 }
 </script>
 </head>
