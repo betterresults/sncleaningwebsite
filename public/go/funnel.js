@@ -99,6 +99,7 @@
   var answers = {};
   var history = [];
   var leadId = get("sessionStorage", "sn-lead-" + F.page) || "";
+  var completed = get("sessionStorage", "sn-done-" + F.page) === "1";
   var details = {};
   var startedSent = false;
 
@@ -241,6 +242,58 @@
     fetch("/", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: body.toString(), keepalive: true }).catch(function () {});
   }
 
+  function payload(action, d, extra) {
+    var flat = {};
+    Object.keys(answers).forEach(function (k) { flat[k] = answers[k]; });
+    var b = {
+      action: action, page: F.page, leadId: leadId, firstName: d.firstName, email: d.email, phone: d.phone,
+      answers: flat, first: firstTouch(), last: touch, visitorId: visitorId(), consent: consent(),
+      fbc: consent() === "accepted" ? fbc() : "", fbp: consent() === "accepted" ? cookie("_fbp") : "",
+      pageUrl: location.origin + location.pathname
+    };
+    if (extra) Object.keys(extra).forEach(function (k) { b[k] = extra[k]; });
+    return b;
+  }
+  // One request at a time, so the first save creates the lead and later ones update it.
+  var queue = Promise.resolve();
+  function send(body) {
+    var p = queue.then(function () { body.leadId = leadId; return api(body); }).then(function (r) {
+      if (r && r.leadId) { leadId = r.leadId; set("sessionStorage", "sn-lead-" + F.page, leadId); }
+      return r;
+    });
+    queue = p.catch(function () {});
+    return p;
+  }
+
+  /* Save name / email / phone as soon as anything is typed, even if they never press Next. */
+  var partialTimer = null, lastPartial = "";
+  function readForm() {
+    var f = document.getElementById("details");
+    if (!f) return null;
+    return { firstName: f.first_name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), website: f.website.value };
+  }
+  function savePartial() {
+    clearTimeout(partialTimer);
+    if (completed) return;
+    var d = readForm();
+    if (!d || d.website || (!d.firstName && !d.email && !d.phone)) return;
+    var key = d.firstName + "|" + d.email + "|" + d.phone;
+    if (key === lastPartial) return;
+    lastPartial = key;
+    details = d;
+    send(payload("partial", d)).catch(function () { lastPartial = ""; });
+  }
+  root.addEventListener("input", function (e) {
+    if (!e.target.form || e.target.form.id !== "details") return;
+    clearTimeout(partialTimer);
+    partialTimer = setTimeout(savePartial, 800);
+  });
+  root.addEventListener("focusout", function (e) {
+    if (e.target.form && e.target.form.id === "details") savePartial();
+  });
+  document.addEventListener("visibilitychange", function () { if (document.visibilityState === "hidden") savePartial(); });
+  window.addEventListener("pagehide", savePartial);
+
   root.addEventListener("submit", function (e) {
     if (e.target.id !== "details") return;
     e.preventDefault();
@@ -255,22 +308,15 @@
     btn.disabled = true;
     details = d;
 
-    var isNew = !leadId;
+    clearTimeout(partialTimer);
+    var isNew = !completed;
     var eventId = isNew ? rid("lead-") : "";
     var fired = isNew ? pixel("track", "Lead", { content_name: F.page }, eventId) : false;
-    var flat = {};
-    Object.keys(answers).forEach(function (k) { flat[k] = answers[k]; });
 
-    api({
-      action: "lead", page: F.page, leadId: leadId, firstName: d.firstName, email: d.email, phone: d.phone,
-      answers: flat, first: firstTouch(), last: touch, visitorId: visitorId(), consent: consent(),
-      fbc: consent() === "accepted" ? fbc() : "", fbp: consent() === "accepted" ? cookie("_fbp") : "",
-      pageUrl: location.origin + location.pathname, eventId: eventId, pixelFired: fired, website: f.website.value
-    }).then(function (r) {
+    send(payload("lead", d, { eventId: eventId, pixelFired: fired, website: f.website.value })).then(function (r) {
       btn.disabled = false;
       if (r && r.ok) {
-        if (r.leadId) { leadId = r.leadId; set("sessionStorage", "sn-lead-" + F.page, leadId); }
-        if (isNew) netlifyForm("New lead");
+        if (isNew) { completed = true; set("sessionStorage", "sn-done-" + F.page, "1"); netlifyForm("New lead"); }
         go(F.screens[history[history.length - 1]].next);
       } else {
         err.textContent = (r && r.error) || "Sorry, something went wrong. Please try again, or message us on WhatsApp.";
