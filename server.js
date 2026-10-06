@@ -94,15 +94,18 @@ const isDomestic = (s) => !COMMERCIAL_SLUGS.includes(s.slug);
 // lists them together as "Carpet, Upholstery and Mattress Cleaning").
 const BOOK_ALIAS = { 'upholstery-cleaning': 'carpet-cleaning-services', 'mattress-cleaning': 'carpet-cleaning-services' };
 // The slug of the online booking form for a service, or null if it has none.
-app.locals.bookSlug = (service) => (!service ? null : service.booking_embed_url ? service.slug : BOOK_ALIAS[service.slug] || null);
+// Services with an online form on app.sncleaningservices.co.uk that have no
+// booking_embed_url in Supabase (they were never embedded).
+const ONLINE_FORM = ['deep-house-cleaning', 'after-builders-cleaning'];
+app.locals.bookSlug = (service) => (!service ? null : (service.booking_embed_url || ONLINE_FORM.includes(service.slug)) ? service.slug : BOOK_ALIAS[service.slug] || null);
 // Where "Get a quote" goes: the service's booking form, or (no online form)
 // the quote request form on the service's own page.
 // The booking forms now live on our own subdomain (Dilvon custom domain), so
 // buttons link straight to them. Dilvon's form names match our service slugs,
-// except carpet (Dilvon: carpet-cleaning). Same rule in public/js/main.js.
+// except carpet (carpet-cleaning) and deep (deep-cleaning). Same rule in public/js/main.js.
 const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
 const BOOK_LANDING = BOOK_BASE + 'main-landing-1790164444462';
-const DILVON_SLUG = { 'carpet-cleaning-services': 'carpet-cleaning' };
+const DILVON_SLUG = { 'carpet-cleaning-services': 'carpet-cleaning', 'deep-house-cleaning': 'deep-cleaning' };
 app.locals.bookUrl = (slug) => (slug ? BOOK_BASE + (DILVON_SLUG[slug] || slug) : BOOK_LANDING);
 app.locals.bookHref = (service) => {
   if (!service) return BOOK_LANDING;
@@ -226,7 +229,7 @@ app.get('/', async (req, res) => {
     services: ['domestic-cleaning', 'end-of-tenancy-cleaning', 'deep-house-cleaning', 'carpet-cleaning-services', 'after-builders-cleaning', 'airbnb-cleaning']
       .map((slug) => services.find((s) => s.slug === slug))
       .filter(Boolean),
-    bookable: services.filter((s) => s.booking_embed_url),
+    bookable: services.filter((s) => s.booking_embed_url || ONLINE_FORM.includes(s.slug)),
     testimonials,
     checklist,
     faqs,
