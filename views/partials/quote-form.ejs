@@ -3,7 +3,7 @@
       <h2 class="h-quote-title">Get <%= article %> <%= lower %> quote</h2>
 <% if (formSlug) { %>
       <p class="h-quote-sub">Enter your postcode and email and we'll take you straight to the booking form.</p>
-      <form name="quote" method="GET" action="/book/<%= formSlug %>" data-netlify="true" netlify-honeypot="bot-field"
+      <form name="quote" method="GET" action="<%= bookUrl(formSlug) %>" data-netlify="true" netlify-honeypot="bot-field"
             class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
         <input type="hidden" name="service" value="<%= formSlug %>" />

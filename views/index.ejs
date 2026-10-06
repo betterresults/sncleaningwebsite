@@ -36,7 +36,7 @@
           chosen). The postcode and email are also saved to the Netlify "quote"
           form in the background, so an enquiry is never lost if someone stops
           half-way through the booking form (see home.js). %>
-      <form name="quote" method="GET" action="/book" data-netlify="true" netlify-honeypot="bot-field"
+      <form name="quote" method="GET" action="<%= bookUrl() %>" data-netlify="true" netlify-honeypot="bot-field"
             class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
         <p class="hidden-field"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
@@ -258,7 +258,7 @@
         <h2 class="h-title h-title--light">Ready for a cleaner home?</h2>
         <p>Choose your service, add a few details about the property and get your price online.</p>
       </div>
-      <a href="/book" class="h-btn h-btn--light">Get a quote</a>
+      <a href="<%= bookUrl() %>" class="h-btn h-btn--light">Get a quote</a>
     </div>
   </div>
 </section>

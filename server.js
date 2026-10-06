@@ -97,10 +97,17 @@ const BOOK_ALIAS = { 'upholstery-cleaning': 'carpet-cleaning-services', 'mattres
 app.locals.bookSlug = (service) => (!service ? null : service.booking_embed_url ? service.slug : BOOK_ALIAS[service.slug] || null);
 // Where "Get a quote" goes: the service's booking form, or (no online form)
 // the quote request form on the service's own page.
+// The booking forms now live on our own subdomain (Dilvon custom domain), so
+// buttons link straight to them. Dilvon's form names match our service slugs,
+// except carpet (Dilvon: carpet-cleaning). Same rule in public/js/main.js.
+const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
+const BOOK_LANDING = BOOK_BASE + 'main-landing-1790164444462';
+const DILVON_SLUG = { 'carpet-cleaning-services': 'carpet-cleaning' };
+app.locals.bookUrl = (slug) => (slug ? BOOK_BASE + (DILVON_SLUG[slug] || slug) : BOOK_LANDING);
 app.locals.bookHref = (service) => {
-  if (!service) return '/book';
+  if (!service) return BOOK_LANDING;
   const slug = app.locals.bookSlug(service);
-  return slug ? `/book/${slug}` : `/${service.slug}#quote`;
+  return slug ? app.locals.bookUrl(slug) : `/${service.slug}#quote`;
 };
 
 // Runs on every request. Sets up everything every page needs regardless of

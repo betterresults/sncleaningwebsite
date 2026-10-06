@@ -66,9 +66,9 @@
     form.addEventListener('change', (e) => sync(e.target));
   }
 
-  // Quote form -> booking form. Service chosen: /book/{slug}; none: /book
-  // (the chooser). Postcode and email travel as URL params, which the booking
-  // forms pre-fill. A copy goes to Netlify Forms in the background so the lead
+  // Quote form -> booking form on app.sncleaningservices.co.uk. Service chosen:
+  // that service's form; none: the chooser. Postcode and email travel as
+  // prefill_* URL params, which the booking forms pre-fill. A copy goes to Netlify Forms in the background so the lead
   // is kept even if the booking form is never finished.
   const qf = document.querySelector('[data-quote-form]');
   if (qf) {
@@ -85,8 +85,8 @@
         fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
       } catch (_) { /* never block the redirect */ }
 
-      const params = new URLSearchParams({ postcode, email });
-      window.location.href = (service ? '/book/' + encodeURIComponent(service) : '/book') + '?' + params.toString();
+      const params = new URLSearchParams({ prefill_postcode: postcode, prefill_email: email });
+      window.location.href = window.snBookUrl(service) + '?' + params.toString();
     });
   }
 

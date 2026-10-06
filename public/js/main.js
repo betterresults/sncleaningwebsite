@@ -38,13 +38,47 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Forms load in advance. The quote/booking forms (Dilvon) sit inside our
-  // /book pages and the contact page. As soon as a page has finished loading,
-  // every form page it links to is opened once in a hidden frame, one after
-  // another, so the form's files are already in the browser cache when the
-  // customer clicks and the form appears almost instantly. Skipped on
-  // data-saver and very slow connections.
-  const isFormPage = (path) => /^\/(book|contact)(\/|$)/.test(path) && !/^\/contact\/success/.test(path);
+  // Booking forms live on our subdomain (Dilvon custom domain). Dilvon's form
+  // names match our service slugs except carpet. Same rule in server.js.
+  const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
+  const BOOK_LANDING = BOOK_BASE + 'main-landing-1790164444462';
+  window.snBookUrl = (slug) => (slug ? BOOK_BASE + (slug === 'carpet-cleaning-services' ? 'carpet-cleaning' : slug) : BOOK_LANDING);
+
+  // Quote boxes (service pages, sticky bar): go straight to the booking form
+  // with postcode/email filled in. The homepage form is handled in home.js.
+  document.addEventListener('submit', (e) => {
+    const f = e.target;
+    if (e.defaultPrevented || !f.matches('form[data-quote-form], form[data-book-form]')) return;
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    if (f.elements['bot-field'] && f.elements['bot-field'].value) return;
+    const get = (n) => (f.elements[n] ? f.elements[n].value.trim() : '');
+    const postcode = (get('postcode') || get('prefill_postcode')).toUpperCase().replace(/\s+/g, ' ');
+    const email = get('email') || get('prefill_email');
+    const service = get('service');
+    if (f.matches('[data-quote-form]')) {
+      try {
+        const body = new URLSearchParams({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email });
+        fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
+      } catch (_) {}
+    }
+    const params = new URLSearchParams();
+    if (postcode) params.set('prefill_postcode', postcode);
+    if (email) params.set('prefill_email', email);
+    const q = params.toString();
+    window.location.href = window.snBookUrl(f.matches('[data-quote-form]') ? service : '') + (q ? '?' + q : '');
+  });
+
+  // Forms load in advance.
+  //  - Chrome/Edge/Android: the speculation rules in the page head prepare a
+  //    booking form when the visitor hovers or presses its button.
+  //  - Other browsers (iPhone Safari): once the page has loaded, one booking
+  //    form is opened in a hidden frame with ?preload=1 (Dilvon skips tracking
+  //    for that), so the form's files are already cached when they click.
+  //    The contact page (our own page with the form inside) is warmed the same way.
+  // Skipped on data-saver and very slow connections.
+  const BOOK_ORIGIN = 'https://app.sncleaningservices.co.uk';
+  const hasSpeculation = !!(window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports('speculationrules'));
   const warmed = new Set();
   const queue = [];
   let busy = false;
@@ -70,12 +104,21 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(finish, 10000); // never get stuck on one page
     document.body.appendChild(f);
   };
+  let bookingWarmed = false;
   const warmForm = (href) => {
     try {
       const url = new URL(href, location.href);
-      if (url.origin !== location.origin || !isFormPage(url.pathname)) return;
-      const key = url.pathname.replace(/\/?$/, '/');
-      if (key === location.pathname.replace(/\/?$/, '/') || warmed.has(key)) return;
+      let key;
+      if (url.origin === BOOK_ORIGIN) {
+        // All booking forms share the same app files, so one is enough.
+        if (hasSpeculation || bookingWarmed) return;
+        bookingWarmed = true;
+        key = url.origin + url.pathname + '?preload=1';
+      } else if (url.origin === location.origin && /^\/contact\/?$/.test(url.pathname)) {
+        key = '/contact/';
+        if (key === location.pathname.replace(/\/?$/, '/')) return;
+      } else return;
+      if (warmed.has(key)) return;
       warmed.add(key);
       try { if (sessionStorage.getItem('warm:' + key)) return; } catch (_) {}
       queue.push(key);
@@ -87,25 +130,13 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!slow && window.self === window.top) {
     const warmAll = () => {
       const hrefs = [];
-      const form = document.querySelector('form[data-quote-form]');
-      if (form) {
-        const svc = form.elements.service && form.elements.service.value;
-        hrefs.push(svc ? '/book/' + svc : form.getAttribute('action'));
-      }
-      document.querySelectorAll('a[href^="/book"], a[href^="/contact"]').forEach((a) => hrefs.push(a.getAttribute('href')));
+      document.querySelectorAll('a[href^="' + BOOK_ORIGIN + '"], form[action^="' + BOOK_ORIGIN + '"], a[href^="/contact"]').forEach((el) => hrefs.push(el.getAttribute('href') || el.getAttribute('action')));
       hrefs.filter(Boolean).slice(0, 12).forEach(warmForm);
     };
     const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 300));
     const start = () => idle(warmAll, { timeout: 2000 });
     if (document.readyState === 'complete') start();
     else window.addEventListener('load', start, { once: true });
-    // A service picked in the homepage form: get that form ready first.
-    document.addEventListener('change', (e) => {
-      if (e.target.matches && e.target.matches('form[data-quote-form] select[name="service"]') && e.target.value) {
-        const key = '/book/' + e.target.value + '/';
-        if (!warmed.has(key)) { warmForm(key); const i = queue.indexOf(key); if (i > 0) { queue.splice(i, 1); queue.unshift(key); } }
-      }
-    });
   }
 
   // Card click feedback: a soft ripple from the tap point (CSS does the press).

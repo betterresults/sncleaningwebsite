@@ -35,15 +35,21 @@
     <meta name="twitter:image" content="<%= ogImage %>" />
   <% } %>
 
-  <!-- Booking forms (Dilvon) and their data: connect early so forms open fast -->
+  <!-- Booking forms (Dilvon, on our app. subdomain) and their data: connect early so forms open fast -->
+  <link rel="preconnect" href="https://app.sncleaningservices.co.uk" />
   <link rel="preconnect" href="https://app.dilvon.com" />
   <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
-  <!-- Instant page changes: booking and contact pages are prepared as soon as a page
-       linking to them loads; every other internal page is prepared on hover/touch. -->
+  <!-- Instant page changes: the contact page is prepared as soon as a page linking to
+       it loads; booking forms (app. subdomain) and every other internal page are
+       prepared on hover/touch. Booking forms are also fetched early. -->
   <script type="speculationrules">
   {
+    "prefetch": [
+      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "eager" }
+    ],
     "prerender": [
-      { "tag": "booking", "where": { "or": [ { "href_matches": "/book{/*}?" }, { "href_matches": "/contact{/}?" } ] }, "eagerness": "eager" },
+      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "moderate" },
+      { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },
       { "tag": "site", "where": { "and": [
           { "href_matches": "/*" },
           { "not": { "href_matches": "/book{/*}?" } },
@@ -91,8 +97,8 @@
   <div class="sticky-bar">
     <div class="container sticky-bar-inner">
       <span class="sticky-bar-label"><span class="pulse-dot"></span> Need a quote?</span>
-      <form action="/book" method="GET" class="sticky-bar-form">
-        <input type="text" name="postcode" placeholder="Postcode" aria-label="Postcode" autocomplete="postal-code" />
+      <form action="<%= bookUrl() %>" method="GET" class="sticky-bar-form" data-book-form>
+        <input type="text" name="prefill_postcode" placeholder="Postcode" aria-label="Postcode" autocomplete="postal-code" />
         <button type="submit" class="btn btn-primary">Quote</button>
       </form>
     </div>

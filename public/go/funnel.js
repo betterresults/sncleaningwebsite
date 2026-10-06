@@ -22,6 +22,10 @@
   function set(kind, k, v) { try { var s = store(kind); if (s) s.setItem(k, v); } catch (e) {} }
   function rid(p) { return p + Date.now().toString(36) + Math.random().toString(36).slice(2, 8); }
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function normPostcode(v) {
+    var p = String(v || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    return p.length > 3 ? p.slice(0, -3) + " " + p.slice(-3) : p;
+  }
   function cookie(name) { var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : ""; }
   function consent() { return get("localStorage", CONSENT_KEY) || "unknown"; }
   function api(body) {
@@ -61,7 +65,7 @@
   }
 
   /* ---------- Meta Pixel (only after Accept) ---------- */
-  var pixelId = "", pixelReady = false, bookingBase = "https://app.dilvon.com/book/sn-cleaning-services";
+  var pixelId = "", pixelReady = false, bookingBase = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services";
   function loadPixel() {
     if (pixelReady || !pixelId || consent() !== "accepted") return;
     /* Standard Meta Pixel loader */
@@ -109,6 +113,18 @@
     if (leadId) api({ action: "event", leadId: leadId, type: type, detail: detail || "", eventId: eventId, consent: consent(), pixelFired: fired });
   }
 
+  /* Booking form link with their details filled in (Dilvon reads prefill_*). */
+  function bookingUrl(service) {
+    var q = new URLSearchParams();
+    if (details.firstName) q.set("prefill_first_name", details.firstName);
+    if (details.email) q.set("prefill_email", details.email);
+    if (details.phone) q.set("prefill_phone", details.phone);
+    if (details.postcode) q.set("prefill_postcode", details.postcode);
+    if (leadId) q.set("ref", leadId);
+    var qs = q.toString();
+    return bookingBase.replace(/\/+$/, "") + "/" + service + (qs ? "?" + qs : "");
+  }
+
   /* ---------- rendering ---------- */
   function backBtn() {
     return history.length > 1 ? '<button type="button" class="back" data-back>&larr; Back</button>' : "";
@@ -130,7 +146,7 @@
         s.options.map(function (o, i) {
           var inner = '<span class="key">' + letter(i) + '</span><span class="txt"><span>' + esc(o.label) + "</span>" + (o.sub ? "<small>" + esc(o.sub) + "</small>" : "") + "</span>";
           if (o.service) {
-            return '<a class="opt" data-service="' + esc(o.service) + '" data-label="' + esc(o.label) + '" href="#">' + inner + "</a>";
+            return '<a class="opt" data-service="' + esc(o.service) + '" data-label="' + esc(o.label) + '" href="' + esc(bookingUrl(o.service)) + '">' + inner + "</a>";
           }
           return '<button type="button" class="opt" data-pick="' + i + '">' + inner + "</button>";
         }).join("") + "</div>";
@@ -149,6 +165,7 @@
         '<div class="field"><label for="fn">First name</label><input id="fn" name="first_name" autocomplete="given-name" required value="' + esc(details.firstName) + '"></div>' +
         '<div class="field"><label for="em">Email</label><input id="em" name="email" type="email" autocomplete="email" inputmode="email" required value="' + esc(details.email) + '"></div>' +
         '<div class="field"><label for="ph">Phone</label><input id="ph" name="phone" type="tel" autocomplete="tel" inputmode="tel" required value="' + esc(details.phone) + '"></div>' +
+        '<div class="field"><label for="pc">Postcode</label><input id="pc" name="postcode" autocomplete="postal-code" autocapitalize="characters" required value="' + esc(details.postcode) + '"></div>' +
         '<div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>' +
         '<p class="err" id="err" hidden></p>' +
         '<button type="submit" class="btn btn-block">' + esc(s.button || "Next") + "</button></form>";
@@ -218,7 +235,7 @@
       var label = t.getAttribute("data-label");
       answers["Booking service"] = label;
       trackClick("booking_click", label, "BookingClick", true);
-      var url = bookingBase.replace(/\/+$/, "") + "/" + t.getAttribute("data-service") + (leadId ? "?ref=" + encodeURIComponent(leadId) : "");
+      var url = bookingUrl(t.getAttribute("data-service"));
       setTimeout(function () { location.href = url; }, 150);
       return;
     }
@@ -237,7 +254,7 @@
     var flat = Object.keys(answers).map(function (k) { return k + ": " + (Array.isArray(answers[k]) ? answers[k].join(", ") : answers[k]); }).join("\n");
     var body = new URLSearchParams({
       "form-name": "funnel-lead", page: F.page, first_name: details.firstName || "", email: details.email || "",
-      phone: details.phone || "", answers: flat, request: request, lead_id: leadId || ""
+      phone: details.phone || "", postcode: details.postcode || "", answers: flat, request: request, lead_id: leadId || ""
     });
     fetch("/", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: body.toString(), keepalive: true }).catch(function () {});
   }
@@ -246,7 +263,7 @@
     var flat = {};
     Object.keys(answers).forEach(function (k) { flat[k] = answers[k]; });
     var b = {
-      action: action, page: F.page, leadId: leadId, firstName: d.firstName, email: d.email, phone: d.phone,
+      action: action, page: F.page, leadId: leadId, firstName: d.firstName, email: d.email, phone: d.phone, postcode: d.postcode,
       answers: flat, first: firstTouch(), last: touch, visitorId: visitorId(), consent: consent(),
       fbc: consent() === "accepted" ? fbc() : "", fbp: consent() === "accepted" ? cookie("_fbp") : "",
       pageUrl: location.origin + location.pathname
@@ -270,14 +287,14 @@
   function readForm() {
     var f = document.getElementById("details");
     if (!f) return null;
-    return { firstName: f.first_name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), website: f.website.value };
+    return { firstName: f.first_name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), postcode: normPostcode(f.postcode.value), website: f.website.value };
   }
   function savePartial() {
     clearTimeout(partialTimer);
     if (completed) return;
     var d = readForm();
-    if (!d || d.website || (!d.firstName && !d.email && !d.phone)) return;
-    var key = d.firstName + "|" + d.email + "|" + d.phone;
+    if (!d || d.website || (!d.firstName && !d.email && !d.phone && !d.postcode)) return;
+    var key = d.firstName + "|" + d.email + "|" + d.phone + "|" + d.postcode;
     if (key === lastPartial) return;
     lastPartial = key;
     details = d;
@@ -298,10 +315,11 @@
     if (e.target.id !== "details") return;
     e.preventDefault();
     var f = e.target, err = document.getElementById("err");
-    var d = { firstName: f.first_name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim() };
+    var d = { firstName: f.first_name.value.trim(), email: f.email.value.trim(), phone: f.phone.value.trim(), postcode: normPostcode(f.postcode.value) };
     var problem = !d.firstName ? "Please enter your first name." :
       !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? "Please enter a valid email address." :
-      d.phone.replace(/\D/g, "").length < 9 ? "Please enter a valid phone number." : "";
+      d.phone.replace(/\D/g, "").length < 9 ? "Please enter a valid phone number." :
+      !/^[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}$/.test(d.postcode) ? "Please enter your full postcode, e.g. CM15 8AB." : "";
     if (problem) { err.textContent = problem; err.hidden = false; return; }
     err.hidden = true;
     var btn = f.querySelector("button[type=submit]");
@@ -328,6 +346,24 @@
       err.hidden = false;
     });
   });
+
+  /* ---------- warm the booking form (browsers without speculation rules) ---------- */
+  (function () {
+    var spec = window.HTMLScriptElement && HTMLScriptElement.supports && HTMLScriptElement.supports("speculationrules");
+    var conn = navigator.connection || {};
+    if (spec || conn.saveData || /(^|-)2g$/.test(conn.effectiveType || "")) return;
+    var go = function () {
+      setTimeout(function () {
+        var f = document.createElement("iframe");
+        f.src = bookingBase.replace(/\/+$/, "") + "/domestic-cleaning?preload=1";
+        f.setAttribute("aria-hidden", "true"); f.tabIndex = -1; f.title = "";
+        f.style.cssText = "position:absolute;left:-9999px;top:0;width:400px;height:600px;border:0;opacity:0;pointer-events:none;";
+        document.body.appendChild(f);
+        setTimeout(function () { f.remove(); }, 15000);
+      }, 1500);
+    };
+    if (document.readyState === "complete") go(); else window.addEventListener("load", go, { once: true });
+  })();
 
   /* ---------- start ---------- */
   history.push(F.start);

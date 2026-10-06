@@ -37,6 +37,74 @@
   status = 200
   force = true
 
+# Booking forms moved to our own subdomain (Dilvon custom domain). Old /book
+# links go straight there; buttons on the site already link there directly.
+[[redirects]]
+  from = "/book/domestic-cleaning"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/domestic-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/end-of-tenancy-cleaning"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/end-of-tenancy-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/airbnb-cleaning"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/airbnb-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/airbnb-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/airbnb-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/carpet-cleaning-services"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/carpet-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/carpet-cleaning-services/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/carpet-cleaning"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/*"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/book/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/dashboard"
   to = "/.netlify/functions/leads"
