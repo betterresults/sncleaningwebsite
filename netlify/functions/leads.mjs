@@ -1,3 +1,4 @@
+import "@netlify/blobs"; // listed here so Netlify ships it with this function
 import adapt from "../../lib/adapt.js";
 import impl from "../../lib/leads-handler.js";
 
