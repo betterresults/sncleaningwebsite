@@ -38,9 +38,15 @@
   force = true
 
 [[redirects]]
-  from = "/leads"
+  from = "/dashboard"
   to = "/.netlify/functions/leads"
   status = 200
+  force = true
+
+[[redirects]]
+  from = "/leads"
+  to = "/dashboard"
+  status = 301
   force = true
 
 [[redirects]]
