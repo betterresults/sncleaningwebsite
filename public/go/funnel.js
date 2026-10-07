@@ -36,12 +36,12 @@
   /* ---------- where they came from ---------- */
   var params = new URLSearchParams(location.search);
   var touch = { at: new Date().toISOString(), landing: location.pathname, referrer: document.referrer || "" };
-  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid"].forEach(function (k) {
+  ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"].forEach(function (k) {
     var v = params.get(k); if (v) touch[k] = v.slice(0, 300);
   });
   // Within this visit (tab) we always keep it, so a reload doesn't lose the ad.
   var sessTouch = get("sessionStorage", "sn-touch");
-  if (!touch.utm_source && !touch.fbclid && sessTouch) { try { touch = JSON.parse(sessTouch); } catch (e) {} }
+  if (!touch.utm_source && !touch.fbclid && !touch.gclid && sessTouch) { try { touch = JSON.parse(sessTouch); } catch (e) {} }
   set("sessionStorage", "sn-touch", JSON.stringify(touch));
 
   function firstTouch() {
