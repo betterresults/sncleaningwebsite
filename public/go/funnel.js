@@ -168,7 +168,8 @@
         '<div class="field"><label for="pc">Postcode</label><input id="pc" name="postcode" autocomplete="postal-code" autocapitalize="characters" required value="' + esc(details.postcode) + '"></div>' +
         '<div class="hp" aria-hidden="true"><label>Website <input name="website" tabindex="-1" autocomplete="off"></label></div>' +
         '<p class="err" id="err" hidden></p>' +
-        '<button type="submit" class="btn btn-block">' + esc(s.button || "Next") + "</button></form>";
+        '<button type="submit" class="btn btn-block">' + esc(s.button || "Next") + "</button></form>" +
+        (s.helpTitle ? '<div class="help"><h3>' + esc(s.helpTitle) + "</h3>" + (s.helpText ? "<p>" + esc(s.helpText) + "</p>" : "") + ticks(s.helpTicks) + "</div>" : "");
     } else if (s.type === "whatsapp") {
       h = backBtn() + "<h2>" + esc(s.title) + "</h2><p class=\"lead\">" + esc(s.text) + "</p>" +
         '<a class="btn btn-block" data-wa href="https://wa.me/' + WA_NUMBER + "?text=" + encodeURIComponent(s.waText || "") + '" target="_blank" rel="noopener">' + esc(s.button) + "</a>";

@@ -93,54 +93,26 @@ window.FUNNEL = {
       title: "Where is your home?",
       text: "We only cover Essex and London, so our cleaners are always local to you.",
       options: [
-        { label: "Essex", sub: "Brentwood, Chelmsford, Billericay, Basildon, Romford, Southend-on-Sea and nearby", next: "had" },
-        { label: "Other Essex town", next: "had" },
-        { label: "London", next: "had" },
+        { label: "Essex", sub: "Brentwood, Chelmsford, Billericay, Basildon, Romford, Southend-on-Sea and nearby", next: "details" },
+        { label: "Other Essex town", next: "details" },
+        { label: "London", next: "details" },
         { label: "Somewhere else", next: "notcovered" }
       ]
     },
-    had: {
-      type: "single", name: "Had cleaner", key: "Had a cleaner before",
-      title: "Have you had a cleaner before?",
-      options: [
-        { label: "Yes, but it didn't work out", next: "missed" },
-        { label: "Yes, and I'm looking for better", next: "missed" },
-        { label: "No, this would be my first", next: "missed" }
-      ]
-    },
-    missed: {
-      type: "multi", name: "Missed areas", key: "Areas usually missed",
-      title: "Which areas usually get missed?",
-      text: "Tick all that apply.",
-      options: ["Under the sofa and cushions", "Under the rugs", "Behind and under small furniture", "Skirting boards", "Something else"],
-      next: "reassurance"
-    },
-    reassurance: {
-      type: "info", name: "Reassurance",
-      title: "That's exactly what we're there for",
-      text: "You can wipe the surfaces yourself. We're there for the parts you don't have time for.",
-      ticks: [
+    details: {
+      type: "details", name: "Your details",
+      title: "Who's the cleaning for?",
+      text: "Next, choose how you'd like to get your quote.",
+      button: "Next",
+      helpTitle: "That's how we help",
+      helpText: "You can wipe the surfaces yourself. We're there for the parts you don't have time for.",
+      helpTicks: [
         "We lift the cushions and clean under the sofa",
         "We move small furniture and clean under the rugs",
         "Our own trained cleaners, insured and DBS-checked",
         "We bring professional products and equipment",
         "Anything not right? We come back and re-clean it free"
       ],
-      next: "matters"
-    },
-    matters: {
-      type: "multi", name: "Matters most", key: "What matters most",
-      title: "What matters most to you?",
-      text: "Tick all that apply.",
-      options: ["Someone I can trust in my home", "A proper, thorough clean", "Reliable: turns up when booked", "Good communication", "DBS-checked and insured cleaners", "Professional cleaning products"],
-      next: "details"
-    },
-    details: {
-      type: "details", name: "Your details",
-      title: "Who's the cleaning for?",
-      text: "Next, choose how you'd like to get your quote.",
-      ticks: ["Our own insured, DBS-checked team", "Professional products and equipment, brought by us", "Free re-clean if anything is missed"],
-      button: "Next",
       next: "method"
     },
     method: {
