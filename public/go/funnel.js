@@ -26,6 +26,27 @@
     var p = String(v || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
     return p.length > 3 ? p.slice(0, -3) + " " + p.slice(-3) : p;
   }
+  /* Make sure the Meta browser ID (_fbp) exists before a lead is sent. The pixel
+     sets it a moment after loading; if it still isn't there, create it in Meta's
+     own format (the pixel then keeps using it). Only for visitors who accepted. */
+  function ensureFbp() {
+    return new Promise(function (resolve) {
+      if (consent() !== "accepted" || cookie("_fbp")) return resolve();
+      var waited = 0;
+      var t = setInterval(function () {
+        waited += 100;
+        if (cookie("_fbp") || waited >= 1500) {
+          clearInterval(t);
+          if (!cookie("_fbp")) {
+            var host = location.hostname.replace(/^www\./, "");
+            document.cookie = "_fbp=fb.1." + Date.now() + "." + Math.floor(1e9 + Math.random() * 9e9) +
+              "; path=/; max-age=7776000; SameSite=Lax" + (/sncleaningservices\.co\.uk$/.test(host) ? "; domain=.sncleaningservices.co.uk" : "");
+          }
+          resolve();
+        }
+      }, 100);
+    });
+  }
   function cookie(name) { var m = document.cookie.match(new RegExp("(?:^|; )" + name + "=([^;]*)")); return m ? decodeURIComponent(m[1]) : ""; }
   function consent() { return get("localStorage", CONSENT_KEY) || "unknown"; }
   function api(body) {
@@ -329,13 +350,17 @@
 
     clearTimeout(partialTimer);
     var isNew = !completed;
-    var eventId = isNew ? rid("lead-") : "";
-    var fired = isNew ? pixel("track", "Lead", { content_name: F.page }, eventId) : false;
 
-    send(payload("lead", d, { eventId: eventId, pixelFired: fired, website: f.website.value })).then(function (r) {
+    ensureFbp().then(function () {
+      return send(payload("lead", d, { pixelFired: isNew && pixelReady, website: f.website.value }));
+    }).then(function (r) {
       btn.disabled = false;
       if (r && r.ok) {
-        if (isNew) { completed = true; set("sessionStorage", "sn-done-" + F.page, "1"); netlifyForm("New lead"); }
+        if (isNew) {
+          // Event ID lead_<ref> matches our server event and Dilvon's, so Meta counts one Lead.
+          if (leadId) pixel("track", "Lead", { content_name: F.page }, "lead_" + leadId);
+          completed = true; set("sessionStorage", "sn-done-" + F.page, "1"); netlifyForm("New lead");
+        }
         go(F.screens[history[history.length - 1]].next);
       } else {
         err.textContent = (r && r.error) || "Sorry, something went wrong. Please try again, or message us on WhatsApp.";
