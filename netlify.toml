@@ -118,6 +118,12 @@
   force = true
 
 [[redirects]]
+  from = "/api/meta-leads"
+  to = "/.netlify/functions/meta-leads"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/api/funnel"
   to = "/.netlify/functions/funnel-api"
   status = 200
