@@ -62,6 +62,7 @@
   });
   // Within this visit (tab) we always keep it, so a reload doesn't lose the ad.
   var sessTouch = get("sessionStorage", "sn-touch");
+  var firstLoadInTab = !sessTouch; // count a visit once per visit, not on every reload
   if (!touch.utm_source && !touch.fbclid && !touch.gclid && !touch.campaign_id && sessTouch) { try { touch = JSON.parse(sessTouch); } catch (e) {} }
   set("sessionStorage", "sn-touch", JSON.stringify(touch));
 
@@ -99,6 +100,12 @@
     if (!pixelReady || !window.fbq) return false;
     window.fbq(kind, name, data || {}, eventId ? { eventID: eventId } : undefined);
     return true;
+  }
+
+  // Count the visit (where they came from only — no name, no IP, no cookies)
+  if (firstLoadInTab) {
+    api({ action: "visit", page: F.page, touch: { utm_source: touch.utm_source, utm_medium: touch.utm_medium, utm_campaign: touch.utm_campaign,
+      fbclid: touch.fbclid ? "1" : "", gclid: touch.gclid ? "1" : "", referrer: touch.referrer } }).catch(function () {});
   }
 
   fetch("/api/funnel?action=config&page=" + encodeURIComponent(F.page))
