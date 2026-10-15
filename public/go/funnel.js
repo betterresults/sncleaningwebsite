@@ -149,6 +149,8 @@
     if (details.phone) q.set("prefill_phone", details.phone);
     if (details.postcode) q.set("prefill_postcode", details.postcode);
     if (leadId) q.set("ref", leadId);
+    // Keep where they came from (e.g. a partner's link) all the way into the booking form
+    ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "fbclid", "gclid"].forEach(function (k) { if (touch[k]) q.set(k, touch[k]); });
     var qs = q.toString();
     return bookingBase.replace(/\/+$/, "") + "/" + service + (qs ? "?" + qs : "");
   }
