@@ -88,7 +88,7 @@ const JOBS = { [SOURCE_FORM]: "Cleaner", [REP_FORM]: "Door to door rep" };
 
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
-function shell(title, inner, refresh) {
+function shell(title, inner, refresh, bare) {
   return `<!DOCTYPE html><html lang="en-GB"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
@@ -182,7 +182,7 @@ input[type=password]{width:100%;font:inherit;font-size:16px;padding:11px 12px;bo
 button{width:100%;margin-top:12px;font-family:Archivo,sans-serif;font-size:16px;font-weight:600;padding:13px;border:0;border-radius:2px;background:var(--petrol);color:var(--ground);cursor:pointer}
 @media(prefers-color-scheme:dark){button{color:#0C1417}}
 .err{color:var(--bad);font-size:14px;margin:10px 0 0}
-</style></head><body><div class="wrap">${inner}</div>
+</style></head><body>${bare ? inner : `<div class="wrap">${inner}</div>`}
 <script>
 document.addEventListener("click",function(e){
   var del=e.target.closest("button[data-confirm]");
@@ -615,7 +615,7 @@ exports.handler = async (event) => {
     const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.length}</span></div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`) };
+      body: shell("Applicants", require("../../lib/admin-ui").layout("applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`), false, true) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
