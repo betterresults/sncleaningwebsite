@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Booking forms live on our subdomain (Dilvon custom domain). Dilvon's form
   // names match our service slugs except carpet and deep. Same rule in server.js.
   const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
-  const BOOK_LANDING = BOOK_BASE + 'main-landing-1790164444462';
+  const BOOK_LANDING = BOOK_BASE + 'main-landing';
   const DILVON_SLUG = { 'carpet-cleaning-services': 'carpet-cleaning', 'deep-house-cleaning': 'deep-cleaning' };
   window.snBookUrl = (slug) => (slug ? BOOK_BASE + (DILVON_SLUG[slug] || slug) : BOOK_LANDING);
 

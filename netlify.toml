@@ -89,19 +89,19 @@
 
 [[redirects]]
   from = "/book/*"
-  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing"
   status = 301
   force = true
 
 [[redirects]]
   from = "/book"
-  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing"
   status = 301
   force = true
 
 [[redirects]]
   from = "/book/"
-  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing-1790164444462"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing"
   status = 301
   force = true
 

@@ -84,7 +84,7 @@ app.locals.postUrl = postUrl;
 // has one (services.booking_embed_url), otherwise the service chooser at /book.
 const BOOK_SCRIPT = require('fs').readFileSync(require('path').join(__dirname, 'public/js/book.js'), 'utf8');
 app.locals.bookScript = BOOK_SCRIPT;
-const BOOKING_LANDING_EMBED = 'https://app.dilvon.com/book/sn-cleaning-services/main-landing-1790164444462?embedded=true';
+const BOOKING_LANDING_EMBED = 'https://app.dilvon.com/book/sn-cleaning-services/main-landing?embedded=true';
 // Commercial work lives on the SN Clean site. Office and nursery cleaning are
 // listed there, not here; the link is tagged so SN Clean can see the referral.
 const COMMERCIAL_SLUGS = ['office-cleaning', 'nursery-cleaning'];
@@ -104,7 +104,7 @@ app.locals.bookSlug = (service) => (!service ? null : (service.booking_embed_url
 // buttons link straight to them. Dilvon's form names match our service slugs,
 // except carpet (carpet-cleaning) and deep (deep-cleaning). Same rule in public/js/main.js.
 const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
-const BOOK_LANDING = BOOK_BASE + 'main-landing-1790164444462';
+const BOOK_LANDING = BOOK_BASE + 'main-landing';
 const DILVON_SLUG = { 'carpet-cleaning-services': 'carpet-cleaning', 'deep-house-cleaning': 'deep-cleaning' };
 app.locals.bookUrl = (slug) => (slug ? BOOK_BASE + (DILVON_SLUG[slug] || slug) : BOOK_LANDING);
 app.locals.bookHref = (service) => {
