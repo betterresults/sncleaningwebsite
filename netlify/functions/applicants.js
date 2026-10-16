@@ -39,6 +39,28 @@ function writePending(obj) {
   return PENDING + "=" + v + "; Path=/; Max-Age=1800; SameSite=Lax";
 }
 
+/* Archived applicants: a list of ids in Netlify Blobs. Reads can lag a few
+   seconds behind a write, so (like statuses) the last change is also kept in a
+   short-lived cookie and wins until the store catches up. */
+const ARCH_PENDING = "sn_arch_pending";
+function archStore(event) {
+  const { getStore, connectLambda } = require("@netlify/blobs");
+  if (event && event.blobs) connectLambda(event);
+  return getStore("applicants-archive");
+}
+async function readArchived(event) {
+  try { return (await archStore(event).get("ids", { type: "json" })) || {}; } catch (e) { console.error("archive read", e); return {}; }
+}
+function readArchPending(cookieHeader) {
+  const raw = (cookieHeader || "").split(";").map((c) => c.trim()).find((c) => c.indexOf(ARCH_PENDING + "=") === 0);
+  if (!raw) return {};
+  try { return JSON.parse(Buffer.from(decodeURIComponent(raw.slice(ARCH_PENDING.length + 1)), "base64").toString("utf8")) || {}; } catch (e) { return {}; }
+}
+function writeArchPending(obj) {
+  const v = encodeURIComponent(Buffer.from(JSON.stringify(obj), "utf8").toString("base64"));
+  return ARCH_PENDING + "=" + v + "; Path=/; Max-Age=300; SameSite=Lax";
+}
+
 function token(pw) {
   return crypto.createHash("sha256").update("sn-applicants:" + pw).digest("hex");
 }
@@ -124,6 +146,9 @@ td a{color:var(--petrol);text-decoration:none;white-space:nowrap}
 .mini{width:auto;margin:0;font-size:12px;font-weight:600;padding:6px 10px;background:transparent;color:var(--petrol);border:1px solid var(--line-strong);border-radius:2px;cursor:pointer}
 .mini:hover{background:var(--petrol-soft)}
 .mini.danger{color:var(--bad);margin-top:6px}
+.arch .mini{margin-top:6px}
+tr.row.archived td{opacity:.55}
+.arch-toggle{font-weight:600}
 .mini.danger:hover{background:var(--bad-soft)}
 .mini.armed{background:var(--bad);color:#fff;border-color:var(--bad)}
 .act form{margin:0}
@@ -216,7 +241,9 @@ document.addEventListener("click",function(e){
       else if(bucket==="50-75") okScore = sc!==null && sc>=50 && sc<=75;
       else if(bucket==="over75") okScore = sc!==null && sc>75;
       var okJob = !job || r.dataset.job===job;
-      var show = okStatus && okCar && okScore && okJob;
+      var fa=document.getElementById("f-arch");
+      var okArch = (fa && fa.checked) || r.dataset.arch!=="1";
+      var show = okStatus && okCar && okScore && okJob && okArch;
       r.style.display = show ? "" : "none";
       var d=document.getElementById(r.getAttribute("data-for"));
       if(d && !show) d.classList.remove("open");
@@ -226,6 +253,8 @@ document.addEventListener("click",function(e){
   fc.addEventListener("change",apply);
   fsc.addEventListener("change",apply);
   fj.addEventListener("change",apply);
+  var faEl=document.getElementById("f-arch"); if(faEl) faEl.addEventListener("change",apply);
+  apply();
   try{var saved=localStorage.getItem("sn-job-filter");if(saved){fj.value=saved;apply();}}catch(e){}
   fj.addEventListener("change",function(){try{localStorage.setItem("sn-job-filter",fj.value);}catch(e){}});
 })();
@@ -278,7 +307,7 @@ const STATUSES = [
 
 const SHORT = { monday: "Mon", tuesday: "Tue", wednesday: "Wed", thursday: "Thu", friday: "Fri", saturday: "Sat", sunday: "Sun" };
 
-function rows(app, scored, i, pending) {
+function rows(app, scored, i, pending, archived) {
   const d = app.data || {};
   const s = (scored && scored.data) || {};
   const isRep = app.__form === REP_FORM;
@@ -331,7 +360,8 @@ function rows(app, scored, i, pending) {
   const scoreMatch = /\d+/.exec(s.score || "");
   const scoreNum = scoreMatch ? scoreMatch[0] : "";
 
-  return `<tr class="row" data-for="${id}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}" data-score="${scoreNum}" data-job="${esc(job)}">
+  const isArch = !!(archived && archived[app.id]);
+  return `<tr class="row${isArch ? " archived" : ""}" data-for="${id}" data-arch="${isArch ? "1" : "0"}" data-action="${esc(action)}" data-car="${hasCar ? "1" : "0"}" data-score="${scoreNum}" data-job="${esc(job)}">
     <td><span class="nm">${esc(d.name || "Unnamed")}</span><span class="dt">${esc(when)}</span></td>
     <td><span class="job ${isRep ? "job-rep" : "job-clean"}">${esc(job)}</span></td>
     <td class="gen">${esc(d.gender === "Female" ? "F" : d.gender === "Male" ? "M" : d.gender ? "–" : "")}</td>
@@ -343,6 +373,7 @@ function rows(app, scored, i, pending) {
     <td class="sc">${esc(s.score || "")}</td>
     <td class="fit">${isRealVerdict ? `<span class="badge ${verdictClass(statusV)}">${esc(statusV)}</span>` : ""}${s.summary && isRealVerdict ? `<p class="note">${esc(s.summary)}</p>` : ""}${s.flags && s.flags !== "None" && isRealVerdict ? `<p class="note ask"><strong>Ask:</strong> ${esc(s.flags)}</p>` : ""}</td>
     <td class="act">${isRep ? "" : `<form method="POST"><input type="hidden" name="resend" value="${esc(app.id)}"><button class="mini" type="submit" title="Re-run scoring">&#8635; Re-run</button></form>`}
+      <form method="POST" class="arch"><input type="hidden" name="${isArch ? "unarchive" : "archive"}" value="${esc(app.id)}"><button class="mini" type="submit">${isArch ? "&#8617; Unarchive" : "&#128451; Archive"}</button></form>
       <form method="POST" class="del"><input type="hidden" name="delete" value="${esc(app.id)}"><input type="hidden" name="who" value="${esc(d.name || "")}"><button class="mini danger" type="submit" data-confirm="1" title="Delete">&#128465; Delete</button></form></td>
     <td class="action-col"><form method="POST"><input type="hidden" name="set-action" value="${esc(app.id)}"><select name="action" class="act-select ${actClass}" onchange="this.form.submit()">${actionOpts}</select></form></td>
   </tr>
@@ -468,6 +499,20 @@ exports.handler = async (event) => {
       return { statusCode: 302, headers: { location: "/applicants?deleted=1" }, body: "" };
     }
 
+    if (authed && (params.get("archive") || params.get("unarchive"))) {
+      const id = params.get("archive") || params.get("unarchive");
+      const on = !!params.get("archive");
+      try {
+        const store = archStore(event);
+        const ids = (await store.get("ids", { type: "json" })) || {};
+        if (on) ids[id] = new Date().toISOString(); else delete ids[id];
+        await store.setJSON("ids", ids);
+      } catch (err) { console.error("Archive failed", err); }
+      const ap = readArchPending(cookies);
+      ap[id] = on;
+      return { statusCode: 302, headers: { location: "/applicants", "set-cookie": writeArchPending(ap) }, body: "" };
+    }
+
     if (authed && params.get("set-action")) {
       const key2 = process.env.NETLIFY_API_TOKEN;
       const appId = params.get("set-action");
@@ -568,6 +613,8 @@ exports.handler = async (event) => {
     ]);
 
     const pending = readPending(cookies);
+    const archived = await readArchived(event);
+    Object.entries(readArchPending(cookies)).forEach(([k, v]) => { if (v) archived[k] = archived[k] || true; else delete archived[k]; });
 
     const byName = {};
     scores.forEach((s) => {
@@ -586,7 +633,7 @@ exports.handler = async (event) => {
             <th>Name</th><th>Job</th><th>F/M</th><th>Phone</th><th>Postcode / town</th><th>Days available</th>
             <th>Car?</th><th>Areas covered</th><th>Score</th><th>Fit &amp; notes</th><th></th><th>Status</th>
           </tr></thead>
-          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i, pending)).join("")}</tbody>
+          <tbody>${list.map((a, i) => rows(a, byName[(((a.data || {}).name) || "").trim().toLowerCase()], i, pending, archived)).join("")}</tbody>
         </table></div>
         <p class="hint">Click any row to open that person's full answers. The page stays still until you press Refresh.</p>`
       : `<div class="empty">No applications yet. They will appear here the moment someone submits the form.</div>`;
@@ -609,10 +656,11 @@ exports.handler = async (event) => {
         <option value="over75">Over 75</option>
       </select></label>
       <label><input type="checkbox" id="f-car"> Has a car</label>
+      <label class="arch-toggle"><input type="checkbox" id="f-arch"> Show archived (${list.filter((a) => archived[a.id]).length})</label>
       <button type="button" class="mini" onclick="location.href='/applicants'">&#8635; Refresh</button>
     </div>`;
 
-    const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.length}</span></div>`;
+    const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.filter((a) => !archived[a.id]).length}</span></div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
       body: shell("Applicants", require("../../lib/admin-ui").layout("applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`), false, true) };
