@@ -63,6 +63,10 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
 .res p{margin:0;font-size:15px}.res.next p{color:var(--text)}
 .calc .btn{margin-top:18px;background:var(--gold);color:var(--navy);box-shadow:none}
 .calc .btn:hover{background:#ffd26a}
+.how{background:rgba(255,255,255,.06);border-radius:14px;padding:14px 16px;margin-top:14px;font-size:14px;color:#cfdbe6}
+.how b{color:#fff}.how ul{margin:6px 0 0;padding-left:18px}.how li{margin:3px 0}
+.or{display:flex;align-items:center;gap:12px;color:var(--mut);font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.08em}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
 .fine{font-size:12.5px;color:#93a7b8;margin:14px 0 0}
 /* steps / lists */
 .steps{display:grid;gap:12px;counter-reset:s}
@@ -150,8 +154,8 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
           <option>Estate or letting agent</option><option>Shop or café</option><option>Office or other business</option>
         </select></div>
 
-      <div class="q"><label for="c-week">How many customers could you send us each week?</label>
-        <div class="rangebox"><input type="range" id="c-week" min="1" max="10" step="1" value="2"><output id="o-week">2</output></div></div>
+      <div class="q"><label for="c-week">How many customers could you send us each month?</label>
+        <div class="rangebox"><input type="range" id="c-week" min="1" max="20" step="1" value="4"><output id="o-week">4</output></div></div>
 
       <div class="q"><span class="ql" id="mixl">What cleaning would they mostly need?</span>
         <div class="seg" role="radiogroup" aria-labelledby="mixl">
@@ -167,8 +171,9 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
         <div class="res missed"><small>What you could have earned so far</small><div class="big" id="r-missed">£0</div><p id="r-missed-t"></p></div>
         <div class="res next"><small>Let's change that. Your next 6 months</small><div class="big" id="r-next">£0</div><p id="r-next-t"></p></div>
       </div>
+      <div class="how" id="r-how"></div>
       <a class="btn" href="#apply">Let's be partners</a>
-      <p class="fine">These are estimates based on your answers, using our real rates: 10% of an average £400 one off clean, and a weekly 4 hour regular clean at £23 an hour. Milestone bonuses are included. Commission is only paid on completed, paid bookings.</p>
+      <p class="fine">These are estimates based on your answers. Commission is only paid on completed, paid bookings.</p>
     </div>
   </div>
 </section>
@@ -179,7 +184,7 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
     <p>Nothing changes in how you work. You just mention us.</p>
     <div class="steps">
       <div class="step card"><div class="n">1</div><div><h3>You mention us</h3><p style="margin:0">Tell your customers about SN Cleaning Services when cleaning comes up.</p></div></div>
-      <div class="step card"><div class="n">2</div><div><h3>They book with us</h3><p style="margin:0">They get their free hour of cleaning, as a gift from you.</p></div></div>
+      <div class="step card"><div class="n">2</div><div><h3>They book with us</h3><p style="margin:0">They get a free gift from you with their booking.</p></div></div>
       <div class="step card"><div class="n">3</div><div><h3>You get paid</h3><p style="margin:0">Once the job is completed and paid, you get your commission.</p></div></div>
     </div>
   </div>
@@ -187,10 +192,13 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
 
 <section style="padding-top:0">
   <div class="wrap">
-    <h2>What your customers get, as gifts from you</h2>
+    <h2>What your customers get, as a gift from you</h2>
+    <p>Each new customer gets one of these.</p>
     <div class="gifts">
       <div class="gift card"><div class="ic">🎁</div><div><h3>One hour of cleaning free</h3><p style="margin:0">For new customers.</p></div></div>
+      <div class="or">or</div>
       <div class="gift card"><div class="ic">✨</div><div><h3>A free single oven clean</h3><p style="margin:0">With a one off cleaning booking of £200 or more.</p></div></div>
+      <div class="or">or</div>
       <div class="gift card"><div class="ic">🛏️</div><div><h3>One bedroom carpet cleaned free</h3><p style="margin:0">When they book a carpet cleaning service.</p></div></div>
     </div>
   </div>
@@ -201,7 +209,7 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
     <h2>What you earn</h2>
     <div class="earn">
       <div class="card"><h3>One off cleaning</h3><div class="pct">10%</div><p style="margin:6px 0 0">of each completed, paid booking. Deep cleans, end of tenancy, after builders and carpet cleaning.</p></div>
-      <div class="card"><h3>Regular cleaning</h3><div class="pct2">10% months 1 to 3<br>5% months 4 to 6</div><p style="margin:6px 0 0">Home, Airbnb and office cleaning, typically £23 to £27 per hour.</p></div>
+      <div class="card"><h3>Regular cleaning</h3><div class="pct2">10% months 1 to 3<br>5% months 4 to 6</div></div>
     </div>
     <div class="ex">
       <div class="card"><div><strong>5 one off bookings</strong><br><span style="font-size:14px;color:var(--mut)">5 × £400 = £2,000 in sales. £200 commission plus a £50 bonus.</span></div><div class="amt">£250</div></div>
@@ -317,21 +325,29 @@ input[type=range]{flex:1;accent-color:var(--gold);height:30px}
   }
   var lastEst = "";
   function calc() {
-    var perWeek = +$("c-week").value, years = +$("c-years").value;
+    var perMonth = +$("c-week").value, years = +$("c-years").value;
     var mix = +(document.querySelector("input[name=mix]:checked") || { value: 0.5 }).value;
-    $("o-week").textContent = perWeek; $("o-years").textContent = years;
+    $("o-week").textContent = perMonth; $("o-years").textContent = years;
     var avg = (1 - mix) * ONE_OFF + mix * REG_FULL;
-    var pastCustomers = perWeek * 52 * years;
-    var missed = pastCustomers * avg + bonus(pastCustomers);
-    var next = 0;
+    var pastCustomers = perMonth * 12 * years;
+    var pastBonus = bonus(pastCustomers);
+    var missed = pastCustomers * avg + pastBonus;
+    var perWeek = perMonth * 12 / 52, next = 0;
     for (var w = 1; w <= 26; w++) next += perWeek * ((1 - mix) * ONE_OFF + mix * regInWindow(w));
-    var nextCustomers = perWeek * 26;
-    next += bonus(nextCustomers);
+    var nextCustomers = perMonth * 6, nextBonus = bonus(nextCustomers);
+    next += nextBonus;
     $("r-missed").textContent = gbp(missed);
-    $("r-missed-t").textContent = "About " + pastCustomers.toLocaleString("en-GB") + " customers over " + years + (years === 1 ? " year" : " years") + " that could have paid you.";
+    $("r-missed-t").textContent = pastCustomers.toLocaleString("en-GB") + " customers over " + years + (years === 1 ? " year" : " years") + " that could have paid you.";
     $("r-next").textContent = gbp(next);
     $("r-next-t").textContent = "That's about " + gbp(next / 6) + " a month from " + nextCustomers + " customers, including your milestone bonuses.";
-    lastEst = $("c-type").value + " · " + perWeek + " customers a week · " + (mix < 0.4 ? "mostly one off" : mix > 0.6 ? "mostly regular" : "a mix") + " · " + years + " years in business · missed so far " + gbp(missed) + " · next 6 months " + gbp(next);
+    var oneP = Math.round((1 - mix) * 100), regP = 100 - oneP;
+    $("r-how").innerHTML = "<b>How we worked this out</b><ul>" +
+      "<li>" + perMonth + " customers a month × 12 months × " + years + (years === 1 ? " year" : " years") + " = " + pastCustomers.toLocaleString("en-GB") + " customers.</li>" +
+      "<li>" + oneP + "% one off cleans: you earn 10% of an average £400 clean, so £40 each.</li>" +
+      "<li>" + regP + "% regular cleans: a weekly 4 hour clean at £23 an hour earns you 10% for 3 months, then 5% for 3 months, so £179.40 each.</li>" +
+      "<li>Milestone bonuses on top: " + gbp(pastBonus) + " so far, " + gbp(nextBonus) + " in the next 6 months.</li>" +
+      "<li>For the next 6 months we only count the cleans that happen inside those 6 months.</li></ul>";
+    lastEst = $("c-type").value + " · " + perMonth + " customers a month · " + (mix < 0.4 ? "mostly one off" : mix > 0.6 ? "mostly regular" : "a mix") + " · " + years + " years in business · missed so far " + gbp(missed) + " · next 6 months " + gbp(next);
   }
   ["c-week", "c-years", "c-type"].forEach(function (id) { $(id).addEventListener("input", calc); });
   document.querySelectorAll("input[name=mix]").forEach(function (r) { r.addEventListener("change", calc); });
