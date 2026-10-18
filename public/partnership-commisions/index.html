@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Partner Programme | SN Cleaning Services</title>
+<meta name="description" content="Recommend SN Cleaning Services and get commission on every paid booking. Your customers get a free hour of cleaning from you.">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Your customers can bring you income, not only when they use your services.">
+<meta property="og:description" content="Recommend SN Cleaning Services and get commission on every paid booking. Your customers get a free hour of cleaning from you.">
+<meta property="og:image" content="https://sncleaningservices.co.uk/images/og-image.jpg">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+<style>
+:root{--g:#1f6b66;--g2:#17534f;--gs:#e7f1f0;--navy:#13263a;--ink:#1d2926;--text:#46534f;--mut:#6b7a76;--line:#dfe6e4;--bg:#f6f9f8;--star:#f5b301;--gold:#f2c14e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+img{max-width:100%;display:block}
+a{color:var(--g)}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:60px;font-weight:700;color:var(--ink)}
+.top img{width:32px;height:32px}
+h1,h2,h3{color:var(--ink);letter-spacing:-.015em}
+h1{font-size:clamp(30px,7.4vw,48px);line-height:1.1;margin:0 0 14px}
+h2{font-size:clamp(24px,5.6vw,32px);line-height:1.2;margin:0 0 12px}
+h3{font-size:18px;margin:0 0 4px}
+p{margin:0 0 14px}
+section{padding:44px 0}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:14px;background:var(--g);color:#fff;font:700 18px Inter,system-ui,sans-serif;padding:17px 22px;text-decoration:none;cursor:pointer;box-shadow:0 6px 18px rgba(31,107,102,.25);transition:background .15s,transform .1s}
+.btn:hover{background:var(--g2)}.btn:active{transform:translateY(1px)}
+@media(min-width:640px){.btn{width:auto;display:inline-flex;padding:17px 34px}}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g);background:var(--gs);padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.hero{background:linear-gradient(180deg,#fff 0%,var(--bg) 100%);padding:34px 0 30px}
+.hero .lead{font-size:18px;color:var(--text)}
+.proof{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:14px;color:var(--mut)}
+.proof b{color:var(--star)}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}
+/* calculator */
+.calc{background:var(--navy);color:#dbe6ef;border-radius:22px;padding:22px 18px;margin-top:6px}
+.calc h2{color:#fff}.calc p{color:#b9c9d6}
+.q{margin:22px 0 0}.q label,.q .ql{display:block;font-weight:700;color:#fff;margin-bottom:10px;font-size:16px}
+.q select{width:100%;font:inherit;font-size:16px;padding:13px 12px;border-radius:12px;border:0;background:#fff;color:var(--ink)}
+.rangebox{display:flex;align-items:center;gap:14px}
+.rangebox output{min-width:64px;text-align:center;font-weight:800;font-size:22px;color:#fff;background:rgba(255,255,255,.1);border-radius:10px;padding:6px 8px}
+input[type=range]{flex:1;accent-color:var(--gold);height:30px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:block;text-align:center;padding:12px 6px;border-radius:12px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.15);font-weight:600;font-size:14px;cursor:pointer;color:#e6eef5}
+.seg input:checked+span{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.seg input:focus-visible+span{outline:2px solid #fff;outline-offset:2px}
+.results{display:grid;gap:12px;margin-top:24px}
+.res{border-radius:16px;padding:18px}
+.res.missed{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14)}
+.res.next{background:#fff;color:var(--text)}
+.res small{display:block;font-size:13px;font-weight:700;letter-spacing:.05em;text-transform:uppercase}
+.res.missed small{color:#f3b4a6}.res.next small{color:var(--g)}
+.res .big{font-size:clamp(38px,11vw,54px);font-weight:800;line-height:1.1;letter-spacing:-.02em;margin:4px 0}
+.res.missed .big{color:#fff}.res.next .big{color:var(--ink)}
+.res p{margin:0;font-size:15px}.res.next p{color:var(--text)}
+.calc .btn{margin-top:18px;background:var(--gold);color:var(--navy);box-shadow:none}
+.calc .btn:hover{background:#ffd26a}
+.fine{font-size:12.5px;color:#93a7b8;margin:14px 0 0}
+/* steps / lists */
+.steps{display:grid;gap:12px;counter-reset:s}
+.step{display:flex;gap:14px;align-items:flex-start}
+.step .n{flex:none;width:38px;height:38px;border-radius:12px;background:var(--g);color:#fff;font-weight:800;display:grid;place-items:center}
+.gifts{display:grid;gap:12px}
+.gift{display:flex;gap:14px;align-items:flex-start}
+.gift .ic{flex:none;width:44px;height:44px;border-radius:12px;background:var(--gs);display:grid;place-items:center;font-size:22px}
+.earn{display:grid;gap:12px}@media(min-width:640px){.earn{grid-template-columns:1fr 1fr}}
+.earn .card{background:var(--navy);border:0;color:#cfdbe6}
+.earn h3{color:#fff;font-size:15px;text-transform:uppercase;letter-spacing:.05em}
+.pct{font-size:44px;font-weight:800;color:#fff;line-height:1.1}
+.pct2{font-size:26px;font-weight:800;color:#fff;line-height:1.35}
+.ex{display:grid;gap:10px;margin-top:14px}
+.ex .card{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.ex .amt{font-size:24px;font-weight:800;color:var(--g);white-space:nowrap}
+.miles{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(min-width:640px){.miles{grid-template-columns:repeat(4,1fr)}}
+.mile{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;text-align:center}
+.mile b{display:block;font-size:28px;color:var(--ink)}
+.mile span{font-size:13px;color:var(--mut)}
+.reviews{display:grid;gap:12px}
+.review .stars{color:var(--star);letter-spacing:2px;font-size:18px}
+.review q{display:block;color:var(--ink);margin:6px 0;quotes:"\201C" "\201D"}
+.review .who{font-size:14px;color:var(--mut)}
+.trust{display:grid;gap:10px;list-style:none;padding:0;margin:0}
+.trust li{display:flex;gap:10px;align-items:flex-start}
+.trust li::before{content:"✓";flex:none;width:24px;height:24px;border-radius:50%;background:var(--gs);color:var(--g);font-weight:800;display:grid;place-items:center;font-size:14px;margin-top:1px}
+.terms{font-size:14px;color:var(--mut);padding-left:18px;margin:0}
+.terms li{margin-bottom:6px}
+/* form */
+.formcard{background:#fff;border:1px solid var(--line);border-radius:22px;padding:22px 18px;box-shadow:0 10px 30px rgba(19,38,58,.06)}
+.f label{display:block;font-weight:600;color:var(--ink);margin:14px 0 6px;font-size:15px}
+.f input,.f select,.f textarea{width:100%;font:inherit;font-size:16px;padding:13px 12px;border:1.5px solid #cfd8d5;border-radius:12px;background:#fff;color:var(--ink)}
+.f input:focus,.f select:focus,.f textarea:focus{outline:none;border-color:var(--g);box-shadow:0 0 0 3px var(--gs)}
+.f textarea{min-height:90px;resize:vertical}
+.choice{display:grid;gap:8px}
+.choice.two{grid-template-columns:1fr 1fr}.choice.three{grid-template-columns:repeat(3,1fr)}
+.choice input{position:absolute;opacity:0;width:1px;height:1px}
+.choice span{display:block;text-align:center;padding:13px 8px;border-radius:12px;border:1.5px solid #cfd8d5;font-weight:600;font-size:15px;cursor:pointer;color:var(--ink);background:#fff}
+.choice input:checked+span{background:var(--g);border-color:var(--g);color:#fff}
+.choice input:focus-visible+span{outline:2px solid var(--g);outline-offset:2px}
+.days{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.days span{padding:11px 0;font-size:14px}
+.f .btn{margin-top:22px;width:100%}
+.err{color:#a62626;font-weight:600;font-size:14px;margin-top:10px}
+.thanks{text-align:center;padding:10px 0}
+.thanks .tick{width:64px;height:64px;border-radius:50%;background:var(--gs);color:var(--g);display:grid;place-items:center;font-size:32px;margin:0 auto 14px}
+.stick{position:sticky;bottom:0;z-index:5;background:rgba(246,249,248,.96);border-top:1px solid var(--line);padding:10px 18px calc(10px + env(safe-area-inset-bottom));display:none}
+.stick.show{display:block}
+@media(min-width:900px){.stick{display:none!important}}
+.foot{text-align:center;font-size:13px;color:var(--mut);padding:26px 0 40px}
+</style>
+</head>
+<body>
+
+<header class="top"><div class="wrap"><img src="/images/logo-mark-84.webp" alt="" width="32" height="32">SN Cleaning Services</div></header>
+
+<!-- Lets Netlify Forms know this form exists, so each application also arrives by email -->
+<form name="partner-application" data-netlify="true" hidden>
+  <input name="name"><input name="business"><input name="business_type"><input name="email"><input name="phone">
+  <input name="contact_by"><input name="best_days"><input name="best_time"><input name="address">
+  <textarea name="message"></textarea><textarea name="estimate"></textarea>
+</form>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Partner programme</span>
+    <h1>Your customers can bring you income, not only when they use your services.</h1>
+    <p class="lead">Recommend SN Cleaning Services and get commission on every paid booking. Your customers get a free hour of cleaning from you.</p>
+    <a class="btn" href="#apply">Let's be partners</a>
+    <div class="proof"><span><b>★★★★★</b> 5.0 on Google</span><span>12 years in London and Essex</span><span>Nothing changes in how you work</span></div>
+  </div>
+</section>
+
+<section style="padding-top:8px">
+  <div class="wrap">
+    <div class="calc" id="calc">
+      <h2>How much have you missed so far?</h2>
+      <p>A lot of your customers need cleaning. When they find a cleaner, your business gets nothing. Answer four quick questions and see what that has cost you.</p>
+
+      <div class="q"><label for="c-type">What type of business do you run?</label>
+        <select id="c-type">
+          <option>Hair or beauty salon</option><option>Barber</option><option>Gym or fitness studio</option>
+          <option>Estate or letting agent</option><option>Shop or café</option><option>Office or other business</option>
+        </select></div>
+
+      <div class="q"><label for="c-week">How many customers could you send us each week?</label>
+        <div class="rangebox"><input type="range" id="c-week" min="1" max="10" step="1" value="2"><output id="o-week">2</output></div></div>
+
+      <div class="q"><span class="ql" id="mixl">What cleaning would they mostly need?</span>
+        <div class="seg" role="radiogroup" aria-labelledby="mixl">
+          <label><input type="radio" name="mix" value="0.2"><span>One off cleans</span></label>
+          <label><input type="radio" name="mix" value="0.5" checked><span>A mix</span></label>
+          <label><input type="radio" name="mix" value="0.8"><span>Regular cleans</span></label>
+        </div></div>
+
+      <div class="q"><label for="c-years">How many years have you been in business?</label>
+        <div class="rangebox"><input type="range" id="c-years" min="1" max="30" step="1" value="5"><output id="o-years">5</output></div></div>
+
+      <div class="results" aria-live="polite">
+        <div class="res missed"><small>What you could have earned so far</small><div class="big" id="r-missed">£0</div><p id="r-missed-t"></p></div>
+        <div class="res next"><small>Let's change that. Your next 6 months</small><div class="big" id="r-next">£0</div><p id="r-next-t"></p></div>
+      </div>
+      <a class="btn" href="#apply">Let's be partners</a>
+      <p class="fine">These are estimates based on your answers, using our real rates: 10% of an average £400 one off clean, and a weekly 4 hour regular clean at £23 an hour. Milestone bonuses are included. Commission is only paid on completed, paid bookings.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>How it works</h2>
+    <p>Nothing changes in how you work. You just mention us.</p>
+    <div class="steps">
+      <div class="step card"><div class="n">1</div><div><h3>You mention us</h3><p style="margin:0">Tell your customers about SN Cleaning Services when cleaning comes up.</p></div></div>
+      <div class="step card"><div class="n">2</div><div><h3>They book with us</h3><p style="margin:0">They get their free hour of cleaning, as a gift from you.</p></div></div>
+      <div class="step card"><div class="n">3</div><div><h3>You get paid</h3><p style="margin:0">Once the job is completed and paid, you get your commission.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>What your customers get, as gifts from you</h2>
+    <div class="gifts">
+      <div class="gift card"><div class="ic">🎁</div><div><h3>One hour of cleaning free</h3><p style="margin:0">For new customers.</p></div></div>
+      <div class="gift card"><div class="ic">✨</div><div><h3>A free single oven clean</h3><p style="margin:0">With a one off cleaning booking of £200 or more.</p></div></div>
+      <div class="gift card"><div class="ic">🛏️</div><div><h3>One bedroom carpet cleaned free</h3><p style="margin:0">When they book a carpet cleaning service.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>What you earn</h2>
+    <div class="earn">
+      <div class="card"><h3>One off cleaning</h3><div class="pct">10%</div><p style="margin:6px 0 0">of each completed, paid booking. Deep cleans, end of tenancy, after builders and carpet cleaning.</p></div>
+      <div class="card"><h3>Regular cleaning</h3><div class="pct2">10% months 1 to 3<br>5% months 4 to 6</div><p style="margin:6px 0 0">Home, Airbnb and office cleaning, typically £23 to £27 per hour.</p></div>
+    </div>
+    <div class="ex">
+      <div class="card"><div><strong>5 one off bookings</strong><br><span style="font-size:14px;color:var(--mut)">5 × £400 = £2,000 in sales. £200 commission plus a £50 bonus.</span></div><div class="amt">£250</div></div>
+      <div class="card"><div><strong>Weekly home clean</strong><br><span style="font-size:14px;color:var(--mut)">4 hours a week at £23 an hour, over six months.</span></div><div class="amt">£179.40</div></div>
+      <div class="card"><div><strong>Weekly office clean</strong><br><span style="font-size:14px;color:var(--mut)">8 hours a week at £23 an hour, over six months.</span></div><div class="amt">£358.80</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--mut);margin-top:10px">Examples assume 13 weekly cleans in each three month period.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Milestone bonuses, on top of commission</h2>
+    <div class="miles">
+      <div class="mile"><span>5 customers</span><b>£50</b><span>£1,000 paid sales</span></div>
+      <div class="mile"><span>10 customers</span><b>£100</b><span>£2,000 paid sales</span></div>
+      <div class="mile"><span>20 customers</span><b>£150</b><span>£4,000 paid sales</span></div>
+      <div class="mile"><span>50 customers</span><b>£300</b><span>£10,000 paid sales</span></div>
+    </div>
+    <p style="font-size:14px;margin-top:12px">Both the number of customers and the paid sales total must be reached. For example, if 10 customers have only spent £1,600, the £100 bonus is paid once their sales reach £2,000. Further rewards can be agreed beyond 50 customers.</p>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2>Why your customers will be happy</h2>
+    <div class="reviews">
+      <div class="review card"><div class="stars" aria-label="5 stars">★★★★★</div><q>They arrived right on time; the service was excellent, thorough and efficient.</q><div class="who">Qingzi J. · Google review</div></div>
+      <div class="review card"><div class="stars" aria-label="5 stars">★★★★★</div><q>Cleaning service is reliable and efficient… Receive weekly confirmation by text of next cleaning date.</q><div class="who">Sally W. · Google review</div></div>
+      <div class="review card"><div class="stars" aria-label="5 stars">★★★★★</div><q>Punctual and did an excellent job… She’s also consistently good which is why I ask for specifically!</q><div class="who">Lovanya · Google review</div></div>
+    </div>
+    <ul class="trust" style="margin-top:18px">
+      <li>Five stars on Google.</li>
+      <li>12 years cleaning homes in London and Essex.</li>
+      <li>Professional products and tools, for people who want the job done properly.</li>
+      <li>Members of local business networking groups, where quality matters because members recommend each other.</li>
+    </ul>
+  </div>
+</section>
+
+<section id="apply" style="padding-top:10px">
+  <div class="wrap">
+    <div class="formcard">
+      <div id="formbox">
+        <h2>Ready to start getting paid for your recommendations?</h2>
+        <p>Leave your details and tell us how you'd like to talk. We can come to see you, or give you a call.</p>
+        <form class="f" id="pform" novalidate>
+          <label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required>
+          <label for="f-biz">Business name</label><input id="f-biz" name="business" autocomplete="organization" required>
+          <label for="f-type">Type of business</label>
+          <select id="f-type" name="business_type"><option>Hair or beauty salon</option><option>Barber</option><option>Gym or fitness studio</option><option>Estate or letting agent</option><option>Shop or café</option><option>Office or other business</option></select>
+          <label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+          <label for="f-phone">Phone</label><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+
+          <label id="cbl">How would you like to talk?</label>
+          <div class="choice two" role="radiogroup" aria-labelledby="cbl">
+            <label><input type="radio" name="contact_by" value="Visit at my business" checked><span>Visit me</span></label>
+            <label><input type="radio" name="contact_by" value="Phone call"><span>Call me</span></label>
+          </div>
+          <div id="addrbox"><label for="f-addr">Business address or postcode</label><input id="f-addr" name="address" autocomplete="street-address"></div>
+
+          <label id="dl">Best days</label>
+          <div class="choice days" role="group" aria-labelledby="dl">
+            <label><input type="checkbox" name="best_days" value="Mon"><span>Mon</span></label><label><input type="checkbox" name="best_days" value="Tue"><span>Tue</span></label><label><input type="checkbox" name="best_days" value="Wed"><span>Wed</span></label>
+            <label><input type="checkbox" name="best_days" value="Thu"><span>Thu</span></label><label><input type="checkbox" name="best_days" value="Fri"><span>Fri</span></label><label><input type="checkbox" name="best_days" value="Sat"><span>Sat</span></label>
+          </div>
+          <label id="tl">Best time</label>
+          <div class="choice three" role="radiogroup" aria-labelledby="tl">
+            <label><input type="radio" name="best_time" value="Morning" checked><span>Morning</span></label>
+            <label><input type="radio" name="best_time" value="Afternoon"><span>Afternoon</span></label>
+            <label><input type="radio" name="best_time" value="Evening"><span>Evening</span></label>
+          </div>
+          <label for="f-msg">Message (optional)</label><textarea id="f-msg" name="message" placeholder="Anything you'd like us to know"></textarea>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+          <button class="btn" type="submit">Let's be partners</button>
+          <p class="err" id="ferr" hidden></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <h2 style="font-size:20px">Terms</h2>
+    <ul class="terms">
+      <li>Only completed, paid services count. Refunded or cancelled services do not.</li>
+      <li>Milestones combine unique new customers from one off and regular bookings.</li>
+      <li>Regular cleaning counts for the first six months of each referral.</li>
+      <li>Customer offers are for new customers and subject to booking eligibility.</li>
+      <li>Free services cannot be exchanged for cash. Offer availability is confirmed when booking.</li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<div class="stick" id="stick"><a class="btn" href="#apply">Let's be partners</a></div>
+<p class="foot">SN Cleaning Services · <a href="/privacy-policy/">Privacy</a></p>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var gbp = function (n) { return "£" + Math.round(n).toLocaleString("en-GB"); };
+  var ONE_OFF = 40;                 // 10% of an average £400 one off clean
+  var WEEK_VALUE = 92;              // 4 hours a week at £23
+  var REG_FULL = WEEK_VALUE * 13 * 0.10 + WEEK_VALUE * 13 * 0.05; // £179.40 over six months
+  function bonus(customers) { return (customers >= 5 ? 50 : 0) + (customers >= 10 ? 100 : 0) + (customers >= 20 ? 150 : 0) + (customers >= 50 ? 300 : 0); }
+  // Regular customer gained in week w (1..26) of the next six months: only count weeks that fall inside the six months
+  function regInWindow(w) {
+    var weeks = 26 - w + 1, t = 0;
+    for (var i = 1; i <= weeks; i++) t += WEEK_VALUE * (i <= 13 ? 0.10 : 0.05);
+    return t;
+  }
+  var lastEst = "";
+  function calc() {
+    var perWeek = +$("c-week").value, years = +$("c-years").value;
+    var mix = +(document.querySelector("input[name=mix]:checked") || { value: 0.5 }).value;
+    $("o-week").textContent = perWeek; $("o-years").textContent = years;
+    var avg = (1 - mix) * ONE_OFF + mix * REG_FULL;
+    var pastCustomers = perWeek * 52 * years;
+    var missed = pastCustomers * avg + bonus(pastCustomers);
+    var next = 0;
+    for (var w = 1; w <= 26; w++) next += perWeek * ((1 - mix) * ONE_OFF + mix * regInWindow(w));
+    var nextCustomers = perWeek * 26;
+    next += bonus(nextCustomers);
+    $("r-missed").textContent = gbp(missed);
+    $("r-missed-t").textContent = "About " + pastCustomers.toLocaleString("en-GB") + " customers over " + years + (years === 1 ? " year" : " years") + " that could have paid you.";
+    $("r-next").textContent = gbp(next);
+    $("r-next-t").textContent = "That's about " + gbp(next / 6) + " a month from " + nextCustomers + " customers, including your milestone bonuses.";
+    lastEst = $("c-type").value + " · " + perWeek + " customers a week · " + (mix < 0.4 ? "mostly one off" : mix > 0.6 ? "mostly regular" : "a mix") + " · " + years + " years in business · missed so far " + gbp(missed) + " · next 6 months " + gbp(next);
+  }
+  ["c-week", "c-years", "c-type"].forEach(function (id) { $(id).addEventListener("input", calc); });
+  document.querySelectorAll("input[name=mix]").forEach(function (r) { r.addEventListener("change", calc); });
+  $("c-type").addEventListener("change", function () { $("f-type").value = $("c-type").value; });
+  calc();
+
+  // address only needed for a visit
+  function addr() { $("addrbox").hidden = !document.querySelector("input[name=contact_by][value^=Visit]").checked; }
+  document.querySelectorAll("input[name=contact_by]").forEach(function (r) { r.addEventListener("change", addr); }); addr();
+
+  // sticky button on phones, hidden once the form is on screen
+  var stick = $("stick"), apply = $("apply");
+  window.addEventListener("scroll", function () {
+    var r = apply.getBoundingClientRect();
+    stick.classList.toggle("show", window.scrollY > 500 && r.top > window.innerHeight);
+  }, { passive: true });
+
+  $("pform").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var f = e.target, err = $("ferr");
+    var d = {
+      name: f.name.value.trim(), business: f.business.value.trim(), business_type: f.business_type.value,
+      email: f.email.value.trim(), phone: f.phone.value.trim(),
+      contact_by: (f.querySelector("input[name=contact_by]:checked") || {}).value || "",
+      address: f.address.value.trim(),
+      best_days: [].map.call(f.querySelectorAll("input[name=best_days]:checked"), function (x) { return x.value; }).join(", "),
+      best_time: (f.querySelector("input[name=best_time]:checked") || {}).value || "",
+      message: f.message.value.trim(), estimate: lastEst, website: f.website.value
+    };
+    var problem = !d.name ? "Please add your name." : !d.business ? "Please add your business name." :
+      !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(d.email) ? "Please add a valid email." :
+      d.phone.replace(/\D/g, "").length < 9 ? "Please add a valid phone number." :
+      (d.contact_by.indexOf("Visit") === 0 && !d.address) ? "Please add your business address or postcode so we can visit." : "";
+    if (problem) { err.textContent = problem; err.hidden = false; return; }
+    err.hidden = true;
+    var b = f.querySelector("button[type=submit]"); b.disabled = true; b.textContent = "Sending…";
+    var api = fetch("/api/funnel", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(Object.assign({ action: "partner-apply" }, d)) })
+      .then(function (r) { return r.json(); });
+    var nf = new URLSearchParams(Object.assign({ "form-name": "partner-application" }, d)); nf.delete("website");
+    fetch("/", { method: "POST", headers: { "content-type": "application/x-www-form-urlencoded" }, body: nf.toString(), keepalive: true }).catch(function () {});
+    api.then(function (r) {
+      if (!r || !r.ok) throw new Error("not saved");
+      var how = d.contact_by.indexOf("Visit") === 0 ? "arrange a visit" : "give you a call";
+      $("formbox").innerHTML = '<div class="thanks"><div class="tick">✓</div><h2>Thank you, ' + d.name.replace(/[<>&"]/g, "") + '</h2><p>We have your details and will be in touch to ' + how + (d.best_time ? ", in the " + d.best_time.toLowerCase() : "") + '.</p></div>';
+      $("apply").scrollIntoView({ behavior: "smooth", block: "start" });
+    }).catch(function () {
+      b.disabled = false; b.textContent = "Let's be partners";
+      err.textContent = "Sorry, something went wrong. Please try again, or email info@sncleaningservices.co.uk."; err.hidden = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>
