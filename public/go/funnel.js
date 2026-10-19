@@ -312,7 +312,7 @@
     var b = {
       action: action, page: F.page, leadId: leadId, firstName: d.firstName, email: d.email, phone: d.phone, postcode: d.postcode,
       answers: flat, first: firstTouch(), last: touch, visitorId: visitorId(), consent: consent(),
-      fbc: consent() === "accepted" ? fbc() : "", fbp: consent() === "accepted" ? cookie("_fbp") : "",
+      fbc: consent() === "accepted" ? fbc() : "", fbp: consent() === "accepted" ? cookie("_fbp") : "", oppref: consent() === "accepted" ? cookie("__oppref") : "", obref: consent() === "accepted" ? cookie("__obref") : "",
       pageUrl: location.origin + location.pathname
     };
     if (extra) Object.keys(extra).forEach(function (k) { b[k] = extra[k]; });
