@@ -102,6 +102,21 @@
     return true;
   }
 
+  /* ---------- ChatGPT (OpenAI) ads pixel (only after Accept) ---------- */
+  var OAI_PIXEL = "A91iDFxMXBirm1njjvc76z", oaiReady = false;
+  function loadOai() {
+    if (oaiReady || consent() !== "accepted" || window.self !== window.top) return;
+    !function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
+    window.oaiq("init", { pixelId: OAI_PIXEL, debug: false });
+    window.oaiq("measure", "page_viewed", { type: "contents" });
+    oaiReady = true;
+  }
+  function oai(name, props, opts) {
+    if (!oaiReady || !window.oaiq) return;
+    try { window.oaiq("measure", name, props, opts || {}); } catch (e) {}
+  }
+  loadOai();
+
   // Count the visit (where they came from only — no name, no IP, no cookies)
   if (firstLoadInTab) {
     api({ action: "visit", page: F.page, touch: { utm_source: touch.utm_source, utm_medium: touch.utm_medium, utm_campaign: touch.utm_campaign,
@@ -123,7 +138,7 @@
       if (!v) return;
       set("localStorage", CONSENT_KEY, v);
       banner.hidden = true;
-      if (v === "accepted") { rememberAcrossVisits(); loadPixel(); }
+      if (v === "accepted") { rememberAcrossVisits(); loadPixel(); loadOai(); }
     });
   }
 
@@ -266,6 +281,7 @@
       var label = t.getAttribute("data-label");
       answers["Booking service"] = label;
       trackClick("booking_click", label, "BookingClick", true);
+      oai("custom", { type: "custom" }, { custom_event_name: "booking_click" });
       var url = bookingUrl(t.getAttribute("data-service"));
       setTimeout(function () { location.href = url; }, 150);
       return;
@@ -368,6 +384,7 @@
         if (isNew) {
           // Event ID lead_<ref> matches our server event and Dilvon's, so Meta counts one Lead.
           if (leadId) pixel("track", "Lead", { content_name: F.page }, "lead_" + leadId);
+          oai("lead_created", { type: "customer_action" }, leadId ? { event_id: "lead_" + leadId } : {});
           completed = true; set("sessionStorage", "sn-done-" + F.page, "1"); netlifyForm("New lead");
         }
         go(F.screens[history[history.length - 1]].next);
