@@ -1681,6 +1681,139 @@
   status = 301
 
 
+# Old WordPress addresses Search Console still reports as 404 (Nov 2026).
+
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/home/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/page"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/page/"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/blog-elementor"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog-elementor/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/diy-carpet-cleaning-methods-that-work"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/diy-carpet-cleaning-methods-that-work/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/tailoring-your-cleaning-routine-to-fit-your-lifestyle"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/tailoring-your-cleaning-routine-to-fit-your-lifestyle/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/strategies-for-reducing-cleaning-costs-in-your-business"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/strategies-for-reducing-cleaning-costs-in-your-business/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/addressing-common-office-cleaning-challenges-in-the-uk"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/addressing-common-office-cleaning-challenges-in-the-uk/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/top-10-school-cleaning-techniques-for-a-healthier-environment"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/top-10-school-cleaning-techniques-for-a-healthier-environment/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/book-office-cleaning"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=office_cleaning_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/book-office-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=office_cleaning_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/eot-areas-template"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/eot-areas-template/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/how-long-does-end-of-tenancy-cleaning-take"
+  to = "/how-long-does-end-of-tenancy-cleaning-take/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/how-long-does-end-of-tenancy-cleaning-take/"
+  to = "/how-long-does-end-of-tenancy-cleaning-take/"
+  status = 301
+
+[[redirects]]
+  from = "/location/cambridge-heath"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/cambridge-heath/"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/top-10-school-cleaning-techniques-for-a-healthier-environment/*"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+# Old WordPress sitemap address -> the real sitemap.
+[[redirects]]
+  from = "/sitemap_index.xml"
+  to = "/sitemap.xml"
+  status = 301
+
 # Anything else: the 404 page. Must stay LAST.
 [[redirects]]
   from = "/quote"
