@@ -240,9 +240,7 @@
 <% if (children.length || nearby.length || parentLink || mapLink) { %>
 <section class="h-section h-sand" id="areas">
   <% if (mapLink) { %>
-  <% const isRegion = region.level === 'region';
-     const quick = (children.length ? children : nearby).slice(0, 8);
-     const quickTitle = children.length ? 'Areas in ' + place : (parentLink ? 'Also in ' + parentLink.name : 'Nearby'); %>
+  <% const isRegion = region.level === 'region'; %>
   <div class="h-wrap h-cov h-cov--area">
     <div class="h-cov-map" data-cov-map>
       <%- include('partials/coverage-map', { mapLink: mapLink, mapCurrent: mapCurrent }) %>
@@ -253,10 +251,6 @@
       <h2 class="h-title"><%= name %> across <%= isRegion ? place : 'London and Essex' %></h2>
       <% if (mapCopy) { %><p class="h-cov-text"><%= mapCopy %></p><% } %>
       <p class="h-cov-hint">Tap an area on the map to see our local <%= lower %> page.</p>
-      <% if (quick.length) { %>
-      <p class="h-cov-sub"><%= quickTitle %></p>
-      <ul class="h-cov-links"><% quick.forEach(function (l) { %><li><a href="<%= l.url %>"><%= l.name %></a></li><% }); %></ul>
-      <% } %>
       <ul class="h-legend" aria-hidden="true">
         <% if (!isRegion) { %><li><span class="h-swatch h-swatch--current"></span><%= place %></li><% } %>
         <li><span class="h-swatch h-swatch--london"></span>London</li>
@@ -267,7 +261,7 @@
   </div>
   <% } %>
   <div class="h-wrap s-areas">
-    <p class="h-eyebrow">Areas</p>
+    <% if (!mapLink) { %><p class="h-eyebrow">Areas</p><% } %>
     <% if (children.length) { %>
       <h2 class="h-title">Areas we cover in <%= place %></h2>
       <ul class="s-area-links"><% children.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= l.name %></a></li><% }); %></ul>
