@@ -81,3 +81,14 @@ Since `server.js` still exports a working Express app, it can also run as a norm
 Node server (Render, Railway, Fly.io, a VPS, etc.) instead of the static Netlify build — just
 run `npm start` and set the `PORT` environment variable if your host requires a specific one.
 
+
+## Website editor (/admin)
+
+A visual editor at `/admin` (personal logins with Netlify Identity, invite only).
+
+- Click any text, photo or button on the editable pages (Home, Services, About, Gallery, Blog page, Contact, legal pages), change website colours, add ready made sections, write blog posts and case studies, and set each page's Google title, description and share photo.
+- Parts that come from Supabase, forms and maps are marked in the templates with `<!--sb:name-->...<!--/sb-->` and stay locked. Service and area pages are view only.
+- Edits autosave as a draft (Netlify Blobs). Publish makes one commit to `content/editor/` (and new photos to `public/images/uploads/`), which rebuilds the site.
+- `public/admin/overlay.js` applies the saved edits both in the browser preview and in `server.js` at build time (`lib/editor-content.js`).
+- Needs the `GITHUB_TOKEN` environment variable in Netlify (a token that can write to this repo).
+- After every deploy `netlify/functions/deploy-succeeded.js` sends the pages changed today to IndexNow.

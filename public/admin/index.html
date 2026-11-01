@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Website editor | SN Cleaning Services</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{--g9:#123b39;--g7:#1f6b66;--g1:#e3f0ee;--gold:#2c7d79;--gold2:#215e5b;--ink:#14302c;--mut:#56645f;--line:#e2e8e6;--bg:#f2f5f4;--white:#fff;--red:#b3261e;--blue:#2563eb}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{font:14px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:var(--ink);background:var(--bg)}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+/* login */
+#login{min-height:100%;display:grid;place-items:center;background:var(--g9)}
+.login-card{background:#fff;border-radius:18px;padding:36px 34px;width:min(380px,92vw);box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.login-card img{width:150px;display:block;margin:0 auto 18px}
+.login-card h1{font-size:20px;margin:0 0 4px;text-align:center}
+.login-card p{margin:0 0 20px;text-align:center;color:var(--mut)}
+.field{display:block;margin:0 0 14px}
+.field>span{display:block;font-weight:600;font-size:12.5px;margin-bottom:5px;color:#3d4842}
+.inp{width:100%;border:1px solid #d9d4c8;border-radius:10px;padding:9px 11px;background:#fff;outline:none;transition:border-color .15s,box-shadow .15s}
+.inp:focus{border-color:var(--g7);box-shadow:0 0 0 3px rgba(23,80,63,.14)}
+textarea.inp{resize:vertical;min-height:70px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid transparent;border-radius:10px;padding:8px 14px;font-weight:600;background:#fff;border-color:#d9d4c8;transition:background .15s,border-color .15s,transform .05s;white-space:nowrap}
+.btn:hover{background:#f6f3ec}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.primary{background:var(--g9);color:#fff;border-color:var(--g9)}
+.btn.primary:hover{background:var(--g7)}
+.btn.gold{background:var(--gold);border-color:var(--gold);color:#fff}
+.btn.gold:hover{background:var(--gold2)}
+.btn.danger{color:var(--red)}
+.btn.sm{padding:5px 10px;font-size:12.5px;border-radius:8px}
+.btn.icon{padding:6px 8px}
+.btn.full{width:100%}
+.links{display:flex;flex-direction:column;gap:6px;align-items:center;margin:10px 0 0!important}
+.links a{color:var(--g7);font-size:13px}
+.ok{color:var(--g7)!important}
+.err{color:var(--red);min-height:18px;font-size:13px;margin:8px 0 0}
+/* app */
+#app{height:100%;display:grid;grid-template-rows:56px 1fr}
+.top{display:flex;align-items:center;gap:12px;padding:0 14px;background:var(--g9);color:#fff}
+.top .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:.2px;min-width:250px}
+.top .brand img{height:30px;background:#fff;border-radius:6px;padding:2px 6px}
+.top .pagename{font-weight:600;opacity:.9;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg{display:inline-flex;background:rgba(255,255,255,.1);border-radius:10px;padding:3px}
+.seg button{border:0;background:transparent;color:#d8e3dc;padding:5px 11px;border-radius:8px;font-weight:600;font-size:13px;display:inline-flex;gap:6px;align-items:center}
+.seg button.on{background:#fff;color:var(--g9)}
+.top .spacer{flex:1}
+.status{font-size:12.5px;color:#cfe0d6;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.status .dot{width:8px;height:8px;border-radius:50%;background:#7fd1a4}
+.status.unsaved .dot{background:#f4c26b}
+.status.saving .dot{background:#9cc3ff}
+.top .btn{border-color:rgba(255,255,255,.25);background:transparent;color:#fff}
+.top .btn:hover{background:rgba(255,255,255,.1)}
+.top .btn.gold{background:var(--gold);border-color:var(--gold)}
+.top .btn.gold:hover{background:var(--gold2)}
+.badge{background:#fff;color:var(--g9);border-radius:999px;padding:0 7px;font-size:11.5px;font-weight:700;min-width:20px;text-align:center}
+.main{display:grid;grid-template-columns:330px 1fr 300px;min-height:0}
+.main.noinspect{grid-template-columns:330px 1fr 0}
+/* left */
+.side{background:#fff;border-right:1px solid var(--line);display:flex;flex-direction:column;min-height:0}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);border-bottom:1px solid var(--line)}
+.tabs button{border:0;background:none;padding:12px 4px 10px;font-weight:600;font-size:12.5px;color:var(--mut);border-bottom:2px solid transparent}
+.tabs button.on{color:var(--g9);border-bottom-color:var(--gold)}
+.panel{overflow:auto;padding:14px;flex:1}
+.grp{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#8a958e;margin:16px 0 6px}
+.grp:first-child{margin-top:2px}
+.pgrp{border-bottom:1px solid #efebe2;padding:2px 0}
+.pgrp>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;padding:10px 6px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b766f;border-radius:8px}
+.pgrp>summary::-webkit-details-marker{display:none}
+.pgrp>summary::before{content:"▸";font-size:12px;transition:transform .15s;color:#9aa49e}
+.pgrp[open]>summary::before{transform:rotate(90deg)}
+.pgrp>summary:hover{background:#f6f3ec}
+.pgrp .cnt{margin-left:auto;background:#f1eee6;color:#6b766f;border-radius:999px;padding:1px 8px;font-size:11px;letter-spacing:0}
+.pgrp .plist{padding:0 0 8px}
+.plist{list-style:none;margin:0;padding:0}
+.plist li{display:flex;align-items:center;gap:6px;border-radius:9px;padding:7px 9px;cursor:pointer;color:#2b3530}
+.plist li:hover{background:#f4f1ea}
+.plist li.on{background:var(--g1);color:var(--g9);font-weight:600}
+.plist li .t{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plist li .chg{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:none}
+.plist li .gear{opacity:0;border:0;background:none;padding:2px 4px;border-radius:6px;color:var(--mut)}
+.plist li:hover .gear,.plist li.on .gear{opacity:1}
+.plist li .gear:hover{background:rgba(0,0,0,.06)}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px;margin:0 0 10px;background:#fff}
+.card h4{margin:0 0 8px;font-size:13.5px;display:flex;align-items:center;gap:2px}
+.card h4 .cn{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.svc{display:flex;align-items:center;gap:8px;padding:7px 8px;border-radius:9px;border:1px solid #efebe2;margin:6px 0;background:#fcfbf8}
+.svc img{width:38px;height:28px;object-fit:cover;border-radius:5px;flex:none}
+.svc .n{flex:1;min-width:0;font-weight:600;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mini{border:0;background:none;padding:3px 4px;border-radius:6px;color:var(--mut);font-size:13px}
+.mini:hover{background:rgba(0,0,0,.06);color:var(--ink)}
+.color-row{display:flex;align-items:center;gap:8px;margin:7px 0}
+.color-row label{flex:1;font-size:13px}
+.color-row input[type=color]{width:38px;height:30px;border:1px solid #d9d4c8;border-radius:8px;padding:2px;background:#fff;cursor:pointer}
+.color-row .hex{width:82px;font-family:ui-monospace,monospace;font-size:12px}
+.hint{color:var(--mut);font-size:12.5px;margin:4px 0 10px}
+/* canvas */
+.canvas{position:relative;overflow:hidden;background:#e9e5dc;display:flex;justify-content:center}
+.frame-wrap{position:absolute;top:16px;transform-origin:top center;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.15);border-radius:6px;overflow:hidden}
+.frame-wrap iframe{border:0;display:block;background:#fff}
+.mobile .frame-wrap{border-radius:26px;border:10px solid #1d2420}
+.banner{position:absolute;left:50%;transform:translateX(-50%);top:14px;z-index:5;background:#fff8e6;border:1px solid #f0d9a6;color:#5a4416;border-radius:12px;padding:9px 12px;display:flex;gap:10px;align-items:center;box-shadow:0 8px 24px rgba(0,0,0,.12);max-width:90%}
+.edit-hint{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);background:rgba(18,59,57,.92);color:#fff;border-radius:999px;padding:7px 16px;font-size:12.5px;z-index:4;pointer-events:none}
+/* inspector */
+.insp{background:#fff;border-left:1px solid var(--line);overflow:auto;min-height:0}
+.insp .hd{display:flex;align-items:center;gap:8px;padding:13px 14px;border-bottom:1px solid var(--line);font-weight:700;position:sticky;top:0;background:#fff;z-index:2}
+.insp .hd .sp{flex:1}
+.insp .bd{padding:14px}
+.insp .sec{margin:0 0 18px}
+.insp .sec>h5{margin:0 0 8px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#8a958e}
+.tool-row{display:flex;gap:6px;flex-wrap:wrap}
+.tool-row .btn{flex:1}
+.thumb{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#f4f1ea;display:block;margin-bottom:8px}
+.lib{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;max-height:260px;overflow:auto;margin-top:8px}
+.lib img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;border:2px solid transparent;cursor:pointer;background:#f4f1ea}
+.lib img:hover{border-color:var(--gold)}
+/* modal */
+.lockbar{position:absolute;top:14px;left:50%;transform:translateX(-50%);z-index:5;background:#eef4f3;border:1px solid #c9dcd9;color:#14302c;border-radius:12px;padding:8px 14px;font-size:12.5px;box-shadow:0 8px 24px rgba(0,0,0,.1)}
+.search{margin:4px 0 8px}
+.modal-bg{position:fixed;inset:0;background:rgba(10,25,19,.45);display:grid;place-items:center;z-index:50}
+.modal{background:#fff;border-radius:16px;width:min(520px,94vw);max-height:90vh;overflow:auto;box-shadow:0 30px 80px rgba(0,0,0,.3)}
+.modal .mh{padding:18px 20px 6px;font-size:17px;font-weight:700}
+.modal .mb{padding:8px 20px 6px}
+.modal .mf{padding:12px 20px 18px;display:flex;gap:8px;justify-content:flex-end}
+.modal.wide{width:min(880px,96vw)}
+.modal .mh{display:flex;align-items:center;gap:8px}.modal .mh .sp{flex:1}
+.slib{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 14px}
+.scard{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;background:#fff;border:1px solid #e5e0d4;border-radius:12px;padding:10px;cursor:pointer;font:inherit;color:inherit;transition:border-color .15s,box-shadow .15s,transform .15s}
+.scard:hover{border-color:var(--gold);box-shadow:0 8px 22px rgba(13,57,45,.12);transform:translateY(-2px)}
+.scard svg{width:100%;height:auto;border-radius:8px;margin-bottom:4px}
+.scard b{font-size:14px}.scard span{font-size:12px;color:#6b7280;line-height:1.35}
+@media (max-width:700px){.slib{grid-template-columns:1fr 1fr}}
+.modal ul{margin:6px 0 12px;padding-left:18px}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--g9);color:#fff;padding:10px 18px;border-radius:999px;opacity:0;transition:.25s;z-index:60;pointer-events:none;font-weight:600}
+.toast.show{opacity:1;transform:translateX(-50%)}
+.toast.bad{background:var(--red)}
+.loadbar{position:fixed;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),#f0dcb0,var(--gold));background-size:200% 100%;animation:lb 1s linear infinite;z-index:70}
+@keyframes lb{to{background-position:-200% 0}}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;display:inline-block}
+@keyframes sp{to{transform:rotate(360deg)}}
+.empty{color:var(--mut);text-align:center;padding:30px 10px}
+.empty b{display:block;color:var(--ink);margin-bottom:4px}
+kbd{background:#f1eee6;border:1px solid #ddd6c6;border-bottom-width:2px;border-radius:5px;padding:0 5px;font-size:11px}
+</style>
+</head>
+<body>
+<div id="loadBar" class="loadbar hidden"></div>
+
+<div id="login">
+  <form class="login-card" id="loginForm">
+    <img src="/images/logo-mark.png" alt="SN Cleaning Services" style="width:64px">
+    <h1 id="loginTitle">Website editor</h1>
+    <p id="loginSub">Sign in with your email and password</p>
+    <label class="field" id="emailField"><span>Email</span><input class="inp" id="em" type="email" autocomplete="username"></label>
+    <label class="field" id="pwField"><span>Password</span><input class="inp" id="pw" type="password" autocomplete="current-password"></label>
+    <label class="field hidden" id="pw2Field"><span>Type the password again</span><input class="inp" id="pw2" type="password" autocomplete="new-password"></label>
+    <button class="btn primary full" id="loginBtn">Sign in</button>
+    <p class="err" id="loginErr"></p>
+    <p class="links"><a href="#" id="forgotLink">Forgot your password?</a> <a href="#" id="backLink" class="hidden">Back to sign in</a></p>
+  </form>
+</div>
+
+<div id="app" class="hidden">
+  <div class="top">
+    <div class="brand"><img src="/images/logo-mark.png" alt="" style="height:30px;padding:2px"><span>SN website editor</span></div>
+    <div class="pagename" id="pageName"></div>
+    <div class="seg" id="modeSeg">
+      <button data-mode="edit" class="on">✏️ Edit</button>
+      <button data-mode="preview">👁 Preview</button>
+    </div>
+    <div class="seg" id="devSeg">
+      <button data-dev="desktop" class="on" title="Desktop">🖥 Desktop</button>
+      <button data-dev="mobile" title="Phone">📱 Phone</button>
+    </div>
+    <div class="spacer"></div>
+    <div class="status" id="status"><span class="dot"></span><span id="statusText">All changes saved</span></div>
+    <button class="btn" id="saveBtn" title="Save (Ctrl+S)">Save</button>
+    <button class="btn" id="viewLive" title="Open the live website">Live site ↗</button>
+    <button class="btn gold" id="publishBtn">Publish <span class="badge" id="chgCount">0</span></button>
+    <button class="btn" id="logoutBtn" title="Sign out">⎋</button>
+  </div>
+  <div class="main noinspect" id="main">
+    <aside class="side">
+      <div class="tabs" id="tabs">
+        <button data-tab="pages" class="on">Pages</button>
+        <button data-tab="design">Design</button>
+        <button data-tab="settings">Settings</button>
+      </div>
+      <div class="panel" id="panel"></div>
+    </aside>
+    <section class="canvas" id="canvas">
+      <div class="banner hidden" id="banner"></div>
+      <div class="lockbar hidden" id="lockbar"></div>
+      <div class="frame-wrap" id="frameWrap"><iframe id="frame" title="Page preview"></iframe></div>
+      <div class="edit-hint" id="editHint">Click any text to edit it · click a photo to change it · hover a section for its colours</div>
+    </section>
+    <aside class="insp" id="insp"></aside>
+  </div>
+</div>
+
+<input type="file" id="fileIn" accept="image/*" class="hidden">
+<div class="toast" id="toast"></div>
+<script src="overlay.js"></script>
+<script type="module" src="editor.js"></script>
+</body>
+</html>

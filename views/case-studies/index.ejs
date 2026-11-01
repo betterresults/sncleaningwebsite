@@ -1,0 +1,29 @@
+<section class="page-hero page-hero--plain">
+  <div class="container">
+    <span class="eyebrow">Case studies</span>
+    <h1>Real jobs, real results</h1>
+    <p>What our clients in London and Essex needed, what we did and how it turned out, with before and after photos from the job.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <!--sb:cases--><div class="grid grid-3">
+      <% cases.forEach(function(cs) { %>
+        <a href="/case-studies/<%= cs.slug %>/" class="card service-card">
+          <% if (cs.cover_image) { %>
+            <div class="service-card-photo">
+              <img src="<%= cs.cover_image %>?v=<%= assetVersion %>"<%- rs(cs.cover_image, '(max-width: 800px) 100vw, 400px') %> alt="<%= cs.title %>" decoding="async" loading="lazy" width="1152" height="864" />
+            </div>
+          <% } %>
+          <div class="service-card-body">
+            <% if (cs.service || cs.area) { %><span class="blog-card-date"><%= [cs.service, cs.area].filter(Boolean).join(' · ') %></span><% } %>
+            <h2 class="h3"><%= cs.title %></h2>
+            <p><%= cs.excerpt %></p>
+            <span class="card-link">Read the case study →</span>
+          </div>
+        </a>
+      <% }); %>
+    </div><!--/sb-->
+  </div>
+</section>

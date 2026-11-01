@@ -28,7 +28,7 @@
       <% } %>
     </div>
 
-    <div class="h-quote" id="quote">
+    <!--sb:quote-form--><div class="h-quote" id="quote">
       <h2 class="h-quote-title">Get a quote</h2>
       <p class="h-quote-sub">Enter your postcode and we'll take you straight to the right booking form.</p>
 
@@ -69,7 +69,7 @@
 
         <button type="submit" class="h-btn h-btn--primary h-btn--block">Get my quote <span aria-hidden="true">→</span></button>
       </form>
-    </div>
+    </div><!--/sb-->
   </div>
 
   <div class="h-wrap">
@@ -93,7 +93,7 @@
       <a href="/our-services" class="h-btn h-btn--primary">See all services</a>
     </div>
 
-    <div class="h-svc-grid<%= services.length === 5 ? ' h-svc-grid--5' : '' %>">
+    <!--sb:services--><div class="h-svc-grid<%= services.length === 5 ? ' h-svc-grid--5' : '' %>">
       <% services.forEach(function(service) { %>
         <a href="/<%= service.slug %>" class="h-svc h-reveal">
           <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(service.slug), '(max-width: 1000px) 50vw, 400px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />
@@ -106,7 +106,7 @@
           </span>
         </a>
       <% }); %>
-    </div>
+    </div><!--/sb-->
   </div>
 </section>
 
@@ -146,9 +146,9 @@
 </section>
 
 <!-- ============ ROOM CHECKLIST (existing interactive partial) ============ -->
-<div class="h-checklist">
+<!--sb:checklist--><div class="h-checklist">
   <%- include('partials/cleaning-checklist') %>
-</div>
+</div><!--/sb-->
 
 <!-- ============ HOW IT WORKS ============ -->
 <section class="h-section h-white h-rounded-top">
@@ -223,10 +223,10 @@
         <li><span class="h-swatch h-swatch--other"></span>Not covered</li>
       </ul>
     </div>
-    <div class="h-cov-map" data-cov-map>
+    <!--sb:map--><div class="h-cov-map" data-cov-map>
       <%- include('partials/coverage-map') %>
       <div class="h-cov-tip" role="status" aria-live="polite" hidden></div>
-    </div>
+    </div><!--/sb-->
   </div>
 </section>
 

@@ -135,6 +135,25 @@
   status = 200
   force = true
 
+# Website editor (/admin): its API and photos uploaded before publishing.
+[[redirects]]
+  from = "/api/editor"
+  to = "/.netlify/functions/editor-api"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/draft-image/*"
+  to = "/.netlify/functions/editor-image?f=:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/admin/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 [[headers]]
   for = "/go/*"
   [headers.values]

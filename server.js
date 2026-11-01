@@ -30,6 +30,9 @@ app.set('layout', 'layouts/main');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+// Page edits, SEO and colours saved in the website editor (/admin).
+const editorContent = require('./lib/editor-content');
+app.use(editorContent.middleware);
 
 // Hardcoded fallback used only if site_settings has no row yet or Supabase is
 // unreachable — keeps the site working, never blank, while staying editable
@@ -161,6 +164,7 @@ app.use(async (req, res, next) => {
       : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
 
     res.locals.coverageAreas = coverageAreas || [];
+    res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas })];
@@ -284,6 +288,7 @@ function renderPost(req, res, post) {
 
   res.render('blog/post', {
     title: post.meta_title || post.title,
+    noindex: !!post.noindex,
     metaDescription: post.meta_description || post.excerpt,
     post,
     breadcrumbs,
@@ -292,6 +297,51 @@ function renderPost(req, res, post) {
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
       schema.buildArticle({ post, site: res.locals.site })
+    ]
+  });
+}
+
+// Templates the website editor uses to preview a new post or case study before
+// it is published. Not linked anywhere, hidden from Google and the sitemap.
+const SAMPLE = {
+  slug: '_template', title: 'Post title', excerpt: 'Short summary', cover_image: '/images/hero-living-room.jpg',
+  published_at: new Date().toISOString(), content: '<p>Text</p>', editor: true, noindex: true, service: 'Service', area: 'Area'
+};
+app.get('/blog/_template', (req, res) => renderPost(req, res, SAMPLE));
+app.get('/case-studies/_template', (req, res) => renderCase(req, res, SAMPLE));
+
+// ---------- Case studies (written in the website editor) ----------
+app.get('/case-studies', (req, res, next) => {
+  const cases = editorContent.editorPosts('case');
+  if (!cases.length) return next();
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Case studies', url: '/case-studies' }];
+  res.render('case-studies/index', {
+    title: 'Case Studies: Real Cleaning Jobs',
+    metaDescription: 'Real cleaning jobs from SN Cleaning Services in London and Essex: what the client needed, what we did and the result, with before and after photos.',
+    cases,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+app.get('/case-studies/:slug', (req, res, next) => {
+  const cs = editorContent.editorPosts('case').find((p) => p.slug === req.params.slug);
+  if (!cs) return next();
+  renderCase(req, res, cs);
+});
+function renderCase(req, res, cs) {
+  const url = `/case-studies/${cs.slug}`;
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Case studies', url: '/case-studies' }, { name: cs.title, url }];
+  res.render('case-studies/post', {
+    title: cs.meta_title || cs.title,
+    metaDescription: cs.meta_description || cs.excerpt,
+    noindex: !!cs.noindex,
+    post: cs,
+    breadcrumbs,
+    ogImage: cs.cover_image ? schema.absoluteUrl(cs.cover_image) : res.locals.ogImage,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildArticle({ post: cs, site: res.locals.site, url })
     ]
   });
 }

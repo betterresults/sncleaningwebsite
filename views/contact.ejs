@@ -8,7 +8,7 @@
 
 <section class="section">
   <div class="container grid grid-2 contact-grid">
-    <div class="contact-form-wrap">
+    <!--sb:form--><div class="contact-form-wrap">
       <iframe id="booking-form-contact-us"
         data-src="https://app.dilvon.com/book/sn-cleaning-services/contact-us?embedded=true"
         style="width:100%;border:0;min-height:600px;display:block;" title="Contact Us"></iframe>
@@ -28,7 +28,7 @@
           });
         })();
       </script>
-    </div>
+    </div><!--/sb-->
 
     <div class="contact-info">
       <div class="contact-photo">
@@ -36,7 +36,7 @@
       </div>
       <div class="contact-info-card">
         <h2 class="h3">Reach us</h2>
-        <ul>
+        <!--sb:details--><ul>
           <li><a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a></li>
           <% if (site.whatsappUrl) { %>
             <li><a href="<%= site.whatsappUrl %>" target="_blank" rel="noopener">WhatsApp</a></li>
@@ -44,17 +44,17 @@
           <li><a href="mailto:<%= site.email %>"><%= site.email %></a></li>
           <li><%= site.address %></li>
           <li><%= site.hours %></li>
-        </ul>
+        </ul><!--/sb-->
       </div>
       <div class="contact-info-card">
         <h2 class="h3">Prefer to talk it through?</h2>
         <p>Call or WhatsApp with the postcode and what you need. No obligation.</p>
-        <div class="contact-info-actions">
+        <!--sb:actions--><div class="contact-info-actions">
           <a href="tel:<%= site.phone.replace(/\s+/g, '') %>" class="btn btn-outline">Call</a>
           <% if (site.whatsappUrl) { %>
             <a href="<%= site.whatsappUrl %>" class="btn btn-primary" target="_blank" rel="noopener">WhatsApp</a>
           <% } %>
-        </div>
+        </div><!--/sb-->
       </div>
     </div>
   </div>

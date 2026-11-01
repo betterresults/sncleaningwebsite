@@ -6,10 +6,10 @@
   </div>
 </section>
 
-<%- include('partials/cleaning-checklist') %>
+<!--sb:checklist--><%- include('partials/cleaning-checklist') %><!--/sb-->
 
 <section class="section">
-  <div class="container services-list">
+  <!--sb:services--><div class="container services-list">
     <% services.forEach(function(service, i) { %>
       <div class="service-detail <%= i % 2 === 1 ? 'reverse' : '' %>" id="<%= service.slug %>">
         <div class="service-detail-media">
@@ -32,7 +32,7 @@
         </div>
       </div>
     <% }); %>
-  </div>
+  </div><!--/sb-->
 </section>
 
 <section class="section cta-band">

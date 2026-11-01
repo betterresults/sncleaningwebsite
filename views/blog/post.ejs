@@ -1,10 +1,10 @@
 <section class="page-hero page-hero--plain">
   <div class="container">
     <span class="eyebrow">Blog</span>
-    <h1><%= post.title %></h1>
+    <h1 data-ed-title><%= post.title %></h1>
     <% if (post.published_at) { %>
       <p>
-        <time datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+        <time data-ed-date datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
       </p>
     <% } %>
   </div>
@@ -13,11 +13,12 @@
 <section class="section blog-post">
   <div class="container blog-post-inner">
     <% if (post.cover_image) { %>
-      <img class="blog-post-cover" src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 900px) 100vw, 860px') %> alt="" fetchpriority="high" decoding="async" />
+      <img class="blog-post-cover" data-ed-cover src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 900px) 100vw, 860px') %> alt="" fetchpriority="high" decoding="async" />
     <% } %>
-    <div class="blog-content">
+    <!--sb:post--><div class="blog-content"<%- post.editor ? ' data-ed-body' : '' %>>
       <%- post.content %>
-    </div>
+    </div><!--/sb-->
+    <%- include('../partials/author-box') %>
     <div class="blog-post-cta">
       <p>Need a clean in London or Essex? Our own trained, insured and DBS-checked cleaners can help. Click Get a quote to see your price.</p>
       <div class="blog-post-cta-actions">

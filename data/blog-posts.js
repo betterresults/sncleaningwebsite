@@ -1,6 +1,6 @@
 // Seed posts shown when the CMS has nothing published yet.
 // If a matching slug is later added in Supabase, that row wins.
-module.exports = [
+const seed = [
   {
     slug: 'end-of-tenancy-what-gets-checked',
     title: 'End of tenancy: what actually gets checked',
@@ -113,3 +113,6 @@ module.exports = [
 `
   }
 ];
+
+// Posts written in the website editor (/admin), saved in content/editor/.
+module.exports = seed.concat(require('../lib/editor-content').editorPosts('post'));

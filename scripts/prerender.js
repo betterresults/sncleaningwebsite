@@ -16,6 +16,7 @@ const path = require('path');
 
 const app = require('../server');
 const content = require('../data/content');
+const editorContent = require('../lib/editor-content');
 const { SITE_URL } = require('../lib/site-config');
 const DIST = path.join(__dirname, '..', 'dist');
 const PORT = 4521;
@@ -92,7 +93,28 @@ async function buildRoutes() {
   // Office and nursery cleaning now live on snclean.co.uk (301s in netlify.toml),
   // so they are not built here or listed in the sitemap.
   const MOVED = /^\/(office-cleaning|nursery-cleaning)(\/|$)/;
-  return [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes].filter((r) => !MOVED.test(r.url));
+  // Case studies written in the website editor, and the hidden templates the
+  // editor uses to preview new posts before they are published.
+  const cases = editorContent.editorPosts('case');
+  const caseRoutes = cases.length
+    ? [{ url: '/case-studies', out: 'case-studies/index.html', sitemap: true, lastmod: cases[0].updated_at },
+       ...cases.map((p) => ({ url: `/case-studies/${p.slug}`, out: `case-studies/${p.slug}/index.html`, sitemap: !p.noindex, lastmod: p.updated_at }))]
+    : [];
+  const editorTemplates = [
+    { url: '/blog/_template', out: 'blog/_template/index.html', sitemap: false },
+    { url: '/case-studies/_template', out: 'case-studies/_template/index.html', sitemap: false }
+  ];
+
+  // Pages edited in the website editor: hidden from Google, or last edited on.
+  const all = [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...caseRoutes, ...editorTemplates].filter((r) => !MOVED.test(r.url));
+  for (const r of all) {
+    const m = editorContent.pageMeta(r.url);
+    if (!m) continue;
+    if (m.seo && m.seo.noindex) r.sitemap = false;
+    if (m.updatedAt && (!r.lastmod || new Date(m.updatedAt) > new Date(r.lastmod))) r.lastmod = m.updatedAt;
+  }
+  blogPosts.filter((p) => p.noindex).forEach((p) => { const r = all.find((x) => x.url === `/blog/${p.slug}`); if (r) r.sitemap = false; });
+  return all;
 }
 
 function fetchHtml(url) {
@@ -113,17 +135,31 @@ function writeFile(relPath, content) {
   fs.writeFileSync(fullPath, content);
 }
 
+// Content photos on a page (inside <main>), for the image sitemap.
+function pageImages(html) {
+  const a = html.indexOf('<main>'), b = html.lastIndexOf('</main>');
+  if (a < 0 || b < a) return [];
+  const out = new Set();
+  for (const m of html.slice(a, b).matchAll(/<img[^>]+src="(\/images\/[^"?]+\.(?:jpe?g|png|webp))[^"]*"/gi)) {
+    if (!/\/images\/(_r|favicon)\/|logo/.test(m[1])) out.add(m[1]);
+  }
+  return [...out].slice(0, 20);
+}
+
 function writeSitemap(routes) {
-  const today = new Date().toISOString().slice(0, 10);
+  // lastmod only when we really know when a page changed (Supabase rows, posts,
+  // editor edits), so Google can trust it. Photos on each page are listed too.
+  const escXml = (u) => u.replace(/&/g, '&amp;').replace(/</g, '&lt;');
   const urls = routes
     .filter((r) => r.sitemap)
     .map((r) => {
-      const lastmod = (r.lastmod ? new Date(r.lastmod).toISOString().slice(0, 10) : today);
-      return `  <url>\n    <loc>${SITE_URL}${r.url === '/' ? '/' : r.url.replace(/\/?$/, '/')}</loc>\n    <lastmod>${lastmod}</lastmod>\n  </url>`;
+      const lastmod = r.lastmod && !isNaN(new Date(r.lastmod)) ? `\n    <lastmod>${new Date(r.lastmod).toISOString().slice(0, 10)}</lastmod>` : '';
+      const imgs = (r.images || []).map((src) => `\n    <image:image><image:loc>${escXml(SITE_URL + src)}</image:loc></image:image>`).join('');
+      return `  <url>\n    <loc>${SITE_URL}${r.url === '/' ? '/' : r.url.replace(/\/?$/, '/')}</loc>${lastmod}${imgs}\n  </url>`;
     })
     .join('\n');
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`;
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">\n${urls}\n</urlset>\n`;
   writeFile('sitemap.xml', xml);
   console.log(`Wrote dist/sitemap.xml (${routes.filter((r) => r.sitemap).length} URLs)`);
 }
@@ -132,7 +168,7 @@ function writeRobotsTxt() {
   // AI search/answer bots (ChatGPT, Claude, Perplexity, Google AI) are allowed
   // so the business can be found and recommended in AI search. Only
   // Bytespider (a bulk scraper, not a search engine) is kept out.
-  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
@@ -171,6 +207,7 @@ async function main() {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
         writeFile(route.out, inlineCss(body));
+        route.images = pageImages(body);
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
 

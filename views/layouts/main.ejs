@@ -9,6 +9,8 @@
   <link rel="canonical" href="<%= canonicalUrl %>" />
   <% if (typeof noindex !== 'undefined' && noindex) { %>
     <meta name="robots" content="noindex, nofollow" />
+  <% } else { %>
+    <meta name="robots" content="max-image-preview:large, max-snippet:-1" />
   <% } %>
 
   <!-- Favicons -->
