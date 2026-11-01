@@ -193,6 +193,38 @@ function inlineCss(html) {
   });
 }
 
+// Every page is published at /{path}/ (with the slash), which is the address in
+// the sitemap and the canonical tag. Links written as /{path} make Google go
+// through a 301 first and see two versions of each page. After the build, point
+// every internal link and structured-data URL straight at the real address,
+// but only when that page really exists in dist/ (so files, /api routes and
+// redirects are left alone).
+function fixInternalLinks() {
+  const isPage = (p) => p !== '/' && !p.endsWith('/') && !/\.[a-z0-9]+$/i.test(p) &&
+    fs.existsSync(path.join(DIST, p, 'index.html'));
+  const files = [];
+  (function walk(dir) {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, e.name);
+      if (e.isDirectory()) walk(full);
+      else if (e.name.endsWith('.html')) files.push(full);
+    }
+  })(DIST);
+
+  const site = SITE_URL.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const hrefRe = /(href=["'])(\/[^"'?#\s]*)([?#][^"']*)?(["'])/g;
+  const absRe = new RegExp(`(${site})(/[^"'?#\\s<>\\\\]*)`, 'g');
+  let changed = 0;
+  for (const f of files) {
+    const before = fs.readFileSync(f, 'utf8');
+    const after = before
+      .replace(hrefRe, (m, a, p, rest = '', q) => (isPage(p) ? `${a}${p}/${rest}${q}` : m))
+      .replace(absRe, (m, s, p) => (isPage(p) ? `${s}${p}/` : m));
+    if (after !== before) { fs.writeFileSync(f, after); changed++; }
+  }
+  console.log(`Pointed internal links at the real (slash) address in ${changed} pages`);
+}
+
 async function main() {
   // Fresh dist/
   fs.rmSync(DIST, { recursive: true, force: true });
@@ -220,6 +252,8 @@ async function main() {
         fs.cpSync(path.join(publicDir, entry), path.join(DIST, entry), { recursive: true });
       }
       console.log('Copied /public assets into /dist');
+
+      fixInternalLinks();
 
       console.log('\nStatic build complete: dist/');
     } catch (err) {
