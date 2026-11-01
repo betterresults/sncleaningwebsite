@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Send a job for a case study | SN Cleaning Services team</title>
+<link rel="icon" href="/favicon.ico">
+<style>
+:root{--ink:#14302c;--text:#33423f;--muted:#55635f;--line:#e2ddd3;--sand:#f4f1eb;--primary:#1f6b66;--err:#b42318}
+*{box-sizing:border-box}
+body{margin:0;background:var(--sand);color:var(--text);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:640px;margin:0 auto;padding:24px 16px 64px}
+h1{font:600 1.7rem/1.2 Georgia,serif;color:var(--ink);margin:8px 0 6px}
+.lede{color:var(--muted);margin:0 0 20px}
+.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px;margin-bottom:16px}
+.card h2{font:600 1.1rem/1.3 Georgia,serif;color:var(--ink);margin:0 0 12px}
+label{display:block;font-weight:600;color:var(--ink);margin:14px 0 6px}
+label small{font-weight:400;color:var(--muted)}
+.hint{color:var(--muted);font-size:.9rem;margin:-2px 0 6px}
+input,select,textarea{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;font:inherit;color:var(--ink);background:#fff}
+textarea{min-height:110px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--primary);outline-offset:1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;color:var(--text)}
+.check input{width:22px;height:22px;flex:none;margin-top:2px}
+.photos{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:8px;margin-top:10px}
+.photos img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px}
+button{width:100%;padding:15px;border:0;border-radius:999px;background:var(--primary);color:#fff;font:600 1.05rem/1 inherit;cursor:pointer}
+button[disabled]{opacity:.6}
+.msg{padding:14px 16px;border-radius:12px;margin-bottom:16px}
+.ok{background:#e7f3ec;color:#1d5b3a}
+.bad{background:#fdecea;color:var(--err)}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Send us a job for a case study</h1>
+  <p class="lede">Tell us about a job you did. We turn it into a short story for the website that helps people with the same problem. Write it the way you would tell it to a colleague. Never put the customer's name, house number or street.</p>
+
+  <div id="done" class="msg ok" hidden>Thank you, it's sent. You can send another one below.</div>
+  <div id="error" class="msg bad" hidden></div>
+
+  <form id="f" novalidate>
+    <div class="card">
+      <h2>You</h2>
+      <label for="team_member">Your name</label>
+      <input id="team_member" name="team_member" required autocomplete="name">
+      <label for="code">Team code <small>(we gave you this)</small></label>
+      <input id="code" name="code" required autocomplete="off" autocapitalize="characters">
+    </div>
+
+    <div class="card">
+      <h2>The job</h2>
+      <label for="service">Type of clean</label>
+      <select id="service" name="service" required>
+        <option value="">Choose one</option>
+        <option>End of tenancy cleaning</option>
+        <option>Deep cleaning</option>
+        <option>Domestic cleaning</option>
+        <option>Airbnb cleaning</option>
+        <option>After builders cleaning</option>
+        <option>Carpet cleaning</option>
+        <option>Upholstery cleaning</option>
+        <option>Mattress cleaning</option>
+      </select>
+      <div class="row">
+        <div><label for="area">Area or town</label><input id="area" name="area" required placeholder="e.g. Hornchurch"></div>
+        <div><label for="postcode_district">Postcode start</label><input id="postcode_district" name="postcode_district" placeholder="e.g. RM11" autocapitalize="characters" maxlength="5"></div>
+      </div>
+      <div class="row">
+        <div><label for="property_type">Type of property</label><input id="property_type" name="property_type" placeholder="e.g. semi detached house"></div>
+        <div><label for="property_size">Size</label><input id="property_size" name="property_size" placeholder="e.g. 3 bedrooms, 2 bathrooms"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>What happened</h2>
+      <label for="situation">The situation and the problem</label>
+      <p class="hint">Why did the customer need us? What did you find when you arrived? For example: moving out on Friday, heavy limescale in the shower, grease on the oven door.</p>
+      <textarea id="situation" name="situation" required></textarea>
+      <label for="what_we_did">What you did</label>
+      <p class="hint">Step by step, room by room, and anything that took extra work.</p>
+      <textarea id="what_we_did" name="what_we_did" required></textarea>
+      <div class="row">
+        <div><label for="time_taken">How long it took</label><input id="time_taken" name="time_taken" placeholder="e.g. 6 hours"></div>
+        <div><label for="cleaners">Number of cleaners</label><input id="cleaners" name="cleaners" type="number" min="1" max="20" inputmode="numeric"></div>
+      </div>
+      <label for="products">Products and equipment used <small>(optional)</small></label>
+      <input id="products" name="products" placeholder="e.g. our Limescale Remover, steam cleaner">
+      <label for="interesting">Anything interesting or useful for others to know <small>(optional)</small></label>
+      <textarea id="interesting" name="interesting"></textarea>
+    </div>
+
+    <div class="card">
+      <h2>Photos <small style="font-weight:400;color:var(--muted)">(optional, up to 8)</small></h2>
+      <p class="hint">Before and after photos work best. Keep family photos, letters and anything personal out of shot.</p>
+      <input id="photos" type="file" accept="image/*" multiple>
+      <div id="previews" class="photos"></div>
+    </div>
+
+    <div class="card">
+      <h2>What the customer said <small style="font-weight:400;color:var(--muted)">(optional)</small></h2>
+      <label for="customer_comment">Their words</label>
+      <textarea id="customer_comment" name="customer_comment" style="min-height:80px"></textarea>
+      <label class="check"><input type="checkbox" id="customer_permission" name="customer_permission"> The customer said we can use their comment on our website, without their name.</label>
+    </div>
+
+    <button id="send" type="submit">Send case study</button>
+  </form>
+</div>
+<script>
+(function () {
+  var URL_ = "https://dkomihipebixlegygnoy.supabase.co", KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrb21paGlwZWJpeGxlZ3lnbm95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA1MDEwNTMsImV4cCI6MjA0NjA3NzA1M30.z4hlXMnyyleo4sWyPnFuKFC5-tkQw4lVcDiF8TRWla4", BUCKET = "case-study-photos";
+  var f = document.getElementById("f"), btn = document.getElementById("send"), err = document.getElementById("error"), done = document.getElementById("done");
+  var input = document.getElementById("photos"), prev = document.getElementById("previews"), shots = [];
+  try { var c = localStorage.getItem("snTeamCode"), n = localStorage.getItem("snTeamName"); if (c) f.code.value = c; if (n) f.team_member.value = n; } catch (e) {}
+
+  function shrink(file) {
+    return new Promise(function (res, rej) {
+      var img = new Image();
+      img.onload = function () {
+        var s = Math.min(1, 1600 / Math.max(img.width, img.height)), cv = document.createElement("canvas");
+        cv.width = Math.round(img.width * s); cv.height = Math.round(img.height * s);
+        cv.getContext("2d").drawImage(img, 0, 0, cv.width, cv.height);
+        cv.toBlob(function (b) { b ? res(b) : rej(new Error("photo")); }, "image/jpeg", 0.8);
+      };
+      img.onerror = function () { rej(new Error("photo")); };
+      img.src = window.URL.createObjectURL(file);
+    });
+  }
+  input.addEventListener("change", function () {
+    var files = [].slice.call(input.files, 0, 8 - shots.length);
+    files.forEach(function (file) {
+      shrink(file).then(function (b) {
+        shots.push(b);
+        var im = document.createElement("img"); im.alt = "Photo " + shots.length; im.src = window.URL.createObjectURL(b); prev.appendChild(im);
+      }).catch(function () {});
+    });
+    input.value = "";
+  });
+
+  function id() { return (crypto.randomUUID ? crypto.randomUUID() : String(Date.now()) + Math.random().toString(16).slice(2)); }
+  function show(m) { err.textContent = m; err.hidden = false; done.hidden = true; window.scrollTo(0, 0); }
+
+  f.addEventListener("submit", function (e) {
+    e.preventDefault(); err.hidden = true;
+    var need = ["team_member", "code", "service", "area", "situation", "what_we_did"];
+    for (var i = 0; i < need.length; i++) { if (!f[need[i]].value.trim()) { var lab = f.querySelector('label[for="' + need[i] + '"]'); show("Please fill in: " + (lab ? lab.firstChild.textContent.trim() : need[i])); f[need[i]].focus(); return; } }
+    var code = f.code.value.trim().toUpperCase();
+    btn.disabled = true; btn.textContent = "Sending…";
+    var urls = [];
+    var uploads = shots.map(function (b) {
+      var path = code + "/" + id() + ".jpg";
+      return fetch(URL_ + "/storage/v1/object/" + BUCKET + "/" + path, { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "image/jpeg" }, body: b })
+        .then(function (r) { if (!r.ok) throw new Error("upload"); urls.push(URL_ + "/storage/v1/object/public/" + BUCKET + "/" + path); });
+    });
+    Promise.all(uploads).then(function () {
+      var row = {
+        team_member: f.team_member.value.trim(), team_code: code, service: f.service.value, area: f.area.value.trim(),
+        postcode_district: f.postcode_district.value.trim().toUpperCase() || null, property_type: f.property_type.value.trim() || null,
+        property_size: f.property_size.value.trim() || null, situation: f.situation.value.trim(), what_we_did: f.what_we_did.value.trim(),
+        time_taken: f.time_taken.value.trim() || null, cleaners: f.cleaners.value ? parseInt(f.cleaners.value, 10) : null,
+        products: f.products.value.trim() || null, interesting: f.interesting.value.trim() || null,
+        customer_comment: f.customer_comment.value.trim() || null, customer_permission: f.customer_permission.checked, photos: urls
+      };
+      return fetch(URL_ + "/rest/v1/case_study_submissions", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json", Prefer: "return=minimal" }, body: JSON.stringify(row) });
+    }).then(function (r) {
+      if (!r.ok) throw new Error("save");
+      try { localStorage.setItem("snTeamCode", code); localStorage.setItem("snTeamName", f.team_member.value.trim()); } catch (e) {}
+      var keepCode = f.code.value, keepName = f.team_member.value;
+      f.reset(); f.code.value = keepCode; f.team_member.value = keepName; shots = []; prev.innerHTML = "";
+      done.hidden = false; window.scrollTo(0, 0);
+    }).catch(function () {
+      show("It didn't send. Check the team code is right and you have signal, then try again.");
+    }).then(function () { btn.disabled = false; btn.textContent = "Send case study"; });
+  });
+})();
+</script>
+</body>
+</html>
