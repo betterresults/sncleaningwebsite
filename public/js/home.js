@@ -52,6 +52,40 @@
     svg.addEventListener('pointerleave', hideTip);
   }
 
+  // ---------- Area pages: small nearby map fades in when it scrolls into view ----------
+  const mini = document.querySelector('.mini-map');
+  if (mini) {
+    if ('IntersectionObserver' in window) {
+      const mio = new IntersectionObserver((es) => { if (es[0].isIntersecting) { mini.classList.add('is-in'); mio.disconnect(); } }, { threshold: 0.2 });
+      mio.observe(mini);
+    } else mini.classList.add('is-in');
+  }
+
+  // ---------- Area pages: "Find your area" filter + folded groups on phones ----------
+  const dir = document.querySelector('[data-area-dir]');
+  if (dir) {
+    const groups = [...dir.querySelectorAll('.area-dir-group')];
+    if (window.matchMedia('(max-width: 700px)').matches) groups.forEach((g) => g.removeAttribute('open'));
+    const input = dir.querySelector('[data-area-search]');
+    const empty = dir.querySelector('[data-area-empty]');
+    input.addEventListener('input', () => {
+      const q = input.value.trim().toLowerCase();
+      let any = false;
+      groups.forEach((g) => {
+        let n = 0;
+        g.querySelectorAll('li').forEach((li) => {
+          const hit = !q || li.textContent.toLowerCase().includes(q);
+          li.hidden = !hit;
+          if (hit) n++;
+        });
+        g.hidden = n === 0;
+        if (q && n) g.setAttribute('open', '');
+        if (n) any = true;
+      });
+      empty.hidden = any;
+    });
+  }
+
   // ---------- Quote form: keep aria-invalid in sync with :user-invalid ----------
   const form = document.querySelector('.h-form');
   if (form) {

@@ -211,6 +211,7 @@ function buildMapLink(areaPages, regions, servicePref, { onlyThese = false } = {
 // Service pages already moved to the new design (views/service-v2.ejs).
 // The rest still use views/service-detail.ejs until they are redesigned.
 const serviceContent = require('./data/service-content');
+const areaMap = require('./lib/area-map');
 app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
 
@@ -641,16 +642,44 @@ async function renderArea(req, res, next, areaSlug) {
     const faqs = page.faqs || [];
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
-    // Every area page shows it, with this area (or the borough it sits in) highlighted.
+    // London / Essex pages: the big coverage map linking to this service's pages.
     const serviceMap = buildMapLink(allAreaPages, allRegions, [service.slug], { onlyThese: true });
-    const mapLink = serviceMap.count ? serviceMap : null;
-    const chainNames = new Set();
-    // ("Essex - Romford / Thurrock Edge" is drawn as Thurrock on the map, so it
-    // is not highlighted; Romford shows as part of Havering instead.)
-    for (let r = region; r; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) {
-      if (!/Thurrock/.test(r.name)) chainNames.add(r.name);
+    const mapLink = region.level === 'region' && serviceMap.count ? serviceMap : null;
+    // Every other area page: a small map of this area and its neighbours,
+    // with links to nearby pages beside it, and a grouped list of all the rest.
+    const chain = [];
+    for (let r = region; r; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) chain.push(r);
+    const chainNames = chain.map((r) => r.name);
+    const svcPages = allAreaPages.filter((ap) => ap.services.slug === service.slug && ap.coverage_regions);
+    const pageForRegionName = (n) => svcPages.find((ap) => ap.coverage_regions.name === n);
+    const link = (ap) => ({ name: areaName(ap.coverage_regions), url: pageUrl(ap) });
+    const mini = mapLink ? null : areaMap.miniMap(chainNames, (n) => !!pageForRegionName(n));
+    let nearbyLinks = [];
+    if (region.level !== 'region') {
+      if (parent && region.level === 'town') {
+        const neighbourPages = (mini ? mini.neighbourRegions : []).map(pageForRegionName).filter(Boolean);
+        nearbyLinks = [...(parentPage ? [parentPage] : []), ...nearby.sort((a, b) => areaName(a.coverage_regions).localeCompare(areaName(b.coverage_regions))).slice(0, 5), ...neighbourPages];
+      } else {
+        const neighbourPages = (mini ? mini.neighbourRegions : []).map(pageForRegionName).filter(Boolean);
+        nearbyLinks = [...children, ...neighbourPages];
+      }
     }
-    const mapCurrent = (n) => chainNames.has(n);
+    nearbyLinks = nearbyLinks.filter((ap, i, a) => ap.id !== page.id && a.findIndex((x) => x.id === ap.id) === i).map(link);
+    if (region.level !== 'town') nearbyLinks.sort((a, b) => a.name.localeCompare(b.name));
+    nearbyLinks = nearbyLinks.slice(0, 8);
+    const shown = new Set([pageUrl(page), ...nearbyLinks.map((l) => l.url)]);
+    const groups = new Map();
+    for (const ap of svcPages) {
+      if (shown.has(pageUrl(ap)) || ap.coverage_regions.level === 'region') continue;
+      const names = [];
+      for (let r = ap.coverage_regions; r; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) names.push(r.name);
+      const g = areaMap.groupFor(names);
+      if (!groups.has(g)) groups.set(g, []);
+      groups.get(g).push(link(ap));
+    }
+    const directory = areaMap.GROUP_ORDER.filter((g) => groups.has(g)).map((g) => ({
+      name: g, links: groups.get(g).sort((a, b) => a.name.localeCompare(b.name))
+    }));
     const mapCopy = require('./data/area-map-copy')[service.slug] || '';
     // Every page in Essex (any service), plus domestic cleaning in Havering
     // (Romford, Upminster), shows the team video.
@@ -664,8 +693,10 @@ async function renderArea(req, res, next, areaSlug) {
       : null;
     return res.render('area-v2', {
       mapLink,
-      mapCurrent,
       mapCopy,
+      mini,
+      nearbyLinks,
+      directory,
       video,
       designV2: true,
       heroPreload: serviceImage(service.slug),

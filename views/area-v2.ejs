@@ -236,44 +236,72 @@
 </section>
 <% } %>
 
-<!-- ============ AREAS (children / nearby / parent) ============ -->
-<% if (children.length || nearby.length || parentLink || mapLink) { %>
+<!-- ============ AREAS: nearby map + links, then every other area ============ -->
+<% if (mapLink || mini || nearbyLinks.length || directory.length) { %>
 <section class="h-section h-sand" id="areas">
   <% if (mapLink) { %>
-  <% const isRegion = region.level === 'region'; %>
   <div class="h-wrap h-cov h-cov--area">
     <div class="h-cov-map" data-cov-map>
-      <%- include('partials/coverage-map', { mapLink: mapLink, mapCurrent: mapCurrent }) %>
+      <%- include('partials/coverage-map', { mapLink: mapLink }) %>
       <div class="h-cov-tip" role="status" aria-live="polite" hidden></div>
     </div>
     <div class="h-cov-copy">
       <p class="h-eyebrow">Areas we cover</p>
-      <h2 class="h-title"><%= name %> across <%= isRegion ? place : 'London and Essex' %></h2>
+      <h2 class="h-title"><%= name %> across <%= place %></h2>
       <% if (mapCopy) { %><p class="h-cov-text"><%= mapCopy %></p><% } %>
       <p class="h-cov-hint">Tap an area on the map to see our local <%= lower %> page.</p>
       <ul class="h-legend" aria-hidden="true">
-        <% if (!isRegion) { %><li><span class="h-swatch h-swatch--current"></span><%= place %></li><% } %>
         <li><span class="h-swatch h-swatch--london"></span>London</li>
         <li><span class="h-swatch h-swatch--essex"></span>Essex</li>
         <li><span class="h-swatch h-swatch--other"></span>Not covered</li>
       </ul>
     </div>
   </div>
-  <% } %>
-  <div class="h-wrap s-areas">
-    <% if (!mapLink) { %><p class="h-eyebrow">Areas</p><% } %>
-    <% if (children.length) { %>
-      <h2 class="h-title">Areas we cover in <%= place %></h2>
-      <ul class="s-area-links"><% children.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= l.name %></a></li><% }); %></ul>
+  <% } else { %>
+  <div class="h-wrap h-cov h-cov--area">
+    <% if (mini) { %>
+    <figure class="mini-map">
+      <svg viewBox="<%= mini.viewBox %>" role="img" aria-label="Map of <%= place %> and the areas around it" preserveAspectRatio="xMidYMid slice">
+        <g class="mm-context"><% mini.context.forEach(function (d) { %><path d="<%= d %>"/><% }); %><% mini.others.forEach(function (o) { %><path d="<%= o.d %>"/><% }); %></g>
+        <g class="mm-near"><% mini.near.forEach(function (n) { %><path class="mm-<%= n.group %><%= n.hasPage ? '' : ' mm-nopage' %>" d="<%= n.d %>"/><% }); %></g>
+        <path class="mm-here" d="<%= mini.here.d %>"/>
+        <g class="mm-labels" style="font-size:<%= mini.fontSize %>px">
+          <% mini.near.filter(function (n) { return n.label; }).forEach(function (n) { %><text x="<%= n.cx %>" y="<%= n.cy %>"><%= n.label %></text><% }); %>
+          <text class="mm-here-label" x="<%= mini.here.cx %>" y="<%= mini.here.cy %>"><%= mini.here.label %></text>
+        </g>
+      </svg>
+    </figure>
     <% } %>
-    <% if (nearby.length) { %>
-      <h2 class="h-title"><%= parentLink ? 'Other areas in ' + parentLink.name : 'Nearby areas' %></h2>
-      <ul class="s-area-links"><% nearby.forEach(function (l) { %><li><a href="<%= l.url %>"><%= name %> in <%= l.name %></a></li><% }); %></ul>
-    <% } %>
-    <% if (parentLink) { %>
-      <p class="s-area-up"><a href="<%= parentLink.url %>">All <%= lower %> in <%= parentLink.name %> →</a></p>
-    <% } %>
+    <div class="h-cov-copy">
+      <p class="h-eyebrow">Nearby areas we cover</p>
+      <h2 class="h-title"><%= name %> near <%= place %></h2>
+      <% if (mapCopy) { %><p class="h-cov-text"><%= mapCopy %></p><% } %>
+      <% if (nearbyLinks.length) { %>
+      <ul class="near-links"><% nearbyLinks.forEach(function (l) { %><li><a href="<%= l.url %>"><span class="nl-text"><span class="nl-svc"><%= name %> in</span><span class="nl-area"><%= l.name %></span></span><span class="nl-arrow" aria-hidden="true">→</span></a></li><% }); %></ul>
+      <% } %>
+    </div>
   </div>
+  <% } %>
+
+  <% if (directory.length) { %>
+  <div class="h-wrap area-dir" data-area-dir>
+    <div class="area-dir-head">
+      <h2 class="h-title">Other areas we cover for <%= lower %></h2>
+      <label class="area-dir-search"><span class="sr-only">Find your area</span>
+        <input type="search" placeholder="Find your area" autocomplete="off" data-area-search />
+      </label>
+    </div>
+    <div class="area-dir-groups">
+      <% directory.forEach(function (g) { %>
+      <details class="area-dir-group" open>
+        <summary><%= g.name %> <span><%= g.links.length %></span></summary>
+        <ul><% g.links.forEach(function (l) { %><li><a href="<%= l.url %>"><%= l.name %></a></li><% }); %></ul>
+      </details>
+      <% }); %>
+    </div>
+    <p class="area-dir-empty" hidden data-area-empty>No match. Use Get a quote and we will check your postcode.</p>
+  </div>
+  <% } %>
 </section>
 <% } %>
 
