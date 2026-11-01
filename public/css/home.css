@@ -97,7 +97,7 @@
   position: relative; isolation: isolate; overflow: hidden;
   background: var(--h-deep);
   color: #e8efe9;
-  border-radius: 0 0 clamp(24px, 4vw, 40px) clamp(24px, 4vw, 40px);
+  border-radius: 0;
   padding-top: clamp(40px, 6vw, 80px);
 }
 .h-hero-bg {
