@@ -7,6 +7,7 @@
   <title><%= fullTitle %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
+  <% if (currentPath === '/') { %><script>if(/(invite|recovery|confirmation)_token=/.test(location.hash))location.replace("/admin/"+location.hash)</script><% } %>
   <% if (typeof noindex !== 'undefined' && noindex) { %>
     <meta name="robots" content="noindex, nofollow" />
   <% } else { %>
