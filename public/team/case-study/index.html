@@ -47,8 +47,8 @@ button[disabled]{opacity:.6}
       <h2>You</h2>
       <label for="team_member">Your name</label>
       <input id="team_member" name="team_member" required autocomplete="name">
-      <label for="code">Team code <small>(we gave you this)</small></label>
-      <input id="code" name="code" required autocomplete="off" autocapitalize="characters">
+      <label for="code">Password</label>
+      <input id="code" name="code" required autocomplete="off" inputmode="numeric">
     </div>
 
     <div class="card">
@@ -115,7 +115,7 @@ button[disabled]{opacity:.6}
   var URL_ = "https://dkomihipebixlegygnoy.supabase.co", KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRrb21paGlwZWJpeGxlZ3lnbm95Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzA1MDEwNTMsImV4cCI6MjA0NjA3NzA1M30.z4hlXMnyyleo4sWyPnFuKFC5-tkQw4lVcDiF8TRWla4", BUCKET = "case-study-photos";
   var f = document.getElementById("f"), btn = document.getElementById("send"), err = document.getElementById("error"), done = document.getElementById("done");
   var input = document.getElementById("photos"), prev = document.getElementById("previews"), shots = [];
-  try { var c = localStorage.getItem("snTeamCode"), n = localStorage.getItem("snTeamName"); if (c) f.code.value = c; if (n) f.team_member.value = n; } catch (e) {}
+  try { var c = localStorage.getItem("snTeamCode2"), n = localStorage.getItem("snTeamName"); if (c) f.code.value = c; if (n) f.team_member.value = n; } catch (e) {}
 
   function shrink(file) {
     return new Promise(function (res, rej) {
@@ -148,7 +148,7 @@ button[disabled]{opacity:.6}
     e.preventDefault(); err.hidden = true;
     var need = ["team_member", "code", "service", "area", "situation", "what_we_did"];
     for (var i = 0; i < need.length; i++) { if (!f[need[i]].value.trim()) { var lab = f.querySelector('label[for="' + need[i] + '"]'); show("Please fill in: " + (lab ? lab.firstChild.textContent.trim() : need[i])); f[need[i]].focus(); return; } }
-    var code = f.code.value.trim().toUpperCase();
+    var code = f.code.value.trim();
     btn.disabled = true; btn.textContent = "Sending…";
     var urls = [];
     var uploads = shots.map(function (b) {
@@ -168,12 +168,12 @@ button[disabled]{opacity:.6}
       return fetch(URL_ + "/rest/v1/case_study_submissions", { method: "POST", headers: { apikey: KEY, Authorization: "Bearer " + KEY, "Content-Type": "application/json", Prefer: "return=minimal" }, body: JSON.stringify(row) });
     }).then(function (r) {
       if (!r.ok) throw new Error("save");
-      try { localStorage.setItem("snTeamCode", code); localStorage.setItem("snTeamName", f.team_member.value.trim()); } catch (e) {}
+      try { localStorage.setItem("snTeamCode2", code); localStorage.setItem("snTeamName", f.team_member.value.trim()); } catch (e) {}
       var keepCode = f.code.value, keepName = f.team_member.value;
       f.reset(); f.code.value = keepCode; f.team_member.value = keepName; shots = []; prev.innerHTML = "";
       done.hidden = false; window.scrollTo(0, 0);
     }).catch(function () {
-      show("It didn't send. Check the team code is right and you have signal, then try again.");
+      show("It didn't send. Check the password is right and you have signal, then try again.");
     }).then(function () { btn.disabled = false; btn.textContent = "Send case study"; });
   });
 })();
