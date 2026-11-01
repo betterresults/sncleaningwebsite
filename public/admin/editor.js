@@ -351,6 +351,7 @@ async function previewHtml(p) {
   }
   for (const img of draft.images) html = html.split(`/images/uploads/${img}`).join(`/api/draft-image/${img}`);
   html = html.replace("<head>", `<head>\n<base href="${location.origin}/">`);
+  if (!html.includes("/css/extras.css") && !html.includes(".author-box{")) html = html.replace("</head>", '<link rel="stylesheet" href="/css/extras.css"></head>');
   if (mode === "edit") html = html.replace(/<script(?![^>]*\btype=)/g, '<script type="text/x-ed-off"');
   return html;
 }

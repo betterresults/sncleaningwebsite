@@ -45,24 +45,9 @@
   <!-- Instant page changes: booking forms (app. subdomain) and the contact page are
        prepared in the background as soon as a page linking to them loads; every
        other internal page is prepared on hover/touch. -->
-  <script type="speculationrules">
-  {
-    "prefetch": [
-      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }
-    ],
-    "prerender": [
-      { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },
-      { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },
-      { "tag": "site", "where": { "and": [
-          { "href_matches": "/*" },
-          { "not": { "href_matches": "/book{/*}?" } },
-          { "not": { "href_matches": "/contact{/}?" } },
-          { "not": { "href_matches": "/contact/success{/*}?" } },
-          { "not": { "selector_matches": "[target=_blank], [download]" } }
-        ] }, "eagerness": "moderate" }
-    ]
-  }
-  </script>
+  <%# Booking forms and pages are prepared in the background, but only after this
+      page has fully loaded, so it never slows down the first view. %>
+  <script>addEventListener('load',function(){setTimeout(function(){if(!HTMLScriptElement.supports||!HTMLScriptElement.supports('speculationrules'))return;var s=document.createElement('script');s.type='speculationrules';s.textContent=JSON.stringify({     "prefetch": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }     ],     "prerender": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },       { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },       { "tag": "site", "where": { "and": [           { "href_matches": "/*" },           { "not": { "href_matches": "/book{/*}?" } },           { "not": { "href_matches": "/contact{/}?" } },           { "not": { "href_matches": "/contact/success{/*}?" } },           { "not": { "selector_matches": "[target=_blank], [download]" } }         ] }, "eagerness": "moderate" }     ]   });document.head.appendChild(s)},300)})</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <%# Web fonts load without blocking the first paint (text shows in a fallback font, then swaps). %>
