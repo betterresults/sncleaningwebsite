@@ -1,4 +1,4 @@
-<%# Area page — new design. One template for every service + area
+<%# Area page, new design. One template for every service + area
     TEMPLATE: every area page for every service uses this file. Rules and
     field guide: docs/AREA-PAGE-TEMPLATE.md and Supabase table area_page_template.
     (/end-of-tenancy-cleaning/romford/, /domestic-cleaning/havering/ ...).
@@ -21,9 +21,9 @@
   const reclean = service.slug === 'end-of-tenancy-cleaning' ? 72 : 24;
   const benefits = [
     ['Our own trained cleaners', 'Never subcontractors or gig workers, so you get the same standard every time.'],
-    ['Insured and DBS-checked', 'People you can trust in your home, fully insured for every job.'],
+    ['Insured and DBS checked', 'People you can trust in your home, fully insured for every job.'],
     ['A proper clean, not a quick wipe', 'Professional products and equipment, including our own limescale remover.'],
-    ['Re-clean within ' + reclean + ' hours', 'If anything is missed, tell us within ' + reclean + ' hours and we come back to put it right.']
+    ['Re clean within ' + reclean + ' hours', 'If anything is missed, tell us within ' + reclean + ' hours and we come back to put it right.']
   ];
   // Reviews: ones that mention this area first, then ones about this service.
   const placeRe = new RegExp(place.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');

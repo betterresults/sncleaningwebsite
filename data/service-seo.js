@@ -8,26 +8,26 @@ module.exports = {
   'domestic-cleaning': {
     metaTitle: 'Domestic Cleaning London & Essex | From £23/hour',
     metaDescription:
-      'Weekly, fortnightly, monthly or one-off domestic cleaning in London & Essex by our own insured, DBS-checked cleaners. From £23 an hour. Book online.',
+      'Weekly, fortnightly, monthly or one off domestic cleaning in London & Essex by our own insured, DBS checked cleaners. From £23 an hour. Book online.',
     prices: [],
     guide: [
       {
         h: 'What is domestic cleaning?',
         p: [
-          'Domestic cleaning is regular, general cleaning of your home: kitchens, bathrooms, living areas and bedrooms kept clean and tidy on a schedule that suits you. It is the clean that keeps a home on top, week after week, rather than a one-time deep reset.',
-          `SN Cleaning Services has provided domestic cleaning ${LONDON_ESSEX} for 12 years. Every clean is done by our own trained, insured and DBS-checked cleaners, never subcontractors, and we send the same cleaner wherever we can so they get to know your home.`
+          'Domestic cleaning is regular, general cleaning of your home: kitchens, bathrooms, living areas and bedrooms kept clean and tidy on a schedule that suits you. It is the clean that keeps a home on top, week after week, rather than a one time deep reset.',
+          `SN Cleaning Services has provided domestic cleaning ${LONDON_ESSEX} for 12 years. Every clean is done by our own trained, insured and DBS checked cleaners, never subcontractors, and we send the same cleaner wherever we can so they get to know your home.`
         ]
       },
       {
         h: 'How much does domestic cleaning cost in London and Essex?',
         p: [
-          'Our domestic cleaning starts from £23 an hour. Regular visits cost less per hour than a one-off clean. Click Get a quote, enter your postcode and email, and the booking form shows your exact price before you confirm.'
+          'Our domestic cleaning starts from £23 an hour. Regular visits cost less per hour than a one off clean. Click Get a quote, enter your postcode and email, and the booking form shows your exact price before you confirm.'
         ]
       },
       {
         h: 'Weekly, fortnightly or monthly: how often should you book?',
         p: [
-          'Weekly suits busy households, families and homes with pets, where the house needs regular attention to stay on top. Fortnightly is a good balance for couples and smaller homes. Monthly works as a regular reset, and a one-off clean is there when you need a hand before guests arrive or after a busy few weeks.'
+          'Weekly suits busy households, families and homes with pets, where the house needs regular attention to stay on top. Fortnightly is a good balance for couples and smaller homes. Monthly works as a regular reset, and a one off clean is there when you need a hand before guests arrive or after a busy few weeks.'
         ]
       },
       {
@@ -52,14 +52,14 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London & Essex | From £179',
     metaDescription:
-      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Fixed prices from £179. 72-hour re-clean if the agent flags anything.',
+      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Fixed prices from £179. 72-hour re clean if the agent flags anything.',
     prices: [],
     guide: [
       {
         h: 'What is an end of tenancy clean?',
         p: [
-          'An end of tenancy clean, also called a move-out clean, is a thorough clean of a rented property when a tenant leaves. It returns the property to the standard it was in at the start of the tenancy, which is what the letting agent or inventory clerk checks at the check-out inspection.',
-          `We carry out end of tenancy cleaning ${LONDON_ESSEX} for tenants, landlords and letting agents, with our own trained, insured and DBS-checked team.`
+          'An end of tenancy clean, also called a move out clean, is a thorough clean of a rented property when a tenant leaves. It returns the property to the standard it was in at the start of the tenancy, which is what the letting agent or inventory clerk checks at the check out inspection.',
+          `We carry out end of tenancy cleaning ${LONDON_ESSEX} for tenants, landlords and letting agents, with our own trained, insured and DBS checked team.`
         ]
       },
       {
@@ -85,13 +85,13 @@ module.exports = {
       {
         h: 'What if the agent is not happy with the clean?',
         p: [
-          'Tell us within 72 hours and we come back and re-clean anything cleaning-related that the agent has flagged, free of charge. We allow 72 hours rather than 24 because the property is empty and it can take a day or two for the agent or landlord to inspect.'
+          'Tell us within 72 hours and we come back and re clean anything cleaning related that the agent has flagged, free of charge. We allow 72 hours rather than 24 because the property is empty and it can take a day or two for the agent or landlord to inspect.'
         ]
       },
       {
         h: 'When should you book an end of tenancy clean?',
         p: [
-          'Book the clean for after your furniture and belongings have been moved out. An empty property lets us clean behind and under everything, which is exactly what the check-out inspection looks at. Booking a few days before your move-out date also gives time for any re-clean before you hand back the keys.'
+          'Book the clean for after your furniture and belongings have been moved out. An empty property lets us clean behind and under everything, which is exactly what the check out inspection looks at. Booking a few days before your move out date also gives time for any re clean before you hand back the keys.'
         ]
       }
     ],
@@ -110,13 +110,13 @@ module.exports = {
   'airbnb-cleaning': {
     metaTitle: 'Airbnb Cleaning London & Essex | From £24/hour',
     metaDescription:
-      'Airbnb and short-let cleaning in London & Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
+      'Airbnb and short let cleaning in London & Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
     guide: [
       {
         h: 'What is Airbnb cleaning?',
         p: [
           'Airbnb cleaning, also called a turnover or changeover clean, is the clean between one guest checking out and the next checking in. The property is cleaned, the beds are changed and the bathrooms, kitchen and living areas are reset so the listing is ready for the next stay.',
-          `We clean Airbnb and short-let properties ${LONDON_ESSEX} for hosts and co-hosts, with our own trained, insured and DBS-checked team.`
+          `We clean Airbnb and short let properties ${LONDON_ESSEX} for hosts and co hosts, with our own trained, insured and DBS checked team.`
         ]
       },
       {
@@ -133,9 +133,9 @@ module.exports = {
         ]
       },
       {
-        h: 'Can you do same-day turnovers?',
+        h: 'Can you do same day turnovers?',
         p: [
-          'Yes. Same-day check-out to check-in turnovers are what this service is built for. Tell us your usual check-out and check-in times and we plan the clean around them.'
+          'Yes. Same day check out to check in turnovers are what this service is built for. Tell us your usual check out and check in times and we plan the clean around them.'
         ]
       },
       {
@@ -148,7 +148,7 @@ module.exports = {
     extraFaqs: [
       {
         question: 'Do you clean Airbnb properties in Essex as well as London?',
-        answer: 'Yes, we clean short-let and Airbnb properties across London and Essex. Enter your postcode in the quote form to check your address.'
+        answer: 'Yes, we clean short let and Airbnb properties across London and Essex. Enter your postcode in the quote form to check your address.'
       }
     ]
   },
@@ -156,14 +156,14 @@ module.exports = {
   'deep-house-cleaning': {
     metaTitle: 'Deep Cleaning London & Essex | From £27/hour',
     metaDescription:
-      'Deep house cleaning in London & Essex: inside the oven, grout, tiles, skirting boards and behind furniture. Own insured, DBS-checked team. From £27 an hour.',
+      'Deep house cleaning in London & Essex: inside the oven, grout, tiles, skirting boards and behind furniture. Own insured, DBS checked team. From £27 an hour.',
     prices: [],
     guide: [
       {
         h: 'What is a deep clean?',
         p: [
-          'A deep clean is a top-to-bottom clean of the areas a regular clean does not usually cover. It goes after the grime that builds up over time: inside the oven, around grout and tiles, on skirting boards and door frames, and behind and under furniture.',
-          `We carry out deep cleaning ${LONDON_ESSEX} with our own trained, insured and DBS-checked team, using professional products for every surface.`
+          'A deep clean is a top to bottom clean of the areas a regular clean does not usually cover. It goes after the grime that builds up over time: inside the oven, around grout and tiles, on skirting boards and door frames, and behind and under furniture.',
+          `We carry out deep cleaning ${LONDON_ESSEX} with our own trained, insured and DBS checked team, using professional products for every surface.`
         ]
       },
       {
@@ -196,13 +196,13 @@ module.exports = {
   'after-builders-cleaning': {
     metaTitle: 'After Builders Cleaning London & Essex | From £179',
     metaDescription:
-      'After builders and post-renovation cleaning in London & Essex. Building dust removed from every surface, ready to move in or hand over. Request a quote.',
+      'After builders and post renovation cleaning in London & Essex. Building dust removed from every surface, ready to move in or hand over. Request a quote.',
     guide: [
       {
         h: 'What is an after builders clean?',
         p: [
-          'An after builders clean, also called a post-construction or post-renovation clean, removes the dust, debris and residue left once building work is finished. Fine building dust settles on every surface, inside cupboards and on fittings, and a normal clean does not shift it.',
-          `We carry out after builders cleaning ${LONDON_ESSEX} for homeowners, landlords, builders and developers, with our own trained, insured and DBS-checked team.`
+          'An after builders clean, also called a post construction or post renovation clean, removes the dust, debris and residue left once building work is finished. Fine building dust settles on every surface, inside cupboards and on fittings, and a normal clean does not shift it.',
+          `We carry out after builders cleaning ${LONDON_ESSEX} for homeowners, landlords, builders and developers, with our own trained, insured and DBS checked team.`
         ]
       },
       {
@@ -219,7 +219,7 @@ module.exports = {
       {
         h: 'When should you book an after builders clean?',
         p: [
-          'Book once the trades have finished and the property is clear to access. If you have a handover, move-in or completion date, tell us when you request a quote and we will plan the clean around it.'
+          'Book once the trades have finished and the property is clear to access. If you have a handover, move in or completion date, tell us when you request a quote and we will plan the clean around it.'
         ]
       }
     ],
@@ -234,14 +234,14 @@ module.exports = {
   'carpet-cleaning-services': {
     metaTitle: 'Carpet Cleaning London & Essex | From £49',
     metaDescription:
-      'Professional carpet and rug cleaning in London & Essex. Stains pre-treated, fast-dry method, from £49. Book online.',
+      'Professional carpet and rug cleaning in London & Essex. Stains pre-treated, fast dry method, from £49. Book online.',
     prices: [],
     guide: [
       {
         h: 'How does professional carpet cleaning work?',
         p: [
-          'We first check the carpet type and condition, vacuum up loose dirt and pre-treat visible stains. The carpet is then deep cleaned with professional equipment to lift dirt from deep in the fibres, treated for odours and finished with a fast-dry method.',
-          `We clean carpets and rugs ${LONDON_ESSEX} in homes and rental properties, with our own trained, insured and DBS-checked team.`
+          'We first check the carpet type and condition, vacuum up loose dirt and pre treat visible stains. The carpet is then deep cleaned with professional equipment to lift dirt from deep in the fibres, treated for odours and finished with a fast dry method.',
+          `We clean carpets and rugs ${LONDON_ESSEX} in homes and rental properties, with our own trained, insured and DBS checked team.`
         ]
       },
       {
@@ -253,7 +253,7 @@ module.exports = {
       {
         h: 'How long do carpets take to dry?',
         p: [
-          'With our fast-dry method most carpets can be walked on within a few hours. Full drying can take up to 24 hours depending on the carpet and how well the room is ventilated.'
+          'With our fast dry method most carpets can be walked on within a few hours. Full drying can take up to 24 hours depending on the carpet and how well the room is ventilated.'
         ]
       },
       {
@@ -274,14 +274,14 @@ module.exports = {
   'upholstery-cleaning': {
     metaTitle: 'Sofa & Upholstery Cleaning London & Essex | From £69',
     metaDescription:
-      'Sofa, armchair and upholstery cleaning in London & Essex with fabric-safe products, priced per item. Book online.',
+      'Sofa, armchair and upholstery cleaning in London & Essex with fabric safe products, priced per item. Book online.',
     prices: [],
     guide: [
       {
         h: 'How is a sofa professionally cleaned?',
         p: [
-          'We check the fabric type, test on a hidden area and pre-treat visible stains. The piece is then deep cleaned with a fabric-safe solution, paying attention to seams, piping and crevices, and finished with a fast-dry method.',
-          `We clean sofas, armchairs, dining chairs, headboards and curtains ${LONDON_ESSEX}, with our own trained, insured and DBS-checked team.`
+          'We check the fabric type, test on a hidden area and pre treat visible stains. The piece is then deep cleaned with a fabric safe solution, paying attention to seams, piping and crevices, and finished with a fast dry method.',
+          `We clean sofas, armchairs, dining chairs, headboards and curtains ${LONDON_ESSEX}, with our own trained, insured and DBS checked team.`
         ]
       },
       {
@@ -315,7 +315,7 @@ module.exports = {
         h: 'Why get a mattress professionally cleaned?',
         p: [
           'A mattress is the one part of the bed that never goes in the wash. Over time it builds up dust mites, sweat and spills, even with clean sheets on top. A professional clean treats stains and odours and targets dust mites and allergens.',
-          `We clean mattresses ${LONDON_ESSEX} in homes and rental properties, with our own trained, insured and DBS-checked team.`
+          `We clean mattresses ${LONDON_ESSEX} in homes and rental properties, with our own trained, insured and DBS checked team.`
         ]
       },
       {

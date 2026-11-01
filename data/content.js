@@ -1,4 +1,4 @@
-// Live content layer — reads published rows from Supabase at build/request time.
+// Live content layer, reads published rows from Supabase at build/request time.
 // Falls back to empty arrays (never throws) so a Supabase hiccup can't take the
 // whole site down; routes below handle empty state gracefully.
 const supabase = require('../lib/supabase');
@@ -91,7 +91,7 @@ async function getBlogPostBySlug(slug) {
   return publishedLocalPosts().find((p) => p.slug === slug) || null;
 }
 
-// Sitewide business info (name, phone, address, hours, socials) — a single
+// Sitewide business info (name, phone, address, hours, socials), a single
 // editable row instead of hardcoded values in server.js. Falls back to null
 // (never throws) so a Supabase hiccup can't take the whole site down; the
 // caller in server.js has hardcoded defaults for that case.
@@ -105,7 +105,7 @@ async function getSiteSettings() {
   return data;
 }
 
-// The flat "Areas We Cover" list — London boroughs and Essex districts
+// The flat "Areas We Cover" list, London boroughs and Essex districts
 // (level = 'borough'; these are also the shapes on the coverage map). Specific local areas nested under one of these (e.g.
 // Shenfield under Essex - Brentwood) are surfaced separately by
 // getFeaturedAreaGroups() below instead of duplicated in this list.
@@ -125,7 +125,7 @@ async function getCoverageAreas() {
 }
 
 // Every coverage region including sub-areas, used internally to resolve a
-// sub-area's parent borough name (id, name, parent_id only — not the display list).
+// sub-area's parent borough name (id, name, parent_id only, not the display list).
 async function getAllCoverageRegions() {
   const { data, error } = await supabase.from('coverage_regions').select('id, name, display_name, parent_id, level');
 
@@ -137,7 +137,7 @@ async function getAllCoverageRegions() {
 }
 
 // Every published area page belongs to exactly one service (area_pages.service_id)
-// and one region (area_pages.region_id) — this is what lets each service build
+// and one region (area_pages.region_id), this is what lets each service build
 // its own set of borough/area pages (/end-of-tenancy-cleaning/camden/,
 // /airbnb-cleaning/hillingdon/, ...) instead of one generic area page shared
 // across every service.
@@ -154,7 +154,7 @@ async function getAreaPages() {
   return data || [];
 }
 
-// Looks up one area page by its service AND area slug together — e.g.
+// Looks up one area page by its service AND area slug together, e.g.
 // serviceSlug="end-of-tenancy-cleaning", areaSlug="camden" for
 // /end-of-tenancy-cleaning/camden/. Both must match the same row.
 async function getAreaPageBySlug(serviceSlug, areaSlug) {
@@ -183,7 +183,7 @@ async function getAreaPagesForService(serviceSlug) {
 // Powers the homepage's "Local Area Guides" section: every published area
 // page, grouped under its parent borough's name. Add a new area_pages row
 // with published = true (with a service_id set) and it appears here
-// automatically on the next request/build — nothing else to wire up. A
+// automatically on the next request/build, nothing else to wire up. A
 // borough can list more than one service if it has more than one area page.
 async function getFeaturedAreaGroups() {
   const [areaPages, regions] = await Promise.all([getAreaPages(), getAllCoverageRegions()]);

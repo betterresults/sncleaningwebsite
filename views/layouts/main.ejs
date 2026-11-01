@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <% const fullTitle = (title + ' | ' + site.name).length <= 60 ? title + ' | ' + site.name : title; /* keep under ~60 chars so Google shows it in full */ %>
   <title><%= fullTitle %></title>
-  <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.' %>" />
+  <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
   <% if (currentPath === '/') { %><script>if(/(invite|recovery|confirmation)_token=/.test(location.hash))location.replace("/admin/"+location.hash)</script><% } %>
   <% if (typeof noindex !== 'undefined' && noindex) { %>
@@ -22,7 +22,7 @@
 
   <!-- Open Graph / Twitter -->
   <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
-  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ' — professional residential and commercial cleaning services.'; %>
+  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.'; %>
   <meta property="og:type" content="<%= typeof post !== 'undefined' ? 'article' : 'website' %>" />
   <meta property="og:site_name" content="<%= site.name %>" />
   <meta property="og:title" content="<%= ogTitle %>" />

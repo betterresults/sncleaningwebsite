@@ -9,20 +9,20 @@
 const COPY = {
   'domestic-cleaning': {
     h1: 'Domestic cleaning, done <em>properly</em>',
-    lead: 'Regular or one-off cleaning for your home by our own trained, insured and DBS-checked team. We bring professional products and equipment, and work to a checklist for every room.',
+    lead: 'Regular or one off cleaning for your home by our own trained, insured and DBS checked team. We bring professional products and equipment, and work to a checklist for every room.',
     tilesEyebrow: 'Your schedule',
     tilesTitle: 'A clean home, as often as you need it',
-    tilesIntro: "Book a regular visit and we'll send the same cleaner wherever we can, so they get to know your home. Or book a one-off clean before guests arrive, after a busy few weeks, or whenever you need a hand.",
+    tilesIntro: "Book a regular visit and we'll send the same cleaner wherever we can, so they get to know your home. Or book a one off clean before guests arrive, after a busy few weeks, or whenever you need a hand.",
     tiles: [
       ['Weekly', 'Your home stays on top, every week'],
       ['Fortnightly', 'Regular help without the weekly commitment'],
       ['Monthly', 'A thorough reset once a month'],
-      ['One-off', 'Whenever you need a hand']
+      ['One off', 'Whenever you need a hand']
     ],
     stepsTitle: 'Booked in a few minutes',
     steps: [
       ['Tell us about your home', "Your postcode, the number of rooms and how often you'd like us to come."],
-      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
+      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add ons later.'],
       ['Come home to a clean house', 'Your cleaner arrives with everything needed and follows the checklist.']
     ],
     reviewMatch: /regular|weekly|clean/i,
@@ -31,43 +31,43 @@ const COPY = {
   },
   'end-of-tenancy-cleaning': {
     h1: 'End of tenancy cleaning, <em>ready for inspection</em>',
-    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against — inside the oven, limescale, skirting boards and all — so you can hand back the keys with confidence.',
+    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against, inside the oven, limescale, skirting boards and all, so you can hand back the keys with confidence.',
     tilesEyebrow: 'Who we clean for',
     tilesTitle: 'Moving out, moving in, or between tenants',
     tilesIntro: 'Agents check the same things every time: the oven, limescale in the bathroom, skirting boards, marks on walls and doors. We pay extra attention to all of them, and we work to your moving day.',
     tiles: [
       ['Tenants', 'Moving out and want to hand back the keys with confidence'],
       ['Landlords', 'Getting the property ready for the next tenant'],
-      ['Letting agents', 'A reliable team for check-outs and changeovers'],
+      ['Letting agents', 'A reliable team for check outs and changeovers'],
       ['Moving in', 'A fresh, clean start in your new home']
     ],
     stepsTitle: 'From quote to keys handed back',
     steps: [
       ['Tell us about the property', 'Your postcode, the number of bedrooms and bathrooms, and any extras like carpets.'],
       ['See your price, pick your date', 'The booking form works out your price as you go. We work to your moving day.'],
-      ['Hand back the keys', 'We clean every room to the inspection checklist, so the property is ready for check-out.']
+      ['Hand back the keys', 'We clean every room to the inspection checklist, so the property is ready for check out.']
     ],
     reviewMatch: /tenancy/i,
     finalTitle: 'Moving out soon?',
     finalText: 'Tell us about the property, see your price and book the clean for your moving day.'
   },
   'airbnb-cleaning': {
-    h1: 'Airbnb cleaning, <em>guest-ready</em> every time',
-    lead: 'Turnovers between check-out and the next check-in by our own trained, insured team. Beds made, bathroom and kitchen reset, so your listing looks the way your photos promise.',
+    h1: 'Airbnb cleaning, <em>guest ready</em> every time',
+    lead: 'Turnovers between check out and the next check in by our own trained, insured team. Beds made, bathroom and kitchen reset, so your listing looks the way your photos promise.',
     tilesEyebrow: 'Every turnover',
     tilesTitle: 'Everything a changeover needs',
-    tilesIntro: 'Tell us your usual guest schedule and we build the clean around it, including same-day check-out to check-in turnarounds.',
+    tilesIntro: 'Tell us your usual guest schedule and we build the clean around it, including same day check out to check in turnarounds.',
     tiles: [
-      ['Same-day turnovers', 'Worked around your check-out and check-in times'],
-      ['Linen & towels', 'Beds made hotel-style and fresh towels laid out'],
+      ['Same day turnovers', 'Worked around your check out and check in times'],
+      ['Linen & towels', 'Beds made hotel style and fresh towels laid out'],
       ['Guest essentials', 'Toilet roll, toiletries, tea and coffee restocked on request'],
       ['Anything to report', 'We let you know about damage or items guests left behind']
     ],
     stepsTitle: 'Set up in a few minutes',
     steps: [
       ['Tell us about the listing', 'Your postcode, the size of the property and how often guests change over.'],
-      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
-      ['Welcome your next guests', 'The property is cleaned, reset and ready for check-in.']
+      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add ons later.'],
+      ['Welcome your next guests', 'The property is cleaned, reset and ready for check in.']
     ],
     reviewMatch: /airbnb|guest|host/i,
     finalTitle: 'Next guests arriving soon?',
@@ -75,7 +75,7 @@ const COPY = {
   },
   'deep-house-cleaning': {
     h1: 'Deep cleaning that gets <em>underneath</em>',
-    lead: 'A top-to-bottom clean of everything a regular clean doesn’t reach: inside the oven, grout and tiles, skirting boards and behind furniture. Done by our own trained team with professional products.',
+    lead: 'A top to bottom clean of everything a regular clean doesn’t reach: inside the oven, grout and tiles, skirting boards and behind furniture. Done by our own trained team with professional products.',
     tilesEyebrow: 'When to book',
     tilesTitle: 'A proper reset for your home',
     tilesIntro: 'You can book a deep clean for the whole home or just the rooms that need it most. Kitchens and bathrooms are the most popular.',
@@ -100,7 +100,7 @@ const COPY = {
     lead: 'Building work leaves fine dust on every surface. We clean it away from floors, walls, skirting, fittings, windows and cupboards, so the space is ready to live in or hand over.',
     tilesEyebrow: 'Who we clean for',
     tilesTitle: 'After renovations, refits and new builds',
-    tilesIntro: 'We clear general debris and packaging as part of the clean, and with notice we work to your handover, move-in or completion date.',
+    tilesIntro: 'We clear general debris and packaging as part of the clean, and with notice we work to your handover, move in or completion date.',
     tiles: [
       ['Homeowners', 'After a renovation, extension or new kitchen'],
       ['Landlords', 'Ready for new tenants after works'],
@@ -120,21 +120,21 @@ const COPY = {
   'carpet-cleaning-services': {
     includedTitle: 'Every step of the clean, done properly',
     h1: 'Carpet cleaning that goes <em>deeper</em>',
-    lead: 'Professional equipment lifts dirt from deep in the fibres, not just the surface. We check each carpet first, treat stains before the clean and use a fast-dry method.',
+    lead: 'Professional equipment lifts dirt from deep in the fibres, not just the surface. We check each carpet first, treat stains before the clean and use a fast dry method.',
     tilesEyebrow: 'Popular for',
     tilesTitle: 'Fresh carpets, room by room',
     tilesIntro: 'Book one room or the whole property. Carpet cleaning is often added to an end of tenancy or deep clean, but works just as well on its own.',
     tiles: [
-      ['End of tenancy', 'Carpets ready for the check-out inspection'],
+      ['End of tenancy', 'Carpets ready for the check out inspection'],
       ['Homes with pets', 'Lifts dirt, hair and odours from the fibres'],
-      ['Rentals', 'Between tenants, ready for the next move-in'],
+      ['Rentals', 'Between tenants, ready for the next move in'],
       ['Rugs', 'Rugs and runners as well as fitted carpet']
     ],
     stepsTitle: 'Booked in a few minutes',
     steps: [
       ['Tell us what needs cleaning', 'Your postcode and the rooms, rugs or items you need doing.'],
-      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
-      ['Enjoy fresher carpets', 'Fast-dry method, so most carpets can be walked on within a few hours.']
+      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add ons later.'],
+      ['Enjoy fresher carpets', 'Fast dry method, so most carpets can be walked on within a few hours.']
     ],
     reviewMatch: /carpet/i,
     finalTitle: 'Carpets need a refresh?',
@@ -143,12 +143,12 @@ const COPY = {
   'upholstery-cleaning': {
     includedTitle: 'Every step of the clean, done properly',
     h1: 'Upholstery cleaning for <em>sofas and chairs</em>',
-    lead: 'We deep clean fabric sofas, armchairs and dining chairs with fabric-safe products, testing on a hidden area first so colours and textures stay as they are.',
+    lead: 'We deep clean fabric sofas, armchairs and dining chairs with fabric safe products, testing on a hidden area first so colours and textures stay as they are.',
     tilesEyebrow: 'What we clean',
     tilesTitle: 'Priced per item, so you only pay for what you need',
     tilesIntro: 'Book a single chair, a sofa or a whole suite. Upholstery, carpets and mattresses can all be done in one visit.',
     tiles: [
-      ['Sofas', 'Two-seaters, three-seaters and corner sofas'],
+      ['Sofas', 'Two seaters, three seaters and corner sofas'],
       ['Armchairs', 'Single chairs and matching pairs'],
       ['Dining chairs', 'Fabric seats and backs'],
       ['Other fabric furniture', 'Ask us about delicate or antique pieces']
@@ -156,8 +156,8 @@ const COPY = {
     stepsTitle: 'Booked in a few minutes',
     steps: [
       ['Tell us what needs cleaning', 'Your postcode and the pieces you’d like cleaned.'],
-      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
-      ['Sit back on a fresh sofa', 'Fast-dry method, so most pieces are ready to use within a few hours.']
+      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add ons later.'],
+      ['Sit back on a fresh sofa', 'Fast dry method, so most pieces are ready to use within a few hours.']
     ],
     reviewMatch: /sofa|upholster/i,
     finalTitle: 'Sofa seen better days?',
@@ -179,8 +179,8 @@ const COPY = {
     stepsTitle: 'Booked in a few minutes',
     steps: [
       ['Tell us what needs cleaning', 'Your postcode and the size and number of mattresses.'],
-      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add-ons later.'],
-      ['Sleep on a fresher bed', 'Fast-dry method, so most mattresses are dry within a few hours.']
+      ['See your price, pick a date', 'The booking form works out your price as you go. No hidden add ons later.'],
+      ['Sleep on a fresher bed', 'Fast dry method, so most mattresses are dry within a few hours.']
     ],
     reviewMatch: /mattress/i,
     finalTitle: 'Time for a fresher bed?',

@@ -35,7 +35,7 @@ const GALLERY = [
   { src: '/images/rooms/kitchen.jpg', caption: 'Kitchens' },
   { src: '/images/rooms/bathroom.jpg', caption: 'Bathrooms' },
   { src: '/images/rooms/room.jpg', caption: 'Bedrooms' },
-  { src: '/images/services/airbnb.jpg', caption: 'Guest-ready stays' },
+  { src: '/images/services/airbnb.jpg', caption: 'Guest ready stays' },
   { src: '/images/services/tenancy.jpg', caption: 'End of tenancy' },
   { src: '/images/services/office.jpg', caption: 'Offices' },
   { src: '/images/services/carpet.jpg', caption: 'Carpets & upholstery' },

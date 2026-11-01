@@ -6,9 +6,9 @@
     <p><%= service.short_description %></p>
     <div class="quote-card-badges" style="margin-top:18px;">
       <span>Insured</span>
-      <span>DBS-checked</span>
+      <span>DBS checked</span>
       <span>Own staff</span>
-      <span>Re-clean guarantee</span>
+      <span>Re clean guarantee</span>
     </div>
     <div class="page-hero-actions">
       <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>
@@ -64,10 +64,10 @@
       <span class="eyebrow">Why SN</span>
       <h2>A local team, not a franchise script</h2>
       <ul class="checklist">
-        <li><strong>Our cleaners, every job</strong> — we don't send subcontractors into your home.</li>
-        <li><strong>Insured and DBS-checked</strong> — trained staff you can leave a key with.</li>
-        <li><strong>Re-clean guarantee</strong> — tell us within <%= service.slug === 'end-of-tenancy-cleaning' ? '72' : '24' %> hours and we'll come back, free.</li>
-        <li><strong>We bring the supplies</strong> — professional products and equipment.</li>
+        <li><strong>Our cleaners, every job</strong>, we don't send subcontractors into your home.</li>
+        <li><strong>Insured and DBS checked</strong>, trained staff you can leave a key with.</li>
+        <li><strong>Re clean guarantee</strong>, tell us within <%= service.slug === 'end-of-tenancy-cleaning' ? '72' : '24' %> hours and we'll come back, free.</li>
+        <li><strong>We bring the supplies</strong>, professional products and equipment.</li>
       </ul>
       <a href="/about" class="btn btn-primary">About the company</a>
     </div>
@@ -75,7 +75,7 @@
       <div class="stat-card"><strong>12</strong><span>Years in business</span></div>
       <div class="stat-card"><strong>London &amp; Essex</strong><span>Where we work</span></div>
       <div class="stat-card"><strong>Own staff</strong><span>No gig workers</span></div>
-      <div class="stat-card"><strong>Re-clean</strong><span>If we miss a bit</span></div>
+      <div class="stat-card"><strong>Re clean</strong><span>If we miss a bit</span></div>
     </div>
   </div>
 </section>
@@ -91,7 +91,7 @@
       <div class="step">
         <div class="step-number">1</div>
         <h3>Request a quote</h3>
-        <p>Send the postcode and what you need. We'll quote you — usually the same weekday.</p>
+        <p>Send the postcode and what you need. We'll quote you, usually the same weekday.</p>
       </div>
       <div class="step">
         <div class="step-number">2</div>
@@ -145,7 +145,7 @@
     <div class="section-heading">
       <span class="eyebrow">Coverage</span>
       <h2><%= service.title %> across London &amp; Essex</h2>
-      <p>We cover the boroughs and towns below — if you don't see yours listed, get in touch and we'll confirm availability.</p>
+      <p>We cover the boroughs and towns below, if you don't see yours listed, get in touch and we'll confirm availability.</p>
     </div>
     <div class="area-tags">
       <% coverageAreas.forEach(function(area) { %>
@@ -171,7 +171,7 @@
             <div class="stars"><%= '★'.repeat(t.rating) %></div>
           </div>
           <p class="quote">"<%= t.quote %>"</p>
-          <p class="testimonial-author"><strong><%= t.name %></strong> — <%= t.location %></p>
+          <p class="testimonial-author"><strong><%= t.name %></strong>, <%= t.location %></p>
         </div>
       <% }); %>
     </div>

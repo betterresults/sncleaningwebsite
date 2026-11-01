@@ -26,7 +26,7 @@ module.exports = {
 <ul>
   <li>To reply to your enquiry and give you a price.</li>
   <li>To arrange, carry out and follow up on your clean, including sending confirmations, reminders and invoices.</li>
-  <li>To handle any re-clean request, complaint or question about a job.</li>
+  <li>To handle any re clean request, complaint or question about a job.</li>
   <li>To assess job applications and contact applicants.</li>
   <li>To keep financial records we are required to keep by law.</li>
   <li>To understand how people use our website so we can improve it.</li>
@@ -126,7 +126,7 @@ module.exports = {
 
 <h2>Our work and re-cleans</h2>
 <ul>
-  <li>Our cleaners are our own trained team. They are insured and DBS-checked.</li>
+  <li>Our cleaners are our own trained team. They are insured and DBS checked.</li>
   <li>If anything we cleaned is not right, tell us and we will come back and put it right: within <strong>72 hours</strong> for end of tenancy cleaning, and within <strong>24 hours</strong> for other services.</li>
   <li>We clean; we cannot repair damage, stains that are permanent, or normal wear and tear.</li>
 </ul>
