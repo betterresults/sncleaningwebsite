@@ -641,7 +641,17 @@ async function renderArea(req, res, next, areaSlug) {
     const faqs = page.faqs || [];
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
-    const mapLink = region.level === 'region' ? buildMapLink(allAreaPages, allRegions, [service.slug], { onlyThese: true }) : null;
+    // Every area page shows it, with this area (or the borough it sits in) highlighted.
+    const serviceMap = buildMapLink(allAreaPages, allRegions, [service.slug], { onlyThese: true });
+    const mapLink = serviceMap.count ? serviceMap : null;
+    const chainNames = new Set();
+    // ("Essex - Romford / Thurrock Edge" is drawn as Thurrock on the map, so it
+    // is not highlighted; Romford shows as part of Havering instead.)
+    for (let r = region; r; r = r.parent_id ? allRegions.find((x) => x.id === r.parent_id) : null) {
+      if (!/Thurrock/.test(r.name)) chainNames.add(r.name);
+    }
+    const mapCurrent = (n) => chainNames.has(n);
+    const mapCopy = require('./data/area-map-copy')[service.slug] || '';
     // Every page in Essex (any service), plus domestic cleaning in Havering
     // (Romford, Upminster), shows the team video.
     let inEssex = false;
@@ -654,6 +664,8 @@ async function renderArea(req, res, next, areaSlug) {
       : null;
     return res.render('area-v2', {
       mapLink,
+      mapCurrent,
+      mapCopy,
       video,
       designV2: true,
       heroPreload: serviceImage(service.slug),

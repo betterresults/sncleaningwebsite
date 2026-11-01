@@ -293,6 +293,15 @@
 .h-swatch--london { background: var(--h-deep-2); }
 .h-swatch--essex { background: #6f9f7b; }
 .h-swatch--other { background: #e4e0d7; border: 1px solid #d3cdc1; }
+.h-swatch--current { background: #c9a24a; }
+/* Area pages: map on the left, text and nearby links on the right. */
+.h-cov--area { grid-template-columns: 1.5fr minmax(280px, 1fr); }
+.h-cov-text { color: var(--h-text); margin: 0 0 14px; line-height: 1.65; }
+.h-cov-sub { font-weight: 600; color: var(--h-ink); margin: 22px 0 10px; }
+.h-cov-links { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 18px; }
+.h-cov-links a { color: var(--h-primary); font-weight: 500; text-decoration: none; font-size: .95rem; }
+.h-cov-links a:hover, .h-cov-links a:focus-visible { text-decoration: underline; }
+.cov-area.is-current path { fill: #c9a24a; }
 
 .h-cov-map { position: relative; background: #f7f5f0; border-radius: 24px; padding: clamp(8px, 1.5vw, 16px); overflow: hidden; }
 .cov-map { display: block; width: 100%; height: auto; }

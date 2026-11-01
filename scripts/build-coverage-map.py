@@ -95,7 +95,8 @@ for i, name in enumerate(order):
     c = geoms[name].representative_point()
     cx, cy = proj(c.x, c.y)
     areas.append(
-        f'<a href="<%= mapLink({json.dumps(region)}) %>" class="cov-area cov-{group}" '
+        f'<a href="<%= mapLink({json.dumps(region)}) %>" class="cov-area cov-{group}'
+        f'<%= typeof mapCurrent === \'function\' && mapCurrent({json.dumps(region)}) ? \' is-current\' : \'\' %>" '
         f'style="--i:{i}" data-name="{label}" data-cx="{cx:.0f}" data-cy="{cy:.0f}" aria-label="{label}">'
         f'<path d="{d}"/></a>'
     )
