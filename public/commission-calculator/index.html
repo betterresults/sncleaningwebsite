@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Commission Calculator | SN Cleaning Services Partner Programme</title>
+<meta name="description" content="Work out what you could earn as a commission only partner of SN Cleaning Services.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
+<style>
+:root{--g:#1f6b66;--g2:#17534f;--gs:#e7f1f0;--navy:#13263a;--ink:#1d2926;--text:#46534f;--mut:#6b7a76;--line:#dfe6e4;--bg:#f6f9f8;--gold:#f2c14e}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+.top{background:#fff;border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:10px;height:60px;font-weight:700;color:var(--ink)}
+.top img{width:32px;height:32px}
+h1,h2,h3{color:var(--ink);letter-spacing:-.015em;margin:0}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.12;margin:0 0 12px}
+.eyebrow{display:inline-block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g);background:var(--gs);padding:5px 11px;border-radius:999px;margin-bottom:14px}
+.hero{padding:34px 0 22px}
+.hero p{font-size:18px;max-width:640px;margin:0}
+.grid{display:grid;gap:18px;padding-bottom:40px}
+@media(min-width:900px){.grid{grid-template-columns:1.15fr 1fr;align-items:start}.side{position:sticky;top:18px}}
+.card{background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}
+.card+.card{margin-top:18px}
+.head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.num{flex:none;width:36px;height:36px;border-radius:11px;background:var(--g);color:#fff;font-weight:800;display:grid;place-items:center}
+.head h2{font-size:20px}
+.sub{color:var(--mut);font-size:14px;margin:0 0 6px}
+.rate{display:inline-flex;gap:8px;flex-wrap:wrap;margin:8px 0 4px}
+.rate span{background:var(--gs);color:var(--g2);font-weight:700;font-size:13px;padding:5px 10px;border-radius:999px}
+.q{margin-top:18px}
+.q>label,.q>.ql{display:flex;justify-content:space-between;align-items:baseline;font-weight:700;color:var(--ink);margin-bottom:8px;font-size:15px}
+.q output{font-weight:800;color:var(--g);font-size:17px}
+input[type=range]{width:100%;accent-color:var(--g);height:28px;margin:0}
+.scale{display:flex;justify-content:space-between;font-size:12px;color:var(--mut)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.seg input{position:absolute;opacity:0;width:1px;height:1px}
+.seg span{display:block;text-align:center;padding:11px 6px;border-radius:12px;border:1.5px solid var(--line);font-weight:600;font-size:14px;cursor:pointer;color:var(--ink);background:#fff}
+.seg input:checked+span{background:var(--g);border-color:var(--g);color:#fff}
+.seg input:focus-visible+span{outline:2px solid var(--g);outline-offset:2px}
+.line{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px}
+.line b{color:var(--ink);white-space:nowrap}
+.mini{margin-top:14px}
+.total{background:var(--navy);color:#cfdbe6;border-radius:20px;padding:24px}
+.total small{display:block;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--gold)}
+.total .big{font-size:clamp(44px,10vw,60px);font-weight:800;color:#fff;line-height:1.05;letter-spacing:-.02em;margin:6px 0 4px}
+.total p{margin:0;font-size:15px}
+.total .line{border-color:rgba(255,255,255,.12);color:#cfdbe6}
+.total .line b{color:#fff}
+.bars{margin-top:18px;display:grid;gap:10px}
+.ms{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;font-size:14px}
+.ms .dot{width:22px;height:22px;border-radius:50%;border:2px solid rgba(255,255,255,.3);display:grid;place-items:center;font-size:12px;font-weight:800;color:var(--navy)}
+.ms.on .dot{background:var(--gold);border-color:var(--gold)}
+.ms .t b{color:#fff}
+.ms .t span{display:block;font-size:12px;color:#93a7b8}
+.ms .v{font-weight:800;color:#fff}
+.ms:not(.on) .v{color:#93a7b8}
+.next{margin-top:16px;background:rgba(255,255,255,.07);border-radius:14px;padding:12px 14px;font-size:14px}
+.next b{color:var(--gold)}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:14px;background:var(--gold);color:var(--navy);font:700 17px Inter,system-ui,sans-serif;padding:16px 22px;text-decoration:none;margin-top:18px}
+.btn:hover{background:#ffd26a}
+.fine{font-size:12.5px;color:var(--mut);margin:14px 0 0}
+.total .fine{color:#93a7b8}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap"><img src="/images/logo-mark-84.webp" alt="" width="32" height="32">SN Cleaning Services</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <span class="eyebrow">Partner programme</span>
+    <h1>See what you could earn</h1>
+    <p>Move the sliders to see your commission as a commission only partner. Every completed and paid booking from a new customer you bring counts.</p>
+  </section>
+
+  <div class="grid">
+    <div>
+      <div class="card">
+        <div class="head"><span class="num">1</span><h2>One off cleaning</h2></div>
+        <p class="sub">Deep cleaning, end of tenancy, after builders and carpet cleaning.</p>
+        <div class="rate"><span>10% commission</span><span>Typical booking £200 to £700</span></div>
+        <div class="q"><label for="oCount">New one off customers <output id="oCountV"></output></label>
+          <input type="range" id="oCount" min="0" max="50" value="5"><div class="scale"><span>0</span><span>50</span></div></div>
+        <div class="q"><label for="oValue">Average booking value <output id="oValueV"></output></label>
+          <input type="range" id="oValue" min="200" max="700" step="10" value="400"><div class="scale"><span>£200</span><span>£700</span></div></div>
+        <div class="mini">
+          <div class="line"><span>Sales</span><b id="oSales"></b></div>
+          <div class="line"><span>Your commission</span><b id="oComm"></b></div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="head"><span class="num">2</span><h2>Regular cleaning</h2></div>
+        <p class="sub">Domestic, Airbnb and office cleaning. You earn on everything the customer pays in their first six months.</p>
+        <div class="rate"><span>Months 1 to 3: 10%</span><span>Months 4 to 6: 5%</span></div>
+        <div class="q"><label for="rCount">New regular customers <output id="rCountV"></output></label>
+          <input type="range" id="rCount" min="0" max="50" value="3"><div class="scale"><span>0</span><span>50</span></div></div>
+        <div class="q"><span class="ql">How often they have a clean</span>
+          <div class="seg" role="radiogroup" aria-label="How often">
+            <label><input type="radio" name="freq" value="13" checked><span>Weekly</span></label>
+            <label><input type="radio" name="freq" value="6.5"><span>Fortnightly</span></label>
+            <label><input type="radio" name="freq" value="3"><span>Monthly</span></label>
+          </div></div>
+        <div class="q"><label for="rHours">Hours per clean <output id="rHoursV"></output></label>
+          <input type="range" id="rHours" min="2" max="16" value="4"><div class="scale"><span>2 hours</span><span>16 hours</span></div></div>
+        <div class="q"><label for="rRate">Price per hour <output id="rRateV"></output></label>
+          <input type="range" id="rRate" min="23" max="27" value="23"><div class="scale"><span>£23</span><span>£27</span></div></div>
+        <div class="mini">
+          <div class="line"><span>Each customer pays per clean</span><b id="rVisit"></b></div>
+          <div class="line"><span>Six months of cleaning, all customers</span><b id="rSales"></b></div>
+          <div class="line"><span>Commission months 1 to 3</span><b id="rC1"></b></div>
+          <div class="line"><span>Commission months 4 to 6</span><b id="rC2"></b></div>
+          <div class="line"><span>Your commission</span><b id="rComm"></b></div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="side">
+      <div class="total">
+        <small>Your estimated earnings</small>
+        <div class="big" id="total"></div>
+        <p id="totalNote"></p>
+        <div class="mini">
+          <div class="line"><span>One off commission</span><b id="tOne"></b></div>
+          <div class="line"><span>Regular commission</span><b id="tReg"></b></div>
+          <div class="line"><span>Milestone bonuses</span><b id="tBonus"></b></div>
+        </div>
+        <div class="bars" id="bars"></div>
+        <div class="next" id="next"></div>
+        <a class="btn" href="/partnership-commisions/">Become a partner</a>
+        <p class="fine">An estimate to help you plan, not a promise of earnings. Commission is paid only on completed and paid services, refunds do not count, and regular customers count for their first six months. Regular examples assume 13 weekly cleans in each three month period. Beyond 50 customers, further bonuses may be agreed.</p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var gbp = function (n) { return "£" + n.toLocaleString("en-GB", { minimumFractionDigits: n % 1 ? 2 : 0, maximumFractionDigits: 2 }); };
+  var MILESTONES = [
+    { c: 5, r: 1000, b: 50 },
+    { c: 10, r: 2000, b: 100 },
+    { c: 20, r: 4000, b: 150 },
+    { c: 50, r: 10000, b: 300 }
+  ];
+  function calc() {
+    var oCount = +$("oCount").value, oValue = +$("oValue").value;
+    var rCount = +$("rCount").value, hours = +$("rHours").value, rate = +$("rRate").value;
+    var cleans = +document.querySelector('input[name="freq"]:checked').value; // per three months
+    $("oCountV").textContent = oCount; $("oValueV").textContent = gbp(oValue);
+    $("rCountV").textContent = rCount; $("rHoursV").textContent = hours + (hours === 1 ? " hour" : " hours"); $("rRateV").textContent = gbp(rate);
+
+    var oSales = oCount * oValue, oComm = Math.round(oSales * 0.10 * 100) / 100;
+    var visit = hours * rate;
+    var perQuarter = visit * cleans * rCount;
+    var c1 = Math.round(perQuarter * 0.10 * 100) / 100, c2 = Math.round(perQuarter * 0.05 * 100) / 100;
+    var rSales = perQuarter * 2, rComm = c1 + c2;
+
+    var customers = oCount + rCount, revenue = oSales + rSales;
+    var bonus = 0, html = "", next = null;
+    MILESTONES.forEach(function (m) {
+      var on = customers >= m.c && revenue >= m.r;
+      if (on) bonus += m.b; else if (!next) next = m;
+      html += '<div class="ms' + (on ? " on" : "") + '"><span class="dot">' + (on ? "✓" : "") + '</span><span class="t"><b>' + m.c + ' customers</b><span>and ' + gbp(m.r) + ' paid revenue</span></span><span class="v">' + gbp(m.b) + '</span></div>';
+    });
+    var total = oComm + rComm + bonus;
+
+    $("oSales").textContent = gbp(oSales); $("oComm").textContent = gbp(oComm);
+    $("rVisit").textContent = gbp(visit); $("rSales").textContent = gbp(rSales);
+    $("rC1").textContent = gbp(c1); $("rC2").textContent = gbp(c2); $("rComm").textContent = gbp(rComm);
+    $("total").textContent = gbp(total);
+    $("totalNote").textContent = customers ? "From " + customers + " new customer" + (customers === 1 ? "" : "s") + " and " + gbp(revenue) + " of paid cleaning." : "Move the sliders to see your earnings.";
+    $("tOne").textContent = gbp(oComm); $("tReg").textContent = gbp(rComm); $("tBonus").textContent = gbp(bonus);
+    $("bars").innerHTML = html;
+    if (next) {
+      var needC = Math.max(0, next.c - customers), needR = Math.max(0, next.r - revenue);
+      var parts = [];
+      if (needC) parts.push(needC + " more customer" + (needC === 1 ? "" : "s"));
+      if (needR) parts.push(gbp(Math.ceil(needR)) + " more paid revenue");
+      $("next").innerHTML = "Next bonus: <b>" + gbp(next.b) + "</b> with " + parts.join(" and ") + ".";
+    } else $("next").innerHTML = "<b>All four milestone bonuses reached.</b> Beyond 50 customers, further bonuses may be agreed.";
+  }
+  document.querySelectorAll("input").forEach(function (i) { i.addEventListener("input", calc); });
+  calc();
+})();
+</script>
+</body>
+</html>
