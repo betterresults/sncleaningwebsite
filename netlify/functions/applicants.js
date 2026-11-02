@@ -597,7 +597,8 @@ exports.handler = async (event) => {
     return { statusCode: 401, headers: { "content-type": "text/html" }, body: loginPage("That password is not right.") };
   }
 
-  if (!authed) return { statusCode: 200, headers: { "content-type": "text/html" }, body: loginPage("") };
+  // one login for all admin pages: sign in on the dashboard, then come back here
+  if (!authed) return { statusCode: 302, headers: { location: "/dashboard?next=" + encodeURIComponent("/applicants") }, body: "" };
 
   if (!key) return { statusCode: 200, headers: { "content-type": "text/html" },
     body: shell("Applicants", `<h1>Applicants</h1><p class="warn">NETLIFY_API_TOKEN is not set, so I cannot read the submissions. Create one at app.netlify.com/user/applications and add it in Site configuration &rarr; Environment variables.</p>`) };
