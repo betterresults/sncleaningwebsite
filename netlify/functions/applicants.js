@@ -662,7 +662,10 @@ exports.handler = async (event) => {
       <button type="button" class="mini" onclick="location.href='/applicants'">&#8635; Refresh</button>
     </div>`;
 
-    const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.filter((a) => !archived[a.id]).length}</span></div>`;
+    const jobQ = (event.queryStringParameters || {}).job || "";
+    const formUrl = /^Sales/.test(jobQ) ? "https://sncleaningservices.co.uk/apply-rep/" : "https://sncleaningservices.co.uk/apply/";
+    const formBtns = `<span style="display:inline-flex;gap:6px;margin-left:auto"><button type="button" class="mini" onclick="navigator.clipboard.writeText('${formUrl}');this.textContent='Copied'">Copy form link</button><a class="mini" href="${formUrl}" target="_blank" rel="noopener" style="text-decoration:none">Open form</a></span>`;
+    const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.filter((a) => !archived[a.id]).length}</span>${formBtns}</div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
       body: shell("Applicants", require("../../lib/admin-ui").layout(/^Sales/.test((event.queryStringParameters || {}).job || "") ? "applicants-rep" : "applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`), false, true) };
