@@ -106,7 +106,7 @@ const REP_QUESTIONS = [
   ["q9-three-words", "Three words friends would use"]
 ];
 
-const JOBS = { [SOURCE_FORM]: "Cleaner", [REP_FORM]: "Door to door rep" };
+const JOBS = { [SOURCE_FORM]: "Cleaner", [REP_FORM]: "Sales representative" };
 
 const DAYS = ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"];
 
@@ -255,7 +255,8 @@ document.addEventListener("click",function(e){
   fj.addEventListener("change",apply);
   var faEl=document.getElementById("f-arch"); if(faEl) faEl.addEventListener("change",apply);
   apply();
-  try{var saved=localStorage.getItem("sn-job-filter");if(saved){fj.value=saved;apply();}}catch(e){}
+  var uj=new URLSearchParams(location.search).get("job");
+  if(uj){fj.value=uj;apply();} else {try{var saved=localStorage.getItem("sn-job-filter");if(saved){fj.value=saved;apply();}}catch(e){}}
   fj.addEventListener("change",function(){try{localStorage.setItem("sn-job-filter",fj.value);}catch(e){}});
 })();
 </script>
@@ -643,7 +644,7 @@ exports.handler = async (event) => {
       <label>Job <select id="f-job">
         <option value="">All</option>
         <option value="Cleaner">Cleaner</option>
-        <option value="Door to door rep">Door to door rep</option>
+        <option value="Sales representative">Sales representative</option>
       </select></label>
       <label>Status <select id="f-status">
         <option value="">All</option>
@@ -664,7 +665,7 @@ exports.handler = async (event) => {
     const topbar = `<div class="topbar"><h1>Applicants</h1>${filters}<span class="count">${list.filter((a) => !archived[a.id]).length}</span></div>`;
 
     return { statusCode: 200, headers: { "content-type": "text/html", "cache-control": "no-store" },
-      body: shell("Applicants", require("../../lib/admin-ui").layout("applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`), false, true) };
+      body: shell("Applicants", require("../../lib/admin-ui").layout(/^Sales/.test((event.queryStringParameters || {}).job || "") ? "applicants-rep" : "applicants", `${(event.queryStringParameters || {}).deleted ? `<p class="ok">Deleted.</p>` : ""}${topbar}${body}`), false, true) };
   } catch (err) {
     return { statusCode: 200, headers: { "content-type": "text/html" },
       body: shell("Applicants", `<h1>Applicants</h1><p class="warn">Could not load submissions: ${esc(String(err))}</p>`) };
