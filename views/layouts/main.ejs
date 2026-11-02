@@ -7,7 +7,7 @@
   <title><%= fullTitle %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.' %>" />
   <link rel="canonical" href="<%= canonicalUrl %>" />
-  <% if (currentPath === '/') { %><script>if(/(invite|recovery|confirmation)_token=/.test(location.hash))location.replace("/admin/"+location.hash)</script><% } %>
+  <% if (currentPath === '/') { %><script>if(/(invite|recovery|confirmation)_token=/.test(location.hash))location.replace("/admin/"+location.hash);else if(/access_token=|error=access_denied/.test(location.hash)){var b="/dashboard";try{b=localStorage.getItem("sn_login_back")||b;localStorage.removeItem("sn_login_back")}catch(e){}location.replace(b+location.hash)}</script><% } %>
   <% if (typeof noindex !== 'undefined' && noindex) { %>
     <meta name="robots" content="noindex, nofollow" />
   <% } else { %>
