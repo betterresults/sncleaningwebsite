@@ -415,6 +415,7 @@ img.pse-hover{cursor:pointer}
 .pse-chip{position:absolute;z-index:2147483646;background:#2563eb;color:#fff;font:600 12px/1 system-ui,sans-serif;padding:7px 10px;border-radius:0 0 8px 0;cursor:pointer;box-shadow:0 4px 12px rgba(0,0,0,.2);display:none}
 .pse-add{position:absolute;z-index:2147483646;transform:translate(-50%,-50%);background:#fff;color:#2563eb;border:2px solid #2563eb;font:700 12px/1 system-ui,sans-serif;padding:8px 14px;border-radius:999px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,.18);display:none;white-space:nowrap}
 .pse-add:hover{background:#2563eb;color:#fff}
+.pse-add-all{display:block!important;opacity:.85}.pse-add-all:hover{opacity:1}
 .pse-tip{position:fixed;z-index:2147483647;background:#1f2937;color:#fff;font:500 12px/1.4 system-ui,sans-serif;padding:7px 10px;border-radius:8px;max-width:280px;pointer-events:none;display:none}
 .ps-video::after{content:"Click to change the video";position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;color:#fff;font:600 13px system-ui,sans-serif;background:linear-gradient(transparent 60%,rgba(0,0,0,.45));cursor:pointer;opacity:0;transition:opacity .2s;z-index:2}
 .ps-video:hover::after,.ps-video.pse-sel::after{opacity:1}
@@ -473,6 +474,26 @@ function attachEditor(doc, i) {
   }, { passive: true });
   chip.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); if (chip._sec) select("section", chip._sec); });
   add.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); if (add._sec) openLibrary(add._sec, "after"); });
+  // A "+ Add section" button under every section, always showing, so it never jumps when the mouse moves
+  add.remove();
+  let adds = [];
+  const placeAdds = () => {
+    const secs = [...main.children].filter((x) => x.tagName !== "SCRIPT" && x.tagName !== "STYLE" && x.getBoundingClientRect().height > 0);
+    while (adds.length > secs.length) adds.pop().remove();
+    while (adds.length < secs.length) {
+      const b = doc.createElement("button"); b.type = "button"; b.className = "pse-add pse-add-all"; b.textContent = "+ Add section here";
+      b.addEventListener("click", (e) => { e.preventDefault(); e.stopPropagation(); if (b._sec) openLibrary(b._sec, "after"); });
+      doc.body.appendChild(b); adds.push(b);
+    }
+    const sy = doc.defaultView.scrollY;
+    secs.forEach((sec, i) => { const r = sec.getBoundingClientRect(), b = adds[i]; b._sec = sec; b.style.top = r.bottom + sy + "px"; b.style.left = r.left + r.width / 2 + "px"; });
+  };
+  placeAdds();
+  new doc.defaultView.MutationObserver(() => requestAnimationFrame(placeAdds)).observe(main, { childList: true, subtree: true, characterData: true });
+  if (doc.defaultView.ResizeObserver) new doc.defaultView.ResizeObserver(() => requestAnimationFrame(placeAdds)).observe(main);
+  doc.defaultView.addEventListener("resize", placeAdds);
+  doc.defaultView.addEventListener("load", placeAdds);
+  [300, 1200, 3000].forEach((ms) => setTimeout(placeAdds, ms));
   doc.addEventListener("click", (e) => {
     const t = e.target;
     if (t === chip || t === add) return;
