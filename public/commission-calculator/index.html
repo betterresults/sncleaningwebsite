@@ -64,6 +64,14 @@ input[type=range]{width:100%;accent-color:var(--g);height:28px;margin:0}
 .next b{color:var(--gold)}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;border:0;border-radius:14px;background:var(--gold);color:var(--navy);font:700 17px Inter,system-ui,sans-serif;padding:16px 22px;text-decoration:none;margin-top:18px}
 .btn:hover{background:#ffd26a}
+.earned{margin-top:18px;background:var(--gs);border:1px solid #cfe3e0;border-radius:16px;padding:16px 18px}
+.earned small{display:block;font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--g2)}
+.earned-big{font-size:clamp(32px,7vw,40px);font-weight:800;color:var(--g2);line-height:1.1;letter-spacing:-.02em;margin-top:4px}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.split div{background:#fff;border-radius:12px;padding:10px 12px}
+.split span{display:block;font-size:13px;color:var(--mut)}
+.split b{font-size:20px;color:var(--ink)}
+.detail{font-size:13px;color:var(--mut);margin:10px 2px 0}
 .fine{font-size:12.5px;color:var(--mut);margin:14px 0 0}
 .total .fine{color:#93a7b8}
 </style>
@@ -88,10 +96,11 @@ input[type=range]{width:100%;accent-color:var(--g);height:28px;margin:0}
           <input type="range" id="oCount" min="0" max="50" value="5"><div class="scale"><span>0</span><span>50</span></div></div>
         <div class="q"><label for="oValue">Average booking value <output id="oValueV"></output></label>
           <input type="range" id="oValue" min="200" max="700" step="10" value="400"><div class="scale"><span>£200</span><span>£700</span></div></div>
-        <div class="mini">
-          <div class="line"><span>Sales</span><b id="oSales"></b></div>
-          <div class="line"><span>Your commission</span><b id="oComm"></b></div>
+        <div class="earned">
+          <small>Your commission</small>
+          <div class="earned-big" id="oComm"></div>
         </div>
+        <p class="detail">From <span id="oSales"></span> of bookings.</p>
       </div>
 
       <div class="card">
@@ -110,13 +119,12 @@ input[type=range]{width:100%;accent-color:var(--g);height:28px;margin:0}
           <input type="range" id="rHours" min="2" max="16" value="4"><div class="scale"><span>2 hours</span><span>16 hours</span></div></div>
         <div class="q"><label for="rRate">Price per hour <output id="rRateV"></output></label>
           <input type="range" id="rRate" min="23" max="27" value="23"><div class="scale"><span>£23</span><span>£27</span></div></div>
-        <div class="mini">
-          <div class="line"><span>Each customer pays per clean</span><b id="rVisit"></b></div>
-          <div class="line"><span>Six months of cleaning, all customers</span><b id="rSales"></b></div>
-          <div class="line"><span>Commission months 1 to 3</span><b id="rC1"></b></div>
-          <div class="line"><span>Commission months 4 to 6</span><b id="rC2"></b></div>
-          <div class="line"><span>Your commission</span><b id="rComm"></b></div>
+        <div class="earned">
+          <small>Your commission over six months</small>
+          <div class="earned-big" id="rComm"></div>
+          <div class="split"><div><span>Months 1 to 3</span><b id="rC1"></b></div><div><span>Months 4 to 6</span><b id="rC2"></b></div></div>
         </div>
+        <p class="detail">Each customer pays <span id="rVisit"></span> per clean, <span id="rSales"></span> in total over six months.</p>
       </div>
     </div>
 
@@ -132,7 +140,7 @@ input[type=range]{width:100%;accent-color:var(--g);height:28px;margin:0}
         </div>
         <div class="bars" id="bars"></div>
         <div class="next" id="next"></div>
-        <a class="btn" href="/partnership-commisions/">Become a partner</a>
+        <a class="btn" href="https://wa.me/442038355033?text=Hi%2C%20I%20would%20like%20to%20become%20a%20partner" target="_blank" rel="noopener">Become a partner</a>
         <p class="fine">An estimate to help you plan, not a promise of earnings. Commission is paid only on completed and paid services, refunds do not count, and regular customers count for their first six months. Regular examples assume 13 weekly cleans in each three month period. Beyond 50 customers, further bonuses may be agreed.</p>
       </div>
     </aside>
