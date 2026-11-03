@@ -164,11 +164,41 @@ function writeSitemap(routes) {
   console.log(`Wrote dist/sitemap.xml (${routes.filter((r) => r.sitemap).length} URLs)`);
 }
 
+// Page title and meta description, for the recent changes feed.
+function pageTitle(html) {
+  const m = html.match(/<title>([^<]*)<\/title>/i);
+  return m ? m[1].trim() : '';
+}
+function pageDescription(html) {
+  const m = html.match(/<meta\s+name="description"\s+content="([^"]*)"/i);
+  return m ? m[1].trim() : '';
+}
+
+// Small Atom feed of the most recently changed pages (dist/feed.xml). Google
+// recommends a sitemap for all pages plus a feed for recent changes: it fetches
+// small feeds more often, so new and updated pages are found sooner. Only pages
+// that are in the sitemap and have a real last changed date are listed.
+function writeFeed(routes) {
+  const esc = (t) => String(t).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  const items = routes
+    .filter((r) => r.sitemap && r.lastmod && !isNaN(new Date(r.lastmod)))
+    .sort((a, b) => new Date(b.lastmod) - new Date(a.lastmod))
+    .slice(0, 50);
+  const updated = items.length ? new Date(items[0].lastmod).toISOString() : new Date().toISOString();
+  const entries = items.map((r) => {
+    const loc = SITE_URL + (r.url === '/' ? '/' : r.url.replace(/\/?$/, '/'));
+    return `  <entry>\n    <title>${esc(r.title || loc)}</title>\n    <link href="${esc(loc)}"/>\n    <id>${esc(loc)}</id>\n    <updated>${new Date(r.lastmod).toISOString()}</updated>${r.description ? `\n    <summary>${esc(r.description)}</summary>` : ''}\n  </entry>`;
+  }).join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<feed xmlns="http://www.w3.org/2005/Atom">\n  <title>SN Cleaning Services: new and updated pages</title>\n  <link href="${SITE_URL}/"/>\n  <link rel="self" href="${SITE_URL}/feed.xml"/>\n  <id>${SITE_URL}/feed.xml</id>\n  <updated>${updated}</updated>\n  <author><name>SN Cleaning Services</name></author>\n${entries}\n</feed>\n`;
+  writeFile('feed.xml', xml);
+  console.log(`Wrote dist/feed.xml (${items.length} entries)`);
+}
+
 function writeRobotsTxt() {
   // AI search/answer bots (ChatGPT, Claude, Perplexity, Google AI) are allowed
   // so the business can be found and recommended in AI search. Only
   // Bytespider (a bulk scraper, not a search engine) is kept out.
-  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\n`;
+  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
@@ -240,10 +270,13 @@ async function main() {
         }
         writeFile(route.out, inlineCss(body));
         route.images = pageImages(body);
+        route.title = pageTitle(body);
+        route.description = pageDescription(body);
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
 
       writeSitemap(ROUTES);
+      writeFeed(ROUTES);
       writeRobotsTxt();
 
       // Copy static assets (css/js/images) so absolute paths like /css/style.css resolve.
