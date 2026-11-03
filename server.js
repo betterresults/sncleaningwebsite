@@ -42,7 +42,7 @@ const SITE_DEFAULTS = {
   phone: '020 3835 5033',
   email: 'info@sncleaningservices.co.uk',
   address: 'Serving London & Essex',
-  hours: 'Phone: Mon - Sat, 8am - 5pm · WhatsApp: Mon - Sun, 8am - 9pm',
+  hours: 'Customer support: Mon to Fri 7am to 10pm · Sat and Sun 8am to 5pm',
   social: {
     facebook: '',
     instagram: ''
