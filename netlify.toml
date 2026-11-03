@@ -1825,6 +1825,12 @@
   to = "https://form.sncleaningservices.co.uk/domestic"
   status = 301
 
+# Search Console verification for the section properties (serves the root file at /<section>/<file>)
+[[redirects]]
+  from = "/:section/googlef028cb1a11f8e46d.html"
+  to = "/googlef028cb1a11f8e46d.html"
+  status = 200
+
 # Old WordPress addresses still visited by Google (added 3 Nov 2026 by the SEO agent)
 [[redirects]]
   from = "/ardleigh-green/"
