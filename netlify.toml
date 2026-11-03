@@ -1825,6 +1825,1657 @@
   to = "https://form.sncleaningservices.co.uk/domestic"
   status = 301
 
+# Old WordPress addresses still visited by Google (added 3 Nov 2026 by the SEO agent)
+[[redirects]]
+  from = "/ardleigh-green/"
+  to = "/end-of-tenancy-cleaning/havering/ardleigh-green/"
+  status = 301
+
+[[redirects]]
+  from = "/ardleigh-green"
+  to = "/end-of-tenancy-cleaning/havering/ardleigh-green/"
+  status = 301
+
+[[redirects]]
+  from = "/barking-and-dagenham"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/barking-and-dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/barking-riverside"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/barking-riverside/"
+  status = 301
+
+[[redirects]]
+  from = "/barking-riverside/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/barking-riverside/"
+  status = 301
+
+[[redirects]]
+  from = "/barnet/"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/barnet"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/basildon"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/basildon/"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/beckton"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/beckton/"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/becontree"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/becontree/"
+  status = 301
+
+[[redirects]]
+  from = "/becontree/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/becontree/"
+  status = 301
+
+[[redirects]]
+  from = "/bexley"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/bexley/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/brent"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/brent/"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/brentwood/"
+  to = "/end-of-tenancy-cleaning/essex/brentwood/"
+  status = 301
+
+[[redirects]]
+  from = "/brentwood"
+  to = "/end-of-tenancy-cleaning/essex/brentwood/"
+  status = 301
+
+[[redirects]]
+  from = "/bromley/"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/bromley"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/camden/"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/camden"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/chase-cross/"
+  to = "/end-of-tenancy-cleaning/havering/chase-cross/"
+  status = 301
+
+[[redirects]]
+  from = "/chase-cross"
+  to = "/end-of-tenancy-cleaning/havering/chase-cross/"
+  status = 301
+
+[[redirects]]
+  from = "/collier-row/"
+  to = "/end-of-tenancy-cleaning/havering/collier-row/"
+  status = 301
+
+[[redirects]]
+  from = "/collier-row"
+  to = "/end-of-tenancy-cleaning/havering/collier-row/"
+  status = 301
+
+[[redirects]]
+  from = "/cranham/"
+  to = "/end-of-tenancy-cleaning/havering/cranham/"
+  status = 301
+
+[[redirects]]
+  from = "/cranham"
+  to = "/end-of-tenancy-cleaning/havering/cranham/"
+  status = 301
+
+[[redirects]]
+  from = "/creekmouth"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/creekmouth/"
+  status = 301
+
+[[redirects]]
+  from = "/creekmouth/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/creekmouth/"
+  status = 301
+
+[[redirects]]
+  from = "/croydon"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/croydon/"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/custom-house/"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/custom-house"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/dagenham"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/ealing/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/ealing"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/east-ham"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/east-ham/"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/elm-park"
+  to = "/end-of-tenancy-cleaning/havering/elm-park/"
+  status = 301
+
+[[redirects]]
+  from = "/elm-park/"
+  to = "/end-of-tenancy-cleaning/havering/elm-park/"
+  status = 301
+
+[[redirects]]
+  from = "/emerson-park"
+  to = "/end-of-tenancy-cleaning/havering/emerson-park/"
+  status = 301
+
+[[redirects]]
+  from = "/emerson-park/"
+  to = "/end-of-tenancy-cleaning/havering/emerson-park/"
+  status = 301
+
+[[redirects]]
+  from = "/enfield"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/enfield/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/gants-hill/"
+  to = "/end-of-tenancy-cleaning/redbridge/gants-hill/"
+  status = 301
+
+[[redirects]]
+  from = "/gants-hill"
+  to = "/end-of-tenancy-cleaning/redbridge/gants-hill/"
+  status = 301
+
+[[redirects]]
+  from = "/gidea-park"
+  to = "/end-of-tenancy-cleaning/havering/gidea-park/"
+  status = 301
+
+[[redirects]]
+  from = "/gidea-park/"
+  to = "/end-of-tenancy-cleaning/havering/gidea-park/"
+  status = 301
+
+[[redirects]]
+  from = "/goodmayes/"
+  to = "/end-of-tenancy-cleaning/redbridge/goodmayes/"
+  status = 301
+
+[[redirects]]
+  from = "/goodmayes"
+  to = "/end-of-tenancy-cleaning/redbridge/goodmayes/"
+  status = 301
+
+[[redirects]]
+  from = "/greenwich/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/greenwich"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/hainault/"
+  to = "/end-of-tenancy-cleaning/redbridge/hainault/"
+  status = 301
+
+[[redirects]]
+  from = "/hainault"
+  to = "/end-of-tenancy-cleaning/redbridge/hainault/"
+  status = 301
+
+[[redirects]]
+  from = "/haringey"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/haringey/"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/harold-hill"
+  to = "/end-of-tenancy-cleaning/havering/harold-hill/"
+  status = 301
+
+[[redirects]]
+  from = "/harold-hill/"
+  to = "/end-of-tenancy-cleaning/havering/harold-hill/"
+  status = 301
+
+[[redirects]]
+  from = "/harold-wood/"
+  to = "/end-of-tenancy-cleaning/havering/harold-wood/"
+  status = 301
+
+[[redirects]]
+  from = "/harold-wood"
+  to = "/end-of-tenancy-cleaning/havering/harold-wood/"
+  status = 301
+
+[[redirects]]
+  from = "/harrow"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/harrow/"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/havering-atte-bower/"
+  to = "/end-of-tenancy-cleaning/havering/havering-atte-bower/"
+  status = 301
+
+[[redirects]]
+  from = "/havering-atte-bower"
+  to = "/end-of-tenancy-cleaning/havering/havering-atte-bower/"
+  status = 301
+
+[[redirects]]
+  from = "/havering/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/havering"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/hillingdon/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/hillingdon"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/hounslow"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/hounslow/"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/islington/"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/islington"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/kensington-and-chelsea"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/kensington-and-chelsea/"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/lambeth/"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/lambeth"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/lewisham"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/lewisham/"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/little-ilford"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/little-ilford/"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/manor-park/"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/manor-park"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/marks-gate/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/marks-gate/"
+  status = 301
+
+[[redirects]]
+  from = "/marks-gate"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/marks-gate/"
+  status = 301
+
+[[redirects]]
+  from = "/merton/"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/merton"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/newbury-park"
+  to = "/end-of-tenancy-cleaning/redbridge/newbury-park/"
+  status = 301
+
+[[redirects]]
+  from = "/newbury-park/"
+  to = "/end-of-tenancy-cleaning/redbridge/newbury-park/"
+  status = 301
+
+[[redirects]]
+  from = "/newham"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/newham/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/north-woolwich"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/north-woolwich/"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/rainham"
+  to = "/end-of-tenancy-cleaning/havering/rainham/"
+  status = 301
+
+[[redirects]]
+  from = "/rainham/"
+  to = "/end-of-tenancy-cleaning/havering/rainham/"
+  status = 301
+
+[[redirects]]
+  from = "/redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/redbridge"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/richmond"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/richmond/"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/romford/"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/romford"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/seven-kings"
+  to = "/end-of-tenancy-cleaning/redbridge/seven-kings/"
+  status = 301
+
+[[redirects]]
+  from = "/seven-kings/"
+  to = "/end-of-tenancy-cleaning/redbridge/seven-kings/"
+  status = 301
+
+[[redirects]]
+  from = "/shenfield"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/shenfield/"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/southwark/"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/southwark"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/sutton/"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/sutton"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/thames-view/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/thames-view/"
+  status = 301
+
+[[redirects]]
+  from = "/thames-view"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/thames-view/"
+  status = 301
+
+[[redirects]]
+  from = "/tower-hamlets/"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/tower-hamlets"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/upminster-bridge"
+  to = "/end-of-tenancy-cleaning/havering/upminster-bridge/"
+  status = 301
+
+[[redirects]]
+  from = "/upminster-bridge/"
+  to = "/end-of-tenancy-cleaning/havering/upminster-bridge/"
+  status = 301
+
+[[redirects]]
+  from = "/upton-park/"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/upton-park"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/waltham-forest"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/waltham-forest/"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/wandsworth/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/wandsworth"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/wanstead/"
+  to = "/end-of-tenancy-cleaning/redbridge/wanstead/"
+  status = 301
+
+[[redirects]]
+  from = "/wanstead"
+  to = "/end-of-tenancy-cleaning/redbridge/wanstead/"
+  status = 301
+
+[[redirects]]
+  from = "/west-ham"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/west-ham/"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/westminster"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/westminster/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-bridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-bridge/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-bridge"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-bridge/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-green/"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-green/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-green"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-green/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-wells/"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-wells/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford-wells"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford-wells/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford/"
+  status = 301
+
+[[redirects]]
+  from = "/woodford/"
+  to = "/end-of-tenancy-cleaning/redbridge/woodford/"
+  status = 301
+
+[[redirects]]
+  from = "/castle-green/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/castle-green"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/north-ockendon"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/north-ockendon/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/chadwell-heath"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/chadwell-heath/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/beckton"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/beckton/"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/page-sitemap.xml"
+  to = "/sitemap.xml"
+  status = 301
+
+[[redirects]]
+  from = "/page-sitemap1.xml"
+  to = "/sitemap.xml"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Waltham%20Forest"
+  to = "/airbnb-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/Waltham%20Forest/"
+  to = "/airbnb-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/airbnb-cleaning/feed/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/airbnb-cleaning/feed"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/airbnb-cleaning/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/airbnb-cleaning"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/end-of-tenancy-cleaning/feed"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/end-of-tenancy-cleaning/feed/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/end-of-tenancy-cleaning/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/end-of-tenancy-cleaning"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/domestic-cleaning/feed"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/domestic-cleaning/feed/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/domestic-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/domestic-cleaning"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/after-builders-cleaning/feed/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/after-builders-cleaning/feed"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/after-builders-cleaning"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/after-builders-cleaning/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/carpet-cleaning/feed"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/carpet-cleaning/feed/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/deep-cleaning/feed"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/page-category/deep-cleaning/feed/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barking-and-dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barking-and-dagenham"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barking-and-dagenham/feed/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barking-and-dagenham/feed"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barnet"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barnet/"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barnet/feed"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/barnet/feed/"
+  to = "/end-of-tenancy-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/basildon/"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/basildon"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/basildon/feed"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/basildon/feed/"
+  to = "/end-of-tenancy-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/beckton"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/beckton/"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/beckton/feed"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/beckton/feed/"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bexley"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bexley/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bexley/feed"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bexley/feed/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/brent"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/brent/"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/brent/feed"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/brent/feed/"
+  to = "/end-of-tenancy-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bromley"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bromley/"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bromley/feed/"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/bromley/feed"
+  to = "/end-of-tenancy-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/camden/"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/camden"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/camden/feed"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/camden/feed/"
+  to = "/end-of-tenancy-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/croydon/"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/croydon"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/croydon/feed/"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/croydon/feed"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/custom-house/"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/custom-house"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/custom-house/feed/"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/custom-house/feed"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/ealing"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/ealing/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/ealing/feed"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/ealing/feed/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/east-ham"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/east-ham/"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/east-ham/feed/"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/east-ham/feed"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/enfield"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/enfield/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/enfield/feed"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/enfield/feed/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/greenwich"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/greenwich/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/greenwich/feed/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/greenwich/feed"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/haringey"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/haringey/"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/haringey/feed/"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/haringey/feed"
+  to = "/end-of-tenancy-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/harrow/"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/harrow"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/harrow/feed/"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/harrow/feed"
+  to = "/end-of-tenancy-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/havering/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/havering"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/havering/feed/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/havering/feed"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hillingdon/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hillingdon"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hillingdon/feed/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hillingdon/feed"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hounslow"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hounslow/"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hounslow/feed/"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/hounslow/feed"
+  to = "/end-of-tenancy-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/islington"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/islington/"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/islington/feed/"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/islington/feed"
+  to = "/end-of-tenancy-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/kensington-and-chelsea"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/kensington-and-chelsea/"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/kensington-and-chelsea/feed"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/kensington-and-chelsea/feed/"
+  to = "/end-of-tenancy-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lambeth/"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lambeth"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lambeth/feed/"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lambeth/feed"
+  to = "/end-of-tenancy-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lewisham/"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lewisham"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lewisham/feed"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/lewisham/feed/"
+  to = "/end-of-tenancy-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/little-ilford/"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/little-ilford"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/little-ilford/feed/"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/little-ilford/feed"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/manor-park"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/manor-park/"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/manor-park/feed/"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/manor-park/feed"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/merton"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/merton/"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/merton/feed/"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/merton/feed"
+  to = "/end-of-tenancy-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/newham/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/newham"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/newham/feed/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/newham/feed"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/north-woolwich/"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/north-woolwich"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/north-woolwich/feed/"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/north-woolwich/feed"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/redbridge"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/redbridge/feed/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/redbridge/feed"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/richmond"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/richmond/"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/richmond/feed/"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/richmond/feed"
+  to = "/end-of-tenancy-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/romford/"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/romford"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/romford/feed"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/romford/feed/"
+  to = "/end-of-tenancy-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/shenfield"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/shenfield/"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/shenfield/feed"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/shenfield/feed/"
+  to = "/end-of-tenancy-cleaning/shenfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/southwark"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/southwark/"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/southwark/feed/"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/southwark/feed"
+  to = "/end-of-tenancy-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/sutton/"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/sutton"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/sutton/feed/"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/sutton/feed"
+  to = "/end-of-tenancy-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/tower-hamlets"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/tower-hamlets/"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/tower-hamlets/feed"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/tower-hamlets/feed/"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/upton-park"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/upton-park/"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/upton-park/feed"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/upton-park/feed/"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/waltham-forest"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/waltham-forest/"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/waltham-forest/feed/"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/waltham-forest/feed"
+  to = "/end-of-tenancy-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/wandsworth/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/wandsworth"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/wandsworth/feed"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/wandsworth/feed/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/west-ham"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/west-ham/"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/west-ham/feed"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/west-ham/feed/"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/westminster/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/westminster"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/westminster/feed"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area-name/westminster/feed/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
