@@ -1,0 +1,69 @@
+<%# One answered question: /questions/{slug} %>
+<section class="page-hero page-hero--plain">
+  <div class="container">
+    <span class="eyebrow"><a href="/questions/">Your questions</a></span>
+    <h1><%= answer.question %></h1>
+    <% if (answer.checked_on) { %><p>Checked <time datetime="<%= answer.checked_on %>"><%= new Date(answer.checked_on + 'T12:00:00Z').toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time></p><% } %>
+  </div>
+</section>
+
+<section class="section blog-post">
+  <div class="container blog-post-inner">
+    <div class="qa-short">
+      <p class="qa-short-label">Short answer</p>
+      <p><%= answer.short_answer %></p>
+    </div>
+
+    <% if (answer.youtube_id) { %>
+      <div class="qa-video">
+        <button type="button" class="qa-play" data-yt="<%= answer.youtube_id %>" aria-label="Play video: <%= answer.video_title || answer.question %>">
+          <img src="https://i.ytimg.com/vi/<%= answer.youtube_id %>/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
+          <span class="qa-play-icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    <% } %>
+
+    <div class="blog-content">
+      <%- answer.body_html %>
+    </div>
+
+    <% if (answer.sources && answer.sources.length) { %>
+      <div class="qa-sources">
+        <h2>Sources</h2>
+        <ul>
+          <% answer.sources.forEach(function (s) { %>
+            <li><a href="<%= s.url %>" target="_blank" rel="noopener"><%= s.title %></a></li>
+          <% }); %>
+        </ul>
+      </div>
+    <% } %>
+
+    <%- include('../partials/author-box') %>
+
+    <% if (related.length) { %>
+      <div class="qa-related">
+        <h2>More questions</h2>
+        <ul>
+          <% related.forEach(function (r) { %><li><a href="/questions/<%= r.slug %>/"><%= r.question %></a></li><% }); %>
+        </ul>
+      </div>
+    <% } %>
+
+    <div class="blog-post-cta">
+      <p>Need a clean in London or Essex? Our own trained, insured and DBS checked cleaners can help. Click Get a quote to see your price.</p>
+      <div class="blog-post-cta-actions">
+        <a href="<%= bookUrl() %>" class="btn btn-primary">Get a quote</a>
+        <% if (serviceLink) { %><a href="<%= serviceLink.url %>" class="btn btn-outline"><%= serviceLink.name %></a><% } else { %><a href="/questions/" class="btn btn-outline">All questions</a><% } %>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+document.addEventListener('click', function (e) {
+  var b = e.target.closest('.qa-play[data-yt]'); if (!b) return;
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + b.getAttribute('data-yt') + '?autoplay=1&rel=0&playsinline=1';
+  f.title = b.getAttribute('aria-label'); f.allow = 'autoplay; encrypted-media; picture-in-picture'; f.allowFullscreen = true;
+  b.replaceWith(f);
+});
+</script>

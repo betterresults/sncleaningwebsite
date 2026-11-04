@@ -1,0 +1,32 @@
+<%# All answered questions: /questions %>
+<section class="page-hero page-hero--plain">
+  <div class="container">
+    <span class="eyebrow">Your questions</span>
+    <h1>Cleaning questions, answered</h1>
+    <p>Real questions people ask about end of tenancy, deep, carpet and Airbnb cleaning in London and Essex, answered by our team.</p>
+  </div>
+</section>
+
+<section class="section blog-post">
+  <div class="container blog-post-inner">
+    <% if (!answers.length) { %>
+      <p>New answers are on their way. In the meantime, <a href="/contact/">ask us anything</a>.</p>
+    <% } %>
+    <div class="qa-list">
+      <% answers.forEach(function (a) { %>
+        <article class="qa-item" id="<%= a.slug %>">
+          <h2><a href="/questions/<%= a.slug %>/"><%= a.question %></a></h2>
+          <p><%= a.short_answer %></p>
+          <a class="qa-more" href="/questions/<%= a.slug %>/">Read the full answer<%= a.youtube_id ? ' and watch the video' : '' %> &rarr;</a>
+        </article>
+      <% }); %>
+    </div>
+    <div class="blog-post-cta">
+      <p>Need a clean in London or Essex? Our own trained, insured and DBS checked cleaners can help. Click Get a quote to see your price.</p>
+      <div class="blog-post-cta-actions">
+        <a href="<%= bookUrl() %>" class="btn btn-primary">Get a quote</a>
+        <a href="/contact/" class="btn btn-outline">Ask a question</a>
+      </div>
+    </div>
+  </div>
+</section>

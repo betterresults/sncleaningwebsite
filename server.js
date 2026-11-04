@@ -351,6 +351,48 @@ function renderCase(req, res, cs) {
   });
 }
 
+// Questions answered: /questions and /questions/{slug} (rows in Supabase public.faq_answers)
+app.get('/questions', async (req, res) => {
+  const answers = await content.getFaqAnswers();
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Questions', url: '/questions' }];
+  const faq = schema.buildFaqPage(answers.map((a) => ({ question: a.question, answer: a.short_answer })));
+  res.render('questions/index', {
+    title: 'Cleaning Questions Answered',
+    metaDescription: 'Real questions about end of tenancy, deep, carpet and Airbnb cleaning in London and Essex, answered by the SN Cleaning Services team.',
+    answers,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), faq].filter(Boolean)
+  });
+});
+app.get('/questions/:slug', async (req, res, next) => {
+  const answers = await content.getFaqAnswers();
+  const answer = answers.find((a) => a.slug === req.params.slug);
+  if (!answer) return next();
+  const url = `/questions/${answer.slug}`;
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Questions', url: '/questions' }, { name: answer.question, url }];
+  const pages = await content.getServicePages();
+  const sp = answer.service_slug && pages.find((p) => p.slug === answer.service_slug);
+  const serviceLink = sp ? { url: `/${sp.slug}/`, name: sp.service_name || sp.title || 'Our service' } : null;
+  const related = answers.filter((a) => a.slug !== answer.slug && a.service_slug === answer.service_slug).slice(0, 4);
+  const video = answer.youtube_id ? jobVideoLib.buildVideoSchema([{ title: answer.video_title || answer.question, description: answer.short_answer, youtube_id: answer.youtube_id, recorded_on: answer.checked_on, created_at: answer.created_at }]) : [];
+  res.render('questions/answer', {
+    title: answer.meta_title || answer.question,
+    metaDescription: answer.meta_description || answer.short_answer,
+    answer,
+    related,
+    serviceLink,
+    breadcrumbs,
+    ogImage: answer.youtube_id ? `https://i.ytimg.com/vi/${answer.youtube_id}/hqdefault.jpg` : res.locals.ogImage,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildFaqPage([{ question: answer.question, answer: answer.short_answer }]),
+      schema.buildArticle({ post: { title: answer.question, meta_description: answer.short_answer, published_at: answer.created_at, updated_at: answer.updated_at }, site: res.locals.site, url }),
+      ...video
+    ]
+  });
+});
+
 // Legal pages (content in data/legal.js).
 const legalDocs = require('./data/legal');
 Object.keys(legalDocs).forEach((slug) => {

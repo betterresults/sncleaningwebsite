@@ -229,7 +229,26 @@ async function getJobVideos() {
   return _videosCache;
 }
 
+// Questions answered on the website. Rows: public.faq_answers (published only).
+let _faqCache = null;
+async function getFaqAnswers() {
+  if (_faqCache) return _faqCache;
+  const { data, error } = await supabase
+    .from('faq_answers')
+    .select('*')
+    .eq('published', true)
+    .order('sort_order', { ascending: true })
+    .order('created_at', { ascending: false });
+  if (error) {
+    console.error('Error fetching questions:', error.message);
+    return [];
+  }
+  _faqCache = data || [];
+  return _faqCache;
+}
+
 module.exports = {
+  getFaqAnswers,
   getJobVideos,
   getServices,
   getServicePages,

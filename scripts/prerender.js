@@ -59,6 +59,13 @@ async function buildRoutes() {
   const videoRoutes = [...new Set(jobVideos.map((v) => v.service_slug))]
     .map((slug) => ({ url: `/videos/${slug}`, out: `videos/${slug}/index.html`, sitemap: true }));
 
+  // Questions answered (Supabase public.faq_answers)
+  const faqAnswers = await content.getFaqAnswers();
+  const questionRoutes = faqAnswers.length ? [
+    { url: '/questions', out: 'questions/index.html', sitemap: true, lastmod: faqAnswers.map((a) => a.updated_at).sort().pop() },
+    ...faqAnswers.map((a) => ({ url: `/questions/${a.slug}`, out: `questions/${a.slug}/index.html`, sitemap: true, lastmod: a.updated_at }))
+  ] : [];
+
   // Booking pages: the chooser, plus one per service that has an online form.
   const bookRoutes = [
     { url: '/book', out: 'book/index.html', sitemap: false },
@@ -114,7 +121,7 @@ async function buildRoutes() {
   ];
 
   // Pages edited in the website editor: hidden from Google, or last edited on.
-  const all = [...fixed, ...videoRoutes, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...caseRoutes, ...editorTemplates].filter((r) => !MOVED.test(r.url));
+  const all = [...fixed, ...videoRoutes, ...questionRoutes, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...caseRoutes, ...editorTemplates].filter((r) => !MOVED.test(r.url));
   for (const r of all) {
     const m = editorContent.pageMeta(r.url);
     if (!m) continue;
