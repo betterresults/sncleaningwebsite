@@ -1,0 +1,172 @@
+<%# Why us page for one service. Content: data/why-us/{slug}.json. Styles: h- and a- classes plus w- classes at the end of public/css/home.css %>
+
+<!-- ============ HERO ============ -->
+<section class="a-hero w-hero">
+  <div class="h-wrap w-hero-inner">
+    <p class="h-eyebrow">Why SN Cleaning Services · <%= page.service_name %></p>
+    <h1 class="a-display"><%= page.h1 %></h1>
+    <p class="a-lead"><%= page.intro %></p>
+    <div class="w-hero-actions">
+      <a href="<%= bookUrl() %>" class="h-btn h-btn--primary">Get a quote</a>
+      <a href="/<%= page.slug %>" class="h-btn w-btn-ghost">See what's included in <%= page.service_name.toLowerCase() %></a>
+    </div>
+    <ul class="w-facts" aria-label="SN Cleaning Services in numbers">
+      <li><strong>12</strong><span>years cleaning London and Essex homes</span></li>
+      <li><strong>7,549</strong><span>end of tenancy cleans</span></li>
+      <li><strong>5.0</strong><span>on Google reviews</span></li>
+      <li><strong><%= page.slug === 'end-of-tenancy-cleaning' ? '72' : '24' %> hours</strong><span>free re clean window</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WE UNDERSTAND ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap w-understand">
+    <div class="h-head">
+      <p class="h-eyebrow">We understand</p>
+      <h2 class="h-title"><%= page.understand.heading %></h2>
+    </div>
+    <div class="w-prose">
+      <% page.understand.paragraphs.forEach(function (p) { %><p><%= p %></p><% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE DO DIFFERENTLY ============ -->
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">What we do differently</p>
+      <h2 class="h-title"><%= page.different.heading %></h2>
+    </div>
+    <ul class="w-diff">
+      <% page.different.items.forEach(function (it) { %>
+        <li class="h-reveal">
+          <span class="h-ico h-ico--dark" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.2 4.2L19 7"/></svg></span>
+          <div><h3><%= it.title %></h3><p><%= it.text %></p></div>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--center">
+      <p class="h-eyebrow">How it works</p>
+      <h2 class="h-title"><%= page.process.heading %></h2>
+    </div>
+    <ol class="h-steps">
+      <% page.process.steps.forEach(function (st, i) { %>
+        <li class="h-step h-reveal">
+          <span class="h-step-num"><%= i + 1 %></span>
+          <h3><%= st.title %></h3>
+          <p><%= st.text %></p>
+        </li>
+      <% }); %>
+    </ol>
+  </div>
+</section>
+
+<!-- ============ PROMISE ============ -->
+<section class="h-section h-sand h-section--tight">
+  <div class="h-wrap">
+    <div class="h-panel w-promise">
+      <div>
+        <p class="h-eyebrow h-eyebrow--light">Our promise</p>
+        <h2 class="h-title h-title--light"><%= page.promise.heading %></h2>
+      </div>
+      <div class="w-promise-copy">
+        <% page.promise.paragraphs.forEach(function (p) { %><p><%= p %></p><% }); %>
+        <a href="<%= bookUrl() %>" class="h-btn h-btn--light">Get a quote</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROOF + REVIEWS ============ -->
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Experience you can check</p>
+        <h2 class="h-title"><%= page.proof.heading %></h2>
+        <p class="w-proof"><%= page.proof.paragraph %></p>
+      </div>
+      <% if (site.googleBusinessUrl) { %>
+        <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <% } %>
+    </div>
+    <% if (page.proof.stories && page.proof.stories.length) { %>
+    <div class="w-stories">
+      <% page.proof.stories.forEach(function (st) { %>
+        <article class="w-story h-reveal">
+          <h3><%= st.title %></h3>
+          <p><%= st.text %></p>
+        </article>
+      <% }); %>
+    </div>
+    <% } %>
+    <% if (reviews.length) { %>
+    <div class="h-reviews">
+      <% reviews.forEach(function (t) { %>
+        <figure class="h-review h-reveal">
+          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
+        </figure>
+      <% }); %>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="h-section h-white" id="faqs">
+  <div class="h-wrap h-faq-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">FAQs</p>
+      <h2 class="h-title">Your questions about <%= page.service_name.toLowerCase() %>, answered</h2>
+    </div>
+    <div class="h-faq">
+      <% page.faqs.forEach(function (faq) { %>
+        <details class="h-faq-item">
+          <summary><h3><%= faq.question %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+          <p><%= faq.answer %></p>
+        </details>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NEXT STEP ============ -->
+<section class="h-section h-sand h-section--tight">
+  <div class="h-wrap">
+    <div class="h-panel h-final">
+      <div>
+        <h2 class="h-title h-title--light"><%= page.cta.heading %></h2>
+        <p class="w-cta-text"><%= page.cta.text %></p>
+      </div>
+      <div class="w-hero-actions">
+        <a href="<%= bookUrl() %>" class="h-btn h-btn--light">Get a quote</a>
+        <a href="/<%= page.slug %>" class="h-btn w-btn-ghost w-btn-ghost--light"><%= page.service_name %> details</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ OTHER SERVICES ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">Why us for other services</p>
+      <h2 class="h-title">How we approach every kind of clean</h2>
+    </div>
+    <ul class="w-others">
+      <% others.forEach(function (o) { %>
+        <li><a href="<%= o.url %>"><span><%= o.service_name %></span><span class="h-arrow" aria-hidden="true">→</span></a></li>
+      <% }); %>
+    </ul>
+  </div>
+</section>

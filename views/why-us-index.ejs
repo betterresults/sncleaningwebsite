@@ -1,0 +1,64 @@
+<%# Why us hub: links to one page per service (data/why-us.js) %>
+
+<section class="a-hero w-hero">
+  <div class="h-wrap w-hero-inner">
+    <p class="h-eyebrow">Why SN Cleaning Services</p>
+    <h1 class="a-display">Built on deadlines, trusted with your keys</h1>
+    <p class="a-lead">We started 12 years ago cleaning the same homes every week. Then end of tenancy took over: for four years, about 95 out of every 100 bookings were move out cleans on dates that could not move. That is where we learned to turn up, finish properly the first time and put things right fast.</p>
+    <div class="w-hero-actions">
+      <a href="<%= bookUrl() %>" class="h-btn h-btn--primary">Get a quote</a>
+      <a href="/about" class="h-btn w-btn-ghost">Our story</a>
+    </div>
+    <ul class="w-facts" aria-label="SN Cleaning Services in numbers">
+      <li><strong>12</strong><span>years cleaning London and Essex homes</span></li>
+      <li><strong>7,549</strong><span>end of tenancy cleans</span></li>
+      <li><strong>5.0</strong><span>on Google reviews</span></li>
+      <li><strong>Own team</strong><span>trained, insured and DBS checked</span></li>
+    </ul>
+  </div>
+</section>
+
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">Pick your clean</p>
+      <h2 class="h-title">How we approach each service, and why people choose us for it</h2>
+    </div>
+    <div class="w-cards">
+      <% pages.forEach(function (p) { %>
+        <a class="w-card h-reveal" href="<%= p.url %>">
+          <span class="w-card-tag"><%= p.service_name %></span>
+          <h3><%= p.h1 %></h3>
+          <p><%= p.intro %></p>
+          <span class="h-svc-meta"><span>Why us for <%= p.nav_label.toLowerCase() %></span><span class="h-arrow" aria-hidden="true">→</span></span>
+        </a>
+      <% }); %>
+    </div>
+  </div>
+</section>
+
+<% if (reviews.length) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Google reviews</p>
+        <h2 class="h-title">What our customers say</h2>
+        <p class="h-rating h-rating--dark"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google · real reviews, word for word</p>
+      </div>
+      <% if (site.googleBusinessUrl) { %>
+        <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <% } %>
+    </div>
+    <div class="h-reviews">
+      <% reviews.forEach(function (t) { %>
+        <figure class="h-review h-reveal">
+          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% } %>

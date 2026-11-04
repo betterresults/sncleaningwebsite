@@ -56,6 +56,7 @@ const SITE_DEFAULTS = {
 // ---------- Data ----------
 const content = require('./data/content'); // live content from Supabase (services, service pages, blog, site settings)
 const testimonials = require('./data/testimonials');
+const whyUs = require('./data/why-us');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
 const { serviceImage, GALLERY } = require('./data/media');
@@ -163,6 +164,7 @@ app.use(async (req, res, next) => {
         }
       : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
 
+    res.locals.navWhyUs = whyUs.all().map((p) => ({ title: p.nav_label, url: p.url }));
     res.locals.coverageAreas = coverageAreas || [];
     res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
@@ -173,6 +175,7 @@ app.use(async (req, res, next) => {
   } catch (err) {
     console.error('Error loading nav services / site settings:', err);
     res.locals.navServices = [];
+    res.locals.navWhyUs = [];
     res.locals.site = SITE_DEFAULTS;
     res.locals.coverageAreas = [];
     res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.defaultOgImage);
@@ -360,6 +363,50 @@ Object.keys(legalDocs).forEach((slug) => {
       breadcrumbs,
       structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
     });
+  });
+});
+
+// ---------- Why us: a hub plus one page per service ----------
+app.get('/why-us', (req, res) => {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Why us', url: '/why-us' }];
+  res.render('why-us-index', {
+    title: 'Why Choose SN Cleaning Services',
+    metaDescription:
+      'Why people across London and Essex choose SN Cleaning Services: 12 years, 7,549 end of tenancy cleans, our own DBS checked team and a free re clean.',
+    pages: whyUs.all(),
+    reviews: testimonials.slice(0, 3),
+    designV2: true,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
+app.get('/why-us/:slug', async (req, res, next) => {
+  const page = whyUs.get(req.params.slug);
+  if (!page) return next();
+  const services = await content.getServices();
+  const service = services.find((s) => s.slug === page.slug) || { title: page.service_name, slug: page.slug };
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Why us', url: '/why-us' },
+    { name: page.service_name, url: page.url }
+  ];
+  const reviews = (page.proof && page.proof.review_indices || []).map((i) => testimonials[i]).filter(Boolean);
+  const faqPage = schema.buildFaqPage(page.faqs);
+  res.render('why-us', {
+    title: page.meta_title,
+    metaDescription: page.meta_description,
+    page,
+    service,
+    reviews,
+    others: whyUs.all().filter((p) => p.slug !== page.slug),
+    designV2: true,
+    breadcrumbs,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      ...(faqPage ? [faqPage] : [])
+    ]
   });
 });
 
