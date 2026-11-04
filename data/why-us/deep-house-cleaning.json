@@ -1,191 +1,164 @@
 {
-  "service_slug": "deep-house-cleaning",
-  "service_name": "Deep house cleaning",
-  "nav_label": "Deep cleaning",
-  "meta_title": "Why Choose SN Cleaning Services for Deep Cleaning",
-  "meta_description": "No judgement, honest prices from photos and our own DBS checked team. Why homes across London and Essex choose SN Cleaning Services for a deep clean.",
-  "h1": "No judgement, just a home that feels properly clean again",
-  "intro": "Sometimes a home gets away from you. A new baby, long hours, an illness, a hard year, or simply years of everyday living. A deep clean gets you back to a fresh starting point, and for most people the hardest part is picking up the phone.",
-  "understand": {
-    "heading": "The part people don't say out loud",
-    "paragraphs": [
-      "A lot of people who ask us about a deep clean start by apologising. They tell us the oven hasn't been done since they moved in, the grout has gone dark, or they've put off calling because they're embarrassed about how it looks. Please don't be. My team genuinely enjoy the dirty jobs, because they're the ones where you can see the difference you've made.",
-      "Other times it isn't about mess at all. Family are coming to stay, someone has been ill, the seasons are changing, or you want to start regular cleaning and need a proper baseline first. Either way, you want someone who'll get into the corners a normal clean skips, and who'll tell you honestly what it will take.",
-      "You don't have to describe it perfectly. Tell us in your own words, or send a few photos, and we'll give you an honest price."
-    ]
-  },
-  "different": {
-    "heading": "Why people trust us with the rooms they'd rather nobody saw",
-    "items": [
-      {
-        "title": "No judgement, ever",
-        "text": "You won't be the first, and you won't get a lecture. You'll get a friendly team who are pleased to be there and want to see the change."
-      },
-      {
-        "title": "An honest price from photos",
-        "text": "Describe the home or send photos and we price it on what's really there. Deep cleaning is charged by the hour, from £27 per cleaner per hour, and you agree the price before anything is booked."
-      },
-      {
-        "title": "We go where regular cleans don't",
-        "text": "Grout and tiles, limescale, skirting boards, door frames, and behind and under furniture. Add the oven and we clean inside it too."
-      },
-      {
-        "title": "The whole home, or just the room that bothers you",
-        "text": "Book every room, or only the ones that need it. Kitchens and bathrooms are the rooms people ask for most."
-      },
-      {
-        "title": "My own Limescale Remover",
-        "text": "Bathrooms are where a deep clean shows. Alongside professional products for each surface, the team uses my own Limescale Remover on taps, screens and tiles."
-      },
-      {
-        "title": "Before and after photos",
-        "text": "Our cleaners photograph the rooms before and after, and you get a private link with Before and After folders, so you can see exactly what was done."
-      }
-    ]
-  },
-  "process": {
-    "heading": "How a deep clean with us works",
-    "steps": [
-      {
-        "title": "Tell us about your home",
-        "text": "Let us know which rooms you want done and what's bothering you most. Photos help, but a few honest sentences work just as well."
-      },
-      {
-        "title": "Get an honest price",
-        "text": "We work out how many hours the job needs, based on the size and condition of the home. Larger homes may have more than one cleaner. You see and agree the price before booking."
-      },
-      {
-        "title": "Choose your day",
-        "text": "Pick a date that suits you, and mention pets, allergies or anything you'd like left alone."
-      },
-      {
-        "title": "The deep clean",
-        "text": "The team takes before photos, then works top to bottom through each room, including the edges, corners and hidden spots, and finishes with after photos for your private link."
-      },
-      {
-        "title": "Check it, then keep it that way",
-        "text": "Walk round and look. If you'd like, we can then set up weekly, fortnightly or monthly cleaning so the home stays where the deep clean left it."
-      }
-    ]
-  },
-  "promise": {
-    "heading": "You're not taking a chance on us",
-    "paragraphs": [
-      "The price is agreed before you book, based on what you've told us or shown us. If the home turns out to need something different from what we discussed, we talk to you first.",
-      "If you're not happy with any part of the clean, tell us within 24 hours and we'll come back and re clean that area free of charge.",
-      "Every cleaner is from our own team: trained, insured and DBS checked, never a subcontractor. When you let someone into a home you've felt awkward about, you should know exactly who they are."
-    ]
-  },
-  "proof": {
-    "heading": "Where our eye for detail comes from",
-    "paragraph": "SN Cleaning Services started as a regular domestic cleaning company. Then we added end of tenancy cleaning, and for four years it made up about 95% of our bookings. Cleaning thousands of homes to the standard an inventory clerk checks against taught us where dirt hides, and that's the experience we brought into deep and heavy duty cleaning. After 12 years cleaning homes in London and Essex, there's very little we haven't seen.",
-    "review_indices": [
-      4,
-      0,
-      5
-    ]
-  },
-  "faqs": [
-    {
-      "question": "How much will my deep clean cost in total?",
-      "answer": "Deep cleaning is charged by the hour, from £27 per cleaner per hour, so the total depends on how long your home needs. Tell us about the rooms and their condition, or send photos, and we'll give you a price to agree before you book."
-    },
-    {
-      "question": "Can I send photos instead of describing my home?",
-      "answer": "Yes, and it often helps. A few photos of the kitchen, bathroom and any problem areas let us see what's really there and give you an honest price. Nobody is judging the photos, they're just there to get the price right."
-    },
-    {
-      "question": "My home is in a really bad state. Will you still take it on?",
-      "answer": "Yes. People are often embarrassed, and there's no need to be. We also do heavy duty cleans for homes that need more than a standard deep clean. Tell us about it or send photos and we'll be straight with you about what it needs."
-    },
-    {
-      "question": "What's the difference between a deep clean and a heavy duty clean?",
-      "answer": "A deep clean goes beyond a regular clean into grout, limescale, skirting and behind furniture. A heavy duty clean is for homes where things have built up much further. If you're not sure which you need, describe the home or send photos and we'll advise."
-    },
-    {
-      "question": "How long does a deep clean take?",
-      "answer": "It depends on the size of the home, how many rooms you want done and their condition. A single bathroom is a very different job from a whole house. We'll tell you how many hours we expect when we give you the price."
-    },
-    {
-      "question": "Will more than one cleaner come?",
-      "answer": "Sometimes. For larger homes or bigger jobs we may send more than one cleaner so the work gets done in a sensible time. Remember the hourly rate is per cleaner, and we'll explain the plan when we price it."
-    },
-    {
-      "question": "Is the inside of the oven included?",
-      "answer": "The oven is cleaned inside when you add it to your deep clean. Just mention it when you book, along with anything else you'd like included, so we can allow the time for it."
-    },
-    {
-      "question": "Do you clean inside the fridge and cupboards?",
-      "answer": "We can. Inside the fridge and kitchen cupboards is done on request, so let us know when you book. It helps if they're emptied beforehand so the team can clean every shelf."
-    },
-    {
-      "question": "Can you get rid of mould in the bathroom?",
-      "answer": "We treat mould where it's present on bathroom surfaces as part of a deep clean. If mould keeps coming back, it's often a damp or ventilation issue that cleaning alone can't fix, and we'll be honest with you about that."
-    },
-    {
-      "question": "Can you remove heavy limescale from taps and shower screens?",
-      "answer": "That's one of our favourite jobs. We use professional products and my own Limescale Remover on taps, shower screens, tiles and fittings. Very old build up can be stubborn, and we'll be honest about what to expect."
-    },
-    {
-      "question": "Do you clean behind and under furniture?",
-      "answer": "Yes, where it's accessible. That's where dust and allergens collect most. If there's a very heavy piece of furniture, like a wardrobe or a large sofa, mention it when you book so we know what to expect."
-    },
-    {
-      "question": "What should I do before the deep clean?",
-      "answer": "Clear away clutter, clothes and personal items where you can, so the hours go on cleaning rather than tidying. Empty anything you'd like cleaned inside, and tell us about any delicate surfaces or areas to avoid."
-    },
-    {
-      "question": "Do I need to be at home during the clean?",
-      "answer": "That's up to you. Some people like to be there at the start to show the team round. If you won't be in, tell us when you book how we'll get into the property."
-    },
-    {
-      "question": "I have pets. Is that a problem?",
-      "answer": "Not at all. Let us know what pets you have when you book. It helps if they're kept in one room or out of the way while the team cleans, especially around wet floors and open doors."
-    },
-    {
-      "question": "Do you bring your own products and equipment?",
-      "answer": "We bring professional products chosen for each surface, including my own Limescale Remover. If you need equipment brought as well, ask when you book."
-    },
-    {
-      "question": "Are your cleaners insured and DBS checked?",
-      "answer": "Yes. Every cleaner is part of our own team, trained by us, insured and DBS checked. We never use subcontractors, so we always know who is in your home. That matters when you are letting someone into your home."
-    },
-    {
-      "question": "Will I get before and after photos?",
-      "answer": "Yes. On deep cleans our cleaners photograph the rooms before and after, and you get a private link with Before and After folders. You can see the difference side by side."
-    },
-    {
-      "question": "What if I'm not happy with part of the clean?",
-      "answer": "Tell us within 24 hours and we'll come back and re clean that area free of charge. Let us know which room and what isn't right, and photos help us put it right first time."
-    },
-    {
-      "question": "Can I book a deep clean before moving into a new home?",
-      "answer": "Yes. A deep clean before you unpack is a good way to start fresh in a new home, because the rooms are empty and every corner is easy to reach. Tell us it's a move in when you book."
-    },
-    {
-      "question": "Can I move to regular cleaning after the deep clean?",
-      "answer": "Yes. Many people use a deep clean as the starting point and then book weekly, fortnightly or monthly visits. Regular visits cost less per hour than a one off clean, and we try to send the same cleaner each time."
-    },
-    {
-      "question": "Do you deep clean carpets as part of this?",
-      "answer": "Carpets are vacuumed thoroughly as part of a deep clean. Professional carpet cleaning with hot water extraction is a separate service you can book alongside it, so the floors match the rest of the home."
-    },
-    {
-      "question": "Which areas do you cover?",
-      "answer": "We deep clean homes across London and Essex, from our office in Brentwood. Enter your postcode in the quote form to check your address. If you are not sure, ask our team and they will check for you."
-    },
-    {
-      "question": "Can I change or cancel my booking?",
-      "answer": "Contact our team as soon as you know your plans have changed and they'll explain the options for your booking. The sooner you get in touch, the easier it is to find another day that works for you and your home."
-    },
-    {
-      "question": "Can I talk to someone first?",
-      "answer": "Of course, if you'd rather talk it through first. Our customer support team is available Monday to Friday from 7am to 10pm, and Saturday and Sunday from 8am to 5pm."
-    }
+ "service_slug": "deep-house-cleaning",
+ "service_name": "Deep house cleaning",
+ "nav_label": "Deep cleaning",
+ "meta_title": "Deep House Cleaning, However Long It's Been | SN Cleaning Services",
+ "meta_description": "Deep house cleaning from £27 per hour with professional grade products and our own trained team. Dirt doesn't worry us, and our guarantees cover every clean.",
+ "h1": "Please don't be embarrassed. We love dirt.",
+ "intro": "So many people tell us they're embarrassed or ashamed of how their home looks. Please don't be. Dirt isn't a problem for us at all. A deep clean is where we can really show what we can do.",
+ "understand": {
+  "heading": "Where our experience shows",
+  "paragraphs": [
+   "If your home has been neglected for years and it needs a massive refresh, yes, we can do that. We know which products to use, and we have the experience to know what's possible to achieve.",
+   "A deep clean reaches the areas a regular clean doesn't. That's not because a regular cleaner doesn't care. The time given for a regular clean simply doesn't allow going that deep.",
+   "That's also why I don't send just anyone. Some cleaners who mainly do regular cleans are brilliant, and their clients love them, but in my experience they don't perform well on deep cleaning. They're used to the same house and the same plan every week. Our team is trained for the deep work."
+  ]
+ },
+ "different": {
+  "heading": "What's different when you book us",
+  "items": [
+   {
+    "title": "Dirt doesn't put us off",
+    "text": "However long it's been, you don't need to explain or apologise. This is the work we're good at."
+   },
+   {
+    "title": "Professional grade products",
+    "text": "Products from the supermarket won't get you there. We always use professional grade products and know which one each job needs."
+   },
+   {
+    "title": "The right number of cleaners",
+    "text": "One cleaner can work up to 8 hours before tiredness affects the work. For jobs of 6 hours or more we send a team. We plan it around the result, nothing else."
+   },
+   {
+    "title": "Our own trained team",
+    "text": "Every new cleaner goes through a trial, then works alongside one of our cleaners for two to four weeks. After that we check their work at least three times a week until we're confident in them. Every one of them is insured and DBS checked."
+   },
+   {
+    "title": "Our show up guarantee",
+    "text": "Our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or it's free."
+   },
+   {
+    "title": "We come back if we missed something",
+    "text": "If the property is empty and someone finds a missed spot after we leave, we come back and put it right, completely free. If you live in the home, tell us within 24 hours."
+   }
+  ]
+ },
+ "process": {
+  "heading": "How your deep clean works",
+  "steps": [
+   {
+    "title": "Tell us about your home",
+    "text": "The size of your home and what state it's in, honestly."
+   },
+   {
+    "title": "We plan the time and the team",
+    "text": "One cleaner for up to 8 hours, or a team when the job needs 6 hours or more."
+   },
+   {
+    "title": "Our trained team arrives",
+    "text": "On the day and at the time you booked, with professional grade products."
+   },
+   {
+    "title": "We deep clean",
+    "text": "The areas a regular clean never has time for, done properly."
+   },
+   {
+    "title": "Check it after we leave",
+    "text": "If anything was missed, we put it right under our satisfaction guarantee."
+   }
+  ]
+ },
+ "promise": {
+  "heading": "Our promise to you",
+  "paragraphs": [
+   "Our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or it's free. An afternoon booking would move to first thing the next morning.",
+   "If the property is empty and someone checks after we leave and finds a missed spot, we come back and put it right, completely free. If you live in the home, tell us within 24 hours. Customer satisfaction comes first for us, and that's how we've worked for 12 years."
+  ]
+ },
+ "proof": {
+  "heading": "Learned on the dirtiest homes",
+  "paragraph": "End of tenancy cleans are usually really dirty, and we've done 7,549 of them. That's where our team learned what professional grade products and experience can achieve.",
+  "stories": [
+   {
+    "title": "A bathroom that took 4 hours",
+    "text": "In one Hornchurch property the bathroom had so much limescale it was even on the tiles. It took one cleaner around 4 hours. The next day the landlord and the estate agent were amazed. They had been told the property needed a complete refurbishment."
+   }
   ],
-  "cta": {
-    "heading": "Tell us about your home, honestly",
-    "text": "Click Get a quote, describe the rooms or send photos, and we'll give you a price before anything is booked."
+  "review_indices": [
+   4,
+   5,
+   0
+  ]
+ },
+ "faqs": [
+  {
+   "question": "I'm embarrassed about the state of my home. Will you judge me?",
+   "answer": "No. So many people tell us they feel embarrassed or ashamed, and there's no need. Dirt isn't a problem for us at all. In fact, we love it, because a deep clean is where our expertise shows."
   },
-  "notes": "Is the oven an add on for deep cleans with its own price, or part of the hourly time? Is there a separate heavy duty service page we should link to? Can customers send photos by WhatsApp or email, and if so which? I said 'many people use a deep clean as the starting point' based on the service page guide; please confirm that's fair."
+  {
+   "question": "Can you clean a home that's been neglected for years?",
+   "answer": "Yes, we can. If your home needs a massive refresh, we can definitely help."
+  },
+  {
+   "question": "How much does a deep clean cost?",
+   "answer": "Deep cleaning starts from £27 per hour."
+  },
+  {
+   "question": "What products do you use?",
+   "answer": "Always professional grade products. Knowing which product to use for each job is a big part of what we can achieve."
+  },
+  {
+   "question": "How is a deep clean different from a regular clean?",
+   "answer": "A regular clean has a set time, and that time doesn't allow going deep. A deep clean gets to the areas a regular clean doesn't touch."
+  },
+  {
+   "question": "Why can't my regular cleaner do a deep clean?",
+   "answer": "They might be great at your regular clean. But in my experience, cleaners who mainly do regular cleans don't perform well on deep cleaning. They're used to the same house and the same plan. Deep cleaning needs training and experience."
+  },
+  {
+   "question": "How many cleaners will you send?",
+   "answer": "It depends on how long the job needs. We usually send a team on jobs of 6 hours or more. For shorter jobs, one cleaner does it."
+  },
+  {
+   "question": "Why don't you send two cleaners for a short clean?",
+   "answer": "Every cleaner loses time settling in and finishing off, 10 minutes here, 10 minutes there. Two cleaners losing 20 minutes each is 40 minutes, almost an hour of your clean."
+  },
+  {
+   "question": "How long can one cleaner work?",
+   "answer": "We recommend up to 8 hours. After that people get tired and the work suffers, so for longer jobs we build a team."
+  },
+  {
+   "question": "What if you miss something?",
+   "answer": "If the property is empty and someone finds a missed spot after we leave, we come back and put it right, completely free of charge. If you live in the home, tell us within 24 hours."
+  },
+  {
+   "question": "What is your show up guarantee?",
+   "answer": "We have systems in place so our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or we do it for free."
+  },
+  {
+   "question": "How do you make sure your cleaners turn up?",
+   "answer": "We check on our cleaners early in the morning and again in the late afternoon, so we know they're on track."
+  },
+  {
+   "question": "Are your cleaners your own team?",
+   "answer": "Yes. Every cleaner is part of our own trained, insured and DBS checked team."
+  },
+  {
+   "question": "How do you train your cleaners?",
+   "answer": "Everyone who applies fills in a form and gets scored. The right people are invited to a trial. Then they work alongside one of our cleaners, usually for two to four weeks. Once they work on their own, we check their work at least three times a week for the first one to two months."
+  },
+  {
+   "question": "Can you remove heavy limescale?",
+   "answer": "Yes. In one Hornchurch property the limescale was even on the tiles. The bathroom took one cleaner around 4 hours, and the landlord and the estate agent could hardly believe the result."
+  },
+  {
+   "question": "Can you clean carpets, sofas and mattresses too?",
+   "answer": "Yes. Carpet cleaning starts from £49, upholstery from £69 and mattresses from £39, all with professional grade machines and products."
+  }
+ ],
+ "cta": {
+  "heading": "Tell us about your home",
+  "text": "Get your price and we'll take it from there."
+ },
+ "notes": "SOURCES: 'embarrassed, ashamed', 'we love dirt', 'expertise comes out in deep cleans', 'neglected for years, massive refresh, yes we can', professional grade products, team sizing, guarantees and training are from her voice notes and chat statements. The Hornchurch bathroom story was an end of tenancy clean; I used it here as proof of limescale work (the text does not call it a deep clean booking). Wording I added that she should check: 'Be honest,' (step 1 and CTA) follows from 'we love dirt' but are not her words. LEFT OUT: '3 times faster' and 'hundreds of 5 star reviews'. QUESTIONS FOR SILVIA: For a deep clean in an EMPTY property, what is the time window to report a missed spot (72 hours as for end of tenancy, or something else)? For lived in homes, is the 24 hour fix a free return visit? Do you bring all products and equipment for deep cleans? Is internal oven and appliance cleaning included in a deep clean or an extra? Do you give an estimate of hours before booking, and what happens if the job needs more time than booked?"
 }

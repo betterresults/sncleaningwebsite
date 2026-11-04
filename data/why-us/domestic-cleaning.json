@@ -1,182 +1,169 @@
 {
-  "service_slug": "domestic-cleaning",
-  "service_name": "Domestic cleaning",
-  "nav_label": "Domestic",
-  "meta_title": "Why Choose SN Cleaning Services for Domestic Cleaning",
-  "meta_description": "Why families in London and Essex trust SN Cleaning Services with their keys: the same cleaner where we can, our own DBS checked team and a 24 hour re clean.",
-  "h1": "A cleaner you can trust with your keys",
-  "intro": "Letting someone into your home every week is a bigger decision than it looks. You're handing over your keys, your routines and the rooms nobody else sees. Here's why so many people in London and Essex have trusted SN Cleaning Services with that, and how we keep earning it on every visit.",
-  "understand": {
-    "heading": "We know what you're really worried about",
-    "paragraphs": [
-      "Most people who get in touch aren't worried about whether we can clean a bathroom. They're worried about everything around it: a different stranger turning up each week, explaining again where the vacuum lives and which tap drips, and wondering whether the person in their home will be careful with the photos on the shelf.",
-      "Some have been let down before, by a cleaner who stopped turning up or rushed round the rooms. Others have never had help at home and feel a bit awkward about it, as if they ought to be managing on their own. Both are completely normal. A demanding job, children, a new baby, a parent to look after or simply wanting your Saturday back are all good reasons, and you never need to apologise for the state of the place.",
-      "I started SN Cleaning Services as a regular domestic cleaning company, so this is the work the whole business was built on. I know how much it matters that the person walking through your door is the right one."
-    ]
-  },
-  "different": {
-    "heading": "What we do differently, and why it matters to you",
-    "items": [
-      {
-        "title": "The same cleaner wherever we can",
-        "text": "We try to send the same person each visit, so they learn your home, your preferences and the jobs you care about most. You explain things once, not every week."
-      },
-      {
-        "title": "Our own team, never subcontractors",
-        "text": "Every cleaner is part of our own trained, insured and DBS checked team. We don't pass jobs on to anyone else, so we always know exactly who is in your home."
-      },
-      {
-        "title": "Products, and equipment if you want it",
-        "text": "We bring professional products, including my own Limescale Remover for taps and shower screens. You can also choose for us to bring the vacuum and mop, which helps if you'd rather not keep your own."
-      },
-      {
-        "title": "A rhythm that fits your life",
-        "text": "Weekly, fortnightly or monthly, or a one off when you need it. Regular visits cost less per hour than one off cleans, so steady help is also the better value."
-      },
-      {
-        "title": "Your list comes first",
-        "text": "Tell us what matters most, whether that's the kitchen after a busy week or the bathroom before the weekend, and your cleaner will focus there. If they spot a maintenance problem, they'll mention it."
-      },
-      {
-        "title": "Real people to talk to",
-        "text": "Our support team is there Monday to Friday 7am to 10pm and Saturday and Sunday 8am to 5pm, so passing on a note or changing a detail fits around your working day."
-      }
-    ]
-  },
-  "process": {
-    "heading": "How it works, from your first quote to your regular day",
-    "steps": [
-      {
-        "title": "See your price",
-        "text": "Click Get a quote, enter your postcode and a few details about your home, and you'll see the price before you confirm anything."
-      },
-      {
-        "title": "Choose how often",
-        "text": "Pick weekly, fortnightly, monthly or a one off visit, and decide whether you'd like us to bring equipment as well as products."
-      },
-      {
-        "title": "Tell us how we get in",
-        "text": "Be at home, or leave access notes for a key, a code or a keysafe. Add anything your cleaner should know about pets, alarms or rooms to leave alone."
-      },
-      {
-        "title": "Your cleaner gets to work",
-        "text": "They work through the kitchen, bathrooms, living areas and bedrooms, give extra time to the jobs you've flagged, then switch off lights and lock up securely when they leave."
-      },
-      {
-        "title": "Settle into a routine",
-        "text": "Over the following visits your cleaner gets to know your home. If anything needs changing, you just tell our team."
-      }
-    ]
-  },
-  "promise": {
-    "heading": "What happens if something isn't right",
-    "paragraphs": [
-      "If anything has been missed, tell us within 24 hours and we'll come back and re clean it free of charge. Just tell us what you found and where.",
-      "The price you see when you book is the price agreed before we start, so there are no surprises on the day. And the person in your home is always one of our own trained, insured and DBS checked cleaners, never a subcontractor and never someone we haven't vetted ourselves."
-    ]
-  },
-  "proof": {
-    "heading": "Twelve years of looking after homes",
-    "paragraph": "I've been cleaning homes in London and Essex for 12 years, and SN Cleaning Services was registered as a company in 2019. We began with regular domestic cleaning, then added end of tenancy work, and later grew into deep, heavy duty and Airbnb cleaning. Along the way our team has completed 7,549 end of tenancy cleans, which teaches you a lot about the corners people forget. Our office is at 15A Shenfield Road, Brentwood, and the reviews below are from real customers on Google, some of whom ask for their cleaner by name.",
-    "review_indices": [3, 1, 0]
-  },
-  "faqs": [
-    {
-      "question": "What does a regular domestic clean cost?",
-      "answer": "Domestic cleaning starts from £23 per hour. Your final price depends on the size of your home, how often we visit and whether you'd like us to bring equipment as well as products. Click Get a quote and you'll see the exact price before you confirm anything."
-    },
-    {
-      "question": "Is a one off clean more expensive than regular visits?",
-      "answer": "Per hour, yes. Weekly, fortnightly and monthly visits cost less per hour than a one off clean, because your cleaner keeps the home on top rather than starting from scratch. A one off is still a good choice before guests arrive or after a hectic few weeks."
-    },
-    {
-      "question": "What is included in a regular clean?",
-      "answer": "Kitchen worktops, the outside of appliances, the hob and inside the microwave, bathrooms cleaned and disinfected, dusting including skirting boards, vacuuming and mopping, and bins emptied. Beds can be made on request. If you'd like the time spent differently, tell us and your cleaner will follow your list."
-    },
-    {
-      "question": "How many hours will I need each visit?",
-      "answer": "It depends on the size of your home and what you'd like done. When you get a quote you tell us about your property, and the price is shown before you confirm. If you're unsure how much time to book, ask our team and we'll help you choose a sensible amount."
-    },
-    {
-      "question": "What should I do before my cleaner arrives?",
-      "answer": "Nothing complicated. Clearing clutter from worktops and floors lets your cleaner spend the time cleaning rather than tidying. Put away anything valuable or fragile you'd rather they didn't handle, and leave a note about anything special, such as a surface that needs a particular product."
-    },
-    {
-      "question": "Can I leave a key in a keysafe?",
-      "answer": "Yes. Many customers use a keysafe, a door code or a spare key. Add the details to your access notes when you book and your cleaner will follow them exactly, then lock up securely when they leave. If anything about access changes, just let our team know."
-    },
-    {
-      "question": "I have a dog. Is that a problem?",
-      "answer": "Not at all, plenty of our customers have pets. Tell us when you book what pets you have and whether they'll be at home, so your cleaner knows what to expect. If you'd prefer a pet kept in one room during the clean, just say so in your notes."
-    },
-    {
-      "question": "Are your cleaners insured and DBS checked?",
-      "answer": "Yes. Every cleaner is part of our own trained, insured and DBS checked team. SN Cleaning Services never passes jobs to subcontractors, so you always know the person in your home is one of ours and has been vetted by us."
-    },
-    {
-      "question": "How are your cleaners trained?",
-      "answer": "Every cleaner on our team is trained by us, as well as being insured and DBS checked. If you'd like to know more, our team is happy to talk you through it."
-    },
-    {
-      "question": "What happens when my regular cleaner is on holiday?",
-      "answer": "We try to send the same cleaner every time. When that isn't possible, another member of our own trained, insured and DBS checked team will cover."
-    },
-    {
-      "question": "Can you bring a vacuum and mop?",
-      "answer": "Yes. When you book you can choose for us to bring equipment, such as the vacuum and mop, as well as products. It's handy if your own vacuum has seen better days or you'd simply rather not keep cleaning kit at home."
-    },
-    {
-      "question": "Which products will you use in my home?",
-      "answer": "Professional products chosen for each surface, and for limescale on taps, sinks and shower screens we use my own Limescale Remover. If there's a product you'd like us to use on a particular surface, such as a worktop or wooden floor, leave it out with a note."
-    },
-    {
-      "question": "Can I change my cleaning day or skip a visit?",
-      "answer": "Contact our team and we'll do our best to help. Support is open Monday to Friday 7am to 10pm and Saturday and Sunday 8am to 5pm, so you can reach us outside normal office hours. The earlier you tell us, the easier it is to rearrange."
-    },
-    {
-      "question": "What is your cancellation policy?",
-      "answer": "Please ask our team, who will explain how cancellations and changes work for your booking before you commit. We'd always rather you knew the details upfront than found out later. Letting us know about a change early helps us look after you and your cleaner."
-    },
-    {
-      "question": "How do I pay for my cleans?",
-      "answer": "The booking form shows your price and how payment works before you confirm. If you have a question about paying for regular visits, ask our team and they'll explain how it works for your schedule."
-    },
-    {
-      "question": "How does the re clean guarantee work?",
-      "answer": "If something has been missed, tell us within 24 hours of your clean and we'll send someone back to re clean it free of charge. Telling us exactly which room and which job helps us put it right quickly, and helps your cleaner get it right next time too."
-    },
-    {
-      "question": "Do you clean inside the oven or fridge on a regular clean?",
-      "answer": "A regular clean covers the hob, the outside of appliances and inside the microwave. Inside the oven is part of our deep cleaning service, so if your oven needs proper attention, ask about adding a deep clean. Deep cleaning starts from £27 per hour."
-    },
-    {
-      "question": "My home needs more than a regular clean to start with. What do you suggest?",
-      "answer": "Lots of customers start with a deep clean to bring everything up to standard, then switch to regular visits that keep it there. It means your regular cleaner isn't spending their first few visits catching up. Tell us about your home and we'll suggest what makes sense."
-    },
-    {
-      "question": "Do I have to sign a long contract?",
-      "answer": "No. You choose weekly, fortnightly or monthly visits, or a single one off clean, without being tied into a long contract. If your needs change, talk to our team about adjusting your schedule."
-    },
-    {
-      "question": "Will my cleaner do laundry or ironing?",
-      "answer": "Our domestic cleaning focuses on cleaning your home: kitchen, bathrooms, living areas and bedrooms. If you'd like help with something else, ask our team before you book and we'll tell you honestly what we can and can't include."
-    },
-    {
-      "question": "Is my postcode in your area?",
-      "answer": "We clean homes across London and Essex, from our office in Brentwood. The easiest way to check is to click Get a quote and enter your postcode, and the form will confirm whether we cover your address."
-    },
-    {
-      "question": "Do you clean flats as well as houses?",
-      "answer": "Yes. We look after everything from studio flats to large family homes. Tell us how many bedrooms and bathrooms you have when you get a quote, so the price and time reflect the size of your home rather than a one size estimate."
-    },
-    {
-      "question": "How can I be sure my things are safe when I'm out?",
-      "answer": "We understand that worry completely. Every cleaner is part of our own trained, insured and DBS checked team, we try to send the same person each time, and they follow your access notes and lock up when they leave. If anything ever concerns you, tell our team straight away."
-    }
+ "service_slug": "domestic-cleaning",
+ "service_name": "Domestic cleaning",
+ "nav_label": "Domestic cleaning",
+ "meta_title": "Regular Home Cleaning, Done Properly | SN Cleaning Services",
+ "meta_description": "Regular home cleaning from £23 per hour by our own trained team, with a show up guarantee. We clean the areas that get missed day to day.",
+ "h1": "Come home to the clean house you booked",
+ "intro": "A lot of our regular customers are busy families. They leave early in the morning, come back in the evening, and on cleaning day they expect to open the door to a clean house. We understand what it means if that doesn't happen, and we make sure it does.",
+ "understand": {
+  "heading": "Regular cleaning isn't light cleaning",
+  "paragraphs": [
+   "People often say regular cleaning is just a light clean. I don't see it that way. Anyone can wipe a bit of dust and run the hoover round. Even if you're really busy, you can find 30 minutes to do that yourself.",
+   "When you book a professional cleaning service, you should get more than you could do on your own: better results, and the areas that usually get skipped.",
+   "You already tidy up and clean every day. What you need is a cleaner who does the jobs that take more time and more trouble: the tops and the outside of the kitchen cupboards, the microwave, taking the rubbish out and cleaning the bin. Many cleaning companies see these as unimportant on a regular clean. We see them as the reason you booked us.",
+   "And I know what it means when a cleaner doesn't turn up. You open the door after a long day and the house hasn't been cleaned. That's why our show up guarantee covers your regular clean too."
+  ]
+ },
+ "different": {
+  "heading": "What's different when you book us",
+  "items": [
+   {
+    "title": "Our show up guarantee",
+    "text": "We have systems in place so our cleaners arrive on the day and at the time you booked. We check on them early in the morning and again in the late afternoon. If something outside our control happens, your clean is still done within 12 hours, or it's free."
+   },
+   {
+    "title": "A true clean, every visit",
+    "text": "We do the things that get missed day to day: the tops and the outside of the kitchen cupboards, the microwave, the rubbish out and the bin cleaned."
+   },
+   {
+    "title": "A cleaner who knows your home",
+    "text": "When a cleaner comes to you regularly, they learn your house and what you want, and they work to it every time."
+   },
+   {
+    "title": "Teams only when the job needs one",
+    "text": "We usually send a team only on jobs of 6 hours or more. Two cleaners for an hour and a half never get through what one cleaner does in 3 hours."
+   },
+   {
+    "title": "Cleaners we train ourselves",
+    "text": "Every new cleaner goes through a trial, then works alongside one of our cleaners for two to four weeks. After that we check their work at least three times a week until we're confident in them."
+   },
+   {
+    "title": "Tell us within 24 hours",
+    "text": "If anything isn't right after your clean, tell us within 24 hours and we'll deal with it."
+   }
+  ]
+ },
+ "process": {
+  "heading": "How your regular clean works",
+  "steps": [
+   {
+    "title": "Tell us about your home",
+    "text": "The size of your home, how often you'd like us and which day suits you."
+   },
+   {
+    "title": "We plan the time",
+    "text": "One cleaner for anything up to 8 hours. A team only when the job needs 6 hours or more."
+   },
+   {
+    "title": "Your cleaner arrives",
+    "text": "On the day and at the time you booked, covered by our show up guarantee."
+   },
+   {
+    "title": "The clean you don't have time for",
+    "text": "Cupboard tops and fronts, the microwave, the bin and the areas that get missed day to day, as well as the rest of your home."
+   },
+   {
+    "title": "Tell us how it went",
+    "text": "If anything isn't right, tell us within 24 hours."
+   }
+  ]
+ },
+ "promise": {
+  "heading": "Our promise to you",
+  "paragraphs": [
+   "Our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or it's free. If your clean was booked for the afternoon, it would move to first thing the next morning.",
+   "You're not a one off transaction to us. Customer satisfaction comes first, and I want you to feel heard and looked after, every time we come."
+  ]
+ },
+ "proof": {
+  "heading": "Where we started",
+  "paragraph": "I started as a self employed cleaner and built SN Cleaning Services from there. Regular home cleaning is how we began, and after 12 years it's still a big part of what we do. When I send my cleaners to someone, the message I hear back again and again is how hard working they are. I know, because that's how I choose them.",
+  "stories": [
+   {
+    "title": "A 3 hour clean that became an hour and a half",
+    "text": "One of our regular customers had the same cleaner for a long time. That cleaner kept cancelling and rescheduling, and areas were being missed. Her clean was booked for 3 hours, and at some point the cleaner started bringing a second cleaner and they finished in an hour and a half. On paper that's still 3 hours. In my experience it never is: two people lose time settling in and finishing off, 10 minutes here and 10 minutes there, and 20 minutes lost by each cleaner is almost an hour of your clean. That's why we only send teams on jobs of 6 hours or more."
+   }
   ],
-  "cta": {
-    "heading": "Find out what regular help would cost",
-    "text": "Click Get a quote and see your price before you decide anything, with no pressure either way."
+  "review_indices": [
+   3,
+   1,
+   0
+  ]
+ },
+ "faqs": [
+  {
+   "question": "Is regular cleaning just a light clean?",
+   "answer": "Not with us. Anyone can wipe a bit of dust and hoover. When you book a professional, we should achieve more than that and reach the areas that usually get skipped."
   },
-  "notes": "Facts I wanted but did not have: cancellation and notice policy, how payment is taken for recurring cleans, whether laundry or ironing can be added, and how cleaners are trained (I kept this general). The service page mentions recurring discounts of up to 20 percent and a 'no contracts' line; I used 'no long contract' but did not quote the percentage. Please confirm 'no contract' is still true."
+  {
+   "question": "What do you clean on a regular visit?",
+   "answer": "Your home, plus the jobs that take more time and get missed day to day: the tops and the outside of the kitchen cupboards, the microwave, taking the rubbish out and cleaning the bin."
+  },
+  {
+   "question": "How much does domestic cleaning cost?",
+   "answer": "Domestic cleaning starts from £23 per hour."
+  },
+  {
+   "question": "What is your show up guarantee?",
+   "answer": "We have systems in place so our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or we do it for free."
+  },
+  {
+   "question": "What happens if my cleaner can't make it?",
+   "answer": "We don't just cancel. We still handle your booking within 12 hours. If your clean was booked for the afternoon, for example, it would move to first thing the next morning."
+  },
+  {
+   "question": "How do you make sure your cleaners turn up?",
+   "answer": "We check on our cleaners early in the morning and again in the late afternoon, so we know they're on track. If something happens outside our control, our show up guarantee is there."
+  },
+  {
+   "question": "What if I'm not happy with a clean?",
+   "answer": "Tell us within 24 hours and we'll deal with it."
+  },
+  {
+   "question": "Will the same cleaner come each time?",
+   "answer": "That's how we like regular cleaning to work. A cleaner who comes to you regularly learns your house and what you want, and works to it every time."
+  },
+  {
+   "question": "Will you send two cleaners to finish faster?",
+   "answer": "Not for a short clean. We usually send a team only on jobs of 6 hours or more. In my experience two cleaners for an hour and a half never finish the same work as one cleaner in 3 hours."
+  },
+  {
+   "question": "Why does a team lose time on a short clean?",
+   "answer": "Every cleaner needs time to settle in at the start and to finish off at the end, 10 minutes here, 10 minutes there. If two cleaners each lose 20 minutes, that's 40 minutes, almost an hour of your clean."
+  },
+  {
+   "question": "How long can one cleaner work?",
+   "answer": "We recommend one cleaner for up to 8 hours. After that people get tired and the work suffers, so for longer jobs we send a team."
+  },
+  {
+   "question": "Are your cleaners your own team?",
+   "answer": "Yes. Every cleaner is part of our own trained, insured and DBS checked team. We don't post a job and send whoever answers."
+  },
+  {
+   "question": "How do you train your cleaners?",
+   "answer": "Everyone who applies fills in a form and gets scored. The right people are invited to a trial. After that they work alongside one of our cleaners, usually for two to four weeks. Once they work on their own, we check their work at least three times a week for the first one to two months."
+  },
+  {
+   "question": "Do you only hire experienced cleaners?",
+   "answer": "No. In my experience a cleaner who has learned to work the wrong way is very hard to teach. We look for people who are happy and open to learn, and we train them our way."
+  },
+  {
+   "question": "Do you use professional products?",
+   "answer": "Yes. Cleaning is experience and knowledge, and it's professional cleaning products too."
+  },
+  {
+   "question": "How long have you been cleaning homes?",
+   "answer": "12 years. I started as a self employed cleaner, and SN Cleaning Services began as a regular home cleaning company."
+  },
+  {
+   "question": "Will I be treated as just another booking?",
+   "answer": "No. We care about how you feel and whether you see real value in what we do. You're not a one off transaction to us."
+  }
+ ],
+ "cta": {
+  "heading": "Tell us which day suits you",
+  "text": "Book your regular clean and come home to a clean house."
+ },
+ "notes": "SOURCES: busy family example, 'regular cleaning isn't light cleaning', the jobs list, the 3 hour story, team sizing, 24 hour complaints, show up guarantee, training and 'your guys are amazing, so hard working' are all from her voice notes. LEFT OUT OR UNCLEAR: the customer's name in the story is garbled ('client is marway') and she said 'every Thursday, I believe', so I left out the name and the day. I wrote the story as 'one of our regular customers'; please confirm she came to us because of that cleaner. 'Hundreds of 5 star reviews' left out (needs her OK). For the 24 hour window I wrote 'we'll deal with it' because she didn't say whether occupied homes get a free return visit. QUESTIONS FOR SILVIA: Do we promise the same cleaner every time, or is it 'where possible'? For lived in homes, is the fix a free return visit? Do customers supply products and equipment for regular cleans, or do we bring them? How often can people book (weekly, fortnightly, monthly) and is there a minimum number of hours? What is the notice period to cancel or skip a clean? Can ironing or laundry be added? Are there recurring discounts?"
 }

@@ -98,6 +98,16 @@
         <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
       <% } %>
     </div>
+    <% if (page.proof.stories && page.proof.stories.length) { %>
+    <div class="w-stories">
+      <% page.proof.stories.forEach(function (st) { %>
+        <article class="w-story h-reveal">
+          <h3><%= st.title %></h3>
+          <p><%= st.text %></p>
+        </article>
+      <% }); %>
+    </div>
+    <% } %>
     <% if (reviews.length) { %>
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>

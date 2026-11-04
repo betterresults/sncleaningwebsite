@@ -771,6 +771,10 @@
 .w-promise { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 5vw, 64px); padding: clamp(28px, 5vw, 64px); align-items: start; }
 .w-promise-copy p { margin: 0 0 1em; color: #d9e5dc; line-height: 1.7; }
 .w-proof { margin: 14px 0 0; color: var(--h-text); line-height: 1.7; max-width: 44em; }
+.w-stories { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; margin-bottom: 28px; }
+.w-story { background: #fff; border-radius: 22px; padding: 26px 28px; border-left: 4px solid var(--h-primary); }
+.w-story h3 { margin: 0 0 10px; font-family: var(--h-serif); font-weight: 500; font-size: 1.3rem; color: var(--h-ink); }
+.w-story p { margin: 0; line-height: 1.7; color: var(--h-text); }
 .w-cta-text { margin: 10px 0 0; color: #c6d4ca; }
 .w-others { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
 .w-others a { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 18px; border: 1px solid var(--h-line); border-radius: 16px; text-decoration: none; color: var(--h-ink); font-weight: 600; }
@@ -783,7 +787,7 @@
 .w-card-tag { justify-self: start; background: var(--h-sage-soft); color: var(--h-ink); border-radius: 999px; padding: 4px 12px; font-size: .8rem; font-weight: 600; }
 @media (max-width: 900px) {
   .w-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .w-understand, .w-promise, .w-diff, .w-cards { grid-template-columns: 1fr; }
+  .w-understand, .w-promise, .w-diff, .w-cards, .w-stories { grid-template-columns: 1fr; }
   .w-others { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px) { .w-others { grid-template-columns: 1fr; } }

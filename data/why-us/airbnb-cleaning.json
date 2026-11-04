@@ -1,190 +1,162 @@
 {
  "service_slug": "airbnb-cleaning",
  "service_name": "Airbnb cleaning",
- "nav_label": "Airbnb",
- "meta_title": "Why Choose SN Cleaning Services for Airbnb Cleaning",
- "meta_description": "Turnovers planned around your guests, damage and left items reported, our own DBS checked team. Why hosts in London and Essex trust SN Cleaning Services.",
- "h1": "Turnovers you can rely on when you're not there",
- "intro": "When you host, the clean between guests is the one job you can't do from your phone. A hair in the shower or a crumpled pillowcase ends up in a review, and reviews are your business. We clean short lets across London and Essex so the next guest walks into the place they saw in your photos.",
+ "nav_label": "Airbnb cleaning",
+ "meta_title": "Airbnb Cleaning for 5 Star Reviews | SN Cleaning Services",
+ "meta_description": "Airbnb cleaning from £24 per hour by cleaners trained on Airbnb and end of tenancy cleans, with our show up guarantee on every turnover.",
+ "h1": "A 5 star review needs a 5 star clean",
+ "intro": "Look at Airbnb listings and you'll see it: a beautiful property, an amazing location, and then bad reviews for cleanliness. Those reviews affect the business. We understand that, and we clean every turnover with your business in mind.",
  "understand": {
-  "heading": "We know the clean is only half of a turnover",
+  "heading": "Cleanliness reviews cost hosts money",
   "paragraphs": [
-   "The hard part of hosting isn't the cleaning, it's the timing and the not knowing. One guest checks out late morning, the next arrives mid afternoon, and in between someone has to strip the beds, reset the kitchen, notice the charger left in the socket and spot the chipped glass before a guest does.",
-   "Many hosts aren't close by, either. You might live across town, host while you travel, or co host for an owner who expects updates. What you need isn't just a cleaner, it's someone who acts like your eyes in the property and tells you what they found.",
-   "And when something does go wrong, a guest messages you, not us. You want a cleaning company that takes that seriously and comes back to put it right, because your rating is on the line, not ours."
+   "Bad cleaning reviews can reduce your revenue. Some properties even get taken off the market because of them and can't be part of the business anymore.",
+   "So you're not looking for someone to clean the floors, check the washing machine and the dishwasher and make the beds. You're looking for a partner who understands that the cleaning is a huge part of your business.",
+   "A lot of hosts look for just a cleaner. In my experience an Airbnb turnover is like an end of tenancy clean every single time. You have to check everything and move everything. Yes, it takes time. But to get 5 star reviews, the clean has to be 5 star, 100% on the details."
   ]
  },
  "different": {
-  "heading": "What we do differently for hosts",
+  "heading": "What's different when you book us",
   "items": [
    {
-    "title": "Planned around your check out and check in",
-    "text": "Tell us your usual guest times and we plan each turnover around them, including same day check out to check in changeovers."
+    "title": "Our show up guarantee",
+    "text": "This matters most for Airbnb. We have systems in place so our cleaners arrive on the day and at the time you booked, and we check on them early in the morning and again in the late afternoon. If something outside our control happens, your clean is still done within 12 hours, or it's free."
    },
    {
-    "title": "A full reset, not a quick tidy",
-    "text": "Bathroom cleaned and disinfected, fresh towels laid out, beds made with fresh linen, kitchen reset with dishes washed and put away, bins emptied. Every time."
+    "title": "Trained on Airbnb and end of tenancy cleans",
+    "text": "Can a cleaner who usually does regular cleans do an Airbnb turnover? In my experience, no. Our cleaners are trained on Airbnb and end of tenancy cleans, where every clean is different and goes deep."
    },
    {
-    "title": "Your eyes in the property",
-    "text": "We check for anything guests left behind and report any damage to you, so you hear about it before the next guest does."
+    "title": "Every turnover treated like an end of tenancy",
+    "text": "We check everything and move everything, every time. The details are what guests notice."
    },
    {
-    "title": "Proof when you can't be there",
-    "text": "Ask for a photo checklist and you'll see the key areas finished before your next guest arrives, which is handy for remote hosts and co hosting teams."
+    "title": "A partner for your business",
+    "text": "The washing machine, the dishwasher and the beds are part of it. Understanding what a cleanliness review does to your income is the rest."
    },
    {
-    "title": "Essentials restocked on request",
-    "text": "We can top up toiletries, toilet roll, tea and coffee from your supplies, so the small things guests notice are never missing."
+    "title": "Professional products and know how",
+    "text": "Cleaning is experience and knowledge, and it's professional cleaning products. Our team knows which product each job needs."
    },
    {
-    "title": "Our own team in your guests' space",
-    "text": "Every cleaner is trained, insured and DBS checked by us, never a subcontractor. The people with your key code are people we know."
+    "title": "Training that goes beyond a day",
+    "text": "When I say training, I don't mean showing someone a couple of properties. Every new cleaner goes through a trial, works alongside one of our cleaners for two to four weeks, and then we check their work at least three times a week until we're confident in them."
    }
   ]
  },
  "process": {
-  "heading": "How turnovers with us work",
+  "heading": "How your Airbnb cleaning works",
   "steps": [
    {
-    "title": "Tell us about the listing",
-    "text": "Number of bedrooms and beds, bathrooms, your usual check out and check in times, and any house rules guests should find in place."
+    "title": "Tell us about your listing",
+    "text": "The size of the property and when your guests check out and check in."
    },
    {
-    "title": "Get your price",
-    "text": "Airbnb cleaning starts from £24 per hour. Click Get a quote for a one off turnover, or talk to our team about a schedule that follows your booking calendar rather than a fixed weekly day."
+    "title": "We plan the time and the team",
+    "text": "One cleaner for up to 8 hours, or a team when the turnover needs 6 hours or more."
    },
    {
-    "title": "Set up access and supplies",
-    "text": "Tell us how we get in, where the linen, towels and spare essentials are kept, and whether you'd like a photo checklist."
+    "title": "A trained cleaner arrives",
+    "text": "On the day and at the time you booked, covered by our show up guarantee."
    },
    {
-    "title": "The turnover",
-    "text": "The team cleans and resets every room, makes the beds, lays out towels, restocks on request and sets the lights and heating to your house rules."
+    "title": "Everything checked, everything moved",
+    "text": "The whole property cleaned like an end of tenancy, with the washing machine and the dishwasher checked and the beds made."
    },
    {
-    "title": "Your update",
-    "text": "We let you know about anything left behind or damaged, and send the photo checklist if you asked for one."
+    "title": "Ready for your next guests",
+    "text": "A property cleaned to the standard a 5 star review needs."
    }
   ]
  },
  "promise": {
-  "heading": "What you can count on",
+  "heading": "Our promise to you",
   "paragraphs": [
-   "You see the price before you confirm a booking, and if you set up a regular schedule we agree how it works with you first. No surprises on the price.",
-   "If anything from a turnover isn't right, tell us within 24 hours and we'll come back and re clean it free of charge.",
-   "Your guests' space is only ever cleaned by our own trained, insured and DBS checked cleaners. We don't pass your listing to another company, so we're answerable for every turnover."
+   "Our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or it's free. An afternoon booking would move to first thing the next morning.",
+   "You're not a one off transaction to us. We care about your business, and we keep looking for what else we can improve, even when everything already looks great."
   ]
  },
  "proof": {
-  "heading": "The standard behind every turnover",
-  "paragraph": "SN Cleaning Services began as a regular domestic cleaning company, then spent four years doing almost nothing but end of tenancy cleans, where an inventory clerk checks every surface. That habit of cleaning as if someone is about to inspect is exactly what a guest does when they walk in. We grew into Airbnb cleaning from there, and after 12 years cleaning homes in London and Essex, we know a turnover is judged the moment the door opens.",
+  "heading": "Trained where the standard is highest",
+  "paragraph": "For four years, about 95 out of every 100 of our bookings were end of tenancy cleans, and we've now done 7,549 of them. That's the standard of checking and detail we train our Airbnb cleaners to, after 12 years in cleaning.",
   "review_indices": [
    2,
-   5
+   3,
+   0
   ]
  },
  "faqs": [
   {
-   "question": "How much does an Airbnb turnover cost?",
-   "answer": "Airbnb cleaning starts from £24 per hour. The total depends on the size of the property and what each turnover involves. Click Get a quote to see the price for a one off turnover, or talk to our team about a regular schedule."
+   "question": "Why does cleaning matter so much on Airbnb?",
+   "answer": "Because guests review it. A beautiful property in an amazing location can still get bad reviews for cleanliness, and that affects your revenue."
   },
   {
-   "question": "How do you work out how long a turnover takes?",
-   "answer": "It depends on the number of bedrooms, beds and bathrooms, and what you need each time, such as restocking. Tell us about the listing and we'll suggest the time it needs so guests arrive to the right standard."
+   "question": "Can bad cleaning reviews really hurt my listing?",
+   "answer": "Yes. They can reduce your revenue, and some properties even get taken off the market because of bad reviews."
   },
   {
-   "question": "What does every turnover include?",
-   "answer": "Bathroom cleaned and disinfected with fresh towels out, beds made with fresh linen, kitchen surfaces and appliances wiped, dishes washed and put away, floors vacuumed and mopped, bins emptied, and a check for left items and damage."
+   "question": "What does an Airbnb turnover involve?",
+   "answer": "In my experience it's like an end of tenancy clean every single time. You have to check everything and move everything. It takes time, but that's what a 5 star review needs."
   },
   {
-   "question": "Can you work to my booking calendar instead of a fixed day?",
-   "answer": "Yes. Many hosts don't have the same changeover day every week, so we can set up cleans that follow your bookings. Talk to our team about how you'd like to share your upcoming stays."
+   "question": "Do you check the washing machine and dishwasher and make the beds?",
+   "answer": "Yes. That's part of every turnover, along with checking and cleaning the whole property properly."
   },
   {
-   "question": "What if a guest checks out late?",
-   "answer": "Let us know as soon as you hear and we'll work with you on the timing. We can't promise to absorb every change, but we plan around your guests wherever we can."
+   "question": "Can a regular cleaner do Airbnb cleans?",
+   "answer": "In my experience, no. Cleaners who mainly do regular cleans get used to the same house and the same plan. Airbnb cleaning changes every time and needs deep cleaning, so they don't perform well on it."
   },
   {
-   "question": "Do you make the beds hotel style?",
-   "answer": "Yes. Beds are made with fresh linen and finished neatly, the way guests expect from a listing. If you have a particular way you like beds dressed, such as cushions or throws, tell us and we'll follow it."
+   "question": "Are your cleaners trained for Airbnb?",
+   "answer": "Yes. Our cleaners are trained on Airbnb and end of tenancy cleans."
   },
   {
-   "question": "Do you restock toiletries and kitchen basics?",
-   "answer": "On request, yes. We can top up toiletries, toilet roll, tea, coffee and sugar from the supplies you keep at the property. Tell us where they're stored and what should be left out for guests."
+   "question": "How do you train your cleaners?",
+   "answer": "Everyone who applies fills in a form and gets scored. The right people are invited to a trial. Then they work alongside one of our cleaners, usually for two to four weeks. Once they work on their own, we check their work at least three times a week for the first one to two months."
   },
   {
-   "question": "What happens if you find damage?",
-   "answer": "We report it to you, so you can deal with it before the next guest arrives and raise it with the previous guest if you need to. Tell us how you prefer to hear about it when you set up."
+   "question": "Do you only hire experienced cleaners?",
+   "answer": "No. In my experience a cleaner who has learned to work the wrong way is very hard to teach. We look for people who are happy and open to learn, and we train them our way."
   },
   {
-   "question": "What do you do with things guests leave behind?",
-   "answer": "We check the property for left items on every turnover and let you know what we find. Tell us what you'd like done with them, for example left in a particular cupboard for you to collect."
+   "question": "What is your show up guarantee?",
+   "answer": "We have systems in place so our cleaners arrive on the day and at the time you booked. If something outside our control happens, your clean is still done within 12 hours, or we do it for free."
   },
   {
-   "question": "Can you follow my house rules for heating and lights?",
-   "answer": "Yes. Tell us how the thermostat, lights and anything else should be left, and the team resets them at the end of each turnover so guests find the property as you intended."
+   "question": "What happens if a cleaner can't make it?",
+   "answer": "We don't just cancel. We still handle your booking within 12 hours. An afternoon booking, for example, would move to first thing the next morning."
   },
   {
-   "question": "How will you get into the property?",
-   "answer": "However works for your listing. Tell us when you book how access is set up, whether that's a key safe, a lockbox or keys left with someone. Let us know if access changes between bookings."
+   "question": "How do you make sure your cleaners turn up?",
+   "answer": "We check on our cleaners early in the morning and again in the late afternoon, so we know they're on track."
   },
   {
-   "question": "Do I need to be there for the turnover?",
-   "answer": "No. Most hosts aren't, which is exactly why we report left items and damage and offer a photo checklist on request. Just make sure we have access and know where the supplies are."
+   "question": "How much does Airbnb cleaning cost?",
+   "answer": "Airbnb cleaning starts from £24 per hour."
   },
   {
-   "question": "Do you bring your own cleaning products?",
-   "answer": "Yes. We bring professional products chosen for each surface, including my own Limescale Remover, which keeps taps and shower screens looking like they do in your listing photos. Tell us about any surfaces that need special care."
+   "question": "How many cleaners will you send?",
+   "answer": "It depends on how long the turnover needs. We usually send a team on jobs of 6 hours or more, and one cleaner for shorter jobs."
   },
   {
-   "question": "Do you bring equipment like a vacuum and mop?",
-   "answer": "Many listings keep their own equipment, but tell us what's at the property when you book. If you'd like us to bring a vacuum and mop, ask our team and we'll confirm."
+   "question": "Why not send two cleaners to make a short turnover quicker?",
+   "answer": "Every cleaner loses time settling in and finishing off, 10 minutes here, 10 minutes there. Two cleaners losing 20 minutes each is 40 minutes, almost an hour of your clean."
   },
   {
-   "question": "Are your cleaners insured and DBS checked?",
-   "answer": "Yes. Every cleaner is part of our own team, trained by us, insured and DBS checked. That matters when the people cleaning have regular access to your property. We know exactly who is in your listing."
+   "question": "How long can one cleaner work?",
+   "answer": "We recommend up to 8 hours. After that people get tired and the work suffers."
   },
   {
-   "question": "Do you use subcontractors?",
-   "answer": "No, never. Your turnovers are done by our own team. We don't pass listings on to other companies, so we're responsible for every clean. The people with your access details are people we trained and vetted ourselves."
+   "question": "Are your cleaners your own team?",
+   "answer": "Yes. Every cleaner is part of our own trained, insured and DBS checked team. We never send random cleaners to an Airbnb."
   },
   {
-   "question": "Will the same cleaner do my turnovers?",
-   "answer": "We can't promise the same person every time, because turnovers follow your bookings rather than a fixed slot. You can tell us anything specific about your listing so the whole team knows."
-  },
-  {
-   "question": "What if a guest says something wasn't clean?",
-   "answer": "Tell us within 24 hours and we'll come back and re clean it free of charge. Send us the details or the guest's message so we can put it right and make sure it doesn't happen again."
-  },
-  {
-   "question": "Can I get proof the clean is done?",
-   "answer": "Yes. A photo checklist of key areas is available on request, sent to you after the clean. It's useful if you host remotely or share a listing with a co host."
-  },
-  {
-   "question": "Do you clean inside the oven and fridge between guests?",
-   "answer": "A turnover wipes down kitchen surfaces and appliances and resets the kitchen. If the oven or fridge needs a proper clean inside, we can arrange a deep clean of the listing between bookings."
-  },
-  {
-   "question": "Do you work with co hosts and property managers?",
-   "answer": "Yes. We clean for individual hosts, co hosts and property management companies, and can coordinate cleans across several listings. Tell us who should receive updates for each property."
-  },
-  {
-   "question": "Which areas do you cover for short lets?",
-   "answer": "We clean short lets and Airbnb properties across London and Essex. Enter the postcode in the quote form to check the address. If you host several listings, tell us where each one is and we will check them all."
-  },
-  {
-   "question": "What if a booking is cancelled and I don't need the clean?",
-   "answer": "Contact our team as soon as you know and they'll explain the options for that turnover. The sooner we hear, the easier it is to adjust your schedule and keep the next turnover on track for your guests."
-  },
-  {
-   "question": "Can I talk to someone before I book?",
-   "answer": "Yes. Our customer support team is available Monday to Friday from 7am to 10pm, and Saturday and Sunday from 8am to 5pm, and is happy to talk through your listing and schedule."
+   "question": "How long have you been cleaning?",
+   "answer": "12 years. We've done 7,549 end of tenancy cleans, and that's the standard we bring to every Airbnb turnover."
   }
  ],
  "cta": {
-  "heading": "Let's plan your next turnover",
-  "text": "Click Get a quote for a one off turnover, or ask us about a schedule built around your bookings."
+  "heading": "Tell us about your listing",
+  "text": "Get your price and a cleaning partner who understands your reviews."
  },
- "notes": "There's no Google review from an Airbnb host yet; reviews 2 and 3 are used for reliability and punctuality. A real host review would make this page much stronger. Are before and after photo folders used on Airbnb turnovers too, or only the photo checklist on request? Is linen supplied, and is there a multi listing rate we can mention without a price? Is there a cancellation notice period for turnovers?"
+ "notes": "SOURCES: reviews affecting revenue, listings taken off, 'a partner, not someone to clean floors, check washing machine and dishwasher and make beds', 'like end of tenancy every time, check and move everything', '5 star reviews need 5 star', regular cleaners don't perform well, trained on Airbnb and end of tenancy, 'training isn't just showing them a couple of properties' (transcript says '12 properties', probably 'one or two'; I wrote 'a couple of properties', please confirm), show up guarantee, and 'we keep improving even when it looks great' are from her voice notes. The washing machine, dishwasher and beds line in the voice note is said in a garbled way ('you don't look for someone who's gonna clean the floors, check the washing machine... definitely not'); I read it as 'that's not all you need', and wrote that we do these as part of the turnover. Please confirm. 'Your guests notice the details' in item 3 is my wording. LEFT OUT: 'hundreds of 5 star reviews'. QUESTIONS FOR SILVIA: Is there a satisfaction window for Airbnb (if a guest or host finds something, how fast do we come back, and is it free)? Do you supply or change linen and towels, do laundry, or restock toiletries? Do you handle key boxes and same day turnovers between check out and check in? Do you send photos after each turnover? Is there a minimum booking length for Airbnb?"
 }
