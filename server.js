@@ -376,6 +376,18 @@ app.get('/about', (req, res) => {
   });
 });
 
+app.get('/our-work', (req, res) => {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Our work', url: '/our-work' }];
+  res.render('our-work', {
+    title: 'Our Work: Real Before and After Cleans in Essex and London',
+    metaDescription:
+      'Real before and after photos from SN Cleaning Services jobs across Essex and London, our latest cleans, and where we cleaned in the last 6 months.',
+    designV2: true,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
 app.get('/gallery', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Gallery', url: '/gallery' }];
   res.render('gallery', {
