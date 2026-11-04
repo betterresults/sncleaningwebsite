@@ -71,7 +71,7 @@
  "promise": {
   "heading": "What you can count on",
   "paragraphs": [
-   "You see the price before you confirm a booking, and if you set up a regular schedule we agree how it works with you first. No surprises on the invoice.",
+   "You see the price before you confirm a booking, and if you set up a regular schedule we agree how it works with you first. No surprises on the price.",
    "If anything from a turnover isn't right, tell us within 24 hours and we'll come back and re clean it free of charge.",
    "Your guests' space is only ever cleaned by our own trained, insured and DBS checked cleaners. We don't pass your listing to another company, so we're answerable for every turnover."
   ]
@@ -81,7 +81,7 @@
   "paragraph": "SN Cleaning Services began as a regular domestic cleaning company, then spent four years doing almost nothing but end of tenancy cleans, where an inventory clerk checks every surface. That habit of cleaning as if someone is about to inspect is exactly what a guest does when they walk in. We grew into Airbnb cleaning from there, and after 12 years cleaning homes in London and Essex, we know a turnover is judged the moment the door opens.",
   "review_indices": [
    2,
-   3
+   5
   ]
  },
  "faqs": [
@@ -167,7 +167,7 @@
   },
   {
    "question": "Do you work with co hosts and property managers?",
-   "answer": "Yes. We clean for individual hosts, co hosts and property management companies, and can coordinate cleans across several listings. Tell us who should receive updates for each property. Each listing can have its own notes."
+   "answer": "Yes. We clean for individual hosts, co hosts and property management companies, and can coordinate cleans across several listings. Tell us who should receive updates for each property."
   },
   {
    "question": "Which areas do you cover for short lets?",
