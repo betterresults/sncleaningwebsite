@@ -747,3 +747,43 @@
 .s-video-play { position: absolute; left: 50%; top: 50%; width: 76px; height: 76px; margin: -38px 0 0 -38px; border-radius: 50%; background: rgba(31, 107, 102, .92); box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
 .s-video-play::after { content: ''; position: absolute; left: 31px; top: 24px; border-style: solid; border-width: 14px 0 14px 22px; border-color: transparent transparent transparent #fff; }
 .s-video-btn:focus-visible { outline: 3px solid #1f6b66; outline-offset: 3px; }
+
+/* ============ WHY US pages (views/why-us.ejs, views/why-us-index.ejs) ============ */
+.w-hero-inner { display: block; max-width: 920px; }
+.w-hero .a-display { max-width: 18ch; }
+.w-hero .a-lead { max-width: 40em; }
+.w-hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+.w-btn-ghost { background: transparent; border: 1.5px solid var(--h-primary); color: var(--h-primary); }
+.w-btn-ghost:hover { background: rgba(31, 107, 102, .08); color: var(--h-primary-dark); }
+.w-btn-ghost--light { border-color: var(--h-sage); color: var(--h-sage); }
+.w-btn-ghost--light:hover { background: rgba(182, 211, 176, .12); color: #fff; }
+.w-facts { list-style: none; padding: 0; margin: 36px 0 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.w-facts li { background: #fff; border: 1px solid var(--h-line); border-radius: 18px; padding: 16px 18px; display: grid; gap: 2px; }
+.w-facts strong { font-family: var(--h-serif); font-weight: 500; font-size: 1.7rem; color: var(--h-ink); font-variant-numeric: tabular-nums; }
+.w-facts span { font-size: .88rem; color: var(--h-muted); }
+.w-understand { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 5vw, 72px); align-items: start; }
+.w-understand .h-head { margin-bottom: 0; }
+.w-prose p { margin: 0 0 1em; font-size: 1.05rem; line-height: 1.75; color: var(--h-text); max-width: 38em; }
+.w-diff { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 28px; }
+.w-diff li { display: flex; gap: 16px; align-items: flex-start; background: #fff; border-radius: 20px; padding: 22px 24px; }
+.w-diff h3 { margin: 2px 0 6px; font-family: var(--h-serif); font-weight: 500; font-size: 1.2rem; color: var(--h-ink); }
+.w-diff p { margin: 0; color: var(--h-text); line-height: 1.6; }
+.w-promise { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(24px, 5vw, 64px); padding: clamp(28px, 5vw, 64px); align-items: start; }
+.w-promise-copy p { margin: 0 0 1em; color: #d9e5dc; line-height: 1.7; }
+.w-proof { margin: 14px 0 0; color: var(--h-text); line-height: 1.7; max-width: 44em; }
+.w-cta-text { margin: 10px 0 0; color: #c6d4ca; }
+.w-others { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+.w-others a { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 16px 18px; border: 1px solid var(--h-line); border-radius: 16px; text-decoration: none; color: var(--h-ink); font-weight: 600; }
+.w-others a:hover { border-color: var(--h-primary); color: var(--h-primary); }
+.w-cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.w-card { display: grid; gap: 10px; align-content: start; background: #fff; border-radius: 22px; padding: 26px 28px; text-decoration: none; color: var(--h-text); transition: transform .2s, box-shadow .2s; }
+.w-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(20, 48, 44, .1); }
+.w-card h3 { margin: 0; font-family: var(--h-serif); font-weight: 500; font-size: 1.4rem; line-height: 1.25; color: var(--h-ink); }
+.w-card p { margin: 0; line-height: 1.6; }
+.w-card-tag { justify-self: start; background: var(--h-sage-soft); color: var(--h-ink); border-radius: 999px; padding: 4px 12px; font-size: .8rem; font-weight: 600; }
+@media (max-width: 900px) {
+  .w-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .w-understand, .w-promise, .w-diff, .w-cards { grid-template-columns: 1fr; }
+  .w-others { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 520px) { .w-others { grid-template-columns: 1fr; } }

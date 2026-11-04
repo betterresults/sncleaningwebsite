@@ -34,6 +34,8 @@ async function buildRoutes() {
     // on sncleaningservices.co.uk — see server.js for the route itself.
     { url: '/our-services', out: 'our-services/index.html', sitemap: true },
     { url: '/about', out: 'about/index.html', sitemap: true },
+    { url: '/why-us', out: 'why-us/index.html', sitemap: true },
+    ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true })),
     { url: '/gallery', out: 'gallery/index.html', sitemap: true },
     { url: '/blog', out: 'blog/index.html', sitemap: true },
     { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true },

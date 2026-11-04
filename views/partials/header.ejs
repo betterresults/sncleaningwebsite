@@ -31,6 +31,19 @@
         <% } %>
       </div>
 
+      <% if (typeof navWhyUs !== 'undefined' && navWhyUs.length) { %>
+      <div class="nav-dropdown">
+        <a href="/why-us" class="<%= currentPath.startsWith('/why-us') ? 'active' : '' %>">
+          Why us <span class="nav-dropdown-caret">▾</span>
+        </a>
+        <div class="nav-dropdown-menu">
+          <% navWhyUs.forEach(function(w) { %>
+            <a href="<%= w.url %>"><%= w.title %></a>
+          <% }); %>
+        </div>
+      </div>
+      <% } %>
+
       <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a>
       <a href="/gallery" class="<%= currentPath === '/gallery' ? 'active' : '' %>">Gallery</a>
       <a href="/blog" class="<%= currentPath.startsWith('/blog') ? 'active' : '' %>">Blog</a>
