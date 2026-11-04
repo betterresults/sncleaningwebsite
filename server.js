@@ -57,6 +57,7 @@ const SITE_DEFAULTS = {
 const content = require('./data/content'); // live content from Supabase (services, service pages, blog, site settings)
 const testimonials = require('./data/testimonials');
 const whyUs = require('./data/why-us');
+const jobVideoLib = require('./lib/videos');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
 const { serviceImage, GALLERY } = require('./data/media');
@@ -393,7 +394,10 @@ app.get('/why-us/:slug', async (req, res, next) => {
   ];
   const reviews = (page.proof && page.proof.review_indices || []).map((i) => testimonials[i]).filter(Boolean);
   const faqPage = schema.buildFaqPage(page.faqs);
+  const svcVideos = jobVideoLib.forService(await content.getJobVideos(), page.slug);
+  const jobVideos = jobVideoLib.section(svcVideos, page.slug, page.service_name);
   res.render('why-us', {
+    jobVideos,
     title: page.meta_title,
     metaDescription: page.meta_description,
     page,
@@ -405,8 +409,29 @@ app.get('/why-us/:slug', async (req, res, next) => {
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
-      ...(faqPage ? [faqPage] : [])
+      ...(faqPage ? [faqPage] : []),
+      ...jobVideoLib.buildVideoSchema(jobVideos.videos)
     ]
+  });
+});
+
+// ---------- All job videos for one service ----------
+app.get('/videos/:serviceSlug', async (req, res, next) => {
+  const allVideos = jobVideoLib.forService(await content.getJobVideos(), req.params.serviceSlug);
+  if (!allVideos.length) return next();
+  const services = await content.getServices();
+  const svc = services.find((x) => x.slug === req.params.serviceSlug);
+  const serviceName = svc ? svc.title : req.params.serviceSlug;
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
+  res.render('videos', {
+    title: `${serviceName} Videos: Before and After From Our Jobs`,
+    metaDescription: `Before and after videos from real ${serviceName.toLowerCase()} jobs by SN Cleaning Services across London and Essex.`,
+    allVideos,
+    serviceName,
+    serviceSlug: req.params.serviceSlug,
+    designV2: true,
+    breadcrumbs,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), ...jobVideoLib.buildVideoSchema(allVideos)]
   });
 });
 
@@ -610,7 +635,9 @@ app.get('/:slug', async (req, res, next) => {
       .sort((a, b) => a.name.localeCompare(b.name));
   }
 
+  const svcJobVideos = jobVideoLib.section(jobVideoLib.forService(await content.getJobVideos(), page.slug), page.slug, service.title);
   res.render(v2 ? 'service-v2' : 'service-detail', {
+    jobVideos: svcJobVideos,
     designV2: v2,
     heroPreload: v2 ? ((page.images && page.images.length) ? page.images[0] : serviceImage(page.slug)) : null,
     mapLink,
@@ -630,7 +657,8 @@ app.get('/:slug', async (req, res, next) => {
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
       schema.buildService({ service, page, coverageAreas }),
-      ...(faqPage ? [faqPage] : [])
+      ...(faqPage ? [faqPage] : []),
+      ...jobVideoLib.buildVideoSchema(svcJobVideos.videos)
     ]
   });
 });
@@ -750,7 +778,9 @@ async function renderArea(req, res, next, areaSlug) {
     const video = inEssex || (service.slug === 'domestic-cleaning' && inHavering)
       ? { id: 'G8cOOI3hErg', title: 'Domestic cleaning in Essex by our in-house trained cleaners' }
       : null;
-    return res.render('area-v2', {
+const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJobVideos(), service.slug, page.postcodes), service.slug, service.title);
+        return res.render('area-v2', {
+      jobVideos: areaJobVideos,
       mapLink,
       mapCopy,
       mini,
@@ -774,7 +804,8 @@ async function renderArea(req, res, next, areaSlug) {
         ...res.locals.structuredData,
         schema.buildBreadcrumbList(crumbs),
         schema.buildServiceAreaPage({ service, page, region }),
-        ...(faq ? [faq] : [])
+        ...(faq ? [faq] : []),
+        ...jobVideoLib.buildVideoSchema(areaJobVideos.videos)
       ]
     });
   }

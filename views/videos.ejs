@@ -1,0 +1,13 @@
+<%# All job videos for one service: /videos/{service-slug} %>
+<section class="a-hero w-hero">
+  <div class="h-wrap w-hero-inner">
+    <p class="h-eyebrow">Videos from our jobs</p>
+    <h1 class="a-display"><%= serviceName %>: before and after videos</h1>
+    <p class="a-lead">Every video is from a real <%= serviceName.toLowerCase() %> job by our own team. We show the area only, never an address.</p>
+    <div class="w-hero-actions">
+      <a href="<%= bookUrl() %>" class="h-btn h-btn--primary">Get a quote</a>
+      <a href="/<%= serviceSlug %>" class="h-btn w-btn-ghost"><%= serviceName %> details</a>
+    </div>
+  </div>
+</section>
+<%- include('partials/job-videos', { jobVideos: { videos: allVideos, total: allVideos.length, viewAllUrl: '', serviceName }, videosTitle: allVideos.length + ' videos, newest first' }) %>

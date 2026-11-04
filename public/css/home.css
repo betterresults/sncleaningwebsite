@@ -791,3 +791,18 @@
   .w-others { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 520px) { .w-others { grid-template-columns: 1fr; } }
+
+/* ============ JOB VIDEOS (views/partials/job-videos.ejs) ============ */
+.jv-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+.jv-card { margin: 0; display: grid; gap: 10px; }
+.jv-play, .jv-frame { position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; border: 0; padding: 0; border-radius: 18px; overflow: hidden; background: #0f2421; cursor: pointer; }
+.jv-play img { width: 100%; height: 100%; object-fit: cover; opacity: .92; transition: opacity .2s, transform .3s; }
+.jv-play:hover img { opacity: 1; transform: scale(1.03); }
+.jv-play:focus-visible { outline: 3px solid var(--h-primary); outline-offset: 3px; }
+.jv-icon { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(31, 107, 102, .92); box-shadow: 0 10px 30px rgba(0, 0, 0, .3); }
+.jv-icon::after { content: ''; position: absolute; left: 26px; top: 20px; border-style: solid; border-width: 12px 0 12px 19px; border-color: transparent transparent transparent #fff; }
+.jv-card figcaption { display: grid; gap: 2px; }
+.jv-card strong { font-family: var(--h-serif); font-weight: 500; font-size: 1.1rem; color: var(--h-ink); line-height: 1.3; }
+.jv-meta { font-size: .82rem; font-weight: 600; color: var(--h-primary); }
+@media (max-width: 900px) { .jv-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .jv-grid { grid-template-columns: 1fr; } }

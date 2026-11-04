@@ -54,6 +54,11 @@ async function buildRoutes() {
     content.getServices()
   ]);
 
+  // One "all videos" page per service that has at least one job video.
+  const jobVideos = await content.getJobVideos();
+  const videoRoutes = [...new Set(jobVideos.map((v) => v.service_slug))]
+    .map((slug) => ({ url: `/videos/${slug}`, out: `videos/${slug}/index.html`, sitemap: true }));
+
   // Booking pages: the chooser, plus one per service that has an online form.
   const bookRoutes = [
     { url: '/book', out: 'book/index.html', sitemap: false },
@@ -109,7 +114,7 @@ async function buildRoutes() {
   ];
 
   // Pages edited in the website editor: hidden from Google, or last edited on.
-  const all = [...fixed, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...caseRoutes, ...editorTemplates].filter((r) => !MOVED.test(r.url));
+  const all = [...fixed, ...videoRoutes, ...bookRoutes, ...serviceRoutes, ...blogRoutes, ...areaRoutes, ...caseRoutes, ...editorTemplates].filter((r) => !MOVED.test(r.url));
   for (const r of all) {
     const m = editorContent.pageMeta(r.url);
     if (!m) continue;

@@ -210,7 +210,27 @@ async function getFeaturedAreaGroups() {
   return Array.from(groups, ([parentName, areas]) => ({ parentName, areas }));
 }
 
+
+// Before and after job videos (YouTube). Rows: public.job_videos (see docs/VIDEOS.md).
+let _videosCache = null;
+async function getJobVideos() {
+  if (_videosCache) return _videosCache;
+  const { data, error } = await supabase
+    .from('job_videos')
+    .select('*')
+    .eq('published', true)
+    .order('recorded_on', { ascending: false, nullsFirst: false })
+    .order('created_at', { ascending: false });
+  if (error) {
+    console.error('Error fetching job videos:', error.message);
+    return [];
+  }
+  _videosCache = data || [];
+  return _videosCache;
+}
+
 module.exports = {
+  getJobVideos,
   getServices,
   getServicePages,
   getServicePageBySlug,

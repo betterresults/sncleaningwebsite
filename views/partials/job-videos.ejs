@@ -1,0 +1,46 @@
+<%# Job videos section. Shows only when jobVideos.videos has at least one video.
+    Expects: jobVideos = { videos, total, viewAllUrl, serviceName }, optional videosTitle. %>
+<% if (typeof jobVideos !== 'undefined' && jobVideos && jobVideos.videos && jobVideos.videos.length) { %>
+<section class="h-section h-white" id="videos">
+  <div class="h-wrap">
+    <div class="h-head h-head--split">
+      <div>
+        <p class="h-eyebrow">Videos from our jobs</p>
+        <h2 class="h-title"><%= (typeof videosTitle !== 'undefined' && videosTitle) ? videosTitle : 'Before and after, filmed on the job' %></h2>
+      </div>
+      <% if (jobVideos.total > jobVideos.videos.length) { %>
+        <a href="<%= jobVideos.viewAllUrl %>" class="h-btn h-btn--primary">View all <%= jobVideos.total %> videos</a>
+      <% } %>
+    </div>
+    <div class="jv-grid">
+      <% jobVideos.videos.forEach(function (v) { %>
+        <figure class="jv-card">
+          <button type="button" class="jv-play" data-yt="<%= v.youtube_id %>" aria-label="Play video: <%= v.title %>">
+            <img src="https://i.ytimg.com/vi/<%= v.youtube_id %>/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="480" height="360" />
+            <span class="jv-icon" aria-hidden="true"></span>
+          </button>
+          <figcaption>
+            <span class="jv-meta"><%= [v.town, v.district].filter(Boolean).join(' · ') %></span>
+            <strong><%= v.title %></strong>
+          </figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.querySelectorAll('.jv-play[data-yt]').forEach(function(b){
+    if (b.dataset.bound) return; b.dataset.bound = '1';
+    b.addEventListener('click', function(){
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
+      f.title = b.getAttribute('aria-label').replace('Play video: ', '');
+      f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true; f.className = 'jv-frame';
+      b.replaceWith(f);
+    });
+  });
+})();
+</script>
+<% } %>
