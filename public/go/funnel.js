@@ -117,6 +117,21 @@
   }
   loadOai();
 
+  /* ---------- Google Analytics 4 (only after Accept) ---------- */
+  var gaReady = false;
+  function loadGa() {
+    if (gaReady || consent() !== "accepted" || window.self !== window.top) return;
+    var g = document.createElement("script"); g.async = true;
+    g.src = "https://www.googletagmanager.com/gtag/js?id=G-K9GE74MBMB";
+    document.head.appendChild(g);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    window.gtag("js", new Date());
+    window.gtag("config", "G-K9GE74MBMB");
+    gaReady = true;
+  }
+  loadGa();
+
   // Count the visit (where they came from only — no name, no IP, no cookies)
   if (firstLoadInTab) {
     api({ action: "visit", page: F.page, touch: { utm_source: touch.utm_source, utm_medium: touch.utm_medium, utm_campaign: touch.utm_campaign,
@@ -138,7 +153,7 @@
       if (!v) return;
       set("localStorage", CONSENT_KEY, v);
       banner.hidden = true;
-      if (v === "accepted") { rememberAcrossVisits(); loadPixel(); loadOai(); }
+      if (v === "accepted") { rememberAcrossVisits(); loadPixel(); loadOai(); loadGa(); }
     });
   }
 

@@ -128,6 +128,15 @@
         s.async = true;
         s.src = 'https://app.visitortracking.com/assets/js/tracer.js';
         document.body.appendChild(s);
+        // Google Analytics 4
+        var ga = document.createElement('script');
+        ga.async = true;
+        ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-K9GE74MBMB';
+        document.head.appendChild(ga);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'G-K9GE74MBMB');
         // ChatGPT (OpenAI) ads pixel
         !function(w,d,s,u){if(w.oaiq)return;var q=function(){q.q.push(arguments)};q.q=[];w.oaiq=q;var j=d.createElement(s);j.async=1;j.src=u;var f=d.getElementsByTagName(s)[0];f.parentNode.insertBefore(j,f)}(window,document,"script","https://bzrcdn.openai.com/sdk/oaiq.min.js");
         window.oaiq("init", { pixelId: "A91iDFxMXBirm1njjvc76z", debug: false });
