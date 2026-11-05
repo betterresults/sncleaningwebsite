@@ -716,6 +716,15 @@ input:focus, select:focus, textarea:focus {
   padding: 26px;
 }
 .contact-info-card ul li { margin-bottom: 10px; }
+.contact-map {
+  margin-top: 12px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #e8ece9;
+}
+.contact-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.contact-map-link { margin: 12px 0 0; font-weight: 600; }
 .contact-info-card a:hover { color: var(--color-primary); }
 .contact-info-actions {
   display: flex;
