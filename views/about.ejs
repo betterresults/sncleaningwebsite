@@ -122,6 +122,7 @@
 <% if (featured) { %>
 <section class="h-section h-white">
   <div class="h-wrap">
+    <script type="application/ld+json"><%- JSON.stringify(schemaReviews([featured])) %></script>
     <figure class="a-quote h-reveal">
       <div class="h-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>“<%= featured.quote %>”</blockquote>

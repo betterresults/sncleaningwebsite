@@ -203,6 +203,7 @@
         <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
       <% } %>
     </div>
+    <script type="application/ld+json"><%- JSON.stringify(schemaReviews(reviews)) %></script>
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">

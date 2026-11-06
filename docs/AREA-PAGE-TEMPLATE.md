@@ -40,7 +40,7 @@ People first (sections 1-4 decide whether a visitor books), local detail for Goo
 5. **How it works** — automatic, per service.
 6. **Local** — `local_intro` + `intro`, with `postcodes` and `neighbourhoods`.
 7. **Guide** — all `content_sections`.
-8. **FAQs** — `faqs` (also output as FAQ schema).
+8. **FAQs** — `faqs` (also output as FAQ schema). All other schema is added automatically, see `docs/SCHEMA.md`.
 9. **Other services in {Area}** — automatic, links to the same area for each other service (or the next level up if that page doesn't exist).
 10. **Areas** — automatic from `coverage_regions.parent_id` (map on London/Essex pages).
 11. **Final call to action.**

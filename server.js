@@ -64,6 +64,9 @@ const { serviceImage, GALLERY } = require('./data/media');
 const { servicePrice } = require('./data/prices');
 
 app.locals.serviceImage = serviceImage;
+// Lets views add schema for what they show (the page itself, the reviews on it).
+app.locals.schemaWebPage = schema.buildWebPage;
+app.locals.schemaReviews = schema.buildReviews;
 
 // Responsive photos: scripts/build-images.js writes WebP copies at 480/800/1200px
 // into public/images/_r/. rs(src, sizes) returns the srcset + sizes attributes
@@ -170,7 +173,11 @@ app.use(async (req, res, next) => {
     res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
-    res.locals.structuredData = [schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas })];
+    res.locals.structuredData = [
+      schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas, services: res.locals.navServices }),
+      schema.buildWebSite({ site: res.locals.site }),
+      schema.buildFounder()
+    ];
 
     next();
   } catch (err) {
