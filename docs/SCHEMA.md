@@ -4,14 +4,14 @@ Silvia's rule: every page, including every new page, carries proper schema with 
 
 ## Where it comes from
 - `lib/schema.js` builds every JSON-LD block. Pages never hand write JSON-LD.
-- `data/business-profile.js`: address, map pin, opening hours, Google rating and review count, description, Silvia as founder, profile links (`sameAs`).
+- `data/business-profile.js`: address, map pin, opening hours, Google rating and review count, description, Silvia (manages the business; never call her founder or owner), profile links (`sameAs`).
 - `data/testimonials.js`: real Google reviews, word for word.
 - `data/prices.js`: the from prices used in Offer markup.
 
 ## What each page gets
 | Page | Schema |
 | --- | --- |
-| Every page | HomeAndConstructionBusiness, a LocalBusiness type (address, geo, hours, aggregateRating, offer catalogue, areas served, founder), WebSite, Person (Silvia), WebPage (AboutPage on /about/, ContactPage on /contact/), BreadcrumbList (all but home) |
+| Every page | HomeAndConstructionBusiness, a LocalBusiness type (address, geo, hours, aggregateRating, offer catalogue, areas served, Silvia as employee: never founder or owner), WebSite, Person (Silvia), WebPage (AboutPage on /about/, ContactPage on /contact/), BreadcrumbList (all but home) |
 | Service and area pages | Service with the from price as an Offer, FAQPage |
 | Pages that show reviews (home, service, area, about) | Review markup for exactly the reviews shown |
 | Blog posts, case studies, answers | BlogPosting, author Silvia (same @id as the Person) |

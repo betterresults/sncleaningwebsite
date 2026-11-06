@@ -500,9 +500,9 @@ app.get('/about', (req, res) => {
 app.get('/about/silvia-nedeva', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }, { name: 'Silvia Nedeva', url: '/about/silvia-nedeva' }];
   res.render('silvia', {
-    title: 'Silvia Nedeva, Founder of SN Cleaning Services',
+    title: 'Silvia Nedeva, SN Cleaning Services',
     metaDescription:
-      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and founded SN Cleaning Services in Brentwood. Her story and how she trains her team.',
+      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. Her story and how she trains the team.',
     breadcrumbs,
     designV2: true,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
