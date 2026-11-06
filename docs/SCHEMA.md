@@ -11,7 +11,7 @@ Silvia's rule: every page, including every new page, carries proper schema with 
 ## What each page gets
 | Page | Schema |
 | --- | --- |
-| Every page | HousekeepingService (address, geo, hours, aggregateRating, offer catalogue, areas served, founder), WebSite, Person (Silvia), WebPage (AboutPage on /about/, ContactPage on /contact/), BreadcrumbList (all but home) |
+| Every page | HomeAndConstructionBusiness, a LocalBusiness type (address, geo, hours, aggregateRating, offer catalogue, areas served, founder), WebSite, Person (Silvia), WebPage (AboutPage on /about/, ContactPage on /contact/), BreadcrumbList (all but home) |
 | Service and area pages | Service with the from price as an Offer, FAQPage |
 | Pages that show reviews (home, service, area, about) | Review markup for exactly the reviews shown |
 | Blog posts, case studies, answers | BlogPosting, author Silvia (same @id as the Person) |
