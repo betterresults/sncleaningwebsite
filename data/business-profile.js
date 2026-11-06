@@ -26,7 +26,7 @@ module.exports = {
     name: 'Silvia Nedeva',
     jobTitle: 'Cleaning specialist',
     image: '/images/silvia.webp',
-    url: '/about/',
+    url: '/about/silvia-nedeva/',
     // Silvia's own profiles (given by Silvia, 6 Nov 2026)
     sameAs: [
       'https://www.linkedin.com/in/silvia-nedeva/',

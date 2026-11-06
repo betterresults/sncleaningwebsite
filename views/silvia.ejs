@@ -1,0 +1,51 @@
+<%# Silvia Nedeva profile page. Written from Silvia's own answers (6 Nov 2026). Same design classes as the About page. %>
+
+<!-- ============ HERO ============ -->
+<section class="a-hero">
+  <div class="h-wrap a-hero-inner">
+    <div class="a-hero-copy">
+      <p class="h-eyebrow">About the founder</p>
+      <h1 class="a-display">Silvia Nedeva, founder of SN Cleaning Services</h1>
+      <p class="a-lead">
+        I came to the UK from Bulgaria in 2014, started out as a cleaner, and built SN Cleaning Services
+        around one promise: when you pay for a clean, you know what you're paying for and you get it.
+      </p>
+    </div>
+    <div class="a-hero-media">
+      <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '(max-width: 900px) 90vw, 520px') %> alt="Silvia Nedeva, founder of SN Cleaning Services"
+           fetchpriority="high" width="720" height="960" />
+    </div>
+  </div>
+</section>
+
+<!-- ============ STORY ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="blog-content" style="max-width: 760px;">
+      <h2>How did I start in cleaning?</h2>
+      <p>When I moved to the UK in 2014 I didn't speak English, so I didn't have many choices. I started working in a hotel, and after a couple of months I moved to domestic cleaning. My schedule filled up really quickly and I needed help, so I brought in cleaners to work with me.</p>
+      <p>It wasn't meant to be a company at the start. I just did my job, and I had cleaners helping me. Over the years that grew into SN Cleaning Services, which was registered as a company in 2019 and is based in Brentwood, Essex.</p>
+
+      <h2>What did I do before cleaning?</h2>
+      <p>I'm from Bulgaria. Before I moved here I worked for the same company for nine years, from the age of 18 to 27, and I was an assistant manager at a supermarket in Sofia. Then I moved to the UK and started a new life here.</p>
+
+      <h2>What do I do at SN Cleaning Services today?</h2>
+      <p>My focus is our customers and the quality of every clean. I create the systems behind the business, so everyone in the team can get to the information they need for each job. I create the training our cleaners go through, and I check the quality of the work.</p>
+      <p>I manage SN Cleaning Services, which is the domestic side: homes, end of tenancy, deep cleans, Airbnb changeovers, carpets and more. I also own <a href="https://snclean.co.uk/">SN Clean</a>, our commercial cleaning company. And I built <a href="https://dilvon.com/">Dilvon</a>, a platform that helps other cleaning companies put the right systems in place, take the hassle out of running the business and grow.</p>
+
+      <h2>What am I proud of?</h2>
+      <p>I care about my customers. When someone pays for our service, I want them to know exactly what they're paying for and to receive exactly what they paid for.</p>
+      <p>I'm also really proud of our cleaners. They work hard, and we choose them carefully, because they need to be the right people.</p>
+
+      <h2>What do people get wrong about cleaning?</h2>
+      <p>The biggest thing people get wrong is that anyone can clean. Everyone cleans their own home in one way or another, so it feels simple. It isn't. Think about walking: we all do it now, but nobody was good at it the first time. We had to learn. Cleaning is the same. It depends on how you learned, who you watched, and whether anyone ever showed you the proper way.</p>
+      <p>A good cleaner needs the right personality first. Someone who cares about delivering a good service and wants the customer and the company to be happy with what they've done. They need an eye for detail, and they need to follow instructions.</p>
+      <p>The second thing people get wrong is that one cleaner can do every type of cleaning. A regular clean, an Airbnb changeover and an end of tenancy clean are different jobs. To do each one properly, you need experience and training in that service. That's why training matters so much to me.</p>
+      <p>I believe this goes far beyond cleaning. We think we can do some things naturally, even talking to people, but everything needs a strategy, experience, expertise and knowledge.</p>
+
+      <h2>Where can you find me?</h2>
+      <p>You can find me on <a href="https://www.linkedin.com/in/silvia-nedeva/" rel="me">LinkedIn</a>, <a href="https://www.facebook.com/silvia.ivanova.nedeva/" rel="me">Facebook</a>, <a href="https://www.instagram.com/silvinedeva/" rel="me">Instagram</a> and <a href="https://www.tiktok.com/@silvinedeva" rel="me">TikTok</a>. If you search my name, you may also find a Silvia Nedeva who works in nutrition. That's a different person: my work is cleaning.</p>
+      <p>To book a clean, <a href="<%= bookUrl() %>">get a quote</a> or call us on <a href="tel:<%= site.phone.replace(/\s/g, '') %>"><%= site.phone %></a>.</p>
+    </div>
+  </div>
+</section>
