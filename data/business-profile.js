@@ -27,8 +27,13 @@ module.exports = {
     jobTitle: 'Cleaning specialist',
     image: '/images/silvia.webp',
     url: '/about/',
-    // Silvia's own profiles (LinkedIn, Facebook, Instagram...) go here once she shares them
-    sameAs: []
+    // Silvia's own profiles (given by Silvia, 6 Nov 2026)
+    sameAs: [
+      'https://www.linkedin.com/in/silvia-nedeva/',
+      'https://www.facebook.com/silvia.ivanova.nedeva/',
+      'https://www.instagram.com/silvinedeva/',
+      'https://www.tiktok.com/@silvinedeva'
+    ]
   },
   // Other profiles of the business (Facebook, Instagram, Trustpilot, Yell...) go here as they are created
   sameAs: []

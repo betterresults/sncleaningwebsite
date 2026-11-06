@@ -22,3 +22,4 @@ Silvia's rule: every page, including every new page, carries proper schema with 
 - Add a new profile link (LinkedIn, Facebook, Instagram, Trustpilot, Yell, Bing Places) to `sameAs` as soon as it exists.
 - A new template or page type must call the builders in `lib/schema.js` before going live.
 - Test after any change with validator.schema.org or Google's Rich Results Test.
+- `public/llms.txt`: plain text summary of the business for AI tools. Update it when prices, services, areas, guarantees or profiles change.
