@@ -78,8 +78,8 @@ module.exports = {
           a: 'From £179. The exact price depends on the size of the property, mainly the number of bedrooms and bathrooms, and what you need. You see it before you book through Get a quote. Extras such as oven cleaning and carpet cleaning are added only if you choose them.'
         },
         {
-          q: 'Is it a fixed price or charged by the hour?',
-          a: 'A fixed price based on the size of the property and your requirements, not an hourly rate. You know the full cost before you confirm.'
+          q: 'Is it charged by the hour?',
+          a: "It isn't charged by the hour. Your price is calculated from the size of the property and what you choose to include, such as the number of bedrooms and bathrooms and extras like carpet cleaning. Prices start from £179, and you see your exact price before you confirm."
         },
         {
           q: 'How and when do I pay?',
@@ -138,7 +138,7 @@ module.exports = {
         { q: 'Do landlords and letting agents book with you too?', a: 'Yes. Tenants, landlords and letting agents can all book.' },
         {
           q: "What's the difference between an end of tenancy clean and a deep clean?",
-          a: "An end of tenancy clean is for moving out: the property is empty, it follows the agent's checklist and it has a fixed price from £179. A deep clean is for a home you live in, booked by the hour from £27 an hour."
+          a: "An end of tenancy clean is for moving out: the property is empty, it follows the agent's checklist and it's priced by the size of the property and what you need, from £179. A deep clean is for a home you live in, booked by the hour from £27 an hour."
         },
         {
           q: 'Do you also clean before a new tenant moves in?',
