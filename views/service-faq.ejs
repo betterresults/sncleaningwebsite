@@ -1,0 +1,33 @@
+<%# Full FAQ page for one service (data/faq-<service>.js). Same design classes as the FAQ section on area pages. %>
+
+<section class="a-hero">
+  <div class="h-wrap">
+    <p class="h-eyebrow">Questions and answers</p>
+    <h1 class="a-display"><%= faq.title %></h1>
+    <p class="a-lead">Straight answers to what tenants, landlords and letting agents ask us most about end of tenancy cleaning in London and Essex. Can't see your question? Call us on <a href="tel:<%= site.phone.replace(/\s/g, '') %>"><%= site.phone %></a>.</p>
+  </div>
+</section>
+
+<% faq.groups.forEach(function (group, gi) { %>
+<section class="h-section <%= gi % 2 ? 'h-white' : 'h-sand' %>">
+  <div class="h-wrap h-faq-wrap">
+    <div class="h-head">
+      <h2 class="h-title"><%= group.name %></h2>
+    </div>
+    <div class="h-faq">
+      <% group.items.forEach(function (item, ii) { %>
+        <details class="h-faq-item"<%= gi === 0 && ii === 0 ? ' open' : '' %>>
+          <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+          <p><%= item.a %><% if (item.source) { %> Source: <a href="<%= item.source.url %>" rel="noopener" target="_blank"><%= item.source.name %></a>.<% } %></p>
+        </details>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<% }); %>
+
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <p class="a-lead">Ready to book? <a href="<%= bookUrl('end-of-tenancy-cleaning') %>">Get your end of tenancy quote</a> or read more about our <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning</a>.</p>
+  </div>
+</section>

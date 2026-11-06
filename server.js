@@ -509,6 +509,34 @@ app.get('/about/silvia-nedeva', (req, res) => {
   });
 });
 
+// Full FAQ page per service. Unlinked and noindex until Silvia approves it (set live: true then).
+const SERVICE_FAQS = { 'end-of-tenancy-cleaning': { data: require('./data/faq-end-of-tenancy'), live: false } };
+app.get('/:serviceSlug/faq', (req, res, next) => {
+  const entry = SERVICE_FAQS[req.params.serviceSlug];
+  if (!entry) return next();
+  const faq = entry.data;
+  const all = faq.groups.flatMap((g) => g.items);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'End of Tenancy Cleaning', url: `/${req.params.serviceSlug}` },
+    { name: 'FAQ', url: `/${req.params.serviceSlug}/faq` }
+  ];
+  res.render('service-faq', {
+    title: 'End of Tenancy Cleaning FAQ: Prices, Deposits and More',
+    metaDescription:
+      'End of tenancy cleaning questions answered: what is included, the oven, carpets, how long it takes, prices from £179, deposits, the Tenant Fees Act and our guarantees.',
+    faq,
+    breadcrumbs,
+    designV2: true,
+    noindex: !entry.live,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildFaqPage(all.map((i) => ({ question: i.q, answer: i.a })))
+    ]
+  });
+});
+
 app.get('/our-work', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Our work', url: '/our-work' }];
   res.render('our-work', {
