@@ -18,13 +18,22 @@
       <% group.items.forEach(function (item, ii) { %>
         <details class="h-faq-item"<%= gi === 0 && ii === 0 ? ' open' : '' %>>
           <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
-          <p><%= item.a %><% if (item.source) { %> Source: <a href="<%= item.source.url %>" rel="noopener" target="_blank"><%= item.source.name %></a>.<% } %></p>
+          <p><%= item.a %><% if (item.source) { %> Source: <a href="<%= item.source.url %>" rel="noopener" target="_blank"><%= item.source.name %></a>.<% } %><% if (item.links) { %> Read more: <% item.links.forEach(function (l, li) { %><%= li ? ', ' : '' %><a href="<%= l.url %>"><%= l.text %></a><% }); %>.<% } %></p>
         </details>
       <% }); %>
     </div>
   </div>
 </section>
 <% }); %>
+
+<% if (faq.nearYou) { %>
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-head"><h2 class="h-title">End of tenancy cleaning near you</h2></div>
+    <p class="a-lead"><% faq.nearYou.forEach(function (a, ai) { %><%= ai ? ' · ' : '' %><a href="<%= a.url %>"><%= a.name %></a><% }); %></p>
+  </div>
+</section>
+<% } %>
 
 <section class="h-section h-white">
   <div class="h-wrap">

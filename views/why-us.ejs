@@ -138,6 +138,8 @@
           <p><%= faq.answer %></p>
         </details>
       <% }); %>
+      <% const wTeaser = serviceFaqTeaser(page.slug); %>
+      <% if (wTeaser) { %><p class="h-faq-more" style="margin-top: 1.25rem;"><a href="<%= wTeaser.url %>" class="h-btn h-btn--light"><%= wTeaser.label %></a></p><% } %>
     </div>
   </div>
 </section>

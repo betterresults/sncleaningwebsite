@@ -4,6 +4,22 @@
 module.exports = {
   slug: 'end-of-tenancy-cleaning',
   title: 'End of tenancy cleaning FAQ',
+  linkLabel: 'See all end of tenancy questions',
+  // Main area pages linked at the bottom of the FAQ page
+  nearYou: [
+    { name: 'Brentwood', url: '/end-of-tenancy-cleaning/essex/brentwood/' },
+    { name: 'Shenfield', url: '/end-of-tenancy-cleaning/shenfield/' },
+    { name: 'Basildon', url: '/end-of-tenancy-cleaning/basildon/' },
+    { name: 'Chelmsford', url: '/end-of-tenancy-cleaning/chelmsford/' },
+    { name: 'Romford', url: '/end-of-tenancy-cleaning/romford/' },
+    { name: 'Harold Wood', url: '/end-of-tenancy-cleaning/havering/harold-wood/' },
+    { name: 'Harold Hill', url: '/end-of-tenancy-cleaning/havering/harold-hill/' },
+    { name: 'Gidea Park', url: '/end-of-tenancy-cleaning/havering/gidea-park/' },
+    { name: 'Hornchurch', url: '/end-of-tenancy-cleaning/havering/hornchurch/' },
+    { name: 'Upminster', url: '/end-of-tenancy-cleaning/havering/upminster/' },
+    { name: 'Havering', url: '/end-of-tenancy-cleaning/havering/' },
+    { name: 'Essex', url: '/end-of-tenancy-cleaning/essex/' }
+  ],
   groups: [
     {
       name: 'The clean itself',
@@ -24,6 +40,7 @@ module.exports = {
         },
         {
           q: 'Is carpet cleaning included?',
+          links: [{ text: 'Carpet cleaning', url: '/carpet-cleaning-services/' }],
           a: 'Carpets are vacuumed as part of every end of tenancy clean. Professional carpet cleaning is a separate service from £49, which you can add if your tenancy agreement asks for it or the carpets need it.'
         },
         {
@@ -107,6 +124,7 @@ module.exports = {
         },
         {
           q: 'What does the letting agent or inventory clerk check?',
+          links: [{ text: 'End of tenancy: what actually gets checked', url: '/blog/end-of-tenancy-what-gets-checked/' }],
           a: 'Inside every cupboard and drawer, the fridge, freezer and oven, limescale on taps and shower screens, the extractor, skirting boards, door frames, switches and the inside of windows, compared with the check in report.'
         },
         {
@@ -125,10 +143,12 @@ module.exports = {
       items: [
         {
           q: 'What is your show up guarantee?',
+          links: [{ text: 'Why tenants and agents choose us', url: '/why-us/end-of-tenancy-cleaning/' }],
           a: "Your clean happens on the day you booked. If something outside our control happens, we do it within 12 hours or it's free."
         },
         {
           q: 'What is your deposit back guarantee?',
+          links: [{ text: 'Why tenants and agents choose us', url: '/why-us/end-of-tenancy-cleaning/' }],
           a: "It covers everything related to the cleaning you booked. If the agent or landlord isn't happy with an area we cleaned, we come back and clean it again for free. It can't cover services you didn't book: for example, the standard clean includes vacuuming the carpets, so if the agent asks for professional carpet cleaning and it wasn't booked, that isn't covered."
         },
         {
@@ -138,6 +158,7 @@ module.exports = {
         { q: 'Do landlords and letting agents book with you too?', a: 'Yes. Tenants, landlords and letting agents can all book.' },
         {
           q: "What's the difference between an end of tenancy clean and a deep clean?",
+          links: [{ text: 'Deep cleaning', url: '/deep-house-cleaning/' }],
           a: "An end of tenancy clean is for moving out: the property is empty, it follows the agent's checklist and it's priced by the size of the property and what you need, from £179. A deep clean is for a home you live in, booked by the hour from £27 an hour."
         },
         {

@@ -197,7 +197,8 @@
 <% } %>
 
 <!-- ============ FAQ ============ -->
-<% if (page.faqs && page.faqs.length) { %>
+<% const teaser = serviceFaqTeaser(service.slug); %>
+<% if ((page.faqs && page.faqs.length) || teaser) { %>
 <section class="h-section h-sand">
   <div class="h-wrap h-faq-wrap">
     <div class="h-head">
@@ -205,12 +206,13 @@
       <h2 class="h-title"><%= name %> in <%= place %>: your questions</h2>
     </div>
     <div class="h-faq">
-      <% page.faqs.forEach(function (faq) { %>
+      <% (page.faqs || []).forEach(function (faq) { %>
         <details class="h-faq-item">
           <summary><h3><%= faq.question %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
           <p><%= faq.answer %></p>
         </details>
       <% }); %>
+      <%- include('partials/faq-teaser', { teaser }) %>
     </div>
   </div>
 </section>

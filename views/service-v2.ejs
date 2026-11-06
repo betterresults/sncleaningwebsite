@@ -256,7 +256,8 @@
 
 <!-- ============ FAQ ============ -->
 <% const faqList = (typeof allFaqs !== 'undefined' && allFaqs) ? allFaqs : (page.faqs || []); %>
-<% if (faqList.length) { %>
+<% const teaser = serviceFaqTeaser(service.slug); %>
+<% if (faqList.length || teaser) { %>
 <section class="h-section h-sand">
   <div class="h-wrap h-faq-wrap">
     <div class="h-head">
@@ -270,6 +271,7 @@
           <p><%= faq.answer %></p>
         </details>
       <% }); %>
+      <%- include('partials/faq-teaser', { teaser }) %>
     </div>
   </div>
 </section>

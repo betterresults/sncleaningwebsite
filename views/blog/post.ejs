@@ -21,6 +21,8 @@
     <%- include('../partials/author-box') %>
     <div class="blog-post-cta">
       <p>Need a clean in London or Essex? Our own trained, insured and DBS checked cleaners can help. Click Get a quote to see your price.</p>
+      <% const bTeaser = /tenancy|move out|moving out|deposit/i.test((post.slug || '') + ' ' + (post.title || '')) ? serviceFaqTeaser('end-of-tenancy-cleaning') : null; %>
+      <% if (bTeaser) { %><p>Moving out? Read our <a href="<%= bTeaser.url %>">end of tenancy cleaning FAQ</a> for prices, what's included and how to protect your deposit.</p><% } %>
       <div class="blog-post-cta-actions">
         <a href="<%= bookUrl() %>" class="btn btn-primary">Get a quote</a>
         <a href="/blog" class="btn btn-outline">All posts</a>

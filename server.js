@@ -510,7 +510,16 @@ app.get('/about/silvia-nedeva', (req, res) => {
 });
 
 // Full FAQ page per service. Unlinked and noindex until Silvia approves it (set live: true then).
-const SERVICE_FAQS = { 'end-of-tenancy-cleaning': { data: require('./data/faq-end-of-tenancy'), live: false } };
+const SERVICE_FAQS = { 'end-of-tenancy-cleaning': { data: require('./data/faq-end-of-tenancy'), live: true } };
+// The top questions of a service's FAQ page plus its link, shown on that service's pages (null if no live FAQ page).
+app.locals.serviceFaqTeaser = (slug) => {
+  const entry = SERVICE_FAQS[slug];
+  if (!entry || !entry.live) return null;
+  const items = entry.data.groups.flatMap((g) => g.items).filter((i) => i.top);
+  return { url: `/${slug}/faq/`, label: entry.data.linkLabel || 'See all questions', items };
+};
+app.locals.liveServiceFaqs = () =>
+  Object.entries(SERVICE_FAQS).filter(([, e]) => e.live).map(([slug, e]) => ({ url: `/${slug}/faq/`, title: e.data.title }));
 app.get('/:serviceSlug/faq', (req, res, next) => {
   const entry = SERVICE_FAQS[req.params.serviceSlug];
   if (!entry) return next();

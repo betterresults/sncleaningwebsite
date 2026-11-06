@@ -1,0 +1,10 @@
+<%# Top questions from the service's full FAQ page, plus a link to it. Needs `teaser` from serviceFaqTeaser(). %>
+<% if (teaser) { %>
+  <% teaser.items.forEach(function (item) { %>
+    <details class="h-faq-item">
+      <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+      <p><%= item.a %></p>
+    </details>
+  <% }); %>
+  <p class="h-faq-more" style="margin-top: 1.25rem;"><a href="<%= teaser.url %>" class="h-btn h-btn--light"><%= teaser.label %></a></p>
+<% } %>

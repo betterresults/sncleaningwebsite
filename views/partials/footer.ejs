@@ -37,6 +37,7 @@
         <% (typeof navServices !== 'undefined' ? navServices : []).forEach(function (s) { %>
           <li><a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>"><%= s.title %></a></li>
         <% }); %>
+        <% liveServiceFaqs().forEach(function (f) { %><li><a href="<%= f.url %>"><%= f.title %></a></li><% }); %>
         <li><a href="<%= commercialUrl %>" target="_blank" rel="noopener">Commercial Cleaning ↗</a></li>
       </ul>
     </div>
