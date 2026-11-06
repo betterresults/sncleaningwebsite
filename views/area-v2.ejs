@@ -212,7 +212,7 @@
           <p><%= faq.answer %></p>
         </details>
       <% }); %>
-      <%- include('partials/faq-teaser', { teaser }) %>
+      <% if (teaser) { %><p class="h-faq-more" style="margin-top: 1.25rem;">Questions about <%= lower %>? Read our <a href="<%= teaser.url %>"><%= lower %> FAQ</a>.</p><% } %>
     </div>
   </div>
 </section>
