@@ -1,0 +1,2 @@
+<%# Empty hidden fields so Netlify Forms keeps where a quote box lead came from (filled by window.snAttr in main.js). %>
+<% ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','gclid','gbraid','wbraid','fbclid','ttclid','msclkid','came_from','landing','page'].forEach(function (f) { %><input type="hidden" name="<%= f %>" value="" /><% }) %>

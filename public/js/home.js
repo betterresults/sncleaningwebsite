@@ -115,7 +115,7 @@
       if (qf.elements['bot-field'].value) return;
 
       try {
-        const body = new URLSearchParams({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email });
+        const body = new URLSearchParams(Object.assign({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email }, window.snAttr ? window.snAttr() : {}));
         fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
       } catch (_) { /* never block the redirect */ }
 

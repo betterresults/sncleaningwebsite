@@ -39,6 +39,7 @@
       <form name="quote" method="GET" action="<%= bookUrl() %>" data-netlify="true" netlify-honeypot="bot-field"
             class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
+        <%- include('partials/quote-attr-fields') %>
         <p class="hidden-field"><label>Leave this empty <input name="bot-field" tabindex="-1" autocomplete="off" /></label></p>
 
         <div class="h-field">

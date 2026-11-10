@@ -15,6 +15,33 @@
 const SOURCE_FORM = "cleaner-application";
 const REP_FORM = "rep-application"; // door to door representatives
 const TARGET_FORM = "scored-application";
+const QUOTE_FORM = "quote"; // the postcode + email box on the website
+
+const ATTR = ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "gclid", "gbraid", "wbraid", "fbclid", "ttclid", "msclkid", "came_from", "landing", "page"];
+
+async function saveQuoteLead(event, payload) {
+  const F = require("../../lib/funnel");
+  const st = F.stores(event);
+  const d = payload.data || {};
+  const id = "Lw" + String(payload.id || Date.now()).replace(/[^a-zA-Z0-9]/g, "");
+  if (await st.leads.get(id, { type: "json" })) return;
+  const at = payload.created_at || new Date().toISOString();
+  const first = { at };
+  ATTR.forEach((k) => { if (d[k]) first[k] = String(d[k]).slice(0, 300); });
+  if (first.came_from) { first.referrer = first.came_from; delete first.came_from; }
+  const service = d.service && d.service !== "Not chosen" ? String(d.service) : "";
+  const page = first.page || first.landing || "";
+  await st.leads.setJSON(id, {
+    id, page: "website", source: "website_quote", createdAt: at, status: "New",
+    firstName: "", lastName: "", email: String(d.email || "").trim().slice(0, 200), phone: "",
+    postcode: String(d.postcode || "").trim().toUpperCase().slice(0, 12),
+    answers: service ? { service: service.replace(/-/g, " ") } : {},
+    pageUrl: page ? "https://sncleaningservices.co.uk" + page : "",
+    first, last: first,
+    journey: [{ at, type: "lead", detail: "Typed postcode and email in the quote box" + (page ? " on " + page : "") + ", then went to the booking form" }],
+    meta: [], netlifySubmission: String(payload.id || "")
+  });
+}
 const ROUTINE_URL =
   process.env.CLAUDE_ROUTINE_URL ||
   "https://api.anthropic.com/v1/claude_code/routines/trig_01J9HNhNVxmx8homMMU2EjfJ/fire";
@@ -30,6 +57,13 @@ exports.handler = async (event) => {
   }
 
   const payload = body.payload || {};
+
+  // Website quote box (postcode + email): save it as a lead in the leads dashboard,
+  // so people who never finish the booking form are not lost.
+  if (payload.form_name === QUOTE_FORM) {
+    try { await saveQuoteLead(event, payload); } catch (err) { console.log("quote lead not saved", err && err.message); }
+    return { statusCode: 200, body: "quote lead saved" };
+  }
   // Ignore the contact form, and our own scored posts, so nothing loops.
   const isRep = payload.form_name === REP_FORM;
   if (payload.form_name !== SOURCE_FORM && !isRep) {

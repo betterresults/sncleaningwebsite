@@ -38,6 +38,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Where this visitor came from (ad click ids, utm tags, referrer), kept for this
+  // browser session only, so a quote box lead on the website shows its source in the
+  // leads dashboard. First touch of the session wins.
+  window.snAttr = (() => {
+    const KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'gclid', 'gbraid', 'wbraid', 'fbclid', 'ttclid', 'msclkid'];
+    let a = null;
+    try { a = JSON.parse(sessionStorage.getItem('sn-attr') || 'null'); } catch (_) {}
+    const q = new URLSearchParams(location.search);
+    const fresh = {};
+    KEYS.forEach((k) => { if (q.get(k)) fresh[k] = q.get(k).slice(0, 200); });
+    if (!a || Object.keys(fresh).length) {
+      if (!a || !Object.keys(a).some((k) => KEYS.includes(k))) {
+        a = Object.assign({}, fresh, {
+          came_from: (document.referrer || '').slice(0, 300),
+          landing: location.pathname
+        });
+        try { sessionStorage.setItem('sn-attr', JSON.stringify(a)); } catch (_) {}
+      }
+    }
+    return () => Object.assign({}, a || {}, { page: location.pathname });
+  })();
+
   // Booking forms live on our subdomain (Dilvon custom domain). Dilvon's form
   // names match our service slugs except carpet and deep. Same rule in server.js.
   const BOOK_BASE = 'https://app.sncleaningservices.co.uk/book/sn-cleaning-services/';
@@ -59,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const service = get('service');
     if (f.matches('[data-quote-form]')) {
       try {
-        const body = new URLSearchParams({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email });
+        const body = new URLSearchParams(Object.assign({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email }, window.snAttr ? window.snAttr() : {}));
         fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
       } catch (_) {}
     }
