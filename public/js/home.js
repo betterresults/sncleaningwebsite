@@ -117,6 +117,10 @@
       try {
         const body = new URLSearchParams(Object.assign({ 'form-name': 'quote', service: service || 'Not chosen', postcode, email }, window.snAttr ? window.snAttr() : {}));
         fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString(), keepalive: true }).catch(() => {});
+        let consent = '';
+        try { consent = localStorage.getItem('sn-consent') || ''; } catch (_) {}
+        fetch('/api/funnel', { method: 'POST', headers: { 'Content-Type': 'application/json' }, keepalive: true,
+          body: JSON.stringify({ action: 'website-quote', service, postcode, email, consent, touch: window.snAttr ? window.snAttr() : {} }) }).catch(() => {});
       } catch (_) { /* never block the redirect */ }
 
       const params = new URLSearchParams({ prefill_postcode: postcode, prefill_email: email });

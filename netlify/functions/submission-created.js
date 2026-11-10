@@ -60,10 +60,8 @@ exports.handler = async (event) => {
 
   // Website quote box (postcode + email): save it as a lead in the leads dashboard,
   // so people who never finish the booking form are not lost.
-  if (payload.form_name === QUOTE_FORM) {
-    try { await saveQuoteLead(event, payload); } catch (err) { console.log("quote lead not saved", err && err.message); }
-    return { statusCode: 200, body: "quote lead saved" };
-  }
+  // (Quote box leads are saved by /api/funnel action "website-quote", called from the page.)
+  if (payload.form_name === QUOTE_FORM) return { statusCode: 200, body: "ignored" };
   // Ignore the contact form, and our own scored posts, so nothing loops.
   const isRep = payload.form_name === REP_FORM;
   if (payload.form_name !== SOURCE_FORM && !isRep) {
