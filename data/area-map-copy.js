@@ -4,7 +4,7 @@ module.exports = {
   'airbnb-cleaning':
     'We look after Airbnb homes, short lets and holiday lets between guest stays. Whether you let a studio for one night or a family house for a fortnight, our own trained cleaners follow the same checklist on every turnover, so each guest walks into the same standard and your reviews stay strong.',
   'end-of-tenancy-cleaning':
-    'Our end of tenancy cleaning is for tenants moving out and landlords getting a home ready for the next tenants. Every clean includes the oven and follows what inventory clerks check at move out, and if the agent raises anything from our clean we come back within 72 hours.',
+    'Our end of tenancy cleaning is for tenants moving out and landlords getting a home ready for the next tenants. Every clean follows what inventory clerks check at move out, and if the agent raises anything from our clean we come back within 72 hours. Professional internal kitchen appliance cleaning, the oven included, is an optional extra you can add when booking.',
   'domestic-cleaning':
     'Weekly, fortnightly or one off cleaning from our own trained, insured cleaners. You agree a checklist with us once, and your cleaner keeps on top of the kitchen, bathrooms and living areas on every visit.',
   'deep-house-cleaning':
