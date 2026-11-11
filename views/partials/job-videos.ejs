@@ -16,7 +16,7 @@
       <% jobVideos.videos.forEach(function (v) { %>
         <figure class="jv-card">
           <button type="button" class="jv-play" data-yt="<%= v.youtube_id %>" aria-label="Play video: <%= v.title %>">
-            <img src="https://i.ytimg.com/vi/<%= v.youtube_id %>/hqdefault.jpg" alt="" loading="lazy" decoding="async" width="270" height="480" />
+            <img src="https://i.ytimg.com/vi/<%= v.youtube_id %>/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<%= v.youtube_id %>/hqdefault.jpg'" alt="" loading="lazy" decoding="async" width="270" height="480" />
             <span class="jv-icon" aria-hidden="true"></span>
           </button>
           <figcaption>
