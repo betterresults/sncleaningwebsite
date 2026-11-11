@@ -873,9 +873,8 @@ async function renderArea(req, res, next, areaSlug) {
       if (/^essex\b/i.test(String(r.slug || '')) || /^essex\b/i.test(String(r.name || ''))) inEssex = true;
     }
     const inHavering = [region, parent].some((r) => r && /^havering/i.test(String(r.name || '')));
-    const video = inEssex || (service.slug === 'domestic-cleaning' && inHavering)
-      ? { id: 'G8cOOI3hErg', title: 'Domestic cleaning in Essex by our in-house trained cleaners' }
-      : null;
+    // The general team video is no longer shown on area pages (Silvia, 11 Nov 2026); job videos show instead.
+    const video = null;
 const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJobVideos(), service.slug, page.postcodes), service.slug, service.title);
         return res.render('area-v2', {
       jobVideos: areaJobVideos,
