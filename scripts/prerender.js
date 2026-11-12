@@ -215,7 +215,15 @@ function writeRobotsTxt() {
   // AI search/answer bots (ChatGPT, Claude, Perplexity, Google AI) are allowed
   // so the business can be found and recommended in AI search. Only
   // Bytespider (a bulk scraper, not a search engine) is kept out.
-  const txt = `User-agent: *\nAllow: /\nDisallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\n\nUser-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\n`;
+  // AI search crawlers are also named explicitly (OpenAI: OAI-SearchBot must be
+  // allowed for pages to appear in ChatGPT search; ChatGPT-User fetches pages a
+  // user asks about). A named group replaces the * group for that bot, so it
+  // repeats the same private paths.
+  const priv = 'Disallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\n';
+  const ai = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User'];
+  const txt = `User-agent: *\nAllow: /\n${priv}\n` +
+    ai.map((b) => `User-agent: ${b}\n`).join('') + `Allow: /\n${priv}\n` +
+    `User-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
