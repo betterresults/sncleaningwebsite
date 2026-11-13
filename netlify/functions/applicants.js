@@ -470,7 +470,8 @@ exports.handler = async (event) => {
     body: shell("Applicants", `<p class="warn">DASHBOARD_PASSWORD is not set in Netlify, so this page cannot be protected. Add it in Site configuration &rarr; Environment variables.</p>`) };
 
   const cookies = event.headers.cookie || "";
-  let authed = cookies.split(";").some((c) => c.trim() === COOKIE + "=" + token(pw));
+  // same check as the dashboard, so every kind of login works here (shared password, personal email, Google, owner)
+  let authed = require("../../lib/funnel").isAuthed(event);
 
   if (event.httpMethod === "POST") {
     const params = new URLSearchParams(event.body || "");
@@ -599,7 +600,7 @@ exports.handler = async (event) => {
   }
 
   // one login for all admin pages: sign in on the dashboard, then come back here
-  if (!authed) return { statusCode: 302, headers: { location: "/dashboard?next=" + encodeURIComponent("/applicants") }, body: "" };
+  if (!authed) return { statusCode: 302, headers: { location: "/dashboard?next=" + encodeURIComponent("/applicants" + (event.rawQuery ? "?" + event.rawQuery : (event.queryStringParameters && event.queryStringParameters.job ? "?job=" + encodeURIComponent(event.queryStringParameters.job) : ""))) }, body: "" };
 
   if (!key) return { statusCode: 200, headers: { "content-type": "text/html" },
     body: shell("Applicants", `<h1>Applicants</h1><p class="warn">NETLIFY_API_TOKEN is not set, so I cannot read the submissions. Create one at app.netlify.com/user/applications and add it in Site configuration &rarr; Environment variables.</p>`) };
