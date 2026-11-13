@@ -127,7 +127,7 @@ module.exports = {
 <h2>Our work and re-cleans</h2>
 <ul>
   <li>Our cleaners are our own trained team. They are insured and DBS checked.</li>
-  <li>If anything we cleaned is not right, tell us and we will come back and put it right: within <strong>72 hours</strong> for end of tenancy cleaning, and within <strong>24 hours</strong> for other services.</li>
+  <li>If anything we cleaned is not right, tell us and we will come back and put it right: within <strong>7 days</strong> for end of tenancy cleaning and for after builders cleaning in an empty property, and within <strong>24 hours</strong> for homes that are lived in.</li>
   <li>We clean; we cannot repair damage, stains that are permanent, or normal wear and tear.</li>
 </ul>
 

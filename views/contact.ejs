@@ -1,8 +1,8 @@
 <section class="page-hero page-hero--plain">
   <div class="container">
-    <span class="eyebrow">Contact</span>
+    <span class="eyebrow">Contact and customer support</span>
     <h1>Tell us about the property</h1>
-    <p>We'll send a quote, usually the same weekday. Or call / WhatsApp if that's easier.</p>
+    <p>Book online at any time, message us on WhatsApp from 7am, or call. Below you can see exactly how each way of reaching us works, and what happens if anything needs putting right after a clean.</p>
   </div>
 </section>
 
@@ -69,6 +69,36 @@
           <% } %>
         </div><!--/sb-->
       </div>
+    </div>
+  </div>
+</section>
+
+<% const cs = customerSupport; %>
+<section class="section support-section" id="support">
+  <div class="container">
+    <span class="eyebrow">Customer support</span>
+    <h2>How to reach us, and when</h2>
+    <div class="support-table-wrap">
+      <table class="support-table">
+        <thead><tr><th scope="col">Channel</th><th scope="col">When</th><th scope="col">What it is for</th></tr></thead>
+        <tbody>
+          <% cs.channels.forEach(function (c) { %>
+            <tr id="<%= c.id %>"><th scope="row"><%= c.name %></th><td><%= c.when %></td><td><%= c.what %></td></tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <h2 id="after-the-clean">On the day and after the clean</h2>
+    <div class="support-steps">
+      <% cs.steps.forEach(function (s) { %>
+        <div class="contact-info-card"><h3 class="h3"><%= s.title %></h3><p><%= s.text %></p></div>
+      <% }) %>
+    </div>
+    <h2>Support questions</h2>
+    <div class="support-faqs">
+      <% cs.faqs.forEach(function (f) { %>
+        <details class="contact-info-card"><summary><strong><%= f.question %></strong></summary><p><%= f.answer %></p></details>
+      <% }) %>
     </div>
   </div>
 </section>

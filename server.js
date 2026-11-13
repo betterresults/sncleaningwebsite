@@ -67,6 +67,7 @@ app.locals.serviceImage = serviceImage;
 // Lets views add schema for what they show (the page itself, the reviews on it).
 app.locals.schemaWebPage = schema.buildWebPage;
 app.locals.schemaReviews = schema.buildReviews;
+app.locals.customerSupport = require('./data/customer-support');
 
 // Responsive photos: scripts/build-images.js writes WebP copies at 480/800/1200px
 // into public/images/_r/. rs(src, sizes) returns the srcset + sizes attributes
@@ -572,13 +573,18 @@ app.get('/gallery', (req, res) => {
 app.get('/contact', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Contact', url: '/contact' }];
   res.render('contact', {
-    title: 'Contact',
+    title: 'Contact and Customer Support',
     metaDescription:
-      'Request a quote from SN Cleaning Services. Send your postcode, call or WhatsApp — we quote the same weekday.',
+      'Contact SN Cleaning Services: book online any time, WhatsApp 7am to 10pm on weekdays, emails answered within 1 hour, and a 7 day re clean guarantee for empty properties.',
     success: false,
     error: null,
     breadcrumbs,
-    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      { '@context': 'https://schema.org', '@type': 'ContactPage', name: 'Contact and Customer Support', url: 'https://sncleaningservices.co.uk/contact/' },
+      schema.buildFaqPage(require('./data/customer-support').faqs)
+    ]
   });
 });
 

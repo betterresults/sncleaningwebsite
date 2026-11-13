@@ -52,7 +52,7 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London & Essex | From £179',
     metaDescription:
-      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Fixed prices from £179. 72-hour re clean if the agent flags anything.',
+      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Prices from £179. 7 day re clean guarantee if the agent flags anything.',
     prices: [],
     guide: [
       {
@@ -85,7 +85,7 @@ module.exports = {
       {
         h: 'What if the agent is not happy with the clean?',
         p: [
-          'Tell us within 72 hours and we come back and re clean anything cleaning related that the agent has flagged, free of charge. We allow 72 hours rather than 24 because the property is empty and it can take a day or two for the agent or landlord to inspect.'
+          'Tell us within 7 days through the customer app or WhatsApp and we come back and re clean anything cleaning related that the agent has flagged, free of charge. We allow 7 days because the property is empty and the agent or inventory clerk often needs more than 72 hours to visit and write the report. We aim to come back within 1 to 2 working days, and a re clean is always a priority, so it is often done within 24 hours.'
         ]
       },
       {

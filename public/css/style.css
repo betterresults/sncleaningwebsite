@@ -1441,3 +1441,18 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 .cookie-note-btn:focus-visible { outline: 3px solid #fff; outline-offset: 2px; }
 .cookie-note-btn-alt { background: transparent; box-shadow: inset 0 0 0 2px rgba(255,255,255,.75); }
 .cookie-note-btn-alt:hover { background: rgba(255,255,255,.12); }
+
+/* Contact page: customer support (13 Nov 2026) */
+.support-section h2 { margin: 28px 0 14px; }
+.support-table-wrap { overflow-x: auto; }
+.support-table { width: 100%; border-collapse: collapse; min-width: 560px; }
+.support-table th, .support-table td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,.1); }
+.support-table thead th { font-size: 14px; opacity: .75; }
+.support-table tbody th { white-space: nowrap; }
+.support-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.support-faqs { display: grid; gap: 10px; }
+.support-faqs summary { cursor: pointer; }
+.support-faqs details p { margin: 10px 0 0; }
+.reclean-promise { margin-top: 22px; padding: 18px 20px; border-radius: 12px; background: #fff; border: 1px solid rgba(0,0,0,.1); }
+.reclean-promise p { margin: 8px 0 0; }
+.reclean-promise a { text-decoration: underline; }

@@ -67,6 +67,7 @@
         <li class="h-reveal"><strong><%= t[0] %></strong><span><%= t[1] %></span></li>
       <% }); %>
     </ul>
+    <% if (service && service.slug === 'end-of-tenancy-cleaning') { %><%- include('partials/reclean-promise') %><% } %>
   </div>
 </section>
 

@@ -133,7 +133,7 @@ module.exports = {
         },
         {
           q: 'What happens if the agent says something was missed?',
-          a: 'Tell us within 72 hours and we come back and put it right, free of charge.'
+          a: 'Tell us within 7 days, through the customer app or WhatsApp, and we come back and put it right free of charge. We aim to return within 1 to 2 working days.'
         },
         { q: 'Do you give a receipt or cleaning certificate for the agent?', a: 'Yes, we do.' }
       ]

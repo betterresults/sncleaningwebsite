@@ -18,12 +18,14 @@
   const guide = (page.content_sections && page.content_sections.length)
     ? page.content_sections.map(function (c) { return { h: c.heading, p: c.body || [] }; })
     : [];
-  const reclean = service.slug === 'end-of-tenancy-cleaning' ? 72 : 24;
+  // Re clean window (Silvia, 13 Nov 2026): 7 days for empty properties (end of tenancy; after builders when nobody lives there), 24 hours for lived in homes.
+  const reclean = service.slug === 'end-of-tenancy-cleaning' ? '7 days' : (service.slug === 'after-builders-cleaning' ? '7 days' : '24 hours');
+  const recleanNote = service.slug === 'after-builders-cleaning' ? ' (24 hours if you already live in the property)' : '';
   const benefits = [
     ['Our own trained cleaners', 'Never subcontractors or gig workers, so you get the same standard every time.'],
     ['Insured and DBS checked', 'People you can trust in your home, fully insured for every job.'],
     ['A proper clean, not a quick wipe', 'Professional products and equipment, including our own limescale remover.'],
-    ['Re clean within ' + reclean + ' hours', 'If anything is missed, tell us within ' + reclean + ' hours and we come back to put it right.']
+    ['Re clean within ' + reclean, 'If anything is missed, tell us within ' + reclean + recleanNote + ' and we come back to put it right, at no extra cost.']
   ];
   // Reviews: ones that mention this area first, then ones about this service.
   const placeRe = new RegExp(place.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
@@ -82,6 +84,7 @@
         <li class="h-reveal"><strong><%= bf[0] %></strong><span><%= bf[1] %></span></li>
       <% }); %>
     </ul>
+    <% if (service && service.slug === 'end-of-tenancy-cleaning') { %><%- include('partials/reclean-promise') %><% } %>
   </div>
 </section>
 
