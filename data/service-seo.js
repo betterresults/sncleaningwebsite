@@ -79,7 +79,7 @@ module.exports = {
       {
         h: 'How much does end of tenancy cleaning cost?',
         p: [
-          'Our end of tenancy cleaning starts from £179. It is a fixed price based on the size of the property and how furnished it is, and the oven is cleaned as part of the job, priced by its size. Click Get a quote and the booking form shows your full price before you confirm.'
+          'Our end of tenancy cleaning starts from £179. The exact price depends on the number of bedrooms and bathrooms and what you choose to add, such as professional internal kitchen appliance cleaning for the oven, which is an optional extra priced by the size of the oven. Click Get a quote and the booking form shows your full price before you confirm.'
         ]
       },
       {
@@ -97,8 +97,8 @@ module.exports = {
     ],
     extraFaqs: [
       {
-        question: 'Is the price fixed for an end of tenancy clean?',
-        answer: 'Yes. The price is fixed before we start, based on the number of bedrooms and bathrooms, how furnished the property is and the size of the oven. It starts from £179, and the booking form shows your exact price.'
+        question: 'How is the price worked out for an end of tenancy clean?',
+        answer: 'It starts from £179 and depends on the number of bedrooms and bathrooms and any extras you add, such as the oven, which is optional. The booking form shows your exact price before you confirm, so you know what you will pay before we start.'
       },
       {
         question: 'Do I need to be there for the end of tenancy clean?',
