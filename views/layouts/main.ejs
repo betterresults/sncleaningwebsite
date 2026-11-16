@@ -91,6 +91,10 @@
         started = true;
         evs.forEach(function (n) { removeEventListener(n, go, { passive: true }); });
         load();
+        // Microsoft Clarity, started at the same moment. Skipped while the old Netlify snippet still loads it.
+        if (!window.clarity) {
+          (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window, document, "clarity", "script", "jph0qfojsp");
+        }
       };
       var arm = function () { evs.forEach(function (n) { addEventListener(n, go, { passive: true }); }); };
       if (document.prerendering) document.addEventListener('prerenderingchange', arm, { once: true });
