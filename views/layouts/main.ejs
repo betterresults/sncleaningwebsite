@@ -83,8 +83,18 @@
         gtag('js', new Date());
         gtag('config', 'G-K9GE74MBMB');
       };
-      if (document.prerendering) document.addEventListener('prerenderingchange', load, { once: true });
-      else load();
+      // Analytics starts on the visitor's first scroll, tap, key press or mouse move, so it never
+      // slows down the first view (page speed, Silvia 16 Nov 2026). Visits with no interaction at all are not counted.
+      var started = false, evs = ['scroll', 'pointerdown', 'keydown', 'touchstart', 'mousemove'];
+      var go = function () {
+        if (started) return;
+        started = true;
+        evs.forEach(function (n) { removeEventListener(n, go, { passive: true }); });
+        load();
+      };
+      var arm = function () { evs.forEach(function (n) { addEventListener(n, go, { passive: true }); }); };
+      if (document.prerendering) document.addEventListener('prerenderingchange', arm, { once: true });
+      else arm();
       // Lead events (mark quote_click, generate_lead and phone_click as key events in GA4).
       var send = function (name, params) {
         if (!window.gtag) return;
