@@ -6,13 +6,19 @@
         <span class="logo-text"><%= site.name %></span>
       </a>
       <p class="footer-tagline">Domestic, end of tenancy and deep cleaning across London and Essex. 12 years in business, our own insured staff.</p>
-      <% if (site.social.facebook || site.social.instagram) { %>
+      <% if (site.social.facebook || site.social.instagram || site.social.tiktok || site.social.youtube) { %>
         <div class="footer-social">
           <% if (site.social.facebook) { %>
             <a href="<%= site.social.facebook %>" aria-label="Facebook" target="_blank" rel="noopener">Facebook</a>
           <% } %>
           <% if (site.social.instagram) { %>
             <a href="<%= site.social.instagram %>" aria-label="Instagram" target="_blank" rel="noopener">Instagram</a>
+          <% } %>
+          <% if (site.social.tiktok) { %>
+            <a href="<%= site.social.tiktok %>" aria-label="TikTok" target="_blank" rel="noopener">TikTok</a>
+          <% } %>
+          <% if (site.social.youtube) { %>
+            <a href="<%= site.social.youtube %>" aria-label="YouTube" target="_blank" rel="noopener">YouTube</a>
           <% } %>
         </div>
       <% } %>

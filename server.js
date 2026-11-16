@@ -44,8 +44,10 @@ const SITE_DEFAULTS = {
   address: 'Serving London & Essex',
   hours: 'Customer support: Mon to Fri 7am to 10pm · Sat and Sun 8am to 5pm',
   social: {
-    facebook: '',
-    instagram: ''
+    facebook: 'https://www.facebook.com/sncleaningservicesuk',
+    instagram: 'https://www.instagram.com/sncleanservices/',
+    tiktok: 'https://www.tiktok.com/@sncleaningservices',
+    youtube: 'https://www.youtube.com/@sncleaningservicesuk'
   },
   googleBusinessUrl: 'https://share.google/aZm6Leu555SOn4IvZ',
   logoUrl: '/images/logo.png',
@@ -159,8 +161,10 @@ app.use(async (req, res, next) => {
           address: settings.address_area || SITE_DEFAULTS.address,
           hours: settings.hours_note || SITE_DEFAULTS.hours,
           social: {
-            facebook: isPlaceholderSocial(facebook) ? '' : facebook,
-            instagram: isPlaceholderSocial(instagram) ? '' : instagram
+            facebook: isPlaceholderSocial(facebook) ? SITE_DEFAULTS.social.facebook : facebook,
+            instagram: isPlaceholderSocial(instagram) ? SITE_DEFAULTS.social.instagram : instagram,
+            tiktok: SITE_DEFAULTS.social.tiktok,
+            youtube: SITE_DEFAULTS.social.youtube
           },
           googleBusinessUrl: settings.google_business_url || SITE_DEFAULTS.googleBusinessUrl,
           logoUrl: settings.logo_url || SITE_DEFAULTS.logoUrl,
