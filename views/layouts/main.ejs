@@ -56,6 +56,7 @@
   <% if (typeof heroPreload !== 'undefined' && heroPreload) { %>
     <link rel="preload" as="image" href="<%= heroPreload %>?v=<%= assetVersion %>" imagesrcset="<%= (rs(heroPreload, '100vw').match(/srcset="([^"]+)"/) || [,''])[1] %>" imagesizes="100vw" fetchpriority="high">
   <% } %>
+  <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
   <% if ((typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2)) { %>
     <%# Headline font is self-hosted and preloaded so headings don't jump when it arrives. %>

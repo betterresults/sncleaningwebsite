@@ -190,9 +190,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Room photo carousel — tabs, arrows, dots and swipe all share one scroll position
+  // Room photo carousel — tabs, arrows, dots and swipe all share one scroll position.
+  // It sits below the first screen, so it is set up when the browser is idle (page speed).
   const track = document.getElementById('checklist-track');
-  if (track) {
+  const whenIdle = window.requestIdleCallback || ((cb) => setTimeout(cb, 200));
+  if (track) whenIdle(() => {
     const slides = [...track.querySelectorAll('.checklist-slide')];
     const tabs = [...document.querySelectorAll('.checklist-tab')];
     const pagers = [...document.querySelectorAll('.checklist-pager')];
@@ -260,7 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => goTo(activeIndex), 80);
     });
-  }
+  }, { timeout: 2000 });
 
   // Prefill contact form from sticky/hero quote links (?postcode= or legacy ?zip=)
   const params = new URLSearchParams(window.location.search);
