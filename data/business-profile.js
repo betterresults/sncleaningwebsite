@@ -29,10 +29,8 @@ module.exports = {
     url: '/about/silvia-nedeva/',
     // Silvia's own profiles (given by Silvia, 6 Nov 2026)
     sameAs: [
-      'https://www.linkedin.com/in/silvia-nedeva/',
-      'https://www.facebook.com/silvia.ivanova.nedeva/',
-      'https://www.instagram.com/silvinedeva/',
-      'https://www.tiktok.com/@silvinedeva'
+      // Only LinkedIn (Silvia, 16 Nov 2026): her Facebook, Instagram and TikTok are mainly about Dilvon, not SN Cleaning Services.
+      'https://www.linkedin.com/in/silvia-nedeva/'
     ]
   },
   // Other profiles of the business (Facebook, Instagram, Trustpilot, Yell...) go here as they are created
