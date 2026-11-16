@@ -5,6 +5,16 @@
 [functions]
   directory = "netlify/functions"
 
+# Security headers for every page (Screpy audit, 16 Nov 2026). frame-ancestors only stops other sites
+# from showing our pages inside their own; it does not limit our own scripts, forms or embeds.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Content-Security-Policy = "frame-ancestors 'self' https://*.dilvon.com https://dilvon.com https://*.sncleaningservices.co.uk"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
 [[headers]]
   for = "/css/*"
   [headers.values]

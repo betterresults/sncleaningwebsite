@@ -141,10 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (hasSpeculation || bookingWarmed) return;
         bookingWarmed = true;
         key = url.origin + url.pathname + '?preload=1';
-      } else if (url.origin === location.origin && /^\/contact\/?$/.test(url.pathname)) {
-        key = '/contact/';
-        if (key === location.pathname.replace(/\/?$/, '/')) return;
-      } else return;
+      } else return; // The contact page is no longer warmed in a hidden frame: it loaded the full contact form and its tracking on every page (Total Blocking Time), 16 Nov 2026.
       if (warmed.has(key)) return;
       warmed.add(key);
       try { if (sessionStorage.getItem('warm:' + key)) return; } catch (_) {}
@@ -157,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!slow && window.self === window.top) {
     const warmAll = () => {
       const hrefs = [];
-      document.querySelectorAll('a[href^="' + BOOK_ORIGIN + '"], form[action^="' + BOOK_ORIGIN + '"], a[href^="/contact"]').forEach((el) => hrefs.push(el.getAttribute('href') || el.getAttribute('action')));
+      document.querySelectorAll('a[href^="' + BOOK_ORIGIN + '"], form[action^="' + BOOK_ORIGIN + '"]').forEach((el) => hrefs.push(el.getAttribute('href') || el.getAttribute('action')));
       hrefs.filter(Boolean).slice(0, 12).forEach(warmForm);
     };
     const idle = window.requestIdleCallback || ((cb) => setTimeout(cb, 300));

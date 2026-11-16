@@ -14,7 +14,7 @@
 <section class="section blog-post">
   <div class="container blog-post-inner">
     <% if (post.cover_image) { %>
-      <img class="blog-post-cover" data-ed-cover src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 900px) 100vw, 860px') %> alt="" fetchpriority="high" decoding="async" />
+      <img class="blog-post-cover" data-ed-cover src="<%= post.cover_image %>?v=<%= assetVersion %>"<%- rs(post.cover_image, '(max-width: 900px) 100vw, 860px') %> alt="<%= post.title %>" fetchpriority="high" decoding="async" />
     <% } %>
     <!--sb:post--><div class="blog-content cs-content" data-ed-body>
       <%- post.content %>

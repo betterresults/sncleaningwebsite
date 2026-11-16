@@ -5,7 +5,7 @@
   <img
     class="h-hero-bg"
     src="/images/hero-living-room.jpg?v=<%= assetVersion %>"<%- rs('/images/hero-living-room.jpg', '100vw') %>
-    alt=""
+    alt="A clean, tidy living room"
     decoding="async"
     fetchpriority="high"
     width="1280" height="720"
@@ -97,7 +97,7 @@
     <!--sb:services--><div class="h-svc-grid<%= services.length === 5 ? ' h-svc-grid--5' : '' %>">
       <% services.forEach(function(service) { %>
         <a href="/<%= service.slug %>" class="h-svc h-reveal">
-          <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(service.slug), '(max-width: 1000px) 50vw, 400px') %> alt="" loading="lazy" decoding="async" width="1152" height="864" />
+          <img src="<%= serviceImage(service.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(service.slug), '(max-width: 1000px) 50vw, 400px') %> alt="<%= service.title %> by SN Cleaning Services" loading="lazy" decoding="async" width="1152" height="864" />
           <span class="h-svc-card">
             <span class="h-svc-name"><%= service.title %></span>
             <span class="h-svc-meta">
