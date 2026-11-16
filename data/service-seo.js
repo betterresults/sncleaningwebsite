@@ -6,9 +6,9 @@ const LONDON_ESSEX = 'across London and Essex';
 
 module.exports = {
   'domestic-cleaning': {
-    metaTitle: 'Domestic Cleaning London & Essex | From £23/hour',
+    metaTitle: 'Domestic Cleaning London and Essex | Own DBS Checked Team',
     metaDescription:
-      'Weekly, fortnightly, monthly or one off domestic cleaning in London & Essex by our own insured, DBS checked cleaners. From £23 an hour. Book online.',
+      'Weekly, fortnightly or one off domestic cleaning in London and Essex by our own insured, DBS checked cleaners, with a 24 hour re clean guarantee. Book online.',
     prices: [],
     guide: [
       {
@@ -50,9 +50,9 @@ module.exports = {
   },
 
   'end-of-tenancy-cleaning': {
-    metaTitle: 'End of Tenancy Cleaning London & Essex | From £179',
+    metaTitle: 'End of Tenancy Cleaning London and Essex | Deposit Back',
     metaDescription:
-      'End of tenancy cleaning in London & Essex to the checklist letting agents inspect against. Prices from £179. 7 day re clean guarantee if the agent flags anything.',
+      'End of tenancy cleaning in London and Essex to the checklist letting agents use. Deposit back guarantee, show up guarantee and a 7 day re clean at no extra cost.',
     prices: [],
     guide: [
       {
@@ -108,9 +108,9 @@ module.exports = {
   },
 
   'airbnb-cleaning': {
-    metaTitle: 'Airbnb Cleaning London & Essex | From £24/hour',
+    metaTitle: 'Airbnb Cleaning London and Essex | Reliable Changeovers',
     metaDescription:
-      'Airbnb and short let cleaning in London & Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
+      'Airbnb and short let cleaning in London and Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
     guide: [
       {
         h: 'What is Airbnb cleaning?',
@@ -154,9 +154,9 @@ module.exports = {
   },
 
   'deep-house-cleaning': {
-    metaTitle: 'Deep Cleaning London & Essex | From £27/hour',
+    metaTitle: 'Deep Cleaning London and Essex | Own DBS Checked Team',
     metaDescription:
-      'Deep house cleaning in London & Essex: inside the oven, grout, tiles, skirting boards and behind furniture. Own insured, DBS checked team. From £27 an hour.',
+      'Deep house cleaning in London and Essex: grout, tiles, limescale, skirting boards and behind furniture, by our own insured, DBS checked team. No judgement.',
     prices: [],
     guide: [
       {
@@ -194,9 +194,9 @@ module.exports = {
   },
 
   'after-builders-cleaning': {
-    metaTitle: 'After Builders Cleaning London & Essex | From £179',
+    metaTitle: 'After Builders Cleaning London and Essex | Dust Free Finish',
     metaDescription:
-      'After builders and post renovation cleaning in London & Essex. Building dust removed from every surface, ready to move in or hand over. Request a quote.',
+      'After builders and post renovation cleaning in London and Essex. Building dust removed from every surface, ready to move in or hand over. Request a quote.',
     guide: [
       {
         h: 'What is an after builders clean?',
@@ -232,9 +232,9 @@ module.exports = {
   },
 
   'carpet-cleaning-services': {
-    metaTitle: 'Carpet Cleaning London & Essex | From £49',
+    metaTitle: 'Carpet Cleaning London and Essex | 5★ Rated on Google',
     metaDescription:
-      'Professional carpet and rug cleaning in London & Essex. Stains pre-treated, fast dry method, from £49. Book online.',
+      'Professional carpet and rug cleaning in London and Essex by our own trained team. Stains treated before cleaning, carpets left to dry fast. Rated 5.0 on Google.',
     prices: [],
     guide: [
       {
@@ -272,9 +272,9 @@ module.exports = {
   },
 
   'upholstery-cleaning': {
-    metaTitle: 'Sofa & Upholstery Cleaning London & Essex | From £69',
+    metaTitle: 'Sofa and Upholstery Cleaning London and Essex | 5★ Rated',
     metaDescription:
-      'Sofa, armchair and upholstery cleaning in London & Essex with fabric safe products, priced per item. Book online.',
+      'Sofa, armchair and upholstery cleaning in London and Essex with products matched to the fabric, by our own trained, insured team. Rated 5.0 on Google. Book online.',
     prices: [],
     guide: [
       {
@@ -306,9 +306,9 @@ module.exports = {
   },
 
   'mattress-cleaning': {
-    metaTitle: 'Mattress Cleaning London & Essex | From £39',
+    metaTitle: 'Mattress Cleaning London and Essex | 5★ Rated on Google',
     metaDescription:
-      'Professional mattress cleaning in London & Essex. Stains, odours and dust mites treated, priced by size. Book online.',
+      'Professional mattress cleaning in London and Essex. Stains, odours and dust mites treated by our own trained, insured team, with a 24 hour re clean guarantee.',
     prices: [],
     guide: [
       {

@@ -567,7 +567,7 @@ app.get('/gallery', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Gallery', url: '/gallery' }];
   res.render('gallery', {
     title: 'Our Work',
-    metaDescription: 'A look at the standard of work from SN Cleaning Services, serving London & Essex with professional home and office cleaning.',
+    metaDescription: 'A look at the standard of work from SN Cleaning Services, serving homes across London and Essex.',
     gallery: GALLERY,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -896,8 +896,8 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       video,
       designV2: true,
       heroPreload: serviceImage(service.slug),
-      // Title format (keyword first, then price, then trust): fits Google's ~60 characters.
-      title: [`${service.title} ${place} | ${servicePrice(service.slug) || 'Free Quote'} | 5★ Rated`, `${service.title} ${place} | ${servicePrice(service.slug) || 'Free Quote'}`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
+      // Title format (keyword first, then trust; no price in organic titles, Silvia 16 Nov 2026): fits Google's ~60 characters.
+      title: [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
       metaDescription: page.meta_description || `${service.title} in ${place}.`,
       page, region, service: fullService, parent, place,
       servicePage: servicePage || {},
