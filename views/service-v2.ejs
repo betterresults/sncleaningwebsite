@@ -111,11 +111,22 @@
       <% }); %>
     </article>
     <% if (copy.prices && copy.prices.length) { %>
-    <aside class="s-prices" id="prices" aria-label="<%= name %> prices">
+    <aside class="s-prices<%= copy.prices.some(function (t) { return t.items; }) ? ' s-prices--list' : '' %>" id="prices" aria-label="<%= name %> prices">
       <% copy.prices.forEach(function (t) { %>
         <div class="s-price-card">
           <h3><%= t.title %></h3>
           <% if (t.note) { %><p class="s-price-note"><%= t.note %></p><% } %>
+          <% if (t.items) { %>
+          <ul class="s-price-items">
+            <% t.items.forEach(function (it) { %>
+            <li>
+              <div class="s-price-item-head"><h4><%= it.name %></h4><span class="s-price-item-price"><%= it.price %></span></div>
+              <p><%= it.text %></p>
+            </li>
+            <% }); %>
+          </ul>
+          <% if (t.footer) { %><p class="s-price-footer"><%= t.footer %></p><% } %>
+          <% } else { %>
           <div class="s-table-wrap">
             <table>
               <thead><tr><% t.columns.forEach(function (c) { %><th scope="col"><%= c %></th><% }); %></tr></thead>
@@ -124,6 +135,7 @@
               </tbody>
             </table>
           </div>
+          <% } %>
         </div>
       <% }); %>
       <a href="<%= formSlug ? bookHref(service) : '#quote' %>" class="h-btn h-btn--primary h-btn--block">Get your exact price</a>

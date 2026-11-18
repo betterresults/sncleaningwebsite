@@ -690,6 +690,15 @@
 .s-price-card tbody th { font-weight: 500; color: var(--h-ink); }
 .s-price-card td { font-weight: 700; color: var(--h-primary-dark); white-space: nowrap; }
 .s-price-card tr:last-child th, .s-price-card tr:last-child td { border-bottom: 0; }
+
+.s-prices--list { position: static; }
+.s-price-items { list-style: none; margin: 8px 0 0; padding: 0; }
+.s-price-items li { padding: 14px 0; border-top: 1px solid var(--h-line); }
+.s-price-item-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.s-price-item-head h4 { margin: 0; font-size: 1rem; font-weight: 600; color: var(--h-ink); }
+.s-price-item-price { font-weight: 700; color: var(--h-primary-dark); white-space: nowrap; }
+.s-price-items p { margin: 6px 0 0; font-size: .92rem; line-height: 1.55; color: var(--h-text); }
+.s-price-footer { margin: 4px 0 12px; padding: 12px 14px; border-radius: 12px; background: var(--h-sand, #f6f1e8); font-size: .92rem; line-height: 1.5; color: var(--h-ink); }
 .s-areas { margin-top: clamp(28px, 4vw, 44px); }
 .s-areas h3 { font-family: var(--h-serif); font-weight: 500; font-size: 1.25rem; color: var(--h-ink); margin: 0 0 12px; }
 .s-area-links { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }

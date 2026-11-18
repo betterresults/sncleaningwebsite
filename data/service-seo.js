@@ -115,15 +115,30 @@ module.exports = {
     prices: [
       {
         title: 'Airbnb cleaning prices',
-        note: 'Per cleaner, per hour. Minimum 2 hours a visit. Professional grade cleaning products always included.',
-        columns: ['Type of clean', 'Price per hour'],
-        rows: [
-          ['Check in and check out clean (one property)', '£26'],
-          ['Check in and check out clean (several properties)', '£25'],
-          ['Mid stay clean', '£24'],
-          ['Refresh clean', '£23'],
-          ['Deep clean after a long stay', '£29']
-        ]
+        note: 'Per cleaner, per hour, minimum 2 hours a visit. Professional grade cleaning products always included.',
+        items: [
+          {
+            name: 'Check in and check out clean',
+            price: '£26 per hour',
+            text: 'Your guest has left and the next one is on the way. We clean the whole property, make the beds, reset the bathroom and kitchen, empty the bins and check for anything left behind or damaged, so it is ready for the next guest.'
+          },
+          {
+            name: 'Mid stay clean',
+            price: '£24 per hour',
+            text: 'Your guests are still staying and the property needs freshening up. We clean the bathroom, kitchen and floors, empty the bins and change the bed linen and towels if you leave fresh ones for us.'
+          },
+          {
+            name: 'Refresh clean',
+            price: '£23 per hour',
+            text: 'The property was already cleaned, but it has stood empty for a while or there has been some work done. We go round, dust, do the floors and wipe down the bathroom and kitchen so it is fresh and ready for the next guest.'
+          },
+          {
+            name: 'Deep clean after a long stay',
+            price: '£29 per hour',
+            text: 'Guests have stayed for a longer period and a normal changeover is not enough. We clean top to bottom and spend longer on limescale, kitchen grease, skirting boards and the places a quick clean misses.'
+          }
+        ],
+        footer: 'Several properties? Check in and check out cleans come down to £25 per hour when we look after more than one of your properties.'
       }
     ],
     guide: [
@@ -150,19 +165,7 @@ module.exports = {
       {
         h: 'How much does Airbnb cleaning cost?',
         p: [
-          'You pay by the hour, per cleaner, with a minimum of 2 hours a visit, so a studio or a one bedroom let only pays for the time it needs. A check in and check out clean is £26 an hour for one property, or £25 an hour when we look after several of your properties. A mid stay clean is £24 an hour, a refresh clean £23 an hour and a deep clean after a long stay £29 an hour. Click Get a quote and the booking form shows your exact price before you confirm.'
-        ]
-      },
-      {
-        h: 'Which Airbnb clean do you need?',
-        p: [
-          'Each type of clean fits a different moment in a booking:'
-        ],
-        list: [
-          'Check in and check out clean: the full changeover between one guest leaving and the next arriving. Bathrooms and kitchen cleaned, beds made, floors done, bins emptied and the property checked for anything left behind or damaged.',
-          'Mid stay clean: a clean while guests are still staying on a longer booking. Bathrooms, kitchen and floors are cleaned and bins emptied, and fresh bedding and towels go out if you leave them for us.',
-          'Refresh clean: a lighter clean for a property that is already clean but has been empty for a while. We dust, do the floors and wipe bathrooms and kitchen surfaces so it is fresh for the next guest.',
-          'Deep clean after a long stay: a top to bottom clean after guests have stayed for a longer period, when a normal changeover is not enough. We spend longer on limescale, kitchen grease, skirting boards and the places a quick clean misses.'
+          'You pay by the hour, per cleaner, with a minimum of 2 hours a visit, so a studio or a one bedroom let only pays for the time it needs. The price depends on the type of clean: see the price list for what each one covers. Hosts with several properties pay £25 an hour for check in and check out cleans. Click Get a quote and the booking form shows your exact price before you confirm.'
         ]
       },
       {
