@@ -8,7 +8,7 @@ const FROM_PRICES = {
   'deep-house-cleaning': 'From £27/hour',
   'end-of-tenancy-cleaning': 'From £179',
   'after-builders-cleaning': 'From £179',
-  'airbnb-cleaning': 'From £24/hour',
+  'airbnb-cleaning': 'From £25/hour',
   'carpet-cleaning-services': 'From £49',
   'upholstery-cleaning': 'From £69',
   'mattress-cleaning': 'From £39'
