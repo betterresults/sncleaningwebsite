@@ -85,7 +85,7 @@ module.exports = {
       {
         h: 'What if the agent is not happy with the clean?',
         p: [
-          'Tell us within 7 days through the customer app or WhatsApp and we come back and re clean anything cleaning related that the agent has flagged, free of charge. We allow 7 days because the property is empty and the agent or inventory clerk often needs more than 72 hours to visit and write the report. We aim to come back within 1 to 2 working days, and a re clean is always a priority, so it is often done within 24 hours.'
+          'Tell us within 7 days through the customer app or WhatsApp and we come back and re clean anything cleaning related that the agent has flagged, free of charge. We allow 7 days because the property is empty and the agent or inventory clerk often needs a few days to visit and write the report. We aim to come back within 1 to 2 working days, and a re clean is always a priority, so it is often done within 24 hours.'
         ]
       },
       {
@@ -111,6 +111,21 @@ module.exports = {
     metaTitle: 'Airbnb Cleaning London and Essex | Reliable Changeovers',
     metaDescription:
       'Airbnb and short let cleaning in London and Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
+    // Airbnb price list (Silvia, 18 Nov 2026; matches the Dilvon booking form).
+    prices: [
+      {
+        title: 'Airbnb cleaning prices',
+        note: 'Per cleaner, per hour. Minimum 2 hours a visit. Professional grade cleaning products always included.',
+        columns: ['Type of clean', 'Price per hour'],
+        rows: [
+          ['Check in and check out clean (one property)', '£26'],
+          ['Check in and check out clean (several properties)', '£25'],
+          ['Mid stay clean', '£24'],
+          ['Refresh clean', '£23'],
+          ['Deep clean after a long stay', '£29']
+        ]
+      }
+    ],
     guide: [
       {
         h: 'What is Airbnb cleaning?',
@@ -133,6 +148,31 @@ module.exports = {
         ]
       },
       {
+        h: 'How much does Airbnb cleaning cost?',
+        p: [
+          'You pay by the hour, per cleaner, with a minimum of 2 hours a visit, so a studio or a one bedroom let only pays for the time it needs. A check in and check out clean is £26 an hour for one property, or £25 an hour when we look after several of your properties. A mid stay clean is £24 an hour, a refresh clean £23 an hour and a deep clean after a long stay £29 an hour. Click Get a quote and the booking form shows your exact price before you confirm.'
+        ]
+      },
+      {
+        h: 'Which Airbnb clean do you need?',
+        p: [
+          'Each type of clean fits a different moment in a booking:'
+        ],
+        list: [
+          'Check in and check out clean: the full changeover between one guest leaving and the next arriving. Bathrooms and kitchen cleaned, beds made, floors done, bins emptied and the property checked for anything left behind or damaged.',
+          'Mid stay clean: a clean while guests are still staying on a longer booking. Bathrooms, kitchen and floors are cleaned and bins emptied, and fresh bedding and towels go out if you leave them for us.',
+          'Refresh clean: a lighter clean for a property that is already clean but has been empty for a while. We dust, do the floors and wipe bathrooms and kitchen surfaces so it is fresh for the next guest.',
+          'Deep clean after a long stay: a top to bottom clean after guests have stayed for a longer period, when a normal changeover is not enough. We spend longer on limescale, kitchen grease, skirting boards and the places a quick clean misses.'
+        ]
+      },
+      {
+        h: 'Do you bring cleaning products and equipment?',
+        p: [
+          'Our prices always include the cleaning products. We bring professional grade products to every clean, including our own Limescale Remover, because that is the only way we get the result we want, guest after guest.',
+          'Equipment such as a vacuum and mop can be added on request. Tell us how often you need cleaning and a little about the property first, so we can confirm we can supply it for your property.'
+        ]
+      },
+      {
         h: 'Can you do same day turnovers?',
         p: [
           'Yes. Same day check out to check in turnovers are what this service is built for. Tell us your usual check out and check in times and we plan the clean around them.'
@@ -146,6 +186,10 @@ module.exports = {
       }
     ],
     extraFaqs: [
+      {
+        question: 'How much is an Airbnb cleaner per hour?',
+        answer: 'A check in and check out clean is £26 an hour for one property and £25 an hour if we clean several of your properties. Mid stay cleans are £24, refresh cleans £23 and a deep clean after a long stay £29 an hour. Prices are per cleaner, include professional cleaning products and have a 2 hour minimum.'
+      },
       {
         question: 'Do you clean Airbnb properties in Essex as well as London?',
         answer: 'Yes, we clean short let and Airbnb properties across London and Essex. Enter your postcode in the quote form to check your address.'
