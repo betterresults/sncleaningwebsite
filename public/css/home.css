@@ -607,6 +607,7 @@
   display: inline-flex; align-items: center; padding: 8px 16px; border-radius: 999px;
   background: var(--h-sage); color: var(--h-ink); font-weight: 700; font-size: .95rem;
 }
+.s-price-min { margin: 12px 0 0; font-size: .92rem; color: #d9e5dc; line-height: 1.5; }
 
 .s-often { display: grid; grid-template-columns: 1fr 1.1fr; gap: clamp(28px, 5vw, 72px); align-items: center; }
 .s-often .h-head { margin-bottom: 0; }

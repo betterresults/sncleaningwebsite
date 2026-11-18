@@ -65,6 +65,7 @@
           <p class="h-rating"><span class="h-stars" aria-hidden="true">★★★★★</span> <strong>5.0</strong> on Google reviews</p>
         <% } %>
       </div>
+      <% if (typeof priceNote === 'function' && priceNote(service.slug)) { %><p class="s-price-min"><%= priceNote(service.slug) %></p><% } %>
     </div>
 <%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
   </div>

@@ -14,8 +14,22 @@ const FROM_PRICES = {
   'mattress-cleaning': 'From £39'
 };
 
+// Short note shown next to the from price (Silvia, 18 Nov 2026): carpet,
+// upholstery and mattress use the same machine, so one visit has a £120
+// minimum and customers can combine items from all three to reach it.
+const MACHINE_MINIMUM = 'Minimum visit charge £120. Combine carpets, sofas and mattresses to reach it.';
+const PRICE_NOTES = {
+  'carpet-cleaning-services': MACHINE_MINIMUM,
+  'upholstery-cleaning': MACHINE_MINIMUM,
+  'mattress-cleaning': MACHINE_MINIMUM
+};
+
 function servicePrice(slug) {
   return FROM_PRICES[slug] || null;
 }
 
-module.exports = { FROM_PRICES, servicePrice };
+function priceNote(slug) {
+  return PRICE_NOTES[slug] || null;
+}
+
+module.exports = { FROM_PRICES, PRICE_NOTES, servicePrice, priceNote };

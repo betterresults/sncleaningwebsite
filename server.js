@@ -63,7 +63,7 @@ const jobVideoLib = require('./lib/videos');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
 const { serviceImage, GALLERY } = require('./data/media');
-const { servicePrice } = require('./data/prices');
+const { servicePrice, priceNote } = require('./data/prices');
 
 app.locals.serviceImage = serviceImage;
 // Lets views add schema for what they show (the page itself, the reviews on it).
@@ -87,6 +87,7 @@ app.locals.rs = (src, sizes) => {
   return set ? ` srcset="${set}" sizes="${sizes || '100vw'}"` : '';
 };
 app.locals.servicePrice = servicePrice;
+app.locals.priceNote = priceNote;
 // Blog posts rebuilt at their old WordPress address (/{slug}/) keep it; others live under /blog/.
 const postUrl = (p) => (p.legacy_root ? `/${p.slug}/` : `/blog/${p.slug}`);
 app.locals.postUrl = postUrl;
