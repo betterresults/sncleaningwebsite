@@ -138,7 +138,9 @@
           <% } %>
         </div>
       <% }); %>
+      <% if (!copy.prices.some(function (t) { return t.items; })) { %>
       <a href="<%= formSlug ? bookHref(service) : '#quote' %>" class="h-btn h-btn--primary h-btn--block">Get your exact price</a>
+      <% } %>
     </aside>
     <% } %>
   </div>
