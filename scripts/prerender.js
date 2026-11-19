@@ -275,6 +275,35 @@ function nofollowBooking(html) {
   return html.replace(/<a ((?:(?!rel=)[^>])*?href="https:\/\/app\.sncleaningservices\.co\.uk\/[^"]*"(?:(?!rel=)[^>])*)>/g, '<a rel="nofollow" $1>');
 }
 
+
+// Small area maps draw the whole London and Essex outline but only show a
+// small window of it (viewBox). Paths fully outside that window are invisible,
+// so drop them: same picture, much less HTML (Screpy content ratio, 19 Nov 2026).
+function pathBox(d){
+  const re=/([MmLlHhVvZz])([^MmLlHhVvZz]*)/g; let m,x=0,y=0,sx=0,sy=0,minX=1e9,minY=1e9,maxX=-1e9,maxY=-1e9;
+  while((m=re.exec(d))){const c=m[1];const n=(m[2].match(/-?\d*\.?\d+(?:e-?\d+)?/gi)||[]).map(Number);
+    const pts=[];
+    if(c==='M'||c==='L'){for(let i=0;i+1<n.length;i+=2){x=n[i];y=n[i+1];pts.push([x,y]);} if(c==='M'){sx=x;sy=y;}}
+    else if(c==='m'||c==='l'){for(let i=0;i+1<n.length;i+=2){x+=n[i];y+=n[i+1];pts.push([x,y]);} if(c==='m'){sx=x;sy=y;}}
+    else if(c==='H'){for(const v of n){x=v;pts.push([x,y]);}} else if(c==='h'){for(const v of n){x+=v;pts.push([x,y]);}}
+    else if(c==='V'){for(const v of n){y=v;pts.push([x,y]);}} else if(c==='v'){for(const v of n){y+=v;pts.push([x,y]);}}
+    else if(c==='Z'||c==='z'){x=sx;y=sy;}
+    for(const [a,b] of pts){if(a<minX)minX=a;if(a>maxX)maxX=a;if(b<minY)minY=b;if(b>maxY)maxY=b;}
+  }
+  if(/[^MmLlHhVvZz\d\s,.\-e]/i.test(d)) return null;
+  return [minX,minY,maxX,maxY];
+}
+function cullSvgMaps(html){
+  return html.replace(/<svg viewBox="([-\d.]+) ([-\d.]+) ([-\d.]+) ([-\d.]+)"([^>]*)>([\s\S]*?)<\/svg>/g,(all,vx,vy,vw,vh,attrs,inner)=>{
+    if(inner.length<3000) return all;
+    const X0=+vx,Y0=+vy,X1=X0+ +vw,Y1=Y0+ +vh, pad=Math.max(+vw,+vh)*0.25;
+    const out=inner.replace(/<path([^>]*?) d="([^"]*)"\s*\/>/g,(p,a,d)=>{const b=pathBox(d); if(!b) return p;
+      return (b[2]<X0-pad||b[0]>X1+pad||b[3]<Y0-pad||b[1]>Y1+pad)?'':p;});
+    return `<svg viewBox="${vx} ${vy} ${vw} ${vh}"${attrs}>${out}</svg>`;
+  });
+}
+
+
 async function optimiseCss(html) {
   if (!beasties) return inlineCss(html);
   try {
@@ -358,7 +387,7 @@ async function main() {
         if (status !== 200 && status !== 404) {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
-        writeFile(route.out, nofollowBooking(await optimiseCss(body)));
+        writeFile(route.out, cullSvgMaps(nofollowBooking(await optimiseCss(body))));
         route.images = pageImages(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);
