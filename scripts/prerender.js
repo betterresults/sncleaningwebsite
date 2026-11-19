@@ -248,6 +248,71 @@ function inlineCss(html) {
   });
 }
 
+// Critical CSS (Silvia, 19 Nov 2026: Screpy flagged every page for a low text
+// to HTML ratio because each page carried all 90 KB of our CSS inline). Only
+// the rules a page actually uses are inlined; the full stylesheet loads
+// without blocking the first paint. Falls back to inlining everything.
+let beasties = null;
+try {
+  const Beasties = require('beasties');
+  beasties = new (Beasties.default || Beasties)({
+    path: path.join(__dirname, '..', 'public'),
+    publicPath: '/',
+    preload: 'media',
+    pruneSource: false,
+    reduceInlineStyles: false,
+    inlineFonts: false,
+    preloadFonts: false,
+    compress: true,
+    keyframes: 'critical',
+    logLevel: 'silent',
+  });
+} catch (e) { beasties = null; }
+
+// Booking forms on app.sncleaningservices.co.uk are not pages for Google or
+// site crawlers: mark links to them nofollow.
+function nofollowBooking(html) {
+  return html.replace(/<a ((?:(?!rel=)[^>])*?href="https:\/\/app\.sncleaningservices\.co\.uk\/[^"]*"(?:(?!rel=)[^>])*)>/g, '<a rel="nofollow" $1>');
+}
+
+async function optimiseCss(html) {
+  if (!beasties) return inlineCss(html);
+  try {
+    const versions = {};
+    let doc = html.replace(/<link rel="stylesheet" href="\/css\/([a-z0-9-]+\.css)\?v=([^"]*)"\s*\/?>/g, (tag, file, v) => {
+      versions[file] = v;
+      return `<link rel="stylesheet" href="/css/${file}">`;
+    });
+    if (!Object.keys(versions).length) return html;
+    // style.css + home.css as ONE file, so the late full stylesheet keeps the
+    // same cascade order as the inlined critical rules.
+    if (versions['style.css'] && versions['home.css']) {
+      const cssDir = path.join(__dirname, '..', 'public', 'css');
+      const combined = path.join(cssDir, 'site-home.css');
+      if (!fs.existsSync(combined) || !optimiseCss.combinedDone) {
+        fs.writeFileSync(combined, fs.readFileSync(path.join(cssDir, 'style.css'), 'utf8') + '\n' + fs.readFileSync(path.join(cssDir, 'home.css'), 'utf8'));
+        optimiseCss.combinedDone = true;
+      }
+      doc = doc.replace('<link rel="stylesheet" href="/css/style.css">', '<link rel="stylesheet" href="/css/site-home.css">')
+               .replace('<link rel="stylesheet" href="/css/home.css">', '');
+      versions['site-home.css'] = versions['home.css'];
+      delete versions['style.css']; delete versions['home.css'];
+    }
+    // Match rules that depend on the js class set before first paint.
+    doc = doc.replace(/<html lang="en">/, '<html lang="en" class="js" data-crit-js>');
+    let out = await beasties.process(doc);
+    out = out.replace(/<html lang="en" class="js" data-crit-js[^>]*>/, '<html lang="en">');
+    for (const [file, v] of Object.entries(versions)) {
+      out = out.split(`href="/css/${file}"`).join(`href="/css/${file}?v=${v}"`);
+    }
+    if (!/<style>/.test(out)) return inlineCss(html);
+    return out;
+  } catch (e) {
+    console.warn('Critical CSS failed, inlining full CSS:', e.message);
+    return inlineCss(html);
+  }
+}
+
 // Every page is published at /{path}/ (with the slash), which is the address in
 // the sitemap and the canonical tag. Links written as /{path} make Google go
 // through a 301 first and see two versions of each page. After the build, point
@@ -293,7 +358,7 @@ async function main() {
         if (status !== 200 && status !== 404) {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
-        writeFile(route.out, inlineCss(body));
+        writeFile(route.out, nofollowBooking(await optimiseCss(body)));
         route.images = pageImages(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);

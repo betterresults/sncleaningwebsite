@@ -17,7 +17,7 @@
     <% if (answer.youtube_id) { %>
       <div class="qa-video">
         <button type="button" class="qa-play" data-yt="<%= answer.youtube_id %>" aria-label="Play video: <%= answer.video_title || answer.question %>">
-          <img src="https://i.ytimg.com/vi/<%= answer.youtube_id %>/hqdefault.jpg" alt="" width="480" height="360" loading="lazy" decoding="async" />
+          <img src="https://i.ytimg.com/vi/<%= answer.youtube_id %>/hqdefault.jpg" alt="<%= answer.video_title || answer.question %>" width="480" height="360" loading="lazy" decoding="async" />
           <span class="qa-play-icon" aria-hidden="true"></span>
         </button>
       </div>
