@@ -1,0 +1,43 @@
+<%# "Recent cleans in <area>" (Silvia, 18 Nov 2026). Shows only when recentCleans has at least one real video.
+    Videos load only when tapped (thumbnail first, no YouTube script at page start). %>
+<% if (typeof recentCleans !== 'undefined' && recentCleans && recentCleans.length) { %>
+<section class="h-section h-white" id="recent-cleans">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">Filmed on our jobs</p>
+      <h2 class="h-title">Recent cleans in <%= place %></h2>
+    </div>
+    <div class="jv-grid">
+      <% recentCleans.forEach(function (v) { %>
+        <figure class="jv-card">
+          <button type="button" class="jv-play" data-yt="<%= v.youtube_id %>" aria-label="Play video: <%= v.title %>">
+            <img src="https://i.ytimg.com/vi/<%= v.youtube_id %>/oar2.jpg" onerror="this.onerror=null;this.src='https://i.ytimg.com/vi/<%= v.youtube_id %>/hqdefault.jpg'" alt="<%= v.title %>" loading="lazy" decoding="async" width="270" height="480" />
+            <span class="jv-icon" aria-hidden="true"></span>
+          </button>
+          <figcaption>
+            <span class="jv-meta"><%= [v.town, v.district, v.month].filter(Boolean).join(' · ') %></span>
+            <strong><%= v.title %></strong>
+            <% if (v.description) { %><span class="jv-desc"><%= v.description.length > 140 ? v.description.slice(0, 137).replace(/\s+\S*$/, '') + '…' : v.description %></span><% } %>
+            <% if (v.caseStudyUrl) { %><a class="jv-case" href="<%= v.caseStudyUrl %>">Read the case study</a><% } %>
+          </figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>
+<script>
+(function(){
+  document.querySelectorAll('.jv-play[data-yt]').forEach(function(b){
+    if (b.dataset.bound) return; b.dataset.bound = '1';
+    b.addEventListener('click', function(){
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.yt + '?autoplay=1&rel=0';
+      f.title = b.getAttribute('aria-label').replace('Play video: ', '');
+      f.allow = 'accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true; f.className = 'jv-frame';
+      b.replaceWith(f);
+    });
+  });
+})();
+</script>
+<% } %>

@@ -887,8 +887,11 @@ async function renderArea(req, res, next, areaSlug) {
     // The general team video is no longer shown on area pages (Silvia, 11 Nov 2026); job videos show instead.
     const video = null;
 const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJobVideos(), service.slug, page.postcodes), service.slug, service.title);
+    const recentCleans = jobVideoLib.recentCleans(await content.getJobVideos(), page.postcodes, place,
+      areaJobVideos.videos.map((v) => v.id), editorContent.editorPosts('case').filter((c) => !c.noindex));
         return res.render('area-v2', {
       jobVideos: areaJobVideos,
+      recentCleans,
       mapLink,
       mapCopy,
       mini,
@@ -913,7 +916,8 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
         schema.buildBreadcrumbList(crumbs),
         schema.buildServiceAreaPage({ service, page, region }),
         ...(faq ? [faq] : []),
-        ...jobVideoLib.buildVideoSchema(areaJobVideos.videos)
+        ...jobVideoLib.buildVideoSchema(areaJobVideos.videos),
+        ...jobVideoLib.buildVideoSchema(recentCleans)
       ]
     });
   }
