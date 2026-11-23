@@ -7652,6 +7652,323 @@ package = "netlify-plugin-cache"
   to = "/end-of-tenancy-cleaning/westminster/"
   status = 301
 
+# Retired old WordPress URLs with no documented external backlink (Dana, 23 Nov 2026).
+# 410 Gone, body is /404.html. No force. Trailing-slash only, same style as the 826 301s above.
+# Backlink sources and the empty 301 list: docs in the SEO 410 PR / dana/redirects.
+# Must stay ABOVE the final /* 404 rule. Separate from the 301s so this can be rolled back on its own.
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/account/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/after-builders-cleaning/after-builders-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-hainault/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-woodford/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-seven-kings/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-location/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/henry/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/sinsip-2014gmail-com/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/info43a730c976c/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/williamnormal66gmail-com/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/basket/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/change/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/checkout-3/"
+  to = "/404.html"
+  status = 410
+
+# Cloudflare email-protection artefact; not a page
+[[redirects]]
+  from = "/cdn-cgi/l/email-protection/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/cleaners-login/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/coming-soon/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/costumer-login/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/costumer-sign-up/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/deep-house-cleaning/deep-house-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/domestic-cleaning/domestic-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/elementor-support-test/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/draft-end-of-tenancy-cleaning-location-2/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/draft-end-of-tenancy-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/forgot/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/live-chat/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/log-in/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/login/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-eleven/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-five/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-nine/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-four/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-eight/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-seven/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-six/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-one/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-three/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-two/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-twelve/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-ten/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/profile/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/register-2/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/reset/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/register/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/shop/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/tests/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you__trashed/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/whatsapp/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/users/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/user-list-item/"
+  to = "/404.html"
+  status = 410
+
 
 [[redirects]]
   from = "/*"
