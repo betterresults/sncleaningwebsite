@@ -20,7 +20,41 @@ function mergeBlogPosts(remote) {
   );
 }
 
-async function getServices() {
+// One in-memory copy of each list for a single prerender process. A new build
+// is a new process, so it always reads Supabase again at the start. Nothing is
+// written to disk. npm start and Netlify Functions leave PRERENDER unset and
+// stay live; NETLIFY=true alone must not turn this on (functions set that).
+let contentCacheFetches = 0;
+
+function memo(fn) {
+  let stored = false;
+  let value;
+  let pending = null;
+  return function memoized() {
+    if (process.env.PRERENDER !== '1') return fn();
+    if (stored) return Promise.resolve(value);
+    if (!pending) {
+      contentCacheFetches += 1;
+      pending = Promise.resolve()
+        .then(fn)
+        .then((result) => {
+          value = result;
+          stored = true;
+          return result;
+        })
+        .finally(() => {
+          pending = null;
+        });
+    }
+    return pending;
+  };
+}
+
+function contentCacheFetchCount() {
+  return contentCacheFetches;
+}
+
+const getServices = memo(async function getServices() {
   const { data, error } = await supabase
     .from('services')
     .select('*')
@@ -32,9 +66,9 @@ async function getServices() {
     return [];
   }
   return data || [];
-}
+});
 
-async function getServicePages() {
+const getServicePages = memo(async function getServicePages() {
   const { data, error } = await supabase
     .from('service_pages')
     .select('*, services(*)')
@@ -45,24 +79,14 @@ async function getServicePages() {
     return [];
   }
   return data || [];
-}
+});
 
 async function getServicePageBySlug(slug) {
-  const { data, error } = await supabase
-    .from('service_pages')
-    .select('*, services(*)')
-    .eq('slug', slug)
-    .eq('published', true)
-    .maybeSingle();
-
-  if (error) {
-    console.error('Error fetching service page:', error.message);
-    return null;
-  }
-  return data;
+  const pages = await getServicePages();
+  return pages.find((p) => p.slug === slug) || null;
 }
 
-async function getBlogPosts() {
+const getBlogPosts = memo(async function getBlogPosts() {
   const { data, error } = await supabase
     .from('blog_posts')
     .select('*')
@@ -74,28 +98,18 @@ async function getBlogPosts() {
     return publishedLocalPosts();
   }
   return mergeBlogPosts(data);
-}
+});
 
 async function getBlogPostBySlug(slug) {
-  const { data, error } = await supabase
-    .from('blog_posts')
-    .select('*')
-    .eq('slug', slug)
-    .eq('published', true)
-    .maybeSingle();
-
-  if (error) {
-    console.error('Error fetching blog post:', error.message);
-  }
-  if (data) return data;
-  return publishedLocalPosts().find((p) => p.slug === slug) || null;
+  const posts = await getBlogPosts();
+  return posts.find((p) => p.slug === slug) || publishedLocalPosts().find((p) => p.slug === slug) || null;
 }
 
 // Sitewide business info (name, phone, address, hours, socials), a single
 // editable row instead of hardcoded values in server.js. Falls back to null
 // (never throws) so a Supabase hiccup can't take the whole site down; the
 // caller in server.js has hardcoded defaults for that case.
-async function getSiteSettings() {
+const getSiteSettings = memo(async function getSiteSettings() {
   const { data, error } = await supabase.from('site_settings').select('*').maybeSingle();
 
   if (error) {
@@ -103,13 +117,13 @@ async function getSiteSettings() {
     return null;
   }
   return data;
-}
+});
 
 // The flat "Areas We Cover" list, London boroughs and Essex districts
 // (level = 'borough'; these are also the shapes on the coverage map). Specific local areas nested under one of these (e.g.
 // Shenfield under Essex - Brentwood) are surfaced separately by
 // getFeaturedAreaGroups() below instead of duplicated in this list.
-async function getCoverageAreas() {
+const getCoverageAreas = memo(async function getCoverageAreas() {
   const { data, error } = await supabase
     .from('coverage_regions')
     .select('name')
@@ -122,11 +136,11 @@ async function getCoverageAreas() {
     return [];
   }
   return (data || []).map((r) => r.name);
-}
+});
 
 // Every coverage region including sub-areas, used internally to resolve a
 // sub-area's parent borough name (id, name, parent_id only, not the display list).
-async function getAllCoverageRegions() {
+const getAllCoverageRegions = memo(async function getAllCoverageRegions() {
   const { data, error } = await supabase.from('coverage_regions').select('id, name, display_name, parent_id, level');
 
   if (error) {
@@ -134,14 +148,14 @@ async function getAllCoverageRegions() {
     return [];
   }
   return data || [];
-}
+});
 
 // Every published area page belongs to exactly one service (area_pages.service_id)
 // and one region (area_pages.region_id), this is what lets each service build
 // its own set of borough/area pages (/end-of-tenancy-cleaning/camden/,
 // /airbnb-cleaning/hillingdon/, ...) instead of one generic area page shared
 // across every service.
-async function getAreaPages() {
+const getAreaPages = memo(async function getAreaPages() {
   const { data, error } = await supabase
     .from('area_pages')
     .select('*, coverage_regions(id, name, display_name, parent_id, level), services(id, title, slug, icon, short_description)')
@@ -152,25 +166,15 @@ async function getAreaPages() {
     return [];
   }
   return data || [];
-}
+});
 
 // Looks up one area page by its service AND area slug together, e.g.
 // serviceSlug="end-of-tenancy-cleaning", areaSlug="camden" for
 // /end-of-tenancy-cleaning/camden/. Both must match the same row.
+// Published rows only, which getAreaPages already returns.
 async function getAreaPageBySlug(serviceSlug, areaSlug) {
-  const { data, error } = await supabase
-    .from('area_pages')
-    .select('*, coverage_regions(id, name, display_name, parent_id, level), services!inner(id, title, slug, icon, short_description)')
-    .eq('slug', areaSlug)
-    .eq('services.slug', serviceSlug)
-    .eq('published', true)
-    .maybeSingle();
-
-  if (error) {
-    console.error('Error fetching area page:', error.message);
-    return null;
-  }
-  return data;
+  const pages = await getAreaPages();
+  return pages.find((ap) => ap.slug === areaSlug && ap.services && ap.services.slug === serviceSlug) || null;
 }
 
 // All published area pages for one service (used on that service's detail
@@ -212,9 +216,7 @@ async function getFeaturedAreaGroups() {
 
 
 // Before and after job videos (YouTube). Rows: public.job_videos (see docs/VIDEOS.md).
-let _videosCache = null;
-async function getJobVideos() {
-  if (_videosCache) return _videosCache;
+const getJobVideos = memo(async function getJobVideos() {
   const { data, error } = await supabase
     .from('job_videos')
     .select('*')
@@ -225,14 +227,11 @@ async function getJobVideos() {
     console.error('Error fetching job videos:', error.message);
     return [];
   }
-  _videosCache = data || [];
-  return _videosCache;
-}
+  return data || [];
+});
 
 // Questions answered on the website. Rows: public.faq_answers (published only).
-let _faqCache = null;
-async function getFaqAnswers() {
-  if (_faqCache) return _faqCache;
+const getFaqAnswers = memo(async function getFaqAnswers() {
   const { data, error } = await supabase
     .from('faq_answers')
     .select('*')
@@ -243,11 +242,11 @@ async function getFaqAnswers() {
     console.error('Error fetching questions:', error.message);
     return [];
   }
-  _faqCache = data || [];
-  return _faqCache;
-}
+  return data || [];
+});
 
 module.exports = {
+  contentCacheFetchCount,
   getFaqAnswers,
   getJobVideos,
   getServices,

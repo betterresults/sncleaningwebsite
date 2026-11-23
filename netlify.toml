@@ -5,6 +5,11 @@
 [functions]
   directory = "netlify/functions"
 
+[[plugins]]
+package = "netlify-plugin-cache"
+  [plugins.inputs]
+  paths = ["public/images/_r"]
+
 # Security headers for every page (Screpy audit, 16 Nov 2026). frame-ancestors only stops other sites
 # from showing our pages inside their own; it does not limit our own scripts, forms or embeds.
 [[headers]]
