@@ -1,3 +1,7 @@
+// Turns on the in-memory content cache in data/content.js. Must run before
+// server.js (and content.js) load. Unset for `npm start` and Netlify Functions.
+process.env.PRERENDER = '1';
+
 /**
  * Pre-renders every route of the Express/EJS app to static HTML files in /dist,
  * and copies /public assets alongside them. This lets the site deploy to Netlify
@@ -412,6 +416,7 @@ async function main() {
       console.error('Prerender failed:', err);
       process.exitCode = 1;
     } finally {
+      console.log(`Content cache: ${content.contentCacheFetchCount()} unique Supabase list fetches`);
       server.close();
     }
   });
