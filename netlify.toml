@@ -3497,6 +3497,4479 @@ package = "netlify-plugin-cache"
   to = "/end-of-tenancy-cleaning/westminster/"
   status = 301
 
+# Old WordPress URLs still returning 404 (Search Console / Otto's list, 23 Nov 2026), added by Dana (SEO).
+# Each points to the closest live page (verified 200, single hop). Map + reasons: redirect-map.csv in the PR.
+# No force: only applies when no page exists at that address. Must stay ABOVE the final /* 404 rule.
+
+# Bark profile links
+[[redirects]]
+  from = "/carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/oven-cleaning-london/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+# after-builders-cleaning-<place>
+[[redirects]]
+  from = "/after-builders-cleaning-barking-and-dagenham/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-brent/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-bromley/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-camden/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-croydon/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-ealing/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-haringey/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-lambeth/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-london/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-merton/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-newham/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-southwark/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-tower-hamlets/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-wandsworth/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning-westminster/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+# after-builders-cleaning/<place>
+[[redirects]]
+  from = "/after-builders-cleaning/Bromley/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/after-builders-cleaning/Lambeth/"
+  to = "/after-builders-cleaning/london/"
+  status = 301
+
+# airbnb-cleaning/<place>
+[[redirects]]
+  from = "/airbnb-cleaning/camden/"
+  to = "/airbnb-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/merton/"
+  to = "/airbnb-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/airbnb-cleaning/tower-hamlets/"
+  to = "/airbnb-cleaning/london/"
+  status = 301
+
+# area/*
+[[redirects]]
+  from = "/area/bakers-arms/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/balham/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bankside/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/barking-and-dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/barnet/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/area/basildon/"
+  to = "/domestic-cleaning/basildon/"
+  status = 301
+
+[[redirects]]
+  from = "/area/battersea/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bayswater/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/beckton/"
+  to = "/end-of-tenancy-cleaning/beckton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/beddington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/belgravia/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/belmont/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bermondsey/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bethnal-green/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bexley/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/area/blackwall/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/borough/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bow/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/brent/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area/brentwood/"
+  to = "/domestic-cleaning/essex/brentwood/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bromley-by-bow/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/bromley/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/area/camberwell/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/cambridge-heath/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/camden/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/area/canary-wharf/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/cann-hall/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/canning-town/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/carshalton-beeches/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/carshalton-on-the-hill/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/carshalton/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/cheam/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/chingford-hatch/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/chingford-mount/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/chingford/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/cubitt-town/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/custom-house/"
+  to = "/end-of-tenancy-cleaning/custom-house/"
+  status = 301
+
+[[redirects]]
+  from = "/area/dulwich/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/ealing/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/area/earlsfield/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/east-dulwich/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/east-ham/"
+  to = "/end-of-tenancy-cleaning/east-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/east-smithfield/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/elephant-and-castle/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/enfield/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/area/fish-island/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/forest-gate/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/furzedown/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/globe-town/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/greenwich/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hackbridge/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hackney/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hammersmith-and-fulham/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/haringey/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/area/harrow/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/area/havering/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area/highams-park/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hounslow/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/area/hyde-park/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/isle-of-dogs/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/islington/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/area/kensington-and-chelsea/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area/kingston/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/area/knightsbridge/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/area/lambeth/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/lewisham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/leyton/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/leytonstone/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/limehouse/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/lisson-grove/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/little-ilford/"
+  to = "/end-of-tenancy-cleaning/little-ilford/"
+  status = 301
+
+[[redirects]]
+  from = "/area/little-woodcote/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/london/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/area/maida-vale/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/manor-park/"
+  to = "/end-of-tenancy-cleaning/manor-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area/maryland/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/marylebone/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/mayfair/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/merton/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/mile-end/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/millbank/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/millwall/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/newham/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/newington/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/nine-elms/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/north-cheam/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/north-woolwich/"
+  to = "/end-of-tenancy-cleaning/north-woolwich/"
+  status = 301
+
+[[redirects]]
+  from = "/area/nunhead/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/area/old-ford/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/paddington/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/pimlico/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/plaistow/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/poplar/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/putney/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/queens-park/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/area/ratcliff/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area/richmond/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/area/roehampton/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/romford/"
+  to = "/domestic-cleaning/romford/"
+  status = 301
+
+[[redirects]]
+  from = "/area/rose-hill/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/shadwell/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/silvertown/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/soho/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/south-beddington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/south-hornchurch/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area/southfields/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/st-helier/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/st-jamess/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/st-johns-wood/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/stepney/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/stratford/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/sutton-common/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/sutton/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/tooting-bec/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/tooting/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/tower-hamlets/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/upminster-bridge/"
+  to = "/end-of-tenancy-cleaning/havering/upminster-bridge/"
+  status = 301
+
+[[redirects]]
+  from = "/area/upminster/"
+  to = "/domestic-cleaning/upminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/upper-walthamstow/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/upton-park/"
+  to = "/end-of-tenancy-cleaning/upton-park/"
+  status = 301
+
+[[redirects]]
+  from = "/area/victoria/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/wallington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/area/waltham-forest/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/walthamstow-village/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/walthamstow/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/wandsworth/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/wapping/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/wennington/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/area/west-ham/"
+  to = "/end-of-tenancy-cleaning/west-ham/"
+  status = 301
+
+[[redirects]]
+  from = "/area/west-hill/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/area/westbourne-green/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/westminster/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/area/whipps-cross/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/area/whitechapel/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/area/worcester-park/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+# author
+[[redirects]]
+  from = "/author/snclean2022/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/author/support/"
+  to = "/about/"
+  status = 301
+
+# booking
+[[redirects]]
+  from = "/book-after-building-cleaning/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/book-airbnb-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/airbnb-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/book-carpet-cleaning-online/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/carpet-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/book-carpet-upholstery-and-mattress-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/carpet-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/book-domestic-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/book-end-of-tenancy-cleaning-service/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/book-now/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing"
+  status = 301
+
+[[redirects]]
+  from = "/book-online-domestic-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning-london/book-online/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/book-online/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning"
+  status = 301
+
+[[redirects]]
+  from = "/quote-deep-cleaning/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/quote-end-of-tenancy-cleaning/"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning"
+  status = 301
+
+# borough/*
+[[redirects]]
+  from = "/borough/barking-and-dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/barnet/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/bexley/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/brent/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/bromley/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/camden/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/croydon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/ealing/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/enfield/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/greenwich/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/hackney/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/hammersmith-and-fulham/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/haringey/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/harrow/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/havering/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/hillingdon/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/hounslow/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/islington/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/kensington-and-chelsea/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/kingston/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/lambeth/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/lewisham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/merton/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/newham/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/redbridge/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/richmond/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/southwark/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/sutton/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/tower-hamlets/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/waltham-forest/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/wandsworth/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/borough/westminster/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+# carpet-cleaning-services/<place>
+[[redirects]]
+  from = "/carpet-cleaning-services/barking-and-dagenham/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/barnet/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/brent/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/camden/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/enfield/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/greenwich/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/hackney/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/haringey/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/hillingdon/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/hounslow/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/islington/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/kensington-and-chelsea/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/kingston/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/lewisham/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/richmond/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/waltham-forest/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning-services/westminster/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+# carpet-cleaning/<place>
+[[redirects]]
+  from = "/carpet-cleaning/Bromley/"
+  to = "/carpet-cleaning-services/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Camden/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Islington/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Lambeth/"
+  to = "/carpet-cleaning-services/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/carpet-cleaning/Wandsworth/"
+  to = "/carpet-cleaning-services/wandsworth/"
+  status = 301
+
+# commercial
+[[redirects]]
+  from = "/addressing-allergies-cleaning-strategies-for-nurseries/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/book-online-office-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/commercial-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-cleaning-london-deep-or-regular-cleaning-carpet-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/commercial-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/creating-a-healthier-learning-environment-through-school-cleaning-in-the-uk/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/gallery-cat/commercial/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/commercial-cleaning-service-2/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/commercial-cleaning-service/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/commercial-cleaning-services/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-evaluate-and-choose-a-commercial-cleaning-company/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/need-office-cleaning-london/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/nursery-cleaning-a-guide-to-safe-and-natural-products/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/office-cleaning-checklists-a-comprehensive-guide/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/office-deep-cleaning-when-and-why-its-necessary/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/school-cleaning-protocols-for-flu-season/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-benefits-of-green-cleaning-in-commercial-spaces/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-cost-benefit-analysis-of-professional-office-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-essentials-of-nursery-kitchen-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-importance-of-air-quality-in-nursery-cleaning/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+[[redirects]]
+  from = "/the-role-of-cleaning-in-preventing-school-borne-illnesses/"
+  to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
+  status = 301
+
+# date-archive
+[[redirects]]
+  from = "/2020/07/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2021/05/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2022/04/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2022/05/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2022/11/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/02/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/03/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/06/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/11/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/2023/12/"
+  to = "/blog/"
+  status = 301
+
+# deep-house-cleaning/<place>
+[[redirects]]
+  from = "/deep-house-cleaning/brent/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/bromley/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/camden/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/hackney/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/hounslow/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/richmond/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/sutton/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/tower-hamlets/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning/wandsworth/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+# domestic-cleaning/<place>
+[[redirects]]
+  from = "/domestic-cleaning/barking-and-dagenham/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/bexley/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/ealing/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/enfield/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/greenwich/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/hackney/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/hillingdon/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/redbridge/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/redbridge/dusting-services/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/redbridge/vacuum-cleaning-services/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/wandsworth/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning/westminster/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+# end-of-tenancy-cleaning/<place>
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/barking/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/beam-park/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/becontree-heath/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/castle-green/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/chadwell-heath/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/barking-and-dagenham/rush-green/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/canary-wharf/"
+  to = "/end-of-tenancy-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/canning-town/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/east-london/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/forest-gate/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/gidea-park-rm2/"
+  to = "/end-of-tenancy-cleaning/havering/gidea-park/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/hackney/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/hammersmith-and-fulham/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/harold-hill-rm3/"
+  to = "/end-of-tenancy-cleaning/havering/harold-hill/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/harold-wood-rm3/"
+  to = "/end-of-tenancy-cleaning/havering/harold-wood/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/gallows-corner/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/harold-park/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/noak-hill/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/north-ockendon/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/south-hornchurch-2/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/south-hornchurch/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/havering/wennington/"
+  to = "/end-of-tenancy-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/heath-park-rm2/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/kingston/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/maryland/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/north-london/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/plaistow/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/redbridge/ilford/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/redbridge/loxford/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/redbridge/snaresbrook/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/redbridge/south-woodford/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/rise-park-rm1/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/silvertown/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/stratford/"
+  to = "/end-of-tenancy-cleaning/newham/"
+  status = 301
+
+# gallery
+[[redirects]]
+  from = "/gallery-cat/appartment/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery-cat/residential/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/apartment-cleaning-service-2/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/apartment-cleaning-service-3/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/apartment-cleaning-service/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/residential-cleaning-service-2/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/residential-cleaning-service-3/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/residential-cleaning-service-4/"
+  to = "/gallery/"
+  status = 301
+
+[[redirects]]
+  from = "/gallery/residential-cleaning-service/"
+  to = "/gallery/"
+  status = 301
+
+# location/*
+[[redirects]]
+  from = "/location/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/location/alperton/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/location/anerley/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bakers-arms/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/balham/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bankside/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/barking-and-dagenham/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/barnet/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/location/battersea/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bayswater/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bayswater/2/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/beckenham/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/beddington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/belgravia/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bell-green/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bellingham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bellingham/2/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/belmont/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/belsize-park/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bermondsey/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bethnal-green/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bexley/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bickley/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/biggin-hill/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/blackwall/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bloomsbury/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/borough/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bow/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/brent/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/location/brixton/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/brockley/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bromley-by-bow/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/bromley/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/brondesbury-park/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/location/brondesbury/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/location/camberwell/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/camden-town/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/camden/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/canary-wharf/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/cann-hall/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/carshalton-on-the-hill/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/carshalton/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/catford/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chalk-farm/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/cheam/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chelsfield/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chingford-hatch/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chingford-mount/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chingford/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/chislehurst/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/clapham/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/coney-hall/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/covent-garden/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/crofton-park/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/croydon-7/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/crystal-palace/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/cubitt-town/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/dartmouth-park/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/denmark-hill/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/deptford/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/downe/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/downham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/dulwich/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/dulwich/2/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/earlsfield/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/east-dulwich/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/east-smithfield/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/elephant-and-castle/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/elmers-end/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/enfield/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/location/farnborough/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/fish-island/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/fitzrovia/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/forest-gate/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/forest-hill/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/furzedown/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/gipsy-hill/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/globe-town/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/gospel-oak/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/green-street-green/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/green-street-green/2/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/greenwich/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/location/grove-park/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hackbridge/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hackney/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hammersmith-and-fulham/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hampstead/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hamsey-green/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/haringey/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/location/harrow/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/location/havering/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/location/herne-hill/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/highams-park/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/highams-park/2/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/highams-park/3/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/highgate/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hillingdon/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hither-green/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/holborn/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/honor-oak/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hounslow-5/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/location/hyde-park/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/isle-of-dogs/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/islington/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kenley/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kennington/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kensington-and-chelsea/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kentish-town/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/keston/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kings-cross-2/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/kingston/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/location/knightsbridge/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/location/ladywell/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/ladywell/2/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lambeth/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lee/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lewisham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lewisham/2/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/leyton/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/leytonstone/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/limehouse/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lisson-grove/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/little-woodcote/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/locksbottom/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/locksbottom/2/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/locksbottom/3/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/london/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/location/loughborough-junction/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/lower-sydenham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/maida-vale/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/marylebone/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/mayfair/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/merton/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/mile-end/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/millbank/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/millwall/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/monks-orchard/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/mottingham/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/new-addington/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/new-cross/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/newham/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/newington/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/nine-elms/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/norbury/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/north-cheam/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/norwood-new-town/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/norwood/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/nunhead/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/old-coulsdon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/old-ford/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/orpington/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/oval/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/paddington/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/penge/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/perry-vale/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/petts-wood/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/pimlico/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/pollards-hill/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/poplar/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/pratts-bottom/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/primrose-hill/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/purley/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/putney/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/queens-park/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/location/ratcliff/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/richmond/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/location/roehampton/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/rose-hill/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/sanderstead/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/selhurst/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/selsdon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/shadwell/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/shirley/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/shortlands/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/soho/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/somers-town/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/south-beddington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/south-croydon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/south-norwood/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/southend/"
+  to = "/domestic-cleaning/southend-on-sea/"
+  status = 301
+
+[[redirects]]
+  from = "/location/southfields/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/southwark-7/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/location/spitalfields/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-giles/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-helier/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-jamess/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-johns-wood/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-johns/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-mary-cray/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-pancras/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/st-pauls-cray/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/stepney/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/stockwell/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/streatham/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/sundridge/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/sutton-common/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/sutton/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/swiss-cottage/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/sydenham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/telegraph-hill/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/thornton-heath/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/tooting-bec/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/tooting/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/tower-hamlets/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/tufnell-park/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/location/tulse-hill/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/upper-norwood/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/upper-sydenham/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/location/upper-walthamstow/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/vauxhall/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/victoria/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/waddon/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/wallington/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/waltham-forest/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/walthamstow-village/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/walthamstow-village/2/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/walthamstow/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/wandsworth/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/wapping/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/west-hampstead/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/location/west-hill/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/location/west-wickham/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/location/westbourne-green/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/westminster/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/location/whipps-cross/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/location/whitechapel/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/location/woodcote/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/location/woodside/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/location/worcester-park/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+# old-blog
+[[redirects]]
+  from = "/2021/05/29/what-does-end-of-tenancy-cleaning-mean/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/5-common-mistakes-to-avoid-in-end-of-tenancy-cleaning/"
+  to = "/end-of-tenancy-cleaning-cleaning-yourself-vs-professional-services/"
+  status = 301
+
+[[redirects]]
+  from = "/allergy-proof-your-home-with-these-cleaning-tips/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/why-you-should-hire-professional-cleaners-when-you-are-moving-out/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/child-safe-methods-for-cleaning-carpets/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/choosing-the-right-carpet-cleaning-products/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaner-air-at-home-reducing-indoor-pollution/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cost-effective-carpet-cleaning-solutions/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/dealing-with-pet-stains-a-carpet-owners-guide/"
+  to = "/expert-tips-for-removing-tough-stains-from-carpets/"
+  status = 301
+
+[[redirects]]
+  from = "/debunking-common-myths-about-carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/decluttering-strategies-for-a-cleaner-home/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-cleaning-your-home-a-step-by-step-guide/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning-what-is-it/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/dos-and-donts-of-carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/economical-cleaning-tips-for-keeping-your-home-clean/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/effective-cleaning-strategies-after-guest-departure/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/effective-techniques-for-drying-carpets-post-cleaning/"
+  to = "/how-to-prevent-mold-under-the-wet-carpet/"
+  status = 301
+
+[[redirects]]
+  from = "/effective-ways-to-remove-odours-from-carpets/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/efficient-cleaning-hacks-for-the-time-starved/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/ensuring-safety-and-hygiene-in-your-holiday-rentals/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/expert-tips-for-tackling-tough-stains-in-your-home/"
+  to = "/expert-tips-for-removing-tough-stains-from-carpets/"
+  status = 301
+
+[[redirects]]
+  from = "/five-essential-benefits-of-booking-professional-cleaning-when-moving-out/"
+  to = "/end-of-tenancy-cleaning-cleaning-yourself-vs-professional-services/"
+  status = 301
+
+[[redirects]]
+  from = "/green-carpet-cleaning-solutions-for-your-home/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/how-much-does-end-of-tenancy-cleaning-cost/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-clean-your-home-faster-and-more-efficiently/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-get-old-urine-smell-out-of-carpet/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-get-your-security-deposit-back-a-tenants-guide-to-end-of-tenancy-cleaning/"
+  to = "/can-a-landlord-charge-for-end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-manage-and-train-cleaning-staff-for-holiday-lets/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-protect-your-newly-sanded-floors-from-scratches-and-dents/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-renovate-a-wooden-staircase/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-sand-a-wood-deck-before-refinishing/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/how-to-select-a-house-cleaning-and-commercial-cleaning-service/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/leveraging-technology-for-efficient-cleaning-in-holiday-lets/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/maintaining-your-carpet-dos-and-donts/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/mastering-daily-cleaning-a-guide-for-busy-households/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/maximising-space-organisational-tips-for-small-homes/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/maximizing-cleanliness-ratings-for-your-london-airbnb/"
+  to = "/how-cleanliness-ratings-impact-guest-reviews-and-how-to-improve-them/"
+  status = 301
+
+[[redirects]]
+  from = "/organic-options-for-cleaning-your-carpets/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/prepping-your-home-for-special-occasions-cleaning-tips/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/preventative-measures-to-keep-your-carpet-clean/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/seasonal-guide-to-carpet-care-and-maintenance/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/speed-cleaning-secrets-for-quick-and-effective-results/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/streamlining-cleaning-processes-for-your-holiday-let/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-benefits-of-steam-cleaning-your-carpets/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/the-comprehensive-after-builders-cleaning-checklist-for/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/the-importance-of-autumn-gutter-cleaning-in-london-why-you-shouldnt-ignore-it/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/the-ultimate-guide-to-moving-out-cleaning-beyond-end-of-tenancy/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/time-for-spring-cleaning-use-these-tips-from-the-professionals/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/tips-for-extending-the-lifespan-of-your-carpets/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/top-10-reasons-you-should-hire-professional-commercial-and-residential-cleaners/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/top-cleaning-hacks-every-tenant-should-know-before-moving-out/"
+  to = "/end-of-tenancy-cleaning-cleaning-yourself-vs-professional-services/"
+  status = 301
+
+[[redirects]]
+  from = "/whats-end-of-tenancy-cleaning/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/when-to-hire-a-professional-carpet-cleaner/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/why-professional-carpet-cleaning-can-save-you-money-in-the-long-run/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/your-seasonal-cleaning-checklist-a-year-round-guide/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+# old-page
+[[redirects]]
+  from = "/blog-2/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/blog/category/end-of-tenancy-cleaning/"
+  to = "/blog/"
+  status = 301
+
+[[redirects]]
+  from = "/booking-terms-and-conditions/"
+  to = "/terms-and-conditions/"
+  status = 301
+
+[[redirects]]
+  from = "/cancellation-policy/"
+  to = "/terms-and-conditions/"
+  status = 301
+
+[[redirects]]
+  from = "/choose-cleaning-services/"
+  to = "/our-services/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_about_us/how-it-works/"
+  to = "/why-us/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_about_us/some-words/"
+  to = "/about/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_about_us/with-us/"
+  to = "/why-us/"
+  status = 301
+
+[[redirects]]
+  from = "/contact-us/"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/contacts/"
+  to = "/contact/"
+  status = 301
+
+# old-service-slug
+[[redirects]]
+  from = "/carpet-cleaning-london/"
+  to = "/carpet-cleaning-services/london/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/after-renovation/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/apartment-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/house-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/move-in-move-out/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/cleaning_services/residential-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-cleaning/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/deep-house-cleaning-london/"
+  to = "/deep-house-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/domestic-cleaning-london/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-badgers-dene-rm17/"
+  to = "/end-of-tenancy-cleaning/essex/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-croydon/"
+  to = "/end-of-tenancy-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-faqs/"
+  to = "/end-of-tenancy-cleaning/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-london/"
+  to = "/end-of-tenancy-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning-services/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/fag/"
+  to = "/end-of-tenancy-cleaning/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/fag/end-of-tenancy-cleaning/"
+  to = "/end-of-tenancy-cleaning/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/faqs/"
+  to = "/end-of-tenancy-cleaning/faq/"
+  status = 301
+
+[[redirects]]
+  from = "/hard-floor/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/holiday-let-cleaning/"
+  to = "/airbnb-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/new-house-cleaning-services/"
+  to = "/deep-house-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/our-services/book-online/"
+  to = "/our-services/"
+  status = 301
+
+[[redirects]]
+  from = "/post-construction-cleaning/"
+  to = "/after-builders-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/professional-carpet-cleaning/"
+  to = "/carpet-cleaning-services/"
+  status = 301
+
+[[redirects]]
+  from = "/residential-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/house-cleaning/"
+  to = "/domestic-cleaning/"
+  status = 301
+
+[[redirects]]
+  from = "/services/property-cleaning/"
+  to = "/end-of-tenancy-cleaning/"
+  status = 301
+
+# postcodes/*
+[[redirects]]
+  from = "/postcodes/br1/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/br2/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/br3/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/br5/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/br6/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/br7/"
+  to = "/domestic-cleaning/bromley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr0/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr2/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr4/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr5/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr7/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/cr8/"
+  to = "/domestic-cleaning/croydon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da14/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da15/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da16/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da17/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da5/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da6/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/da7/"
+  to = "/end-of-tenancy-cleaning/bexley/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e1/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e10/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e11/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e12/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e13/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e14/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e15/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e16/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e17/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e18/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e1w/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e2/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e20/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e3/"
+  to = "/domestic-cleaning/tower-hamlets/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e4/"
+  to = "/domestic-cleaning/waltham-forest/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e6/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e7/"
+  to = "/domestic-cleaning/newham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e8/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/e9/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/en1/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/en2/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/en3/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/en4/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha0/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha1/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha2/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha3/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha4/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha5/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha7/"
+  to = "/domestic-cleaning/harrow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha8/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ha9/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig1/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig2/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig3/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig4/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig5/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig6/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ig8/"
+  to = "/end-of-tenancy-cleaning/redbridge/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt1/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt2/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt3/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt5/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt6/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/kt9/"
+  to = "/domestic-cleaning/kingston/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n1/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n10/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n11/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n12/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n14/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n15/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n16/"
+  to = "/domestic-cleaning/london/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n17/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n18/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n19/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n2/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n20/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n21/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n22/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n3/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n4/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n5/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n7/"
+  to = "/domestic-cleaning/islington/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n8/"
+  to = "/domestic-cleaning/haringey/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/n9/"
+  to = "/end-of-tenancy-cleaning/enfield/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw1/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw10/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw11/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw2/"
+  to = "/domestic-cleaning/brent/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw3/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw4/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw5/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw6/"
+  to = "/domestic-cleaning/camden/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw7/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw8/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/nw9/"
+  to = "/domestic-cleaning/barnet/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm1/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm10/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm11/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm12/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm2/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm3/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm4/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm5/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm7/"
+  to = "/domestic-cleaning/havering/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm8/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/rm9/"
+  to = "/end-of-tenancy-cleaning/barking-and-dagenham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se1/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se10/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se11/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se13/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se14/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se15/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se16/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se17/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se18/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se21/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se22/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se23/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se24/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se26/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se27/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se3/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se4/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se5/"
+  to = "/domestic-cleaning/southwark/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se6/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se7/"
+  to = "/end-of-tenancy-cleaning/greenwich/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/se8/"
+  to = "/domestic-cleaning/lewisham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm1/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm2/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm3/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm4/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm5/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sm6/"
+  to = "/domestic-cleaning/sutton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw1/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw10/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw12/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw13/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw14/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw15/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw16/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw17/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw18/"
+  to = "/end-of-tenancy-cleaning/wandsworth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw19/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw2/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw20/"
+  to = "/domestic-cleaning/merton/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw3/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw4/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw5/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw7/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw8/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/sw9/"
+  to = "/domestic-cleaning/lambeth/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw1/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw10/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw2/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw3/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw4/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw5/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw7/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw8/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/tw9/"
+  to = "/domestic-cleaning/richmond/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub1/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub10/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub2/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub3/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub4/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub5/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub6/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub7/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/ub8/"
+  to = "/end-of-tenancy-cleaning/hillingdon/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w1/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w10/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w11/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w12/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w13/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w14/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w2/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w3/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w4/"
+  to = "/domestic-cleaning/hounslow/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w5/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w6/"
+  to = "/domestic-cleaning/hammersmith-and-fulham/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w7/"
+  to = "/end-of-tenancy-cleaning/ealing/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w8/"
+  to = "/domestic-cleaning/kensington-and-chelsea/"
+  status = 301
+
+[[redirects]]
+  from = "/postcodes/w9/"
+  to = "/end-of-tenancy-cleaning/westminster/"
+  status = 301
+
+# Retired old WordPress URLs with no documented external backlink (Dana, 23 Nov 2026).
+# 410 Gone, body is /404.html. No force. Trailing-slash only, same style as the 826 301s above.
+# Backlink sources and the empty 301 list: docs in the SEO 410 PR / dana/redirects.
+# Must stay ABOVE the final /* 404 rule. Separate from the 301s so this can be rolled back on its own.
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/account/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/after-builders-cleaning/after-builders-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-hainault/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-woodford/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-in-seven-kings/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/area/draft-location/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/henry/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/sinsip-2014gmail-com/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/info43a730c976c/"
+  to = "/404.html"
+  status = 410
+
+# WordPress author archive for a personal/spam account; no equivalent
+[[redirects]]
+  from = "/author/williamnormal66gmail-com/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/basket/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/change/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/checkout-3/"
+  to = "/404.html"
+  status = 410
+
+# Cloudflare email-protection artefact; not a page
+[[redirects]]
+  from = "/cdn-cgi/l/email-protection/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/cleaners-login/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/coming-soon/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/costumer-login/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/costumer-sign-up/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/deep-house-cleaning/deep-house-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/domestic-cleaning/domestic-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/elementor-support-test/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/draft-end-of-tenancy-cleaning-location-2/"
+  to = "/404.html"
+  status = 410
+
+# unpublished WordPress draft/template page
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/draft-end-of-tenancy-cleaning-location/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/forgot/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/live-chat/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/log-in/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/login/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-eleven/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-five/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-nine/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-four/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-eight/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-seven/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-six/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-one/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-three/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-two/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-twelve/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress coupon post; no live offer page, and pointing at offers could imply prices/offers not confirmed
+[[redirects]]
+  from = "/our_coupons/coupon-ten/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/profile/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/register-2/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/reset/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/register/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/shop/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/tests/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you__trashed/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# old form/payment result page; should not be indexed
+[[redirects]]
+  from = "/thank-you/payment-unsuccessful/"
+  to = "/404.html"
+  status = 410
+
+# test/utility page; no content
+[[redirects]]
+  from = "/whatsapp/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/users/"
+  to = "/404.html"
+  status = 410
+
+# old WordPress account/shop/login function; no equivalent, nothing to rank
+[[redirects]]
+  from = "/user-list-item/"
+  to = "/404.html"
+  status = 410
+
+
 [[redirects]]
   from = "/*"
   to = "/404.html"
