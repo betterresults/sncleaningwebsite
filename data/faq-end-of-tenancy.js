@@ -36,7 +36,8 @@ module.exports = {
         {
           q: 'Is oven cleaning included?',
           top: true,
-          a: "No, it's an optional extra. Professional internal kitchen appliance cleaning, including the oven, can be added when you book, and it's priced by the size of the oven. You see the price before you confirm."
+          links: [{ text: 'Oven prices', url: '/end-of-tenancy-cleaning/prices/#extras' }],
+          a: "Yes, we clean the oven as part of the service. You choose your oven type when you book, because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. That way nobody pays for an oven they don't have."
         },
         {
           q: 'Is carpet cleaning included?',
@@ -80,10 +81,10 @@ module.exports = {
         },
         {
           q: 'How many cleaners will come?',
-          a: 'We work in teams. For a studio or one bedroom we may send one cleaner. For two or three bedrooms we send two cleaners, sometimes three for a larger three bedroom home, and for four bedrooms or more usually three.'
+          a: 'A furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Two or three bedroom homes usually get two cleaners, sometimes three for a larger home, and four bedrooms or more usually three.'
         },
         { q: 'How far ahead should I book?', a: 'Whenever suits you. You can book up to around six months ahead.' },
-        { q: 'Do you do same day or weekend cleans?', a: 'Yes, we clean at weekends and can do same day cleans. Just get in touch.' },
+        { q: 'Do you do same day or weekend cleans?', a: 'Yes, we clean at weekends and can do same day cleans. Same day and Sunday cleans are £50 extra. Just get in touch.' },
         {
           q: "How do you get the keys if I've already moved out?",
           a: "We can collect and return the keys from your office, a neighbour or another place nearby. Within one mile of the property it's free, up to three miles is £15 and up to five miles is £25. If the keys are further away, get in touch first."
@@ -96,6 +97,7 @@ module.exports = {
         {
           q: 'How much does an end of tenancy clean cost?',
           top: true,
+          links: [{ text: 'Full end of tenancy price list and calculator', url: '/end-of-tenancy-cleaning/prices/' }],
           a: 'From £179. The exact price depends on the size of the property, mainly the number of bedrooms and bathrooms, and what you need. You see it before you book through Get a quote. Extras such as oven cleaning and carpet cleaning are added only if you choose them.'
         },
         {

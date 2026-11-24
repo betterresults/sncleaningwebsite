@@ -66,6 +66,7 @@
         <% } %>
       </div>
       <% if (typeof priceNote === 'function' && priceNote(service.slug)) { %><p class="s-price-min"><%= priceNote(service.slug) %></p><% } %>
+      <% if (service.slug === 'end-of-tenancy-cleaning') { %><p class="s-price-min"><a href="/end-of-tenancy-cleaning/prices/" style="color:inherit;text-decoration:underline">See every price and work out yours</a></p><% } %>
     </div>
 <%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
   </div>

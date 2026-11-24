@@ -531,6 +531,31 @@ app.locals.serviceFaqTeaser = (slug) => {
 };
 app.locals.liveServiceFaqs = () =>
   Object.entries(SERVICE_FAQS).filter(([, e]) => e.live).map(([slug, e]) => ({ url: `/${slug}/faq/`, title: e.data.title }));
+// End of tenancy prices page (Silvia, 24 Nov 2026): the one page with prices per home size and per extra.
+app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
+  const prices = require('./data/eot-prices');
+  const url = '/end-of-tenancy-cleaning/prices';
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'End of Tenancy Cleaning', url: '/end-of-tenancy-cleaning' },
+    { name: 'Prices', url }
+  ];
+  res.render('eot-prices', {
+    title: 'End of Tenancy Cleaning Prices: Price List and Calculator',
+    metaDescription:
+      'End of tenancy cleaning prices for every flat and house size in London and Essex, worked examples, a calculator, extras, times and team sizes. No VAT added.',
+    p: prices,
+    breadcrumbs,
+    designV2: true,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildPriceListService({ prices, url }),
+      schema.buildFaqPage([...prices.sizeAnswers, ...prices.faqs].map((i) => ({ question: i.q, answer: i.a })))
+    ]
+  });
+});
+
 app.get('/:serviceSlug/faq', (req, res, next) => {
   const entry = SERVICE_FAQS[req.params.serviceSlug];
   if (!entry) return next();

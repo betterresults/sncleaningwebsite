@@ -1,0 +1,255 @@
+<%# End of tenancy prices page (/end-of-tenancy-cleaning/prices/). Data: data/eot-prices.js. Styles: public/css/eot-prices.css.
+    The only page that shows prices per property size and per extra (Silvia, 24 Nov 2026). The calculator is a small inline
+    script with no network requests; the whole price list is also on the page as plain HTML tables, so it works without it. %>
+<link rel="stylesheet" href="/css/eot-prices.css?v=<%= assetVersion %>" />
+<%
+  const money = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+  const book = bookUrl('end-of-tenancy-cleaning');
+%>
+<div class="ep">
+
+<header class="ep-hero"><div class="ep-wrap">
+  <p class="ep-eyebrow">Prices checked <%= p.checkedOn %> · London and Essex</p>
+  <h1>End of tenancy cleaning prices</h1>
+  <p class="ep-answer">A furnished two bedroom flat costs <strong>£275</strong> for an end of tenancy clean with SN Cleaning Services. Add a single oven and it's <strong>£324</strong>. Empty, the same flat is <strong>£229</strong>. Your price is the size of your home, how furnished it is, and what it actually has, like a second bathroom, the oven or blinds. Nothing is hidden and there is no VAT to add.</p>
+  <p class="ep-answer-sub">Every price includes the team, all products and equipment, every room cleaned from top to bottom, our deposit back guarantee and a free re clean within 7 days.</p>
+  <a href="#calculator" class="h-btn h-btn--primary">Work out your price</a>
+  <ul class="ep-facts">
+    <li><b>7,549</b> end of tenancy cleans in 12 years</li>
+    <li><b>5.0</b> on Google reviews</li>
+    <li><b>Same price</b> in London and Essex</li>
+    <li><b>Own team</b> trained, insured and DBS checked</li>
+  </ul>
+</div></header>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>How we price an end of tenancy clean, and why</h2>
+  <p class="ep-intro">Most companies give you one number for "a two bed". We don't, because two homes with the same number of bedrooms can be very different jobs. A tenant with blinds on every window, a double oven and two bathrooms shouldn't pay the same as someone with none of that. So you pay for three things, and only those.</p>
+  <div class="ep-three">
+    <div class="ep-card"><span class="ep-num">1</span><h3>The size of your home</h3><p>Flat or house, and how many bedrooms. A house costs a little more than a flat with the same bedrooms, because of the stairs and landings and because houses are usually bigger. One bathroom is always included.</p></div>
+    <div class="ep-card"><span class="ep-num">2</span><h3>How furnished it is</h3><p>Empty, part furnished or furnished. Furniture is cleaned inside, on top and underneath, and moved so we can clean behind it. That takes more time, so a furnished home always gets at least two cleaners.</p></div>
+    <div class="ep-card"><span class="ep-num">3</span><h3>What your home has</h3><p>A second bathroom, the oven, blinds, a balcony. These are all part of the service. You tick what your home has so we know how long to plan for, and you never pay for things you don't have.</p></div>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand" id="calculator"><div class="ep-wrap">
+  <h2>Work out your end of tenancy price</h2>
+  <p class="ep-intro">Pick your home below. This is the price for the clean itself; carpets, sofas, waste removal and other extras are listed further down and you can add them in the booking form.</p>
+  <form class="ep-calc" id="ep-calc" data-prices="<%= JSON.stringify({ flats: p.flats.map(f => [f.key, f.prices]), houses: p.houses.map(h => [h.key, h.prices]), bath: p.extraRooms[0].prices, ovens: p.ovens.map(o => [o.key, o.price]), extra: p.sameDaySunday }) %>">
+    <fieldset><legend>Type of home</legend>
+      <label><input type="radio" name="type" value="flat" checked> Flat</label>
+      <label><input type="radio" name="type" value="house"> House</label>
+    </fieldset>
+    <label class="ep-field">Bedrooms
+      <select name="beds">
+        <option value="0">Studio</option><option value="1">1 bedroom</option><option value="2" selected>2 bedrooms</option><option value="3">3 bedrooms</option><option value="4">4 bedrooms</option><option value="5">5 bedrooms</option><option value="6">6 bedrooms</option>
+      </select>
+    </label>
+    <label class="ep-field">Bathrooms
+      <select name="baths"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
+    </label>
+    <fieldset><legend>Furniture</legend>
+      <label><input type="radio" name="furn" value="0"> Unfurnished</label>
+      <label><input type="radio" name="furn" value="1"> Part furnished</label>
+      <label><input type="radio" name="furn" value="2" checked> Furnished</label>
+    </fieldset>
+    <label class="ep-field">Oven
+      <select name="oven"><% p.ovens.forEach(function (o) { %><option value="<%= o.key %>"<%= o.key === 'single' ? ' selected' : '' %>><%= o.label %><%= o.price ? ' (' + money(o.price) + ')' : '' %></option><% }); %></select>
+    </label>
+    <label class="ep-check"><input type="checkbox" name="rush"> Same day or Sunday clean (+<%= money(p.sameDaySunday) %>)</label>
+    <output class="ep-result" for="ep-calc" aria-live="polite">
+      <span class="ep-result-label">Your price</span>
+      <span class="ep-total" id="ep-total">£324</span>
+      <span class="ep-lines" id="ep-lines">2 bedroom flat, furnished £275 · Single oven £49</span>
+    </output>
+    <a class="h-btn h-btn--primary ep-book" href="<%= book %>">Book this clean</a>
+    <p class="ep-small">The booking form uses the same prices and adds any extras you choose. Congestion Charge and parking, where they apply in London, are added on top.</p>
+  </form>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>Prices for every size of home</h2>
+  <p class="ep-intro">Short answers to the question we're asked most. One and two bedroom flats are the homes we clean most often, and when it's a house, it's usually a three bed.</p>
+  <h3 class="ep-sub">Flats</h3>
+  <div class="ep-answers">
+    <% p.sizeAnswers.filter(function (s) { return !/^house/.test(s.key); }).forEach(function (s) { %>
+      <article class="ep-qa" id="<%= s.key %>"><h3><%= s.q %></h3><p><%= s.a %></p></article>
+    <% }); %>
+  </div>
+  <h3 class="ep-sub">Houses</h3>
+  <div class="ep-answers">
+    <% p.sizeAnswers.filter(function (s) { return /^house/.test(s.key); }).forEach(function (s) { %>
+      <article class="ep-qa" id="<%= s.key %>"><h3><%= s.q %></h3><p><%= s.a %></p></article>
+    <% }); %>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand" id="price-list"><div class="ep-wrap">
+  <h2>Full end of tenancy price list</h2>
+  <p class="ep-intro">Prices for the whole home with one bathroom, the kitchen and the living area. No VAT is added. <a href="/files/sn-cleaning-services-end-of-tenancy-price-list.pdf" download>Download the price list (PDF)</a> to save or send to your landlord or agent.</p>
+  <div class="ep-tables">
+    <% [['Flats', p.flats], ['Houses', p.houses]].forEach(function (t) { %>
+    <div class="ep-table-card">
+      <table>
+        <caption><%= t[0] %></caption>
+        <thead><tr><th scope="col">Home</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
+        <tbody><% t[1].forEach(function (r) { %><tr><th scope="row"><%= r.label %></th><% r.prices.forEach(function (v) { %><td><%= money(v) %></td><% }); %></tr><% }); %></tbody>
+      </table>
+    </div>
+    <% }); %>
+  </div>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>What people actually pay: worked examples</h2>
+  <p class="ep-intro">The sum, line by line, for some of the most common homes.</p>
+  <div class="ep-receipts">
+    <% p.examples.forEach(function (e) { const total = e.lines.reduce(function (s, l) { return s + l[1]; }, 0); %>
+    <div class="ep-receipt">
+      <h3><%= e.title %></h3>
+      <dl><% e.lines.forEach(function (l) { %><div><dt><%= l[0] %></dt><dd><%= money(l[1]) %></dd></div><% }); %><div class="ep-receipt-total"><dt>Total</dt><dd><%= money(total) %></dd></div></dl>
+      <p><%= e.note %></p>
+    </div>
+    <% }); %>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand" id="extras"><div class="ep-wrap">
+  <h2>Extra rooms, the oven and other extras</h2>
+  <p class="ep-intro">These are part of the service, priced separately so you only pay for what your home has.</p>
+  <div class="ep-tables">
+    <div class="ep-table-card">
+      <table>
+        <caption>Extra rooms</caption>
+        <thead><tr><th scope="col">Room</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
+        <tbody><% p.extraRooms.forEach(function (r) { %><tr><th scope="row"><%= r.label %></th><% r.prices.forEach(function (v) { %><td><%= money(v) %></td><% }); %></tr><% }); %></tbody>
+      </table>
+    </div>
+    <div class="ep-table-card">
+      <table>
+        <caption>Oven cleaning</caption>
+        <tbody><% p.ovens.filter(function (o) { return o.price; }).forEach(function (o) { %><tr><th scope="row"><%= o.label %></th><td><%= money(o.price) %></td></tr><% }); %></tbody>
+      </table>
+      <p class="ep-small">We clean the oven inside and out as part of the service. The type matters because a single oven takes far less time than a range or an AGA.</p>
+    </div>
+  </div>
+  <div class="ep-extras">
+    <% p.extras.forEach(function (g) { %>
+    <div class="ep-table-card">
+      <table>
+        <caption><%= g.group %></caption>
+        <tbody><% g.items.forEach(function (i) { %><tr><th scope="row"><%= i.label %></th><td><%= money(i.price) %></td></tr><% }); %></tbody>
+      </table>
+      <% if (g.why) { %><p class="ep-small"><%= g.why %></p><% } %>
+    </div>
+    <% }); %>
+  </div>
+  <p class="ep-small ep-center">Same day or Sunday clean: <%= money(p.sameDaySunday) %> extra. London Congestion Charge and parking fees are added on top when they apply.</p>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>How long it takes, and how many cleaners come</h2>
+  <p class="ep-intro">People always ask whether we send one cleaner or a team. A furnished home always gets at least two, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Times depend on the size and the condition of the home.</p>
+  <div class="ep-table-card ep-wide">
+    <table>
+      <thead><tr><th scope="col">Home</th><th scope="col">Cleaners</th><th scope="col">Time on site</th></tr></thead>
+      <tbody><% p.timeGuide.forEach(function (t) { %><tr><th scope="row"><%= t.home %></th><td><%= t.team %></td><td><%= t.hours %></td></tr><% }); %></tbody>
+    </table>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand"><div class="ep-wrap ep-two">
+  <div>
+    <h2>What's included in every end of tenancy clean</h2>
+    <p>Everything inside the home, top to bottom, following a checklist for every room:</p>
+    <ul class="ep-list">
+      <li>Inside every kitchen cupboard and drawer, the fridge, freezer, hob, extractor and microwave</li>
+      <li>Bathrooms cleaned and descaled with our own Limescale Remover</li>
+      <li>Internal windows, window sills and all internal glass</li>
+      <li>Skirting boards, doors, door frames, switches and radiators</li>
+      <li>Marks removed from walls where they will come off</li>
+      <li>Carpets vacuumed and hard floors washed</li>
+      <li>Furniture cleaned inside, on top and underneath in furnished homes</li>
+    </ul>
+  </div>
+  <div>
+    <h2>What isn't included</h2>
+    <ul class="ep-list ep-list--no">
+      <li>Outside windows</li>
+      <li>Washing whole walls (a few marks are fine; a lot of marks costs extra)</li>
+      <li>Professional carpet cleaning, unless you add it (carpets are always vacuumed)</li>
+    </ul>
+    <p>Before we arrive, please make sure the electricity is on, the boiler works for hot water, and the fridge and freezer are switched off. The home needs to be empty of your belongings, and you don't need to be there.</p>
+  </div>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>Real end of tenancy cleans from the last few weeks</h2>
+  <p class="ep-intro">Our cleaners photograph every job. After the clean you get the before and after photos in your account, in folders ready to forward to your letting agent or landlord.</p>
+  <div class="ep-three">
+    <% p.realJobs.forEach(function (j) { %><div class="ep-card"><h3><%= j.area %></h3><p class="ep-small"><%= j.date %></p><p><%= j.text %></p></div><% }); %>
+  </div>
+  <p class="ep-center"><a href="/our-work/">See the before and after photos from our jobs</a> · <a href="/videos/end-of-tenancy-cleaning/">Watch our end of tenancy cleans</a></p>
+</div></section>
+
+<section class="ep-band ep-sand"><div class="ep-wrap">
+  <h2>Guarantees and how payment works</h2>
+  <div class="ep-three">
+    <div class="ep-card"><h3>Show up guarantee</h3><p>Your clean happens on the day you booked. If something outside our control happens, it's done within 12 hours or it's free.</p></div>
+    <div class="ep-card"><h3>Deposit back guarantee</h3><p>It covers everything related to the clean you booked. If the agent or landlord says an area isn't clean enough, we come back and clean it for free.</p></div>
+    <div class="ep-card"><h3>7 day re clean at no extra cost</h3><p>Tell us through your account or on WhatsApp within 7 days, ideally with photos. We aim to come back within 1 to 2 working days, often within 24 hours.</p></div>
+  </div>
+  <p class="ep-intro ep-pay">You add your card when you book. 48 hours before the clean the amount is authorised on your card, and it's only charged once the job is done. Key collection is free within one mile of the property, £15 up to three miles and £25 up to five miles.</p>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>End of tenancy prices: your questions</h2>
+  <div class="h-faq">
+    <% p.faqs.forEach(function (f, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= f.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= f.a %><% if (f.source) { %> Source: <a href="<%= f.source.url %>" rel="noopener" target="_blank"><%= f.source.name %></a>.<% } %></p>
+      </details>
+    <% }); %>
+  </div>
+  <p class="ep-center">More answers on our <a href="/end-of-tenancy-cleaning/faq/">end of tenancy cleaning FAQ</a>, or read about our <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning service</a>.</p>
+  <%- include('partials/author-box') %>
+</div></section>
+
+<section class="ep-band ep-deep"><div class="ep-wrap ep-center">
+  <h2>Get your exact price online</h2>
+  <p>Our booking form uses the same price list. Choose your home and extras, see the total, and book a day that suits you.</p>
+  <a class="h-btn h-btn--light" href="<%= book %>">Get your exact quote</a>
+</div></section>
+
+</div>
+
+<script>
+(function () {
+  var f = document.getElementById('ep-calc'); if (!f) return;
+  var d = JSON.parse(f.getAttribute('data-prices'));
+  var names = ['unfurnished', 'part furnished', 'furnished'];
+  var ovenLabels = {}; Array.prototype.forEach.call(f.oven.options, function (o) { ovenLabels[o.value] = o.text.replace(/ \(.*\)$/, ''); });
+  function m(n) { return '£' + (Math.round(n * 100) % 100 ? n.toFixed(2) : Math.round(n)); }
+  function find(list, key) { for (var i = 0; i < list.length; i++) if (list[i][0] === key) return list[i][1]; }
+  function calc() {
+    var type = f.querySelector('input[name=type]:checked').value;
+    var beds = +f.beds.value;
+    var studio = f.beds.options[0];
+    if (type === 'house') { studio.disabled = true; if (beds === 0) { f.beds.value = '1'; beds = 1; } } else { studio.disabled = false; }
+    var furn = +f.querySelector('input[name=furn]:checked').value;
+    var base = type === 'flat' ? find(d.flats, beds === 0 ? 'studio' : 'flat-' + beds) : find(d.houses, 'house-' + beds);
+    var lines = [], total = base[furn];
+    lines.push((beds === 0 ? 'Studio flat' : beds + ' bedroom ' + type) + ', ' + names[furn] + ' ' + m(base[furn]));
+    var extraBaths = +f.baths.value - 1;
+    if (extraBaths > 0) { var b = d.bath[furn] * extraBaths; total += b; lines.push(extraBaths + ' extra bathroom' + (extraBaths > 1 ? 's' : '') + ' ' + m(b)); }
+    var ov = find(d.ovens, f.oven.value) || 0;
+    if (ov) { total += ov; lines.push(ovenLabels[f.oven.value] + ' ' + m(ov)); }
+    if (f.rush.checked) { total += d.extra; lines.push('Same day or Sunday ' + m(d.extra)); }
+    document.getElementById('ep-total').textContent = m(total);
+    document.getElementById('ep-lines').textContent = lines.join(' · ');
+  }
+  f.addEventListener('change', calc);
+  f.addEventListener('submit', function (e) { e.preventDefault(); });
+})();
+</script>
