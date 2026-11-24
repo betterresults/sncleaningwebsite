@@ -1029,7 +1029,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
 
 // ---------- 404 ----------
 app.use((req, res) => {
-  res.status(404).render('404', { title: 'Page Not Found', noindex: true, structuredData: [] });
+  res.status(404).render('404', { title: 'Page Not Found', noindex: true, omitCanonical: true, structuredData: [] });
 });
 
 // Only start a listening server when run directly (local dev / traditional Node hosting).

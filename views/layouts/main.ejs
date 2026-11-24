@@ -7,7 +7,8 @@
   <title><%= fullTitle %></title>
   <meta name="description" content="<%= (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.' %>" />
   <meta name="ahrefs-site-verification" content="d7b43a6719c01a2342d4f76939b38dcfb906947b35732d3228fa0c9c1dc44212">
-  <link rel="canonical" href="<%= canonicalUrl %>" />
+  <% const showCanonical = !(typeof omitCanonical !== 'undefined' && omitCanonical); /* the 404 page has no address of its own, so it carries no canonical (Bing canonical warning, 24 Nov 2026) */ %>
+  <% if (showCanonical) { %><link rel="canonical" href="<%= canonicalUrl %>" /><% } %>
   <% if (currentPath === '/') { %><script>if(/(invite|recovery|confirmation)_token=/.test(location.hash))location.replace("/admin/"+location.hash);else if(/access_token=|error=access_denied/.test(location.hash)){var b="/dashboard";try{b=localStorage.getItem("sn_login_back")||b;localStorage.removeItem("sn_login_back")}catch(e){}location.replace(b+location.hash)}</script><% } %>
   <% if (typeof noindex !== 'undefined' && noindex) { %>
     <meta name="robots" content="noindex, nofollow" />
@@ -28,7 +29,7 @@
   <meta property="og:site_name" content="<%= site.name %>" />
   <meta property="og:title" content="<%= ogTitle %>" />
   <meta property="og:description" content="<%= ogDesc %>" />
-  <meta property="og:url" content="<%= canonicalUrl %>" />
+  <% if (showCanonical) { %><meta property="og:url" content="<%= canonicalUrl %>" /><% } %>
   <% if (typeof ogImage !== 'undefined' && ogImage) { %>
     <meta property="og:image" content="<%= ogImage %>" />
   <% } %>
