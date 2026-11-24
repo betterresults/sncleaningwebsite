@@ -543,7 +543,7 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
   res.render('eot-prices', {
     title: 'End of Tenancy Cleaning Prices London & Essex | Calculator',
     metaDescription:
-      'End of tenancy cleaning prices for every flat and house size in London and Essex, worked examples, a calculator, extras, times and team sizes. No VAT added.',
+      'End of tenancy cleaning prices for every flat and house size in London and Essex, with a calculator, worked examples, extras and what is included. No VAT added.',
     p: prices,
     breadcrumbs,
     designV2: true,
