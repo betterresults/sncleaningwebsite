@@ -52,7 +52,7 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London and Essex | Deposit Back',
     metaDescription:
-      'End of tenancy cleaning in London and Essex to the checklist letting agents use. Deposit back guarantee, show up guarantee and a 7 day re clean at no extra cost.',
+      'End of tenancy cleaning in London and Essex to the checklist letting agents use, with a deposit back guarantee, show up guarantee and 7 day re clean.',
     prices: [],
     guide: [
       {
@@ -110,7 +110,7 @@ module.exports = {
   'airbnb-cleaning': {
     metaTitle: 'Airbnb Cleaning London and Essex | Reliable Changeovers',
     metaDescription:
-      'Airbnb and short let cleaning in London and Essex. Turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request. Book online.',
+      'Airbnb and short let cleaning in London and Essex: turnovers between guests, beds made, bathrooms and kitchens reset, essentials restocked on request.',
     // Airbnb price list (Silvia, 18 Nov 2026; matches the Dilvon booking form).
     prices: [
       {
@@ -321,7 +321,7 @@ module.exports = {
   'upholstery-cleaning': {
     metaTitle: 'Sofa and Upholstery Cleaning London and Essex | 5★ Rated',
     metaDescription:
-      'Sofa, armchair and upholstery cleaning in London and Essex with products matched to the fabric, by our own trained, insured team. Rated 5.0 on Google. Book online.',
+      'Sofa, armchair and upholstery cleaning in London and Essex with products matched to the fabric, by our own trained, insured team. Rated 5.0 on Google.',
     prices: [],
     guide: [
       {

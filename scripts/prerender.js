@@ -43,7 +43,6 @@ async function buildRoutes() {
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },
     { url: '/why-us', out: 'why-us/index.html', sitemap: true },
     ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true })),
-    { url: '/gallery', out: 'gallery/index.html', sitemap: true },
     { url: '/blog', out: 'blog/index.html', sitemap: true },
     { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true },
     { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true },
@@ -62,8 +61,10 @@ async function buildRoutes() {
 
   // One "all videos" page per service that has at least one job video.
   const jobVideos = await content.getJobVideos();
+  // Listed in the sitemap only when the service page links to it ("View all", shown above 3 videos);
+  // with 3 or fewer the page repeats the service page's own video section (noindex, see server.js).
   const videoRoutes = [...new Set(jobVideos.map((v) => v.service_slug))]
-    .map((slug) => ({ url: `/videos/${slug}`, out: `videos/${slug}/index.html`, sitemap: true }));
+    .map((slug) => ({ url: `/videos/${slug}`, out: `videos/${slug}/index.html`, sitemap: jobVideos.filter((v) => v.service_slug === slug).length > 3 }));
 
   // Questions answered (Supabase public.faq_answers)
   const faqAnswers = await content.getFaqAnswers();
@@ -273,11 +274,8 @@ try {
   });
 } catch (e) { beasties = null; }
 
-// Booking forms on app.sncleaningservices.co.uk are not pages for Google or
-// site crawlers: mark links to them nofollow.
-function nofollowBooking(html) {
-  return html.replace(/<a ((?:(?!rel=)[^>])*?href="https:\/\/app\.sncleaningservices\.co\.uk\/[^"]*"(?:(?!rel=)[^>])*)>/g, '<a rel="nofollow" $1>');
-}
+// Booking form links (app.sncleaningservices.co.uk) are plain links, not nofollow (Ahrefs audit, 24 Nov 2026):
+// nofollow on our own links only wastes link value. Keep booking pages out of Google with noindex on the booking app.
 
 
 // Small area maps draw the whole London and Essex outline but only show a
@@ -391,7 +389,7 @@ async function main() {
         if (status !== 200 && status !== 404) {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
-        writeFile(route.out, cullSvgMaps(nofollowBooking(await optimiseCss(body))));
+        writeFile(route.out, cullSvgMaps(await optimiseCss(body)));
         route.images = pageImages(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);

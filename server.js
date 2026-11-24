@@ -290,7 +290,7 @@ app.get('/blog', async (req, res) => {
 
   res.render('blog/index', {
     title: 'Cleaning Tips & Advice Blog',
-    metaDescription: 'Practical cleaning tips, guides and news from the SN Cleaning Services team.',
+    metaDescription: 'Cleaning guides from the SN Cleaning Services team: carpet stains, mould and damp, end of tenancy, Airbnb turnovers and sharing chores at home.',
     posts,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -482,7 +482,9 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
   res.render('videos', {
     title: `${serviceName} Videos: Before and After From Our Jobs`,
-    metaDescription: `Before and after videos from real ${serviceName.toLowerCase()} jobs by SN Cleaning Services across London and Essex.`,
+    metaDescription: `Before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex.`,
+    // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
+    noindex: allVideos.length <= 3,
     allVideos,
     serviceName,
     serviceSlug: req.params.serviceSlug,
@@ -510,7 +512,7 @@ app.get('/about/silvia-nedeva', (req, res) => {
   res.render('silvia', {
     title: 'Silvia Nedeva, SN Cleaning Services',
     metaDescription:
-      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. Her story and how she trains the team.',
+      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. How she trains the team.',
     breadcrumbs,
     designV2: true,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -541,7 +543,7 @@ app.get('/:serviceSlug/faq', (req, res, next) => {
   res.render('service-faq', {
     title: 'End of Tenancy Cleaning FAQ: Prices, Deposits and More',
     metaDescription:
-      'End of tenancy cleaning questions answered: what is included, the oven, carpets, how long it takes, prices from £179, deposits, the Tenant Fees Act and our guarantees.',
+      'End of tenancy cleaning questions answered: what is included, the oven, carpets, how long it takes, deposits, the Tenant Fees Act and our guarantees.',
     faq,
     breadcrumbs,
     designV2: true,
@@ -582,7 +584,7 @@ app.get('/contact', (req, res) => {
   res.render('contact', {
     title: 'Contact and Customer Support',
     metaDescription:
-      'Contact SN Cleaning Services: book online any time, WhatsApp 7am to 10pm on weekdays, emails answered within 1 hour, and a 7 day re clean guarantee for empty properties.',
+      'Contact SN Cleaning Services: book online any time, WhatsApp 7am to 10pm weekdays, emails answered within 1 hour, 7 day re clean for empty properties.',
     success: false,
     error: null,
     breadcrumbs,

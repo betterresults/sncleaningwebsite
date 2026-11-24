@@ -50,6 +50,11 @@ const pages = {
   "carpet-cleaning-services/london": {"linkPhrases": [{"phrase": "carpet cleaning in the London Borough of Sutton", "href": "/carpet-cleaning-services/sutton/"}]}
 };
 
+// Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
+Object.assign(pages, {
+  "domestic-cleaning/ilford": {"metaDescription": "Domestic cleaning in Ilford: weekly, fortnightly or one off house cleaning in IG1, Gants Hill and Seven Kings by our own DBS checked team. Book online."},
+});
+
 // clusters: groups of neighbouring areas per service (area_pages.slug values). Every page in `pages` is linked first,
 // in the existing "near" link block, from the other members of its cluster, and links first to them (max 7). Slugs that are
 // not published pages for that service are ignored by server.js.

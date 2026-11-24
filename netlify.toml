@@ -1830,15 +1830,33 @@ package = "netlify-plugin-cache"
   status = 301
 
 # Anything else: the 404 page. Must stay LAST.
+# /quote used to go to form.sncleaningservices.co.uk/domestic, which now returns 404 (Ahrefs audit, 24 Nov 2026):
+# send it straight to the domestic booking form in one hop.
 [[redirects]]
   from = "/quote"
-  to = "https://form.sncleaningservices.co.uk/domestic"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/quote/"
-  to = "https://form.sncleaningservices.co.uk/domestic"
+  to = "https://app.sncleaningservices.co.uk/book/sn-cleaning-services/domestic-cleaning"
   status = 301
+  force = true
+
+# /gallery was an old, thin copy of /our-work (same photos idea, title "Our Work", not linked anywhere):
+# one 301 to /our-work/ (Ahrefs audit, 24 Nov 2026). Forced, because an old build may still hold gallery/index.html.
+[[redirects]]
+  from = "/gallery"
+  to = "/our-work/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/gallery/"
+  to = "/our-work/"
+  status = 301
+  force = true
 
 # Search Console verification for the section properties (serves the root file at /<section>/<file>)
 [[redirects]]
@@ -5084,47 +5102,47 @@ package = "netlify-plugin-cache"
 # gallery
 [[redirects]]
   from = "/gallery-cat/appartment/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery-cat/residential/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/apartment-cleaning-service-2/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/apartment-cleaning-service-3/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/apartment-cleaning-service/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/residential-cleaning-service-2/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/residential-cleaning-service-3/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/residential-cleaning-service-4/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 [[redirects]]
   from = "/gallery/residential-cleaning-service/"
-  to = "/gallery/"
+  to = "/our-work/"
   status = 301
 
 # location/*
