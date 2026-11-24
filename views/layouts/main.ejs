@@ -67,7 +67,7 @@
 
   <!-- Structured data -->
   <% if (typeof structuredData !== 'undefined') { %>
-    <% structuredData.concat([schemaWebPage({ url: canonicalUrl, title: fullTitle, description: (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : null, path: currentPath, image: (typeof ogImage !== 'undefined' && ogImage) ? ogImage : null })]).filter(Boolean).forEach(function(block) { %>
+    <% structuredData.concat([schemaWebPage({ url: canonicalUrl, title: fullTitle, description: (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : null, path: currentPath, image: (typeof ogImage !== 'undefined' && ogImage) ? ogImage : null, dateModified: (typeof webPageDateModified !== 'undefined' && webPageDateModified) ? webPageDateModified : null })]).filter(Boolean).forEach(function(block) { %>
       <script type="application/ld+json"><%- JSON.stringify(block) %></script>
     <% }); %>
   <% } %>
