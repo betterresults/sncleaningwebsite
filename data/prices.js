@@ -8,7 +8,9 @@ const FROM_PRICES = {
   'deep-house-cleaning': 'From £27/hour',
   'end-of-tenancy-cleaning': 'From £179',
   'after-builders-cleaning': 'From £179',
-  'airbnb-cleaning': 'From £23/hour',
+  // Airbnb: check in / check out (changeover) clean, £26/hour with products, 2 hour minimum (Dilvon booking form, checked 24 Nov 2026).
+  // Refresh cleans are £23/hour; that is shown in the Airbnb price list, not as the service's from price.
+  'airbnb-cleaning': 'From £26/hour',
   'carpet-cleaning-services': 'From £49',
   'upholstery-cleaning': 'From £69',
   'mattress-cleaning': 'From £39'
