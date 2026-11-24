@@ -116,15 +116,18 @@ const sameDaySunday = 50;
 
 // One short answer per home size (Silvia, 24 Nov 2026: two prices, unfurnished and furnished).
 const sizeAnswers = [
-  { key: 'studio', q: 'How much is an end of tenancy clean for a studio flat?', a: '£179 unfurnished, £199 part furnished and £215 furnished.' },
-  { key: 'flat-1', q: 'How much is an end of tenancy clean for a one bedroom flat?', a: '£205 unfurnished, £225 part furnished and £245 furnished.' },
-  { key: 'flat-2', q: 'How much is an end of tenancy clean for a two bedroom flat?', a: '£229 unfurnished, £249 part furnished and £275 furnished.' },
-  { key: 'flat-3', q: 'How much is an end of tenancy clean for a three bedroom flat?', a: '£275 unfurnished, £299 part furnished and £329 furnished.' },
-  { key: 'flat-4', q: 'How much is an end of tenancy clean for a four bedroom flat?', a: '£319 unfurnished, £349 part furnished and £385 furnished.' },
-  { key: 'house-1', q: 'How much is an end of tenancy clean for a one bedroom house?', a: '£229 unfurnished, £249 part furnished and £275 furnished.' },
-  { key: 'house-2', q: 'How much is an end of tenancy clean for a two bedroom house?', a: '£259 unfurnished, £285 part furnished and £309 furnished.' },
-  { key: 'house-3', q: 'How much is an end of tenancy clean for a three bedroom house?', a: '£305 unfurnished, £335 part furnished and £365 furnished.' },
-  { key: 'house-4', q: 'How much is an end of tenancy clean for a four bedroom house?', a: '£349 unfurnished, £385 part furnished and £439 furnished.' }
+  { key: 'studio', q: 'How much is an end of tenancy clean for a studio flat?', a: "£179 if it's empty and £215 if it's furnished. Furnished costs a bit more because the wardrobe, drawers and bed are cleaned inside and underneath too." },
+  { key: 'flat-1', q: 'How much is an end of tenancy clean for a one bedroom flat?', a: '£205 unfurnished and £245 furnished. One and two bedroom flats are the homes we clean most.' },
+  { key: 'flat-2', q: 'How much is an end of tenancy clean for a two bedroom flat?', a: '£229 unfurnished and £275 furnished. A second bathroom is £35 more, or £42 if the flat is furnished.' },
+  { key: 'flat-3', q: 'How much is an end of tenancy clean for a three bedroom flat?', a: '£275 unfurnished and £329 furnished. Furnished takes longer because every piece of furniture is cleaned inside, on top and underneath.' },
+  { key: 'flat-4', q: 'How much is an end of tenancy clean for a four bedroom flat?', a: '£319 unfurnished and £385 furnished, for everything the letting agent will check.' },
+  { key: 'flat-5', q: 'How much is an end of tenancy clean for a five or six bedroom flat?', a: 'A five bed flat is £359 unfurnished and £429 furnished. A six bed is £399 unfurnished and £479 furnished.' },
+  { key: 'house-1', q: 'How much is an end of tenancy clean for a one bedroom house?', a: '£229 unfurnished and £275 furnished. A little more than a one bed flat, because a house has stairs and a landing and is usually bigger.' },
+  { key: 'house-2', q: 'How much is an end of tenancy clean for a two bedroom house?', a: '£259 unfurnished and £309 furnished. A two bed house is bigger than a two bed flat, with stairs and a landing to clean.' },
+  { key: 'house-3', q: 'How much is an end of tenancy clean for a three bedroom house?', a: "£305 unfurnished and £365 furnished. When we clean a house, it's most often a three bed like this. Many have a second bathroom or toilet, which is added on top." },
+  { key: 'house-4', q: 'How much is an end of tenancy clean for a four bedroom house?', a: '£349 unfurnished and £439 furnished, with all products and equipment included.' },
+  { key: 'house-5', q: 'How much is an end of tenancy clean for a five bedroom house?', a: '£385 unfurnished and £489 furnished, covering every room, the stairs and the landings.' },
+  { key: 'house-6', q: 'How much is an end of tenancy clean for a six bedroom house?', a: '£429 unfurnished and £545 furnished, with the deposit back guarantee and the free 7 day re clean included.' }
 ];
 
 // Time and team guide (Silvia, 24 Nov 2026). Hours are for the whole team on site, not per cleaner.
@@ -142,17 +145,17 @@ const examples = [
   {
     title: 'Furnished 2 bedroom flat, single oven',
     lines: [['2 bedroom flat, furnished', 275], ['Single oven', 49]],
-    note: 'Two cleaners, about 4 to 5 hours.'
+    note: 'One of the cleans we do most.'
   },
   {
     title: 'Empty 1 bedroom flat, nothing extra',
     lines: [['1 bedroom flat, unfurnished', 205]],
-    note: 'One cleaner can do it alone in 4 to 6 hours.'
+    note: 'The size and the furniture are the whole price.'
   },
   {
     title: 'Furnished 3 bedroom house, two bathrooms, double oven, 4 medium blinds',
     lines: [['3 bedroom house, furnished', 365], ['Second bathroom, furnished', 42], ['Double oven', 79], ['4 medium blinds', 48]],
-    note: 'Usually two cleaners, around 6 hours.'
+    note: 'Each extra is only added because the home has it.'
   },
   {
     title: 'Unfurnished 2 bedroom flat, booked for a Sunday',
