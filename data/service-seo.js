@@ -52,7 +52,7 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London and Essex | Deposit Back',
     metaDescription:
-      'End of tenancy cleaning in London and Essex to the checklist letting agents use, with a deposit back guarantee, show up guarantee and 7 day re clean.',
+      'End of tenancy cleaning in London and Essex to the checklist letting agents use, with a deposit back guarantee, show up guarantee and a 7 day re clean.',
     prices: [],
     guide: [
       {

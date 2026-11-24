@@ -34,11 +34,11 @@ const seed = [
   <li>Anything the inventory flagged last time, oven, mould, carpet stains.</li>
   <li>Checkout date, so we book before the clerk, not after.</li>
 </ul>
-<p>We will quote you the same weekday in most cases. There is no online price because two two-bed flats are never the same job.</p>
+<p>To see your price straight away, use our instant price booking form: click <a href="https://app.sncleaningservices.co.uk/book/sn-cleaning-services/end-of-tenancy-cleaning">Get a quote</a>, enter your postcode and email, and the booking form shows your exact price before you confirm.</p>
 <p><a href="/blog/how-we-quote-a-clean/">How we quote a clean</a> explains what happens after you send these details.</p>
 
-<h2>What we will not promise</h2>
-<p>We cannot guarantee a deposit back. That sits with the landlord, the agent and the condition when you moved in. What we can do is a proper clean, and come back free if you or your agent tell us within 7 days that we missed something.</p>
+<h2>Our deposit back guarantee</h2>
+<p>Every end of tenancy clean comes with our deposit back guarantee. It covers everything related to the cleaning you booked. If the agent or landlord isn't happy with an area we cleaned, we come back and clean it again for free. It can't cover services you didn't book: for example, the standard clean includes vacuuming the carpets, so if the agent asks for professional carpet cleaning and it wasn't booked, that isn't covered.</p>
 <p><a href="/end-of-tenancy-cleaning">See what our end of tenancy clean covers</a>, or <a href="/contact">send the postcode and checkout date</a> and we will come back with a price.</p>
 `
   },
@@ -46,22 +46,22 @@ const seed = [
     slug: 'how-we-quote-a-clean',
     title: 'How we quote a clean',
     excerpt:
-      'Send a postcode and what you need. We come back the same weekday with a price, no payment to enquire, no calculator guessing your house.',
+      'See your price in our instant price booking form, or send a postcode and what you need and our team comes back with a quote. No payment to enquire.',
     meta_title: 'How SN Cleaning quotes work | London & Essex',
     meta_description:
-      'How to get a cleaning quote from SN in London and Essex: what to send us, when we reply, and why we do not show an instant online price.',
+      'How to get a cleaning price from SN in London and Essex: our instant price booking form, or what to send our team for a quote and when we reply.',
     cover_image: '/images/hero-living-room.jpg',
     published: true,
     published_at: '2026-09-08T09:00:00.000Z',
     updated_at: '2026-09-08T09:00:00.000Z',
     content: `
-<p>A lot of cleaning sites ask for a few clicks and spit out a number. We do not. Two homes with the same bedroom count can be an hour apart once you see the oven, the limescale and how we get in.</p>
-<p>If you request a quote with SN, you are asking a person on our team, not a form that pretends to know your house.</p>
+<p>The quickest way to see your price is our instant price booking form. Click <a href="https://app.sncleaningservices.co.uk/book/sn-cleaning-services/main-landing">Get a quote</a>, enter your postcode and email, and the booking form shows your exact price before you confirm.</p>
+<p>If you would rather ask a person on our team, send us the details below and we will come back with a quote.</p>
 
 <h2>What to send us</h2>
 <ul>
   <li><strong>Postcode</strong>, so we know it is in London or Essex, or close enough that we can still do it.</li>
-  <li><strong>The job</strong>, regular domestic, end of tenancy, Airbnb changeover, office, deep clean, after builders, carpets.</li>
+  <li><strong>The job</strong>, regular domestic, end of tenancy, Airbnb changeover, deep clean, after builders, carpets.</li>
   <li><strong>Size</strong>, bedrooms, bathrooms, and whether it is a flat or a house.</li>
   <li><strong>How often</strong>, one off, weekly, fortnightly, or a guest turnover.</li>
   <li><strong>Access</strong>, you in, key safe, agent. Stairs, parking, pets if they matter.</li>
@@ -78,7 +78,7 @@ const seed = [
   <li>We bring professional products and kit.</li>
   <li>If we miss something, tell us within 24 hours (7 days for end of tenancy and other empty properties) and we come back and re clean it free.</li>
 </ul>
-<p>Weekly and fortnightly visits are usually less per clean than a one off, because we already know the property. We will put that in the quote rather than hide it behind a “from” price on the homepage.</p>
+<p>Weekly and fortnightly visits are usually less per clean than a one off, because we already know the property. The booking form shows your exact price before you confirm.</p>
 <p>Not sure how often you need us? Read <a href="/blog/weekly-fortnightly-or-one-off/">weekly, fortnightly, or a one off?</a></p>
 <p><a href="/contact">Request a quote</a>, postcode and a line about the property is enough to start.</p>
 `

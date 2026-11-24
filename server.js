@@ -293,7 +293,7 @@ app.get('/blog', async (req, res) => {
     metaDescription: 'Cleaning guides from the SN Cleaning Services team: carpet stains, mould and damp, end of tenancy, Airbnb turnovers and sharing chores at home.',
     posts,
     breadcrumbs,
-    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), schema.buildBlog({ posts, postUrl })]
   });
 });
 
@@ -467,6 +467,7 @@ app.get('/why-us/:slug', async (req, res, next) => {
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
       ...(faqPage ? [faqPage] : []),
+      ...(schema.buildGuideArticle({ page }) ? [schema.buildGuideArticle({ page })] : []),
       ...jobVideoLib.buildVideoSchema(jobVideos.videos)
     ]
   });
@@ -512,7 +513,7 @@ app.get('/about/silvia-nedeva', (req, res) => {
   res.render('silvia', {
     title: 'Silvia Nedeva, SN Cleaning Services',
     metaDescription:
-      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. How she trains the team.',
+      'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. Read how she trains the team.',
     breadcrumbs,
     designV2: true,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -543,7 +544,7 @@ app.get('/:serviceSlug/faq', (req, res, next) => {
   res.render('service-faq', {
     title: 'End of Tenancy Cleaning FAQ: Prices, Deposits and More',
     metaDescription:
-      'End of tenancy cleaning questions answered: what is included, the oven, carpets, how long it takes, deposits, the Tenant Fees Act and our guarantees.',
+      'End of tenancy cleaning questions answered: what is included, the oven, carpets, how long it takes, deposits, the Tenant Fees Act and all our guarantees.',
     faq,
     breadcrumbs,
     designV2: true,
@@ -792,6 +793,7 @@ app.get('/:serviceSlug/:areaSlug', (req, res, next) => renderArea(req, res, next
 
 // Per-page SEO overrides (data/seo-overrides.js). Applied after the CMS row is read, so they survive the daily CMS rewrite.
 const seoOverrides = require('./data/seo-overrides');
+const { guardAirbnbPrices } = require('./lib/price-guard');
 function applyLeadOverride(original, ov) {
   let text = original;
   if (ov && ov.leadFirst && original && !original.startsWith(ov.leadFirst)) {
@@ -821,7 +823,8 @@ function applyPageOverrides(page, ov) {
 }
 
 async function renderArea(req, res, next, areaSlug) {
-  const page = await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug);
+  // Airbnb changeover price corrected after the CMS row is read (lib/price-guard.js), so text and FAQ schema match the booking form.
+  const page = guardAirbnbPrices(await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug));
   if (!page) return next(); // not a real service+area combo — falls through to 404
 
   const region = page.coverage_regions;
