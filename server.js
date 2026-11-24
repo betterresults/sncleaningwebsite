@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const { SITE_URL } = require('./lib/site-config');
 const schema = require('./lib/schema');
 const { isPlaceholderSocial, whatsappHref } = require('./lib/site-helpers');
+const { linkifyInternal, applyLinkPhrasesToPage } = require('./lib/linkify-internal');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -132,6 +133,7 @@ app.locals.bookHref = (service) => {
 // social-share image and structured data that routes can override below.
 app.use(async (req, res, next) => {
   res.locals.currentPath = req.path;
+  res.locals.linkifyInternal = linkifyInternal;
   // Pages are served with a trailing slash (Netlify redirects /x to /x/), so
   // canonicals point at the final URL, not at a redirect.
   res.locals.canonicalUrl = `${SITE_URL}${req.path === '/' || /\.[a-z0-9]+$/i.test(req.path) ? req.path : req.path.replace(/\/?$/, '/')}`;
@@ -807,6 +809,14 @@ function applyLeadOverride(original, ov) {
   }
   return text;
 }
+function applyPageOverrides(page, ov) {
+  if (!ov) return page;
+  let next = page;
+  if (ov.quickAnswer) next = { ...next, quick_answer: ov.quickAnswer };
+  else if (ov.leadFirst || (ov.leadSwap && ov.leadSwap.length)) next = { ...next, quick_answer: applyLeadOverride(next.quick_answer, ov) };
+  if (ov.linkPhrases) next = applyLinkPhrasesToPage(next, ov.linkPhrases);
+  return next;
+}
 
 async function renderArea(req, res, next, areaSlug) {
   const page = await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug);
@@ -931,7 +941,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       title: (ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
       metaDescription: (ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`,
       h1Override: ov && ov.h1 ? ov.h1 : null,
-      page: ov && (ov.leadFirst || (ov.leadSwap && ov.leadSwap.length)) ? { ...page, quick_answer: applyLeadOverride(page.quick_answer, ov) } : page,
+      page: applyPageOverrides(page, ov),
       region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
