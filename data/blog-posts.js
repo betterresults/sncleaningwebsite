@@ -35,6 +35,7 @@ const seed = [
   <li>Checkout date, so we book before the clerk, not after.</li>
 </ul>
 <p>We will quote you the same weekday in most cases. There is no online price because two two-bed flats are never the same job.</p>
+<p><a href="/blog/how-we-quote-a-clean/">How we quote a clean</a> explains what happens after you send these details.</p>
 
 <h2>What we will not promise</h2>
 <p>We cannot guarantee a deposit back. That sits with the landlord, the agent and the condition when you moved in. What we can do is a proper clean, and come back free if you or your agent tell us within 7 days that we missed something.</p>
@@ -78,6 +79,7 @@ const seed = [
   <li>If we miss something, tell us within 24 hours (7 days for end of tenancy and other empty properties) and we come back and re clean it free.</li>
 </ul>
 <p>Weekly and fortnightly visits are usually less per clean than a one off, because we already know the property. We will put that in the quote rather than hide it behind a “from” price on the homepage.</p>
+<p>Not sure how often you need us? Read <a href="/blog/weekly-fortnightly-or-one-off/">weekly, fortnightly, or a one off?</a></p>
 <p><a href="/contact">Request a quote</a>, postcode and a line about the property is enough to start.</p>
 `
   },
@@ -108,6 +110,7 @@ const seed = [
 
 <h2>How we decide with you</h2>
 <p>Tell us the postcode, how the house is used, and what is bothering you. We will quote the job you described, not upsell a package on the page. Recurring visits are discounted against a one off of the same size; the exact figure is in the quote.</p>
+<p><a href="/blog/how-we-quote-a-clean/">How we quote a clean</a> explains what to send us. And if you want the household to share the jobs between visits, see <a href="/getting-the-whole-family-involved-in-cleaning-chores/">getting the whole family involved in cleaning chores</a>.</p>
 <p>Same rules as the rest of SN: own staff, insured, DBS checked, we bring the supplies, and we come back free if we miss something and you tell us within 24 hours.</p>
 <p><a href="/domestic-cleaning">Domestic cleaning</a> · <a href="/deep-house-cleaning">Deep house cleaning</a> · <a href="/contact">Request a quote</a></p>
 `

@@ -51,7 +51,11 @@ module.exports = {
           q: 'Do you clean walls, marks and scuffs?',
           a: "We check the walls and remove marks where we can. Washing whole walls isn't part of the clean, and if there are a lot of marks, removing them is an additional charge."
         },
-        { q: 'Can you clean a property where pets have lived?', a: "Yes, that's fine." },
+        {
+          q: 'Can you clean a property where pets have lived?',
+          a: "Yes, that's fine.",
+          links: [{ text: 'End of tenancy cleaning tips for pet owners', url: '/end-of-tenancy-cleaning-tips-for-pet-owners/' }]
+        },
         {
           q: 'Do you bring your own products and equipment?',
           a: "Yes. Our team brings professional products and equipment, including our own Limescale Remover. You don't need to buy anything."
@@ -153,7 +157,8 @@ module.exports = {
         },
         {
           q: 'Are your cleaners vetted, insured and DBS checked?',
-          a: 'Yes. Every cleaner is part of our own team, trained, insured and DBS checked. We never use subcontractors.'
+          a: 'Yes. Every cleaner is part of our own team, trained, insured and DBS checked. We never use subcontractors.',
+          links: [{ text: 'How to verify an end of tenancy cleaning company before you book', url: '/how-to-verify-the-certification-of-an-end-of-tenancy-cleaning-company/' }]
         },
         { q: 'Do landlords and letting agents book with you too?', a: 'Yes. Tenants, landlords and letting agents can all book.' },
         {
