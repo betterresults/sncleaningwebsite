@@ -61,18 +61,17 @@
 .ep .h-faq{margin-top:12px}
 .ep .author-box{margin-top:32px}
 
-/* Calculator: big tiles, chips and a price panel */
+/* Calculator: every option the same size, each row fills the full width */
 .ep-calc{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
-.ep-steps{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px);display:grid;gap:22px;box-shadow:0 10px 30px rgba(20,48,44,.06)}
+.ep-steps{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px);display:grid;gap:20px;box-shadow:0 10px 30px rgba(20,48,44,.06)}
 .ep-step{border:0;padding:0;margin:0;min-width:0}
 .ep-step legend{font-weight:600;color:var(--ink);font-size:.95rem;margin-bottom:10px;padding:0}
 .ep-calc input[type=radio]{position:absolute;opacity:0;width:1px;height:1px}
-.ep-type{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.ep-big span{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px;border:2px solid var(--line);border-radius:18px;font-weight:600;font-size:1.05rem;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
-.ep-big svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--primary)}
-.ep-opts{display:flex;flex-wrap:wrap;gap:8px}
-.ep-opt span{display:grid;place-items:center;min-width:52px;height:46px;padding:0 14px;border:2px solid var(--line);border-radius:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
-.ep-big:hover span,.ep-opt:hover span{border-color:var(--sage)}
+.ep-opts{display:grid;grid-template-columns:repeat(var(--n,4),minmax(0,1fr));gap:8px}
+.ep-opt{display:block;min-width:0}
+.ep-opt span{display:flex;align-items:center;justify-content:center;gap:8px;height:52px;padding:0 8px;border:2px solid var(--line);border-radius:14px;font-weight:600;font-size:.95rem;color:var(--ink);text-align:center;line-height:1.15;cursor:pointer;transition:border-color .15s,background .15s}
+.ep-opt svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;color:var(--primary)}
+.ep-opt:hover span{border-color:var(--sage)}
 .ep-calc input:checked+span{border-color:var(--primary);background:#e7f1ef;color:var(--primary-dark)}
 .ep-calc input:focus-visible+span{outline:3px solid var(--sage);outline-offset:2px}
 .ep-calc input:disabled+span{opacity:.35;cursor:not-allowed}
@@ -91,7 +90,7 @@
 .ep-price .ep-book{justify-self:stretch;text-align:center}
 .ep-price p{font-size:.85rem;margin:0;color:#c9d8cc}
 @media (max-width:860px){.ep-calc{grid-template-columns:1fr}.ep-price{position:static}}
-
+@media (max-width:600px){.ep-opts[style*="--n:7"]{grid-template-columns:repeat(4,minmax(0,1fr))}.ep-opt span{font-size:.85rem;padding:0 4px}}
 @media (max-width:520px){
   .ep table{font-size:.9rem}
   .ep th,.ep td{padding:8px 6px}
