@@ -547,6 +547,7 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
     p: prices,
     breadcrumbs,
     designV2: true,
+    webPageDateModified: prices.PRICES_LAST_UPDATED,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),

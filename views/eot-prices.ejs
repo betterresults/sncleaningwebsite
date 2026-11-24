@@ -9,8 +9,10 @@
 <div class="ep">
 
 <header class="ep-hero"><div class="ep-wrap">
-  <h1>End of tenancy cleaning prices</h1>
+  <p class="ep-small">Prices last updated <time datetime="<%= p.PRICES_LAST_UPDATED %>"><%= p.pricesUpdatedLabel %></time></p>
+  <h1>End of tenancy cleaning prices in London and Essex</h1>
   <p class="ep-answer">Your price depends on your home: flat or house, the number of bedrooms and bathrooms, and how much furniture is left. Extras like the oven or blinds are added only if your home has them.</p>
+  <p class="ep-answer-sub"><%= p.priceAnswer %></p>
   <form class="ep-calc" id="calculator" data-prices="<%= JSON.stringify({ flats: p.flats.map(f => [f.key, f.prices]), houses: p.houses.map(h => [h.key, h.prices]), bath: p.extraRooms[0].prices, ovens: p.ovens.map(o => [o.key, o.price]), extra: p.sameDaySunday }) %>">
     <div class="ep-steps">
       <fieldset class="ep-step"><legend>Your home</legend>

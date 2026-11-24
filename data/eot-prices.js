@@ -4,6 +4,16 @@
 // When Dilvon prices change, update this file, then regenerate the PDF with scripts/eot-price-pdf.py.
 // Times, team sizes and the pricing explanation come from Silvia (24 Nov 2026). Do not add facts she has not given.
 
+// The only date to change when these prices are refreshed. The "Prices last updated" line
+// and this page's WebPage dateModified both read it. Use a full ISO date (YYYY-MM-DD).
+const PRICES_LAST_UPDATED = '2026-11-24';
+
+function pricesUpdatedLabel(iso) {
+  const [year, month] = iso.split('-').map(Number);
+  const monthName = new Intl.DateTimeFormat('en-GB', { month: 'long', timeZone: 'UTC' }).format(new Date(Date.UTC(year, month - 1, 1)));
+  return `${monthName} ${year}`;
+}
+
 
 // [unfurnished, part furnished, furnished]
 const flats = [
@@ -25,6 +35,43 @@ const houses = [
 ];
 
 const furnishing = ['Unfurnished', 'Part furnished', 'Furnished'];
+
+// Same flats and houses the AggregateOffer uses for lowPrice and highPrice (extras are not included).
+function baseOfferExtremes() {
+  let low = null;
+  let high = null;
+  for (const row of [...flats, ...houses]) {
+    row.prices.forEach((price, furnIndex) => {
+      const item = { price, row, furnIndex };
+      if (!low || price < low.price) low = item;
+      if (!high || price > high.price) high = item;
+    });
+  }
+  return { low, high };
+}
+
+function gbp(n) {
+  return '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+}
+
+// "an empty studio flat" / "the largest furnished home" when the extremes are those homes.
+function lowHomePhrase(item) {
+  if (item.row.key === 'studio' && item.furnIndex === 0) return 'an empty studio flat';
+  return `a ${furnishing[item.furnIndex].toLowerCase()} ${item.row.label.toLowerCase()}`;
+}
+
+function highHomePhrase(item) {
+  const maxBeds = Math.max(...[...flats, ...houses].map((row) => row.beds));
+  if (item.furnIndex === furnishing.length - 1 && item.row.beds === maxBeds && item.row.key.startsWith('house')) {
+    return 'the largest furnished home';
+  }
+  return `a ${furnishing[item.furnIndex].toLowerCase()} ${item.row.label.toLowerCase()}`;
+}
+
+const extremes = baseOfferExtremes();
+const PRICE_LOW = extremes.low.price;
+const PRICE_HIGH = extremes.high.price;
+const priceAnswer = `End of tenancy cleaning in London and Essex costs from ${gbp(PRICE_LOW)} for ${lowHomePhrase(extremes.low)} to ${gbp(PRICE_HIGH)} for ${highHomePhrase(extremes.high)}. The same prices apply across London and Essex, with no VAT added.`;
 
 // Extra rooms, by furnishing [unfurnished, part furnished, furnished]
 const extraRooms = [
@@ -187,4 +234,11 @@ const faqs = [
   { q: 'Do I have to pay for a professional clean when I move out?', a: "No. Since the Tenant Fees Act 2019 a landlord in England can't make you pay for a professional clean. But you have to hand the home back as clean as it was at check in, allowing for fair wear and tear, or the landlord can claim cleaning costs from your deposit.", source: { name: 'GOV.UK Tenant Fees Act 2019 guidance', url: 'https://www.gov.uk/government/publications/tenant-fees-act-2019-guidance' } }
 ];
 
-module.exports = { flats, houses, furnishing, extraRooms, ovens, extras, sameDaySunday, sizeAnswers, timeGuide, examples, realJobs, faqs };
+module.exports = {
+  flats, houses, furnishing, extraRooms, ovens, extras, sameDaySunday, sizeAnswers, timeGuide, examples, realJobs, faqs,
+  PRICES_LAST_UPDATED,
+  pricesUpdatedLabel: pricesUpdatedLabel(PRICES_LAST_UPDATED),
+  PRICE_LOW,
+  PRICE_HIGH,
+  priceAnswer
+};
