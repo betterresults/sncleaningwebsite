@@ -789,12 +789,23 @@ app.get('/:serviceSlug/:areaSlug', (req, res, next) => renderArea(req, res, next
 // Per-page SEO overrides (data/seo-overrides.js). Applied after the CMS row is read, so they survive the daily CMS rewrite.
 const seoOverrides = require('./data/seo-overrides');
 function applyLeadOverride(original, ov) {
-  if (!ov || !ov.leadFirst || !original) return original;
-  if (original.startsWith(ov.leadFirst)) return original;
-  if (ov.leadKeepOriginal) return `${ov.leadFirst} ${original}`;
-  const m = original.match(/^[\s\S]*?[.!?](?=\s+[A-Z]|\s*$)/);
-  const rest = m ? original.slice(m[0].length).trim() : '';
-  return rest ? `${ov.leadFirst} ${rest}` : ov.leadFirst;
+  let text = original;
+  if (ov && ov.leadFirst && original && !original.startsWith(ov.leadFirst)) {
+    if (ov.leadKeepOriginal) text = `${ov.leadFirst} ${original}`;
+    else {
+      const m = original.match(/^[\s\S]*?[.!?](?=\s+[A-Z]|\s*$)/);
+      const rest = m ? original.slice(m[0].length).trim() : '';
+      text = rest ? `${ov.leadFirst} ${rest}` : ov.leadFirst;
+    }
+  }
+  // Exact sentence swaps in the hero intro. The override has no general body-text field;
+  // this is only for a sentence that sits after the first one (the Newham Airbnb rate).
+  if (ov && text && Array.isArray(ov.leadSwap)) {
+    for (const pair of ov.leadSwap) {
+      if (pair && pair[0] && text.includes(pair[0])) text = text.replace(pair[0], pair[1]);
+    }
+  }
+  return text;
 }
 
 async function renderArea(req, res, next, areaSlug) {
@@ -920,7 +931,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       title: (ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
       metaDescription: (ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`,
       h1Override: ov && ov.h1 ? ov.h1 : null,
-      page: ov && ov.leadFirst ? { ...page, quick_answer: applyLeadOverride(page.quick_answer, ov) } : page,
+      page: ov && (ov.leadFirst || (ov.leadSwap && ov.leadSwap.length)) ? { ...page, quick_answer: applyLeadOverride(page.quick_answer, ov) } : page,
       region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
