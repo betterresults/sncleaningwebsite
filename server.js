@@ -786,6 +786,17 @@ app.get('/:slug', async (req, res, next) => {
 app.get('/:serviceSlug/:areaSlug/:subSlug', (req, res, next) => renderArea(req, res, next, `${req.params.areaSlug}/${req.params.subSlug}`));
 app.get('/:serviceSlug/:areaSlug', (req, res, next) => renderArea(req, res, next, req.params.areaSlug));
 
+// Per-page SEO overrides (data/seo-overrides.js). Applied after the CMS row is read, so they survive the daily CMS rewrite.
+const seoOverrides = require('./data/seo-overrides');
+function applyLeadOverride(original, ov) {
+  if (!ov || !ov.leadFirst || !original) return original;
+  if (original.startsWith(ov.leadFirst)) return original;
+  if (ov.leadKeepOriginal) return `${ov.leadFirst} ${original}`;
+  const m = original.match(/^[\s\S]*?[.!?](?=\s+[A-Z]|\s*$)/);
+  const rest = m ? original.slice(m[0].length).trim() : '';
+  return rest ? `${ov.leadFirst} ${rest}` : ov.leadFirst;
+}
+
 async function renderArea(req, res, next, areaSlug) {
   const page = await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug);
   if (!page) return next(); // not a real service+area combo — falls through to 404
@@ -804,6 +815,7 @@ async function renderArea(req, res, next, areaSlug) {
     // map labels like "Essex - " and " / Thurrock Edge".
     const areaName = (r) => r ? (r.display_name || String(r.name).replace(/^Essex - /, '').replace(/\s*\/.*$/, '')) : '';
     const place = areaName(region);
+    const ov = seoOverrides.pages[`${service.slug}/${page.slug}`] || null;
     const fullService = allServices.find((s) => s.slug === service.slug) || service; // has booking_embed_url
     const allAreaPages = await content.getAreaPages();
     const pageUrl = (ap) => `/${ap.services.slug}/${ap.slug}`;
@@ -862,6 +874,10 @@ async function renderArea(req, res, next, areaSlug) {
     }
     nearbyLinks = nearbyLinks.filter((ap, i, a) => ap.id !== page.id && a.findIndex((x) => x.id === ap.id) === i).map(link);
     if (region.level !== 'town') nearbyLinks.sort((a, b) => a.name.localeCompare(b.name));
+    // Neighbouring areas to show first (data/seo-overrides.js nearbyFirst); only published pages of this service are used.
+    const firstLinks = (seoOverrides.nearbyFirst[`${service.slug}/${page.slug}`] || [])
+      .map((slug) => svcPages.find((ap) => ap.slug === slug && ap.id !== page.id)).filter(Boolean).map(link);
+    if (firstLinks.length) nearbyLinks = [...firstLinks, ...nearbyLinks.filter((l) => !firstLinks.some((f) => f.url === l.url))];
     nearbyLinks = nearbyLinks.slice(0, 8);
     const shown = new Set([pageUrl(page), ...nearbyLinks.map((l) => l.url)]);
     const groups = new Map();
@@ -901,9 +917,11 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       designV2: true,
       heroPreload: serviceImage(service.slug),
       // Title format (keyword first, then trust; no price in organic titles, Silvia 16 Nov 2026): fits Google's ~60 characters.
-      title: [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
-      metaDescription: page.meta_description || `${service.title} in ${place}.`,
-      page, region, service: fullService, parent, place,
+      title: (ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
+      metaDescription: (ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`,
+      h1Override: ov && ov.h1 ? ov.h1 : null,
+      page: ov && ov.leadFirst ? { ...page, quick_answer: applyLeadOverride(page.quick_answer, ov) } : page,
+      region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
       nearby: nearby.map((ap) => ({ name: areaName(ap.coverage_regions), url: pageUrl(ap) })).sort((a, b) => a.name.localeCompare(b.name)),
