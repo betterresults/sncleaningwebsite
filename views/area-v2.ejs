@@ -170,7 +170,7 @@
     <div class="s-local-copy">
       <p class="h-eyebrow">Local to <%= place %></p>
       <h2 class="h-title"><%= name %> across <%= place %></h2>
-      <% localText.forEach(function (t) { %><p><%= t %></p><% }); %>
+      <% localText.forEach(function (t) { %><p><%- linkifyInternal(t) %></p><% }); %>
     </div>
     <aside class="s-local-card">
       <% if (page.postcodes && page.postcodes.length) { %>
@@ -195,7 +195,7 @@
       <p class="h-eyebrow"><%= name %> in <%= place %></p>
       <% guide.forEach(function (g) { %>
         <h2><%= g.h %></h2>
-        <% g.p.forEach(function (para) { %><p><%= para %></p><% }); %>
+        <% g.p.forEach(function (para) { %><p><%- linkifyInternal(para) %></p><% }); %>
       <% }); %>
     </article>
   </div>
@@ -215,7 +215,7 @@
       <% (page.faqs || []).forEach(function (faq) { %>
         <details class="h-faq-item">
           <summary><h3><%= faq.question %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
-          <p><%= faq.answer %></p>
+          <p><%- linkifyInternal(faq.answer) %></p>
         </details>
       <% }); %>
       <% if (teaser) { %><p class="h-faq-more" style="margin-top: 1.25rem;">Questions about <%= lower %>? Read our <a href="<%= teaser.url %>"><%= lower %> FAQ</a>.</p><% } %>
