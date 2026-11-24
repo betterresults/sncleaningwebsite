@@ -4985,16 +4985,6 @@ package = "netlify-plugin-cache"
   status = 301
 
 [[redirects]]
-  from = "/end-of-tenancy-cleaning/hackney/"
-  to = "/end-of-tenancy-cleaning/london/"
-  status = 301
-
-[[redirects]]
-  from = "/end-of-tenancy-cleaning/hammersmith-and-fulham/"
-  to = "/end-of-tenancy-cleaning/london/"
-  status = 301
-
-[[redirects]]
   from = "/end-of-tenancy-cleaning/harold-hill-rm3/"
   to = "/end-of-tenancy-cleaning/havering/harold-hill/"
   status = 301
@@ -5045,11 +5035,6 @@ package = "netlify-plugin-cache"
   status = 301
 
 [[redirects]]
-  from = "/end-of-tenancy-cleaning/kingston/"
-  to = "/end-of-tenancy-cleaning/london/"
-  status = 301
-
-[[redirects]]
   from = "/end-of-tenancy-cleaning/maryland/"
   to = "/end-of-tenancy-cleaning/newham/"
   status = 301
@@ -5064,9 +5049,11 @@ package = "netlify-plugin-cache"
   to = "/end-of-tenancy-cleaning/newham/"
   status = 301
 
+# EOT Ilford now has its own page at /end-of-tenancy-cleaning/redbridge/ilford/ (CMS row ae046497, Dana 24 Nov 2026);
+# the old redirect from that address to /redbridge/ is removed, and the short /ilford/ address points to it.
 [[redirects]]
-  from = "/end-of-tenancy-cleaning/redbridge/ilford/"
-  to = "/end-of-tenancy-cleaning/redbridge/"
+  from = "/end-of-tenancy-cleaning/ilford/"
+  to = "/end-of-tenancy-cleaning/redbridge/ilford/"
   status = 301
 
 [[redirects]]

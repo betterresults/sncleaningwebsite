@@ -6,7 +6,7 @@ const seed = [
     title: 'End of tenancy: what actually gets checked',
     excerpt:
       'Inventories are picky. Here is what we clean for a move out in London and Essex, and what we need from you before the day.',
-    meta_title: 'End of tenancy cleaning checklist | SN Cleaning Services',
+    meta_title: 'End of tenancy: what actually gets checked',
     meta_description:
       'What landlords and inventory clerks usually look at on move out, and how our end of tenancy clean in London and Essex is scoped.',
     cover_image: '/images/services/tenancy.jpg',
