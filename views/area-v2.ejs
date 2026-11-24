@@ -57,7 +57,7 @@
         <% breadcrumbs.slice(0, -1).forEach(function (c) { %><a href="<%= c.url %>"><%= c.name %></a><% }); %><span aria-current="page"><%= place %></span>
       </nav>
       <p class="h-eyebrow h-eyebrow--light"><%= parentLink ? place + ', ' + parentLink.name : 'Local service' %></p>
-      <h1 class="h-display"><%= name %> in <%= place %></h1>
+      <h1 class="h-display"><%= (typeof h1Override !== 'undefined' && h1Override) ? h1Override : name + ' in ' + place %></h1>
       <p class="h-lead"><%= lead %></p>
       <div class="s-hero-meta">
         <% if (price) { %><span class="s-price"><%= price %></span><% } %>
