@@ -36,7 +36,7 @@ doc = SimpleDocTemplate(out, pagesize=A4, leftMargin=16*mm, rightMargin=16*mm, t
                         title='SN Cleaning Services end of tenancy price list', author='SN Cleaning Services')
 f = data['furnishing']
 s = [Paragraph('End of tenancy cleaning price list', h1),
-     Paragraph('SN Cleaning Services · London and Essex · prices checked %s · sncleaningservices.co.uk/end-of-tenancy-cleaning/prices/' % data['checkedOn'], small),
+     Paragraph('SN Cleaning Services · London and Essex · sncleaningservices.co.uk/end-of-tenancy-cleaning/prices/', small),
      Spacer(1, 6),
      Paragraph('Prices are for the whole home with one bathroom, the kitchen and the living area. They are the same in London and Essex. '
                'SN Cleaning Services is not VAT registered, so no VAT is added. Every price includes the team, all products and equipment, '

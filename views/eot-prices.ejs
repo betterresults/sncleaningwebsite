@@ -12,35 +12,30 @@
 <div class="ep">
 
 <header class="ep-hero"><div class="ep-wrap">
-  <p class="ep-eyebrow">London and Essex · prices checked <%= p.checkedOn %></p>
   <h1>End of tenancy cleaning prices</h1>
-  <p class="ep-lead">Choose your home to see the price. The prices are the same in London and Essex, and there is no VAT to add.</p>
+  <p class="ep-lead">Your price is worked out from your home: flat or house, the number of bedrooms and bathrooms, and how furnished it is. The oven and extras like blinds are added only if your home has them, so you never pay for something you don't have. Prices are the same in London and Essex, with no VAT.</p>
 
   <form class="ep-calc" id="calculator" data-prices="<%= JSON.stringify({ flats: p.flats.map(f => [f.key, f.prices]), houses: p.houses.map(h => [h.key, h.prices]), bath: p.extraRooms[0].prices, ovens: p.ovens.map(o => [o.key, o.price]), extra: p.sameDaySunday }) %>">
-    <fieldset><legend>Home</legend>
-      <label><input type="radio" name="type" value="flat" checked> Flat</label>
-      <label><input type="radio" name="type" value="house"> House</label>
-    </fieldset>
-    <label class="ep-field">Bedrooms
-      <select name="beds"><option value="0">Studio</option><option value="1">1</option><option value="2" selected>2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option></select>
-    </label>
-    <label class="ep-field">Bathrooms
-      <select name="baths"><option value="1" selected>1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option></select>
-    </label>
-    <fieldset><legend>Furniture</legend>
-      <label><input type="radio" name="furn" value="0" checked> None</label>
-      <label><input type="radio" name="furn" value="1"> Some</label>
-      <label><input type="radio" name="furn" value="2"> Furnished</label>
-    </fieldset>
-    <label class="ep-field">Oven
-      <select name="oven"><% p.ovens.forEach(function (o) { %><option value="<%= o.key %>"<%= o.key === 'none' ? ' selected' : '' %>><%= o.label %></option><% }); %></select>
-    </label>
-    <label class="ep-check"><input type="checkbox" name="rush"> Same day or Sunday</label>
-    <output class="ep-result" for="calculator" aria-live="polite">
-      <span class="ep-total" id="ep-total">£229</span>
-      <span class="ep-lines" id="ep-lines">2 bedroom flat, unfurnished</span>
-    </output>
-    <a class="h-btn h-btn--primary ep-book" href="<%= book %>">Book this clean</a>
+    <div class="ep-steps">
+      <fieldset class="ep-step"><legend>Your home</legend>
+        <div class="ep-type">
+          <label class="ep-big"><input type="radio" name="type" value="flat" checked><span><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="2"/><path d="M16 13h4M28 13h4M16 21h4M28 21h4M16 29h4M28 29h4M21 42v-7h6v7"/></svg>Flat</span></label>
+          <label class="ep-big"><input type="radio" name="type" value="house"><span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 22 24 8l18 14"/><path d="M11 19v23h26V19"/><path d="M20 42V30h8v12"/></svg>House</span></label>
+        </div>
+      </fieldset>
+      <fieldset class="ep-step"><legend>Bedrooms</legend><div class="ep-opts"><label class="ep-opt"><input type="radio" name="beds" value="0"><span>Studio</span></label><label class="ep-opt"><input type="radio" name="beds" value="1"><span>1</span></label><label class="ep-opt"><input type="radio" name="beds" value="2" checked><span>2</span></label><label class="ep-opt"><input type="radio" name="beds" value="3"><span>3</span></label><label class="ep-opt"><input type="radio" name="beds" value="4"><span>4</span></label><label class="ep-opt"><input type="radio" name="beds" value="5"><span>5</span></label><label class="ep-opt"><input type="radio" name="beds" value="6"><span>6</span></label></div></fieldset>
+      <fieldset class="ep-step"><legend>Bathrooms</legend><div class="ep-opts"><label class="ep-opt"><input type="radio" name="baths" value="1" checked><span>1</span></label><label class="ep-opt"><input type="radio" name="baths" value="2"><span>2</span></label><label class="ep-opt"><input type="radio" name="baths" value="3"><span>3</span></label><label class="ep-opt"><input type="radio" name="baths" value="4"><span>4</span></label></div></fieldset>
+      <fieldset class="ep-step"><legend>Furniture</legend><div class="ep-opts"><label class="ep-opt ep-opt--wide"><input type="radio" name="furn" value="0" checked><span>Unfurnished</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="furn" value="1"><span>Part furnished</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="furn" value="2"><span>Furnished</span></label></div></fieldset>
+      <fieldset class="ep-step"><legend>Oven</legend><div class="ep-opts"><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="none" checked><span>No oven</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="single"><span>Single</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="double"><span>Double</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="convection"><span>Single and convection</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="range"><span>Range</span></label><label class="ep-opt ep-opt--wide"><input type="radio" name="oven" value="aga"><span>AGA</span></label></div></fieldset>
+      <label class="ep-switch"><input type="checkbox" name="rush"><span></span>Same day or Sunday clean</label>
+    </div>
+    <aside class="ep-price" aria-live="polite">
+      <span class="ep-price-label">Your price</span>
+      <output class="ep-total" id="ep-total" for="calculator">£229</output>
+      <ul class="ep-lines" id="ep-lines"><li><span>2 bedroom flat, unfurnished</span><span>£229</span></li></ul>
+      <a class="h-btn h-btn--light ep-book" href="<%= book %>">Book this clean</a>
+      <p>Carpets, sofas and other extras can be added when you book.</p>
+    </aside>
   </form>
 </div></header>
 
@@ -136,21 +131,23 @@
   var names = ['unfurnished', 'part furnished', 'furnished'];
   function m(n) { return '£' + (Math.round(n * 100) % 100 ? n.toFixed(2) : Math.round(n)); }
   function find(list, key) { for (var i = 0; i < list.length; i++) if (list[i][0] === key) return list[i][1]; }
+  function val(n) { var e = f.querySelector('input[name=' + n + ']:checked'); return e ? e.value : null; }
+  function label(n) { var e = f.querySelector('input[name=' + n + ']:checked'); return e ? e.nextElementSibling.textContent.trim() : ''; }
   function calc() {
-    var type = f.querySelector('input[name=type]:checked').value;
-    var beds = +f.beds.value, studio = f.beds.options[0];
+    var type = val('type');
+    var studio = f.querySelector('input[name=beds][value="0"]');
     studio.disabled = type === 'house';
-    if (type === 'house' && beds === 0) { f.beds.value = '1'; beds = 1; }
-    var furn = +f.querySelector('input[name=furn]:checked').value;
+    if (type === 'house' && studio.checked) { f.querySelector('input[name=beds][value="1"]').checked = true; }
+    var beds = +val('beds'), furn = +val('furn');
     var base = type === 'flat' ? find(d.flats, beds === 0 ? 'studio' : 'flat-' + beds) : find(d.houses, 'house-' + beds);
-    var total = base[furn], parts = [(beds === 0 ? 'Studio flat' : beds + ' bedroom ' + type) + ', ' + names[furn]];
-    var extraBaths = +f.baths.value - 1;
-    if (extraBaths > 0) { total += d.bath[furn] * extraBaths; parts.push(extraBaths + ' extra bathroom' + (extraBaths > 1 ? 's' : '')); }
-    var ov = find(d.ovens, f.oven.value) || 0;
-    if (ov) { total += ov; parts.push(f.oven.options[f.oven.selectedIndex].text.toLowerCase()); }
-    if (f.rush.checked) { total += d.extra; parts.push('same day or Sunday'); }
+    var total = base[furn], rows = [[(beds === 0 ? 'Studio flat' : beds + ' bedroom ' + type) + ', ' + names[furn], base[furn]]];
+    var extraBaths = +val('baths') - 1;
+    if (extraBaths > 0) { var b = d.bath[furn] * extraBaths; total += b; rows.push([extraBaths + ' extra bathroom' + (extraBaths > 1 ? 's' : ''), b]); }
+    var ov = find(d.ovens, val('oven')) || 0;
+    if (ov) { total += ov; rows.push([label('oven') + ' oven', ov]); }
+    if (f.rush.checked) { total += d.extra; rows.push(['Same day or Sunday', d.extra]); }
     document.getElementById('ep-total').textContent = m(total);
-    document.getElementById('ep-lines').textContent = parts.join(', ');
+    document.getElementById('ep-lines').innerHTML = rows.map(function (r) { return '<li><span>' + r[0] + '</span><span>' + m(r[1]) + '</span></li>'; }).join('');
   }
   f.addEventListener('change', calc);
   f.addEventListener('submit', function (e) { e.preventDefault(); });

@@ -4,7 +4,6 @@
 // When Dilvon prices change, update this file, then regenerate the PDF with scripts/eot-price-pdf.py.
 // Times, team sizes and the pricing explanation come from Silvia (24 Nov 2026). Do not add facts she has not given.
 
-const checkedOn = '24 November 2026';
 
 // [unfurnished, part furnished, furnished]
 const flats = [
@@ -117,18 +116,15 @@ const sameDaySunday = 50;
 
 // One short answer per home size (Silvia, 24 Nov 2026: two prices, unfurnished and furnished).
 const sizeAnswers = [
-  { key: 'studio', q: 'How much is an end of tenancy clean for a studio flat?', a: "£179 if it's empty, £215 if it's furnished. Furnished costs a bit more because we clean inside the wardrobes and drawers and under the bed too. One cleaner usually does a studio in 4 to 5 hours, or two cleaners in about 2 and a half." },
-  { key: 'flat-1', q: 'How much is an end of tenancy clean for a one bedroom flat?', a: "£205 unfurnished and £245 furnished. One and two bedroom flats are the homes we clean most. Two cleaners usually finish a one bed in 3 to 4 hours. If it's empty, one cleaner can do it alone in 4 to 6 hours." },
-  { key: 'flat-2', q: 'How much is an end of tenancy clean for a two bedroom flat?', a: "£229 unfurnished and £275 furnished. This is one of our most booked cleans. Two cleaners usually take about 4 to 5 hours. An empty two bed with one bathroom can be done by one cleaner in 6 to 8 hours." },
-  { key: 'flat-3', q: 'How much is an end of tenancy clean for a three bedroom flat?', a: "£275 unfurnished and £329 furnished. Two cleaners usually take about 5 hours, or 5 and a half to 6 if there's a second bathroom. Furnished takes longer because every piece of furniture gets cleaned inside, on top and underneath." },
-  { key: 'flat-4', q: 'How much is an end of tenancy clean for a four bedroom flat?', a: '£319 unfurnished and £385 furnished. A flat this size is usually done by a team of three, working through everything the letting agent will check.' },
-  { key: 'flat-5', q: 'How much is an end of tenancy clean for a five or six bedroom flat?', a: 'A five bed flat is £359 unfurnished and £429 furnished. A six bed is £399 unfurnished and £479 furnished. A team of three usually takes care of it.' },
-  { key: 'house-1', q: 'How much is an end of tenancy clean for a one bedroom house?', a: '£229 unfurnished and £275 furnished. That is a little more than a one bed flat, because a house has stairs and a landing and is usually bigger. Two cleaners usually take about 4 hours.' },
-  { key: 'house-2', q: 'How much is an end of tenancy clean for a two bedroom house?', a: '£259 unfurnished and £309 furnished. A two bed house is bigger than a two bed flat, with stairs and a landing to clean, so it costs a bit more. Two cleaners usually take about 5 hours.' },
-  { key: 'house-3', q: 'How much is an end of tenancy clean for a three bedroom house?', a: "£305 unfurnished and £365 furnished. When we clean a house, it's most often a three bed like this. Usually two cleaners come, or three if the house is on the bigger side, and it takes around 6 hours." },
-  { key: 'house-4', q: 'How much is an end of tenancy clean for a four bedroom house?', a: '£349 unfurnished and £439 furnished. A team of three usually does it, bringing all the products and equipment with them.' },
-  { key: 'house-5', q: 'How much is an end of tenancy clean for a five bedroom house?', a: '£385 unfurnished and £489 furnished. A team of three works through every room, the stairs and the landings in one visit.' },
-  { key: 'house-6', q: 'How much is an end of tenancy clean for a six bedroom house?', a: '£429 unfurnished and £545 furnished. A team of three usually does it in one visit, and you still get the deposit back guarantee and the free 7 day re clean.' }
+  { key: 'studio', q: 'How much is an end of tenancy clean for a studio flat?', a: '£179 unfurnished, £199 part furnished and £215 furnished.' },
+  { key: 'flat-1', q: 'How much is an end of tenancy clean for a one bedroom flat?', a: '£205 unfurnished, £225 part furnished and £245 furnished.' },
+  { key: 'flat-2', q: 'How much is an end of tenancy clean for a two bedroom flat?', a: '£229 unfurnished, £249 part furnished and £275 furnished.' },
+  { key: 'flat-3', q: 'How much is an end of tenancy clean for a three bedroom flat?', a: '£275 unfurnished, £299 part furnished and £329 furnished.' },
+  { key: 'flat-4', q: 'How much is an end of tenancy clean for a four bedroom flat?', a: '£319 unfurnished, £349 part furnished and £385 furnished.' },
+  { key: 'house-1', q: 'How much is an end of tenancy clean for a one bedroom house?', a: '£229 unfurnished, £249 part furnished and £275 furnished.' },
+  { key: 'house-2', q: 'How much is an end of tenancy clean for a two bedroom house?', a: '£259 unfurnished, £285 part furnished and £309 furnished.' },
+  { key: 'house-3', q: 'How much is an end of tenancy clean for a three bedroom house?', a: '£305 unfurnished, £335 part furnished and £365 furnished.' },
+  { key: 'house-4', q: 'How much is an end of tenancy clean for a four bedroom house?', a: '£349 unfurnished, £385 part furnished and £439 furnished.' }
 ];
 
 // Time and team guide (Silvia, 24 Nov 2026). Hours are for the whole team on site, not per cleaner.
@@ -176,9 +172,8 @@ const faqs = [
   { q: 'Is the oven included in an end of tenancy clean?', a: "Yes, we clean the oven as part of the service. You choose your oven type when you book because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. That way nobody pays for an oven they don't have: single £49, double £79, range £98, AGA £129." },
   { q: 'What is included in the price?', a: 'Everything inside the home, top to bottom: inside every kitchen cupboard and drawer, fridge and freezer, hob, extractor and microwave, bathrooms descaled, internal windows and glass, skirting boards, doors, switches and radiators, carpets vacuumed and hard floors washed. What you select when you book only tells us what your home has, so we can plan the time.' },
   { q: 'Are windows included?', a: 'Inside windows and all internal glass, yes. Outside windows are not included.' },
-  { q: 'Why does a furnished property cost more?', a: 'Every wardrobe, chest of drawers, bed and sofa has to be cleaned inside, on top and underneath, and furniture has to be moved to clean behind it. That takes more time, and it is why a furnished home always gets at least two cleaners.' },
+  { q: 'Why does a furnished property cost more?', a: 'Every wardrobe, chest of drawers, bed and sofa has to be cleaned inside, on top and underneath, and furniture has to be moved to clean behind it. That takes more time, so it costs more.' },
   { q: 'Why do you price everything separately?', a: "Because homes are different. If one tenant has blinds on every window, a double oven and two bathrooms, and another has none of that, it isn't fair for them to pay the same. You pay for the size of your home and for what we actually need to clean." },
-  { q: 'Will you send one cleaner or a team?', a: 'A furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Homes with four bedrooms or more usually get a team of three.' },
   { q: 'Are the prices the same in London and Essex?', a: 'Yes, the prices are the same. In London the Congestion Charge (if the home is in the zone) and any parking fees are added on top. In Essex we can usually find free parking.' },
   { q: 'Do your prices include VAT?', a: 'SN Cleaning Services is not VAT registered, so there is no VAT to add. The price you see is the price you pay.' },
   { q: 'Do you charge more for same day or Sunday cleans?', a: 'Yes, £50 extra for a same day clean or a Sunday clean. Saturdays and weekdays are the normal price.' },
@@ -189,4 +184,4 @@ const faqs = [
   { q: 'Do I have to pay for a professional clean when I move out?', a: "No. Since the Tenant Fees Act 2019 a landlord in England can't make you pay for a professional clean. But you have to hand the home back as clean as it was at check in, allowing for fair wear and tear, or the landlord can claim cleaning costs from your deposit.", source: { name: 'GOV.UK Tenant Fees Act 2019 guidance', url: 'https://www.gov.uk/government/publications/tenant-fees-act-2019-guidance' } }
 ];
 
-module.exports = { checkedOn, flats, houses, furnishing, extraRooms, ovens, extras, sameDaySunday, sizeAnswers, timeGuide, examples, realJobs, faqs };
+module.exports = { flats, houses, furnishing, extraRooms, ovens, extras, sameDaySunday, sizeAnswers, timeGuide, examples, realJobs, faqs };

@@ -17,17 +17,36 @@
 .ep-center{text-align:center;margin-top:20px}
 .ep-grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px 28px;align-items:start}
 
-/* Calculator */
-.ep-calc{margin-top:24px;background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px 20px;align-items:start;box-shadow:0 10px 30px rgba(20,48,44,.06)}
-.ep-calc fieldset{border:0;padding:0;margin:0}
-.ep-calc legend,.ep-field{font-weight:600;color:var(--ink);font-size:.92rem}
-.ep-calc fieldset label{display:flex;align-items:center;gap:8px;margin-top:8px;font-weight:400;color:var(--text)}
-.ep-field select{display:block;width:100%;margin-top:6px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:inherit;background:#fff;color:var(--text)}
-.ep-check{display:flex;gap:8px;align-items:center;font-size:.95rem;align-self:center}
-.ep-result{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;background:var(--deep);color:#dfe9dc;border-radius:16px;padding:16px 20px}
-.ep-total{font-family:var(--serif);font-size:2.5rem;color:#fff;line-height:1}
-.ep-lines{font-size:.95rem}
-.ep-book{grid-column:1/-1;justify-self:start}
+/* Calculator: big tiles, chips and a price panel */
+.ep-calc{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}
+.ep-steps{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:clamp(18px,3vw,28px);display:grid;gap:22px;box-shadow:0 10px 30px rgba(20,48,44,.06)}
+.ep-step{border:0;padding:0;margin:0;min-width:0}
+.ep-step legend{font-weight:600;color:var(--ink);font-size:.95rem;margin-bottom:10px;padding:0}
+.ep-calc input[type=radio]{position:absolute;opacity:0;width:1px;height:1px}
+.ep-type{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ep-big span{display:flex;flex-direction:column;align-items:center;gap:8px;padding:18px 10px;border:2px solid var(--line);border-radius:18px;font-weight:600;font-size:1.05rem;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.ep-big svg{width:44px;height:44px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;color:var(--primary)}
+.ep-opts{display:flex;flex-wrap:wrap;gap:8px}
+.ep-opt span{display:grid;place-items:center;min-width:52px;height:46px;padding:0 14px;border:2px solid var(--line);border-radius:14px;font-weight:600;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+.ep-big:hover span,.ep-opt:hover span{border-color:var(--sage)}
+.ep-calc input:checked+span{border-color:var(--primary);background:#e7f1ef;color:var(--primary-dark)}
+.ep-calc input:focus-visible+span{outline:3px solid var(--sage);outline-offset:2px}
+.ep-calc input:disabled+span{opacity:.35;cursor:not-allowed}
+.ep-switch{display:flex;align-items:center;gap:12px;font-weight:600;color:var(--ink);cursor:pointer}
+.ep-switch input{position:absolute;opacity:0}
+.ep-switch span{position:relative;width:46px;height:26px;border-radius:26px;background:var(--line);transition:background .15s;flex:none}
+.ep-switch span::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
+.ep-switch input:checked+span{background:var(--primary)}
+.ep-switch input:checked+span::after{transform:translateX(20px)}
+.ep-switch input:focus-visible+span{outline:3px solid var(--sage);outline-offset:2px}
+.ep-price{position:sticky;top:100px;background:var(--deep);color:#dfe9dc;border-radius:var(--r);padding:24px;display:grid;gap:12px}
+.ep-price-label{font-size:.78rem;text-transform:uppercase;letter-spacing:.08em;color:var(--sage);font-weight:600}
+.ep-total{font-family:var(--serif);font-size:3.2rem;color:#fff;line-height:1}
+.ep-lines{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.92rem}
+.ep-lines li{display:flex;justify-content:space-between;gap:12px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:6px}
+.ep-price .ep-book{justify-self:stretch;text-align:center}
+.ep-price p{font-size:.85rem;margin:0;color:#c9d8cc}
+@media (max-width:860px){.ep-calc{grid-template-columns:1fr}.ep-price{position:static}}
 
 /* Tables: one style everywhere */
 .ep-table{width:100%;border-collapse:collapse;font-size:.97rem;background:#fff;border-radius:16px;overflow:hidden}
@@ -55,5 +74,4 @@
   .ep-table th,.ep-table td{padding:8px 6px}
   .ep-table thead th{font-size:.66rem;letter-spacing:.02em;white-space:normal;vertical-align:bottom}
   .ep-table td{font-size:.88rem}
-  .ep-calc{grid-template-columns:1fr 1fr;padding:16px}
 }
