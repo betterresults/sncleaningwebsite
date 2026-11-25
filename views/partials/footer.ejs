@@ -29,7 +29,7 @@
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/our-services">Services</a></li>
-        <li><a href="/end-of-tenancy-cleaning/prices/">End of tenancy prices</a></li>
+        <li><a href="/prices/">Prices</a></li>
         <li><a href="/about">About</a></li>
         <li><a href="/our-work">Our work</a></li>
         <li><a href="/blog">Blog</a></li>
@@ -45,6 +45,13 @@
           <li><a href="<%= s.hasDetailPage ? '/' + s.slug : '/our-services#' + s.slug %>"><%= s.title %></a></li>
         <% }); %>
         <li><a href="<%= commercialUrl %>" target="_blank" rel="noopener">Commercial Cleaning ↗</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-heading">Prices</h2>
+      <ul>
+        <% pricePages.forEach(function (pg) { %><li><a href="<%= pg.url %>"><%= pg.title %></a></li><% }); %>
       </ul>
     </div>
 

@@ -1,0 +1,13 @@
+<%# Prices hub (/prices/): one card per service prices page (data/price-pages.js). Styles: public/css/eot-prices.css. %>
+<link rel="stylesheet" href="/css/eot-prices.css?v=<%= assetVersion %>" />
+<div class="ep">
+<header class="ep-hero"><div class="ep-wrap">
+  <h1>Cleaning prices in London and Essex</h1>
+  <p class="ep-answer">Choose a service to see the full price list and work out your price.</p>
+  <div class="ep-three ep-methods">
+    <% pricePages.forEach(function (pg) { %>
+    <a class="ep-card ep-card-link" href="<%= pg.url %>"><h2 class="ep-method-title"><%= pg.title %></h2><p><%= pg.text %></p><span class="ep-method-price">See prices →</span></a>
+    <% }); %>
+  </div>
+</div></header>
+</div>

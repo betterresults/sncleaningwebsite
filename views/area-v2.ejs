@@ -66,7 +66,7 @@
         <% } %>
       </div>
       <% if (typeof priceNote === 'function' && priceNote(service.slug)) { %><p class="s-price-min"><%= priceNote(service.slug) %></p><% } %>
-      <% if (['end-of-tenancy-cleaning', 'after-builders-cleaning'].indexOf(service.slug) !== -1) { %><p class="s-price-min"><a href="/<%= service.slug %>/prices/" style="color:inherit;text-decoration:underline">See every price and work out yours</a></p><% } %>
+      <% if (pricePages.some(function (pg) { return pg.slug === service.slug; })) { %><p class="s-price-min"><a href="/<%= service.slug %>/prices/" style="color:inherit;text-decoration:underline">See every price and work out yours</a></p><% } %>
     </div>
 <%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
   </div>

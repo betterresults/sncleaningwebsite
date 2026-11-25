@@ -38,7 +38,7 @@ const realJobs = [
     date: 'September 2026',
     title: 'Four bedroom house, two cleaners for a day',
     text: 'Four bedrooms, three bathrooms, a living room and a dining room after building work. Two cleaners spent the day on the entrance, stairs, toilets, bathrooms and the top floor rooms where the builders had worked, then dusted and did the floors in the rooms that had been closed off.',
-    price: 460
+    price: 464
   },
   {
     area: 'Ingatestone, CM4',

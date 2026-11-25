@@ -202,6 +202,7 @@ img { max-width: 100%; height: auto; display: block; }
   justify-content: center;
 }
 .main-nav a {
+  white-space: nowrap;
   font-weight: 700;
   color: var(--color-text);
   padding: 8px 2px;
@@ -742,7 +743,7 @@ input:focus, select:focus, textarea:focus {
 /* Footer */
 .site-footer { background: var(--color-dark); color: #cfe0da; padding-top: 60px; }
 .site-footer .logo { color: #fff; }
-.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 32px; padding-bottom: 40px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr; gap: 32px; padding-bottom: 40px; }
 .footer-tagline { color: #9fb3ac; margin-top: 14px; font-size: 0.92rem; }
 .footer-social { display: flex; gap: 16px; margin-top: 16px; }
 .footer-social a {
@@ -1456,3 +1457,4 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 .reclean-promise { margin-top: 22px; padding: 18px 20px; border-radius: 12px; background: #fff; border: 1px solid rgba(0,0,0,.1); }
 .reclean-promise p { margin: 8px 0 0; }
 .reclean-promise a { text-decoration: underline; }
+@media (max-width: 1200px) and (min-width: 1025px) { .main-nav { gap: 18px; } }

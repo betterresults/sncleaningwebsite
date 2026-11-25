@@ -26,7 +26,6 @@
                 <%= s.title %>
               </a>
             <% }); %>
-            <a href="/end-of-tenancy-cleaning/prices/">End of tenancy prices</a>
             <a href="<%= commercialUrl %>" target="_blank" rel="noopener">Commercial Cleaning <span aria-hidden="true">↗</span></a>
           </div>
         <% } %>
@@ -45,10 +44,18 @@
       </div>
       <% } %>
 
+      <div class="nav-dropdown">
+        <a href="/prices" class="<%= currentPath.startsWith('/prices') || /\/prices\/?$/.test(currentPath) ? 'active' : '' %>">
+          Prices <span class="nav-dropdown-caret">▾</span>
+        </a>
+        <div class="nav-dropdown-menu">
+          <% pricePages.forEach(function (pg) { %><a href="<%= pg.url %>"><%= pg.title %></a><% }); %>
+        </div>
+      </div>
+
       <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a>
       <a href="/our-work" class="<%= currentPath === '/our-work' ? 'active' : '' %>">Our work</a>
       <a href="/blog" class="<%= currentPath.startsWith('/blog') ? 'active' : '' %>">Blog</a>
-      <a href="/contact" class="<%= currentPath === '/contact' ? 'active' : '' %>">Contact</a>
 
       <div class="nav-mobile-actions">
         <a href="<%= bookUrl() %>" class="btn btn-primary">Get a quote</a>

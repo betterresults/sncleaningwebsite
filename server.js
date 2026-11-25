@@ -531,6 +531,19 @@ app.locals.serviceFaqTeaser = (slug) => {
 };
 app.locals.liveServiceFaqs = () =>
   Object.entries(SERVICE_FAQS).filter(([, e]) => e.live).map(([slug, e]) => ({ url: `/${slug}/faq/`, title: e.data.title }));
+// Prices hub (/prices/) and the list used by the top menu and footer.
+app.locals.pricePages = require('./data/price-pages');
+app.get('/prices', (req, res) => {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Prices', url: '/prices' }];
+  res.render('prices-index', {
+    title: 'Cleaning Prices London & Essex | SN Cleaning Services',
+    metaDescription: 'Cleaning prices from SN Cleaning Services in London and Essex: full price lists and calculators for end of tenancy cleaning and after builders cleaning.',
+    breadcrumbs,
+    designV2: true,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
 // After builders prices page (Silvia, 25 Nov 2026): price by size, by the hour, or cleaners by the day.
 app.get('/after-builders-cleaning/prices', (req, res) => {
   const prices = require('./data/after-builders-prices');

@@ -105,3 +105,4 @@
 .ep-method-price{font-weight:700;color:var(--primary-dark);margin:0 0 8px}
 .ep-steps>div{display:grid;gap:20px}
 .ep-steps>div[hidden]{display:none}
+.ep-card-link{display:block;text-decoration:none;color:inherit;transition:border-color .15s,transform .15s}.ep-card-link:hover{border-color:var(--primary);transform:translateY(-2px)}
