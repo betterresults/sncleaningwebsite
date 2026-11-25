@@ -41,6 +41,7 @@ async function buildRoutes() {
     { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true },
     { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true },
     { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true },
+    { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },
     { url: '/why-us', out: 'why-us/index.html', sitemap: true },
     ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true })),

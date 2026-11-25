@@ -1,0 +1,216 @@
+<%# After builders cleaning prices page (/after-builders-cleaning/prices/). Data: data/after-builders-prices.js.
+    Same styles as the end of tenancy prices page (public/css/eot-prices.css, scoped .ep). Three ways to price (Silvia, 25 Nov 2026).
+    The calculator is a small inline script with no network requests; every price is also on the page as plain HTML. %>
+<link rel="stylesheet" href="/css/eot-prices.css?v=<%= assetVersion %>" />
+<%
+  const money = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+  const book = bookUrl('after-builders-cleaning');
+  const opt = (name, value, label, checked) => '<label class="ep-opt"><input type="radio" name="' + name + '" value="' + value + '"' + (checked ? ' checked' : '') + '><span>' + label + '</span></label>';
+  const day = p.hourlyRate * p.fullDayHours;
+%>
+<div class="ep">
+
+<header class="ep-hero"><div class="ep-wrap">
+  <h1>After builders cleaning prices in London and Essex</h1>
+  <p class="ep-answer">There are three ways to price an after builders clean, depending on the job: by the size of the home when it's empty, by the hour when only one area was done, or by the day for builders and developers. Hourly and daily work is <%= money(p.hourlyRate) %> per cleaner per hour.</p>
+
+  <div class="ep-three ep-methods">
+    <% p.methods.forEach(function (m, i) { %>
+    <div class="ep-card"><span class="ep-num"><%= i + 1 %></span><h2 class="ep-method-title"><%= m.title %></h2><p class="ep-method-price"><%= m.price %></p><p><%= m.text %></p></div>
+    <% }); %>
+  </div>
+
+  <form class="ep-calc" id="calculator" data-prices="<%= JSON.stringify({ flats: p.flats.map(f => [f.key, f.prices]), houses: p.houses.map(h => [h.key, h.prices]), bath: p.extraRooms[0].prices, ovens: p.ovens.map(o => [o.key, o.price]), rate: p.hourlyRate }) %>">
+    <div class="ep-steps">
+      <fieldset class="ep-step"><legend>How do you want to book?</legend>
+        <div class="ep-opts" style="--n:2"><%- opt('mode', 'size', 'Whole empty home', true) %><%- opt('mode', 'hours', 'Cleaners by the hour or day', false) %></div>
+      </fieldset>
+      <div data-mode="size">
+        <fieldset class="ep-step"><legend>Your home</legend>
+          <div class="ep-opts" style="--n:2">
+            <label class="ep-opt"><input type="radio" name="type" value="flat" checked><span><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36" rx="2"/><path d="M16 13h4M28 13h4M16 21h4M28 21h4M16 29h4M28 29h4M21 42v-7h6v7"/></svg>Flat</span></label>
+            <label class="ep-opt"><input type="radio" name="type" value="house"><span><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 22 24 8l18 14"/><path d="M11 19v23h26V19"/><path d="M20 42V30h8v12"/></svg>House</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="ep-step"><legend>Bedrooms</legend><div class="ep-opts" style="--n:7"><%- ['Studio', 1, 2, 3, 4, 5, 6].map(function (b, i) { return opt('beds', i, b, i === 2); }).join('') %></div></fieldset>
+        <fieldset class="ep-step"><legend>Bathrooms</legend><div class="ep-opts" style="--n:4"><%- [1, 2, 3, 4].map(function (b) { return opt('baths', b, b, b === 1); }).join('') %></div></fieldset>
+        <fieldset class="ep-step"><legend>Furniture</legend><div class="ep-opts" style="--n:3"><%- ['Unfurnished', 'Part furnished', 'Furnished'].map(function (f, i) { return opt('furn', i, f, i === 0); }).join('') %></div></fieldset>
+        <fieldset class="ep-step"><legend>Oven</legend><div class="ep-opts" style="--n:3"><%- p.ovens.map(function (o) { return opt('oven', o.key, o.key === 'none' ? 'No oven' : o.label.replace(' oven', ''), o.key === 'none'); }).join('') %></div></fieldset>
+      </div>
+      <div data-mode="hours" hidden>
+        <fieldset class="ep-step"><legend>Cleaners</legend><div class="ep-opts" style="--n:4"><%- [1, 2, 3, 4].map(function (c) { return opt('cleaners', c, c, c === 1); }).join('') %></div></fieldset>
+        <fieldset class="ep-step"><legend>Hours each</legend><div class="ep-opts" style="--n:6"><%- [3, 4, 5, 6, 7, 8].map(function (h) { return opt('hours', h, h === 8 ? 'Full day' : h, h === 4); }).join('') %></div></fieldset>
+      </div>
+    </div>
+    <aside class="ep-price" aria-live="polite">
+      <span class="ep-price-label">Your price</span>
+      <output class="ep-total" id="ep-total" for="calculator">£229</output>
+      <ul class="ep-lines" id="ep-lines"><li><span>2 bedroom flat, unfurnished</span><span>£229</span></li></ul>
+      <a class="h-btn h-btn--light ep-book" href="<%= book %>">Book this clean</a>
+      <p>Waste removal and other extras can be added when you book.</p>
+    </aside>
+  </form>
+</div></header>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>Real after builders cleans and what they cost</h2>
+  <p class="ep-intro">Builders often leave cleaning out of their quote so the client's price stays down. When the work is done, the home is dusty but it still has to be handed back looking good. Booking cleaners for the day solves that without paying for a full clean of every room.</p>
+  <div class="ep-receipts">
+    <% p.realJobs.forEach(function (j) { %>
+    <div class="ep-receipt">
+      <p class="ep-small"><%= j.area %> · <%= j.date %></p>
+      <h3><%= j.title %></h3>
+      <p><%= j.text %></p>
+      <dl><div class="ep-receipt-total"><dt>Paid</dt><dd><%= money(j.price) %></dd></div></dl>
+    </div>
+    <% }); %>
+  </div>
+  <p class="ep-center"><a href="/case-studies/after-builders-cleaning-for-a-construction-company/">Read the full story: after builders cleaning for a construction company</a></p>
+</div></section>
+
+<section class="ep-band ep-sand" id="price-list"><div class="ep-wrap">
+  <h2>Price list for an empty home after the work</h2>
+  <p class="ep-intro">For homes where nobody lives yet. One bathroom is included in every price.</p>
+  <div class="ep-tables">
+    <% [['Flats', p.flats], ['Houses', p.houses]].forEach(function (t) { %>
+    <div class="ep-table-card">
+      <table>
+        <caption><%= t[0] %></caption>
+        <thead><tr><th scope="col">Home</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
+        <tbody><% t[1].forEach(function (r) { %><tr><th scope="row"><%= r.label %></th><% r.prices.forEach(function (v) { %><td><%= money(v) %></td><% }); %></tr><% }); %></tbody>
+      </table>
+    </div>
+    <% }); %>
+  </div>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap">
+  <h2>Prices by the hour and by the day</h2>
+  <p class="ep-intro">For a home you live in where only part was renovated, or for builders and developers. <%= money(p.hourlyRate) %> per cleaner per hour.</p>
+  <div class="ep-tables">
+    <div class="ep-table-card">
+      <table>
+        <caption>By the hour</caption>
+        <thead><tr><th scope="col">Hours</th><th scope="col">1 cleaner</th><th scope="col">2 cleaners</th></tr></thead>
+        <tbody><% [3, 4, 5, 6].forEach(function (h) { %><tr><th scope="row"><%= h %> hours</th><td><%= money(h * p.hourlyRate) %></td><td><%= money(h * p.hourlyRate * 2) %></td></tr><% }); %></tbody>
+      </table>
+    </div>
+    <div class="ep-table-card">
+      <table>
+        <caption>By the day (<%= p.fullDayHours %> hours)</caption>
+        <thead><tr><th scope="col">Cleaners</th><th scope="col">Price for the day</th></tr></thead>
+        <tbody><% [1, 2, 3, 4].forEach(function (c) { %><tr><th scope="row"><%= c %> cleaner<%= c > 1 ? 's' : '' %></th><td><%= money(c * day) %></td></tr><% }); %></tbody>
+      </table>
+    </div>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand" id="extras"><div class="ep-wrap">
+  <h2>Extra rooms, the oven and other extras</h2>
+  <p class="ep-intro">For the price by size. Only add what your home has.</p>
+  <div class="ep-tables">
+    <div class="ep-table-card">
+      <table>
+        <caption>Extra rooms</caption>
+        <thead><tr><th scope="col">Room</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
+        <tbody><% p.extraRooms.forEach(function (r) { %><tr><th scope="row"><%= r.label %></th><% r.prices.forEach(function (v) { %><td><%= money(v) %></td><% }); %></tr><% }); %></tbody>
+      </table>
+    </div>
+    <div class="ep-table-card">
+      <table>
+        <caption>Oven cleaning</caption>
+        <tbody><% p.ovens.filter(function (o) { return o.price; }).forEach(function (o) { %><tr><th scope="row"><%= o.label %></th><td><%= money(o.price) %></td></tr><% }); %></tbody>
+      </table>
+    </div>
+  </div>
+  <div class="ep-extras">
+    <% p.extras.filter(function (g) { return /Blinds|Outside|Waste/.test(g.group); }).forEach(function (g) { %>
+    <div class="ep-table-card">
+      <table>
+        <caption><%= g.group %></caption>
+        <tbody><% g.items.forEach(function (i) { %><tr><th scope="row"><%= i.label %></th><td><%= money(i.price) %></td></tr><% }); %></tbody>
+      </table>
+    </div>
+    <% }); %>
+  </div>
+</div></section>
+
+<section class="ep-band ep-white"><div class="ep-wrap ep-two">
+  <div>
+    <h2>What's included in an after builders clean</h2>
+    <ul class="ep-list">
+      <li>Building dust removed from walls, skirting boards, light fittings, vents and sills</li>
+      <li>Kitchen and bathroom fixtures, cabinets and drawers cleaned inside and out</li>
+      <li>Floors vacuumed and mopped</li>
+      <li>Internal windows and frames cleaned</li>
+      <li>Paint splashes and tape residue removed where possible</li>
+      <li>Packaging and small debris cleared</li>
+    </ul>
+  </div>
+  <div>
+    <h2>Not included</h2>
+    <ul class="ep-list ep-list--no">
+      <li>Outside windows</li>
+      <li>Large waste, unless you add waste removal</li>
+    </ul>
+    <p>When you book by the hour or by the day, the cleaners start with the areas the work touched and carry on as far as the time allows.</p>
+  </div>
+</div></section>
+
+<section class="ep-band ep-sand"><div class="ep-wrap">
+  <h2>After builders cleaning prices: your questions</h2>
+  <div class="h-faq">
+    <% p.faqs.forEach(function (f, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= f.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= f.a %></p>
+      </details>
+    <% }); %>
+  </div>
+  <p class="ep-center">Read more about our <a href="/after-builders-cleaning/">after builders cleaning</a>, or see our <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a>.</p>
+  <%- include('partials/author-box') %>
+</div></section>
+
+<section class="ep-band ep-deep"><div class="ep-wrap ep-center">
+  <h2>Get your exact price online</h2>
+  <p>Choose your home or the cleaners and hours you need, see the total and book a day that suits you.</p>
+  <a class="h-btn h-btn--light" href="<%= book %>">Get your exact quote</a>
+</div></section>
+
+</div>
+
+<script>
+(function () {
+  var f = document.getElementById('calculator'); if (!f) return;
+  var d = JSON.parse(f.getAttribute('data-prices'));
+  var names = ['unfurnished', 'part furnished', 'furnished'];
+  function m(n) { return '£' + (Math.round(n * 100) % 100 ? n.toFixed(2) : Math.round(n)); }
+  function find(list, key) { for (var i = 0; i < list.length; i++) if (list[i][0] === key) return list[i][1]; }
+  function val(n) { var e = f.querySelector('input[name=' + n + ']:checked'); return e ? e.value : null; }
+  function label(n) { var e = f.querySelector('input[name=' + n + ']:checked'); return e ? e.nextElementSibling.textContent.trim() : ''; }
+  function calc() {
+    var mode = val('mode'), rows = [], total = 0;
+    Array.prototype.forEach.call(f.querySelectorAll('[data-mode]'), function (el) { el.hidden = el.getAttribute('data-mode') !== mode; });
+    if (mode === 'hours') {
+      var c = +val('cleaners'), h = +val('hours');
+      total = c * h * d.rate;
+      rows.push([c + ' cleaner' + (c > 1 ? 's' : '') + ' × ' + (h === 8 ? 'full day (8 hours)' : h + ' hours') + ' × ' + m(d.rate), total]);
+    } else {
+      var type = val('type'), studio = f.querySelector('input[name=beds][value="0"]');
+      studio.disabled = type === 'house';
+      if (type === 'house' && studio.checked) f.querySelector('input[name=beds][value="1"]').checked = true;
+      var beds = +val('beds'), furn = +val('furn');
+      var base = type === 'flat' ? find(d.flats, beds === 0 ? 'studio' : 'flat-' + beds) : find(d.houses, 'house-' + beds);
+      total = base[furn]; rows.push([(beds === 0 ? 'Studio flat' : beds + ' bedroom ' + type) + ', ' + names[furn], base[furn]]);
+      var extraBaths = +val('baths') - 1;
+      if (extraBaths > 0) { var b = d.bath[furn] * extraBaths; total += b; rows.push([extraBaths + ' extra bathroom' + (extraBaths > 1 ? 's' : ''), b]); }
+      var ov = find(d.ovens, val('oven')) || 0;
+      if (ov) { total += ov; rows.push([label('oven') + ' oven', ov]); }
+    }
+    document.getElementById('ep-total').textContent = m(total);
+    document.getElementById('ep-lines').innerHTML = rows.map(function (r) { return '<li><span>' + r[0] + '</span><span>' + m(r[1]) + '</span></li>'; }).join('');
+  }
+  f.addEventListener('change', calc);
+  f.addEventListener('submit', function (e) { e.preventDefault(); });
+})();
+</script>

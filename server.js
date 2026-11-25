@@ -531,6 +531,40 @@ app.locals.serviceFaqTeaser = (slug) => {
 };
 app.locals.liveServiceFaqs = () =>
   Object.entries(SERVICE_FAQS).filter(([, e]) => e.live).map(([slug, e]) => ({ url: `/${slug}/faq/`, title: e.data.title }));
+// After builders prices page (Silvia, 25 Nov 2026): price by size, by the hour, or cleaners by the day.
+app.get('/after-builders-cleaning/prices', (req, res) => {
+  const prices = require('./data/after-builders-prices');
+  const url = '/after-builders-cleaning/prices';
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'After Builders Cleaning', url: '/after-builders-cleaning' },
+    { name: 'Prices', url }
+  ];
+  const day = prices.hourlyRate * prices.fullDayHours;
+  res.render('ab-prices', {
+    title: 'After Builders Cleaning Prices London & Essex | Calculator',
+    metaDescription:
+      'After builders cleaning prices in London and Essex: by the size of an empty home, by the hour for one room, or cleaners by the day for builders. Calculator.',
+    p: prices,
+    breadcrumbs,
+    designV2: true,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildPriceListService({
+        prices,
+        url,
+        service: 'After Builders Cleaning',
+        extraOffers: [
+          { name: 'After builders cleaning, one cleaner per hour', price: prices.hourlyRate },
+          { name: `After builders cleaning, one cleaner for a day of ${prices.fullDayHours} hours`, price: day }
+        ]
+      }),
+      schema.buildFaqPage(prices.faqs.map((i) => ({ question: i.q, answer: i.a })))
+    ]
+  });
+});
+
 // End of tenancy prices page (Silvia, 24 Nov 2026): the one page with prices per home size and per extra.
 app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
   const prices = require('./data/eot-prices');

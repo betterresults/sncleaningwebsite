@@ -97,3 +97,11 @@
   .ep thead th{font-size:.66rem;letter-spacing:.02em;white-space:normal;vertical-align:bottom}
 }
 .ep-sand .ep-qa{background:#fff}
+
+/* After builders prices page */
+.ep-methods{margin-top:24px}
+.ep-hero .ep-card{background:#fff}
+.ep-method-title{font-family:var(--serif);font-size:1.2rem!important;margin:0 0 4px!important}
+.ep-method-price{font-weight:700;color:var(--primary-dark);margin:0 0 8px}
+.ep-steps>div{display:grid;gap:20px}
+.ep-steps>div[hidden]{display:none}
