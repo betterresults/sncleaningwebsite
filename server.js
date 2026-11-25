@@ -761,7 +761,10 @@ app.get('/:slug', async (req, res, next) => {
   const extra = (v2 && serviceContent[page.slug]) || {};
   // Database FAQs plus the service's extra FAQs (data/service-seo.js).
   const allFaqs = [...(page.faqs || []), ...(extra.extraFaqs || [])];
-  const faqPage = schema.buildFaqPage(allFaqs);
+  // The FAQ teaser (top questions of the service's live FAQ page) is shown with full answers under
+  // the same FAQ heading (partials/faq-teaser.ejs), so the FAQPage schema lists those too: schema matches what is visible.
+  const faqTeaser = app.locals.serviceFaqTeaser(page.slug);
+  const faqPage = schema.buildFaqPage([...allFaqs, ...((faqTeaser && faqTeaser.items) || []).map((i) => ({ question: i.q, answer: i.a }))]);
 
   let mapLink = null;
   let localPages = [];
@@ -848,27 +851,6 @@ function applyPageOverrides(page, ov) {
   return next;
 }
 
-// Adds a guide section and matching FAQ for one service+area key in seo-overrides.contentExtras.
-// Rendered by the existing guide and FAQ markup, so only that page changes.
-function applyContentExtras(page, serviceSlug) {
-  const extra = seoOverrides.contentExtras && seoOverrides.contentExtras[`${serviceSlug}/${page.slug}`];
-  if (!extra) return page;
-  let next = page;
-  if (Array.isArray(extra.sections) && extra.sections.length) {
-    const existing = Array.isArray(next.content_sections) ? next.content_sections : [];
-    const headings = new Set(existing.map((c) => c && c.heading));
-    const add = extra.sections.filter((c) => c && c.heading && !headings.has(c.heading));
-    if (add.length) next = { ...next, content_sections: existing.concat(add) };
-  }
-  if (Array.isArray(extra.faqs) && extra.faqs.length) {
-    const existing = Array.isArray(next.faqs) ? next.faqs : [];
-    const questions = new Set(existing.map((f) => f && f.question));
-    const add = extra.faqs.filter((f) => f && f.question && !questions.has(f.question));
-    if (add.length) next = { ...next, faqs: existing.concat(add) };
-  }
-  return next;
-}
-
 async function renderArea(req, res, next, areaSlug) {
   // Airbnb changeover price corrected after the CMS row is read (lib/price-guard.js), so text and FAQ schema match the booking form.
   const page = guardAirbnbPrices(await content.getAreaPageBySlug(req.params.serviceSlug, areaSlug));
@@ -920,8 +902,7 @@ async function renderArea(req, res, next, areaSlug) {
       { name: place, url: `/${service.slug}/${page.slug}` }
     ];
     const servicePage = await content.getServicePageBySlug(service.slug);
-    const pageWithCopy = applyContentExtras(page, service.slug);
-    const faqs = pageWithCopy.faqs || [];
+    const faqs = page.faqs || [];
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
     // London / Essex pages: the big coverage map linking to this service's pages.
@@ -994,7 +975,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       title: (ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
       metaDescription: (ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`,
       h1Override: ov && ov.h1 ? ov.h1 : null,
-      page: applyPageOverrides(pageWithCopy, ov),
+      page: applyPageOverrides(page, ov),
       region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
