@@ -49,6 +49,7 @@ const pages = {
   "upholstery-cleaning/billericay": {"title": "Sofa & Upholstery Cleaning Billericay | 5★ Rated", "metaDescription": "Sofa and upholstery cleaning in Billericay, Queen's Park and South Green. Sofas and armchairs cleaned at home by our own DBS checked team. Book online.", "h1": "Sofa and Upholstery Cleaning in Billericay", "leadFirst": "SN Cleaning Services provides a sofa cleaning service in Billericay.", "leadKeepOriginal": true},
   "end-of-tenancy-cleaning/sutton": {"linkPhrases": [{"phrase": "Carpet cleaning in Sutton", "href": "/carpet-cleaning-services/sutton/"}]},
   "deep-house-cleaning/london": {"h1": "Deep House Cleaning Services in London", "leadFirst": "SN Cleaning Services offers a deep cleaning service for flats and houses across London.", "leadKeepOriginal": true},
+  "airbnb-cleaning/london": {"h1": "Airbnb Cleaning Service in London", "leadFirst": "SN Cleaning Services is an Airbnb cleaning service for hosts across London.", "leadKeepOriginal": true},
   "carpet-cleaning-services/london": {"linkPhrases": [{"phrase": "carpet cleaning in the London Borough of Sutton", "href": "/carpet-cleaning-services/sutton/"}]}
 };
 
