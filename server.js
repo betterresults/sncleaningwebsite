@@ -827,6 +827,54 @@ app.get('/end-of-tenancy-cleaning-checklist', (req, res) => {
   });
 });
 
+// Regular domestic checklist. Registered before /:slug so the flat URL is not
+// treated as a service page. The nested /domestic-cleaning/checklist alias is
+// a Netlify 301 only (netlify.toml), not an area route.
+const domesticChecklist = require('./data/domestic-checklist');
+
+function useDomesticBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'domestic-cleaning');
+}
+
+app.get('/domestic-cleaning-checklist', (req, res) => {
+  useDomesticBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Domestic Cleaning', url: '/domestic-cleaning' },
+    { name: 'Checklist', url: domesticChecklist.PATH }
+  ];
+  const faqEntities = domesticChecklist.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  res.render('domestic-checklist', {
+    title: domesticChecklist.TITLE,
+    metaDescription: domesticChecklist.META_DESCRIPTION,
+    checklist: domesticChecklist,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: domesticChecklist.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildChecklistArticle({
+        headline: domesticChecklist.H1,
+        description: domesticChecklist.META_DESCRIPTION,
+        url: domesticChecklist.PATH,
+        date: domesticChecklist.PUBLISHED
+      }),
+      schema.buildChecklistHowTo({
+        name: domesticChecklist.H1,
+        description: domesticChecklist.META_DESCRIPTION,
+        url: domesticChecklist.PATH,
+        sections: domesticChecklist.howToSections
+      }),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
 async function checklistHttp(req, res) {
   try {
     const body = req.method === 'GET' || req.method === 'HEAD'

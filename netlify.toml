@@ -1646,6 +1646,19 @@ package = "netlify-plugin-cache"
   status = 301
   force = true
 
+# Flat domestic checklist URL. Not an area page, and not prerendered at the nested path.
+[[redirects]]
+  from = "/domestic-cleaning/checklist"
+  to = "/domestic-cleaning-checklist/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/domestic-cleaning/checklist/"
+  to = "/domestic-cleaning-checklist/"
+  status = 301
+  force = true
+
 [[redirects]]
   from = "/the-ultimate-end-of-tenancy-cleaning-checklist"
   to = "/end-of-tenancy-cleaning/"

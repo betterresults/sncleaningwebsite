@@ -1,0 +1,119 @@
+<%# Public domestic cleaning checklist. Data: data/domestic-checklist.js. Styles: public/css/domestic-checklist.css. %>
+<link rel="stylesheet" href="/css/domestic-checklist.css?v=<%= assetVersion %>" />
+<% const book = bookUrl('domestic-cleaning'); %>
+<div class="dc" id="domestic-checklist" data-total="<%= checklist.TASKS.length %>" data-storage="<%= checklist.STORAGE_KEY %>">
+
+<header class="dc-hero"><div class="dc-wrap">
+  <nav class="dc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= checklist.H1 %></h1>
+  <p class="dc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= checklist.PUBLISHED %>"><%= checklist.PUBLISHED_LABEL %></time></p>
+  <div class="dc-prose">
+    <p>A regular domestic clean is the weekly or fortnightly visit that keeps a home on top: kitchen, bathrooms, bedrooms, living areas and hallway, worked through to a checklist rather than left to memory.</p>
+    <p>This is the room-by-room list our cleaners use for a regular house clean across London and Essex. Tick each task as you go, add a note if you want a room done in a particular way, or <a href="<%= checklist.PDF_PATH %>">download the printable PDF</a>. If you would rather hand the clean to us, <a href="<%= book %>">get a quote for domestic cleaning</a>.</p>
+    <p>SN Cleaning Services has provided domestic cleaning in London and Essex for 12 years. Every clean is done by our own trained, insured and DBS checked team, and we send the same cleaner wherever we can so they get to know your home.</p>
+  </div>
+  <div class="dc-actions">
+    <a class="h-btn h-btn--primary" href="#the-checklist">Start the checklist</a>
+    <a class="h-btn h-btn--light" href="<%= checklist.PDF_PATH %>">Download the printable PDF</a>
+    <button type="button" class="h-btn h-btn--light" id="dc-print">Print</button>
+  </div>
+</div></header>
+
+<section class="dc-band dc-white"><div class="dc-wrap dc-prose">
+  <h2>How it works</h2>
+  <ol class="dc-steps">
+    <li><strong>1.</strong> Tick each task as you clean, or download the printable PDF and print it.</li>
+    <li><strong>2.</strong> Work through the home room by room, and add a note if you want a room done in a particular way.</li>
+    <li><strong>3.</strong> If you would rather hand the clean to us, <a href="<%= book %>">get a quote for a regular domestic clean</a>. The booking form shows the exact price before you confirm.</li>
+  </ol>
+</div></section>
+
+<section class="dc-band dc-sand" id="the-checklist"><div class="dc-wrap">
+  <h2>The room-by-room checklist</h2>
+  <p class="dc-prose">Tick as you go. Your ticks and notes stay in this browser if you refresh the page.</p>
+  <div class="dc-progress" aria-live="polite">
+    <div class="dc-progress-row">
+      <span class="dc-progress-label" id="dc-progress-text">0 of <%= checklist.TASKS.length %> done</span>
+      <span><%= checklist.TASKS.length %> tasks</span>
+    </div>
+    <div class="dc-bar" role="progressbar" aria-valuemin="0" aria-valuemax="<%= checklist.TASKS.length %>" aria-valuenow="0" aria-labelledby="dc-progress-text"><span id="dc-progress-bar"></span></div>
+  </div>
+  <div class="dc-actions dc-noprint">
+    <button type="button" class="h-btn h-btn--primary" id="dc-print-2">Print</button>
+    <a class="h-btn h-btn--light" href="<%= checklist.PDF_PATH %>">Download the printable PDF</a>
+  </div>
+
+  <% checklist.sections.forEach(function (section) { %>
+    <section class="dc-room" id="section-<%= section.key %>" aria-labelledby="section-heading-<%= section.key %>">
+      <div class="dc-room-head">
+        <h3 id="section-heading-<%= section.key %>"><%= section.name %></h3>
+        <span class="dc-count"><%= section.tasks.length %> tasks</span>
+      </div>
+      <% section.tasks.forEach(function (item) { %>
+        <div class="dc-task" data-task="<%= item.id %>">
+          <p class="dc-task-name"><%= item.text %></p>
+          <div class="dc-ticks">
+            <label class="dc-tick"><input type="checkbox" data-kind="done" aria-label="Done: <%= item.text %>"> Done</label>
+          </div>
+        </div>
+      <% }); %>
+      <% if (section.key === 'kitchen') { %>
+        <p class="dc-note"><%= checklist.OVEN_NOTE %></p>
+      <% } %>
+      <div class="dc-notes">
+        <label for="note-<%= section.key %>">Notes for <%= section.name %></label>
+        <textarea id="note-<%= section.key %>" data-section="<%= section.key %>" maxlength="2000" placeholder="Anything you want done a particular way in this room"></textarea>
+      </div>
+    </section>
+  <% }); %>
+
+  <div class="dc-hand" id="hand-it-over">
+    <h3>Hand it to us</h3>
+    <p>If you would rather we did the clean, tell us the postcode and we will open the domestic cleaning booking form. You see the price there before you confirm.</p>
+    <form method="get" action="<%= book %>">
+      <input type="hidden" name="utm_content" value="domestic-checklist">
+      <div class="dc-fields">
+        <label class="dc-field">Postcode <input name="prefill_postcode" type="text" required autocomplete="postal-code" maxlength="12"></label>
+        <label class="dc-field">Email <input name="prefill_email" type="email" required autocomplete="email"></label>
+      </div>
+      <p style="margin-top:12px"><button type="submit" class="h-btn h-btn--primary">Get a quote for domestic cleaning</button></p>
+    </form>
+  </div>
+</div></section>
+
+<section class="dc-band dc-white"><div class="dc-wrap dc-prose">
+  <h2>What a regular clean does not include</h2>
+  <p><%= checklist.OVEN_NOTE %> You can add the inside of the oven when you book, and the booking form shows the price before you confirm.</p>
+  <p>This list is a regular visit. It is not a <a href="/deep-house-cleaning/">deep house clean</a>, and it is not an <a href="/end-of-tenancy-cleaning/">end of tenancy clean</a>. If you are moving out, use the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>.</p>
+</div></section>
+
+<section class="dc-band dc-sand"><div class="dc-wrap dc-prose">
+  <h2>Domestic cleaning near you</h2>
+  <p>See <a href="/domestic-cleaning/">domestic cleaning in London and Essex</a> for what's included when we do the clean.</p>
+  <ul class="dc-areas">
+    <% checklist.nearYou.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>
+  </ul>
+</div></section>
+
+<section class="dc-band dc-white"><div class="dc-wrap">
+  <h2>Frequently asked questions</h2>
+  <div class="h-faq">
+    <% checklist.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= item.a %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="dc-prose" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script src="/js/domestic-checklist.js?v=<%= assetVersion %>" defer></script>

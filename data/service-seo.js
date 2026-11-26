@@ -15,6 +15,7 @@ module.exports = {
         h: 'What is domestic cleaning?',
         p: [
           'Domestic cleaning is regular, general cleaning of your home: kitchens, bathrooms, living areas and bedrooms kept clean and tidy on a schedule that suits you. It is the clean that keeps a home on top, week after week, rather than a one time deep reset.',
+          'You can work through our [room-by-room domestic cleaning checklist](/domestic-cleaning-checklist/) to see exactly what a regular visit covers.',
           `SN Cleaning Services has provided domestic cleaning ${LONDON_ESSEX} for 12 years. Every clean is done by our own trained, insured and DBS checked cleaners, never subcontractors, and we send the same cleaner wherever we can so they get to know your home.`
         ]
       },
