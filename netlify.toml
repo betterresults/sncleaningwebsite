@@ -164,15 +164,11 @@ package = "netlify-plugin-cache"
   force = true
 
 # Private report links. Not prerendered. noindex is also set by the function.
+# The id is the last path segment. The function reads it from the request path
+# because a rewrite does not reliably add a query string.
 [[redirects]]
-  from = "/checklist/report/:id"
-  to = "/.netlify/functions/checklist-api?report=:id"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/checklist/report/:id/"
-  to = "/.netlify/functions/checklist-api?report=:id"
+  from = "/checklist/report/*"
+  to = "/.netlify/functions/checklist-api/:splat"
   status = 200
   force = true
 
