@@ -8,7 +8,7 @@ module.exports = {
   'domestic-cleaning': {
     metaTitle: 'Domestic Cleaning London and Essex | Own DBS Checked Team',
     metaDescription:
-      'Weekly, fortnightly or one off domestic cleaning in London and Essex by our own insured, DBS checked cleaners, with a 24 hour re clean guarantee. Book online.',
+      'Weekly, fortnightly or one off domestic cleaning in London and Essex by our own DBS checked cleaners, with a 24 hour re clean guarantee. Book online.',
     prices: [],
     guide: [
       {
@@ -52,7 +52,7 @@ module.exports = {
   'end-of-tenancy-cleaning': {
     metaTitle: 'End of Tenancy Cleaning London and Essex | Deposit Back',
     metaDescription:
-      'End of tenancy cleaning in London and Essex to the checklist letting agents use, with a deposit back guarantee, show up guarantee and a 7 day re clean.',
+      'End of tenancy cleaning for homes in London and Essex by SN Cleaning Services, with a deposit back guarantee and a 7 day re clean. Book online.',
     prices: [],
     guide: [
       {
