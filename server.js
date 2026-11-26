@@ -901,6 +901,56 @@ app.get('/checklist/report/:id', (req, res) => {
   return checklistHttp(req, res);
 });
 
+// Clean home report. Registered before /:slug so it is not treated as a service
+// or legacy blog slug. Research page: no quote form, no booking button.
+const CLEAN_HOME_H1 = 'The clean home: how a clean or messy home affects mood, stress, sleep and motivation';
+const CLEAN_HOME_META = 'Published research on how a clean or messy home is linked with mood, stress, sleep and motivation, with a source for every figure. Read the report.';
+const CLEAN_HOME_DATE = '2026-11-26T00:00:00+00:00';
+// Visible article (standfirst, disclaimer, ten findings and body through methodology,
+// excluding the sources list and the explorer, which repeats the findings).
+// 4,258 words at 230 per minute, rounded.
+const CLEAN_HOME_READING_MINUTES = 19;
+
+app.get('/clean-home-report', (req, res) => {
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Blog', url: '/blog' },
+    { name: 'The clean home report', url: '/clean-home-report' }
+  ];
+  res.render('clean-home-report', {
+    title: 'Clean home report on mood and sleep',
+    metaDescription: CLEAN_HOME_META,
+    ogType: 'article',
+    hideQuoteCta: true,
+    bodyClass: 'is-chr-report',
+    extraStylesheets: ['clean-home-report.css'],
+    breadcrumbs,
+    report: {
+      h1: CLEAN_HOME_H1,
+      date: CLEAN_HOME_DATE,
+      dateLabel: '26 November 2026',
+      readingMinutes: CLEAN_HOME_READING_MINUTES
+    },
+    webPageDateModified: CLEAN_HOME_DATE,
+    structuredData: [
+      ...res.locals.structuredData.map((block) => {
+        if (!block || block['@type'] !== 'HomeAndConstructionBusiness') return block;
+        const copy = { ...block };
+        delete copy.hasOfferCatalog;
+        delete copy.priceRange;
+        return copy;
+      }),
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildResearchReport({
+        headline: CLEAN_HOME_H1,
+        description: CLEAN_HOME_META,
+        url: '/clean-home-report',
+        date: CLEAN_HOME_DATE
+      })
+    ]
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on

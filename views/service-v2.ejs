@@ -110,6 +110,9 @@
         <% (g.p || []).forEach(function (para) { %><p><%- linkifyInternal(para) %></p><% }); %>
         <% if (g.list) { %><ul><% g.list.forEach(function (li) { %><li><%= li %></li><% }); %></ul><% } %>
       <% }); %>
+      <% if (service.slug === 'domestic-cleaning' || service.slug === 'deep-house-cleaning') { %>
+        <p>Our <a href="/clean-home-report/">clean home report</a> reviews published research on how a clean or messy home is linked with mood, stress, sleep and motivation.</p>
+      <% } %>
     </article>
     <% if (copy.prices && copy.prices.length) { %>
     <aside class="s-prices<%= copy.prices.some(function (t) { return t.items; }) ? ' s-prices--list' : '' %>" id="prices" aria-label="<%= name %> prices">

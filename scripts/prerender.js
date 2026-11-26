@@ -43,6 +43,7 @@ async function buildRoutes() {
     { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true },
     { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
+    { url: '/clean-home-report', out: 'clean-home-report/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
     { url: '/prices', out: 'prices/index.html', sitemap: true },
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },
