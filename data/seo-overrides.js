@@ -52,7 +52,8 @@ const pages = {
   "airbnb-cleaning/london": {"h1": "Airbnb Cleaning Service in London", "leadFirst": "SN Cleaning Services is an Airbnb cleaning service for hosts across London.", "leadKeepOriginal": true},
   "carpet-cleaning-services/london": {"linkPhrases": [{"phrase": "carpet cleaning in the London Borough of Sutton", "href": "/carpet-cleaning-services/sutton/"}]},
   // Page 2 upgrades (26 Nov 2026). New keys only. Delete a key to roll that page back.
-  "domestic-cleaning/west-horndon": {"title": "Domestic Cleaners West Horndon, CM13 | 5★ Rated", "metaDescription": "Domestic cleaners in West Horndon and East Horndon, Brentwood CM13. Weekly or fortnightly house cleaning by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in West Horndon", "leadFirst": "SN Cleaning Services provides domestic cleaners in West Horndon, Brentwood.", "leadKeepOriginal": true}
+  "domestic-cleaning/west-horndon": {"title": "Domestic Cleaners West Horndon, CM13 | 5★ Rated", "metaDescription": "Domestic cleaners in West Horndon and East Horndon, Brentwood CM13. Weekly or fortnightly house cleaning by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in West Horndon", "leadFirst": "SN Cleaning Services provides domestic cleaners in West Horndon, Brentwood.", "leadKeepOriginal": true},
+  "after-builders-cleaning/chelmsford": {"title": "After Builders Cleaning Chelmsford, Essex | 5★ Rated", "metaDescription": "After builders cleaning in Chelmsford, Essex, across CM1, CM2 and CM3. Plaster dust, paint splatters and grout haze cleared by our own team. Book online.", "h1": "After Builders Cleaning in Chelmsford, Essex", "leadFirst": "SN Cleaning Services provides after builders cleaning in Chelmsford, Essex.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
