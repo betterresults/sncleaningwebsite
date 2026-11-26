@@ -951,6 +951,45 @@ app.get('/clean-home-report', (req, res) => {
   });
 });
 
+// House cleaning time calculator. Registered before /:slug so the flat URL is
+// not treated as a service page. Static guide: no Supabase area page, no form capture.
+const timeCalc = require('./data/house-cleaning-time-calculator');
+const timeCalcEngine = require('./public/js/house-cleaning-time-calculator');
+
+app.get('/house-cleaning-time-calculator', (req, res) => {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'domestic-cleaning');
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'House cleaning time calculator', url: timeCalc.PATH }
+  ];
+  const faqEntities = timeCalc.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  const initial = timeCalcEngine.estimate(timeCalc.DEFAULT_STATE, timeCalc.rateInputs());
+  res.render('house-cleaning-time-calculator', {
+    title: timeCalc.TITLE,
+    metaDescription: timeCalc.META_DESCRIPTION,
+    calc: timeCalc,
+    initial,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: timeCalc.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildFaqPage(faqEntities),
+      schema.buildWebApplication({
+        name: timeCalc.H1,
+        description: timeCalc.META_DESCRIPTION,
+        url: timeCalc.PATH,
+        date: timeCalc.PUBLISHED
+      })
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on

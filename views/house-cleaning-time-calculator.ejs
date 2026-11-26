@@ -1,0 +1,188 @@
+<%# House cleaning time calculator. Data: data/house-cleaning-time-calculator.js. Maths: public/js/house-cleaning-time-calculator.js. %>
+<link rel="stylesheet" href="/css/house-cleaning-time-calculator.css?v=<%= assetVersion %>" />
+<% function checked(name, value) { return String(calc.DEFAULT_STATE[name]) === String(value) ? ' checked' : ''; } %>
+<% const eotFrom = String(calc.PRICE_LABELS.eot || '').replace(/^From /, 'from '); %>
+<div class="htc" id="house-cleaning-time-calculator">
+
+<header class="htc-hero"><div class="htc-wrap">
+  <nav class="htc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= calc.H1 %></h1>
+  <p class="htc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= calc.PUBLISHED %>"><%= calc.PUBLISHED_LABEL %></time></p>
+  <div class="htc-lead">
+    <p>This calculator gives a guide to how long a regular domestic clean, a one-off deep clean or an end of tenancy clean may take in a London or Essex home, based on the rooms, the condition of the property, pets and optional add-ons.</p>
+    <p>Regular and deep visits are booked by the hour, with a <strong>3-hour minimum</strong> on the booking form. End of tenancy cleaning is priced <%= eotFrom %> by the size of the property, not by the hour. The exact price is always shown in the booking form before you confirm.</p>
+  </div>
+</div></header>
+
+<section class="htc-band htc-white" aria-labelledby="htc-estimate-heading"><div class="htc-wrap">
+  <h2 id="htc-estimate-heading">Estimate the time</h2>
+  <p class="htc-intro">Set the service, the rooms and the condition. This is a guide to help you choose hours, or to understand a typical visit. The booking form is where the time and the exact price are confirmed.</p>
+
+  <div class="htc-tool">
+    <div class="htc-summary" aria-hidden="true">
+      <span class="htc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.25"/><path d="M12 7.75V12l2.75 1.75"/></svg></span>
+      <span>
+        <strong id="htc-summary-hours"><%= initial.hoursValue %> hours</strong>
+        <span id="htc-summary-meta"><%= initial.summaryMeta %></span>
+      </span>
+    </div>
+
+    <form class="htc-card" id="htc-form" action="#house-cleaning-time-calculator" autocomplete="off"
+      data-rate-regular="<%= calc.rateInputs().regularHourly %>"
+      data-rate-deep="<%= calc.rateInputs().deepHourly %>"
+      data-label-regular="<%= calc.PRICE_LABELS.regular %>"
+      data-label-deep="<%= calc.PRICE_LABELS.deep %>"
+      data-label-eot="<%= calc.PRICE_LABELS.eot %>"
+      data-url-regular="<%= bookUrl('domestic-cleaning') %>"
+      data-url-deep="<%= bookUrl('deep-house-cleaning') %>"
+      data-url-eot="<%= bookUrl('end-of-tenancy-cleaning') %>">
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend">Service type</span></legend>
+        <div class="htc-seg">
+          <label class="htc-choice"><input type="radio" name="service" value="regular"<%= checked('service', 'regular') %> required> Regular Domestic Clean</label>
+          <label class="htc-choice"><input type="radio" name="service" value="deep"<%= checked('service', 'deep') %> required> One-off Deep Clean</label>
+          <label class="htc-choice"><input type="radio" name="service" value="eot"<%= checked('service', 'eot') %> required> End of Tenancy Clean</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.8V20h11V9.8"/></svg> Bedrooms</span></legend>
+        <div class="htc-beds">
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="studio"<%= checked('bedrooms', 'studio') %> required> Studio</label>
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="1"<%= checked('bedrooms', '1') %> required> 1</label>
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="2"<%= checked('bedrooms', '2') %> required> 2</label>
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="3"<%= checked('bedrooms', '3') %> required> 3</label>
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="4"<%= checked('bedrooms', '4') %> required> 4</label>
+          <label class="htc-choice"><input type="radio" name="bedrooms" value="5"<%= checked('bedrooms', '5') %> required> 5+</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend">Bathrooms</span></legend>
+        <div class="htc-baths">
+          <label class="htc-choice"><input type="radio" name="bathrooms" value="1"<%= checked('bathrooms', '1') %> required> 1</label>
+          <label class="htc-choice"><input type="radio" name="bathrooms" value="2"<%= checked('bathrooms', '2') %> required> 2</label>
+          <label class="htc-choice"><input type="radio" name="bathrooms" value="3"<%= checked('bathrooms', '3') %> required> 3</label>
+          <label class="htc-choice"><input type="radio" name="bathrooms" value="4"<%= checked('bathrooms', '4') %> required> 4+</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend">Property condition</span></legend>
+        <div class="htc-stack">
+          <label class="htc-choice"><input type="radio" name="condition" value="well"<%= checked('condition', 'well') %> required> Well maintained</label>
+          <label class="htc-choice"><input type="radio" name="condition" value="average"<%= checked('condition', 'average') %> required> Average lived-in</label>
+          <label class="htc-choice"><input type="radio" name="condition" value="extra"<%= checked('condition', 'extra') %> required> Needs extra attention</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend">Pets</span></legend>
+        <div class="htc-pets">
+          <label class="htc-choice"><input type="radio" name="pets" value="none"<%= checked('pets', 'none') %> required> No pets</label>
+          <label class="htc-choice"><input type="radio" name="pets" value="pets"<%= checked('pets', 'pets') %> required> 1+ pets</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="htc-set">
+        <legend><span class="htc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 9.5h4V20H10z"/><path d="M10 9.5V8a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5"/><path d="M14 8h2.5M8 5.5l1.2 1.2M7 8h1.5"/></svg> Optional add-ons</span></legend>
+        <p class="htc-hint" id="htc-addon-hint"><%= calc.ADDON_NOTE %></p>
+        <div class="htc-stack">
+          <label class="htc-check"><input type="checkbox" name="addon-oven" value="1"<%= calc.DEFAULT_STATE.oven ? ' checked' : '' %> aria-describedby="htc-addon-hint"> Inside oven</label>
+          <label class="htc-check"><input type="checkbox" name="addon-fridge" value="1"<%= calc.DEFAULT_STATE.fridge ? ' checked' : '' %> aria-describedby="htc-addon-hint"> Inside fridge/freezer</label>
+          <label class="htc-check"><input type="checkbox" name="addon-windows" value="1"<%= calc.DEFAULT_STATE.windows ? ' checked' : '' %> aria-describedby="htc-addon-hint"> Interior windows</label>
+        </div>
+      </fieldset>
+    </form>
+
+    <div class="htc-results" id="htc-results" role="status" aria-live="polite">
+      <div class="htc-results-body">
+      <h3 id="htc-service"><%= initial.serviceName %></h3>
+      <p class="htc-kicker">Recommended cleaning time</p>
+      <p class="htc-hours"><span id="htc-hours-value"><%= initial.hoursValue %></span> <span>hours</span></p>
+      <p class="htc-hours-note" id="htc-hours-note"<%= initial.hoursNote ? '' : ' hidden' %>><%= initial.hoursNote %></p>
+
+      <div class="htc-pricebox">
+        <p class="htc-stat-label">Guide price</p>
+        <p class="htc-price" id="htc-price"><%= initial.priceLabel %></p>
+        <p class="htc-example" id="htc-example"<%= initial.showHourlyExample ? '' : ' hidden' %>><%= initial.example %></p>
+        <p class="htc-example" id="htc-eot-example"<%= initial.showHourlyExample ? ' hidden' : '' %>>The exact price depends on the size of the property and what you include. See the <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a> and confirm the total in the booking form.</p>
+      </div>
+
+      <div class="htc-stat">
+        <span class="htc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5"/><path d="M6.5 9.8V20h11V9.8"/></svg></span>
+        <div>
+          <p class="htc-stat-label">Typical team</p>
+          <p class="htc-stat-copy" id="htc-team"><%= initial.team %></p>
+        </div>
+      </div>
+
+      <div class="htc-stat">
+        <span class="htc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="5.5" width="16" height="14" rx="2"/><path d="M8 3.75v3.5M16 3.75v3.5M4 10.5h16"/></svg></span>
+        <div>
+          <p class="htc-stat-label">Recommended frequency</p>
+          <p class="htc-stat-copy"><strong id="htc-frequency"><%= initial.frequency %></strong></p>
+          <p class="htc-stat-copy" id="htc-frequency-reason"><%= initial.frequencyReason %></p>
+        </div>
+      </div>
+
+      <div class="htc-results-foot">
+        <a class="h-btn h-btn--primary" id="htc-cta" href="<%= bookUrl(calc.BOOK_SLUG[initial.service]) %>">Open the booking form</a>
+        <p class="htc-links">
+          <a href="/domestic-cleaning-checklist/">Domestic cleaning checklist</a>
+          <a href="/end-of-tenancy-cleaning-checklist/">End of tenancy cleaning checklist</a>
+        </p>
+      </div>
+      <p class="htc-honesty"><%= calc.HONESTY_NOTE %></p>
+
+      <p class="htc-worked"><span class="htc-worked-label">How we worked this out.</span> <span id="htc-worked"><%= initial.worked %></span></p>
+      <div class="htc-notes" id="htc-notes">
+        <% initial.notes.forEach(function (text) { %><p><%= text %></p><% }); %>
+      </div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="htc-band htc-sand" aria-labelledby="htc-method-heading"><div class="htc-wrap">
+  <h2 id="htc-method-heading">How the estimate is worked out</h2>
+  <div class="htc-explain">
+    <article>
+      <h3>Rooms</h3>
+      <p>More bedrooms and bathrooms take longer. A studio or 1-bed regular visit often sits at the 3-hour minimum; a family house needs more time.</p>
+    </article>
+    <article>
+      <h3>Condition and pets</h3>
+      <p>A well maintained home is quicker than one that needs extra attention. Pet hair on floors and soft furnishings usually adds a little time. There is no separate pet fee.</p>
+    </article>
+    <article>
+      <h3>Optional add-ons</h3>
+      <p>Cleaning <strong>inside the oven</strong> is an optional add-on, not a standalone oven-cleaning service. On a regular visit we already wipe the oven exterior and control panel; the inside is extra. On a deep or end of tenancy clean you choose your oven type (or no oven cleaning) on the booking form. <strong>Inside the fridge/freezer</strong> is part of a typical end of tenancy clean when the appliance is empty and has been switched off to defrost; on a deep clean it is done if the appliance is empty or you can make room; a regular visit includes the fridge exterior. <strong>Interior windows</strong> (internal glass) are part of a typical end of tenancy clean; outside windows are not included. Any extra cost is shown in the booking form, not here.</p>
+    </article>
+  </div>
+  <p class="htc-follow">What each visit includes is set out on our <a href="/domestic-cleaning/">domestic cleaning</a>, <a href="/deep-house-cleaning/">deep house cleaning</a> and <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning</a> pages. End of tenancy prices by property size are on the <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a> page. If you want a room-by-room list, use the <a href="/domestic-cleaning-checklist/">domestic cleaning checklist</a> or the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>. For the research on how a tidy or cluttered home is linked with mood, stress and sleep, read the <a href="/clean-home-report/">clean home report</a>.</p>
+</div></section>
+
+<section class="htc-band htc-white" aria-labelledby="htc-faq-heading"><div class="htc-wrap">
+  <h2 id="htc-faq-heading">Frequently asked questions</h2>
+  <div class="h-faq htc-faq">
+    <% calc.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= item.a %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="htc-follow" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script src="/js/house-cleaning-time-calculator.js?v=<%= assetVersion %>" defer></script>
