@@ -36,8 +36,8 @@ const pages = {
   "end-of-tenancy-cleaning/havering/emerson-park": {"title": "End of Tenancy Cleaning Emerson Park RM11 | 5★ Rated", "metaDescription": "End of tenancy cleaning in Emerson Park, Hornchurch RM11: our own DBS checked cleaners for big family homes, with a 7 day re clean guarantee. Get a quote.", "h1": "End of Tenancy Cleaning in Emerson Park RM11"},
   "end-of-tenancy-cleaning/havering/collier-row": {"title": "End of Tenancy Cleaning Collier Row RM5 | 5★ Rated", "metaDescription": "End of tenancy cleaning in Collier Row, Romford RM5. Our own DBS checked cleaners work to your inventory, 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Collier Row RM5"},
   "end-of-tenancy-cleaning/redbridge": {"title": "End of Tenancy Cleaning Redbridge & Ilford | 5★ Rated", "metaDescription": "End of tenancy cleaning in Redbridge: Ilford, Gants Hill, Barkingside, Wanstead and Woodford. Our own DBS checked team, 7 day re clean. Get a quote online.", "h1": "End of Tenancy Cleaning in Redbridge and Ilford"},
-  "domestic-cleaning/newham": {"title": "Domestic Cleaning Newham | 5★ Rated, Book Online", "metaDescription": "Domestic cleaning in Newham: weekly or fortnightly cleans in Stratford, Forest Gate, East Ham and Manor Park by our own DBS checked cleaners. Book online.", "h1": "Domestic Cleaners in Newham", "leadFirst": "SN Cleaning Services provides regular weekly and fortnightly domestic cleaning in Newham, for homes you live in.", "leadKeepOriginal": true},
-  "domestic-cleaning/havering": {"title": "Cleaners in Havering | Romford, Hornchurch & Upminster", "metaDescription": "Cleaners in Havering for weekly or fortnightly house cleaning in Romford, Hornchurch, Upminster and Harold Hill. Our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Havering", "leadFirst": "SN Cleaning Services provides regular domestic cleaners across Havering, including Romford, Hornchurch and Upminster.", "leadKeepOriginal": true},
+  "domestic-cleaning/newham": {"title": "Domestic Cleaning Newham | 5★ Rated, Book Online", "metaDescription": "Domestic cleaning in Newham: weekly or fortnightly cleans in Stratford, Forest Gate, East Ham and Manor Park by our own DBS checked cleaners. Book online.", "h1": "Domestic Cleaners in Newham", "leadFirst": "SN Cleaning Services provides regular weekly and fortnightly domestic cleaning in Newham, for homes you live in.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "East Ham and Beckton in E6", "href": "/domestic-cleaning/east-ham/"}, {"phrase": "Upton Park in E13", "href": "/domestic-cleaning/upton-park/"}]},
+  "domestic-cleaning/havering": {"title": "Cleaners in Havering | Romford, Hornchurch & Upminster", "metaDescription": "Cleaners in Havering for weekly or fortnightly house cleaning in Romford, Hornchurch, Upminster and Harold Hill. Our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Havering", "leadFirst": "SN Cleaning Services provides regular domestic cleaners across Havering, including Romford, Hornchurch and Upminster.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "Rainham, RM13", "href": "/domestic-cleaning/havering/rainham/"}]},
   "domestic-cleaning/broomfield": {"title": "Domestic Cleaners Broomfield, Chelmsford CM1 | 5★ Rated", "metaDescription": "Domestic cleaners in Broomfield, Chelmsford CM1: the same cleaner from our own DBS checked team each visit, products included. Book online.", "h1": "Domestic Cleaners in Broomfield"},
   "domestic-cleaning/gidea-park": {"title": "Domestic Cleaning Gidea Park RM2 | 5★ Rated, Book", "metaDescription": "Domestic cleaning services in Gidea Park, RM2: weekly or fortnightly cleans for period and family homes by our own insured, DBS checked team. Book online.", "h1": "Domestic Cleaning Services in Gidea Park"},
   "domestic-cleaning/hutton": {"title": "Domestic Cleaning Hutton, Brentwood CM13 | 5★ Rated", "metaDescription": "House cleaners in Hutton, Brentwood, Essex: Hutton Mount and Ingrave, CM13. Weekly or fortnightly visits by our own DBS checked team. Book online.", "h1": "Domestic Cleaning in Hutton, Brentwood"},
@@ -78,12 +78,169 @@ Object.assign(pages, {
   "domestic-cleaning/ilford": {"metaDescription": "Domestic cleaning in Ilford: weekly, fortnightly or one off house cleaning in IG1, Gants Hill and Seven Kings by our own DBS checked team. Book online."},
 });
 
+// New money pages (26 Nov 2026). New keys only.
+// Deep parent keys below are linkPhrases only, so existing titles and H1s stay with the CMS.
+Object.assign(pages, {
+  "domestic-cleaning/city-of-london": {
+    title: "Domestic Cleaners City of London | 5★ Rated",
+    metaDescription: "Domestic cleaners in the City of London for flats in the Barbican, Golden Lane and EC1 to EC4. Our own DBS checked team. Book online.",
+    h1: "Domestic Cleaners in the City of London",
+    leadFirst: "SN Cleaning Services provides regular domestic cleaners for flats in the City of London.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "end of tenancy cleaning in the City of London", href: "/end-of-tenancy-cleaning/city-of-london/" },
+      { phrase: "deep house cleaning in the City of London", href: "/deep-house-cleaning/city-of-london/" },
+      { phrase: "domestic cleaning across London", href: "/domestic-cleaning/london/" },
+      { phrase: "domestic cleaners in Islington", href: "/domestic-cleaning/islington/" },
+      { phrase: "domestic cleaning checklist", href: "/domestic-cleaning-checklist/" },
+      { phrase: "domestic cleaning service", href: "/domestic-cleaning/" }
+    ]
+  },
+  "domestic-cleaning/east-ham": {
+    title: "Domestic Cleaners East Ham, E6 | 5★ Rated",
+    metaDescription: "Domestic cleaners in East Ham, E6: weekly or fortnightly house cleaning for terraces and flats by our own DBS checked team. Book online.",
+    h1: "Domestic Cleaners in East Ham, E6",
+    leadFirst: "SN Cleaning Services provides regular domestic cleaners in East Ham, E6.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "domestic cleaning in Upton Park", href: "/domestic-cleaning/upton-park/" },
+      { phrase: "domestic cleaning in Beckton", href: "/domestic-cleaning/beckton/" },
+      { phrase: "domestic cleaning in Newham", href: "/domestic-cleaning/newham/" },
+      { phrase: "end of tenancy cleaning in East Ham", href: "/end-of-tenancy-cleaning/east-ham/" },
+      { phrase: "deep house cleaning in East Ham", href: "/deep-house-cleaning/east-ham/" },
+      { phrase: "domestic cleaning checklist", href: "/domestic-cleaning-checklist/" }
+    ]
+  },
+  "domestic-cleaning/beckton": {
+    title: "Domestic Cleaners Beckton, E6 & E16 | 5★ Rated",
+    metaDescription: "Domestic cleaners in Beckton, Newham E6 and E16, for houses and flats around Gallions Reach and Cyprus. Our own DBS checked team. Book online.",
+    h1: "Domestic Cleaners in Beckton, E6 and E16",
+    leadFirst: "SN Cleaning Services provides regular domestic cleaners in Beckton, E6 and E16.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "domestic cleaning in East Ham", href: "/domestic-cleaning/east-ham/" },
+      { phrase: "domestic cleaning in Newham", href: "/domestic-cleaning/newham/" },
+      { phrase: "deep house cleaning in Beckton", href: "/deep-house-cleaning/beckton/" },
+      { phrase: "end of tenancy cleaning in Beckton", href: "/end-of-tenancy-cleaning/beckton/" },
+      { phrase: "domestic cleaning checklist", href: "/domestic-cleaning-checklist/" }
+    ]
+  },
+  "domestic-cleaning/upton-park": {
+    title: "Domestic Cleaning Upton Park, E13 | 5★ Rated",
+    metaDescription: "Domestic cleaning in Upton Park, E13: weekly or fortnightly cleans for terraces around Green Street and flats at Upton Gardens. Our own team. Book online.",
+    h1: "Domestic Cleaning in Upton Park, E13",
+    leadFirst: "SN Cleaning Services provides regular domestic cleaning in Upton Park, E13.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "domestic cleaning in Beckton", href: "/domestic-cleaning/beckton/" },
+      { phrase: "domestic cleaning in East Ham", href: "/domestic-cleaning/east-ham/" },
+      { phrase: "domestic cleaning in Newham", href: "/domestic-cleaning/newham/" },
+      { phrase: "end of tenancy cleaning in Upton Park", href: "/end-of-tenancy-cleaning/upton-park/" },
+      { phrase: "domestic cleaning checklist", href: "/domestic-cleaning-checklist/" }
+    ]
+  },
+  "domestic-cleaning/havering/rainham": {
+    title: "Domestic Cleaners Rainham, RM13 | 5★ Rated",
+    metaDescription: "Domestic cleaners in Rainham, RM13, including Orchard Village and Beam Park. Weekly or fortnightly visits by our own DBS checked team. Book online.",
+    h1: "Domestic Cleaners in Rainham, RM13",
+    leadFirst: "SN Cleaning Services provides regular domestic cleaners in Rainham and Wennington, RM13.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "domestic cleaners in Hornchurch", href: "/domestic-cleaning/hornchurch/" },
+      { phrase: "domestic cleaning in Havering", href: "/domestic-cleaning/havering/" },
+      { phrase: "end of tenancy cleaning in Rainham", href: "/end-of-tenancy-cleaning/havering/rainham/" },
+      { phrase: "domestic cleaning checklist", href: "/domestic-cleaning-checklist/" }
+    ]
+  },
+  "deep-house-cleaning/city-of-london": {
+    title: "Deep House Cleaning City of London | 5★ Rated",
+    metaDescription: "Deep house cleaning in the City of London for Barbican, Golden Lane and EC1 to EC4 flats. Our own DBS checked team, 24 hour re clean. Book online.",
+    h1: "Deep House Cleaning in the City of London",
+    leadFirst: "SN Cleaning Services provides deep house cleaning for flats in the City of London.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "end of tenancy cleaning in the City of London", href: "/end-of-tenancy-cleaning/city-of-london/" },
+      { phrase: "domestic cleaning in the City of London", href: "/domestic-cleaning/city-of-london/" },
+      { phrase: "deep house cleaning across London", href: "/deep-house-cleaning/london/" },
+      { phrase: "deep house cleaning in Islington", href: "/deep-house-cleaning/islington/" },
+      { phrase: "deep house cleaning service", href: "/deep-house-cleaning/" }
+    ]
+  },
+  "deep-house-cleaning/east-ham": {
+    title: "Deep House Cleaning East Ham, E6 | 5★ Rated",
+    metaDescription: "Deep house cleaning in East Ham, E6, for Victorian terraces and flats. Grease, limescale and missed corners, by our own DBS checked team. Book online.",
+    h1: "Deep House Cleaning in East Ham, E6",
+    leadFirst: "SN Cleaning Services provides deep house cleaning in East Ham, E6.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "deep house cleaning in Newham", href: "/deep-house-cleaning/newham/" },
+      { phrase: "deep house cleaning in Beckton", href: "/deep-house-cleaning/beckton/" },
+      { phrase: "domestic cleaning in East Ham", href: "/domestic-cleaning/east-ham/" },
+      { phrase: "end of tenancy cleaning in East Ham", href: "/end-of-tenancy-cleaning/east-ham/" }
+    ]
+  },
+  "deep-house-cleaning/beckton": {
+    title: "Deep House Cleaning Beckton, E6 & E16 | 5★ Rated",
+    metaDescription: "Deep house cleaning in Beckton, E6 and E16, for 1980s houses and low rise flats around Gallions Reach. Our own DBS checked team. Book online.",
+    h1: "Deep House Cleaning in Beckton, E6 and E16",
+    leadFirst: "SN Cleaning Services provides deep house cleaning in Beckton, E6 and E16.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "deep house cleaning in Newham", href: "/deep-house-cleaning/newham/" },
+      { phrase: "deep house cleaning in East Ham", href: "/deep-house-cleaning/east-ham/" },
+      { phrase: "domestic cleaning in Beckton", href: "/domestic-cleaning/beckton/" },
+      { phrase: "end of tenancy cleaning in Beckton", href: "/end-of-tenancy-cleaning/beckton/" }
+    ]
+  },
+  "deep-house-cleaning/redbridge/ilford": {
+    title: "Deep House Cleaning Ilford, IG1 & IG2 | 5★ Rated",
+    metaDescription: "Deep house cleaning in Ilford, IG1 and IG2: town centre flats, Cranbrook, Valentines and Loxford. Our own DBS checked team, 24 hour re clean. Book online.",
+    h1: "Deep House Cleaning in Ilford, IG1 and IG2",
+    leadFirst: "SN Cleaning Services provides deep house cleaning in Ilford, IG1 and IG2.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "domestic cleaning in Ilford", href: "/domestic-cleaning/ilford/" },
+      { phrase: "end of tenancy cleaning in Ilford", href: "/end-of-tenancy-cleaning/redbridge/ilford/" },
+      { phrase: "deep house cleaning in Redbridge", href: "/deep-house-cleaning/redbridge/" }
+    ]
+  },
+  "deep-house-cleaning/barking-and-dagenham/becontree": {
+    title: "Deep House Cleaning Becontree | 5★ Rated",
+    metaDescription: "Deep house cleaning on the Becontree estate, RM8 to RM10: terraces around Parsloes, Valence and Mayesbrook parks. Our own DBS checked team. Book online.",
+    h1: "Deep House Cleaning in Becontree, RM8 to RM10",
+    leadFirst: "SN Cleaning Services provides deep house cleaning services in Becontree.",
+    leadKeepOriginal: true,
+    linkPhrases: [
+      { phrase: "end of tenancy cleaning in Becontree", href: "/end-of-tenancy-cleaning/barking-and-dagenham/becontree/" },
+      { phrase: "deep house cleaning in Barking and Dagenham", href: "/deep-house-cleaning/barking-and-dagenham/" },
+      { phrase: "deep house cleaning in Newham", href: "/deep-house-cleaning/newham/" }
+    ]
+  },
+  "deep-house-cleaning/newham": {
+    linkPhrases: [
+      { phrase: "East Ham, E6", href: "/deep-house-cleaning/east-ham/" },
+      { phrase: "Beckton, E6 and E16", href: "/deep-house-cleaning/beckton/" }
+    ]
+  },
+  "deep-house-cleaning/redbridge": {
+    linkPhrases: [
+      { phrase: "Ilford, IG1 and IG2", href: "/deep-house-cleaning/redbridge/ilford/" }
+    ]
+  },
+  "deep-house-cleaning/barking-and-dagenham": {
+    linkPhrases: [
+      { phrase: "deep house cleaning in Becontree", href: "/deep-house-cleaning/barking-and-dagenham/becontree/" }
+    ]
+  }
+});
+
 // clusters: groups of neighbouring areas per service (area_pages.slug values). Every page in `pages` is linked first,
 // in the existing "near" link block, from the other members of its cluster, and links first to them (max 7). Slugs that are
 // not published pages for that service are ignored by server.js.
 const clusters = {
   "end-of-tenancy-cleaning": [["havering/gidea-park", "havering/collier-row", "havering/harold-hill", "romford", "havering/harold-wood", "havering/chase-cross", "havering/havering-atte-bower"], ["havering/elm-park", "havering/emerson-park", "havering/hornchurch", "havering/rainham", "havering/upminster", "havering/cranham", "havering/upminster-bridge"], ["redbridge/gants-hill", "redbridge/seven-kings", "redbridge/goodmayes", "redbridge/newbury-park", "redbridge/wanstead", "redbridge/hainault", "redbridge"], ["manor-park", "beckton", "east-ham", "upton-park", "west-ham", "custom-house", "north-woolwich", "little-ilford", "newham"], ["barking-and-dagenham/becontree", "barking-and-dagenham/dagenham", "barking-and-dagenham/marks-gate", "barking-and-dagenham"], ["essex/brentwood", "shenfield", "hutton", "warley", "pilgrims-hatch"], ["london", "newham", "redbridge", "havering", "barking-and-dagenham"]],
-  "domestic-cleaning": [["newham", "tower-hamlets", "waltham-forest"], ["broomfield", "chelmsford", "great-baddow", "springfield", "writtle"], ["gidea-park", "romford", "harold-wood", "emerson-park", "hornchurch", "upminster"], ["hutton", "shenfield", "warley", "pilgrims-hatch", "essex/brentwood"], ["sutton", "merton", "croydon", "kingston"]],
+  "domestic-cleaning": [["newham", "east-ham", "beckton", "upton-park", "tower-hamlets", "waltham-forest"], ["broomfield", "chelmsford", "great-baddow", "springfield", "writtle"], ["havering", "havering/rainham", "gidea-park", "romford", "harold-wood", "emerson-park", "hornchurch", "upminster"], ["hutton", "shenfield", "warley", "pilgrims-hatch", "essex/brentwood"], ["sutton", "merton", "croydon", "kingston"], ["city-of-london", "islington", "tower-hamlets", "camden", "southwark", "newham"]],
+  "deep-house-cleaning": [["newham", "east-ham", "beckton"], ["redbridge", "redbridge/ilford"], ["barking-and-dagenham", "barking-and-dagenham/becontree"], ["city-of-london", "islington", "westminster", "southwark", "newham"]],
   "airbnb-cleaning": [["greenwich", "lewisham", "bexley", "southwark"], ["croydon", "sutton", "bromley", "lambeth", "merton"], ["wandsworth", "lambeth", "merton", "richmond", "kingston", "hammersmith-and-fulham"], ["kingston", "richmond", "sutton", "merton", "wandsworth"], ["ealing", "hounslow", "hillingdon", "harrow", "brent", "hammersmith-and-fulham"]],
   "after-builders-cleaning": [["hammersmith-and-fulham", "kensington-and-chelsea", "richmond", "wandsworth", "ealing"], ["richmond", "kingston", "hounslow", "wandsworth"], ["kensington-and-chelsea", "westminster", "wandsworth"], ["barnet", "brent", "harrow", "enfield", "haringey", "camden"], ["kingston", "richmond", "sutton", "merton", "croydon"]],
   "carpet-cleaning-services": [["sutton", "croydon", "merton", "kingston"], ["hutton", "essex/brentwood", "shenfield", "warley"]],
@@ -143,6 +300,31 @@ const contentExtras = {
       answer: 'No. A deep clean is a one off reset of kitchens, bathrooms, grout and hidden dust. A regular weekly or fortnightly visit is a different service and follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). Many people book a deep clean first, then a regular visit afterwards, but there is no obligation to.'
     }]
   },
+  // Parent links for the 26 Nov 2026 money pages. One town per sentence.
+  'domestic-cleaning/havering': {
+    sections: [{ heading: 'Domestic cleaning in Rainham', body: ['We also clean homes in Rainham, RM13.'] }]
+  },
+  'deep-house-cleaning/newham': {
+    sections: [{
+      heading: 'Deep house cleaning in East Ham and in Beckton',
+      body: [
+        'Victorian and Edwardian terraces in East Ham, E6 have their own deep house cleaning page.',
+        'Houses and low-rise flats in Beckton, E6 and E16 have their own deep house cleaning page.'
+      ]
+    }]
+  },
+  'deep-house-cleaning/redbridge': {
+    sections: [{
+      heading: 'Deep house cleaning in Ilford',
+      body: ['Town centre flats, Cranbrook, Valentines and Loxford are covered on the deep house cleaning page for Ilford, IG1 and IG2.']
+    }]
+  },
+  'deep-house-cleaning/barking-and-dagenham': {
+    sections: [{
+      heading: 'Deep house cleaning in Becontree',
+      body: ['Terraces around Parsloes, Valence and Mayesbrook parks are covered by deep house cleaning in Becontree.']
+    }]
+  }
 };
 
 module.exports = { pages, nearbyFirst, contentExtras };
