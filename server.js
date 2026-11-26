@@ -609,6 +609,7 @@ app.get('/:serviceSlug/faq', (req, res, next) => {
   if (!entry) return next();
   const faq = entry.data;
   const all = faq.groups.flatMap((g) => g.items);
+  const plainFaq = (a) => String(a || '').replace(/\[([^\]]+)\]\([^)]+\)/g, '$1');
   const breadcrumbs = [
     ...res.locals.breadcrumbs,
     { name: 'End of Tenancy Cleaning', url: `/${req.params.serviceSlug}` },
@@ -625,7 +626,7 @@ app.get('/:serviceSlug/faq', (req, res, next) => {
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
-      schema.buildFaqPage(all.map((i) => ({ question: i.q, answer: i.a })))
+      schema.buildFaqPage(all.map((i) => ({ question: i.q, answer: plainFaq(i.a) })))
     ]
   });
 });
@@ -774,6 +775,82 @@ app.post('/contact', async (req, res) => {
       error: 'Something went wrong sending your message. Please try again or call us directly.'
     });
   }
+});
+
+// End of tenancy checklist. Registered before /:slug so the flat URL is not
+// treated as a service page. The nested /end-of-tenancy-cleaning/checklist
+// alias is a Netlify 301 only (netlify.toml), not an area route.
+const eotChecklist = require('./data/eot-checklist');
+const checklistApi = require('./lib/checklist-api-handler');
+
+function useEotBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'end-of-tenancy-cleaning');
+}
+
+app.get('/end-of-tenancy-cleaning-checklist', (req, res) => {
+  useEotBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'End of Tenancy Cleaning', url: '/end-of-tenancy-cleaning' },
+    { name: 'Checklist', url: eotChecklist.PATH }
+  ];
+  const faqEntities = eotChecklist.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a + (item.source ? ' Source: ' + item.source.name + ' (' + item.source.url + ').' : '')
+  }));
+  res.render('eot-checklist', {
+    title: eotChecklist.TITLE,
+    metaDescription: eotChecklist.META_DESCRIPTION,
+    checklist: eotChecklist,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: eotChecklist.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildChecklistArticle({
+        headline: eotChecklist.H1,
+        description: eotChecklist.META_DESCRIPTION,
+        url: eotChecklist.PATH,
+        date: eotChecklist.PUBLISHED,
+        citations: eotChecklist.citations
+      }),
+      schema.buildChecklistHowTo({
+        name: eotChecklist.H1,
+        description: eotChecklist.META_DESCRIPTION,
+        url: eotChecklist.PATH,
+        sections: eotChecklist.howToSections
+      }),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
+async function checklistHttp(req, res) {
+  try {
+    const body = req.method === 'GET' || req.method === 'HEAD'
+      ? ''
+      : (typeof req.body === 'string' ? req.body : JSON.stringify(req.body || {}));
+    const result = await checklistApi.handler({
+      httpMethod: req.method,
+      headers: req.headers,
+      queryStringParameters: req.query || {},
+      body
+    });
+    res.status(result.statusCode || 200);
+    Object.entries(result.headers || {}).forEach(([key, value]) => res.set(key, value));
+    res.send(result.body || '');
+  } catch (err) {
+    console.error('checklist route:', err && err.message ? err.message : 'failed');
+    res.status(200).json({ ok: true, delivery: 'off', message: checklistApi.OFF_MESSAGE });
+  }
+}
+
+app.all('/api/checklist', checklistHttp);
+app.get('/checklist/report/:id', (req, res) => {
+  req.query.report = req.params.id;
+  return checklistHttp(req, res);
 });
 
 // Individual service page — one shared template, content pulled from Supabase.

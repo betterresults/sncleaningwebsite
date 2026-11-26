@@ -107,7 +107,7 @@
       <p class="h-eyebrow"><%= name %> guide</p>
       <% (copy.guide || []).forEach(function (g) { %>
         <h2><%= g.h %></h2>
-        <% (g.p || []).forEach(function (para) { %><p><%= para %></p><% }); %>
+        <% (g.p || []).forEach(function (para) { %><p><%- linkifyInternal(para) %></p><% }); %>
         <% if (g.list) { %><ul><% g.list.forEach(function (li) { %><li><%= li %></li><% }); %></ul><% } %>
       <% }); %>
     </article>

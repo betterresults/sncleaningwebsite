@@ -65,7 +65,8 @@ module.exports = {
       {
         h: 'What do letting agents check at the end of a tenancy?',
         p: [
-          'Agents and inventory clerks look at the same areas every time, so they are where we spend the most time:'
+          'Agents and inventory clerks look at the same areas every time, so they are where we spend the most time:',
+          'If you are cleaning the property yourself, work through our [room-by-room end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
         ],
         list: [
           'Inside the oven, hob and extractor',

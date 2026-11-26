@@ -80,6 +80,7 @@
       <p class="h-eyebrow">Why choose us</p>
       <h2 class="h-title">Why people in <%= place %> book with us</h2>
       <p class="s-intro">12 years cleaning homes across London and Essex, with our own team and the right products for every job.</p>
+      <% if (service.slug === 'end-of-tenancy-cleaning') { %><p class="s-intro">Doing the clean yourself? Work through our <a href="/end-of-tenancy-cleaning-checklist/">room-by-room end of tenancy cleaning checklist</a> before the inspection.</p><% } %>
     </div>
     <ul class="s-freq">
       <% benefits.forEach(function (bf) { %>

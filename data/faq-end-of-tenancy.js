@@ -131,7 +131,7 @@ module.exports = {
         {
           q: 'What does the letting agent or inventory clerk check?',
           links: [{ text: 'End of tenancy: what actually gets checked', url: '/blog/end-of-tenancy-what-gets-checked/' }],
-          a: 'Inside every cupboard and drawer, the fridge, freezer and oven, limescale on taps and shower screens, the extractor, skirting boards, door frames, switches and the inside of windows, compared with the check in report.'
+          a: 'Inside every cupboard and drawer, the fridge, freezer and oven, limescale on taps and shower screens, the extractor, skirting boards, door frames, switches and the inside of windows, compared with the check in report. Work through our [room-by-room list](/end-of-tenancy-cleaning-checklist/) before the inspection.'
         },
         {
           q: 'What is fair wear and tear?',

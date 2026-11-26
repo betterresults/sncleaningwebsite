@@ -41,6 +41,7 @@ async function buildRoutes() {
     { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true },
     { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true },
     { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true },
+    { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
     { url: '/prices', out: 'prices/index.html', sitemap: true },
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },
@@ -227,7 +228,7 @@ function writeRobotsTxt() {
   // allowed for pages to appear in ChatGPT search; ChatGPT-User fetches pages a
   // user asks about). A named group replaces the * group for that bot, so it
   // repeats the same private paths.
-  const priv = 'Disallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\n';
+  const priv = 'Disallow: /apply/\nDisallow: /apply-rep/\nDisallow: /admin/\nDisallow: /team/\nDisallow: /checklist/report/\nDisallow: /api/checklist/\n';
   const ai = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User'];
   const txt = `User-agent: *\nAllow: /\n${priv}\n` +
     ai.map((b) => `User-agent: ${b}\n`).join('') + `Allow: /\n${priv}\n` +
