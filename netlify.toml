@@ -150,6 +150,34 @@ package = "netlify-plugin-cache"
   status = 200
   force = true
 
+# End of tenancy checklist. Optional save/report. Missing keys must still return 200.
+[[redirects]]
+  from = "/api/checklist"
+  to = "/.netlify/functions/checklist-api"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/checklist/*"
+  to = "/.netlify/functions/checklist-api"
+  status = 200
+  force = true
+
+# Private report links. Not prerendered. noindex is also set by the function.
+# The id is the last path segment. The function reads it from the request path
+# because a rewrite does not reliably add a query string.
+[[redirects]]
+  from = "/checklist/report/*"
+  to = "/.netlify/functions/checklist-api/:splat"
+  status = 200
+  force = true
+
+[[headers]]
+  for = "/checklist/report/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+    Cache-Control = "no-store"
+
 # Website editor (/admin): its API and photos uploaded before publishing.
 [[redirects]]
   from = "/api/editor"
@@ -1603,6 +1631,20 @@ package = "netlify-plugin-cache"
   from = "/the-psychology-of-clean-how-office-cleaning-affects-employee-performance/"
   to = "https://snclean.co.uk/?ref=sncleaningservices&utm_source=sncleaningservices.co.uk&utm_medium=referral&utm_campaign=old_page_redirect"
   status = 301
+
+# Flat checklist URL. Do not retarget the ultimate-checklist redirects below:
+# those stay on the end of tenancy service hub.
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/checklist"
+  to = "/end-of-tenancy-cleaning-checklist/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/end-of-tenancy-cleaning/checklist/"
+  to = "/end-of-tenancy-cleaning-checklist/"
+  status = 301
+  force = true
 
 [[redirects]]
   from = "/the-ultimate-end-of-tenancy-cleaning-checklist"

@@ -2,13 +2,14 @@
 // Plain HTML content rendered by views/legal.ejs. Keep every statement true to
 // how the site and business actually work; update the "Last updated" date when editing.
 const UPDATED = '27 September 2026';
+const PRIVACY_UPDATED = '26 November 2026';
 const EMAIL = 'info@sncleaningservices.co.uk';
 
 module.exports = {
   'privacy-policy': {
     title: 'Privacy Policy',
     metaDescription: 'How SN Cleaning Services collects, uses and protects your personal information when you visit our website, ask for a quote or book a clean.',
-    updated: UPDATED,
+    updated: PRIVACY_UPDATED,
     content: `
 <p>This policy explains how SN Cleaning Services ("we", "us") collects and uses personal information when you use sncleaningservices.co.uk, ask for a quote, book a clean or apply to work with us. We are the data controller for this information. If you have any questions, email <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
 
@@ -56,6 +57,7 @@ module.exports = {
 
 <h2>How long we keep it</h2>
 <p>We keep enquiry details for as long as we need them to deal with your request. We keep customer and booking records while you use our services and afterwards for as long as we need them for tax and accounting purposes. We keep application details for as long as the recruitment process needs them. After that we delete them.</p>
+<p>If you use our end of tenancy cleaning checklist, we also collect your name, email address, phone number and postcode, plus any notes and photos you add. We use this to save your checklist and to send you a private link to your report by email, and by text only if you asked us to. We keep this information for 12 months, then delete it. We will only email you about a cleaning quote if you tick the marketing box. You can ask us to delete your details, or opt out of emails or texts, at any time by emailing <a href="mailto:${EMAIL}">${EMAIL}</a>.</p>
 
 <h2>Your rights</h2>
 <p>Under UK data protection law you can ask us to:</p>

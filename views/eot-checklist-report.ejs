@@ -1,0 +1,45 @@
+<%# Same private report as lib/checklist-api-handler.js. The function builds the HTML itself so Netlify does not have to ship the ejs package. %>
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Your checklist report</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/home.css">
+  <link rel="stylesheet" href="/css/eot-checklist.css">
+</head>
+<body class="is-home no-sticky">
+  <main>
+    <div class="ec">
+      <header class="ec-hero"><div class="ec-wrap ec-prose">
+        <p class="ec-byline">Private report · not for search engines</p>
+        <h1>Your end of tenancy cleaning checklist</h1>
+        <p>Saved <%= savedLabel %> for <%= name %><% if (postcode) { %>, <%= postcode %><% } %>. This link is just for you. Ask us to delete it any time by emailing <a href="mailto:info@sncleaningservices.co.uk">info@sncleaningservices.co.uk</a>.</p>
+        <p><a href="/end-of-tenancy-cleaning-checklist/">Back to the checklist</a> · <a href="/downloads/sn-cleaning-end-of-tenancy-checklist.pdf">Download the printable PDF</a></p>
+      </div></header>
+      <section class="ec-band ec-white"><div class="ec-wrap">
+        <% rooms.forEach(function (room) { %>
+          <% const groups = groupsOf(room); %>
+          <section class="ec-room">
+            <h2><%= room.name %></h2>
+            <% if (notes[room.key]) { %><p><%= notes[room.key] %></p><% } %>
+            <% groups.forEach(function (group) { %>
+              <% if (groups.length > 1) { %><p class="ec-group"><%= group.name %></p><% } %>
+              <% group.tasks.forEach(function (item) { %>
+                <% const state = tasks[item.id] || {}; %>
+                <div class="ec-task">
+                  <p class="ec-task-name"><%= item.text %></p>
+                  <p class="ec-count"><%= state.done ? 'Done' : 'Not ticked' %><%= state.checkin ? ' · As at check-in' : '' %><%= state.photo ? ' · Photo taken' : '' %></p>
+                </div>
+              <% }); %>
+            <% }); %>
+          </section>
+        <% }); %>
+        <p class="ec-prose"><a class="h-btn h-btn--primary" href="<%= book %>">Get a quote for an end of tenancy clean</a></p>
+      </div></section>
+    </div>
+  </main>
+</body>
+</html>

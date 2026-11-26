@@ -18,7 +18,7 @@
       <% group.items.forEach(function (item, ii) { %>
         <details class="h-faq-item"<%= gi === 0 && ii === 0 ? ' open' : '' %>>
           <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
-          <p><%= item.a %><% if (item.source) { %> Source: <a href="<%= item.source.url %>" rel="noopener" target="_blank"><%= item.source.name %></a>.<% } %><% if (item.links) { %> Read more: <% item.links.forEach(function (l, li) { %><%= li ? ', ' : '' %><a href="<%= l.url %>"><%= l.text %></a><% }); %>.<% } %></p>
+          <p><%- linkifyInternal(item.a) %><% if (item.source) { %> Source: <a href="<%= item.source.url %>" rel="noopener" target="_blank"><%= item.source.name %></a>.<% } %><% if (item.links) { %> Read more: <% item.links.forEach(function (l, li) { %><%= li ? ', ' : '' %><a href="<%= l.url %>"><%= l.text %></a><% }); %>.<% } %></p>
         </details>
       <% }); %>
     </div>
