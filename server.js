@@ -1032,6 +1032,53 @@ app.get('/end-of-tenancy-cleaning-cost-calculator', (req, res) => {
   });
 });
 
+// Airbnb turnover checklist. Registered immediately before /:slug so the flat
+// URL is not treated as a service page. Static page: no Supabase query here.
+const airbnbChecklist = require('./data/airbnb-turnover-checklist');
+
+function useAirbnbBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'airbnb-cleaning');
+}
+
+app.get('/airbnb-turnover-cleaning-checklist', (req, res) => {
+  useAirbnbBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Airbnb Cleaning', url: '/airbnb-cleaning' },
+    { name: 'Checklist', url: airbnbChecklist.PATH }
+  ];
+  const faqEntities = airbnbChecklist.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  res.render('airbnb-turnover-checklist', {
+    title: airbnbChecklist.TITLE,
+    metaDescription: airbnbChecklist.META_DESCRIPTION,
+    checklist: airbnbChecklist,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: airbnbChecklist.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildChecklistArticle({
+        headline: airbnbChecklist.H1,
+        description: airbnbChecklist.META_DESCRIPTION,
+        url: airbnbChecklist.PATH,
+        date: airbnbChecklist.PUBLISHED
+      }),
+      schema.buildChecklistHowTo({
+        name: airbnbChecklist.H1,
+        description: airbnbChecklist.META_DESCRIPTION,
+        url: airbnbChecklist.PATH,
+        sections: airbnbChecklist.howToSections
+      }),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on

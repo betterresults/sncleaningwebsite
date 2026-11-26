@@ -1,0 +1,119 @@
+<%# Public Airbnb turnover checklist. Data: data/airbnb-turnover-checklist.js. Styles: public/css/airbnb-turnover-checklist.css. designV2 is set on the route. %>
+<link rel="stylesheet" href="/css/airbnb-turnover-checklist.css?v=<%= assetVersion %>" />
+<% const book = bookUrl('airbnb-cleaning'); %>
+<div class="atc" id="airbnb-turnover-checklist" data-total="<%= checklist.TASKS.length %>" data-storage="<%= checklist.STORAGE_KEY %>">
+
+<header class="atc-hero"><div class="atc-wrap">
+  <nav class="atc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= checklist.H1 %></h1>
+  <p class="atc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= checklist.PUBLISHED %>"><%= checklist.PUBLISHED_LABEL %></time></p>
+  <div class="atc-prose">
+    <p>An Airbnb turnover is the changeover between one guest checking out and the next checking in. This is the room-by-room list for that clean across London, inside the M25, and Essex: kitchen, bathroom, bedrooms and living areas, a final guest reset, then linen, keys and damage photos.</p>
+    <p>Tick each task as you go, or <a href="<%= checklist.PDF_PATH %>">download the printable PDF</a>. If you would rather hand the turnover to us, <a href="<%= book %>">book an Airbnb turnover</a>. Same-day checkout-to-check-in turnovers are available. The clean is done by our own trained, insured, DBS-checked team. We never send subcontractors.</p>
+  </div>
+  <div class="atc-actions">
+    <a class="h-btn h-btn--primary" href="<%= book %>">Book an Airbnb turnover</a>
+    <a class="h-btn h-btn--primary atc-download" href="<%= checklist.PDF_PATH %>">Download printable PDF</a>
+    <a class="h-btn h-btn--light" href="#the-checklist">Start the checklist</a>
+    <button type="button" class="h-btn h-btn--light" id="atc-print">Print</button>
+  </div>
+</div></header>
+
+<section class="atc-band atc-white"><div class="atc-wrap atc-prose">
+  <h2>How it works</h2>
+  <ol class="atc-steps">
+    <li><strong>1.</strong> Tick each task as you clean, or download the printable PDF and print it.</li>
+    <li><strong>2.</strong> Work through the property room by room, then the linen, keys and damage-photo protocol. Add a note if the host wants a room done a particular way.</li>
+    <li><strong>3.</strong> If you would rather we did the turnover, <a href="<%= book %>">book an Airbnb turnover</a>. The booking form shows the price before you confirm, and payment is authorised before the clean.</li>
+  </ol>
+</div></section>
+
+<section class="atc-band atc-sand" id="the-checklist"><div class="atc-wrap">
+  <h2>The room-by-room checklist</h2>
+  <p class="atc-prose">Tick as you go. Your ticks and notes stay in this browser if you refresh the page.</p>
+  <div class="atc-progress" aria-live="polite">
+    <div class="atc-progress-row">
+      <span class="atc-progress-label" id="atc-progress-text">0 of <%= checklist.TASKS.length %> done</span>
+      <span><%= checklist.TASKS.length %> tasks</span>
+    </div>
+    <div class="atc-bar" role="progressbar" aria-valuemin="0" aria-valuemax="<%= checklist.TASKS.length %>" aria-valuenow="0" aria-labelledby="atc-progress-text"><span id="atc-progress-bar"></span></div>
+  </div>
+  <div class="atc-actions atc-noprint">
+    <a class="h-btn h-btn--primary atc-download" href="<%= checklist.PDF_PATH %>">Download printable PDF</a>
+    <button type="button" class="h-btn h-btn--light" id="atc-print-2">Print</button>
+    <button type="button" class="h-btn h-btn--light" id="atc-reset">Reset</button>
+  </div>
+
+  <% checklist.sections.forEach(function (section) { %>
+    <section class="atc-room" id="section-<%= section.key %>" aria-labelledby="section-heading-<%= section.key %>">
+      <div class="atc-room-head">
+        <h3 id="section-heading-<%= section.key %>"><%= section.name %></h3>
+        <span class="atc-count"><%= section.tasks.length %> tasks</span>
+      </div>
+      <% section.tasks.forEach(function (item) { %>
+        <div class="atc-task" data-task="<%= item.id %>">
+          <p class="atc-task-name"><%= item.text %></p>
+          <div class="atc-ticks">
+            <label class="atc-tick"><input type="checkbox" data-kind="done" aria-label="Done: <%= item.text %>"> Done</label>
+          </div>
+        </div>
+      <% }); %>
+      <div class="atc-notes">
+        <label for="note-<%= section.key %>">Notes for <%= section.name %></label>
+        <textarea id="note-<%= section.key %>" data-section="<%= section.key %>" maxlength="2000" placeholder="Anything the host wants done a particular way in this part of the turnover"></textarea>
+      </div>
+    </section>
+  <% }); %>
+
+  <div class="atc-hand" id="hand-it-over">
+    <h3>Hand the turnover to us</h3>
+    <p>Tell us the postcode and we will open the Airbnb cleaning booking form. You see the price there before you confirm. Payment is authorised before the clean.</p>
+    <form method="get" action="<%= book %>">
+      <input type="hidden" name="utm_content" value="airbnb-turnover-checklist">
+      <div class="atc-fields">
+        <label class="atc-field">Postcode <input name="prefill_postcode" type="text" required autocomplete="postal-code" maxlength="12"></label>
+        <label class="atc-field">Email <input name="prefill_email" type="email" required autocomplete="email"></label>
+      </div>
+      <p style="margin-top:12px"><button type="submit" class="h-btn h-btn--primary">Book an Airbnb turnover</button></p>
+    </form>
+  </div>
+</div></section>
+
+<section class="atc-band atc-white"><div class="atc-wrap atc-prose">
+  <h2>Rates, cover and the oven add-on</h2>
+  <p>Check-in and check-out turnovers are from £26 an hour. Hosts with several properties pay £25 an hour for those turnovers. A mid-stay clean is £24 an hour, a refresh is £23 an hour, and a deep clean after a long stay is £29 an hour. Rates are per cleaner, cleaning products are included, and there is a 2-hour minimum. SN Cleaning Services is not VAT registered, so there is no VAT to add. A vacuum and mop are available on request.</p>
+  <p><%= checklist.OVEN_NOTE %></p>
+  <p>We cover London inside the M25 and Essex. We do not cover Kent. If something we cleaned is missed, the 24-hour re-clean guarantee means we come back at no extra cost.</p>
+  <p>This list is a short-let changeover. A weekly or fortnightly home visit is a different clean: use the <a href="/domestic-cleaning-checklist/">domestic cleaning checklist</a>. If you are handing a rental back to a landlord or agent, use the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>. To see how long a regular, deep or end of tenancy clean may take, try the <a href="/house-cleaning-time-calculator/">house cleaning time calculator</a>.</p>
+</div></section>
+
+<section class="atc-band atc-sand"><div class="atc-wrap atc-prose">
+  <h2>Airbnb cleaning near you</h2>
+  <p>See <a href="/airbnb-cleaning/">Airbnb cleaning in London and Essex</a> for what is included when we do the turnover.</p>
+  <ul class="atc-areas">
+    <% checklist.nearYou.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>
+  </ul>
+</div></section>
+
+<section class="atc-band atc-white"><div class="atc-wrap">
+  <h2>Frequently asked questions</h2>
+  <div class="h-faq">
+    <% checklist.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= item.a %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="atc-prose" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script src="/js/airbnb-turnover-checklist.js?v=<%= assetVersion %>" defer></script>
