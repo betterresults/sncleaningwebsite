@@ -62,6 +62,7 @@ const pages = {
   "airbnb-cleaning/southend-on-sea": {"title": "Airbnb Cleaning Southend and Westcliff | 5★ Rated", "metaDescription": "Airbnb and holiday let cleaning in Southend-on-Sea, Westcliff, Chalkwell and Thorpe Bay. Turnover cleans by our own insured team. Get a quote.", "h1": "Airbnb and Holiday Let Cleaning in Southend-on-Sea", "leadFirst": "SN Cleaning Services provides Airbnb and holiday let cleaning in Southend-on-Sea, including Westcliff.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/southend-on-sea/"}]},
   // Page 2/3 batch 2 (26 Nov 2026). New keys only. Delete a key to roll that page back.
   "after-builders-cleaning/islington": {"title": "After Builders Cleaning Islington, London | 5★ Rated", "metaDescription": "After builders cleaning in Islington, London. Our own DBS checked team clears dust from Georgian terraces and N1 to N19 flats. Book online.", "h1": "After Builders Cleaning in Islington, London", "leadFirst": "SN Cleaning Services provides after builders cleaning in Islington, London, including Barnsbury and Holloway.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy clean", "href": "/end-of-tenancy-cleaning/islington/"}]},
+  "deep-house-cleaning/havering": {"title": "Deep House Cleaners Havering and Romford | 5★ Rated", "metaDescription": "Deep house cleaners in Havering, from Romford to Upminster. A one off deep or spring clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Havering", "leadFirst": "SN Cleaning Services provides deep house cleaners in Havering, from Romford to Upminster, from £27 an hour.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -103,7 +104,13 @@ const contentExtras = {
   'after-builders-cleaning/london': {
     sections: [{ heading: AFTER_BUILDERS_LONDON_COST_Q, body: [AFTER_BUILDERS_LONDON_COST_A] }],
     faqs: [{ question: AFTER_BUILDERS_LONDON_COST_Q, answer: AFTER_BUILDERS_LONDON_COST_A }]
-  }
+  },
+  'deep-house-cleaning/havering': {
+    faqs: [{
+      question: 'Do you offer a spring clean in Havering?',
+      answer: 'Yes. A deep clean is the usual booking for a spring clean in a Havering home: kitchens, bathrooms, built up grease and the corners a weekly visit does not reach. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, or book weekly or fortnightly [domestic cleaning in Havering](/domestic-cleaning/havering/).'
+    }]
+  },
 };
 
 module.exports = { pages, nearbyFirst, contentExtras };
