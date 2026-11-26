@@ -50,7 +50,9 @@ const pages = {
   "end-of-tenancy-cleaning/sutton": {"h1": "End of Tenancy Cleaning in Sutton and Cheam", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Sutton and Cheam.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "Carpet cleaning in Sutton", "href": "/carpet-cleaning-services/sutton/"}]},
   "deep-house-cleaning/london": {"h1": "Deep House Cleaning Services in London", "leadFirst": "SN Cleaning Services offers a deep cleaning service for flats and houses across London.", "leadKeepOriginal": true},
   "airbnb-cleaning/london": {"h1": "Airbnb Cleaning Service in London", "leadFirst": "SN Cleaning Services is an Airbnb cleaning service for hosts across London.", "leadKeepOriginal": true},
-  "carpet-cleaning-services/london": {"linkPhrases": [{"phrase": "carpet cleaning in the London Borough of Sutton", "href": "/carpet-cleaning-services/sutton/"}]}
+  "carpet-cleaning-services/london": {"linkPhrases": [{"phrase": "carpet cleaning in the London Borough of Sutton", "href": "/carpet-cleaning-services/sutton/"}]},
+  // Page 2 upgrades (26 Nov 2026). New keys only. Delete a key to roll that page back.
+  "domestic-cleaning/west-horndon": {"title": "Domestic Cleaners West Horndon, CM13 | 5★ Rated", "metaDescription": "Domestic cleaners in West Horndon and East Horndon, Brentwood CM13. Weekly or fortnightly house cleaning by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in West Horndon", "leadFirst": "SN Cleaning Services provides domestic cleaners in West Horndon, Brentwood.", "leadKeepOriginal": true}
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
