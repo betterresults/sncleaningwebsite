@@ -8,7 +8,7 @@ module.exports = {
   'domestic-cleaning': {
     metaTitle: 'Domestic Cleaning London and Essex | Own DBS Checked Team',
     metaDescription:
-      'Weekly, fortnightly or one off domestic cleaning in London and Essex by our own insured, DBS checked cleaners, with a 24 hour re clean guarantee. Book online.',
+      'Weekly, fortnightly or one off domestic cleaning in London and Essex by our own DBS checked cleaners, with a 24 hour re clean guarantee. Book online.',
     prices: [],
     guide: [
       {
