@@ -1,0 +1,144 @@
+/* Airbnb turnover checklist. Tokens match the rest of the new design. Adapted from domestic-checklist.css; that file is left unchanged. */
+.atc {
+  --ink: #14302c;
+  --text: #33423f;
+  --muted: #55635f;
+  --deep: #1d3f3b;
+  --sage: #b6d3b0;
+  --sand: #f4f1eb;
+  --line: #e2ddd3;
+  --primary: #1f6b66;
+  --primary-dark: #17524e;
+  --serif: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --r: 22px;
+  color: var(--text);
+  background: var(--sand);
+  max-width: 100%;
+  overflow-x: clip;
+}
+.atc-wrap { max-width: 920px; margin: 0 auto; padding: 0 20px; }
+.atc-hero { background: var(--sand); padding: clamp(28px, 5vw, 64px) 0 clamp(12px, 2vw, 24px); }
+.atc h1, .atc h2, .atc h3 { font-family: var(--serif); font-weight: 500; color: var(--ink); line-height: 1.15; margin: 0 0 12px; overflow-wrap: break-word; }
+.atc h1 { font-size: clamp(2rem, 4.6vw, 3.15rem); letter-spacing: -0.01em; }
+.atc h2 { font-size: clamp(1.45rem, 2.8vw, 2.05rem); margin-top: 0; }
+.atc h3 { font-size: 1.2rem; margin: 22px 0 8px; }
+.atc p, .atc li { line-height: 1.7; overflow-wrap: break-word; }
+.atc-prose p { margin: 0 0 14px; }
+.atc a:not(.h-btn) { color: var(--primary-dark); text-decoration: underline; text-underline-offset: 2px; }
+.atc-crumbs { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; margin: 0 0 18px; font-size: .92rem; color: var(--muted); }
+.atc-crumbs a { color: var(--primary-dark); text-decoration: none; }
+.atc-crumbs a:hover { text-decoration: underline; }
+.atc-crumbs [aria-current="page"] { color: var(--ink); }
+.atc-byline { margin: 0 0 18px; color: var(--muted); font-size: .95rem; }
+.atc-actions { display: flex; flex-wrap: wrap; gap: 10px; margin: 18px 0 8px; }
+.atc-actions .h-btn { max-width: 100%; white-space: normal; text-align: center; line-height: 1.3; }
+.atc-band { padding: clamp(36px, 6vw, 72px) 0; }
+.atc-white { background: #fff; }
+.atc-sand { background: var(--sand); }
+.atc-steps { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.atc-steps li {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 14px 16px;
+}
+.atc-sand .atc-steps li { background: #fff; }
+.atc-steps strong { color: var(--ink); }
+.atc-progress {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin: 0 0 18px;
+}
+.atc-progress-row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; margin-bottom: 8px; flex-wrap: wrap; }
+.atc-progress-label { font-weight: 600; color: var(--ink); }
+.atc-bar { height: 10px; background: var(--sand); border-radius: 999px; overflow: hidden; }
+.atc-bar > span { display: block; height: 100%; width: 0; background: var(--primary); border-radius: inherit; }
+.atc-room {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 18px 16px 8px;
+  margin: 0 0 16px;
+  max-width: 100%;
+}
+.atc-room-head { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.atc-count { color: var(--muted); font-size: .9rem; font-weight: 600; }
+.atc-task {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding: 12px 0;
+  border-top: 1px solid var(--line);
+}
+.atc-task-name { margin: 0; color: var(--ink); }
+.atc-ticks { display: flex; flex-wrap: wrap; gap: 8px; }
+.atc-tick {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  font-size: .88rem;
+  color: var(--text);
+  cursor: pointer;
+  max-width: 100%;
+}
+.atc-tick input { accent-color: var(--primary); width: 1rem; height: 1rem; flex: 0 0 auto; }
+.atc-notes { margin: 8px 0 14px; }
+.atc-notes label { display: block; font-weight: 600; color: var(--ink); margin-bottom: 6px; }
+.atc-notes textarea {
+  width: 100%;
+  max-width: 100%;
+  min-height: 72px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--ink);
+  background: #fff;
+  resize: vertical;
+}
+.atc-note { margin: 4px 0 12px; color: var(--muted); font-size: .95rem; }
+.atc-hand {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  padding: 20px 18px;
+  margin-top: 18px;
+  max-width: 100%;
+}
+.atc-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.atc-field { display: flex; flex-direction: column; gap: 4px; font-weight: 600; color: var(--ink); font-size: .92rem; min-width: 0; }
+.atc-field input[type="text"], .atc-field input[type="email"], .atc-field input[type="tel"] {
+  width: 100%;
+  max-width: 100%;
+  font: inherit;
+  font-weight: 400;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: var(--ink);
+}
+.atc-areas { display: flex; flex-wrap: wrap; gap: 8px 14px; margin: 0 0 16px; padding: 0; list-style: none; }
+.atc-areas a { font-weight: 600; }
+@media (max-width: 640px) {
+  .atc-fields { grid-template-columns: 1fr; }
+  .atc-progress { top: 0; }
+  .atc-wrap { padding: 0 16px; }
+}
+@media print {
+  .site-header, .site-footer, .cookie-note, .wa-float, .atc-hand, .atc-noprint, .atc-actions { display: none !important; }
+  .atc, .atc-white, .atc-sand, .atc-room, .atc-tick { background: #fff !important; color: #000 !important; }
+  .atc-progress { position: static; }
+  .atc-room, .atc-task { break-inside: avoid; }
+  .atc a { color: #000 !important; text-decoration: none !important; }
+  body { padding-bottom: 0 !important; }
+}
