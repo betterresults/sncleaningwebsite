@@ -74,6 +74,7 @@ const pages = {
   // Page 2/3 batch 3 (26 Nov 2026). New keys only. Delete a key to roll that page back.
   "end-of-tenancy-cleaning/brent": {"title": "End of Tenancy Cleaners Brent | 5★ Rated", "metaDescription": "End of tenancy cleaners in Brent: Wembley, Willesden, Harlesden and Kilburn. Our own DBS checked team, show up guarantee and a 7 day re clean.", "h1": "End of Tenancy Cleaning in Brent", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Brent from £179, covering Wembley, Willesden, Harlesden and Kilburn.", "leadKeepOriginal": true},
   "deep-house-cleaning/bexley": {"title": "Deep House Cleaning Bexley | 5★ Rated", "metaDescription": "Deep cleaning in Bexley: Bexleyheath, Sidcup, Welling and Erith. Kitchens, bathrooms and limescale by our own insured team. Book online.", "h1": "Deep House Cleaning in Bexley", "leadFirst": "SN Cleaning Services provides deep house cleaning in Bexley from £27 an hour, including Bexleyheath, Sidcup, Welling and Erith.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/bexley/"}, {"phrase": "weekly or fortnightly", "href": "/domestic-cleaning-checklist/"}]},
+  "end-of-tenancy-cleaning/barnet": {"title": "End of Tenancy Cleaning Barnet | 5★ Rated", "metaDescription": "End of tenancy cleaning in Barnet: Colindale, Finchley, Friern Barnet and Mill Hill. Deposit back guarantee, show up guarantee and a 7 day re clean.", "h1": "End of Tenancy Cleaning in Barnet", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Barnet from £179, including Colindale, Finchley, Friern Barnet, Mill Hill and Brent Cross.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "regular domestic cleaning", "href": "/domestic-cleaning/barnet/"}]},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -156,6 +157,12 @@ const contentExtras = {
     faqs: [{
       question: 'Do you offer a spring clean in Bexley?',
       answer: 'Yes. A deep clean is the usual booking for a spring clean in a Bexley home: kitchens, bathrooms, built up grease and the corners a weekly visit does not reach. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide. If you are moving out of a rental, book end of tenancy cleaning in Bexley instead.'
+    }]
+  },
+  'end-of-tenancy-cleaning/barnet': {
+    faqs: [{
+      question: 'Do you cover Friern Barnet, Mill Hill and Brent Cross?',
+      answer: 'Yes. We cover the whole of Barnet, including Friern Barnet, Mill Hill, Colindale, Finchley, Edgware, Hendon, Whetstone, New Barnet, Burnt Oak, West Hendon and Brent Cross. Work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection. If the property is in the London Borough of Brent rather than Barnet, use our [end of tenancy cleaning in Brent](/end-of-tenancy-cleaning/brent/) page.'
     }]
   },
 };
