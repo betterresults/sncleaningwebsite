@@ -63,6 +63,7 @@ const pages = {
   // Page 2/3 batch 2 (26 Nov 2026). New keys only. Delete a key to roll that page back.
   "after-builders-cleaning/islington": {"title": "After Builders Cleaning Islington, London | 5★ Rated", "metaDescription": "After builders cleaning in Islington, London. Our own DBS checked team clears dust from Georgian terraces and N1 to N19 flats. Book online.", "h1": "After Builders Cleaning in Islington, London", "leadFirst": "SN Cleaning Services provides after builders cleaning in Islington, London, including Barnsbury and Holloway.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy clean", "href": "/end-of-tenancy-cleaning/islington/"}]},
   "deep-house-cleaning/havering": {"title": "Deep House Cleaners Havering and Romford | 5★ Rated", "metaDescription": "Deep house cleaners in Havering, from Romford to Upminster. A one off deep or spring clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Havering", "leadFirst": "SN Cleaning Services provides deep house cleaners in Havering, from Romford to Upminster, from £27 an hour.", "leadKeepOriginal": true},
+  "deep-house-cleaning/hutton": {"title": "Deep House Cleaning Hutton, Brentwood | 5★ Rated", "metaDescription": "Deep cleaning in Hutton and Hutton Mount, near Brentwood, CM13. Kitchens degreased and bathrooms descaled by our own team. Book online.", "h1": "Deep House Cleaning in Hutton, Brentwood", "leadFirst": "SN Cleaning Services provides deep house cleaning in Hutton, near Brentwood in Essex.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -109,6 +110,12 @@ const contentExtras = {
     faqs: [{
       question: 'Do you offer a spring clean in Havering?',
       answer: 'Yes. A deep clean is the usual booking for a spring clean in a Havering home: kitchens, bathrooms, built up grease and the corners a weekly visit does not reach. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, or book weekly or fortnightly [domestic cleaning in Havering](/domestic-cleaning/havering/).'
+    }]
+  },
+  'deep-house-cleaning/hutton': {
+    faqs: [{
+      question: 'Can I use a checklist to keep my Hutton home tidy between deep cleans?',
+      answer: 'Yes. After a deep clean in Hutton, a weekly or fortnightly visit follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). We also provide [domestic cleaning in Hutton](/domestic-cleaning/hutton/).'
     }]
   },
 };
