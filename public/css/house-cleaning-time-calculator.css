@@ -238,19 +238,16 @@
 @media (max-width: 899px) {
   .htc-set, .htc-choice, .htc-check { scroll-margin-top: 8.5rem; }
 }
+.htc-results { padding-bottom: 32px; }
 @media (min-width: 900px) {
   .htc-tool { grid-template-columns: minmax(0, 1fr) minmax(380px, 1fr); gap: 22px; }
   .htc-summary { display: none; }
+  .htc-set, .htc-choice, .htc-check { scroll-margin-top: 6rem; }
+}
+/* The card is about 1030px tall. Stick it only when that full height fits under the header. */
+@media (min-width: 900px) and (min-height: 1180px) {
   .htc-results {
     position: sticky;
     top: 5.5rem;
-    max-height: calc(100vh - 5.5rem - 96px);
-    overflow: auto;
-    scrollbar-color: var(--sage) transparent;
   }
-  .htc-results-foot { margin: 4px 0 0; }
-  .htc-set, .htc-choice, .htc-check { scroll-margin-top: 6rem; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .htc-results { scroll-behavior: auto; }
 }
