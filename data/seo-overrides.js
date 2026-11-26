@@ -76,6 +76,7 @@ const pages = {
   "deep-house-cleaning/bexley": {"title": "Deep House Cleaning Bexley | 5★ Rated", "metaDescription": "Deep cleaning in Bexley: Bexleyheath, Sidcup, Welling and Erith. Kitchens, bathrooms and limescale by our own insured team. Book online.", "h1": "Deep House Cleaning in Bexley", "leadFirst": "SN Cleaning Services provides deep house cleaning in Bexley from £27 an hour, including Bexleyheath, Sidcup, Welling and Erith.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/bexley/"}, {"phrase": "weekly or fortnightly", "href": "/domestic-cleaning-checklist/"}]},
   "end-of-tenancy-cleaning/barnet": {"title": "End of Tenancy Cleaning Barnet | 5★ Rated", "metaDescription": "End of tenancy cleaning in Barnet: Colindale, Finchley, Friern Barnet and Mill Hill. Deposit back guarantee, show up guarantee and a 7 day re clean.", "h1": "End of Tenancy Cleaning in Barnet", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Barnet from £179, including Colindale, Finchley, Friern Barnet, Mill Hill and Brent Cross.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "regular domestic cleaning", "href": "/domestic-cleaning/barnet/"}]},
   "airbnb-cleaning/redbridge": {"title": "Airbnb Cleaning Redbridge | 5★ Rated", "metaDescription": "Airbnb and short let cleaning in Redbridge: Ilford, Wanstead, Gants Hill and Woodford. Turnovers to a checklist around check in times.", "h1": "Airbnb Cleaning in Redbridge", "leadFirst": "SN Cleaning Services provides Airbnb cleaning in Redbridge from £26 an hour, including Ilford, Wanstead, Gants Hill and Woodford.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/barking-and-dagenham/creekmouth": {"title": "Tenancy Cleaning Creekmouth and Barking | 5★ Rated", "metaDescription": "End of tenancy cleaning in Creekmouth, Barking Riverside and Thames View, IG11. Deposit back guarantee and a 7 day re clean at no extra cost.", "h1": "End of Tenancy Cleaning in Creekmouth", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Creekmouth, Barking Riverside and Thames View from £179.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "Barking Riverside", "href": "/end-of-tenancy-cleaning/barking-and-dagenham/barking-riverside/"}]},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -170,6 +171,12 @@ const contentExtras = {
     faqs: [{
       question: 'Do you also offer regular or end of tenancy cleaning in Redbridge?',
       answer: 'Yes. An Airbnb changeover is for guest turnover. For a weekly or fortnightly visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, and see [domestic cleaning in Ilford](/domestic-cleaning/ilford/) for homes in and around Ilford. If you are handing back a rental, book [end of tenancy cleaning in Redbridge](/end-of-tenancy-cleaning/redbridge/), or the neighbourhood page for [Gants Hill](/end-of-tenancy-cleaning/redbridge/gants-hill/).'
+    }]
+  },
+  'end-of-tenancy-cleaning/barking-and-dagenham/creekmouth': {
+    faqs: [{
+      question: 'Do you cover Barking and Dagenham as well as Creekmouth?',
+      answer: 'Yes. Creekmouth is in the London Borough of Barking and Dagenham, and we also clean nearby Barking Riverside and Thames View. See our page for [end of tenancy cleaning in Becontree](/end-of-tenancy-cleaning/barking-and-dagenham/becontree/) if that is closer, and use our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
     }]
   },
 };
