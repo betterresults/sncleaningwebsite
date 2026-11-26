@@ -45,6 +45,7 @@ async function buildRoutes() {
     { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/clean-home-report', out: 'clean-home-report/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/house-cleaning-time-calculator', out: 'house-cleaning-time-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
+    { url: '/end-of-tenancy-cleaning-cost-calculator', out: 'end-of-tenancy-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
     { url: '/prices', out: 'prices/index.html', sitemap: true },
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },

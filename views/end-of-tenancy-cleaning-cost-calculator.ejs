@@ -1,0 +1,223 @@
+<%# End of tenancy cost calculator. Data: data/end-of-tenancy-cleaning-cost-calculator.js. Maths: public/js/end-of-tenancy-cleaning-cost-calculator.js. %>
+<link rel="stylesheet" href="/css/end-of-tenancy-cleaning-cost-calculator.css?v=<%= assetVersion %>" />
+<% function on(name, value) { return String(calc.DEFAULT_STATE[name]) === String(value) ? ' checked' : ''; } %>
+<div class="ecc" id="end-of-tenancy-cleaning-cost-calculator">
+
+<header class="ecc-hero"><div class="ecc-wrap">
+  <nav class="ecc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= calc.H1 %></h1>
+  <p class="ecc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= calc.PUBLISHED %>"><%= calc.PUBLISHED_LABEL %></time></p>
+  <div class="ecc-lead">
+    <p>This calculator gives a guide price for an end of tenancy clean in a London or Essex home. It uses our published price list: the size of the property, how it is furnished, extra bathrooms, the oven type and any carpet cleaning you add.</p>
+    <p>The fridge and freezer are already included. The total updates as you choose. It is a guide, and the booking form is where the price is confirmed.</p>
+  </div>
+</div></header>
+
+<section class="ecc-band ecc-white" id="ecc-calculator" aria-labelledby="ecc-estimate-heading"><div class="ecc-wrap">
+  <h2 id="ecc-estimate-heading">Estimate the cost</h2>
+  <p class="ecc-intro">Choose the home and only the extras it actually has. One bathroom is included. Prices are the same in London and Essex, with no VAT.</p>
+
+  <div class="ecc-tool">
+    <div class="ecc-summary" aria-hidden="true">
+      <span class="ecc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7.5h12M6 12h12M6 16.5h7"/></svg></span>
+      <span>
+        <strong id="ecc-summary-total"><%= initial.totalLabel %></strong>
+        <span id="ecc-summary-meta"><%= initial.summaryMeta %></span>
+      </span>
+    </div>
+
+    <form class="ecc-card" id="ecc-form" action="#end-of-tenancy-cleaning-cost-calculator" autocomplete="off" data-property="<%= calc.DEFAULT_STATE.property %>">
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V9.5L12 4l8 5.5V20"/><path d="M9 20v-6h6v6"/></svg> Property type</span></legend>
+        <div class="ecc-property">
+          <label class="ecc-choice"><input type="radio" name="property" value="flat"<%= on('property', 'flat') %> required> Flat</label>
+          <label class="ecc-choice"><input type="radio" name="property" value="house"<%= on('property', 'house') %> required> House</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend">Bedrooms</span></legend>
+        <div class="ecc-beds">
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="studio"<%= on('bedrooms', 'studio') %> required> Studio</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="1"<%= on('bedrooms', '1') %> required> 1</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="2"<%= on('bedrooms', '2') %> required> 2</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="3"<%= on('bedrooms', '3') %> required> 3</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="4"<%= on('bedrooms', '4') %> required> 4</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="5"<%= on('bedrooms', '5') %> required> 5</label>
+          <label class="ecc-choice"><input type="radio" name="bedrooms" value="6"<%= on('bedrooms', '6') %> required> 6</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend">Bathrooms</span></legend>
+        <p class="ecc-hint" id="ecc-bath-hint"><%= initial.bathHint %></p>
+        <div class="ecc-baths">
+          <label class="ecc-choice"><input type="radio" name="bathrooms" value="1"<%= on('bathrooms', '1') %> required> 1</label>
+          <label class="ecc-choice"><input type="radio" name="bathrooms" value="2"<%= on('bathrooms', '2') %> required> 2</label>
+          <label class="ecc-choice"><input type="radio" name="bathrooms" value="3"<%= on('bathrooms', '3') %> required> 3</label>
+          <label class="ecc-choice"><input type="radio" name="bathrooms" value="4"<%= on('bathrooms', '4') %> required> 4</label>
+        </div>
+      </fieldset>
+
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend">Furnishing</span></legend>
+        <div class="ecc-furn">
+          <% catalogue.furnishing.forEach(function (label, index) { %>
+            <label class="ecc-choice"><input type="radio" name="furnishing" value="<%= index %>"<%= on('furnishing', String(index)) %> required> <%= label %></label>
+          <% }); %>
+        </div>
+      </fieldset>
+
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 20h8M9 20V9.5h6V20"/><path d="M9 9.5V8a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1.5"/><path d="M15 8h2"/></svg> Oven type</span></legend>
+        <p class="ecc-hint">An add-on to this end of tenancy clean, not a standalone oven clean. Choose none if you do not need it.</p>
+        <div class="ecc-ovens">
+          <% catalogue.ovens.forEach(function (oven) { %>
+            <label class="ecc-choice"><input type="radio" name="oven" value="<%= oven.key %>"<%= on('oven', oven.key) %> required> <span><%= oven.short %> <span class="ecc-choice-price"><%= oven.priceLabel %></span></span></label>
+          <% }); %>
+        </div>
+      </fieldset>
+
+      <fieldset class="ecc-set">
+        <legend><span class="ecc-legend">Optional carpet cleaning</span></legend>
+        <p class="ecc-hint" id="ecc-carpet-hint"><%= calc.CARPET_NOTE %></p>
+        <div class="ecc-steppers">
+          <% catalogue.carpets.forEach(function (item) { %>
+            <div class="ecc-stepper">
+              <span class="ecc-stepper-name" id="ecc-carpet-<%= item.key %>"><%= item.label %></span>
+              <span class="ecc-stepper-price"><%= item.priceLabel %></span>
+              <span class="ecc-stepper-controls">
+                <button type="button" data-step="-1" aria-label="Fewer <%= item.label.toLowerCase() %> carpets">−</button>
+                <input type="number" name="carpet-<%= item.key %>" value="0" min="0" max="12" inputmode="numeric" aria-labelledby="ecc-carpet-<%= item.key %>" aria-describedby="ecc-carpet-hint">
+                <button type="button" data-step="1" aria-label="More <%= item.label.toLowerCase() %> carpets">+</button>
+              </span>
+            </div>
+          <% }); %>
+        </div>
+      </fieldset>
+
+      <div class="ecc-included">
+        <span class="ecc-tick" aria-hidden="true">✓</span>
+        <p><strong>Fridge and freezer.</strong> <%= calc.FRIDGE_NOTE %></p>
+      </div>
+    </form>
+
+    <aside class="ecc-results" id="ecc-results" aria-labelledby="ecc-result-heading">
+      <div id="ecc-live" role="status" aria-live="polite">
+        <h3 id="ecc-result-heading">Your guide price</h3>
+        <p class="ecc-kicker">Estimated guide total</p>
+        <p class="ecc-total" id="ecc-total"><%= initial.totalLabel %></p>
+        <ul class="ecc-lines" id="ecc-lines">
+          <% initial.lines.forEach(function (line) { %>
+            <li><span><%= line.label %></span><span><%= line.amount %></span></li>
+          <% }); %>
+        </ul>
+        <p class="ecc-fridge-line"><span>Fridge and freezer, included</span><span>£0</span></p>
+        <p class="ecc-london"><%= calc.LONDON_NOTE %></p>
+
+        <div class="ecc-stat">
+          <p class="ecc-stat-label">Team</p>
+          <p class="ecc-stat-copy"><strong id="ecc-team"><%= initial.team %></strong></p>
+          <p class="ecc-stat-label">On site</p>
+          <p class="ecc-stat-copy" id="ecc-hours"><%= initial.hours %></p>
+          <p class="ecc-stat-copy" id="ecc-team-note"<%= initial.teamNote ? '' : ' hidden' %>><%= initial.teamNote %></p>
+          <p class="ecc-stat-copy" id="ecc-house"<%= initial.house ? '' : ' hidden' %>><%= initial.house %></p>
+          <p class="ecc-hours-note" id="ecc-team-home">Published guide: <%= initial.teamHome %>.</p>
+          <p class="ecc-hours-note"><%= calc.HOURS_NOTE %></p>
+        </div>
+      </div>
+
+      <div class="ecc-guarantee">
+        <p><strong>7 day re clean, free.</strong> <%= calc.GUARANTEE_RECLEAN %></p>
+        <p><strong>Deposit back guarantee.</strong> <%= calc.GUARANTEE_DEPOSIT %></p>
+      </div>
+      <p class="ecc-honesty"><%= calc.HONESTY_NOTE %></p>
+      <a class="h-btn h-btn--primary" id="ecc-cta" href="<%= bookUrl('end-of-tenancy-cleaning') %>">Open the booking form</a>
+      <p class="ecc-links">
+        <a href="/end-of-tenancy-cleaning/prices/">End of tenancy cleaning prices</a>
+        <a href="/end-of-tenancy-cleaning-checklist/">End of tenancy cleaning checklist</a>
+      </p>
+      <p class="ecc-worked"><span class="ecc-worked-label">How we worked this out.</span> <span id="ecc-worked"><%= initial.worked %></span></p>
+    </aside>
+  </div>
+</div></section>
+
+<section class="ecc-band ecc-sand" aria-labelledby="ecc-dispute-heading"><div class="ecc-wrap">
+  <h2 id="ecc-dispute-heading"><%= calc.deposit.heading %></h2>
+  <p class="ecc-intro"><%= calc.deposit.intro %></p>
+  <div class="ecc-schemes">
+    <% calc.deposit.schemes.forEach(function (scheme) { %>
+      <article class="ecc-scheme" id="<%= scheme.id %>">
+        <p class="ecc-kicker"><%= scheme.kicker %></p>
+        <p class="ecc-scheme-note"><%= scheme.period %></p>
+        <% if (scheme.stat) { %>
+          <p class="ecc-scheme-stat"><%= scheme.stat %></p>
+          <p class="ecc-scheme-caption"><%= scheme.caption %></p>
+        <% } %>
+        <% if (scheme.quote) { %><blockquote class="ecc-quote"><p><%= scheme.quote %></p></blockquote><% } %>
+        <% if (scheme.facts.length) { %>
+          <ul class="ecc-facts">
+            <% scheme.facts.forEach(function (fact) { %><li><%= fact %></li><% }); %>
+          </ul>
+        <% } %>
+        <% if (scheme.rows.length) { %>
+          <p class="ecc-rows-title"><%= scheme.rowsTitle %></p>
+          <ul class="ecc-rows">
+            <% scheme.rows.forEach(function (row) { %><li><span><%= row.label %></span><span><%= row.value %></span></li><% }); %>
+          </ul>
+        <% } %>
+        <% if (scheme.note) { %><p class="ecc-scheme-note"><%= scheme.note %></p><% } %>
+        <p class="ecc-source"><a href="<%= scheme.url %>" rel="noopener" target="_blank"><%= scheme.sourceName %></a></p>
+      </article>
+    <% }); %>
+  </div>
+  <article class="ecc-law">
+    <p class="ecc-kicker"><%= calc.deposit.law.kicker %></p>
+    <h3><%= calc.deposit.law.title %></h3>
+    <p><%= calc.deposit.law.text %></p>
+    <p class="ecc-source"><a href="<%= calc.deposit.law.url %>" rel="noopener" target="_blank"><%= calc.deposit.law.sourceName %></a></p>
+  </article>
+</div></section>
+
+<section class="ecc-band ecc-white" aria-labelledby="ecc-method-heading"><div class="ecc-wrap">
+  <h2 id="ecc-method-heading">How the estimate is worked out</h2>
+  <div class="ecc-explain">
+    <article>
+      <h3>The home</h3>
+      <p>The base price comes from our published list for that flat or house, and for unfurnished, part furnished or furnished. A house costs more than the same number of bedrooms in a flat. One bathroom is included.</p>
+    </article>
+    <article>
+      <h3>Extras you actually have</h3>
+      <p>Each extra bathroom uses the rate for that furnishing. The oven is chosen by type and added to this clean. It is not booked as its own service. Carpet cleaning is optional. Carpets are vacuumed either way.</p>
+    </article>
+    <article>
+      <h3>Team and time</h3>
+      <p>The team and the hours are Silvia's published guide for that size of home. A furnished home always has at least two cleaners. A house takes about half an hour to an hour longer than the same size flat. Four bedrooms or more are usually three cleaners.</p>
+    </article>
+  </div>
+  <p class="ecc-follow">The full list, including blinds, sofas and other extras, is on the <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a> page. For a room-by-room list before check-out, use the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>. If you are comparing a regular visit as well, the <a href="/house-cleaning-time-calculator/">house cleaning time calculator</a> estimates hours rather than an end of tenancy price.</p>
+</div></section>
+
+<section class="ecc-band ecc-sand" aria-labelledby="ecc-faq-heading"><div class="ecc-wrap">
+  <h2 id="ecc-faq-heading">Frequently asked questions</h2>
+  <div class="h-faq ecc-faq">
+    <% calc.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%= item.a %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="ecc-follow" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script type="application/json" id="ecc-catalogue"><%- JSON.stringify(catalogue).replace(/</g, '\\u003c') %></script>
+<script src="/js/end-of-tenancy-cleaning-cost-calculator.js?v=<%= assetVersion %>" defer></script>

@@ -990,6 +990,48 @@ app.get('/house-cleaning-time-calculator', (req, res) => {
   });
 });
 
+// End of tenancy cost calculator. Registered before /:slug, beside the time
+// calculator, so the flat URL is not treated as a service page. Static guide:
+// no Supabase area page, no form capture.
+const eotCost = require('./data/end-of-tenancy-cleaning-cost-calculator');
+const eotCostEngine = require('./public/js/end-of-tenancy-cleaning-cost-calculator');
+
+app.get('/end-of-tenancy-cleaning-cost-calculator', (req, res) => {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'end-of-tenancy-cleaning');
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'End of tenancy cost calculator', url: eotCost.PATH }
+  ];
+  const faqEntities = eotCost.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  const eotCatalogue = eotCost.catalogue();
+  const eotInitial = eotCostEngine.estimate(eotCost.DEFAULT_STATE, eotCatalogue);
+  res.render('end-of-tenancy-cleaning-cost-calculator', {
+    title: eotCost.TITLE,
+    metaDescription: eotCost.META_DESCRIPTION,
+    calc: eotCost,
+    catalogue: eotCatalogue,
+    initial: eotInitial,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: eotCost.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildFaqPage(faqEntities),
+      schema.buildWebApplication({
+        name: eotCost.H1,
+        description: eotCost.META_DESCRIPTION,
+        url: eotCost.PATH,
+        date: eotCost.PUBLISHED
+      })
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on
