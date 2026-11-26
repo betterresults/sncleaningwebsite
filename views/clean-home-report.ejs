@@ -1,0 +1,549 @@
+<%
+  const findings = [
+    {
+      n: 1, theme: 'mood', themeLabel: 'Mood and stress', section: 'mood-and-stress',
+      title: 'Clutter talk, flatter cortisol.',
+      result: 'Among 60 working parents in Los Angeles, wives who described their homes with more words about clutter and unfinished projects had flatter daily cortisol patterns and rising low mood over the day.',
+      scope: '60 working parents in Los Angeles',
+      sources: [{ label: 'Saxbe & Repetti, 2010, Personality and Social Psychology Bulletin', url: 'https://doi.org/10.1177/0146167209352864' }]
+    },
+    {
+      n: 2, theme: 'mood', themeLabel: 'Mood and stress', section: 'mood-and-stress',
+      title: 'Clutter and wellbeing.',
+      result: 'In a survey of nearly 1,400 US and Canadian adults who already had some difficulty with clutter, clutter was linked with a weaker sense of "psychological home" and lower subjective wellbeing.',
+      scope: 'Nearly 1,400 US and Canadian adults who already had some difficulty with clutter',
+      sources: [
+        { label: 'Roster, Ferrari & Jurkat, 2016, Journal of Environmental Psychology', url: 'https://doi.org/10.1016/j.jenvp.2016.03.003' },
+        { label: "sample size from DePaul University's announcement", url: 'https://www.newswise.com/articles/cutting-through-the-clutter-study-examines-dark-side-of-home' }
+      ]
+    },
+    {
+      n: 3, theme: 'mood', themeLabel: 'Mood and stress', section: 'mood-and-stress',
+      title: "It's how you feel about it.",
+      result: 'In a study of 1,111 adults by UK researchers then at the University of East London, how people felt about their clutter predicted wellbeing; the actual amount did not.',
+      scope: '1,111 adults',
+      sources: [{ label: 'Rogers & Hart, 2021, Journal of Environmental Psychology', url: 'https://doi.org/10.1016/j.jenvp.2021.101553' }]
+    },
+    {
+      n: 4, theme: 'focus', themeLabel: 'Focus and motivation', section: 'focus-and-motivation',
+      title: 'Clutter and procrastination.',
+      result: 'Among 346 young adults, clutter was the single best predictor of procrastination scores.',
+      scope: '346 young adults',
+      sources: [{ label: 'Ferrari, Roster, Crum & Pardo, 2018, Current Psychology', url: 'https://doi.org/10.1007/s12144-017-9682-9' }]
+    },
+    {
+      n: 5, theme: 'focus', themeLabel: 'Focus and motivation', section: 'focus-and-motivation',
+      title: 'Clutter and life satisfaction later in life.',
+      result: 'Across three age groups, clutter problems were linked with significantly lower satisfaction with life among older adults (average age 54).',
+      scope: 'Three age groups; older adults, average age 54',
+      sources: [{ label: 'Ferrari & Roster, 2018, Current Psychology', url: 'https://doi.org/10.1007/s12144-017-9679-4' }]
+    },
+    {
+      n: 6, theme: 'sleep', themeLabel: 'Sleep', section: 'sleep',
+      title: 'Sleep and hoarding risk.',
+      result: 'In a St Lawrence University study, 83 people at risk of hoarding disorder reported significantly worse sleep than 198 people who were not.',
+      scope: '83 people at risk of hoarding disorder and 198 people who were not',
+      sources: [{ label: 'Thacher & Reinheimer, SLEEP 2015 abstract, via the American Academy of Sleep Medicine', url: 'https://aasm.org/people-at-risk-of-hoarding-disorder-may-have-serious-complaints-about-sleep/' }]
+    },
+    {
+      n: 7, theme: 'sleep', themeLabel: 'Sleep', section: 'sleep',
+      title: 'Fresh sheets, better nights (reported).',
+      result: '71% of 1,500 Americans polled said they sleep more comfortably on fresh-scented sheets; daily bed-makers were 19% more likely to report a good night\'s sleep every night.',
+      scope: '1,500 Americans',
+      sources: [{ label: 'National Sleep Foundation Bedroom Poll, 2011', url: 'https://www.prnewswire.com/news-releases/americans-bedrooms-are-key-to-better-sleep-according-to-new-national-sleep-foundation-poll-114529349.html' }]
+    },
+    {
+      n: 8, theme: 'mood', themeLabel: 'Mood and stress', section: 'mood-and-stress',
+      title: 'Mindful washing-up.',
+      result: 'Students who washed dishes mindfully reported 27% less nervousness and 25% more inspiration.',
+      scope: '51 students',
+      sources: [
+        { label: 'Hanley et al., 2015, Mindfulness', url: 'https://doi.org/10.1007/s12671-014-0360-9' },
+        { label: 'Florida State University', url: 'https://www.sciencedaily.com/releases/2015/10/151001165852.htm' }
+      ]
+    },
+    {
+      n: 9, theme: 'focus', themeLabel: 'Focus and motivation', section: 'focus-and-motivation',
+      title: 'Tidy homes, more active lives.',
+      result: 'In an Indiana University study of 998 adults, the interior condition of homes, including cleanliness, was linked with physical activity more than neighbourhood features.',
+      scope: '998 adults',
+      sources: [
+        { label: 'Keith, Clark & Miller, 2010, Medicine & Science in Sports & Exercise', url: 'https://doi.org/10.1249/01.mss.0000384314.31339.27' },
+        { label: 'Indiana University', url: 'https://www.sciencedaily.com/releases/2010/06/100602121059.htm' }
+      ]
+    },
+    {
+      n: 10, theme: 'relationships', themeLabel: 'Relationships and family life', section: 'relationships-and-family-life',
+      title: 'Chores and couples.',
+      result: '56% of married US adults say sharing household chores is "very important" to a successful marriage; in the UK, women spent about 50 minutes a day more than men on unpaid work in March 2026, according to the ONS.',
+      scope: 'Married US adults (Pew, 2016); UK time use, March 2026 (ONS)',
+      sources: [
+        { label: 'Pew Research Center, 2016', url: 'https://www.pewresearch.org/short-reads/2016/11/30/sharing-chores-a-key-to-good-marriage-say-majority-of-married-adults/' },
+        { label: 'ONS, Time use in the UK, March 2026', url: 'https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/timeuseintheuk' }
+      ]
+    }
+  ];
+  const credit = 'https://sncleaningservices.co.uk/clean-home-report/';
+%>
+<article class="chr-report">
+  <header class="chr-hero">
+    <div class="chr-wrap">
+      <div class="chr-hero-inner">
+        <nav class="chr-crumbs" aria-label="Breadcrumb">
+          <ol>
+            <% breadcrumbs.forEach(function (c, i) { %>
+              <li>
+                <% if (i === breadcrumbs.length - 1) { %>
+                  <span aria-current="page"><%= c.name %></span>
+                <% } else { %>
+                  <a href="<%= c.url %>"><%= c.name %></a>
+                <% } %>
+              </li>
+            <% }); %>
+          </ol>
+        </nav>
+        <p class="chr-badge">Research</p>
+        <h1><%= report.h1 %></h1>
+        <p class="chr-standfirst">Published research links cluttered, chaotic homes with higher stress, lower wellbeing, poorer sleep and more procrastination, and suggests that how we <em>feel</em> about our space matters as much as how tidy it looks.</p>
+        <p class="chr-byline">
+          <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '56px') %> alt="Silvia Nedeva" width="56" height="56" />
+          <span>
+            <span class="chr-byline-name">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services</span>
+            <span class="chr-byline-role">Cleaning specialist</span>
+          </span>
+        </p>
+        <p class="chr-meta">
+          <time datetime="<%= report.date.slice(0, 10) %>"><%= report.dateLabel %></time>
+          <span aria-hidden="true"> · </span>
+          <span><%= report.readingMinutes %> min read</span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <div class="chr-disclaimer-wrap">
+    <p class="chr-disclaimer">This report summarises published research for a general audience. It is not medical advice. If you are worried about your mood, sleep or mental health, please speak to your GP or a qualified health professional.</p>
+  </div>
+
+  <div class="chr-layout">
+    <nav class="chr-toc" aria-label="In this report">
+      <p class="chr-toc-label">In this report</p>
+      <ol class="chr-toc-list">
+        <li><a href="#key-findings">Key findings</a></li>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#mood-and-stress">Mood and stress</a></li>
+        <li><a href="#sleep">Sleep</a></li>
+        <li><a href="#focus-and-motivation">Focus and motivation</a></li>
+        <li><a href="#relationships-and-family-life">Relationships and family life</a></li>
+        <li><a href="#practical-takeaways">Practical takeaways</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ol>
+    </nav>
+
+    <div class="chr-main">
+      <section class="chr-findings" aria-labelledby="key-findings">
+        <h2 id="key-findings">Key findings at a glance</h2>
+        <ol class="chr-finding-list">
+          <% findings.forEach(function (f) { %>
+            <li id="finding-<%= f.n %>">
+              <p><strong><%= f.title %></strong> <%= f.result %></p>
+              <p class="chr-source"><%= f.sources.length > 1 ? 'Sources' : 'Source' %>:
+                <% f.sources.forEach(function (s, i) { %><% if (i) { %>; <% } %><a href="<%= s.url %>" rel="noopener"><%= s.label %></a><% }); %>
+              </p>
+            </li>
+          <% }); %>
+        </ol>
+
+        <div class="chr-explorer" data-chr-explorer>
+          <h3>Explore the findings</h3>
+          <p>Filter the ten findings by the part of the report they come from. Each card uses the wording above.</p>
+          <div class="chr-filters" role="toolbar" aria-label="Filter findings by theme">
+            <button type="button" data-theme="all" aria-pressed="true">All</button>
+            <button type="button" data-theme="mood" aria-pressed="false">Mood and stress</button>
+            <button type="button" data-theme="sleep" aria-pressed="false">Sleep</button>
+            <button type="button" data-theme="focus" aria-pressed="false">Focus and motivation</button>
+            <button type="button" data-theme="relationships" aria-pressed="false">Relationships and family life</button>
+          </div>
+          <p class="chr-status" aria-live="polite" data-chr-status>Showing 10 findings for all themes.</p>
+          <% findings.forEach(function (f) { %>
+            <article class="chr-card" data-theme-card="<%= f.theme %>">
+              <p class="chr-card-kicker"><%= f.themeLabel %></p>
+              <p class="chr-card-title"><strong><%= f.n %>. <%= f.title %></strong></p>
+              <p><%= f.result %></p>
+              <p class="chr-source">Scope: <%= f.scope %></p>
+              <p class="chr-source"><%= f.sources.length > 1 ? 'Sources' : 'Source' %>:
+                <% f.sources.forEach(function (s, i) { %><% if (i) { %>; <% } %><a href="<%= s.url %>" rel="noopener"><%= s.label %></a><% }); %>
+              </p>
+              <p><a href="#<%= f.section %>">Read in the report</a></p>
+            </article>
+          <% }); %>
+        </div>
+      </section>
+
+      <div class="chr-prose" id="chr-body">
+        <h2 id="introduction">Introduction</h2>
+        <p>Most of us know the feeling. You walk through the front door after a long day, see the pile of post on the side, the washing-up in the sink and the shoes across the hall, and something in you sinks a little. Or the opposite: you come home to a fresh, tidy room, and your shoulders drop.</p>
+        <p>Is there evidence behind these feelings? Psychologists, neuroscientists and sleep researchers have begun to look at the link between the state of our homes and the state of our minds. The research is young, and mostly shows associations rather than cause and effect. But a consistent picture is emerging: our living spaces are linked with how stressed we feel, how well we sleep, how easily we focus and how we get on with the people we live with.</p>
+        <p>It is a question that matters in the UK. The Office for National Statistics (ONS) tracks personal wellbeing every quarter. In April to June 2026, the average UK adult rated their anxiety "yesterday" at 3.2 out of 10, and 22.5% gave a high anxiety score of 6 or more (<a href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/quarterlypersonalwellbeingestimatesseasonallyadjusted" rel="noopener">ONS, 2026</a>). The ONS does not ask about homes, so these figures show the backdrop, not a link with clutter.</p>
+        <aside class="chr-note">
+          <p class="chr-kicker">Backdrop, not a finding about homes</p>
+          <p>ONS, April to June 2026: the average UK adult rated anxiety "yesterday" at 3.2 out of 10, and 22.5% gave a high anxiety score of 6 or more. The ONS does not ask about homes.</p>
+        </aside>
+        <p>This report brings together what published studies actually say, and what each one can and cannot tell us. The aim is not to make anyone feel guilty about a messy kitchen. Real homes get messy. The aim is to understand why a cared-for home can feel so good, and which small, realistic habits might help.</p>
+
+        <h2 id="mood-and-stress">Mood and stress</h2>
+        <h3>What a home "says" about our stress</h3>
+        <p>One of the most cited studies here comes from UCLA. Psychologists Darby Saxbe and Rena Repetti studied 60 working parents from 30 dual-income families (<a href="https://doi.org/10.1177/0146167209352864" rel="noopener">Saxbe &amp; Repetti, 2010</a>). Each parent gave a self-guided video tour of their home, and software counted words describing clutter or unfinished projects, and restful or nature words.</p>
+        <p>Over the next three weekdays, parents gave saliva samples to track cortisol, a stress-related hormone that normally starts high in the morning and falls through the day. Wives whose home tours scored higher on the "stressful home" measure (clutter and unfinished-project words) had flatter cortisol slopes across the day, a profile the authors note is associated with adverse health outcomes. They also showed increasing depressed mood over the course of the day. Wives with higher "restorative home" scores showed the opposite pattern. These links held after accounting for marital satisfaction and neuroticism.</p>
+        <p>This study measured how people <em>talked about</em> their homes, not how messy they actually were, and the reported findings concern the wives. It is small and shows a link, not proof that clutter raises stress.</p>
+
+        <h3>Clutter and wellbeing</h3>
+        <p>Catherine Roster, Joseph Ferrari and M. Peter Jurkat took a broader approach (<a href="https://doi.org/10.1016/j.jenvp.2016.03.003" rel="noopener">Roster, Ferrari &amp; Jurkat, 2016</a>). They defined clutter as "an overabundance of possessions that collectively create chaotic and disorderly living spaces" and surveyed adults in the US and Canada. According to <a href="https://www.newswise.com/articles/cutting-through-the-clutter-study-examines-dark-side-of-home" rel="noopener">DePaul University</a>, the study received just under 1,400 usable responses, mostly from women, recruited through a non-profit organisation that supports people who struggle with chronic disorganisation.</p>
+        <p>Attachment to home and to possessions supported a sense of "psychological home", the feeling that your home reflects and belongs to you. Clutter worked against this: it was associated with a weaker sense of psychological home and lower subjective wellbeing. Because participants already had some difficulty with clutter, the results may not apply equally to everyone.</p>
+
+        <h3>It's how you feel, not how it looks</h3>
+        <p>A UK-led study adds an important nuance. Caroline Rogers and Rona Hart, then at the University of East London (Hart is now at the University of Sussex), surveyed 1,111 adults, most of them women (<a href="https://doi.org/10.1016/j.jenvp.2021.101553" rel="noopener">Rogers &amp; Hart, 2021</a>). They measured how much clutter people had, how they felt about it, how they expressed themselves through their homes and how often they decluttered, and compared these with an established wellbeing measure.</p>
+        <p>Subjective clutter and psychological home accounted for a substantial share of the differences in wellbeing between people. Objective clutter, the actual amount of stuff, did not predict wellbeing. The authors proposed a new definition: clutter is "a subjective experience of possessions (material or other) that inhibits the curation of self-identity at home."</p>
+        <p>This is reassuring: there is no single "correct" level of tidiness. A home full of books and photos can feel wonderful to one person and overwhelming to another. What seems to matter is whether your space feels manageable and feels like <em>yours</em>.</p>
+
+        <h3>A calming chore?</h3>
+        <p>Many Britons already find tidying rewarding. In YouGov polling from October 2025, 46% said they enjoy decluttering or clearing out their house and 40% said they like tidying up, compared with roughly a quarter who dislike each (<a href="https://yougov.com/en-gb/articles/53151-which-chores-do-britons-enjoy-doing" rel="noopener">YouGov, 2025</a>).</p>
+
+        <figure class="chr-chart">
+          <p class="chr-chart-title">Chores Britons say they enjoy</p>
+          <div class="chr-bars" aria-hidden="true">
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Enjoy decluttering or clearing out their house</span><span class="chr-bar-value">46%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:46%"></span></div>
+            </div>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Like tidying up</span><span class="chr-bar-value">40%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:40%"></span></div>
+            </div>
+          </div>
+          <p class="chr-scale">Scale: 0 to 100% of Britons. The share who dislike each chore is not plotted: YouGov described it only as roughly a quarter.</p>
+          <div class="chr-sr"><table>
+            <caption>Share of Britons who said they enjoy these chores</caption>
+            <thead><tr><th scope="col">Chore</th><th scope="col">Share who enjoy it</th></tr></thead>
+            <tbody>
+              <tr><td>Enjoy decluttering or clearing out their house</td><td>46%</td></tr>
+              <tr><td>Like tidying up</td><td>40%</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>
+            <p>Share of Britons who said they enjoy these chores. Compared with roughly a quarter who dislike each (YouGov did not publish a more precise dislike figure in the source used here, so that comparison stays in words only).</p>
+            <p>Source: YouGov, October 2025, "Which chores do Britons enjoy doing?"</p>
+            <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+          </figcaption>
+        </figure>
+
+        <p>Can cleaning itself help? One small study suggests it might. Florida State University researchers asked 51 students to wash dishes, some after a short instruction to pay mindful attention (<a href="https://doi.org/10.1007/s12671-014-0360-9" rel="noopener">Hanley et al., 2015</a>). According to the <a href="https://www.sciencedaily.com/releases/2015/10/151001165852.htm" rel="noopener">university's summary</a>, mindful dish-washers reported a 27% decrease in nervousness and a 25% increase in feeling inspired; the comparison group did not. With a small student sample, this is promising rather than conclusive.</p>
+
+        <figure class="chr-chart">
+          <p class="chr-chart-title">Mindful washing-up (reported change)</p>
+          <ul class="chr-legend" aria-hidden="true">
+            <li><span class="chr-swatch"></span> Decrease</li>
+            <li><span class="chr-swatch chr-swatch--alt"></span> Increase</li>
+          </ul>
+          <div class="chr-bars" aria-hidden="true">
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Nervousness, decrease</span><span class="chr-bar-value">27% decrease</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:27%"></span></div>
+            </div>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Feeling inspired, increase</span><span class="chr-bar-value">25% increase</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:25%"></span></div>
+            </div>
+          </div>
+          <p class="chr-scale">Scale: percent change, drawn on a 0 to 100% axis. Solid bar: decrease. Striped bar: increase.</p>
+          <div class="chr-sr"><table>
+            <caption>Reported change after mindful washing-up</caption>
+            <thead><tr><th scope="col">Measure</th><th scope="col">Reported change</th></tr></thead>
+            <tbody>
+              <tr><td>Nervousness</td><td>27% decrease</td></tr>
+              <tr><td>Feeling inspired</td><td>25% increase</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>
+            <p>Students who washed dishes mindfully reported a 27% decrease in nervousness and a 25% increase in feeling inspired; the comparison group did not. Sample: 51 students. Promising rather than conclusive.</p>
+            <p>Source: Hanley et al., 2015, <em>Mindfulness</em>; figures from Florida State University / ScienceDaily.</p>
+            <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+          </figcaption>
+        </figure>
+
+        <h2 id="sleep">Sleep</h2>
+        <h3>The bedroom as a place to rest</h3>
+        <p>Sleep advice usually stresses a cool, dark, quiet bedroom. Tidiness has been studied less, and the clearest research comes from hoarding, where clutter is extreme. At St Lawrence University in New York, psychologist Pamela Thacher and student researcher Alexis Reinheimer surveyed people recruited online who were interested in hoarding, sleep or clutter (<a href="https://aasm.org/people-at-risk-of-hoarding-disorder-may-have-serious-complaints-about-sleep/" rel="noopener">American Academy of Sleep Medicine, 2015</a>). Using a standard clutter and hoarding rating scale, they identified 83 people at risk of hoarding disorder and 198 at minimal or no risk (<a href="https://northcountrynow.com/stories/hoarders-dont-sleep-well-st-lawrence-university-researcher-finds,59013" rel="noopener">St Lawrence University coverage</a>). Those at risk scored significantly higher on a sleep habits survey and on three parts of a widely used sleep quality index: how long it took them to fall asleep, sleep disturbances and daytime disturbances. This was a conference abstract (SLEEP 2015), not a full journal article.</p>
+        <p>A separate peer-reviewed study from Florida State University looked at 24 patients with hoarding disorder and found that insomnia was a significant predictor of greater hoarding severity, with sleep difficulties associated with more acquiring and more difficulty discarding (<a href="https://doi.org/10.1002/jclp.22161" rel="noopener">Raines et al., 2015</a>). The sample was tiny and the direction of the link is unclear. Hoarding disorder is a recognised mental health condition, very different from an ordinary untidy bedroom, so these findings should not be stretched to everyday mess. Mind's guidance on hoarding suggests small, manageable steps, such as setting a timer to tidy one area, and points people to UK charities including Hoarding UK (<a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/helping-yourself-with-hoarding/" rel="noopener">Mind</a>).</p>
+
+        <h3>Clean sheets and a made bed</h3>
+        <p>Poor sleep is common in the UK. In a 2025 Opinium survey of 2,000 UK adults for the Mental Health Foundation, the average adult reported only three days a week of good-quality sleep, and 38% said poor sleep negatively affects their mental health at least once a week (<a href="https://www.mentalhealth.org.uk/about-us/news/average-adult-has-only-3-days-week-good-quality-sleep" rel="noopener">Mental Health Foundation, 2025</a>). The mental health charity Mind suggests trying different temperature, light and noise levels and different bedding to make your sleeping area more comfortable (<a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/sleep-problems/tips-to-improve-your-sleep/" rel="noopener">Mind</a>).</p>
+        <aside class="chr-note">
+          <p class="chr-kicker">UK sleep, not a clutter finding</p>
+          <p>Mental Health Foundation / Opinium, 2025, 2,000 UK adults: the average adult reported only three days a week of good-quality sleep, and 38% said poor sleep negatively affects their mental health at least once a week.</p>
+        </aside>
+        <p>For everyday homes, the best available evidence comes from surveys. The National Sleep Foundation's first Bedroom Poll interviewed 1,500 Americans aged 25 to 55 by telephone (<a href="https://www.prnewswire.com/news-releases/americans-bedrooms-are-key-to-better-sleep-according-to-new-national-sleep-foundation-poll-114529349.html" rel="noopener">National Sleep Foundation, 2011</a>). At least two thirds said that a clean bedroom, clean air free of allergens, a cool temperature, darkness and quiet play an important role in getting good sleep. Seventy-eight per cent said they were more excited to go to bed on sheets with a fresh scent, and 71% said they got a more comfortable night's sleep on them. People who said they made their bed every day were 19% more likely to report a good night's sleep every night.</p>
+        <p>These are self-reports, not measured sleep, and the poll received financial support from a laundry brand (the foundation says it was developed independently). Nor can it tell us whether bed-making improves sleep or good sleepers simply make their beds. Still, many people clearly <em>feel</em> a fresh, tidy bedroom helps them rest.</p>
+
+        <figure class="chr-chart">
+          <p class="chr-chart-title">Fresh sheets and a made bed (self-reported)</p>
+          <div class="chr-bars" aria-hidden="true">
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">More excited to go to bed on sheets with a fresh scent</span><span class="chr-bar-value">78%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:78%"></span></div>
+            </div>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">A more comfortable night's sleep on them</span><span class="chr-bar-value">71%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:71%"></span></div>
+            </div>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Daily bed-makers, more likely to report a good night's sleep every night</span><span class="chr-bar-value">19% more likely</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:19%"></span></div>
+            </div>
+          </div>
+          <p class="chr-scale">The first two bars are shares of people polled. The striped bar is a different measure: daily bed-makers were 19% more likely to report sleeping well every night. "At least two thirds" for a clean, cool, dark and quiet bedroom is not plotted, because the source did not publish a more precise figure.</p>
+          <div class="chr-sr"><table>
+            <caption>National Sleep Foundation Bedroom Poll, self-reported</caption>
+            <thead><tr><th scope="col">Statement</th><th scope="col">Figure</th></tr></thead>
+            <tbody>
+              <tr><td>More excited to go to bed on sheets with a fresh scent</td><td>78%</td></tr>
+              <tr><td>A more comfortable night's sleep on them</td><td>71%</td></tr>
+              <tr><td>Daily bed-makers were more likely to report a good night's sleep every night</td><td>19% more likely</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>
+            <p>Self-reports from the National Sleep Foundation's 2011 Bedroom Poll of 1,500 Americans aged 25 to 55, not measured sleep. The poll received financial support from a laundry brand; the foundation says it was developed independently. This cannot tell us whether bed-making improves sleep or good sleepers simply make their beds.</p>
+            <p>Source: National Sleep Foundation Bedroom Poll, 2011.</p>
+            <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+          </figcaption>
+        </figure>
+
+        <h2 id="focus-and-motivation">Focus and motivation</h2>
+        <h3>Why a busy room can feel tiring</h3>
+        <p>Researchers at the Princeton Neuroscience Institute have studied how the brain handles several things in view at once (<a href="https://doi.org/10.1523/JNEUROSCI.3766-10.2011" rel="noopener">McMains &amp; Kastner, 2011</a>). Their work showed that multiple items in the visual field compete for representation in the brain's visual system, mutually suppressing one another's activity. Attention can help resolve this competition, and so can the way a scene is grouped and organised.</p>
+        <p>This was a laboratory brain-imaging study of simple displays, not of homes, and it is often over-quoted as proof that clutter ruins concentration. A fairer summary: it helps explain why a visually busy space can make it harder to pick out what matters.</p>
+
+        <h3>Clutter and putting things off</h3>
+        <p>Joseph Ferrari of DePaul University is a leading procrastination researcher. In one study of 346 young adults, he and his colleagues found that clutter in one's living space, negative emotions and difficulties with social life all predicted higher procrastination scores, and clutter was the best single predictor (<a href="https://doi.org/10.1007/s12144-017-9682-9" rel="noopener">Ferrari et al., 2018</a>).</p>
+        <p>In a second study, Ferrari and Roster compared three groups: university students, younger adults recruited online and older adults recruited through a disorganisation support charity (<a href="https://doi.org/10.1007/s12144-017-9679-4" rel="noopener">Ferrari &amp; Roster, 2018</a>). Procrastination explained an increasingly large share of clutter problems from the youngest group to the oldest, and clutter problems were linked with significantly lower satisfaction with life among the older adults. The authors suggest that a habit of delay may lead to a lifelong pattern of putting off decisions about what to keep and what to let go.</p>
+        <p>The relationship probably runs both ways: putting off jobs lets clutter build, and clutter can make starting any job feel harder.</p>
+
+        <h3>A balancing point: mess and creativity</h3>
+        <p>Not all the evidence points one way. In three short experiments, Kathleen Vohs and colleagues from the University of Minnesota compared people in a tidy room with people in a messy one (<a href="https://doi.org/10.1177/0956797613480186" rel="noopener">Vohs, Redden &amp; Rahinel, 2013</a>). People in the messy room came up with more creative ideas and were more drawn to an option labelled "new". People in the tidy room were more likely to choose a healthy snack and donate money, and preferred an option labelled "classic". The authors' conclusion was not that tidiness is better, but that orderly settings seem to encourage convention and tradition, while disorderly ones encourage breaking with them. These were short laboratory experiments, so treat them as interesting rather than definitive. They are a useful counterweight: a bit of mess may suit creative work, and the goal is a home that works for you, not a show home.</p>
+
+        <h3>A tidy home and an active life</h3>
+        <p>An unexpected finding came from Indiana University. NiCole Keith and colleagues studied 998 African American adults aged 49 to 65 living in St Louis (<a href="https://doi.org/10.1249/01.mss.0000384314.31339.27" rel="noopener">Keith, Clark &amp; Miller, 2010</a>). Researchers rated the inside and outside of participants' homes, including cleanliness, and the team compared this with physical activity levels. According to <a href="https://www.sciencedaily.com/releases/2010/06/100602121059.htm" rel="noopener">the university</a>, the interior condition of people's homes was more closely linked with how active they were than neighbourhood features such as pavements and lighting.</p>
+        <p>Cleaning and laundry are themselves physical activity, so active people may simply be people who clean. As the lead researcher asked: "Are the types of people who take care of their bodies the same types of people who take care of their homes?"</p>
+
+        <h2 id="relationships-and-family-life">Relationships and family life</h2>
+        <h3>Household chaos and children</h3>
+        <p>"Household chaos" describes homes that are noisy, crowded, disorganised and lacking routine, which is broader than mess alone. A 2020 review led by researchers at the University of Auckland gathered 112 studies on the subject (<a href="https://doi.org/10.1186/s12889-020-08587-8" rel="noopener">Marsh, Dobson &amp; Maddison, 2020</a>). It found consistent evidence of associations between household chaos and less favourable outcomes for children, parents and families, including children's learning and emotional development.</p>
+        <p>This does not show that an untidy home harms children, and household chaos is closely tied to pressures such as money worries and crowded housing. But it suggests calm, predictable routines may be part of a supportive family environment.</p>
+
+        <h3>Sharing the load</h3>
+        <p>Housework is also a common source of tension between partners. In a Pew Research Center survey, 56% of married US adults said that sharing household chores was "very important" to a successful marriage, ranking it behind shared interests and a satisfying sexual relationship, but ahead of having children and having an adequate income (<a href="https://www.pewresearch.org/short-reads/2016/11/30/sharing-chores-a-key-to-good-marriage-say-majority-of-married-adults/" rel="noopener">Pew Research Center, 2016</a>). A separate Pew survey of parents found mothers and fathers saw the split differently: 50% of mothers said they did more, compared with 12% of fathers.</p>
+
+        <figure class="chr-chart">
+          <p class="chr-chart-title">Sharing chores: what US adults said</p>
+          <div class="chr-bars" aria-hidden="true">
+            <p class="chr-group-name">Very important to a successful marriage</p>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Married US adults who said sharing household chores was "very important"</span><span class="chr-bar-value">56%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:56%"></span></div>
+            </div>
+            <p class="chr-group-name">Who said they did more of the chores</p>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Mothers</span><span class="chr-bar-value">50%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill" style="width:50%"></span></div>
+            </div>
+            <div class="chr-bar">
+              <div class="chr-bar-top"><span class="chr-bar-label">Fathers</span><span class="chr-bar-value">12%</span></div>
+              <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:12%"></span></div>
+            </div>
+          </div>
+          <p class="chr-scale">Scale: 0 to 100%. These are US surveys about fairness, not about clutter. The 56% figure is a different question from the mother and father figures, so they are labelled separately. Fathers use the striped bar.</p>
+          <div class="chr-sr"><table>
+            <caption>Pew Research Center, 2016, US adults</caption>
+            <thead><tr><th scope="col">Group and question</th><th scope="col">Share</th></tr></thead>
+            <tbody>
+              <tr><td>Married US adults who said sharing household chores was "very important" to a successful marriage</td><td>56%</td></tr>
+              <tr><td>Mothers who said they did more of the chores</td><td>50%</td></tr>
+              <tr><td>Fathers who said they did more of the chores</td><td>12%</td></tr>
+            </tbody>
+          </table></div>
+          <figcaption>
+            <p>The Pew figures are from US adults and are about fairness, not about clutter. 56% of married US adults said sharing household chores was "very important" to a successful marriage. 50% of mothers said they did more, compared with 12% of fathers.</p>
+            <p>Source: Pew Research Center, 2016.</p>
+            <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+          </figcaption>
+        </figure>
+
+        <p>The UK picture is similar. In the ONS's latest time-use survey (14 to 22 March 2026), women spent an average of about 3 hours 36 minutes a day on unpaid work, around 50 minutes more than men (about 2 hours 46 minutes). That included about 2 hours 43 minutes a day of unpaid household work, such as cooking and cleaning, compared with about 2 hours for men (<a href="https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/timeuseintheuk" rel="noopener">ONS, Time use in the UK, March 2026</a>; official statistics in development). An earlier, more detailed ONS analysis of 2015 data found that women did an average of 60% more unpaid work than men, including about 4.7 hours of housework a week compared with about 2.4 hours for men (<a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/articles/womenshouldertheresponsibilityofunpaidwork/2016-11-10" rel="noopener">ONS, 2016</a>).</p>
+
+        <div class="chr-years" data-chr-years>
+          <div class="chr-years-controls" role="group" aria-label="Switch between the two UK unpaid-work snapshots">
+            <button type="button" data-year="2026" aria-pressed="true">March 2026</button>
+            <button type="button" data-year="2015" aria-pressed="false">2015</button>
+          </div>
+          <p class="chr-status" aria-live="polite" data-year-live></p>
+
+          <div data-year-panel="2026">
+            <figure class="chr-chart">
+              <p class="chr-chart-title">Unpaid work in the UK, March 2026</p>
+              <ul class="chr-legend" aria-hidden="true">
+                <li><span class="chr-swatch"></span> Women</li>
+                <li><span class="chr-swatch chr-swatch--alt"></span> Men</li>
+              </ul>
+              <div class="chr-bars" aria-hidden="true">
+                <p class="chr-group-name">Unpaid work, average per day</p>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Women, about 3 hours 36 minutes</span><span class="chr-bar-value">216 min</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill" style="width:100%"></span></div>
+                </div>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Men, about 2 hours 46 minutes</span><span class="chr-bar-value">166 min</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:76.9%"></span></div>
+                </div>
+                <p class="chr-group-name">Unpaid household work, such as cooking and cleaning</p>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Women, about 2 hours 43 minutes</span><span class="chr-bar-value">163 min</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill" style="width:75.5%"></span></div>
+                </div>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Men, about 2 hours</span><span class="chr-bar-value">120 min</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:55.6%"></span></div>
+                </div>
+              </div>
+              <p class="chr-scale">Scale: minutes per day. The longest bar is 216 minutes. Bars use the minutes implied by the report's rounded times: 3 hours 36 minutes is 216, 2 hours 46 minutes is 166, 2 hours 43 minutes is 163, and about 2 hours is 120. Women are solid. Men are striped.</p>
+              <div class="chr-sr"><table>
+                <caption>Average time on unpaid work in the UK, 14 to 22 March 2026</caption>
+                <thead><tr><th scope="col">Activity</th><th scope="col">Women</th><th scope="col">Men</th></tr></thead>
+                <tbody>
+                  <tr><td>Unpaid work, average per day</td><td>About 3 hours 36 minutes (216 minutes)</td><td>About 2 hours 46 minutes (166 minutes)</td></tr>
+                  <tr><td>Unpaid household work, such as cooking and cleaning</td><td>About 2 hours 43 minutes (163 minutes)</td><td>About 2 hours (120 minutes)</td></tr>
+                </tbody>
+              </table></div>
+              <figcaption>
+                <p>Average time spent on unpaid work in the UK, 14 to 22 March 2026. Official statistics in development. This is national time use, not a finding about clutter. Women did about 50 minutes more unpaid work a day than men.</p>
+                <p>Source: Office for National Statistics, Time use in the UK, March 2026, Tables 4 and 27.</p>
+                <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+              </figcaption>
+            </figure>
+          </div>
+
+          <div data-year-panel="2015">
+            <figure class="chr-chart">
+              <p class="chr-chart-title">Housework in 2015</p>
+              <p class="chr-statline"><strong>60% more</strong> unpaid work, on average, by women than by men in 2015. That comparison is not drawn as a bar, because the source states the gap rather than two totals to plot side by side.</p>
+              <ul class="chr-legend" aria-hidden="true">
+                <li><span class="chr-swatch"></span> Women</li>
+                <li><span class="chr-swatch chr-swatch--alt"></span> Men</li>
+              </ul>
+              <div class="chr-bars" aria-hidden="true">
+                <p class="chr-group-name">Housework, hours a week</p>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Women, about 4.7 hours a week</span><span class="chr-bar-value">4.7 hours</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill" style="width:94%"></span></div>
+                </div>
+                <div class="chr-bar">
+                  <div class="chr-bar-top"><span class="chr-bar-label">Men, about 2.4 hours a week</span><span class="chr-bar-value">2.4 hours</span></div>
+                  <div class="chr-bar-track"><span class="chr-bar-fill chr-bar-fill--alt" style="width:48%"></span></div>
+                </div>
+              </div>
+              <p class="chr-scale">Scale: 0 to 5 hours a week. Women are solid. Men are striped. This is the 2015 snapshot, separate from March 2026.</p>
+              <div class="chr-sr"><table>
+                <caption>ONS analysis of 2015 unpaid work</caption>
+                <thead><tr><th scope="col">Measure</th><th scope="col">Figure</th></tr></thead>
+                <tbody>
+                  <tr><td>How much more unpaid work women did than men, on average</td><td>60% more</td></tr>
+                  <tr><td>Housework, women</td><td>About 4.7 hours a week</td></tr>
+                  <tr><td>Housework, men</td><td>About 2.4 hours a week</td></tr>
+                </tbody>
+              </table></div>
+              <figcaption>
+                <p>The 2015 ONS figures are an earlier, more detailed UK breakdown. Women did an average of 60% more unpaid work than men, including about 4.7 hours of housework a week compared with about 2.4 hours for men.</p>
+                <p>Source: ONS, 2016, "Women shoulder the responsibility of 'unpaid work'".</p>
+                <p class="chr-credit">Source: <a href="<%= credit %>">SN Cleaning Services, The Clean Home Report 2026</a></p>
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+
+        <p>In the UCLA study, clutter and unfinished projects were chosen as measures partly because they so often surfaced as families' chief concerns about their homes (<a href="https://doi.org/10.1177/0146167209352864" rel="noopener">Saxbe &amp; Repetti, 2010</a>). The state of the home is rarely just about the home: it is bound up with fairness, time pressure and how cared for each person feels.</p>
+
+        <h2 id="practical-takeaways">Practical takeaways</h2>
+        <p>The research does not call for a spotless, minimalist home. It points towards spaces that feel manageable, restful and personal. Some gentle, realistic habits:</p>
+        <ul>
+          <li><strong>Focus on how your home feels to you.</strong> The Rogers and Hart research suggests that your own experience of clutter matters more than any outside standard. Start with the spaces that make you tense.</li>
+          <li><strong>Start small and start now.</strong> Clutter and procrastination seem to feed each other, so clear one surface or sort one drawer. Ten minutes counts.</li>
+          <li><strong>Protect the bedroom.</strong> Keep the bedroom as calm as you can: clear the floor, keep surfaces simple and change your bedding regularly.</li>
+          <li><strong>Create a clear spot for focus.</strong> If you work or study at home, keep one table or desk as clear as possible.</li>
+          <li><strong>Make chores mindful.</strong> Try washing up slowly, noticing the warm water and the smell of the soap.</li>
+          <li><strong>Count housework as movement.</strong> Hoovering and carrying laundry all get you moving.</li>
+          <li><strong>Share the load fairly.</strong> Talk openly about who does what, and revisit it when life changes.</li>
+          <li><strong>Build simple routines.</strong> A five-minute evening reset can make mornings calmer for everyone.</li>
+          <li><strong>Let go of perfection.</strong> A bit of creative mess is normal and may even be useful.</li>
+          <li><strong>Ask for help when you need it.</strong> If clutter feels overwhelming, or you think you may be hoarding, talk to your GP, or see the information from <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/about-hoarding/" rel="noopener">Mind</a> and the <a href="https://www.mentalhealth.org.uk/explore-mental-health/publications/taking-sleep-seriously" rel="noopener">Mental Health Foundation</a>. For everyday cleaning, some households choose professional help to free up time; <a href="/domestic-cleaning/">SN Cleaning Services</a> is one local option for homes in London and Essex.</li>
+        </ul>
+
+        <h2 id="methodology">Methodology</h2>
+        <h3>How we chose sources</h3>
+        <p>We looked for UK data from the ONS, YouGov and mental health charities alongside international research. We searched for peer-reviewed studies, university research and established surveys that examined links between home cleanliness, tidiness or clutter and mood, stress, sleep, focus, motivation or family life. Each study was checked against the publisher, PubMed or the university's own announcement, and is linked so readers can check it. Where a figure comes from a university press release rather than the paper's abstract, we link to that release too.</p>
+        <h3>What we left out</h3>
+        <p>We excluded studies we could not verify, studies whose reliability has been publicly questioned, and commercial surveys of unknown method. No figures were invented or estimated.</p>
+        <p>This report reviews published research only. It does not include an original SN Cleaning Services survey.</p>
+        <h3>Limits of the research</h3>
+        <ul>
+          <li><strong>Association, not causation.</strong> Most studies are correlational: they show that clutter and lower wellbeing, poorer sleep or procrastination tend to go together, not that one causes the other.</li>
+          <li><strong>Self-reported measures.</strong> Many findings rely on what people say, which memory and expectations can colour.</li>
+          <li><strong>Specific samples.</strong> Several studies used small groups, students, people already struggling with clutter, or people in one US city. Most of the research is from the US, so results may differ in UK homes. The UK data we found (ONS, YouGov, the Mental Health Foundation) describes wellbeing, sleep and chores, but does not directly link them to clutter or cleanliness.</li>
+          <li><strong>Extreme versus everyday.</strong> The sleep research mainly involves hoarding, a clinical condition very different from ordinary mess.</li>
+          <li><strong>Laboratory versus real life.</strong> The Princeton and Minnesota studies were laboratory experiments, so their relevance to everyday homes is indirect.</li>
+          <li><strong>Funding.</strong> The National Sleep Foundation's Bedroom Poll received financial support from a laundry brand, although the foundation states it developed the poll independently.</li>
+        </ul>
+        <h3>Not medical advice</h3>
+        <p>This report is for general information only, and nothing in it suggests that mess or dirt causes any health condition. If you have concerns, please speak to your GP.</p>
+
+        <h2 id="sources">Sources</h2>
+        <ol class="chr-sources">
+          <li>Saxbe, D. E., &amp; Repetti, R. (2010). No place like home: Home tours correlate with daily patterns of mood and cortisol. <em>Personality and Social Psychology Bulletin</em>, 36(1), 71–81. <a href="https://doi.org/10.1177/0146167209352864" rel="noopener">https://doi.org/10.1177/0146167209352864</a> (PubMed: <a href="https://pubmed.ncbi.nlm.nih.gov/19934011/" rel="noopener">https://pubmed.ncbi.nlm.nih.gov/19934011/</a>)</li>
+          <li>McMains, S., &amp; Kastner, S. (2011). Interactions of top-down and bottom-up mechanisms in human visual cortex. <em>Journal of Neuroscience</em>, 31(2), 587–597. <a href="https://doi.org/10.1523/JNEUROSCI.3766-10.2011" rel="noopener">https://doi.org/10.1523/JNEUROSCI.3766-10.2011</a> (PMC: <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3072218/" rel="noopener">https://pmc.ncbi.nlm.nih.gov/articles/PMC3072218/</a>)</li>
+          <li>Roster, C. A., Ferrari, J. R., &amp; Jurkat, M. P. (2016). The dark side of home: Assessing possession 'clutter' on subjective well-being. <em>Journal of Environmental Psychology</em>, 46, 32–41. <a href="https://doi.org/10.1016/j.jenvp.2016.03.003" rel="noopener">https://doi.org/10.1016/j.jenvp.2016.03.003</a></li>
+          <li>DePaul University (2016). Cutting through the clutter: Study examines 'dark side of home'. Newswise. <a href="https://www.newswise.com/articles/cutting-through-the-clutter-study-examines-dark-side-of-home" rel="noopener">https://www.newswise.com/articles/cutting-through-the-clutter-study-examines-dark-side-of-home</a></li>
+          <li>Rogers, C. J., &amp; Hart, R. (2021). Home and the extended-self: Exploring associations between clutter and wellbeing. <em>Journal of Environmental Psychology</em>, 73, 101553. <a href="https://doi.org/10.1016/j.jenvp.2021.101553" rel="noopener">https://doi.org/10.1016/j.jenvp.2021.101553</a></li>
+          <li>Ferrari, J. R., Roster, C. A., Crum, K. P., &amp; Pardo, M. A. (2018). Procrastinators and clutter: An ecological view of living with excessive "stuff". <em>Current Psychology</em>, 37(2), 441–444. <a href="https://doi.org/10.1007/s12144-017-9682-9" rel="noopener">https://doi.org/10.1007/s12144-017-9682-9</a></li>
+          <li>Ferrari, J. R., &amp; Roster, C. A. (2018). Delaying disposing: Examining the relationship between procrastination and clutter across generations. <em>Current Psychology</em>, 37(2), 426–431. <a href="https://doi.org/10.1007/s12144-017-9679-4" rel="noopener">https://doi.org/10.1007/s12144-017-9679-4</a></li>
+          <li>Thacher, P., &amp; Reinheimer, A. (2015). Sleep quality and sleep disturbance in those at risk for hoarding disorder (SLEEP 2015 abstract 0920, <em>Sleep</em> abstract supplement). Summary: <a href="https://aasm.org/people-at-risk-of-hoarding-disorder-may-have-serious-complaints-about-sleep/" rel="noopener">https://aasm.org/people-at-risk-of-hoarding-disorder-may-have-serious-complaints-about-sleep/</a> Sample details: <a href="https://northcountrynow.com/stories/hoarders-dont-sleep-well-st-lawrence-university-researcher-finds,59013" rel="noopener">https://northcountrynow.com/stories/hoarders-dont-sleep-well-st-lawrence-university-researcher-finds,59013</a></li>
+          <li>Raines, A. M., Portero, A. K., Unruh, A. S., Short, N. A., &amp; Schmidt, N. B. (2015). An initial investigation of the relationship between insomnia and hoarding. <em>Journal of Clinical Psychology</em>, 71(7), 707–714. <a href="https://doi.org/10.1002/jclp.22161" rel="noopener">https://doi.org/10.1002/jclp.22161</a> (PubMed: <a href="https://pubmed.ncbi.nlm.nih.gov/25760757/" rel="noopener">https://pubmed.ncbi.nlm.nih.gov/25760757/</a>)</li>
+          <li>National Sleep Foundation (2011). Bedroom Poll: Americans' bedrooms are key to better sleep. <a href="https://www.prnewswire.com/news-releases/americans-bedrooms-are-key-to-better-sleep-according-to-new-national-sleep-foundation-poll-114529349.html" rel="noopener">https://www.prnewswire.com/news-releases/americans-bedrooms-are-key-to-better-sleep-according-to-new-national-sleep-foundation-poll-114529349.html</a></li>
+          <li>Hanley, A. W., Warner, A. R., Dehili, V. M., Canto, A. I., &amp; Garland, E. L. (2015). Washing dishes to wash the dishes: Brief instruction in an informal mindfulness practice. <em>Mindfulness</em>, 6(5), 1095–1103. <a href="https://doi.org/10.1007/s12671-014-0360-9" rel="noopener">https://doi.org/10.1007/s12671-014-0360-9</a></li>
+          <li>Florida State University (2015). Chore or stress reliever: Study suggests that washing dishes decreases stress. ScienceDaily. <a href="https://www.sciencedaily.com/releases/2015/10/151001165852.htm" rel="noopener">https://www.sciencedaily.com/releases/2015/10/151001165852.htm</a></li>
+          <li>Vohs, K. D., Redden, J. P., &amp; Rahinel, R. (2013). Physical order produces healthy choices, generosity, and conventionality, whereas disorder produces creativity. <em>Psychological Science</em>, 24(9), 1860–1867. <a href="https://doi.org/10.1177/0956797613480186" rel="noopener">https://doi.org/10.1177/0956797613480186</a></li>
+          <li>Keith, N. R., Clark, D. O., &amp; Miller, D. K. (2010). Environmental correlates of physical activity in middle-aged, urban dwelling African Americans. <em>Medicine &amp; Science in Sports &amp; Exercise</em>, 42(5), 246–247. <a href="https://doi.org/10.1249/01.mss.0000384314.31339.27" rel="noopener">https://doi.org/10.1249/01.mss.0000384314.31339.27</a></li>
+          <li>Indiana University (2010). Tidy house, fitter body? ScienceDaily. <a href="https://www.sciencedaily.com/releases/2010/06/100602121059.htm" rel="noopener">https://www.sciencedaily.com/releases/2010/06/100602121059.htm</a></li>
+          <li>Marsh, S., Dobson, R., &amp; Maddison, R. (2020). The relationship between household chaos and child, parent, and family outcomes: A systematic scoping review. <em>BMC Public Health</em>, 20, 513. <a href="https://doi.org/10.1186/s12889-020-08587-8" rel="noopener">https://doi.org/10.1186/s12889-020-08587-8</a> (PubMed: <a href="https://pubmed.ncbi.nlm.nih.gov/32316937/" rel="noopener">https://pubmed.ncbi.nlm.nih.gov/32316937/</a>)</li>
+          <li>Pew Research Center (2016). Sharing chores a key to good marriage, say majority of married adults. <a href="https://www.pewresearch.org/short-reads/2016/11/30/sharing-chores-a-key-to-good-marriage-say-majority-of-married-adults/" rel="noopener">https://www.pewresearch.org/short-reads/2016/11/30/sharing-chores-a-key-to-good-marriage-say-majority-of-married-adults/</a></li>
+          <li>Office for National Statistics (2026). Quarterly personal well-being estimates – seasonally adjusted, April to June 2026 (Annual Population Survey; official statistics in development). <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/quarterlypersonalwellbeingestimatesseasonallyadjusted" rel="noopener">https://www.ons.gov.uk/peoplepopulationandcommunity/wellbeing/datasets/quarterlypersonalwellbeingestimatesseasonallyadjusted</a></li>
+          <li>Office for National Statistics (2016). Women shoulder the responsibility of 'unpaid work'. <a href="https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/articles/womenshouldertheresponsibilityofunpaidwork/2016-11-10" rel="noopener">https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/articles/womenshouldertheresponsibilityofunpaidwork/2016-11-10</a></li>
+          <li>YouGov (2025). Which chores do Britons enjoy doing? <a href="https://yougov.com/en-gb/articles/53151-which-chores-do-britons-enjoy-doing" rel="noopener">https://yougov.com/en-gb/articles/53151-which-chores-do-britons-enjoy-doing</a></li>
+          <li>Mental Health Foundation (2025). Average adult has only 3 days a week with good quality sleep. <a href="https://www.mentalhealth.org.uk/about-us/news/average-adult-has-only-3-days-week-good-quality-sleep" rel="noopener">https://www.mentalhealth.org.uk/about-us/news/average-adult-has-only-3-days-week-good-quality-sleep</a></li>
+          <li>Mental Health Foundation. Sleep and our mental health. <a href="https://www.mentalhealth.org.uk/explore-mental-health/publications/taking-sleep-seriously" rel="noopener">https://www.mentalhealth.org.uk/explore-mental-health/publications/taking-sleep-seriously</a></li>
+          <li>Mind. How to improve your sleep. <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/sleep-problems/tips-to-improve-your-sleep/" rel="noopener">https://www.mind.org.uk/information-support/types-of-mental-health-problems/sleep-problems/tips-to-improve-your-sleep/</a></li>
+          <li>Mind. What is hoarding? <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/about-hoarding/" rel="noopener">https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/about-hoarding/</a> and How to help yourself with hoarding problems: <a href="https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/helping-yourself-with-hoarding/" rel="noopener">https://www.mind.org.uk/information-support/types-of-mental-health-problems/hoarding/helping-yourself-with-hoarding/</a></li>
+          <li>Office for National Statistics (2026). Time use in the UK: 14 to 22 March 2026 (Online Time Use Survey; official statistics in development), Tables 4 and 27. <a href="https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/timeuseintheuk" rel="noopener">https://www.ons.gov.uk/peoplepopulationandcommunity/personalandhouseholdfinances/incomeandwealth/datasets/timeuseintheuk</a></li>
+        </ol>
+
+        <section class="chr-close">
+          <p>If a calmer, more manageable home is something you want help with in London or Essex, you can <a href="/domestic-cleaning/">explore our domestic cleaning services</a>.</p>
+          <p>Tenants preparing to move out may also find our <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a> useful.</p>
+          <p><a href="/contact/">Get in touch</a></p>
+        </section>
+      </div>
+    </div>
+  </div>
+</article>
+<div class="chr-end">
+  <%- include('partials/author-box') %>
+</div>
+<script src="/js/clean-home-report.js?v=<%= assetVersion %>" defer></script>

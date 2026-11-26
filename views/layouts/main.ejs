@@ -25,7 +25,7 @@
   <!-- Open Graph / Twitter -->
   <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
   <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.'; %>
-  <meta property="og:type" content="<%= typeof post !== 'undefined' ? 'article' : 'website' %>" />
+  <meta property="og:type" content="<%= (typeof ogType !== 'undefined' && ogType) ? ogType : (typeof post !== 'undefined' ? 'article' : 'website') %>" />
   <meta property="og:site_name" content="<%= site.name %>" />
   <meta property="og:title" content="<%= ogTitle %>" />
   <meta property="og:description" content="<%= ogDesc %>" />
@@ -60,6 +60,11 @@
   <% } %>
   <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
+  <% if (typeof extraStylesheets !== 'undefined' && extraStylesheets && extraStylesheets.length) { %>
+    <% extraStylesheets.forEach(function (file) { %>
+      <link rel="stylesheet" href="/css/<%= file %>?v=<%= assetVersion %>" />
+    <% }); %>
+  <% } %>
   <% if ((typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2)) { %>
     <%# Headline font is self-hosted and preloaded so headings don't jump when it arrives. %>
     <link rel="preload" href="/fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
@@ -132,7 +137,8 @@
 </head>
 <% const isHomePage = (typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2); /* pages on the new design system */ %>
 <% const isFunnel = typeof funnel !== 'undefined' && funnel; /* ad landing funnel: no header, footer or extra buttons */ %>
-<body class="<%= (isFunnel || isHomePage || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %>">
+<% const hideQuote = typeof hideQuoteCta !== 'undefined' && hideQuoteCta; %>
+<body class="<%= (isFunnel || isHomePage || hideQuote || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %><%= (typeof bodyClass !== 'undefined' && bodyClass) ? ' ' + bodyClass : '' %>">
   <% if (!isFunnel) { %><%- include('../partials/header') %><% } %>
 
   <main>
@@ -141,7 +147,7 @@
 
   <% if (!isFunnel) { %><%- include('../partials/footer') %><% } %>
 
-  <% if (!isFunnel && !isHomePage && currentPath !== '/contact' && currentPath.indexOf('/contact/') !== 0) { %>
+  <% if (!isFunnel && !isHomePage && !hideQuote && currentPath !== '/contact' && currentPath.indexOf('/contact/') !== 0) { %>
   <div class="sticky-bar">
     <div class="container sticky-bar-inner">
       <span class="sticky-bar-label"><span class="pulse-dot"></span> Need a quote?</span>
