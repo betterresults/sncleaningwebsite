@@ -65,6 +65,7 @@ const pages = {
   "deep-house-cleaning/havering": {"title": "Deep House Cleaners Havering and Romford | 5★ Rated", "metaDescription": "Deep house cleaners in Havering, from Romford to Upminster. A one off deep or spring clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Havering", "leadFirst": "SN Cleaning Services provides deep house cleaners in Havering, from Romford to Upminster, from £27 an hour.", "leadKeepOriginal": true},
   "deep-house-cleaning/hutton": {"title": "Deep House Cleaning Hutton, Brentwood | 5★ Rated", "metaDescription": "Deep cleaning in Hutton and Hutton Mount, near Brentwood, CM13. Kitchens degreased and bathrooms descaled by our own team. Book online.", "h1": "Deep House Cleaning in Hutton, Brentwood", "leadFirst": "SN Cleaning Services provides deep house cleaning in Hutton, near Brentwood in Essex.", "leadKeepOriginal": true},
   "deep-house-cleaning/haringey": {"title": "Deep House Cleaning Haringey, Crouch End | 5★ Rated", "metaDescription": "Deep cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green, by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Haringey, Crouch End", "leadFirst": "SN Cleaning Services provides deep house cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "a regular cleaner in Haringey", "href": "/domestic-cleaning/haringey/"}]},
+  "mattress-cleaning/essex": {"title": "Mattress Cleaning Essex | 5★ Rated, Book Online", "metaDescription": "Mattress cleaning across Essex for stains, odours and dust mites, done at home by our own team. Add carpet or upholstery cleaning. Book online.", "h1": "Mattress Cleaning in Essex", "leadFirst": "SN Cleaning Services provides mattress cleaning in homes across Essex.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -117,6 +118,12 @@ const contentExtras = {
     faqs: [{
       question: 'Can I use a checklist to keep my Hutton home tidy between deep cleans?',
       answer: 'Yes. After a deep clean in Hutton, a weekly or fortnightly visit follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). We also provide [domestic cleaning in Hutton](/domestic-cleaning/hutton/).'
+    }]
+  },
+  'mattress-cleaning/essex': {
+    faqs: [{
+      question: 'Do you offer a mattress washing service in Essex?',
+      answer: 'We clean mattresses in your home, rather than taking them away to be washed. The cleaner vacuums the surface, sides and seams, treats visible stains, then applies a dust mite treatment and a sanitising clean that suits the mattress type. Most mattresses are ready for fresh sheets the same day. Carpet and upholstery on the same visit can use hot water extraction, and you can combine those with mattresses to reach the minimum visit charge. Get a quote with your postcode to see the price for your beds.'
     }]
   },
 };
