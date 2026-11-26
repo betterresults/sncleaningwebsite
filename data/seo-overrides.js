@@ -59,7 +59,18 @@ const pages = {
   "airbnb-cleaning/lambeth": {"title": "Airbnb Cleaning Lambeth, Brixton & Waterloo | 5★ Rated", "metaDescription": "Airbnb cleaning in Lambeth: Waterloo, Vauxhall, Brixton and Clapham. Our own DBS checked cleaners turn your short let round between guests. Book online.", "h1": "Airbnb Cleaning in Lambeth, Brixton and Waterloo", "leadFirst": "SN Cleaning Services provides Airbnb cleaning in Lambeth, including Brixton, Waterloo, Vauxhall and Clapham.", "leadKeepOriginal": true},
   "mattress-cleaning/billericay": {"title": "Mattress Cleaning Billericay | 5★ Rated, Book Online", "metaDescription": "Mattress cleaning in Billericay across CM11 and CM12. Dust mites, stains and odours treated at home by our team, with a 24 hour re clean. Book online.", "h1": "Mattress Cleaning Service in Billericay", "leadFirst": "SN Cleaning Services provides a mattress cleaning service in Billericay.", "leadKeepOriginal": true},
   "airbnb-cleaning/hutton": {"title": "Airbnb Cleaning Hutton, Brentwood CM13 | 5★ Rated", "metaDescription": "Airbnb cleaning in Hutton, CM13. Turnover cleans between guests with fresh linen and bathrooms reset by a reliable local team from Brentwood. Book online.", "h1": "Airbnb Cleaning in Hutton, Brentwood", "leadFirst": "SN Cleaning Services provides Airbnb cleaning in Hutton, near Brentwood.", "leadKeepOriginal": true},
-  "airbnb-cleaning/southend-on-sea": {"title": "Airbnb Cleaning Southend and Westcliff | 5★ Rated", "metaDescription": "Airbnb and holiday let cleaning in Southend-on-Sea, Westcliff, Chalkwell and Thorpe Bay. Turnover cleans by our own insured team. Get a quote.", "h1": "Airbnb and Holiday Let Cleaning in Southend-on-Sea", "leadFirst": "SN Cleaning Services provides Airbnb and holiday let cleaning in Southend-on-Sea, including Westcliff.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/southend-on-sea/"}]}
+  "airbnb-cleaning/southend-on-sea": {"title": "Airbnb Cleaning Southend and Westcliff | 5★ Rated", "metaDescription": "Airbnb and holiday let cleaning in Southend-on-Sea, Westcliff, Chalkwell and Thorpe Bay. Turnover cleans by our own insured team. Get a quote.", "h1": "Airbnb and Holiday Let Cleaning in Southend-on-Sea", "leadFirst": "SN Cleaning Services provides Airbnb and holiday let cleaning in Southend-on-Sea, including Westcliff.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/southend-on-sea/"}]},
+  // Page 2/3 batch 2 (26 Nov 2026). New keys only. Delete a key to roll that page back.
+  "after-builders-cleaning/islington": {"title": "After Builders Cleaning Islington, London | 5★ Rated", "metaDescription": "After builders cleaning in Islington, London. Our own DBS checked team clears dust from Georgian terraces and N1 to N19 flats. Book online.", "h1": "After Builders Cleaning in Islington, London", "leadFirst": "SN Cleaning Services provides after builders cleaning in Islington, London, including Barnsbury and Holloway.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy clean", "href": "/end-of-tenancy-cleaning/islington/"}]},
+  "deep-house-cleaning/havering": {"title": "Deep House Cleaners Havering and Romford | 5★ Rated", "metaDescription": "Deep house cleaners in Havering, from Romford to Upminster. A one off deep or spring clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Havering", "leadFirst": "SN Cleaning Services provides deep house cleaners in Havering, from Romford to Upminster, from £27 an hour.", "leadKeepOriginal": true},
+  "deep-house-cleaning/hutton": {"title": "Deep House Cleaning Hutton, Brentwood | 5★ Rated", "metaDescription": "Deep cleaning in Hutton and Hutton Mount, near Brentwood, CM13. Kitchens degreased and bathrooms descaled by our own team. Book online.", "h1": "Deep House Cleaning in Hutton, Brentwood", "leadFirst": "SN Cleaning Services provides deep house cleaning in Hutton, near Brentwood in Essex.", "leadKeepOriginal": true},
+  "deep-house-cleaning/haringey": {"title": "Deep House Cleaning Haringey, Crouch End | 5★ Rated", "metaDescription": "Deep cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green, by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Haringey, Crouch End", "leadFirst": "SN Cleaning Services provides deep house cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "a regular cleaner in Haringey", "href": "/domestic-cleaning/haringey/"}]},
+  "mattress-cleaning/essex": {"title": "Mattress Cleaning Essex | 5★ Rated, Book Online", "metaDescription": "Mattress cleaning across Essex for stains, odours and dust mites, done at home by our own team. Add carpet or upholstery cleaning. Book online.", "h1": "Mattress Cleaning in Essex", "leadFirst": "SN Cleaning Services provides mattress cleaning in homes across Essex.", "leadKeepOriginal": true},
+  "deep-house-cleaning/lambeth": {"title": "Deep Cleaners Lambeth, Brixton | 5★ Rated", "metaDescription": "Deep cleaners in Lambeth, from Brixton to Streatham and SW2 to SE27. Our own DBS checked team and a 24 hour re clean. Book online.", "h1": "Deep House Cleaners in Lambeth", "leadFirst": "SN Cleaning Services provides deep house cleaners in Lambeth, including Brixton and Streatham, from £27 an hour.", "leadKeepOriginal": true},
+  "deep-house-cleaning/hammersmith-and-fulham": {"title": "Deep Cleaning Fulham and Hammersmith | 5★ Rated", "metaDescription": "Deep cleaning in Fulham and Hammersmith: kitchens, bathrooms, grout and hidden dust, by our own insured, DBS checked team. Book online.", "h1": "Deep Cleaning in Fulham and Hammersmith", "leadFirst": "SN Cleaning Services provides deep cleaning in Fulham and Hammersmith, from £27 an hour.", "leadKeepOriginal": true},
+  "airbnb-cleaning/essex": {"title": "Airbnb and Holiday Let Cleaning Essex | 5★ Rated", "metaDescription": "Airbnb and holiday let cleaning across Essex, including Clacton and Southend. Fresh linen, guest ready turnarounds by our own insured team. Book online.", "h1": "Airbnb and Holiday Let Cleaning in Essex", "leadFirst": "SN Cleaning Services provides Airbnb and holiday let cleaning across Essex, including Clacton, with beds made in your linen.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "regular domestic cleaning from £23 per hour", "href": "/domestic-cleaning/essex/"}, {"phrase": "a deep clean from £27 per hour", "href": "/deep-house-cleaning/essex/"}]},
+  "deep-house-cleaning/havering/harold-wood": {"title": "Deep House Cleaners Harold Wood, RM3 | 5★ Rated", "metaDescription": "Deep house cleaners in Harold Wood, Kings Park and Harold Park, RM3. A thorough clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Harold Wood", "leadFirst": "SN Cleaning Services provides deep house cleaners in Harold Wood, RM3, including Kings Park and Harold Park, from £27 an hour.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/havering/harold-wood/"}]},
+  "end-of-tenancy-cleaning/ealing": {"title": "End of Tenancy Cleaning Ealing and Acton | 5★ Rated", "metaDescription": "End of tenancy cleaning in Ealing, Acton, Hanwell, West Ealing, Southall and Greenford. Own DBS checked team and a deposit back guarantee. Book online.", "h1": "End of Tenancy Cleaning in Ealing and Acton", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Ealing and Acton, from £179.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -101,7 +112,37 @@ const contentExtras = {
   'after-builders-cleaning/london': {
     sections: [{ heading: AFTER_BUILDERS_LONDON_COST_Q, body: [AFTER_BUILDERS_LONDON_COST_A] }],
     faqs: [{ question: AFTER_BUILDERS_LONDON_COST_Q, answer: AFTER_BUILDERS_LONDON_COST_A }]
-  }
+  },
+  'deep-house-cleaning/havering': {
+    faqs: [{
+      question: 'Do you offer a spring clean in Havering?',
+      answer: 'Yes. A deep clean is the usual booking for a spring clean in a Havering home: kitchens, bathrooms, built up grease and the corners a weekly visit does not reach. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, or book weekly or fortnightly [domestic cleaning in Havering](/domestic-cleaning/havering/).'
+    }]
+  },
+  'deep-house-cleaning/hutton': {
+    faqs: [{
+      question: 'Can I use a checklist to keep my Hutton home tidy between deep cleans?',
+      answer: 'Yes. After a deep clean in Hutton, a weekly or fortnightly visit follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). We also provide [domestic cleaning in Hutton](/domestic-cleaning/hutton/).'
+    }]
+  },
+  'mattress-cleaning/essex': {
+    faqs: [{
+      question: 'Do you offer a mattress washing service in Essex?',
+      answer: 'We clean mattresses in your home, rather than taking them away to be washed. The cleaner vacuums the surface, sides and seams, treats visible stains, then applies a dust mite treatment and a sanitising clean that suits the mattress type. Most mattresses are ready for fresh sheets the same day. Carpet and upholstery on the same visit can use hot water extraction, and you can combine those with mattresses to reach the minimum visit charge. Get a quote with your postcode to see the price for your beds.'
+    }]
+  },
+  'deep-house-cleaning/lambeth': {
+    faqs: [{
+      question: 'Do you offer a spring clean in Lambeth?',
+      answer: 'Yes. A deep clean is the usual booking for a spring clean in a Lambeth home, including Brixton and Streatham. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, or book [domestic cleaning in Lambeth](/domestic-cleaning/lambeth/).'
+    }]
+  },
+  'deep-house-cleaning/hammersmith-and-fulham': {
+    faqs: [{
+      question: 'Is a deep clean in Fulham the same as a regular domestic clean?',
+      answer: 'No. A deep clean is a one off reset of kitchens, bathrooms, grout and hidden dust. A regular weekly or fortnightly visit is a different service and follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). Many people book a deep clean first, then a regular visit afterwards, but there is no obligation to.'
+    }]
+  },
 };
 
 module.exports = { pages, nearbyFirst, contentExtras };
