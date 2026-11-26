@@ -67,6 +67,7 @@ const pages = {
   "deep-house-cleaning/haringey": {"title": "Deep House Cleaning Haringey, Crouch End | 5★ Rated", "metaDescription": "Deep cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green, by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Haringey, Crouch End", "leadFirst": "SN Cleaning Services provides deep house cleaning in Haringey, including Crouch End, Muswell Hill, Tottenham and Wood Green.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "a regular cleaner in Haringey", "href": "/domestic-cleaning/haringey/"}]},
   "mattress-cleaning/essex": {"title": "Mattress Cleaning Essex | 5★ Rated, Book Online", "metaDescription": "Mattress cleaning across Essex for stains, odours and dust mites, done at home by our own team. Add carpet or upholstery cleaning. Book online.", "h1": "Mattress Cleaning in Essex", "leadFirst": "SN Cleaning Services provides mattress cleaning in homes across Essex.", "leadKeepOriginal": true},
   "deep-house-cleaning/lambeth": {"title": "Deep Cleaners Lambeth, Brixton | 5★ Rated", "metaDescription": "Deep cleaners in Lambeth, from Brixton to Streatham and SW2 to SE27. Our own DBS checked team and a 24 hour re clean. Book online.", "h1": "Deep House Cleaners in Lambeth", "leadFirst": "SN Cleaning Services provides deep house cleaners in Lambeth, including Brixton and Streatham, from £27 an hour.", "leadKeepOriginal": true},
+  "deep-house-cleaning/hammersmith-and-fulham": {"title": "Deep Cleaning Fulham and Hammersmith | 5★ Rated", "metaDescription": "Deep cleaning in Fulham and Hammersmith: kitchens, bathrooms, grout and hidden dust, by our own insured, DBS checked team. Book online.", "h1": "Deep Cleaning in Fulham and Hammersmith", "leadFirst": "SN Cleaning Services provides deep cleaning in Fulham and Hammersmith, from £27 an hour.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -131,6 +132,12 @@ const contentExtras = {
     faqs: [{
       question: 'Do you offer a spring clean in Lambeth?',
       answer: 'Yes. A deep clean is the usual booking for a spring clean in a Lambeth home, including Brixton and Streatham. If you then want a regular visit, use our [domestic cleaning checklist](/domestic-cleaning-checklist/) as a guide, or book [domestic cleaning in Lambeth](/domestic-cleaning/lambeth/).'
+    }]
+  },
+  'deep-house-cleaning/hammersmith-and-fulham': {
+    faqs: [{
+      question: 'Is a deep clean in Fulham the same as a regular domestic clean?',
+      answer: 'No. A deep clean is a one off reset of kitchens, bathrooms, grout and hidden dust. A regular weekly or fortnightly visit is a different service and follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). Many people book a deep clean first, then a regular visit afterwards, but there is no obligation to.'
     }]
   },
 };
