@@ -103,6 +103,22 @@ const pages = {
   "domestic-cleaning/london": {"title": "Domestic Cleaners in London | 5★ Rated, Book Online", "metaDescription": "Domestic cleaners across London for weekly or fortnightly house cleaning. Our own DBS checked team, products included. Book online.", "h1": "Domestic Cleaners in London", "leadFirst": "SN Cleaning Services provides regular domestic cleaning across London from £23 an hour, with a 3 hour minimum.", "leadKeepOriginal": true},
   "carpet-cleaning-services/ingatestone": {"title": "Carpet Cleaning Ingatestone, CM4 | 5★ Rated", "metaDescription": "Carpet cleaning in Ingatestone and Fryerning, CM4. Fitted carpets and stairs deep cleaned by our own DBS checked team. Book online.", "h1": "Carpet Cleaning in Ingatestone", "leadFirst": "SN Cleaning Services provides carpet cleaning in Ingatestone and Fryerning from £49.", "leadKeepOriginal": true},
   "domestic-cleaning/ingatestone": {"title": "Domestic Cleaners Ingatestone, CM4 | 5★ Rated", "metaDescription": "Domestic cleaners in Ingatestone and Fryerning, CM4. Weekly or fortnightly visits by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Ingatestone", "leadFirst": "SN Cleaning Services provides domestic cleaners in Ingatestone and Fryerning from £23 an hour, with a 3 hour minimum.", "leadKeepOriginal": true},
+  // Page 2/3 batch 5 (26 Nov 2026). New keys only. Delete a key to roll that page back.
+  "domestic-cleaning/upminster": {"title": "Domestic Cleaners Upminster RM14 | 5★ Rated", "metaDescription": "Domestic cleaners in Upminster, RM14, for weekly or fortnightly house cleaning by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Upminster", "leadFirst": "SN Cleaning Services provides regular domestic cleaning in Upminster from £23 an hour, with a 3 hour minimum.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/billericay": {"title": "End of Tenancy Cleaning Billericay | 5★ Rated", "metaDescription": "End of tenancy cleaning in Billericay, Queen's Park and South Green. A checklist move out clean with a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Billericay", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Billericay from £179, including Queen's Park and South Green.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/havering/upminster-bridge": {"title": "End of Tenancy Cleaning Upminster Bridge | 5★ Rated", "metaDescription": "End of tenancy cleaning in Upminster Bridge, between Hornchurch and Upminster. Deposit back guarantee and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Upminster Bridge", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Upminster Bridge from £179.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/hounslow": {"title": "End of Tenancy Cleaning Hounslow | 5★ Rated", "metaDescription": "End of tenancy cleaning in Hounslow, Feltham, Brentford and Isleworth. Our own DBS checked team and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Hounslow", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Hounslow from £179, including Feltham, Brentford and Isleworth.", "leadKeepOriginal": true},
+  "after-builders-cleaning/doddinghurst": {"title": "After Builders Cleaning Doddinghurst | 5★ Rated", "metaDescription": "After builders cleaning in Doddinghurst, near Brentwood, CM15. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Doddinghurst", "leadFirst": "SN Cleaning Services provides after builders cleaning in Doddinghurst, near Brentwood, from £179.", "leadKeepOriginal": true},
+  "domestic-cleaning/hornchurch": {"title": "Domestic Cleaners Hornchurch RM11-RM12 | 5★ Rated", "metaDescription": "Domestic cleaners in Hornchurch, RM11 and RM12, including Emerson Park. Weekly or fortnightly visits by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Hornchurch", "leadFirst": "SN Cleaning Services provides regular domestic cleaning in Hornchurch from £23 an hour, with a 3 hour minimum.", "leadKeepOriginal": true},
+  "deep-house-cleaning/newham": {"title": "Deep House Cleaning Newham | 5★ Rated", "metaDescription": "Deep house cleaning in Newham: Stratford, Forest Gate, East Ham and Beckton. A one off reset by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Newham", "leadFirst": "SN Cleaning Services provides deep house cleaning in Newham from £27 an hour, including Stratford, Forest Gate, East Ham and Beckton.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/barking-and-dagenham/dagenham": {"title": "End of Tenancy Cleaning Dagenham | 5★ Rated", "metaDescription": "End of tenancy cleaning in Dagenham, including Dagenham East and Dagenham Heathway. Deposit back guarantee and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Dagenham", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Dagenham from £179.", "leadKeepOriginal": true},
+  "after-builders-cleaning/harrow": {"title": "After Builders Cleaning Harrow | 5★ Rated", "metaDescription": "After builders cleaning in Harrow, Pinner, Stanmore and Wealdstone. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Harrow", "leadFirst": "SN Cleaning Services provides after builders cleaning in Harrow from £179, including Pinner, Stanmore and Wealdstone.", "leadKeepOriginal": true},
+  "deep-house-cleaning/wickford": {"title": "Deep House Cleaning Wickford, Essex | 5★ Rated", "metaDescription": "Deep house cleaning in Wickford, near Basildon and Billericay. A thorough one off clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Wickford", "leadFirst": "SN Cleaning Services provides deep house cleaning in Wickford from £27 an hour.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/hillingdon": {"title": "End of Tenancy Cleaning Hillingdon | 5★ Rated", "metaDescription": "End of tenancy cleaning in Hillingdon: Uxbridge, Hayes and Ruislip. Our own DBS checked team and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Hillingdon", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Hillingdon from £179, including Uxbridge, Hayes and Ruislip.", "leadKeepOriginal": true},
+  "mattress-cleaning/essex/brentwood": {"title": "Mattress Cleaning Brentwood, Essex | 5★ Rated", "metaDescription": "Mattress cleaning in Brentwood, Shenfield and Hutton. Stains, odours and dust mites treated at home by our own team. Book online.", "h1": "Mattress Cleaning in Brentwood, Essex", "leadFirst": "SN Cleaning Services provides mattress cleaning in Brentwood, Shenfield and Hutton.", "leadKeepOriginal": true},
+  "airbnb-cleaning/essex/brentwood": {"title": "Airbnb Cleaning Brentwood, Essex | 5★ Rated", "metaDescription": "Airbnb and short let cleaning in Brentwood, Shenfield and Hutton. Turnover cleans between guests by our own insured team. Get a quote.", "h1": "Airbnb Cleaning in Brentwood, Essex", "leadFirst": "SN Cleaning Services provides Airbnb cleaning in Brentwood, Shenfield and Hutton from £26 an hour.", "leadKeepOriginal": true},
+  "upholstery-cleaning/rayleigh": {"title": "Sofa & Upholstery Cleaning Rayleigh | 5★ Rated", "metaDescription": "Sofa and upholstery cleaning in Rayleigh, SS6. Sofas and armchairs cleaned at home by our own DBS checked team. Book online.", "h1": "Sofa and Upholstery Cleaning in Rayleigh", "leadFirst": "SN Cleaning Services provides upholstery cleaning in Rayleigh from £69, with a £120 minimum visit charge you can reach by combining sofas, carpets and mattresses.", "leadKeepOriginal": true},
+  "deep-house-cleaning/essex/brentwood": {"title": "Deep House Cleaning Brentwood, Essex | 5★ Rated", "metaDescription": "Deep house cleaning in Brentwood, Shenfield and Hutton. Kitchens, bathrooms and built up grease by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Brentwood, Essex", "leadFirst": "SN Cleaning Services provides deep house cleaning in Brentwood, Shenfield and Hutton from £27 an hour.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -234,6 +250,37 @@ const contentExtras = {
     faqs: [{
       question: 'How long is a regular domestic clean in Kensington and Chelsea?',
       answer: 'Regular domestic cleaning in Kensington and Chelsea starts from £23 an hour, with a 3 hour minimum, and the visit is done by our own vetted, DBS checked cleaners. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) to judge the hours, and our [domestic cleaning checklist](/domestic-cleaning-checklist/) to see what a regular visit covers.'
+    }]
+  },
+  // Page 2/3 batch 5 (26 Nov 2026). New keys only. Prices are the from prices in data/prices.js.
+  'domestic-cleaning/upminster': {
+    faqs: [{
+      question: 'How long is a regular domestic clean in Upminster?',
+      answer: 'Regular domestic cleaning in Upminster starts from £23 an hour, with a 3 hour minimum, and the visit is done by our own vetted cleaners. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) to judge the hours, and our [domestic cleaning checklist](/domestic-cleaning-checklist/) to see what a regular visit covers.'
+    }]
+  },
+  'end-of-tenancy-cleaning/billericay': {
+    faqs: [{
+      question: 'Is the fridge included in an end of tenancy clean in Billericay?',
+      answer: 'End of tenancy cleaning in Billericay starts from £179. The fridge and freezer are included: please switch them off so they can be defrosted and cleaned. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. Estimate the clean with the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/), and work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
+    }]
+  },
+  'end-of-tenancy-cleaning/havering/upminster-bridge': {
+    faqs: [{
+      question: 'What does a move out clean in Upminster Bridge include?',
+      answer: 'End of tenancy cleaning in Upminster Bridge starts from £179. It is a checklist-led move out clean, and you have a 7 day re clean guarantee if the agent flags anything from the clean. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) to estimate the price for your home.'
+    }]
+  },
+  'end-of-tenancy-cleaning/hounslow': {
+    faqs: [{
+      question: 'Are end of tenancy prices in Hounslow the same as in Essex?',
+      answer: 'Yes. End of tenancy cleaning in Hounslow starts from £179, and the same base prices apply across London and Essex. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service, and carpet cleaning can be added when you book. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) for a guide total, and the [house cleaning time calculator](/house-cleaning-time-calculator/) for how long a visit may take.'
+    }]
+  },
+  'after-builders-cleaning/doddinghurst': {
+    faqs: [{
+      question: 'What does after builders cleaning in Doddinghurst cover?',
+      answer: 'After builders cleaning in Doddinghurst starts from £179. The visit removes post renovation dust and plaster dust left after building work. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the clean may take.'
     }]
   },
 };
