@@ -71,6 +71,8 @@ const pages = {
   "airbnb-cleaning/essex": {"title": "Airbnb and Holiday Let Cleaning Essex | 5★ Rated", "metaDescription": "Airbnb and holiday let cleaning across Essex, including Clacton and Southend. Fresh linen, guest ready turnarounds by our own insured team. Book online.", "h1": "Airbnb and Holiday Let Cleaning in Essex", "leadFirst": "SN Cleaning Services provides Airbnb and holiday let cleaning across Essex, including Clacton, with beds made in your linen.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "regular domestic cleaning from £23 per hour", "href": "/domestic-cleaning/essex/"}, {"phrase": "a deep clean from £27 per hour", "href": "/deep-house-cleaning/essex/"}]},
   "deep-house-cleaning/havering/harold-wood": {"title": "Deep House Cleaners Harold Wood, RM3 | 5★ Rated", "metaDescription": "Deep house cleaners in Harold Wood, Kings Park and Harold Park, RM3. A thorough clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaners in Harold Wood", "leadFirst": "SN Cleaning Services provides deep house cleaners in Harold Wood, RM3, including Kings Park and Harold Park, from £27 an hour.", "leadKeepOriginal": true, "linkPhrases": [{"phrase": "end of tenancy cleaning", "href": "/end-of-tenancy-cleaning/havering/harold-wood/"}]},
   "end-of-tenancy-cleaning/ealing": {"title": "End of Tenancy Cleaning Ealing and Acton | 5★ Rated", "metaDescription": "End of tenancy cleaning in Ealing, Acton, Hanwell, West Ealing, Southall and Greenford. Own DBS checked team and a deposit back guarantee. Book online.", "h1": "End of Tenancy Cleaning in Ealing and Acton", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Ealing and Acton, from £179.", "leadKeepOriginal": true},
+  // Page 2/3 batch 3 (26 Nov 2026). New keys only. Delete a key to roll that page back.
+  "end-of-tenancy-cleaning/brent": {"title": "End of Tenancy Cleaners Brent | 5★ Rated", "metaDescription": "End of tenancy cleaners in Brent: Wembley, Willesden, Harlesden and Kilburn. Our own DBS checked team, show up guarantee and a 7 day re clean.", "h1": "End of Tenancy Cleaning in Brent", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Brent from £179, covering Wembley, Willesden, Harlesden and Kilburn.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -141,6 +143,12 @@ const contentExtras = {
     faqs: [{
       question: 'Is a deep clean in Fulham the same as a regular domestic clean?',
       answer: 'No. A deep clean is a one off reset of kitchens, bathrooms, grout and hidden dust. A regular weekly or fortnightly visit is a different service and follows our [domestic cleaning checklist](/domestic-cleaning-checklist/). Many people book a deep clean first, then a regular visit afterwards, but there is no obligation to.'
+    }]
+  },
+  'end-of-tenancy-cleaning/brent': {
+    faqs: [{
+      question: 'Do you also cover Brent Cross?',
+      answer: 'Brent Cross sits on the Barnet side of the borough boundary. For flats around Brent Cross, use our [end of tenancy cleaning in Barnet](/end-of-tenancy-cleaning/barnet/) page. This page covers the London Borough of Brent, including Wembley, Wembley Park, Willesden, Harlesden and Kilburn. For a room by room list before the inventory, use our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/).'
     }]
   },
 };
