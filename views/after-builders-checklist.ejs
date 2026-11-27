@@ -1,0 +1,135 @@
+<%# Public after builders checklist. Data: data/after-builders-checklist.js. Styles: public/css/after-builders-checklist.css. designV2 is set on the route. %>
+<link rel="stylesheet" href="/css/after-builders-checklist.css?v=<%= assetVersion %>" />
+<% const book = bookUrl('after-builders-cleaning'); %>
+<% function withPricesLink(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .split('/after-builders-cleaning/prices/')
+    .join('<a href="/after-builders-cleaning/prices/">after builders cleaning prices</a>');
+} %>
+<div class="abc" id="after-builders-checklist" data-total="<%= checklist.TASKS.length %>" data-storage="<%= checklist.STORAGE_KEY %>">
+
+<header class="abc-hero"><div class="abc-wrap">
+  <nav class="abc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= checklist.H1 %></h1>
+  <p class="abc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= checklist.PUBLISHED %>"><%= checklist.PUBLISHED_LABEL %></time></p>
+  <div class="abc-prose">
+    <p>An after builders clean is the fine dust clean after building work, a post renovation clean, or a new fit out. This is the room by room list for that clean across London, inside the M25, and Essex: whole property dust and debris, the kitchen, the bathrooms, doors and woodwork, then the hallway, stairs and handover.</p>
+    <p>Tick each task as you go, or <a href="<%= checklist.PDF_PATH %>">download the printable PDF</a>. If you would rather hand the clean to us, <a href="<%= book %>">book an after builders clean</a>. The clean is done by our own trained, insured, DBS checked team. We never send subcontractors. We have been in business for 12 years.</p>
+  </div>
+  <div class="abc-actions">
+    <a class="h-btn h-btn--primary" href="<%= book %>">Book an after builders clean</a>
+    <a class="h-btn h-btn--primary abc-download" href="<%= checklist.PDF_PATH %>">Download printable PDF</a>
+    <a class="h-btn h-btn--light" href="#the-checklist">Start the checklist</a>
+    <button type="button" class="h-btn h-btn--light" id="abc-print">Print</button>
+  </div>
+</div></header>
+
+<section class="abc-band abc-white"><div class="abc-wrap abc-prose">
+  <h2>How it works</h2>
+  <ol class="abc-steps">
+    <li><strong>1.</strong> Tick each task as you clean, or download the printable PDF and print it.</li>
+    <li><strong>2.</strong> Work through the property room by room, then the hallway, stairs and handover. Add a note if a room needs a particular finish.</li>
+    <li><strong>3.</strong> If you would rather we did the clean, <a href="<%= book %>">book an after builders clean</a>. The booking form shows the price before you confirm.</li>
+  </ol>
+</div></section>
+
+<section class="abc-band abc-sand" id="the-checklist"><div class="abc-wrap">
+  <h2>The room by room checklist</h2>
+  <p class="abc-prose">Tick as you go. Your ticks and notes stay in this browser if you refresh the page. There are <%= checklist.TASKS.length %> tasks. Oven cleaning is not one of them.</p>
+  <div class="abc-progress" aria-live="polite">
+    <div class="abc-progress-row">
+      <span class="abc-progress-label" id="abc-progress-text">0 of <%= checklist.TASKS.length %> done</span>
+      <span><%= checklist.TASKS.length %> tasks</span>
+    </div>
+    <div class="abc-bar" role="progressbar" aria-valuemin="0" aria-valuemax="<%= checklist.TASKS.length %>" aria-valuenow="0" aria-labelledby="abc-progress-text"><span id="abc-progress-bar"></span></div>
+  </div>
+  <div class="abc-actions abc-noprint">
+    <a class="h-btn h-btn--primary abc-download" href="<%= checklist.PDF_PATH %>">Download printable PDF</a>
+    <button type="button" class="h-btn h-btn--light" id="abc-print-2">Print</button>
+    <button type="button" class="h-btn h-btn--light" id="abc-reset">Reset</button>
+  </div>
+
+  <% checklist.sections.forEach(function (section) { %>
+    <section class="abc-room" id="section-<%= section.key %>" aria-labelledby="section-heading-<%= section.key %>">
+      <div class="abc-room-head">
+        <h3 id="section-heading-<%= section.key %>"><%= section.name %></h3>
+        <span class="abc-count"><%= section.tasks.length %> tasks</span>
+      </div>
+      <% section.tasks.forEach(function (item) { %>
+        <div class="abc-task" data-task="<%= item.id %>">
+          <p class="abc-task-name"><%= item.text %></p>
+          <div class="abc-ticks">
+            <label class="abc-tick"><input type="checkbox" data-kind="done" aria-label="Done: <%= item.text %>"> Done</label>
+          </div>
+        </div>
+      <% }); %>
+      <div class="abc-notes">
+        <label for="note-<%= section.key %>">Notes for <%= section.name %></label>
+        <textarea id="note-<%= section.key %>" data-section="<%= section.key %>" maxlength="2000" placeholder="Anything to flag before handover in this part of the clean"></textarea>
+      </div>
+    </section>
+  <% }); %>
+
+  <div class="abc-hand" id="hand-it-over">
+    <h3>Hand the clean to us</h3>
+    <p>Tell us the postcode and we will open the after builders cleaning booking form. You see the price there before you confirm.</p>
+    <form method="get" action="<%= book %>">
+      <input type="hidden" name="utm_content" value="after-builders-checklist">
+      <div class="abc-fields">
+        <label class="abc-field">Postcode <input name="prefill_postcode" type="text" required autocomplete="postal-code" maxlength="12"></label>
+        <label class="abc-field">Email <input name="prefill_email" type="email" required autocomplete="email"></label>
+      </div>
+      <p style="margin-top:12px"><button type="submit" class="h-btn h-btn--primary">Book an after builders clean</button></p>
+    </form>
+  </div>
+</div></section>
+
+<section class="abc-band abc-white" id="before-you-book"><div class="abc-wrap abc-prose">
+  <h2>Before you book and handover protocol</h2>
+  <% checklist.beforeYouBook.forEach(function (block) { %>
+    <h3><%= block.h %></h3>
+    <p><%= block.p %><% if (block.prices) { %> <a href="/after-builders-cleaning/prices/">after builders cleaning prices</a> page.<% } %></p>
+  <% }); %>
+</div></section>
+
+<section class="abc-band abc-sand"><div class="abc-wrap abc-prose">
+  <h2>The team, the oven add on, and prices</h2>
+  <p><%= checklist.OVEN_NOTE %></p>
+  <p>Empty homes are priced by property size. A single room or lived in area is priced per cleaner per hour. Builders and developers can book a cleaner for the day (8 hours). We are not VAT registered, so no VAT is added. The same base prices apply in London and Essex, and in London the Congestion Charge and parking are added where they apply. The figures are in the questions below, and the full list is on our <a href="/after-builders-cleaning/prices/">after builders cleaning prices</a> page.</p>
+  <p>We cover London inside the M25 and Essex. If something we cleaned is missed, the free reclean guarantee is 7 days for an empty home and 24 hours if you already live in the property.</p>
+  <p>This list is a post renovation clean after the trades have finished. A weekly or fortnightly home visit is a different clean: use the <a href="/domestic-cleaning-checklist/">domestic cleaning checklist</a>. If you are handing a rental back to a landlord or agent, use the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>. If you host a short let, use the <a href="/airbnb-turnover-cleaning-checklist/">Airbnb turnover cleaning checklist</a>. To see how long a regular, deep or end of tenancy clean may take, try the <a href="/house-cleaning-time-calculator/">house cleaning time calculator</a>.</p>
+</div></section>
+
+<section class="abc-band abc-white"><div class="abc-wrap abc-prose">
+  <h2>After builders cleaning near you</h2>
+  <p>See <a href="/after-builders-cleaning/">after builders cleaning in London and Essex</a> for what is included when we do the clean.</p>
+  <ul class="abc-areas">
+    <% checklist.nearYou.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>
+  </ul>
+</div></section>
+
+<section class="abc-band abc-sand"><div class="abc-wrap">
+  <h2>Frequently asked questions</h2>
+  <div class="h-faq">
+    <% checklist.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%- withPricesLink(item.a) %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="abc-prose" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script src="/js/after-builders-checklist.js?v=<%= assetVersion %>" defer></script>

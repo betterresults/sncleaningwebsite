@@ -64,6 +64,7 @@
       <h2 class="h-title"><%= copy.tilesTitle %></h2>
       <p class="s-intro"><%= copy.tilesIntro %></p>
       <% if (service.slug === 'airbnb-cleaning') { %><p class="s-intro">Doing the changeover yourself? Work through our <a href="/airbnb-turnover-cleaning-checklist/">Airbnb turnover cleaning checklist</a>.</p><% } %>
+      <% if (service.slug === 'after-builders-cleaning') { %><p class="s-intro">Doing the clean yourself? Work through our <a href="/after-builders-cleaning-checklist/">after builders cleaning checklist</a>.</p><% } %>
     </div>
     <ul class="s-freq">
       <% copy.tiles.forEach(function (t) { %>
