@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -21,6 +21,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=<%= assetVersion %>" />
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=<%= assetVersion %>" />
   <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png?v=<%= assetVersion %>" />
+  <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Open Graph / Twitter -->
   <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
@@ -52,11 +53,9 @@
   <script>addEventListener('load',function(){setTimeout(function(){if(!HTMLScriptElement.supports||!HTMLScriptElement.supports('speculationrules'))return;var s=document.createElement('script');s.type='speculationrules';s.textContent=JSON.stringify({     "prefetch": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }     ],     "prerender": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },       { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },       { "tag": "site", "where": { "and": [           { "href_matches": "/*" },           { "not": { "href_matches": "/book{/*}?" } },           { "not": { "href_matches": "/contact{/}?" } },           { "not": { "href_matches": "/contact/success{/*}?" } },           { "not": { "selector_matches": "[target=_blank], [download]" } }         ] }, "eagerness": "moderate" }     ]   });document.head.appendChild(s)},300)})</script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <%# Web fonts load without blocking the first paint (text shows in a fallback font, then swaps). %>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=optional" media="print" onload="this.media='all'">
-  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=optional"></noscript>
-  <% if (typeof heroPreload !== 'undefined' && heroPreload) { %>
-    <link rel="preload" as="image" href="<%= heroPreload %>?v=<%= assetVersion %>" imagesrcset="<%= (rs(heroPreload, '100vw').match(/srcset="([^"]+)"/) || [,''])[1] %>" imagesizes="100vw" fetchpriority="high">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+  <% if (typeof heroPreload !== 'undefined' && heroPreload) { const lcp = responsiveWebp(heroPreload); %>
+    <link rel="preload" as="image" href="<%= lcp.href %>"<% if (lcp.srcset) { %> imagesrcset="<%= lcp.srcset %>" imagesizes="100vw"<% } %> fetchpriority="high">
   <% } %>
   <script>document.documentElement.classList.add('js')</script>
   <link rel="stylesheet" href="/css/style.css?v=<%= assetVersion %>" />
@@ -73,7 +72,7 @@
 
   <!-- Structured data -->
   <% if (typeof structuredData !== 'undefined') { %>
-    <% structuredData.concat([schemaWebPage({ url: canonicalUrl, title: fullTitle, description: (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : null, path: currentPath, image: (typeof ogImage !== 'undefined' && ogImage) ? ogImage : null, datePublished: (typeof webPageDatePublished !== 'undefined' && webPageDatePublished) ? webPageDatePublished : null, dateModified: (typeof webPageDateModified !== 'undefined' && webPageDateModified) ? webPageDateModified : null })]).filter(Boolean).forEach(function(block) { %>
+    <% schemaCollapse(structuredData.concat([schemaWebPage({ url: canonicalUrl, title: fullTitle, description: (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : null, path: currentPath, image: (typeof ogImage !== 'undefined' && ogImage) ? ogImage : null, datePublished: (typeof webPageDatePublished !== 'undefined' && webPageDatePublished) ? webPageDatePublished : null, dateModified: (typeof webPageDateModified !== 'undefined' && webPageDateModified) ? webPageDateModified : null })])).filter(Boolean).forEach(function(block) { %>
       <script type="application/ld+json"><%- JSON.stringify(block) %></script>
     <% }); %>
   <% } %>
@@ -139,9 +138,13 @@
 <% const isFunnel = typeof funnel !== 'undefined' && funnel; /* ad landing funnel: no header, footer or extra buttons */ %>
 <% const hideQuote = typeof hideQuoteCta !== 'undefined' && hideQuoteCta; %>
 <body class="<%= (isFunnel || isHomePage || hideQuote || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %><%= (typeof bodyClass !== 'undefined' && bodyClass) ? ' ' + bodyClass : '' %>">
-  <% if (!isFunnel) { %><%- include('../partials/header') %><% } %>
+  <a class="skip-link" href="#content">Skip to content</a>
+  <% if (!isFunnel) { %>
+  <div class="announce"><p>12 years in business · London &amp; Essex · Our own insured, DBS checked team</p></div>
+  <%- include('../partials/header') %>
+  <% } %>
 
-  <main>
+  <main id="content">
     <%- body %>
   </main>
 
@@ -154,19 +157,20 @@
       <form action="<%= bookUrl() %>" method="GET" class="sticky-bar-form" data-book-form>
         <input type="text" name="prefill_postcode" placeholder="Postcode" aria-label="Postcode" autocomplete="postal-code" />
         <button type="submit" class="btn btn-primary">Quote</button>
+        <%- include('../partials/submit-consent') %>
       </form>
     </div>
   </div>
   <% } %>
 
   <% if (site.whatsappUrl && !isFunnel) { %>
-  <a href="<%= site.whatsappUrl %>" class="wa-float" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a href="<%= site.whatsappUrl %>" class="wa-float" target="_blank" rel="noopener" aria-label="Message SN Cleaning Services on WhatsApp">
     <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.7c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7Zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7c0 1.6 1.2 3.1 1.3 3.3.2.2 2.3 3.5 5.5 4.9 2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.5Z"/></svg><span class="wa-float-text">Chat on WhatsApp</span>
   </a>
   <% } %>
 
   <div class="cookie-note" id="cookie-note" role="region" aria-label="Cookies" hidden>
-    <p>We'd like to use optional cookies to understand how visitors use our website. <a href="/cookies-policy/">Cookies Policy</a></p>
+    <p>We'd like to use optional cookies to understand how visitors use our website. <a href="/cookies-policy/">Cookie Policy</a></p>
     <div class="cookie-note-btns">
       <button type="button" class="cookie-note-btn cookie-note-btn-alt" id="cookie-reject">Reject</button>
       <button type="button" class="cookie-note-btn" id="cookie-accept">Accept</button>

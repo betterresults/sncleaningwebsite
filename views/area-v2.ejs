@@ -31,7 +31,7 @@
   // Reviews: ones that mention this area first, then ones about this service.
   const placeRe = new RegExp(place.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
   const score = (t) => (placeRe.test(t.quote + ' ' + (t.location || '')) ? 2 : 0) + (copy.reviewMatch.test(t.quote) ? 1 : 0);
-  const reviews = (typeof testimonials !== 'undefined' ? testimonials : []).slice()
+  const reviews = (typeof pickedReviews !== 'undefined' && pickedReviews) ? pickedReviews : (typeof testimonials !== 'undefined' ? testimonials : []).slice()
     .sort((a, b) => score(b) - score(a))
     .slice(0, 3);
   const roomIcons = {
@@ -51,7 +51,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="h-hero s-hero">
-  <img class="h-hero-bg" src="<%= heroImg %>?v=<%= assetVersion %>"<%- rs(heroImg, '100vw') %> alt="<%= service.title %> in <%= place %> by SN Cleaning Services" decoding="async" fetchpriority="high" width="1152" height="864" />
+  <img class="h-hero-bg" src="<%= responsiveWebp(heroImg).href %>"<%- rs(heroImg, '100vw') %> alt="<%= service.title %> in <%= place %> by SN Cleaning Services" decoding="async" fetchpriority="high" width="1152" height="864" />
   <div class="h-wrap h-hero-inner">
     <div class="h-hero-copy">
       <nav class="s-crumbs" aria-label="Breadcrumb">
@@ -136,7 +136,6 @@
         <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
       <% } %>
     </div>
-    <script type="application/ld+json"><%- JSON.stringify(schemaReviews(reviews)) %></script>
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">

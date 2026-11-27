@@ -255,7 +255,7 @@ const essexPlaces = [
   ['Chelmsford', '/end-of-tenancy-cleaning/chelmsford/'],
   ['Basildon', '/end-of-tenancy-cleaning/basildon/'],
   ['Billericay', '/end-of-tenancy-cleaning/billericay/'],
-  ['Southend-on-Sea', '/end-of-tenancy-cleaning/southend-on-sea/'],
+  ['Southend on Sea', '/end-of-tenancy-cleaning/southend-on-sea/'],
   ['Wickford', '/end-of-tenancy-cleaning/wickford/'],
   ['Rayleigh', '/end-of-tenancy-cleaning/rayleigh/'],
   ['Laindon', '/end-of-tenancy-cleaning/laindon/'],

@@ -2,8 +2,8 @@
 <section class="page-hero page-hero--photo" style="background-image: url('<%= serviceImage(service.slug) %>'); background-image: image-set(url('<%= _heroWebp %>') type('image/webp'), url('<%= serviceImage(service.slug) %>') type('image/jpeg'));">
   <div class="container">
     <span class="eyebrow"><%= parent ? service.title + ' · ' + parent.name : service.title %></span>
-    <h1><%= service.title %> in <%= region.name %></h1>
-    <p><%= page.meta_description || `${service.title} in ${region.name}.` %></p>
+    <h1><%= service.title %> in <%= plainPlaceName(region.name) %></h1>
+    <p><%= page.meta_description || `${service.title} in ${plainPlaceName(region.name)}.` %></p>
     <div class="quote-card-badges" style="margin-top:18px;">
       <span>Insured</span>
       <span>DBS checked</span>
@@ -54,7 +54,7 @@
 <section class="section">
   <div class="container">
     <div class="section-heading">
-      <span class="eyebrow">Also Available in <%= region.name %></span>
+      <span class="eyebrow">Also Available in <%= plainPlaceName(region.name) %></span>
       <h2>Other cleaning services we offer here</h2>
     </div>
     <div class="grid grid-3">
@@ -81,7 +81,7 @@
   <div class="container">
     <div class="section-heading">
       <span class="eyebrow">Nearby</span>
-      <h2><%= service.title %> near <%= region.name %></h2>
+      <h2><%= service.title %> near <%= plainPlaceName(region.name) %></h2>
     </div>
     <div class="area-tags">
       <% relatedAreas.forEach(function(a) { %>
@@ -156,7 +156,7 @@
 <section class="section cta-band">
   <div class="container cta-band-inner">
     <div>
-      <h2>Ready to book <%= service.title.toLowerCase() %> in <%= region.name %>?</h2>
+      <h2>Ready to book <%= service.title.toLowerCase() %> in <%= plainPlaceName(region.name) %>?</h2>
       <p>Tell us the postcode and we'll come back with a quote.</p>
     </div>
     <a href="<%= bookHref(service) %>" class="btn btn-primary btn-lg">Get a quote</a>

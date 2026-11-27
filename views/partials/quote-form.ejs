@@ -23,6 +23,7 @@
           <span class="h-error" id="q-email-error">Please enter a valid email address</span>
         </div>
         <button type="submit" class="h-btn h-btn--primary h-btn--block">Get my quote <span aria-hidden="true">→</span></button>
+        <%- include('submit-consent') %>
       </form>
       <% } else { %>
       <p class="h-quote-sub">Tell us about the job and we’ll send you a price.</p>
@@ -54,6 +55,8 @@
           <textarea id="q-details" name="details" rows="3" required placeholder="e.g. 3-bed house, kitchen and 2 bathrooms"></textarea>
         </div>
         <button type="submit" class="h-btn h-btn--primary h-btn--block">Request a quote <span aria-hidden="true">→</span></button>
+        <%- include('submit-consent') %>
       </form>
       <% } %>
+      <%- include('quote-trust') %>
     </div>

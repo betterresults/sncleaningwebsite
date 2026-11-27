@@ -12,7 +12,7 @@
       </p>
     </div>
     <div class="a-hero-media">
-      <img src="/images/silvia.webp?v=<%= assetVersion %>"<%- rs('/images/silvia.webp', '(max-width: 900px) 90vw, 520px') %> alt="Silvia Nedeva of SN Cleaning Services"
+      <img src="<%= responsiveWebp('/images/silvia.webp').href %>"<%- rs('/images/silvia.webp', '(max-width: 900px) 90vw, 520px') %> alt="Silvia Nedeva of SN Cleaning Services"
            fetchpriority="high" width="720" height="960" />
       <div class="a-float a-float--top">
         <span class="h-stars" aria-hidden="true">★★★★★</span>
@@ -121,7 +121,6 @@
 <% if (featured) { %>
 <section class="h-section h-white">
   <div class="h-wrap">
-    <script type="application/ld+json"><%- JSON.stringify(schemaReviews([featured])) %></script>
     <figure class="a-quote h-reveal">
       <div class="h-stars" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>“<%= featured.quote %>”</blockquote>

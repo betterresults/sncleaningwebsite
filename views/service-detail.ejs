@@ -22,7 +22,7 @@
     <div class="service-detail">
       <div class="service-detail-media">
         <% const servicePhoto = (page.images && page.images.length) ? page.images[0] : serviceImage(service.slug); %>
-        <img src="<%= servicePhoto %>?v=<%= assetVersion %>"<%- rs(servicePhoto, '(max-width: 800px) 100vw, 600px') %> alt="<%= service.title %>" />
+        <img src="<%= responsiveWebp(servicePhoto).href %>"<%- rs(servicePhoto, '(max-width: 800px) 100vw, 600px') %> alt="<%= service.title %>" width="1152" height="864" decoding="async" />
       </div>
       <div class="service-detail-text">
         <h2>About This Service</h2>
@@ -117,7 +117,7 @@
     </div>
     <div class="gallery-grid">
       <% page.images.slice(1).forEach(function(img) { %>
-        <img src="<%= img %>" alt="<%= service.title %>" style="width:100%; border-radius:12px;" />
+        <img src="<%= img %>" alt="<%= service.title %>" width="1152" height="864" decoding="async" loading="lazy" style="width:100%; border-radius:12px;" />
       <% }); %>
     </div>
   </div>
@@ -211,7 +211,7 @@
       <% relatedServices.forEach(function(s) { %>
         <a href="/<%= s.slug %>" class="card service-card">
           <div class="service-card-photo">
-            <img src="<%= serviceImage(s.slug) %>?v=<%= assetVersion %>"<%- rs(serviceImage(s.slug), '(max-width: 800px) 100vw, 600px') %> loading="lazy" decoding="async" alt="<%= s.title %>" />
+            <img src="<%= responsiveWebp(serviceImage(s.slug)).href %>"<%- rs(serviceImage(s.slug), '(max-width: 800px) 100vw, 600px') %> loading="lazy" decoding="async" alt="<%= s.title %>" width="1152" height="864" />
           </div>
           <div class="service-card-body">
             <h3><%= s.title %></h3>

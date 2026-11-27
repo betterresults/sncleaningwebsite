@@ -342,9 +342,14 @@ async function optimiseCss(html) {
       delete versions['style.css']; delete versions['home.css'];
     }
     // Match rules that depend on the js class set before first paint.
-    doc = doc.replace(/<html lang="en">/, '<html lang="en" class="js" data-crit-js>');
+    doc = doc.replace(/<html lang="en-GB">/, '<html lang="en-GB" class="js" data-crit-js>');
     let out = await beasties.process(doc);
-    out = out.replace(/<html lang="en" class="js" data-crit-js[^>]*>/, '<html lang="en">');
+    out = out.replace(/<html lang="en-GB" class="js" data-crit-js[^>]*>/, '<html lang="en-GB">');
+    // Beasties adds a noscript copy of each stylesheet. Browsers still fetch it,
+    // so the homepage downloaded site-home.css and the font CSS twice.
+    out = out.replace(/<noscript>\s*<link rel="stylesheet" href="([^"]+)"\s*\/?>\s*<\/noscript>/g, (full, href) => {
+      return out.replace(full, '').includes(`href="${href}"`) ? '' : full;
+    });
     for (const [file, v] of Object.entries(versions)) {
       out = out.split(`href="/css/${file}"`).join(`href="/css/${file}?v=${v}"`);
     }
@@ -382,7 +387,9 @@ function fixInternalLinks() {
     const before = fs.readFileSync(f, 'utf8');
     const after = before
       .replace(hrefRe, (m, a, p, rest = '', q) => (isPage(p) ? `${a}${p}/${rest}${q}` : m))
-      .replace(absRe, (m, s, p) => (isPage(p) ? `${s}${p}/` : m));
+      .replace(absRe, (m, s, p) => (isPage(p) ? `${s}${p}/` : m))
+      .replaceAll('Southend-on-Sea', 'Southend on Sea')
+      .replaceAll('Leigh-on-Sea', 'Leigh on Sea');
     if (after !== before) { fs.writeFileSync(f, after); changed++; }
   }
   console.log(`Pointed internal links at the real (slash) address in ${changed} pages`);

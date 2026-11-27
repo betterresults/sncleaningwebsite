@@ -56,6 +56,7 @@
       <a href="/about" class="<%= currentPath === '/about' ? 'active' : '' %>">About</a>
       <a href="/our-work" class="<%= currentPath === '/our-work' ? 'active' : '' %>">Our work</a>
       <a href="/blog" class="<%= currentPath.startsWith('/blog') ? 'active' : '' %>">Blog</a>
+      <a href="/end-of-tenancy-cleaning/faq/" class="<%= currentPath.indexOf('/faq') !== -1 ? 'active' : '' %>">FAQ</a>
 
       <div class="nav-mobile-actions">
         <% if (!(typeof hideQuoteCta !== 'undefined' && hideQuoteCta)) { %>
