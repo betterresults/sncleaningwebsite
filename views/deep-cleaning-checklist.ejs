@@ -1,0 +1,135 @@
+<%# Public deep cleaning checklist. Data: data/deep-cleaning-checklist.js. Styles: public/css/deep-cleaning-checklist.css. designV2 is set on the route. %>
+<link rel="stylesheet" href="/css/deep-cleaning-checklist.css?v=<%= assetVersion %>" />
+<% const book = bookUrl('deep-house-cleaning'); %>
+<% const ui = checklist.copy; %>
+<% function esc(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+} %>
+<% function withLinks(text) {
+  let html = esc(text).split(checklist.BOOK_TOKEN).join('<a href="' + book + '">booking form</a>');
+  Object.keys(checklist.LINK_LABELS).forEach(function (href) {
+    html = html.split(href).join('<a href="' + href + '">' + esc(checklist.LINK_LABELS[href]) + '</a>');
+  });
+  html = html.split('download the printable PDF').join('<a href="' + checklist.PDF_PATH + '">download the printable PDF</a>');
+  html = html.split('book a deep clean').join('<a href="' + book + '">book a deep clean</a>');
+  return html;
+} %>
+<div class="dcc" id="deep-cleaning-checklist" data-total="<%= checklist.TASKS.length %>" data-storage="<%= checklist.STORAGE_KEY %>">
+
+<header class="dcc-hero"><div class="dcc-wrap">
+  <nav class="dcc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= checklist.H1 %></h1>
+  <p class="dcc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= checklist.PUBLISHED %>"><%= checklist.PUBLISHED_LABEL %></time></p>
+  <div class="dcc-prose">
+    <% checklist.intro.forEach(function (paragraph) { %><p><%- withLinks(paragraph) %></p><% }); %>
+  </div>
+  <div class="dcc-actions">
+    <a class="h-btn h-btn--primary" href="<%= book %>"><%= ui.bookCta %></a>
+    <a class="h-btn h-btn--primary dcc-download" href="<%= checklist.PDF_PATH %>"><%= ui.downloadCta %></a>
+    <a class="h-btn h-btn--light" href="#the-checklist"><%= ui.startCta %></a>
+    <button type="button" class="h-btn h-btn--light" id="dcc-print"><%= ui.printCta %></button>
+  </div>
+</div></header>
+
+<section class="dcc-band dcc-white"><div class="dcc-wrap dcc-prose">
+  <h2><%= checklist.whenToUse.h %></h2>
+  <p><%- withLinks(checklist.whenToUse.lead) %></p>
+  <ol class="dcc-steps">
+    <% checklist.whenToUse.steps.forEach(function (step, i) { %>
+      <li><strong><%= i + 1 %>.</strong> <%- withLinks(step) %></li>
+    <% }); %>
+  </ol>
+  <p><%- withLinks(checklist.whenToUse.close) %></p>
+</div></section>
+
+<section class="dcc-band dcc-sand" id="the-checklist"><div class="dcc-wrap">
+  <h2><%= ui.checklistHeading %></h2>
+  <p class="dcc-prose"><%= ui.checklistLead %></p>
+  <div class="dcc-progress" aria-live="polite">
+    <div class="dcc-progress-row">
+      <span class="dcc-progress-label" id="dcc-progress-text">0 of <%= checklist.TASKS.length %> done</span>
+      <span><%= checklist.TASKS.length %> <%= ui.tasksWord %></span>
+    </div>
+    <div class="dcc-bar" role="progressbar" aria-valuemin="0" aria-valuemax="<%= checklist.TASKS.length %>" aria-valuenow="0" aria-labelledby="dcc-progress-text"><span id="dcc-progress-bar"></span></div>
+  </div>
+  <div class="dcc-actions dcc-noprint">
+    <a class="h-btn h-btn--primary dcc-download" href="<%= checklist.PDF_PATH %>"><%= ui.downloadCta %></a>
+    <button type="button" class="h-btn h-btn--light" id="dcc-print-2"><%= ui.printCta %></button>
+    <button type="button" class="h-btn h-btn--light" id="dcc-reset"><%= ui.resetCta %></button>
+  </div>
+
+  <% checklist.sections.forEach(function (section) { %>
+    <section class="dcc-room" id="section-<%= section.key %>" aria-labelledby="section-heading-<%= section.key %>">
+      <div class="dcc-room-head">
+        <h3 id="section-heading-<%= section.key %>"><%= section.name %></h3>
+        <span class="dcc-count"><%= section.tasks.length %> <%= ui.tasksWord %></span>
+      </div>
+      <% section.tasks.forEach(function (item) { %>
+        <div class="dcc-task" data-task="<%= item.id %>">
+          <p class="dcc-task-name"><%= item.text %></p>
+          <div class="dcc-ticks">
+            <label class="dcc-tick"><input type="checkbox" data-kind="done" aria-label="<%= ui.doneWord %>: <%= item.text %>"> <%= ui.doneWord %></label>
+          </div>
+        </div>
+      <% }); %>
+      <div class="dcc-notes">
+        <label for="note-<%= section.key %>"><%= ui.notesFor %> <%= section.name %></label>
+        <textarea id="note-<%= section.key %>" data-section="<%= section.key %>" maxlength="2000" placeholder="<%= ui.notesPlaceholder %>"></textarea>
+      </div>
+    </section>
+  <% }); %>
+
+  <div class="dcc-hand" id="hand-it-over">
+    <h3><%= ui.handTitle %></h3>
+    <p><%= ui.handBody %></p>
+    <form method="get" action="<%= book %>">
+      <input type="hidden" name="utm_content" value="deep-cleaning-checklist">
+      <div class="dcc-fields">
+        <label class="dcc-field"><%= ui.postcode %> <input name="prefill_postcode" type="text" required autocomplete="postal-code" maxlength="12"></label>
+        <label class="dcc-field"><%= ui.email %> <input name="prefill_email" type="email" required autocomplete="email"></label>
+      </div>
+      <p style="margin-top:12px"><button type="submit" class="h-btn h-btn--primary"><%= ui.bookCta %></button></p>
+    </form>
+  </div>
+</div></section>
+
+<section class="dcc-band dcc-white"><div class="dcc-wrap dcc-prose">
+  <h2><%= ui.teamHeading %></h2>
+  <p><%= checklist.OVEN_NOTE %></p>
+  <% checklist.body.forEach(function (paragraph) { %><p><%- withLinks(paragraph) %></p><% }); %>
+</div></section>
+
+<section class="dcc-band dcc-sand"><div class="dcc-wrap dcc-prose">
+  <h2><%= ui.nearHeading %></h2>
+  <p><%- withLinks(ui.nearLead) %></p>
+  <ul class="dcc-areas">
+    <% checklist.nearYou.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>
+  </ul>
+</div></section>
+
+<section class="dcc-band dcc-white"><div class="dcc-wrap">
+  <h2><%= ui.faqHeading %></h2>
+  <div class="h-faq">
+    <% checklist.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%- withLinks(item.a) %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="dcc-prose" style="margin-top:28px">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+</div>
+<script src="/js/deep-cleaning-checklist.js?v=<%= assetVersion %>" defer></script>
