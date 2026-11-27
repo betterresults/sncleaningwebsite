@@ -1,0 +1,163 @@
+<%# Carpet cleaning cost calculator. Data: data/carpet-cleaning-cost-calculator.js. Maths: public/js/carpet-cleaning-cost-calculator.js. %>
+<link rel="stylesheet" href="/css/carpet-cleaning-cost-calculator.css?v=<%= assetVersion %>" />
+<% function esc(text) {
+  return String(text)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+} %>
+<% function withLinks(text) {
+  let html = esc(text);
+  Object.keys(calc.LINK_LABELS).forEach(function (href) {
+    html = html.split(href).join('<a href="' + href + '">' + esc(calc.LINK_LABELS[href]) + '</a>');
+  });
+  return html;
+} %>
+<% const book = bookUrl('carpet-cleaning-services'); %>
+<div class="ccc" id="carpet-cleaning-cost-calculator">
+
+<header class="ccc-hero"><div class="ccc-wrap">
+  <nav class="ccc-crumbs" aria-label="Breadcrumb">
+    <% breadcrumbs.forEach(function (c, i) { %>
+      <% if (i) { %><span aria-hidden="true">/</span><% } %>
+      <% if (i === breadcrumbs.length - 1) { %><span aria-current="page"><%= c.name %></span><% } else { %><a href="<%= c.url %>"><%= c.name %></a><% } %>
+    <% }); %>
+  </nav>
+  <h1><%= calc.H1 %></h1>
+  <p class="ccc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= calc.PUBLISHED %>"><%= calc.PUBLISHED_LABEL %></time></p>
+  <div class="ccc-lead">
+    <% calc.intro.forEach(function (paragraph) { %><p><%- withLinks(paragraph) %></p><% }); %>
+  </div>
+  <div class="ccc-actions">
+    <a class="h-btn h-btn--primary" href="<%= book %>"><%= calc.copy.bookCta %></a>
+    <a class="h-btn h-btn--light" href="<%= calc.PDF_PATH %>"><%= calc.copy.downloadCta %></a>
+  </div>
+</div></header>
+
+<section class="ccc-band ccc-white" id="ccc-calculator" aria-labelledby="ccc-estimate-heading"><div class="ccc-wrap">
+  <h2 id="ccc-estimate-heading"><%= calc.copy.estimateHeading %></h2>
+  <p class="ccc-intro"><%= calc.copy.estimateLead %></p>
+
+  <div class="ccc-tool">
+    <div class="ccc-summary" id="ccc-summary" data-empty="<%= initial.minimumState === 'empty' ? '1' : '0' %>" aria-hidden="true">
+      <span class="ccc-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7.5h12M6 12h12M6 16.5h7"/></svg></span>
+      <span>
+        <strong id="ccc-summary-total"><%= initial.totalLabel %></strong>
+        <span id="ccc-summary-meta"><%= initial.summaryMeta %></span>
+      </span>
+    </div>
+
+    <form class="ccc-card" id="ccc-form" action="#carpet-cleaning-cost-calculator" autocomplete="off">
+      <div class="ccc-tabs" role="tablist" aria-label="Item groups">
+        <% catalogue.groups.forEach(function (group, index) { %>
+          <button type="button" class="ccc-tab" role="tab" id="ccc-tab-<%= group.key %>" data-ccc-tab="<%= group.key %>" aria-selected="<%= index === 0 ? 'true' : 'false' %>" aria-controls="ccc-panel-<%= group.key %>" tabindex="<%= index === 0 ? '0' : '-1' %>"><%= group.label %></button>
+        <% }); %>
+      </div>
+      <% catalogue.groups.forEach(function (group, index) { %>
+        <div class="ccc-panel" role="tabpanel" id="ccc-panel-<%= group.key %>" data-ccc-panel="<%= group.key %>" aria-labelledby="ccc-tab-<%= group.key %>"<%= index === 0 ? '' : ' hidden' %>>
+          <% if (group.note) { %><p class="ccc-note" id="ccc-note-<%= group.key %>"><%= group.note %></p><% } %>
+          <div class="ccc-steppers">
+            <% group.items.forEach(function (item) { %>
+              <div class="ccc-stepper">
+                <span class="ccc-stepper-name" id="ccc-item-<%= group.key %>-<%= item.key %>"><%= item.label %></span>
+                <span class="ccc-stepper-price"><%= item.priceLabel %></span>
+                <span class="ccc-stepper-controls">
+                  <button type="button" data-step="-1" aria-label="Fewer <%= item.label %>">-</button>
+                  <input type="number" name="qty-<%= group.key %>-<%= item.key %>" value="0" min="0" max="20" inputmode="numeric" aria-labelledby="ccc-item-<%= group.key %>-<%= item.key %>">
+                  <button type="button" data-step="1" aria-label="More <%= item.label %>">+</button>
+                </span>
+              </div>
+            <% }); %>
+          </div>
+        </div>
+      <% }); %>
+    </form>
+
+    <aside class="ccc-results" id="ccc-results" aria-labelledby="ccc-result-heading">
+      <div id="ccc-live" role="status" aria-live="polite">
+        <h3 id="ccc-result-heading"><%= calc.copy.resultHeading %></h3>
+        <p class="ccc-kicker"><%= calc.copy.kicker %></p>
+        <p class="ccc-total" id="ccc-total"><%= initial.totalLabel %></p>
+        <p class="ccc-items" id="ccc-items"<%= initial.minimumState === 'under' ? '' : ' hidden' %>><%= initial.minimumState === 'under' ? calc.copy.itemsChosen + ' ' + initial.subtotalLabel : '' %></p>
+        <p class="ccc-minimum" id="ccc-minimum" data-state="<%= initial.minimumState %>"><%= initial.minimumText %></p>
+        <ul class="ccc-lines" id="ccc-lines">
+          <% initial.lines.forEach(function (line) { %>
+            <li><span><%= line.label %></span><span><%= line.amount %></span></li>
+          <% }); %>
+        </ul>
+      </div>
+      <a class="h-btn h-btn--primary" id="ccc-cta" href="<%= book %>"><%= calc.copy.bookCta %></a>
+      <a class="h-btn h-btn--light" id="ccc-pdf" href="<%= calc.PDF_PATH %>"><%= calc.copy.downloadCta %></a>
+      <button type="button" class="h-btn h-btn--light" id="ccc-reset"><%= calc.copy.resetCta %></button>
+      <p class="ccc-honesty"><%= calc.HONESTY_NOTE %></p>
+      <p class="ccc-honesty"><%- withLinks(calc.EOT_NOTE) %></p>
+      <p class="ccc-worked"><span class="ccc-worked-label"><%= calc.copy.workedLabel %></span> <span id="ccc-worked"><%= initial.worked %></span></p>
+    </aside>
+  </div>
+</div></section>
+
+<section class="ccc-band ccc-sand" aria-labelledby="ccc-before-heading"><div class="ccc-wrap">
+  <h2 id="ccc-before-heading"><%= calc.copy.beforeHeading %></h2>
+  <div class="ccc-list-card">
+    <p><%= calc.beforeVisit.lead %></p>
+    <ul>
+      <% calc.beforeVisit.items.forEach(function (item) { %><li><%= item %></li><% }); %>
+    </ul>
+  </div>
+</div></section>
+
+<section class="ccc-band ccc-white" aria-labelledby="ccc-work-heading"><div class="ccc-wrap">
+  <h2 id="ccc-work-heading"><%= calc.copy.workHeading %></h2>
+  <p class="ccc-intro"><%= calc.copy.workLead %></p>
+  <div class="ccc-cols">
+    <% calc.work.forEach(function (section) { %>
+      <article>
+        <h3><%= section.name %></h3>
+        <% if (section.note) { %><p class="ccc-note"><%= section.note %></p><% } %>
+        <ul>
+          <% section.items.forEach(function (step) { %><li><%= step %></li><% }); %>
+        </ul>
+      </article>
+    <% }); %>
+  </div>
+  <p class="ccc-follow"><%= calc.TEAM_NOTE %></p>
+</div></section>
+
+<section class="ccc-band ccc-sand" aria-labelledby="ccc-dry-heading"><div class="ccc-wrap">
+  <h2 id="ccc-dry-heading"><%= calc.copy.dryHeading %></h2>
+  <div class="ccc-list-card">
+    <p><%= calc.afterVisit.lead %></p>
+    <ul>
+      <% calc.afterVisit.items.forEach(function (item) { %><li><%= item %></li><% }); %>
+    </ul>
+    <p><%= calc.RECLEAN_NOTE %></p>
+  </div>
+</div></section>
+
+<section class="ccc-band ccc-white" aria-labelledby="ccc-faq-heading"><div class="ccc-wrap">
+  <h2 id="ccc-faq-heading"><%= calc.copy.faqHeading %></h2>
+  <div class="h-faq">
+    <% calc.faqs.forEach(function (item, i) { %>
+      <details class="h-faq-item"<%= i === 0 ? ' open' : '' %>>
+        <summary><h3><%= item.q %></h3><span class="h-faq-icon" aria-hidden="true"></span></summary>
+        <p><%- withLinks(item.a) %></p>
+      </details>
+    <% }); %>
+  </div>
+  <div class="ccc-follow">
+    <%- include('partials/author-box') %>
+  </div>
+</div></section>
+
+<section class="ccc-band ccc-sand" aria-labelledby="ccc-near-heading"><div class="ccc-wrap">
+  <h2 id="ccc-near-heading"><%= calc.copy.nearHeading %></h2>
+  <p class="ccc-intro"><%= calc.copy.nearLead %></p>
+  <ul class="ccc-areas">
+    <% calc.nearYou.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>
+  </ul>
+</div></section>
+
+</div>
+<script type="application/json" id="ccc-catalogue"><%- JSON.stringify(catalogue).replace(/</g, '\\u003c') %></script>
+<script src="/js/carpet-cleaning-cost-calculator.js?v=<%= assetVersion %>" defer></script>

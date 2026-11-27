@@ -85,6 +85,7 @@
       <% if (serviceSlug === 'airbnb-cleaning') { %><p class="s-intro">Doing the changeover yourself? Work through our <a href="/airbnb-turnover-cleaning-checklist/">Airbnb turnover cleaning checklist</a> before the next guest checks in.</p><% } %>
       <% if (service.slug === 'after-builders-cleaning') { %><p class="s-intro">Doing the clean yourself? Work through our <a href="/after-builders-cleaning-checklist/">after builders cleaning checklist</a> before handover.</p><% } %>
       <% if (service.slug === 'deep-house-cleaning') { %><p class="s-intro">Doing the clean yourself? Work through our <a href="/deep-cleaning-checklist/">deep cleaning checklist</a>.</p><% } %>
+      <% if (service.slug === 'carpet-cleaning-services' || service.slug === 'upholstery-cleaning' || service.slug === 'mattress-cleaning') { %><p class="s-intro">Want a guide price before you book? Use our <a href="/carpet-cleaning-cost-calculator/">carpet cleaning cost calculator</a>.</p><% } %>
     </div>
     <ul class="s-freq">
       <% benefits.forEach(function (bf) { %>
