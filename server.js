@@ -1176,6 +1176,47 @@ app.get('/deep-cleaning-checklist', (req, res) => {
   });
 });
 
+// Carpet, sofa and mattress cost calculator. Registered immediately before
+// /:slug so the flat URL is not treated as a service page. Static guide:
+// no Supabase query here. WebPage JSON-LD is added by the layout.
+const carpetCost = require('./data/carpet-cleaning-cost-calculator');
+const carpetCostEngine = require('./public/js/carpet-cleaning-cost-calculator');
+
+function useCarpetBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'carpet-cleaning-services');
+}
+
+app.get('/carpet-cleaning-cost-calculator', (req, res) => {
+  useCarpetBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Carpet Cleaning', url: '/carpet-cleaning-services' },
+    { name: 'Cost Calculator', url: carpetCost.PATH }
+  ];
+  const faqEntities = carpetCost.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  const carpetCatalogue = carpetCost.catalogue();
+  const carpetInitial = carpetCostEngine.estimate(carpetCost.DEFAULT_STATE, carpetCatalogue);
+  res.render('carpet-cleaning-cost-calculator', {
+    title: carpetCost.TITLE,
+    metaDescription: carpetCost.META_DESCRIPTION,
+    calc: carpetCost,
+    catalogue: carpetCatalogue,
+    initial: carpetInitial,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: carpetCost.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on
