@@ -14,8 +14,8 @@
   <h1><%= calc.H1 %></h1>
   <p class="htc-byline">By <a href="/about/silvia-nedeva/">Silvia Nedeva</a>, SN Cleaning Services · Last updated <time datetime="<%= calc.PUBLISHED %>"><%= calc.PUBLISHED_LABEL %></time></p>
   <div class="htc-lead">
-    <p>This calculator gives a guide to how long a regular domestic clean, a one-off deep clean or an end of tenancy clean may take in a London or Essex home, based on the rooms, the condition of the property, pets and optional add-ons.</p>
-    <p>Regular and deep visits are booked by the hour, with a <strong>3-hour minimum</strong> on the booking form. End of tenancy cleaning is priced <%= eotFrom %> by the size of the property, not by the hour. The exact price is always shown in the booking form before you confirm.</p>
+    <p>This calculator gives a guide to how long a regular domestic clean, a one off deep clean or an end of tenancy clean may take in a London or Essex home, based on the rooms, the condition of the property, pets and optional add ons.</p>
+    <p>Regular and deep visits are booked by the hour, with a <strong>3 hour minimum</strong> on the booking form. End of tenancy cleaning is priced <%= eotFrom %> by the size of the property, not by the hour. The exact price is always shown in the booking form before you confirm.</p>
   </div>
 </div></header>
 
@@ -46,7 +46,7 @@
         <legend><span class="htc-legend">Service type</span></legend>
         <div class="htc-seg">
           <label class="htc-choice"><input type="radio" name="service" value="regular"<%= checked('service', 'regular') %> required> Regular Domestic Clean</label>
-          <label class="htc-choice"><input type="radio" name="service" value="deep"<%= checked('service', 'deep') %> required> One-off Deep Clean</label>
+          <label class="htc-choice"><input type="radio" name="service" value="deep"<%= checked('service', 'deep') %> required> One off Deep Clean</label>
           <label class="htc-choice"><input type="radio" name="service" value="eot"<%= checked('service', 'eot') %> required> End of Tenancy Clean</label>
         </div>
       </fieldset>
@@ -77,7 +77,7 @@
         <legend><span class="htc-legend">Property condition</span></legend>
         <div class="htc-stack">
           <label class="htc-choice"><input type="radio" name="condition" value="well"<%= checked('condition', 'well') %> required> Well maintained</label>
-          <label class="htc-choice"><input type="radio" name="condition" value="average"<%= checked('condition', 'average') %> required> Average lived-in</label>
+          <label class="htc-choice"><input type="radio" name="condition" value="average"<%= checked('condition', 'average') %> required> Average lived in</label>
           <label class="htc-choice"><input type="radio" name="condition" value="extra"<%= checked('condition', 'extra') %> required> Needs extra attention</label>
         </div>
       </fieldset>
@@ -91,7 +91,7 @@
       </fieldset>
 
       <fieldset class="htc-set">
-        <legend><span class="htc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 9.5h4V20H10z"/><path d="M10 9.5V8a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5"/><path d="M14 8h2.5M8 5.5l1.2 1.2M7 8h1.5"/></svg> Optional add-ons</span></legend>
+        <legend><span class="htc-legend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 9.5h4V20H10z"/><path d="M10 9.5V8a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v1.5"/><path d="M14 8h2.5M8 5.5l1.2 1.2M7 8h1.5"/></svg> Optional add ons</span></legend>
         <p class="htc-hint" id="htc-addon-hint"><%= calc.ADDON_NOTE %></p>
         <div class="htc-stack">
           <label class="htc-check"><input type="checkbox" name="addon-oven" value="1"<%= calc.DEFAULT_STATE.oven ? ' checked' : '' %> aria-describedby="htc-addon-hint"> Inside oven</label>
@@ -156,18 +156,18 @@
   <div class="htc-explain">
     <article>
       <h3>Rooms</h3>
-      <p>More bedrooms and bathrooms take longer. A studio or 1-bed regular visit often sits at the 3-hour minimum; a family house needs more time.</p>
+      <p>More bedrooms and bathrooms take longer. A studio or 1 bed regular visit often sits at the 3 hour minimum; a family house needs more time.</p>
     </article>
     <article>
       <h3>Condition and pets</h3>
       <p>A well maintained home is quicker than one that needs extra attention. Pet hair on floors and soft furnishings usually adds a little time. There is no separate pet fee.</p>
     </article>
     <article>
-      <h3>Optional add-ons</h3>
-      <p>Cleaning <strong>inside the oven</strong> is an optional add-on, not a standalone oven-cleaning service. On a regular visit we already wipe the oven exterior and control panel; the inside is extra. On a deep or end of tenancy clean you choose your oven type (or no oven cleaning) on the booking form. <strong>Inside the fridge/freezer</strong> is part of a typical end of tenancy clean when the appliance is empty and has been switched off to defrost; on a deep clean it is done if the appliance is empty or you can make room; a regular visit includes the fridge exterior. <strong>Interior windows</strong> (internal glass) are part of a typical end of tenancy clean; outside windows are not included. Any extra cost is shown in the booking form, not here.</p>
+      <h3>Optional add ons</h3>
+      <p>Cleaning <strong>inside the oven</strong> is an optional add on, not a standalone oven cleaning service. On a regular visit we already wipe the oven exterior and control panel; the inside is extra. On a deep or end of tenancy clean you choose your oven type (or no oven cleaning) on the booking form. <strong>Inside the fridge/freezer</strong> is part of a typical end of tenancy clean when the appliance is empty and has been switched off to defrost; on a deep clean it is done if the appliance is empty or you can make room; a regular visit includes the fridge exterior. <strong>Interior windows</strong> (internal glass) are part of a typical end of tenancy clean; outside windows are not included. Any extra cost is shown in the booking form, not here.</p>
     </article>
   </div>
-  <p class="htc-follow">What each visit includes is set out on our <a href="/domestic-cleaning/">domestic cleaning</a>, <a href="/deep-house-cleaning/">deep house cleaning</a> and <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning</a> pages. End of tenancy prices by property size are on the <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a> page, and you can build a guide total on the <a href="/end-of-tenancy-cleaning-cost-calculator/">end of tenancy cleaning cost calculator</a>. If you want a room-by-room list, use the <a href="/domestic-cleaning-checklist/">domestic cleaning checklist</a>, the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>, or the <a href="/airbnb-turnover-cleaning-checklist/">Airbnb turnover cleaning checklist</a>. For the research on how a tidy or cluttered home is linked with mood, stress and sleep, read the <a href="/clean-home-report/">clean home report</a>.</p>
+  <p class="htc-follow">What each visit includes is set out on our <a href="/domestic-cleaning/">domestic cleaning</a>, <a href="/deep-house-cleaning/">deep house cleaning</a> and <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning</a> pages. End of tenancy prices by property size are on the <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning prices</a> page, and you can build a guide total on the <a href="/end-of-tenancy-cleaning-cost-calculator/">end of tenancy cleaning cost calculator</a>. If you want a room by room list, use the <a href="/domestic-cleaning-checklist/">domestic cleaning checklist</a>, the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a>, or the <a href="/airbnb-turnover-cleaning-checklist/">Airbnb turnover cleaning checklist</a>. For the research on how a tidy or cluttered home is linked with mood, stress and sleep, read the <a href="/clean-home-report/">clean home report</a>.</p>
 </div></section>
 
 <section class="htc-band htc-white" aria-labelledby="htc-faq-heading"><div class="htc-wrap">

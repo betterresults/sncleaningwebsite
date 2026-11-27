@@ -1,4 +1,4 @@
-# One-off printable A4 for the domestic cleaning checklist.
+# One off printable A4 for the domestic cleaning checklist.
 # Run from the repo root: python3 scripts/domestic-checklist-pdf.py
 # Needs reportlab locally. Not part of npm run build, and not a production dependency.
 import json, os, subprocess
@@ -84,7 +84,7 @@ story.append(Paragraph(esc(data['title']), title_style))
 story.append(Paragraph('By Silvia Nedeva, SN Cleaning Services', byline))
 story.append(Paragraph(
     'A regular domestic clean covers the kitchen, bathrooms, bedrooms, living areas and hallway. '
-    'Tick Done as you go. This is the room-by-room list our cleaners use for a regular house clean.',
+    'Tick Done as you go. This is the room by room list our cleaners use for a regular house clean.',
     body))
 story.append(Paragraph(esc(data['oven']), note))
 
@@ -143,7 +143,7 @@ def draw_footer(canvas, doc, later=False):
     canvas.setFont('Times-Roman', 6.5)
     # Full oven note, same wording as the page, sits in the footer.
     canvas.drawString(16 * mm, 8.2 * mm, 'A regular domestic clean includes wiping the oven exterior and control panel.')
-    canvas.drawString(16 * mm, 5.4 * mm, 'Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service.')
+    canvas.drawString(16 * mm, 5.4 * mm, 'Cleaning inside the oven is an optional add on, not a standalone oven cleaning service.')
     canvas.setFillColor(ink)
     canvas.setFont('Times-Roman', 8)
     canvas.drawRightString(A4[0] - 16 * mm, 16.2 * mm, '%d' % canvas.getPageNumber())
@@ -155,7 +155,7 @@ doc = SimpleDocTemplate(
     topMargin=16 * mm, bottomMargin=26 * mm,
     title=data['title'],
     author='Silvia Nedeva',
-    subject='Room-by-room domestic cleaning checklist for homes in London and Essex. No prices.',
+    subject='Room by room domestic cleaning checklist for homes in London and Essex. No prices.',
     creator='SN Cleaning Services'
 )
 doc.build(story, onFirstPage=lambda c, d: draw_footer(c, d, False), onLaterPages=lambda c, d: draw_footer(c, d, True))

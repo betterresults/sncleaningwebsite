@@ -13,11 +13,11 @@ const PUBLISHED_LABEL = '26 November 2026';
 // under. Rendered <title> is the 53-character string with no prices.
 const TITLE = 'House Cleaning Time Calculator';
 const H1 = 'How long will a house clean take?';
-const META_DESCRIPTION = 'Work out how long a house clean may take in London or Essex, by rooms, condition, pets and optional add-ons, then open the matching booking form.';
+const META_DESCRIPTION = 'Work out how long a house clean may take in London or Essex, by rooms, condition, pets and optional add ons, then open the matching booking form.';
 
 const PATH = '/house-cleaning-time-calculator/';
 
-const HONESTY_NOTE = 'This is a guide, not a confirmed quote. Add-ons and the exact price are shown in the live booking form before you confirm. Weekly or fortnightly regular visits, and whether equipment is provided, can change the hourly rate — the published from rate is the starting point.';
+const HONESTY_NOTE = 'This is a guide, not a confirmed quote. Add ons and the exact price are shown in the live booking form before you confirm. Weekly or fortnightly regular visits, and whether equipment is provided, can change the hourly rate — the published from rate is the starting point.';
 
 const ADDON_NOTE = 'These are extras, not standalone services. Any extra cost is shown in the booking form before you confirm.';
 
@@ -62,15 +62,15 @@ const DEFAULT_STATE = {
 const faqs = [
   {
     q: 'What is the minimum booking time?',
-    a: 'Regular domestic and deep cleaning visits have a 3-hour minimum on the booking form, and you choose the total time in half-hour steps. End of tenancy cleaning is not charged by the hour; a typical visit takes our team 3 to 6 hours, and a one bedroom property can take 3 to 4 hours depending on whether it is furnished or unfurnished.'
+    a: 'Regular domestic and deep cleaning visits have a 3 hour minimum on the booking form, and you choose the total time in half hour steps. End of tenancy cleaning is not charged by the hour; a typical visit takes our team 3 to 6 hours, and a one bedroom property can take 3 to 4 hours depending on whether it is furnished or unfurnished.'
   },
   {
     q: 'Is this calculator a confirmed quote?',
-    a: 'No. It is a guide to help you choose hours, or to understand a typical visit. The published from prices are from £23/hour for regular domestic cleaning, from £27/hour for a deep clean, and from £179 for end of tenancy cleaning. Add-ons and the exact total are shown in the live booking form before you confirm.'
+    a: 'No. It is a guide to help you choose hours, or to understand a typical visit. The published from prices are from £23/hour for regular domestic cleaning, from £27/hour for a deep clean, and from £179 for end of tenancy cleaning. Add ons and the exact total are shown in the live booking form before you confirm.'
   },
   {
     q: 'Is oven cleaning included?',
-    a: 'Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. A regular domestic visit includes wiping the oven exterior and control panel. On a deep clean or an end of tenancy clean you choose your oven type when you book — including no oven cleaning if you do not need it — and the booking form shows the price before you confirm.'
+    a: 'Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. A regular domestic visit includes wiping the oven exterior and control panel. On a deep clean or an end of tenancy clean you choose your oven type when you book — including no oven cleaning if you do not need it — and the booking form shows the price before you confirm.'
   },
   {
     q: 'Do you clean inside the fridge and the inside of the windows?',
@@ -78,7 +78,7 @@ const faqs = [
   },
   {
     q: 'How many cleaners will come?',
-    a: 'On an end of tenancy clean, a furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Two or three bedroom homes usually get two cleaners, sometimes three for a larger home, and four bedrooms or more usually three. For a regular or deep clean you choose the total hours on the booking form (3-hour minimum); one cleaner is typical for a regular visit.'
+    a: 'On an end of tenancy clean, a furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Two or three bedroom homes usually get two cleaners, sometimes three for a larger home, and four bedrooms or more usually three. For a regular or deep clean you choose the total hours on the booking form (3 hour minimum); one cleaner is typical for a regular visit.'
   }
 ];
 

@@ -8,8 +8,8 @@ const PUBLISHED = '2026-11-26';
 const PUBLISHED_LABEL = '26 November 2026';
 
 const TITLE = 'End of Tenancy Cleaning Checklist | London & Essex';
-const H1 = 'The deposit-ready end of tenancy cleaning checklist (London & Essex)';
-const META_DESCRIPTION = 'Work through a room-by-room end of tenancy cleaning checklist. Tick each task, add notes and photos, then get a private link to your report.';
+const H1 = 'The deposit ready end of tenancy cleaning checklist (London & Essex)';
+const META_DESCRIPTION = 'Work through a room by room end of tenancy cleaning checklist. Tick each task, add notes and photos, then get a private link to your report.';
 
 const PATH = '/end-of-tenancy-cleaning-checklist';
 const PDF_PATH = '/downloads/sn-cleaning-end-of-tenancy-checklist.pdf';
@@ -50,7 +50,7 @@ const rooms = [
           task('bathroom-03', 'Clean and disinfect toilet (bowl, seat, lid, base, behind)'),
           task('bathroom-04', 'Clean sink, taps, and overflow'),
           task('bathroom-05', 'Wipe vanity / cabinets inside and out'),
-          task('bathroom-06', 'Clean mirrors smear-free'),
+          task('bathroom-06', 'Clean mirrors smear free'),
           task('bathroom-07', 'Wipe tiles and grout (remove soap scum)'),
           task('bathroom-08', 'Wipe towel rails, holders, and chrome fixtures'),
           task('bathroom-09', 'Empty bin; wipe bathroom surfaces'),
@@ -129,14 +129,14 @@ const rooms = [
     ],
     tips: [
       'Clear belongings out of the loft, garage and garden store if the tenancy includes them.',
-      'Keep dated photos and any cleaning receipts with your check-in inventory.'
+      'Keep dated photos and any cleaning receipts with your check in inventory.'
     ]
   },
   {
     key: 'windows',
     name: 'Windows',
     tasks: [
-      task('windows-01', 'Clean all internal windows smear-free'),
+      task('windows-01', 'Clean all internal windows smear free'),
       task('windows-02', 'Clean window tracks / ledges'),
       task('windows-03', 'Clean internal glass doors / patio doors')
     ],
@@ -157,7 +157,7 @@ const rooms = [
     tips: [
       'Wipe the oven door seal, and take a dated photo inside the oven once it is clean.',
       'Freezer shelves, drawers and seals, and the washing machine door seal and detergent drawer, are worth a look if the inventory mentions them.',
-      'Oven cleaning on this list is part of handing the property back. It is not a standalone oven-cleaning service. If you book us, the oven is an optional extra.'
+      'Oven cleaning on this list is part of handing the property back. It is not a standalone oven cleaning service. If you book us, the oven is an optional extra.'
     ]
   }
 ];

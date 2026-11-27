@@ -231,18 +231,18 @@ const contentExtras = {
   'end-of-tenancy-cleaning/waltham-forest': {
     faqs: [{
       question: 'How should I plan an end of tenancy clean in Waltham Forest?',
-      answer: 'End of tenancy cleaning in Waltham Forest starts from £179. The fridge and freezer are cleaned when they are empty and switched off, and cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. Work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection, and use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the visit may take.'
+      answer: 'End of tenancy cleaning in Waltham Forest starts from £179. The fridge and freezer are cleaned when they are empty and switched off, and cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection, and use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the visit may take.'
     }]
   },
   'end-of-tenancy-cleaning/east-ham': {
     faqs: [{
       question: 'Can I add oven or carpet cleaning to an end of tenancy clean in East Ham?',
-      answer: 'Yes. End of tenancy cleaning in East Ham starts from £179. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service, and professional carpet cleaning can be added when the inventory asks for it. Use our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) to see what a move out clean covers.'
+      answer: 'Yes. End of tenancy cleaning in East Ham starts from £179. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service, and professional carpet cleaning can be added when the inventory asks for it. Use our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) to see what a move out clean covers.'
     }]
   },
   'end-of-tenancy-cleaning/bexley': {
     faqs: [{
-      question: 'What does a checklist-led end of tenancy clean in Bexley cover?',
+      question: 'What does a checklist led end of tenancy clean in Bexley cover?',
       answer: 'End of tenancy cleaning in Bexley starts from £179 and follows a room by room move out checklist, the same areas an inventory clerk checks. Use our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection, and the [house cleaning time calculator](/house-cleaning-time-calculator/) if you want a guide to how long the clean may take.'
     }]
   },
@@ -262,25 +262,25 @@ const contentExtras = {
   'end-of-tenancy-cleaning/billericay': {
     faqs: [{
       question: 'Is the fridge included in an end of tenancy clean in Billericay?',
-      answer: 'End of tenancy cleaning in Billericay starts from £179. The fridge and freezer are included: please switch them off so they can be defrosted and cleaned. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. Estimate the clean with the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/), and work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
+      answer: 'End of tenancy cleaning in Billericay starts from £179. The fridge and freezer are included: please switch them off so they can be defrosted and cleaned. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Estimate the clean with the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/), and work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
     }]
   },
   'end-of-tenancy-cleaning/havering/upminster-bridge': {
     faqs: [{
       question: 'What does a move out clean in Upminster Bridge include?',
-      answer: 'End of tenancy cleaning in Upminster Bridge starts from £179. It is a checklist-led move out clean, and you have a 7 day re clean guarantee if the agent flags anything from the clean. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) to estimate the price for your home.'
+      answer: 'End of tenancy cleaning in Upminster Bridge starts from £179. It is a checklist led move out clean, and you have a 7 day re clean guarantee if the agent flags anything from the clean. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) to estimate the price for your home.'
     }]
   },
   'end-of-tenancy-cleaning/hounslow': {
     faqs: [{
       question: 'Are end of tenancy prices in Hounslow the same as in Essex?',
-      answer: 'Yes. End of tenancy cleaning in Hounslow starts from £179, and the same base prices apply across London and Essex. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service, and carpet cleaning can be added when you book. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) for a guide total, and the [house cleaning time calculator](/house-cleaning-time-calculator/) for how long a visit may take.'
+      answer: 'Yes. End of tenancy cleaning in Hounslow starts from £179, and the same base prices apply across London and Essex. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service, and carpet cleaning can be added when you book. Use the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/) for a guide total, and the [house cleaning time calculator](/house-cleaning-time-calculator/) for how long a visit may take.'
     }]
   },
   'after-builders-cleaning/doddinghurst': {
     faqs: [{
       question: 'What does after builders cleaning in Doddinghurst cover?',
-      answer: 'After builders cleaning in Doddinghurst starts from £179. The visit removes post renovation dust and plaster dust left after building work. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the clean may take.'
+      answer: 'After builders cleaning in Doddinghurst starts from £179. The visit removes post renovation dust and plaster dust left after building work. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the clean may take.'
     }]
   },
 };

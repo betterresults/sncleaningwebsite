@@ -2,8 +2,8 @@
    Indicative guide only. Maths lives in estimate() — the server calls it for
    the first paint, and this script calls it again on each input or change.
    Hourly rates and "from" labels are passed in from data/prices.js.
-   Do not hard-code a £ rate, an add-on price, or an end-of-tenancy hourly rate.
-   Add-ons change time only. Inside fridge and interior windows add no time
+   Do not hard-code a £ rate, an add on price, or an end of tenancy hourly rate.
+   Add ons change time only. Inside fridge and interior windows add no time
    on an end of tenancy clean (they are part of a typical visit). */
 (function (root, factory) {
   var api = factory();
@@ -39,7 +39,7 @@
 
   var SERVICE_NAME = {
     regular: 'Regular domestic clean',
-    deep: 'One-off deep clean',
+    deep: 'One off deep clean',
     eot: 'End of tenancy clean'
   };
 
@@ -51,7 +51,7 @@
 
   var CTA_NOTE = {
     regular: 'Opens the regular domestic cleaning booking form.',
-    deep: 'Opens the one-off deep cleaning booking form.',
+    deep: 'Opens the one off deep cleaning booking form.',
     eot: 'Opens the end of tenancy cleaning booking form.'
   };
 
@@ -114,7 +114,7 @@
     if (service === 'eot') {
       var small = beds === 'studio' || beds === '1';
       if (small && baths === 1) {
-        return 'On an end of tenancy clean, often one cleaner for an empty 1-bed, or at least two if the home is still furnished.';
+        return 'On an end of tenancy clean, often one cleaner for an empty 1 bed, or at least two if the home is still furnished.';
       }
       if (beds === '2' || beds === '3') {
         return 'On an end of tenancy clean, usually two cleaners, sometimes three for a larger home.';
@@ -124,9 +124,9 @@
       }
       return 'On an end of tenancy clean, a furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day.';
     }
-    var text = 'You choose the total hours on the booking form (3-hour minimum). One cleaner is typical for a regular visit; a longer deep clean can be arranged as a longer visit or a small team — confirm this when you book.';
+    var text = 'You choose the total hours on the booking form (3 hour minimum). One cleaner is typical for a regular visit; a longer deep clean can be arranged as a longer visit or a small team — confirm this when you book.';
     if (mid >= 6) {
-      text += ' A two-cleaner team can finish a long visit in less elapsed time, if you would like to ask for that when you book.';
+      text += ' A two cleaner team can finish a long visit in less elapsed time, if you would like to ask for that when you book.';
     }
     return text;
   }
@@ -134,21 +134,21 @@
   function frequencyCopy(service, state) {
     if (service === 'deep') {
       return {
-        name: 'One-off',
-        reason: 'A deep clean is a one-off reset. After that, a regular domestic visit (weekly or fortnightly) is how most homes stay on top.'
+        name: 'One off',
+        reason: 'A deep clean is a one off reset. After that, a regular domestic visit (weekly or fortnightly) is how most homes stay on top.'
       };
     }
     if (service === 'eot') {
       return {
-        name: 'One-off',
-        reason: 'An end of tenancy clean is a one-off move-out clean, priced by the size of the property rather than by the hour.'
+        name: 'One off',
+        reason: 'An end of tenancy clean is a one off move out clean, priced by the size of the property rather than by the hour.'
       };
     }
     var large = state.bedrooms === '4' || state.bedrooms === '5';
     var weekly = state.condition === 'extra' || state.pets === 'pets' || large;
     if (!weekly) {
-      var cond = state.condition === 'well' ? 'well maintained' : 'average lived-in';
-      var bed = state.bedrooms === 'studio' ? 'studio' : state.bedrooms + '-bed';
+      var cond = state.condition === 'well' ? 'well maintained' : 'average lived in';
+      var bed = state.bedrooms === 'studio' ? 'studio' : state.bedrooms + ' bed';
       var article = cond.charAt(0) === 'a' ? 'an' : 'a';
       return {
         name: 'Fortnightly',
@@ -174,24 +174,24 @@
   function workedCopy(service, beds, baths, condition, pets, picked) {
     var bedPhrase = {
       studio: 'a studio',
-      '1': 'a 1-bedroom home',
-      '2': 'a 2-bedroom home',
-      '3': 'a 3-bedroom home',
-      '4': 'a 4-bedroom home',
-      '5': 'a 5-bedroom or larger home'
+      '1': 'a 1 bedroom home',
+      '2': 'a 2 bedroom home',
+      '3': 'a 3 bedroom home',
+      '4': 'a 4 bedroom home',
+      '5': 'a 5 bedroom or larger home'
     }[beds] || 'a home';
     var bathPhrase = baths === 1 ? '1 bathroom' : baths + ' bathrooms';
     var condBit = {
       well: 'in well maintained condition',
-      average: 'in average lived-in condition',
+      average: 'in average lived in condition',
       extra: 'where the home needs extra attention'
-    }[condition] || 'in average lived-in condition';
+    }[condition] || 'in average lived in condition';
     var petPhrase = pets === 'pets' ? 'pets' : 'no pets';
     var line = SERVICE_NAME[service] + ' for ' + bedPhrase + ' with ' + bathPhrase + ', ' + condBit + ', with ' + petPhrase;
     if (picked.length) {
-      line += ' and ' + joinAnd(picked) + (picked.length > 1 ? ' as optional add-ons' : ' as an optional add-on');
+      line += ' and ' + joinAnd(picked) + (picked.length > 1 ? ' as optional add ons' : ' as an optional add on');
     } else {
-      line += ' and no optional add-ons';
+      line += ' and no optional add ons';
     }
     return line + '.';
   }
@@ -202,7 +202,7 @@
       notes.push('Homes with pets often need a little extra time for hair and floors; there is no separate pet fee on the booking form.');
     }
     if (state.oven) {
-      notes.push('Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. It is priced on the booking form by oven type, and shown before you confirm.');
+      notes.push('Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. It is priced on the booking form by oven type, and shown before you confirm.');
     }
     if (state.fridge) {
       if (service === 'eot') {
@@ -286,7 +286,7 @@
     if (showHourlyExample) {
       var hourly = service === 'deep' ? rates.deepHourly : rates.regularHourly;
       example = hourly
-        ? 'Guide only. A ' + formatMid(range.mid) + '-hour visit would start from ' + formatMoney(hourly, range.mid) + ' at the published from rate, before any add-ons.'
+        ? 'Guide only. A ' + formatMid(range.mid) + ' hour visit would start from ' + formatMoney(hourly, range.mid) + ' at the published from rate, before any add ons.'
         : 'Guide only. The booking form shows the exact total before you confirm.';
     }
 
