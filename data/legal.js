@@ -70,7 +70,7 @@ module.exports = {
 <p>Email <a href="mailto:${EMAIL}">${EMAIL}</a> and we will reply within one month. If you are unhappy with how we have handled your information, you can complain to the Information Commissioner's Office (ICO) at ico.org.uk.</p>
 
 <h2>Cookies</h2>
-<p>See our <a href="/cookies-policy/">Cookies Policy</a> for how this website uses cookies and similar technology.</p>
+<p>See our <a href="/cookies-policy/">Cookie Policy</a> for how this website uses cookies and similar technology.</p>
 
 <h2>Changes to this policy</h2>
 <p>We may update this policy from time to time. The date at the top shows when it was last changed.</p>
@@ -78,7 +78,7 @@ module.exports = {
   },
 
   'cookies-policy': {
-    title: 'Cookies Policy',
+    title: 'Cookie Policy',
     metaDescription: 'Which cookies and similar technology the SN Cleaning Services website uses, and how to control them.',
     updated: UPDATED,
     content: `

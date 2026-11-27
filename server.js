@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 
 const { SITE_URL } = require('./lib/site-config');
 const schema = require('./lib/schema');
-const { isPlaceholderSocial, whatsappHref } = require('./lib/site-helpers');
+const { isPlaceholderSocial, whatsappHref, plainPlaceName } = require('./lib/site-helpers');
 const { linkifyInternal, applyLinkPhrasesToPage } = require('./lib/linkify-internal');
 
 const app = express();
@@ -77,16 +77,29 @@ app.locals.customerSupport = require('./data/customer-support');
 // for a local photo, or nothing if no copies exist (e.g. external images).
 const RS_WIDTHS = [480, 800, 1200];
 const rsCache = new Map();
-app.locals.rs = (src, sizes) => {
-  if (!src || !src.startsWith('/images/')) return '';
-  if (!rsCache.has(src)) {
-    const base = src.replace(/^\/images\//, '').replace(/\.(jpe?g|png|webp)$/i, '');
+// Largest WebP the page can render, plus the srcset the <img> uses.
+// Preload href must be one of those WebP URLs. A JPG href is fetched as well.
+function responsiveWebp(src) {
+  const clean = String(src || '').split('?')[0];
+  if (!clean.startsWith('/images/')) return { href: clean, srcset: '' };
+  if (!rsCache.has(clean)) {
+    const base = clean.replace(/^\/images\//, '').replace(/\.(jpe?g|png|webp)$/i, '');
     const have = RS_WIDTHS.filter((w) => fs.existsSync(path.join(__dirname, 'public/images/_r', `${base}-${w}.webp`)));
-    rsCache.set(src, have.length ? have.map((w) => `/images/_r/${base}-${w}.webp?v=${ASSET_VERSION} ${w}w`).join(', ') : '');
+    const srcset = have.length ? have.map((w) => `/images/_r/${base}-${w}.webp?v=${ASSET_VERSION} ${w}w`).join(', ') : '';
+    const href = have.length
+      ? `/images/_r/${base}-${have[have.length - 1]}.webp?v=${ASSET_VERSION}`
+      : `${clean}?v=${ASSET_VERSION}`;
+    rsCache.set(clean, { href, srcset });
   }
-  const set = rsCache.get(src);
-  return set ? ` srcset="${set}" sizes="${sizes || '100vw'}"` : '';
+  return rsCache.get(clean);
+}
+app.locals.responsiveWebp = responsiveWebp;
+app.locals.rs = (src, sizes) => {
+  const { srcset } = responsiveWebp(src);
+  return srcset ? ` srcset="${srcset}" sizes="${sizes || '100vw'}"` : '';
 };
+app.locals.schemaCollapse = (blocks) => schema.mergeReviewsIntoBusiness(blocks, []);
+app.locals.plainPlaceName = plainPlaceName;
 app.locals.servicePrice = servicePrice;
 app.locals.priceNote = priceNote;
 app.locals.answerCapsuleFor = require('./data/answer-capsules').forSlug;
@@ -178,7 +191,7 @@ app.use(async (req, res, next) => {
       : { ...SITE_DEFAULTS, whatsappUrl: whatsappHref(SITE_DEFAULTS.phone) };
 
     res.locals.navWhyUs = whyUs.all().map((p) => ({ title: p.nav_label, url: p.url }));
-    res.locals.coverageAreas = coverageAreas || [];
+    res.locals.coverageAreas = (coverageAreas || []).map(plainPlaceName);
     res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
@@ -234,6 +247,33 @@ const serviceContent = require('./data/service-content');
 const areaMap = require('./lib/area-map');
 app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+
+function reviewsForService(list, slug) {
+  const copy = serviceContent[slug] || serviceContent['domestic-cleaning'] || {};
+  const match = copy.reviewMatch;
+  return (list || []).slice()
+    .sort((a, b) => ((match && match.test(b.quote) ? 1 : 0) - (match && match.test(a.quote) ? 1 : 0)))
+    .slice(0, 3);
+}
+function plainContent(value) {
+  if (typeof value === 'string') return plainPlaceName(value);
+  if (Array.isArray(value)) return value.map(plainContent);
+  if (value && typeof value === 'object') {
+    const next = {};
+    for (const [key, item] of Object.entries(value)) {
+      next[key] = (key === 'slug' || key === 'url' || key === 'href' || key === 'src' || key === 'id') ? item : plainContent(item);
+    }
+    return next;
+  }
+  return value;
+}
+function reviewsForArea(list, slug, place) {
+  const copy = serviceContent[slug] || serviceContent['domestic-cleaning'] || {};
+  const match = copy.reviewMatch;
+  const placeRe = new RegExp(String(place || '').replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
+  const score = (t) => (placeRe.test(`${t.quote} ${t.location || ''}`) ? 2 : 0) + (match && match.test(t.quote) ? 1 : 0);
+  return (list || []).slice().sort((a, b) => score(b) - score(a)).slice(0, 3);
+}
 // WebPage dates for the homepage, the core service pages and the price pages.
 // 2025-01-15 is the fallback where the page has no earlier published date.
 const AI_DATE_PUBLISHED = '2025-01-15';
@@ -260,11 +300,6 @@ app.get('/', async (req, res) => {
     content.getAllCoverageRegions()
   ]);
   const faqPage = schema.buildFaqPage(faqs);
-  const homeSchema = res.locals.structuredData.map((block) => {
-    if (!block || block['@type'] !== 'HomeAndConstructionBusiness') return block;
-    const review = schema.reviewEntries(testimonials);
-    return review.length ? { ...block, review } : block;
-  });
 
   const mapLink = buildMapLink(areaPages, regions, ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning']);
 
@@ -285,7 +320,10 @@ app.get('/', async (req, res) => {
     isHome: true,
     coverageAreas: res.locals.coverageAreas,
     ...aiPageDates(),
-    structuredData: [...homeSchema, ...(faqPage ? [faqPage] : [])]
+    structuredData: schema.mergeReviewsIntoBusiness(
+      [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])],
+      testimonials
+    )
   });
 });
 
@@ -528,7 +566,11 @@ app.get('/about', (req, res) => {
     breadcrumbs,
     testimonials,
     designV2: true,
-    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+    heroPreload: '/images/silvia.webp',
+    structuredData: schema.mergeReviewsIntoBusiness(
+      [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)],
+      [((testimonials || []).find((t) => /Silvia/.test(t.quote)) || (testimonials || [])[0])].filter(Boolean)
+    )
   });
 });
 
@@ -536,6 +578,7 @@ app.get('/about/silvia-nedeva', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }, { name: 'Silvia Nedeva', url: '/about/silvia-nedeva' }];
   res.render('silvia', {
     title: 'Silvia Nedeva, SN Cleaning Services',
+    heroPreload: '/images/silvia.webp',
     metaDescription:
       'Silvia Nedeva came to the UK from Bulgaria in 2014, started as a cleaner and now manages SN Cleaning Services in Brentwood. Read how she trains the team.',
     breadcrumbs,
@@ -1288,11 +1331,12 @@ app.get('/:slug', async (req, res, next) => {
     // This service's local area pages, for the "Areas we cover" links.
     localPages = areaPages
       .filter((p) => p.services && p.services.slug === page.slug && p.coverage_regions && p.coverage_regions.level !== 'town')
-      .map((p) => ({ name: p.coverage_regions.name, url: `/${page.slug}/${p.slug}` }))
+      .map((p) => ({ name: plainPlaceName(p.coverage_regions.name), url: `/${page.slug}/${p.slug}` }))
       .sort((a, b) => a.name.localeCompare(b.name));
   }
 
   const svcJobVideos = jobVideoLib.section(jobVideoLib.forService(await content.getJobVideos(), page.slug), page.slug, service.title);
+  const pickedReviews = reviewsForService(testimonials, page.slug);
   res.render(v2 ? 'service-v2' : 'service-detail', {
     jobVideos: svcJobVideos,
     designV2: v2,
@@ -1307,17 +1351,18 @@ app.get('/:slug', async (req, res, next) => {
     service,
     relatedServices,
     testimonials,
+    pickedReviews,
     coverageAreas,
     breadcrumbs,
     ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage,
     ...(AI_DATED_SERVICES.has(page.slug) ? aiPageDates() : {}),
-    structuredData: [
+    structuredData: schema.mergeReviewsIntoBusiness([
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
       schema.buildService({ service, page, coverageAreas }),
       ...(faqPage ? [faqPage] : []),
       ...jobVideoLib.buildVideoSchema(svcJobVideos.videos)
-    ]
+    ], pickedReviews)
   });
 });
 
@@ -1404,7 +1449,7 @@ async function renderArea(req, res, next, areaSlug) {
   if (SERVICE_V2.includes(service.slug)) {
     // New design. Area name: display_name, else the region name cleaned of
     // map labels like "Essex - " and " / Thurrock Edge".
-    const areaName = (r) => r ? (r.display_name || String(r.name).replace(/^Essex - /, '').replace(/\s*\/.*$/, '')) : '';
+    const areaName = (r) => r ? plainPlaceName(r.display_name || String(r.name).replace(/^Essex - /, '').replace(/\s*\/.*$/, '')) : '';
     const place = areaName(region);
     const ov = seoOverrides.pages[`${service.slug}/${page.slug}`] || null;
     const fullService = allServices.find((s) => s.slug === service.slug) || service; // has booking_embed_url
@@ -1438,7 +1483,7 @@ async function renderArea(req, res, next, areaSlug) {
       { name: place, url: `/${service.slug}/${page.slug}` }
     ];
     const servicePage = await content.getServicePageBySlug(service.slug);
-    const pageWithCopy = applyContentExtras(page, service.slug);
+    const pageWithCopy = plainContent(applyContentExtras(page, service.slug));
     const faqs = pageWithCopy.faqs || [];
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
@@ -1497,6 +1542,7 @@ async function renderArea(req, res, next, areaSlug) {
 const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJobVideos(), service.slug, page.postcodes), service.slug, service.title);
     const recentCleans = jobVideoLib.recentCleans(await content.getJobVideos(), page.postcodes, place,
       areaJobVideos.videos.map((v) => v.id), editorContent.editorPosts('case').filter((c) => !c.noindex));
+    const pickedReviews = reviewsForArea(testimonials, service.slug, place);
         return res.render('area-v2', {
       jobVideos: areaJobVideos,
       recentCleans,
@@ -1509,10 +1555,10 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       designV2: true,
       heroPreload: serviceImage(service.slug),
       // Title format (keyword first, then trust; no price in organic titles, Silvia 16 Nov 2026): fits Google's ~60 characters.
-      title: (ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`,
-      metaDescription: (ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`,
-      h1Override: ov && ov.h1 ? ov.h1 : null,
-      page: applyPageOverrides(pageWithCopy, ov),
+      title: plainPlaceName((ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`),
+      metaDescription: plainPlaceName((ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`),
+      h1Override: ov && ov.h1 ? plainPlaceName(ov.h1) : null,
+      page: plainContent(applyPageOverrides(pageWithCopy, ov)),
       region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,
@@ -1520,15 +1566,16 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       children: children.map((ap) => ({ name: areaName(ap.coverage_regions), url: pageUrl(ap) })).sort((a, b) => a.name.localeCompare(b.name)),
       otherServices,
       testimonials,
+      pickedReviews,
       breadcrumbs: crumbs,
-      structuredData: [
+      structuredData: schema.mergeReviewsIntoBusiness([
         ...res.locals.structuredData,
         schema.buildBreadcrumbList(crumbs),
-        schema.buildServiceAreaPage({ service, page, region }),
+        schema.buildServiceAreaPage({ service, page: pageWithCopy, region }),
         ...(faq ? [faq] : []),
         ...jobVideoLib.buildVideoSchema(areaJobVideos.videos),
         ...jobVideoLib.buildVideoSchema(recentCleans)
-      ]
+      ], pickedReviews)
     });
   }
 
@@ -1537,18 +1584,18 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
   // each page sitting isolated.
   const relatedAreas = areaPagesForService
     .filter((ap) => ap.id !== page.id && ap.coverage_regions && ap.coverage_regions.parent_id === region.parent_id)
-    .map((ap) => ({ name: ap.coverage_regions.name, url: `/${service.slug}/${ap.slug}` }));
+    .map((ap) => ({ name: plainPlaceName(ap.coverage_regions.name), url: `/${service.slug}/${ap.slug}` }));
 
   const breadcrumbs = [
     ...res.locals.breadcrumbs,
     { name: service.title, url: `/${service.slug}` },
-    { name: region.name, url: `/${service.slug}/${page.slug}` }
+    { name: plainPlaceName(region.name), url: `/${service.slug}/${page.slug}` }
   ];
   const faqPage = schema.buildFaqPage(page.faqs);
 
   res.render('area-detail', {
-    title: page.meta_title || `${service.title} in ${region.name}`,
-    metaDescription: page.meta_description || `${service.title} in ${region.name}.`,
+    title: plainPlaceName(page.meta_title || `${service.title} in ${region.name}`),
+    metaDescription: plainPlaceName(page.meta_description || `${service.title} in ${region.name}.`),
     page,
     region,
     service,
@@ -1561,7 +1608,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
-      schema.buildServiceAreaPage({ service, page, region }),
+      schema.buildServiceAreaPage({ service, page: plainContent(page), region }),
       ...(faqPage ? [faqPage] : [])
     ]
   });

@@ -30,7 +30,7 @@ ESSEX = {
   'Chelmsford': ('Chelmsford', 'Essex - Chelmsford'),
   'Castle Point': ('Benfleet & Canvey Island', 'Essex - Benfleet'),
   'Rochford': ('Rayleigh', 'Essex - Rayleigh'),
-  'Southend-on-Sea': ('Southend & Leigh-on-Sea', 'Essex - Southend-on-Sea'),
+  'Southend-on-Sea': ('Southend & Leigh on Sea', 'Essex - Southend-on-Sea'),
 }
 COVERED = {n: (n, n, 'london') for n in LONDON}
 COVERED.update({k: (v[0], v[1], 'essex') for k, v in ESSEX.items()})
