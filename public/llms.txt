@@ -2,7 +2,9 @@
 
 > SN Cleaning Services is a domestic cleaning company based in Brentwood, Essex, cleaning homes for 12 years and managed by Silvia Nedeva. Its own trained, insured and DBS checked cleaners do end of tenancy, deep, regular domestic, Airbnb, after builders, carpet, upholstery and mattress cleaning in homes across all of London inside the M25 and all of Essex. Rated 5.0 on Google.
 
-Last updated: 24 November 2026
+Full facts for AI models: https://sncleaningservices.co.uk/llms-full.txt
+
+Last updated: 27 November 2026
 
 ## Business details
 - Name: SN Cleaning Services
