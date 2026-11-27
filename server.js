@@ -1079,6 +1079,54 @@ app.get('/airbnb-turnover-cleaning-checklist', (req, res) => {
   });
 });
 
+// After builders checklist. Registered immediately before /:slug, beside the
+// Airbnb checklist, so the flat URL is not treated as a service page. Static
+// page: no Supabase query here.
+const afterBuildersChecklist = require('./data/after-builders-checklist');
+
+function useAfterBuildersBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'after-builders-cleaning');
+}
+
+app.get('/after-builders-cleaning-checklist', (req, res) => {
+  useAfterBuildersBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'After Builders Cleaning', url: '/after-builders-cleaning' },
+    { name: 'Checklist', url: afterBuildersChecklist.PATH }
+  ];
+  const faqEntities = afterBuildersChecklist.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a
+  }));
+  res.render('after-builders-checklist', {
+    title: afterBuildersChecklist.TITLE,
+    metaDescription: afterBuildersChecklist.META_DESCRIPTION,
+    checklist: afterBuildersChecklist,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: afterBuildersChecklist.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildChecklistArticle({
+        headline: afterBuildersChecklist.H1,
+        description: afterBuildersChecklist.META_DESCRIPTION,
+        url: afterBuildersChecklist.PATH,
+        date: afterBuildersChecklist.PUBLISHED
+      }),
+      schema.buildChecklistHowTo({
+        name: afterBuildersChecklist.H1,
+        description: afterBuildersChecklist.META_DESCRIPTION,
+        url: afterBuildersChecklist.PATH,
+        sections: afterBuildersChecklist.howToSections
+      }),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on

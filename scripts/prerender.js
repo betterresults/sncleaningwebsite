@@ -44,6 +44,7 @@ async function buildRoutes() {
     { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/airbnb-turnover-cleaning-checklist', out: 'airbnb-turnover-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
+    { url: '/after-builders-cleaning-checklist', out: 'after-builders-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-27' },
     { url: '/clean-home-report', out: 'clean-home-report/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/house-cleaning-time-calculator', out: 'house-cleaning-time-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/end-of-tenancy-cleaning-cost-calculator', out: 'end-of-tenancy-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
