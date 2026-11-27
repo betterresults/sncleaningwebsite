@@ -5,7 +5,8 @@
 // Times, team sizes and the pricing explanation come from Silvia (24 Nov 2026). Do not add facts she has not given.
 
 // The only date to change when these prices are refreshed. The "Prices last updated" line
-// and this page's WebPage dateModified both read it. Use a full ISO date (YYYY-MM-DD).
+// reads it. Use a full ISO date (YYYY-MM-DD). The page route sets WebPage datePublished
+// from this date and dateModified separately.
 const PRICES_LAST_UPDATED = '2026-11-24';
 
 function pricesUpdatedLabel(iso) {

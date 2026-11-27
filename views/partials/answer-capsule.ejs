@@ -1,0 +1,40 @@
+<%# 2026 answer capsule and worked examples. Data: data/answer-capsules.js. Prices come from data/prices.js. %>
+<% const capsule = (typeof answerCapsuleFor === 'function') ? answerCapsuleFor(service.slug) : null; %>
+<% if (capsule) { %>
+<section class="h-section h-white" id="answer-capsule" aria-labelledby="answer-capsule-title">
+  <div class="h-wrap s-capsule">
+    <div class="h-head">
+      <p class="h-eyebrow"><%= capsule.eyebrow %></p>
+      <h2 class="h-title" id="answer-capsule-title"><%= capsule.title %></h2>
+    </div>
+    <p class="s-capsule-answer"><%= capsule.answer %></p>
+    <% (capsule.support || []).forEach(function (para) { %>
+      <p class="s-capsule-sub"><%= para %></p>
+    <% }); %>
+    <div class="s-receipts">
+      <% capsule.examples.forEach(function (example) { %>
+        <article class="s-receipt">
+          <h3><%= example.title %></h3>
+          <dl>
+            <% example.lines.forEach(function (line) { %>
+              <div><dt><%= line.label %></dt><dd><%= line.amount %></dd></div>
+            <% }); %>
+            <div class="s-receipt-total"><dt>From</dt><dd><%= example.total %></dd></div>
+          </dl>
+          <% if (example.note) { %><p><%= example.note %></p><% } %>
+        </article>
+      <% }); %>
+    </div>
+    <% if (capsule.facts && capsule.facts.length) { %>
+      <ul class="s-capsule-facts">
+        <% capsule.facts.forEach(function (fact) { %><li><%= fact %></li><% }); %>
+      </ul>
+    <% } %>
+    <% if (capsule.links && capsule.links.length) { %>
+      <p class="s-capsule-links">
+        <% capsule.links.forEach(function (link, index) { %><% if (index) { %><span aria-hidden="true"> · </span><% } %><a href="<%= link.href %>"><%= link.text %></a><% }); %>
+      </p>
+    <% } %>
+  </div>
+</section>
+<% } %>

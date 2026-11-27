@@ -5,6 +5,11 @@ module.exports = [
       "London and Essex. If you're just outside the list on this page, still get in touch, we often can."
   },
   {
+    question: 'Are SN Cleaning Services and SN Clean the same company?',
+    answer:
+      'SN Cleaning Services and SN Clean are sister companies, not the same business. SN Cleaning Services handles domestic homes across London, inside the M25, and Essex, while SN Clean handles commercial offices and premises.'
+  },
+  {
     question: 'How much does a cleaning cost?',
     answer:
       "Domestic cleaning starts from £23 an hour, deep cleaning from £27 an hour and end of tenancy cleaning from £179. The final price depends on the size of the property and the type of clean. Send your postcode and what you need, or WhatsApp us, and we'll quote you, usually the same weekday. No hidden add on fees after that."

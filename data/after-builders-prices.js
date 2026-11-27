@@ -61,7 +61,11 @@ const faqs = [
   { q: 'Do your prices include VAT?', a: 'SN Cleaning Services is not VAT registered, so there is no VAT to add.' }
 ];
 
+// Page built 25 Nov 2026 (file header). Used as WebPage datePublished.
+const PUBLISHED = '2026-11-25';
+
 module.exports = {
+  PUBLISHED,
   hourlyRate,
   fullDayHours,
   methods,
