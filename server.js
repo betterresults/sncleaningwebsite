@@ -89,6 +89,7 @@ app.locals.rs = (src, sizes) => {
 };
 app.locals.servicePrice = servicePrice;
 app.locals.priceNote = priceNote;
+app.locals.answerCapsuleFor = require('./data/answer-capsules').forSlug;
 // Blog posts rebuilt at their old WordPress address (/{slug}/) keep it; others live under /blog/.
 const postUrl = (p) => (p.legacy_root ? `/${p.slug}/` : `/blog/${p.slug}`);
 app.locals.postUrl = postUrl;
@@ -233,6 +234,23 @@ const serviceContent = require('./data/service-content');
 const areaMap = require('./lib/area-map');
 app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+// WebPage dates for the homepage, the core service pages and the price pages.
+// 2025-01-15 is the fallback where the page has no earlier published date.
+const AI_DATE_PUBLISHED = '2025-01-15';
+const AI_DATE_MODIFIED = '2026-11-27';
+const AI_DATED_SERVICES = new Set([
+  'domestic-cleaning',
+  'deep-house-cleaning',
+  'airbnb-cleaning',
+  'after-builders-cleaning',
+  'end-of-tenancy-cleaning'
+]);
+function aiPageDates(published) {
+  return {
+    webPageDatePublished: published || AI_DATE_PUBLISHED,
+    webPageDateModified: AI_DATE_MODIFIED
+  };
+}
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
@@ -242,6 +260,11 @@ app.get('/', async (req, res) => {
     content.getAllCoverageRegions()
   ]);
   const faqPage = schema.buildFaqPage(faqs);
+  const homeSchema = res.locals.structuredData.map((block) => {
+    if (!block || block['@type'] !== 'HomeAndConstructionBusiness') return block;
+    const review = schema.reviewEntries(testimonials);
+    return review.length ? { ...block, review } : block;
+  });
 
   const mapLink = buildMapLink(areaPages, regions, ['domestic-cleaning', 'deep-house-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning']);
 
@@ -261,7 +284,8 @@ app.get('/', async (req, res) => {
     heroPreload: '/images/hero-living-room.jpg',
     isHome: true,
     coverageAreas: res.locals.coverageAreas,
-    structuredData: [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])]
+    ...aiPageDates(),
+    structuredData: [...homeSchema, ...(faqPage ? [faqPage] : [])]
   });
 });
 
@@ -540,6 +564,7 @@ app.get('/prices', (req, res) => {
     metaDescription: 'Cleaning prices from SN Cleaning Services in London and Essex: full price lists and calculators for end of tenancy cleaning and after builders cleaning.',
     breadcrumbs,
     designV2: true,
+    ...aiPageDates(),
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
   });
 });
@@ -561,6 +586,7 @@ app.get('/after-builders-cleaning/prices', (req, res) => {
     p: prices,
     breadcrumbs,
     designV2: true,
+    ...aiPageDates(prices.PUBLISHED),
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -594,7 +620,7 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
     p: prices,
     breadcrumbs,
     designV2: true,
-    webPageDateModified: prices.PRICES_LAST_UPDATED,
+    ...aiPageDates(prices.PRICES_LAST_UPDATED),
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1284,6 +1310,7 @@ app.get('/:slug', async (req, res, next) => {
     coverageAreas,
     breadcrumbs,
     ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage,
+    ...(AI_DATED_SERVICES.has(page.slug) ? aiPageDates() : {}),
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
