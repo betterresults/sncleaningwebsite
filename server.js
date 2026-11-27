@@ -1127,6 +1127,55 @@ app.get('/after-builders-cleaning-checklist', (req, res) => {
   });
 });
 
+// Deep cleaning checklist. Registered immediately before /:slug, right after
+// the after builders checklist, so the flat URL is not treated as a service
+// page. Static page: no Supabase query here.
+const deepCleaningChecklist = require('./data/deep-cleaning-checklist');
+
+function useDeepCleaningBooking(res) {
+  const base = app.locals.bookUrl;
+  res.locals.bookUrl = (slug) => base(slug || 'deep-house-cleaning');
+}
+
+app.get('/deep-cleaning-checklist', (req, res) => {
+  useDeepCleaningBooking(res);
+  const breadcrumbs = [
+    ...res.locals.breadcrumbs,
+    { name: 'Deep House Cleaning', url: '/deep-house-cleaning' },
+    { name: 'Checklist', url: deepCleaningChecklist.PATH }
+  ];
+  const book = res.locals.bookUrl('deep-house-cleaning');
+  const faqEntities = deepCleaningChecklist.faqs.map((item) => ({
+    question: item.q,
+    answer: item.a.split(deepCleaningChecklist.BOOK_TOKEN).join(book)
+  }));
+  res.render('deep-cleaning-checklist', {
+    title: deepCleaningChecklist.TITLE,
+    metaDescription: deepCleaningChecklist.META_DESCRIPTION,
+    checklist: deepCleaningChecklist,
+    breadcrumbs,
+    designV2: true,
+    webPageDateModified: deepCleaningChecklist.PUBLISHED,
+    structuredData: [
+      ...res.locals.structuredData,
+      schema.buildBreadcrumbList(breadcrumbs),
+      schema.buildChecklistArticle({
+        headline: deepCleaningChecklist.H1,
+        description: deepCleaningChecklist.META_DESCRIPTION,
+        url: deepCleaningChecklist.PATH,
+        date: deepCleaningChecklist.PUBLISHED
+      }),
+      schema.buildChecklistHowTo({
+        name: deepCleaningChecklist.H1,
+        description: deepCleaningChecklist.META_DESCRIPTION,
+        url: deepCleaningChecklist.PATH,
+        sections: deepCleaningChecklist.howToSections
+      }),
+      schema.buildFaqPage(faqEntities)
+    ].filter(Boolean)
+  });
+});
+
 // Individual service page — one shared template, content pulled from Supabase.
 // Lives at site root (/{slug}/, e.g. /office-cleaning/, /domestic-cleaning/)
 // rather than under /services/, matching the real indexed URLs on
