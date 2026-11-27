@@ -119,6 +119,22 @@ const pages = {
   "airbnb-cleaning/essex/brentwood": {"title": "Airbnb Cleaning Brentwood, Essex | 5★ Rated", "metaDescription": "Airbnb and short let cleaning in Brentwood, Shenfield and Hutton. Turnover cleans between guests by our own insured team. Get a quote.", "h1": "Airbnb Cleaning in Brentwood, Essex", "leadFirst": "SN Cleaning Services provides Airbnb cleaning in Brentwood, Shenfield and Hutton from £26 an hour.", "leadKeepOriginal": true},
   "upholstery-cleaning/rayleigh": {"title": "Sofa & Upholstery Cleaning Rayleigh | 5★ Rated", "metaDescription": "Sofa and upholstery cleaning in Rayleigh, SS6. Sofas and armchairs cleaned at home by our own DBS checked team. Book online.", "h1": "Sofa and Upholstery Cleaning in Rayleigh", "leadFirst": "SN Cleaning Services provides upholstery cleaning in Rayleigh from £69, with a £120 minimum visit charge you can reach by combining sofas, carpets and mattresses.", "leadKeepOriginal": true},
   "deep-house-cleaning/essex/brentwood": {"title": "Deep House Cleaning Brentwood, Essex | 5★ Rated", "metaDescription": "Deep house cleaning in Brentwood, Shenfield and Hutton. Kitchens, bathrooms and built up grease by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Brentwood, Essex", "leadFirst": "SN Cleaning Services provides deep house cleaning in Brentwood, Shenfield and Hutton from £27 an hour.", "leadKeepOriginal": true},
+  // Page 2/3 batch 6 (27 Nov 2026). New keys only. Delete a key to roll that page back.
+  "deep-house-cleaning/croydon": {"title": "Deep House Cleaning Croydon | 5★ Rated", "metaDescription": "Deep house cleaning in Croydon: South Croydon, Purley, Thornton Heath and Addiscombe. A thorough one off clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Croydon", "leadFirst": "SN Cleaning Services provides deep house cleaning in Croydon from £27 an hour, including South Croydon, Purley and Thornton Heath.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/redbridge/woodford-wells": {"title": "End of Tenancy Cleaning Woodford Wells | 5★ Rated", "metaDescription": "End of tenancy cleaning in Woodford Wells, Redbridge IG8, near Woodford Green. Deposit back guarantee and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Woodford Wells", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Woodford Wells, Redbridge, from £179.", "leadKeepOriginal": true},
+  "after-builders-cleaning/enfield": {"title": "After Builders Cleaning Enfield | 5★ Rated", "metaDescription": "After builders cleaning in Enfield, from Enfield Town to Edmonton and Southgate. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Enfield", "leadFirst": "SN Cleaning Services provides after builders cleaning in Enfield from £179, including Enfield Town, Edmonton and Southgate.", "leadKeepOriginal": true},
+  "domestic-cleaning/barnet": {"title": "Domestic Cleaners Barnet | 5★ Rated, Book Online", "metaDescription": "Domestic cleaners in Barnet for Finchley, Hendon, Edgware and High Barnet. Weekly or fortnightly visits by our own DBS checked team. Book online.", "h1": "Domestic Cleaners in Barnet", "leadFirst": "SN Cleaning Services provides regular domestic cleaning in Barnet from £23 an hour, with a 3 hour minimum.", "leadKeepOriginal": true},
+  "deep-house-cleaning/greenwich": {"title": "Deep House Cleaning Greenwich | 5★ Rated", "metaDescription": "Deep house cleaning in Greenwich, from SE10 and the Peninsula to Woolwich and Blackheath. Kitchens and bathrooms by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Greenwich", "leadFirst": "SN Cleaning Services provides deep house cleaning in Greenwich from £27 an hour, including Woolwich and Blackheath.", "leadKeepOriginal": true},
+  "after-builders-cleaning/havering": {"title": "After Builders Cleaning Havering | 5★ Rated", "metaDescription": "After builders cleaning in Havering, from Romford to Hornchurch and Upminster. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Havering", "leadFirst": "SN Cleaning Services provides after builders cleaning in Havering from £179, including Romford, Hornchurch and Upminster.", "leadKeepOriginal": true},
+  "after-builders-cleaning/west-horndon": {"title": "After Builders Cleaning West Horndon | 5★ Rated", "metaDescription": "After builders cleaning in West Horndon and East Horndon, Brentwood CM13. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in West Horndon", "leadFirst": "SN Cleaning Services provides after builders cleaning in West Horndon, near Brentwood, from £179.", "leadKeepOriginal": true},
+  "deep-house-cleaning/barnet": {"title": "Deep House Cleaning Barnet | 5★ Rated", "metaDescription": "Deep house cleaning in Barnet: Finchley, Hendon, Mill Hill and Edgware. A one off reset by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Barnet", "leadFirst": "SN Cleaning Services provides deep house cleaning in Barnet from £27 an hour, including Finchley, Hendon and Mill Hill.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/havering/harold-wood": {"title": "End of Tenancy Cleaning Harold Wood RM3 | 5★ Rated", "metaDescription": "End of tenancy cleaning in Harold Wood, Kings Park and Harold Park, RM3. Our own DBS checked team and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Harold Wood", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Harold Wood, RM3, from £179.", "leadKeepOriginal": true},
+  "after-builders-cleaning/bexley": {"title": "After Builders Cleaning Bexley | 5★ Rated", "metaDescription": "After builders cleaning in Bexleyheath, Sidcup, Welling and Erith. Plaster dust and paint cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Bexley", "leadFirst": "SN Cleaning Services provides after builders cleaning in Bexley from £179, including Bexleyheath, Sidcup, Welling and Erith.", "leadKeepOriginal": true},
+  "end-of-tenancy-cleaning/redbridge/hainault": {"title": "End of Tenancy Cleaning Hainault IG6 | 5★ Rated", "metaDescription": "End of tenancy cleaning in Hainault, Redbridge IG6, near Fairlop and Hainault Forest. Deposit back guarantee and a 7 day re clean. Get a quote.", "h1": "End of Tenancy Cleaning in Hainault", "leadFirst": "SN Cleaning Services provides end of tenancy cleaning in Hainault, Redbridge, from £179.", "leadKeepOriginal": true},
+  "carpet-cleaning-services/wickford": {"title": "Carpet Cleaning Wickford, Essex | 5★ Rated", "metaDescription": "Carpet cleaning in Wickford, SS11 and SS12, near Basildon and Billericay. Stains pre treated by our own DBS checked team. Book online.", "h1": "Carpet Cleaning in Wickford", "leadFirst": "SN Cleaning Services provides carpet cleaning in Wickford from £49.", "leadKeepOriginal": true},
+  "after-builders-cleaning/hackney": {"title": "After Builders Cleaning Hackney | 5★ Rated", "metaDescription": "After builders cleaning in Hackney: Dalston, Hackney Wick, Homerton and Stoke Newington. Plaster dust cleared by our own insured team. Book online.", "h1": "After Builders Cleaning in Hackney", "leadFirst": "SN Cleaning Services provides after builders cleaning in Hackney from £179, including Dalston, Homerton and Stoke Newington.", "leadKeepOriginal": true},
+  "deep-house-cleaning/benfleet": {"title": "Deep House Cleaning Benfleet, Essex | 5★ Rated", "metaDescription": "Deep house cleaning in Benfleet and South Benfleet, SS7. A thorough one off clean by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Benfleet", "leadFirst": "SN Cleaning Services provides deep house cleaning in Benfleet from £27 an hour.", "leadKeepOriginal": true},
+  "deep-house-cleaning/southwark": {"title": "Deep House Cleaning Southwark | 5★ Rated", "metaDescription": "Deep house cleaning in Southwark: Bermondsey, Peckham, Camberwell and Dulwich. A one off reset by our own DBS checked team. Book online.", "h1": "Deep House Cleaning in Southwark", "leadFirst": "SN Cleaning Services provides deep house cleaning in Southwark from £27 an hour, including Bermondsey, Peckham and Camberwell.", "leadKeepOriginal": true},
 };
 
 // Ahrefs audit fixes (Dana, 24 Nov 2026), kept in their own block so other PRs editing `pages` above don't conflict.
@@ -281,6 +297,37 @@ const contentExtras = {
     faqs: [{
       question: 'What does after builders cleaning in Doddinghurst cover?',
       answer: 'After builders cleaning in Doddinghurst starts from £179. The visit removes post renovation dust and plaster dust left after building work. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the clean may take.'
+    }]
+  },
+  // Page 2/3 batch 6 (27 Nov 2026). New keys only. Prices are the from prices in data/prices.js.
+  'deep-house-cleaning/croydon': {
+    faqs: [{
+      question: 'How is a deep clean in Croydon priced?',
+      answer: 'Deep house cleaning in Croydon starts from £27 an hour. It is a thorough top to bottom clean, covering the areas a regular visit does not reach. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) to judge the hours, and our [domestic cleaning checklist](/domestic-cleaning-checklist/) if you later want a regular visit.'
+    }]
+  },
+  'end-of-tenancy-cleaning/redbridge/woodford-wells': {
+    faqs: [{
+      question: 'What does an end of tenancy clean in Woodford Wells include?',
+      answer: 'End of tenancy cleaning in Woodford Wells starts from £179. The fridge and freezer are included, and cleaning inside the oven is an optional add on, not a standalone oven cleaning service. If the agent flags anything from the clean, you have a 7 day free re clean guarantee. Estimate the price with the [end of tenancy cost calculator](/end-of-tenancy-cleaning-cost-calculator/), and work through our [end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
+    }]
+  },
+  'after-builders-cleaning/enfield': {
+    faqs: [{
+      question: 'What does after builders cleaning in Enfield cover?',
+      answer: 'After builders cleaning in Enfield starts from £179. The visit removes post renovation dust and plaster dust left after building work. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) for a guide to how long the clean may take.'
+    }]
+  },
+  'domestic-cleaning/barnet': {
+    faqs: [{
+      question: 'How long is a regular domestic clean in Barnet?',
+      answer: 'Regular domestic cleaning in Barnet starts from £23 an hour, with a 3 hour minimum, and the visit is done by our own vetted, DBS checked cleaners. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) to judge the hours, and our [domestic cleaning checklist](/domestic-cleaning-checklist/) to see what a regular visit covers.'
+    }]
+  },
+  'deep-house-cleaning/greenwich': {
+    faqs: [{
+      question: 'What does a deep clean in Greenwich include?',
+      answer: 'Deep house cleaning in Greenwich starts from £27 an hour and covers kitchens, bathrooms, skirting and appliances. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. Use the [house cleaning time calculator](/house-cleaning-time-calculator/) to judge the hours, and our [domestic cleaning checklist](/domestic-cleaning-checklist/) to see what a regular visit covers.'
     }]
   },
 };
