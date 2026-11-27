@@ -1,4 +1,4 @@
-# One-off printable A4 for the Airbnb turnover cleaning checklist.
+# One off printable A4 for the Airbnb turnover cleaning checklist.
 # Run from the repo root: python3 scripts/airbnb-turnover-checklist-pdf.py
 # Needs reportlab locally. Not part of npm run build, and not a production dependency.
 import json, os, subprocess
@@ -24,11 +24,11 @@ if any('£' in t or '£' in s['name'] for s in data['sections'] for t in s['task
 if '£' in data['title'] or '£' in data['oven'] or '£' in data['h1']:
     raise SystemExit('title, heading and oven note must not contain a price')
 names = [s['name'] for s in data['sections']]
-for required in ['Kitchen', 'Bathroom', 'Bedrooms & Living Areas', 'Final Walkthrough & Guest Reset', 'Linen, Keys & Damage-Photo Protocol']:
+for required in ['Kitchen', 'Bathroom', 'Bedrooms & Living Areas', 'Final Walkthrough & Guest Reset', 'Linen, Keys & Damage Photo Protocol']:
     if required not in names:
         raise SystemExit('missing section: ' + required)
-if 'optional add-on' not in data['oven'].lower() or 'standalone' not in data['oven'].lower():
-    raise SystemExit('oven note must say the oven clean is an optional add-on, not a standalone service')
+if 'optional add on' not in data['oven'].lower() or 'standalone' not in data['oven'].lower():
+    raise SystemExit('oven note must say the oven clean is an optional add on, not a standalone service')
 
 out = os.path.join(root, 'public', 'downloads', 'sn-cleaning-airbnb-turnover-cleaning-checklist.pdf')
 os.makedirs(os.path.dirname(out), exist_ok=True)
@@ -90,8 +90,8 @@ story.append(Spacer(1, 4 * mm))
 story.append(Paragraph(esc(data['title']), title_style))
 story.append(Paragraph('By Silvia Nedeva, SN Cleaning Services', byline))
 story.append(Paragraph(
-    'A short-let turnover covers the kitchen, bathroom, bedrooms and living areas, then a final guest reset '
-    'and the linen, keys and damage-photo protocol. Tick Done as you go. This is the room-by-room changeover '
+    'A short let turnover covers the kitchen, bathroom, bedrooms and living areas, then a final guest reset '
+    'and the linen, keys and damage photo protocol. Tick Done as you go. This is the room by room changeover '
     'for London, inside the M25, and Essex.',
     body))
 story.append(Paragraph(esc(data['oven']), note))
@@ -182,7 +182,7 @@ doc = SimpleDocTemplate(
     topMargin=16 * mm, bottomMargin=30 * mm,
     title=data['title'],
     author='Silvia Nedeva',
-    subject='Room-by-room Airbnb turnover cleaning checklist for short lets in London and Essex. No prices in the task list.',
+    subject='Room by room Airbnb turnover cleaning checklist for short lets in London and Essex. No prices in the task list.',
     creator='SN Cleaning Services'
 )
 doc.build(story, onFirstPage=lambda c, d: draw_footer(c, d, False), onLaterPages=lambda c, d: draw_footer(c, d, True))

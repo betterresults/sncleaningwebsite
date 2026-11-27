@@ -9,15 +9,15 @@ const PUBLISHED = '2026-11-26';
 const PUBLISHED_LABEL = '26 November 2026';
 
 const TITLE = 'Domestic Cleaning Checklist | London & Essex';
-const H1 = 'The room-by-room domestic cleaning checklist (London & Essex)';
-const META_DESCRIPTION = 'Work through a room-by-room domestic cleaning checklist. Tick each task as you clean, or download a printable PDF, then book a regular clean if you would rather hand it to us.';
+const H1 = 'The room by room domestic cleaning checklist (London & Essex)';
+const META_DESCRIPTION = 'Work through a room by room domestic cleaning checklist. Tick each task as you clean, or download a printable PDF, then book a regular clean if you would rather hand it to us.';
 
 const PATH = '/domestic-cleaning-checklist';
 const PDF_PATH = '/downloads/sn-cleaning-domestic-cleaning-checklist.pdf';
 const STORAGE_KEY = 'sn-domestic-checklist-v1';
 const CHECKLIST_ID = 'f0af6a36-c336-4ef4-a181-a5a813cf6326';
 
-const OVEN_NOTE = 'A regular domestic clean includes wiping the oven exterior and control panel. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service.';
+const OVEN_NOTE = 'A regular domestic clean includes wiping the oven exterior and control panel. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service.';
 
 function task(id, text) {
   return { id, text };
@@ -48,7 +48,7 @@ const sections = [
       task('bathroom-01', 'Clean shower / bath; remove hair and soap scum'),
       task('bathroom-02', 'Clean toilet (bowl, seat, lid, exterior, base)'),
       task('bathroom-03', 'Clean sink, taps, and overflow'),
-      task('bathroom-04', 'Wipe mirrors smear-free'),
+      task('bathroom-04', 'Wipe mirrors smear free'),
       task('bathroom-05', 'Wipe accessible surfaces, shelves, and chrome'),
       task('bathroom-06', 'Wipe door handle and light switch'),
       task('bathroom-07', 'Empty bin and replace liner'),
@@ -159,7 +159,7 @@ const faqs = [
   },
   {
     q: 'Is oven cleaning included in a regular domestic clean?',
-    a: 'A regular visit includes wiping the oven exterior and control panel. Cleaning inside the oven is an optional add-on, not a standalone oven-cleaning service. You can add it when you book, and the booking form shows the price before you confirm.'
+    a: 'A regular visit includes wiping the oven exterior and control panel. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. You can add it when you book, and the booking form shows the price before you confirm.'
   }
 ];
 

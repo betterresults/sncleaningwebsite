@@ -15,7 +15,7 @@
   <div class="ec-prose">
     <p>Cleaning is the most common reason landlords claim from a tenancy deposit. In The DPS's own figures, cleaning was the top reason for deposit claims in 2025, at 29.38% of claims, and it has been the top reason for five years running (<a href="https://www.depositprotection.com/news-insights/cleaning-main-cause-of-tenancy-deposit-deductions-for-a-fifth-year-running" rel="noopener">The DPS, June 2026</a>). TDS says that over half of all the deposit disputes it receives include claims for some element of cleaning (<a href="https://custodial.tenancydepositscheme.com/news/blog/asktds-what-is-the-difference-between-professional-and-domestic/" rel="noopener">TDS</a>).</p>
     <p>The good news is that the rules are clearer than most people think. You don't have to hire a cleaner. You do have to hand the property back as clean as it was when you moved in. This checklist is built around that test.</p>
-    <p>Work through each room with your check-in inventory beside you, tick what's done, add a note if something already looked worn or dirty at check-in, and add a dated photo where you can. You can download a printable PDF, or, if you would rather hand the clean to us, <a href="<%= book %>">get a quote for an end of tenancy clean</a>.</p>
+    <p>Work through each room with your check in inventory beside you, tick what's done, add a note if something already looked worn or dirty at check in, and add a dated photo where you can. You can download a printable PDF, or, if you would rather hand the clean to us, <a href="<%= book %>">get a quote for an end of tenancy clean</a>.</p>
     <p>We have cleaned homes across London and Essex for 12 years, and this is the list we would want in our hands on moving day.</p>
   </div>
   <div class="ec-actions">
@@ -29,25 +29,25 @@
   <h2>How it works</h2>
   <ol class="ec-steps">
     <li><strong>1.</strong> Tick each room as you clean, or download the printable PDF.</li>
-    <li><strong>2.</strong> Tick “As at check-in?” where the item already matched your inventory, and take a dated photo where you can.</li>
+    <li><strong>2.</strong> Tick “As at check in?” where the item already matched your inventory, and take a dated photo where you can.</li>
     <li><strong>3.</strong> Optionally leave your email (and phone if you want a text) so we can send a private link to your report.</li>
-    <li><strong>4.</strong> Take the list to check-out, or <a href="<%= book %>">get a quote</a> for us to do the clean.</li>
+    <li><strong>4.</strong> Take the list to check out, or <a href="<%= book %>">get a quote</a> for us to do the clean.</li>
   </ol>
 </div></section>
 
 <section class="ec-band ec-sand"><div class="ec-wrap ec-prose">
   <h2>Before you start</h2>
   <ol class="ec-ol">
-    <li>Find your check-in inventory. mydeposits' advice to renters is to leave everything clean to the same standard (<a href="https://www.mydeposits.co.uk/wp-content/uploads/2024/08/Get-your-deposit-back-Keeping-your-property-clean-updated.pdf" rel="noopener">mydeposits</a>).</li>
+    <li>Find your check in inventory. mydeposits' advice to renters is to leave everything clean to the same standard (<a href="https://www.mydeposits.co.uk/wp-content/uploads/2024/08/Get-your-deposit-back-Keeping-your-property-clean-updated.pdf" rel="noopener">mydeposits</a>).</li>
     <li>Read the cleaning clause in your tenancy agreement. A clause can ask for a professional standard, but it can't make you pay a professional cleaner (see the deposit section below).</li>
     <li>The property needs to be empty of personal belongings. Please leave the electricity on and the boiler working so there is hot water, and switch off the fridge and freezer so they can be defrosted and cleaned. (Site FAQ, Silvia, 6 Nov 2026.)</li>
-    <li>Try to attend the check-out inspection. If you can't, take your own digitally dated photos.</li>
+    <li>Try to attend the check out inspection. If you can't, take your own digitally dated photos.</li>
     <li>Most professional end of tenancy cleans take our team 3 to 6 hours, depending on the size of the property and whether it is furnished, so a DIY clean usually takes longer. (Site FAQ.) You can also use our <a href="/house-cleaning-time-calculator/">house cleaning time calculator</a> for a guide based on the size of the property, or the <a href="/end-of-tenancy-cleaning-cost-calculator/">end of tenancy cleaning cost calculator</a> for a guide price from our published list.</li>
   </ol>
 </div></section>
 
 <section class="ec-band ec-white" id="the-checklist"><div class="ec-wrap">
-  <h2>The room-by-room checklist</h2>
+  <h2>The room by room checklist</h2>
   <p class="ec-prose">Tick as you go. Your ticks and notes stay in this browser if you refresh the page. Photo upload is not stored on our servers: tick “Photo taken” when the picture is on your phone.</p>
   <div class="ec-progress" aria-live="polite">
     <div class="ec-progress-row">
@@ -76,7 +76,7 @@
             <p class="ec-task-name"><%= item.text %></p>
             <div class="ec-ticks">
               <label class="ec-tick"><input type="checkbox" data-kind="done" aria-label="Done: <%= item.text %>"> Done</label>
-              <label class="ec-tick"><input type="checkbox" data-kind="checkin" aria-label="As at check-in: <%= item.text %>"> As at check-in?</label>
+              <label class="ec-tick"><input type="checkbox" data-kind="checkin" aria-label="As at check in: <%= item.text %>"> As at check in?</label>
               <label class="ec-tick"><input type="checkbox" data-kind="photo" aria-label="Photo taken: <%= item.text %>"> Photo taken</label>
             </div>
           </div>
@@ -89,7 +89,7 @@
       <% } %>
       <div class="ec-notes">
         <label for="note-<%= room.key %>">Notes for <%= room.name %></label>
-        <textarea id="note-<%= room.key %>" data-room="<%= room.key %>" maxlength="2000" placeholder="Already worn at check-in, or anything you want on the report"></textarea>
+        <textarea id="note-<%= room.key %>" data-room="<%= room.key %>" maxlength="2000" placeholder="Already worn at check in, or anything you want on the report"></textarea>
       </div>
     </section>
   <% }); %>
@@ -131,28 +131,28 @@
   <h2>What the deposit schemes and GOV.UK say</h2>
   <h3>You can't be made to pay for a professional clean</h3>
   <p>Since the Tenant Fees Act 2019, a landlord in England can't require you to pay for a professional clean, and can't make hiring a professional cleaner a condition of the tenancy. You do have to hand the property back as clean as it was when you moved in, allowing for fair wear and tear. Source: <a href="https://www.gov.uk/government/publications/tenant-fees-act-2019-guidance" rel="noopener">GOV.UK: Tenant Fees Act 2019 guidance</a>.</p>
-  <h3>Clean is compared with check-in, not “perfect”</h3>
-  <p>The comparison is with the check-in inventory, not with a brand-new finish. mydeposits' advice to renters is to leave everything clean to the same standard it was in at the start. Source: <a href="https://www.mydeposits.co.uk/wp-content/uploads/2024/08/Get-your-deposit-back-Keeping-your-property-clean-updated.pdf" rel="noopener">mydeposits</a>.</p>
+  <h3>Clean is compared with check in, not “perfect”</h3>
+  <p>The comparison is with the check in inventory, not with a brand new finish. mydeposits' advice to renters is to leave everything clean to the same standard it was in at the start. Source: <a href="https://www.mydeposits.co.uk/wp-content/uploads/2024/08/Get-your-deposit-back-Keeping-your-property-clean-updated.pdf" rel="noopener">mydeposits</a>.</p>
   <h3>Fair wear and tear doesn't cover dirt</h3>
-  <p>Fair wear and tear is the sort of wear you would expect from ordinary living, such as light scuffs or a path worn into a carpet. Dirt, grease and limescale are not fair wear and tear, and a landlord can claim for cleaning where the property is left dirtier than it was at check-in. Source: <a href="https://www.gov.uk/tenancy-deposit-protection" rel="noopener">GOV.UK: Tenancy deposit protection</a>.</p>
+  <p>Fair wear and tear is the sort of wear you would expect from ordinary living, such as light scuffs or a path worn into a carpet. Dirt, grease and limescale are not fair wear and tear, and a landlord can claim for cleaning where the property is left dirtier than it was at check in. Source: <a href="https://www.gov.uk/tenancy-deposit-protection" rel="noopener">GOV.UK: Tenancy deposit protection</a>.</p>
   <h3>“Professional standard” is a standard, not a supplier</h3>
   <p>A clause can ask for a professional standard of cleanliness. That describes how clean the property should be. It can't make you pay a particular company, and it can't make you pay for a professional cleaner. Source: <a href="https://www.gov.uk/government/publications/tenant-fees-act-2019-guidance" rel="noopener">GOV.UK: Tenant Fees Act 2019 guidance</a>.</p>
   <h3>Written reports first, photos second</h3>
-  <p>Deposit schemes compare the written check-in and check-out reports. Photos support that record; they don't replace it. Take your own digitally dated photos, and keep them with the inventory. Source: <a href="https://custodial.tenancydepositscheme.com/news/blog/asktds-what-is-the-difference-between-professional-and-domestic/" rel="noopener">TDS</a>.</p>
+  <p>Deposit schemes compare the written check in and check out reports. Photos support that record; they don't replace it. Take your own digitally dated photos, and keep them with the inventory. Source: <a href="https://custodial.tenancydepositscheme.com/news/blog/asktds-what-is-the-difference-between-professional-and-domestic/" rel="noopener">TDS</a>.</p>
   <h3>Your deposit must be protected</h3>
-  <p>In England and Wales a landlord has to protect a tenancy deposit in a government-backed scheme. If you disagree with a cleaning deduction, that scheme offers a free dispute service. Source: <a href="https://www.gov.uk/tenancy-deposit-protection" rel="noopener">GOV.UK: Tenancy deposit protection</a>.</p>
+  <p>In England and Wales a landlord has to protect a tenancy deposit in a government backed scheme. If you disagree with a cleaning deduction, that scheme offers a free dispute service. Source: <a href="https://www.gov.uk/tenancy-deposit-protection" rel="noopener">GOV.UK: Tenancy deposit protection</a>.</p>
 </div></section>
 
 <section class="ec-band ec-white"><div class="ec-wrap ec-prose">
   <h2>If the agent flags something</h2>
   <p>If we did the clean and the agent or landlord says something we cleaned was missed, tell us within 7 days of the clean, through the customer app or WhatsApp, and we come back at no extra cost. We aim to return within 1 to 2 working days.</p>
-  <p>It helps to know <a href="/blog/end-of-tenancy-what-gets-checked/">what the agent checks at check-out</a>, and <a href="/can-a-landlord-charge-for-end-of-tenancy-cleaning/">can a landlord charge for cleaning?</a></p>
+  <p>It helps to know <a href="/blog/end-of-tenancy-what-gets-checked/">what the agent checks at check out</a>, and <a href="/can-a-landlord-charge-for-end-of-tenancy-cleaning/">can a landlord charge for cleaning?</a></p>
   <p>Carpets are vacuumed as part of every end of tenancy clean. Professional carpet cleaning is a separate service you can add if the tenancy agreement asks for it or the carpets need it. See <a href="/carpet-cleaning-services/london/">carpet cleaning in London</a> and <a href="/carpet-cleaning-services/essex/">carpet cleaning in Essex</a>.</p>
 </div></section>
 
 <section class="ec-band ec-sand"><div class="ec-wrap ec-prose">
   <h2>Find your area</h2>
-  <p>Read <a href="/end-of-tenancy-cleaning/">what's included when we do the clean</a>, or <a href="/blog/how-we-quote-a-clean/">How we work out your price</a>. For the whole city, see <a href="/end-of-tenancy-cleaning/london/">end of tenancy cleaning in London</a> and <a href="/end-of-tenancy-cleaning/essex/">our Essex move-out clean</a>.</p>
+  <p>Read <a href="/end-of-tenancy-cleaning/">what's included when we do the clean</a>, or <a href="/blog/how-we-quote-a-clean/">How we work out your price</a>. For the whole city, see <a href="/end-of-tenancy-cleaning/london/">end of tenancy cleaning in London</a> and <a href="/end-of-tenancy-cleaning/essex/">our Essex move out clean</a>.</p>
   <h3>London</h3>
   <ul class="ec-areas">
     <% checklist.londonBoroughs.forEach(function (a) { %><li><a href="<%= a[1] %>"><%= a[0] %></a></li><% }); %>

@@ -1,9 +1,9 @@
 /* End of tenancy cleaning cost calculator.
    Indicative guide only. Maths lives in estimate() — the server calls it for
    the first paint, and this script calls it again on each input or change.
-   Prices, add-on rates and Silvia's team and time guide are passed in from
+   Prices, add on rates and Silvia's team and time guide are passed in from
    data/eot-prices.js. Do not hard-code a base price, an oven price, a carpet
-   rate or an extra-bathroom rate in this file. */
+   rate or an extra bathroom rate in this file. */
 (function (root, factory) {
   var api = factory();
   if (typeof module === 'object' && module.exports) module.exports = api;

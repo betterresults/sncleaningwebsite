@@ -1,5 +1,5 @@
 // End of tenancy cleaning cost calculator (public page).
-// Copy, FAQs, the default selection and the verified deposit-scheme figures.
+// Copy, FAQs, the default selection and the verified deposit scheme figures.
 // Every price is read from data/eot-prices.js. Do not copy the price matrix
 // into this file. Estimator maths lives in
 // public/js/end-of-tenancy-cleaning-cost-calculator.js (estimate). The route
@@ -49,7 +49,7 @@ function gbp(n) {
 
 function carpetGroup() {
   const group = eot.extras.find((g) => g.group.indexOf('Carpet cleaning') === 0);
-  if (!group) throw new Error('End of tenancy price list has no carpet cleaning add-ons');
+  if (!group) throw new Error('End of tenancy price list has no carpet cleaning add ons');
   return group;
 }
 
@@ -128,11 +128,11 @@ const faqs = [
   },
   {
     q: 'Is the fridge and freezer an extra?',
-    a: 'No. The fridge and freezer are included in a standard end of tenancy clean at no extra charge. Please empty them and defrost them before we arrive. There is no separate fridge add-on.'
+    a: 'No. The fridge and freezer are included in a standard end of tenancy clean at no extra charge. Please empty them and defrost them before we arrive. There is no separate fridge add on.'
   },
   {
     q: 'Is oven cleaning a standalone service?',
-    a: 'No. You choose an oven type as part of the end of tenancy clean, or no oven if the home does not need one. It is not a standalone oven-cleaning service. A single oven is ' + gbp(singleOven.price) + ', a double oven is ' + gbp(doubleOven.price) + ', a single and convection oven is ' + gbp(convectionOven.price) + ', a range is ' + gbp(rangeOven.price) + ' and an AGA is ' + gbp(agaOven.price) + '.'
+    a: 'No. You choose an oven type as part of the end of tenancy clean, or no oven if the home does not need one. It is not a standalone oven cleaning service. A single oven is ' + gbp(singleOven.price) + ', a double oven is ' + gbp(doubleOven.price) + ', a single and convection oven is ' + gbp(convectionOven.price) + ', a range is ' + gbp(rangeOven.price) + ' and an AGA is ' + gbp(agaOven.price) + '.'
   },
   {
     q: 'Is professional carpet cleaning included?',
@@ -140,7 +140,7 @@ const faqs = [
   },
   {
     q: 'Can a landlord require a professional clean?',
-    a: 'No. GOV.UK guidance on the Tenant Fees Act 2019 says a landlord cannot require a professional clean by default. The property has to be returned to the same standard of cleanliness as at check-in, fair wear and tear excepted. Cleaning is still the issue that comes up most often. The DPS says 29.38% of 2025 deposit claims involved cleaning, the top cause for five years running. TDS, in its 2024/25 statistical briefing, says cleaning featured in 54% of its insured dispute cases. Those figures are from separate schemes and are not one combined number.'
+    a: 'No. GOV.UK guidance on the Tenant Fees Act 2019 says a landlord cannot require a professional clean by default. The property has to be returned to the same standard of cleanliness as at check in, fair wear and tear excepted. Cleaning is still the issue that comes up most often. The DPS says 29.38% of 2025 deposit claims involved cleaning, the top cause for five years running. TDS, in its 2024/25 statistical briefing, says cleaning featured in 54% of its insured dispute cases. Those figures are from separate schemes and are not one combined number.'
   }
 ];
 
@@ -213,7 +213,7 @@ const deposit = {
   law: {
     kicker: 'GOV.UK',
     title: 'A landlord cannot require a professional clean by default',
-    text: 'Under the Tenant Fees Act 2019 guidance, a landlord cannot require a professional clean by default. The property has to be returned to the same standard of cleanliness as at check-in, fair wear and tear excepted.',
+    text: 'Under the Tenant Fees Act 2019 guidance, a landlord cannot require a professional clean by default. The property has to be returned to the same standard of cleanliness as at check in, fair wear and tear excepted.',
     sourceName: 'GOV.UK Tenant Fees Act 2019 guidance',
     url: 'https://www.gov.uk/government/publications/tenant-fees-act-2019-guidance'
   }
