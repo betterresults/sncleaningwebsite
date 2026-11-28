@@ -1498,6 +1498,8 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 
 .footer-legal { margin-left: 12px; }
 .footer-legal a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.footer-cookie-btn { border: 0; background: none; padding: 0; margin: 0; color: inherit; font: inherit; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; min-width: 24px; min-height: 24px; }
+.footer-cookie-btn:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
 @media (max-width: 600px) { .footer-legal { display: block; margin: 6px 0 0; } }
 
 /* Cookie notice: a bar along the bottom. Accept and Reject behave as before. */

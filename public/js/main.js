@@ -5,18 +5,43 @@ document.addEventListener('DOMContentLoaded', () => {
   if (note && window.self === window.top) {
     let choice = null;
     try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
-    if (choice !== 'accepted' && choice !== 'rejected') {
-      note.hidden = false;
-      const pick = (value) => {
-        note.hidden = true;
-        try { localStorage.setItem('sn-consent', value); } catch (_) {}
-        if (value === 'accepted') {
-          if (window.snLoadTracker) window.snLoadTracker();
-          if (window.snLoadAnalytics) window.snLoadAnalytics();
-        }
-      };
-      document.getElementById('cookie-accept').addEventListener('click', () => pick('accepted'));
-      document.getElementById('cookie-reject').addEventListener('click', () => pick('rejected'));
+    const clearTrackingCookies = () => {
+      const names = document.cookie.split(';').map((part) => part.split('=')[0].trim()).filter(Boolean);
+      const fixed = ['_gcl_au', '_fbp', '_clck', '_clsk', '_uetsid', '_uetvid'];
+      const kill = names.filter((name) => name === '_ga' || name.indexOf('_ga_') === 0 || fixed.indexOf(name) !== -1);
+      const hosts = [location.hostname, '.sncleaningservices.co.uk'];
+      kill.forEach((name) => {
+        document.cookie = name + '=; Max-Age=0; path=/';
+        hosts.forEach((host) => {
+          document.cookie = name + '=; Max-Age=0; path=/; domain=' + host;
+        });
+      });
+    };
+    const pick = (value) => {
+      const prev = choice;
+      note.hidden = true;
+      try { localStorage.setItem('sn-consent', value); } catch (_) {}
+      choice = value;
+      if (value === 'accepted') {
+        if (window.snLoadTracker) window.snLoadTracker();
+        if (window.snLoadAnalytics) window.snLoadAnalytics();
+      } else if (value === 'rejected' && prev === 'accepted') {
+        clearTrackingCookies();
+        location.reload();
+      }
+    };
+    if (choice !== 'accepted' && choice !== 'rejected') note.hidden = false;
+    const accept = document.getElementById('cookie-accept');
+    const reject = document.getElementById('cookie-reject');
+    if (accept) accept.addEventListener('click', () => pick('accepted'));
+    if (reject) reject.addEventListener('click', () => pick('rejected'));
+    const settings = document.getElementById('cookie-settings');
+    if (settings) {
+      settings.addEventListener('click', () => {
+        note.hidden = false;
+        const first = note.querySelector('button');
+        if (first) first.focus();
+      });
     }
   }
 
