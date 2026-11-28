@@ -302,6 +302,21 @@
 </section>
 <% } %>
 
+<% if (typeof caseStudies !== 'undefined' && caseStudies.length) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <h2 class="h-title">Recent jobs</h2>
+    </div>
+    <ul class="s-jobs">
+      <% caseStudies.forEach(function (c) { %>
+        <li><a href="/case-studies/<%= c.slug %>/"><%= c.title %></a></li>
+      <% }); %>
+    </ul>
+  </div>
+</section>
+<% } %>
+
 <!-- ============ OTHER SERVICES ============ -->
 <% if (typeof relatedServices !== 'undefined' && relatedServices.length) { %>
 <section class="h-section h-white">

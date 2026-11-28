@@ -484,6 +484,9 @@
    ========================================================================== */
 .h-ico--dark { background: rgba(31, 107, 102, .12); color: var(--h-primary); }
 
+.s-jobs { margin: 0; padding-left: 1.2em; list-style: disc; display: grid; gap: 10px; }
+.s-jobs a { text-decoration: underline; }
+
 .a-glance { display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 10px 24px; margin: 0; }
 .a-glance dt { font-weight: 600; color: var(--h-ink); }
 .a-glance dd { margin: 0; }

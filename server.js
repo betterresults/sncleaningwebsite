@@ -1551,9 +1551,11 @@ app.get('/:slug', async (req, res, next) => {
 
   const svcJobVideos = jobVideoLib.section(jobVideoLib.forService(await content.getJobVideos(), page.slug), page.slug, service.title);
   const pickedReviews = reviewsForService(testimonials, page.slug);
+  const caseStudies = editorContent.editorPosts('case').filter((c) => !c.noindex && c.service && service.title && c.service.toLowerCase() === service.title.toLowerCase());
   const share = serviceOg(page.slug, service.title);
   res.render(v2 ? 'service-v2' : 'service-detail', {
     jobVideos: svcJobVideos,
+    caseStudies,
     designV2: v2,
     heroPreload: v2 ? ((page.images && page.images.length) ? page.images[0] : serviceImage(page.slug)) : null,
     mapLink,
