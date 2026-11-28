@@ -1,22 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Cookie banner: Accept / Reject, remembered in this browser ('sn-consent').
   // Optional tracking only starts after Accept. Shared with the /go/ quote pages.
+  const clearTrackingCookies = () => {
+    const names = document.cookie.split(';').map((part) => part.split('=')[0].trim()).filter(Boolean);
+    const fixed = ['_ga', '_ga_K9GE74MBMB', '__obref', '_gcl_au', '_fbp', '_clck', '_clsk', '_uetsid', '_uetvid'];
+    const kill = new Set(fixed);
+    names.forEach((name) => {
+      if (name === '_ga' || name.indexOf('_ga_') === 0 || name === '__obref' || fixed.indexOf(name) !== -1) kill.add(name);
+    });
+    const host = location.hostname.replace(/^www\./, '');
+    const domains = ['', location.hostname, '.' + host, '.sncleaningservices.co.uk'];
+    kill.forEach((name) => {
+      domains.forEach((domain) => {
+        const dom = domain ? '; domain=' + domain : '';
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/' + dom;
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/; Secure' + dom;
+      });
+    });
+  };
+  let choice = null;
+  try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
+  if (choice === 'rejected') clearTrackingCookies();
   const note = document.getElementById('cookie-note');
   if (note && window.self === window.top) {
-    let choice = null;
-    try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
-    const clearTrackingCookies = () => {
-      const names = document.cookie.split(';').map((part) => part.split('=')[0].trim()).filter(Boolean);
-      const fixed = ['_gcl_au', '_fbp', '_clck', '_clsk', '_uetsid', '_uetvid'];
-      const kill = names.filter((name) => name === '_ga' || name.indexOf('_ga_') === 0 || fixed.indexOf(name) !== -1);
-      const hosts = [location.hostname, '.sncleaningservices.co.uk'];
-      kill.forEach((name) => {
-        document.cookie = name + '=; Max-Age=0; path=/';
-        hosts.forEach((host) => {
-          document.cookie = name + '=; Max-Age=0; path=/; domain=' + host;
-        });
-      });
-    };
     const pick = (value) => {
       const prev = choice;
       note.hidden = true;
