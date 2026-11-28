@@ -302,7 +302,11 @@ function reviewsForService(list, slug) {
     .slice(0, 3);
 }
 function plainContent(value) {
-  if (typeof value === 'string') return plainPlaceName(value);
+  if (typeof value === 'string') {
+    return plainPlaceName(value)
+      .replace(/clean the oven as part of/gi, 'add an oven clean to')
+      .replace(/cleans the oven as part of/gi, 'adds an oven clean to');
+  }
   if (Array.isArray(value)) return value.map(plainContent);
   if (value && typeof value === 'object') {
     const next = {};
@@ -397,7 +401,11 @@ app.get('/our-services', async (req, res) => {
     title: 'Cleaning Services We Offer',
     metaDescription:
       'Domestic, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery and mattress cleaning across London & Essex.',
-    services: services.filter(isDomestic).map((s) => ({ ...s, hasDetailPage: detailSlugs.has(s.slug) })),
+    services: services.filter(isDomestic).map((s) => ({
+      ...s,
+      hasDetailPage: detailSlugs.has(s.slug),
+      features: (s.features || []).map((f) => (/inside oven/i.test(f) ? 'Inside appliances when requested' : f))
+    })),
     checklist,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -461,7 +469,7 @@ function renderPost(req, res, post) {
 // Templates the website editor uses to preview a new post or case study before
 // it is published. Not linked anywhere, hidden from Google and the sitemap.
 const SAMPLE = {
-  slug: '_template', title: 'Post title', excerpt: 'Short summary', cover_image: '/images/hero-living-room.jpg',
+  slug: '_template', title: 'Sample post for the editor preview', excerpt: 'Short summary', cover_image: '/images/hero-living-room.jpg',
   published_at: new Date().toISOString(), content: '<p>Text</p>', editor: true, noindex: true, service: 'Service', area: 'Area'
 };
 app.get('/blog/_template', (req, res) => renderPost(req, res, SAMPLE));
@@ -948,7 +956,7 @@ app.get('/contact', (req, res) => {
 
 app.get('/contact/success', (req, res) => {
   res.render('thank-you', {
-    title: 'Thank You',
+    title: 'Thank you for getting in touch',
     noindex: true,
     structuredData: []
   });
@@ -1840,7 +1848,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
 
 // ---------- 404 ----------
 app.use((req, res) => {
-  res.status(404).render('404', { title: 'Page Not Found', noindex: true, omitCanonical: true, structuredData: [] });
+  res.status(404).render('404', { title: 'Sorry, that page was not found', noindex: true, omitCanonical: true, structuredData: [] });
 });
 
 // Only start a listening server when run directly (local dev / traditional Node hosting).

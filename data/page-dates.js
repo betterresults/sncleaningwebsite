@@ -103,6 +103,12 @@ const DATES = {
   '/contact': '2026-11-28'
 };
 
+// A why us page that stores its own date uses that, so the guide article and
+// the visible date stay on the same day.
+for (const page of require('./why-us').all()) {
+  if (page.date_modified) DATES[page.url] = isoDay(page.date_modified);
+}
+
 function staticDate(url) {
   const key = !url || url === '/' ? '/' : String(url).replace(/\/$/, '');
   return DATES[key] || null;
