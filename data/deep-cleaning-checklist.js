@@ -11,7 +11,7 @@ const PUBLISHED_LABEL = '27 November 2026';
 
 const TITLE = 'Deep Cleaning Checklist';
 const H1 = 'The room by room deep cleaning checklist';
-const META_DESCRIPTION = 'Tick our room by room deep and spring cleaning checklist for London and Essex, or download the printable PDF.';
+const META_DESCRIPTION = 'Tick our room by room deep and spring cleaning checklist for London and Essex, or download the printable PDF to work through at your own pace.';
 
 const PATH = '/deep-cleaning-checklist';
 const PDF_PATH = '/downloads/sn-cleaning-deep-cleaning-checklist.pdf';

@@ -1,7 +1,14 @@
 <section class="section not-found">
   <div class="container">
-    <h1>404</h1>
-    <p>Sorry, we couldn't find that page.</p>
+    <h1>Page not found</h1>
+    <p>Sorry, we couldn't find that page. It may have moved. Try one of these, or call us on <a href="tel:02038355033">020 3835 5033</a>.</p>
+    <ul class="not-found-links">
+      <% (navServices || []).forEach(function (s) { %><li><a href="<%= s.hasDetailPage ? '/' + s.slug + '/' : '/our-services/#' + s.slug %>"><%= s.title %></a></li><% }); %>
+      <li><a href="/prices/">Prices</a></li>
+      <li><a href="/areas/">Areas we cover</a></li>
+      <li><a href="/reviews/">Reviews</a></li>
+      <li><a href="/contact/">Contact us</a></li>
+    </ul>
     <a href="/" class="btn btn-primary">Back to Home</a>
   </div>
 </section>

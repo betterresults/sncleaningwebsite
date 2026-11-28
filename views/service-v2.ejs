@@ -232,7 +232,7 @@
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">
-          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <div class="h-stars" role="img" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
           <blockquote>“<%= t.quote %>”</blockquote>
           <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
         </figure>
@@ -298,6 +298,21 @@
       <% }); %>
       <%- include('partials/faq-teaser', { teaser }) %>
     </div>
+  </div>
+</section>
+<% } %>
+
+<% if (typeof caseStudies !== 'undefined' && caseStudies.length) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <h2 class="h-title">Recent jobs</h2>
+    </div>
+    <ul class="s-jobs">
+      <% caseStudies.forEach(function (c) { %>
+        <li><a href="/case-studies/<%= c.slug %>/"><%= c.title %></a></li>
+      <% }); %>
+    </ul>
   </div>
 </section>
 <% } %>

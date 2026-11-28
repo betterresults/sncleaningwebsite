@@ -211,7 +211,7 @@ module.exports = {
       {
         h: 'What is a deep clean?',
         p: [
-          'A deep clean is a top to bottom clean of the areas a regular clean does not usually cover. It goes after the grime that builds up over time: inside the oven, around grout and tiles, on skirting boards and door frames, and behind and under furniture.',
+          'A deep clean is a top to bottom clean of the areas a regular clean does not usually cover. It goes after the grime that builds up over time: around grout and tiles, on skirting boards and door frames, and behind and under furniture. Oven cleaning is an optional add on, not part of the from price.',
           `We carry out deep cleaning ${LONDON_ESSEX} with our own trained, insured and DBS checked team, using professional products for every surface.`
         ]
       },

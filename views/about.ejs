@@ -56,6 +56,46 @@
   </div>
 </section>
 
+<!-- ============ AT A GLANCE ============ -->
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">The facts</p>
+      <h2 class="h-title">SN Cleaning Services at a glance</h2>
+    </div>
+    <dl class="a-glance">
+      <dt>Based in</dt>
+      <dd><%= glance.address %></dd>
+      <dt>Covers</dt>
+      <dd><%= glance.covers %></dd>
+      <dt>In business</dt>
+      <dd><%= glance.years %></dd>
+      <dt>Team</dt>
+      <dd><%= glance.team %></dd>
+      <dt>Services and from prices</dt>
+      <dd>
+        <ul>
+          <% glance.services.forEach(function (s) { %>
+            <li><a href="<%= s.url %>"><%= s.title %></a><% if (s.price) { %>, <%= s.price %><% } %><% if (s.pricesUrl) { %> (<a href="<%= s.pricesUrl %>">prices</a>)<% } %></li>
+          <% }); %>
+        </ul>
+        <p><a href="/prices/">Prices</a></p>
+      </dd>
+      <dt>Support</dt>
+      <dd>
+        <p>WhatsApp and website chat: <%= glance.chat.when %>.</p>
+        <p><%= glance.phone.when %>. <a href="tel:<%= site.phone.replace(/\s+/g, '') %>"><%= site.phone %></a>. <a href="mailto:<%= site.email %>"><%= site.email %></a>.</p>
+      </dd>
+      <dt>Re clean guarantee</dt>
+      <dd><%= glance.reclean %></dd>
+      <dt>Google rating</dt>
+      <dd><a href="<%= glance.ratingUrl %>" rel="noopener"><%= Number(glance.rating.ratingValue).toFixed(1) %> (<%= glance.rating.reviewCount %> reviews)</a></dd>
+      <dt>VAT</dt>
+      <dd><%= glance.vat %></dd>
+    </dl>
+  </div>
+</section>
+
 <!-- ============ WHAT MAKES US DIFFERENT (bento) ============ -->
 <section class="h-section h-white">
   <div class="h-wrap">
@@ -122,7 +162,7 @@
 <section class="h-section h-white">
   <div class="h-wrap">
     <figure class="a-quote h-reveal">
-      <div class="h-stars" aria-label="5 out of 5 stars">★★★★★</div>
+      <div class="h-stars" role="img" aria-label="5 out of 5 stars">★★★★★</div>
       <blockquote>“<%= featured.quote %>”</blockquote>
       <figcaption><strong><%= featured.name %></strong> · <%= featured.location %></figcaption>
       <% if (site.googleBusinessUrl) { %>

@@ -13,7 +13,7 @@ const PUBLISHED_LABEL = '27 November 2026';
 // under. Rendered <title> is the 54 character string with no price symbol.
 const TITLE = 'Carpet Cleaning Cost Calculator';
 const H1 = 'What will a carpet, sofa or mattress clean cost?';
-const META_DESCRIPTION = 'Estimate your carpet, sofa and mattress cleaning cost in London and Essex, then confirm it on the booking form.';
+const META_DESCRIPTION = 'Estimate your carpet, sofa and mattress cleaning cost in London and Essex with our free calculator, then confirm the exact price on the booking form.';
 
 const PATH = '/carpet-cleaning-cost-calculator';
 const PDF_PATH = '/downloads/sn-cleaning-carpet-cleaning-checklist.pdf';
@@ -281,8 +281,8 @@ const RENDERED_TITLE = TITLE + ' | SN Cleaning Services';
 if (RENDERED_TITLE.length !== 54) {
   throw new Error('Calculator title renders at ' + RENDERED_TITLE.length + ' characters; it must be 54');
 }
-if (META_DESCRIPTION.length !== 111) {
-  throw new Error('Meta description is ' + META_DESCRIPTION.length + ' characters; it must be 111');
+if (META_DESCRIPTION.length !== 149) {
+  throw new Error('Meta description is ' + META_DESCRIPTION.length + ' characters; it must be 149');
 }
 if (TITLE !== 'Carpet Cleaning Cost Calculator') throw new Error('Title changed');
 if (H1 !== 'What will a carpet, sofa or mattress clean cost?') throw new Error('H1 changed');

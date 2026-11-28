@@ -1,22 +1,53 @@
 document.addEventListener('DOMContentLoaded', () => {
   // Cookie banner: Accept / Reject, remembered in this browser ('sn-consent').
   // Optional tracking only starts after Accept. Shared with the /go/ quote pages.
+  const clearTrackingCookies = () => {
+    const names = document.cookie.split(';').map((part) => part.split('=')[0].trim()).filter(Boolean);
+    const fixed = ['_ga', '_ga_K9GE74MBMB', '__obref', '_gcl_au', '_fbp', '_clck', '_clsk', '_uetsid', '_uetvid'];
+    const kill = new Set(fixed);
+    names.forEach((name) => {
+      if (name === '_ga' || name.indexOf('_ga_') === 0 || name === '__obref' || fixed.indexOf(name) !== -1) kill.add(name);
+    });
+    const host = location.hostname.replace(/^www\./, '');
+    const domains = ['', location.hostname, '.' + host, '.sncleaningservices.co.uk'];
+    kill.forEach((name) => {
+      domains.forEach((domain) => {
+        const dom = domain ? '; domain=' + domain : '';
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/' + dom;
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Max-Age=0; path=/; Secure' + dom;
+      });
+    });
+  };
+  let choice = null;
+  try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
+  if (choice === 'rejected') clearTrackingCookies();
   const note = document.getElementById('cookie-note');
   if (note && window.self === window.top) {
-    let choice = null;
-    try { choice = localStorage.getItem('sn-consent'); } catch (_) {}
-    if (choice !== 'accepted' && choice !== 'rejected') {
-      note.hidden = false;
-      const pick = (value) => {
-        note.hidden = true;
-        try { localStorage.setItem('sn-consent', value); } catch (_) {}
-        if (value === 'accepted') {
-          if (window.snLoadTracker) window.snLoadTracker();
-          if (window.snLoadAnalytics) window.snLoadAnalytics();
-        }
-      };
-      document.getElementById('cookie-accept').addEventListener('click', () => pick('accepted'));
-      document.getElementById('cookie-reject').addEventListener('click', () => pick('rejected'));
+    const pick = (value) => {
+      const prev = choice;
+      note.hidden = true;
+      try { localStorage.setItem('sn-consent', value); } catch (_) {}
+      choice = value;
+      if (value === 'accepted') {
+        if (window.snLoadTracker) window.snLoadTracker();
+        if (window.snLoadAnalytics) window.snLoadAnalytics();
+      } else if (value === 'rejected' && prev === 'accepted') {
+        clearTrackingCookies();
+        location.reload();
+      }
+    };
+    if (choice !== 'accepted' && choice !== 'rejected') note.hidden = false;
+    const accept = document.getElementById('cookie-accept');
+    const reject = document.getElementById('cookie-reject');
+    if (accept) accept.addEventListener('click', () => pick('accepted'));
+    if (reject) reject.addEventListener('click', () => pick('rejected'));
+    const settings = document.getElementById('cookie-settings');
+    if (settings) {
+      settings.addEventListener('click', () => {
+        note.hidden = false;
+        const first = note.querySelector('button');
+        if (first) first.focus();
+      });
     }
   }
 

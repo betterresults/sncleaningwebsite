@@ -484,6 +484,16 @@
    ========================================================================== */
 .h-ico--dark { background: rgba(31, 107, 102, .12); color: var(--h-primary); }
 
+.s-jobs { margin: 0; padding-left: 1.2em; list-style: disc; display: grid; gap: 10px; }
+.s-jobs a { text-decoration: underline; }
+
+.a-glance { display: grid; grid-template-columns: minmax(140px, 220px) 1fr; gap: 10px 24px; margin: 0; }
+.a-glance dt { font-weight: 600; color: var(--h-ink); }
+.a-glance dd { margin: 0; }
+.a-glance ul { margin: 0; padding-left: 1.1em; list-style: disc; }
+.a-glance a { text-decoration: underline; }
+@media (max-width: 700px) { .a-glance { grid-template-columns: 1fr; gap: 4px; } .a-glance dd { margin-bottom: 12px; } }
+
 .a-hero { background: var(--h-sand); padding: clamp(40px, 6vw, 88px) 0 clamp(48px, 6vw, 80px); overflow: hidden; }
 .a-hero-inner { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(32px, 5vw, 80px); align-items: start; }
 .a-display {

@@ -20,41 +20,48 @@
   <!-- Favicons -->
   <link rel="icon" href="/favicon.ico" sizes="any" />
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png?v=<%= assetVersion %>" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/images/favicon/icon-192.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png?v=<%= assetVersion %>" />
   <link rel="apple-touch-icon" href="/images/favicon/apple-touch-icon.png?v=<%= assetVersion %>" />
   <link rel="manifest" href="/site.webmanifest" />
 
   <!-- Open Graph / Twitter -->
   <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
-  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.'; %>
+  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', domestic cleaning in London and Essex.'; %>
+  <% const ogAlt = (typeof ogImageAlt !== 'undefined' && ogImageAlt) ? ogImageAlt : 'SN Cleaning Services, domestic cleaning in London and Essex'; %>
   <meta property="og:type" content="<%= (typeof ogType !== 'undefined' && ogType) ? ogType : (typeof post !== 'undefined' ? 'article' : 'website') %>" />
   <meta property="og:site_name" content="<%= site.name %>" />
+  <meta property="og:locale" content="en_GB" />
   <meta property="og:title" content="<%= ogTitle %>" />
   <meta property="og:description" content="<%= ogDesc %>" />
   <% if (showCanonical) { %><meta property="og:url" content="<%= canonicalUrl %>" /><% } %>
   <% if (typeof ogImage !== 'undefined' && ogImage) { %>
     <meta property="og:image" content="<%= ogImage %>" />
+    <% if (/\/images\/og-image\.jpg$/.test(ogImage) || /\/images\/og\//.test(ogImage)) { %>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <% } %>
+    <meta property="og:image:alt" content="<%= ogAlt %>" />
   <% } %>
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<%= ogTitle %>" />
   <meta name="twitter:description" content="<%= ogDesc %>" />
   <% if (typeof ogImage !== 'undefined' && ogImage) { %>
     <meta name="twitter:image" content="<%= ogImage %>" />
+    <meta name="twitter:image:alt" content="<%= ogAlt %>" />
   <% } %>
 
   <!-- Booking forms (Dilvon, on our app. subdomain) and their data: connect early so forms open fast -->
   <link rel="preconnect" href="https://app.sncleaningservices.co.uk" />
-  <link rel="preconnect" href="https://app.dilvon.com" />
-  <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
-  <!-- Instant page changes: booking forms (app. subdomain) and the contact page are
-       prepared in the background as soon as a page linking to them loads; every
-       other internal page is prepared on hover/touch. -->
+  <!-- Instant page changes: the booking form is prefetched straight away. It is
+       prerendered, and so is the contact page, only after cookies are accepted,
+       so those pages do not run their tags before the visitor chooses. Other
+       pages on this site are prepared on hover or touch. -->
   <%# Booking forms and pages are prepared in the background, but only after this
       page has fully loaded, so it never slows down the first view. %>
-  <script>addEventListener('load',function(){setTimeout(function(){if(!HTMLScriptElement.supports||!HTMLScriptElement.supports('speculationrules'))return;var s=document.createElement('script');s.type='speculationrules';s.textContent=JSON.stringify({     "prefetch": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }     ],     "prerender": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },       { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },       { "tag": "site", "where": { "and": [           { "href_matches": "/*" },           { "not": { "href_matches": "/book{/*}?" } },           { "not": { "href_matches": "/contact{/}?" } },           { "not": { "href_matches": "/contact/success{/*}?" } },           { "not": { "selector_matches": "[target=_blank], [download]" } }         ] }, "eagerness": "moderate" }     ]   });document.head.appendChild(s)},300)})</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+  <script>addEventListener('load',function(){setTimeout(function(){if(!HTMLScriptElement.supports||!HTMLScriptElement.supports('speculationrules'))return;var ok=false;try{ok=localStorage.getItem('sn-consent')==='accepted'}catch(e){}var prerender=[{tag:'site',where:{and:[{href_matches:'/*'},{not:{href_matches:'/book{/*}?'}},{not:{href_matches:'/contact{/}?'}},{not:{href_matches:'/contact/success{/*}?'}},{not:{selector_matches:'[target=_blank], [download]'}}]},eagerness:'moderate'}];if(ok){prerender.unshift({tag:'contact',where:{href_matches:'/contact{/}?'},eagerness:'eager'});prerender.unshift({tag:'booking',where:{href_matches:'https://app.sncleaningservices.co.uk/*'},eagerness:'immediate'})}var s=document.createElement('script');s.type='speculationrules';s.textContent=JSON.stringify({prefetch:[{tag:'booking',where:{href_matches:'https://app.sncleaningservices.co.uk/*'},eagerness:'immediate'}],prerender:prerender});document.head.appendChild(s)},300)})</script>
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin-600-normal.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-latin-700-normal.woff2">
   <% if (typeof heroPreload !== 'undefined' && heroPreload) { const lcp = responsiveWebp(heroPreload); %>
     <link rel="preload" as="image" href="<%= lcp.avif || lcp.href %>"<% if (lcp.avif) { %> type="image/avif"<% } %><% if ((lcp.avifSrcset || lcp.srcset)) { %> imagesrcset="<%= lcp.avifSrcset || lcp.srcset %>" imagesizes="100vw"<% } %> fetchpriority="high">
   <% } %>
@@ -150,12 +157,19 @@
 <body class="<%= (isFunnel || isHomePage || hideQuote || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %><%= (typeof isHome !== 'undefined' && isHome) ? ' home' : '' %><%= (typeof bodyClass !== 'undefined' && bodyClass) ? ' ' + bodyClass : '' %>">
   <a class="skip-link" href="#content">Skip to content</a>
   <% if (!isFunnel) { %>
-  <div class="announce"><p>12 years in business · London &amp; Essex · Our own insured, DBS checked team</p></div>
+  <div class="announce" role="region" aria-label="About SN Cleaning Services"><p>12 years in business · London &amp; Essex · Our own insured, DBS checked team</p></div>
   <%- include('../partials/header') %>
   <% } %>
 
   <main id="content">
+    <% var hasCrumbs = typeof body === 'string' && body.indexOf('aria-label="Breadcrumb"') !== -1; %>
+    <% if (!isFunnel && currentPath !== '/' && !hasCrumbs && typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 1) { %>
+      <%- include('../partials/breadcrumbs') %>
+    <% } %>
     <%- body %>
+    <% if (typeof webPageDateModified !== 'undefined' && webPageDateModified && !(typeof hideUpdated !== 'undefined' && hideUpdated)) { const d = new Date(webPageDateModified); if (!isNaN(d)) { %>
+    <p class="page-updated">Last updated: <time datetime="<%= d.toISOString().slice(0, 10) %>"><%= d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' }) %></time></p>
+    <% } } %>
   </main>
 
   <% if (!isFunnel) { %><%- include('../partials/footer') %><% } %>
@@ -174,7 +188,7 @@
   <% } %>
 
   <% if (site.whatsappUrl && !isFunnel) { %>
-  <a href="<%= site.whatsappUrl %>" class="wa-float" target="_blank" rel="noopener" aria-label="Message SN Cleaning Services on WhatsApp">
+  <a href="<%= site.whatsappUrl %>" class="wa-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp with SN Cleaning Services">
     <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3Zm0 23.7c-2 0-4-.5-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7Zm5.9-8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.1l-1 1.2c-.2.2-.4.3-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5.9-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6a1.2 1.2 0 0 0-.9.4 3.7 3.7 0 0 0-1.1 2.7c0 1.6 1.2 3.1 1.3 3.3.2.2 2.3 3.5 5.5 4.9 2 .9 2.8.9 3.8.8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5l-.6-.5Z"/></svg><span class="wa-float-text">Chat on WhatsApp</span>
   </a>
   <% } %>

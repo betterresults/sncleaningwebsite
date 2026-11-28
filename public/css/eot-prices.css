@@ -1,5 +1,5 @@
 /* End of tenancy prices page (views/eot-prices.ejs). Scoped under .ep, same palette as the rest of the new design. */
-.ep{--ink:#14302c;--text:#33423f;--muted:#55635f;--deep:#1d3f3b;--sage:#b6d3b0;--sage-soft:#dfe9dc;--sand:#f4f1eb;--line:#e2ddd3;--primary:#1f6b66;--primary-dark:#17524e;--serif:'Fraunces',Georgia,serif;--r:22px;color:var(--text)}
+.ep{--ink:#14302c;--text:#33423f;--muted:#3a4c48;--deep:#1d3f3b;--sage:#b6d3b0;--sage-soft:#dfe9dc;--sand:#f4f1eb;--line:#e2ddd3;--primary:#1f6b66;--primary-dark:#17524e;--serif:'Fraunces',Georgia,serif;--r:22px;color:var(--text)}
 .ep-wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 .ep h1,.ep h2{font-family:var(--serif);font-weight:500;color:var(--ink);line-height:1.15;margin:0 0 14px}
 .ep h1{font-size:clamp(2.1rem,5vw,3.4rem)}
@@ -7,6 +7,7 @@
 .ep h3{color:var(--ink);font-size:1.06rem;line-height:1.35;margin:0 0 8px;font-weight:600}
 .ep p{line-height:1.7;margin:0 0 12px}
 .ep a:not(.h-btn){color:var(--primary-dark)}
+.ep a:not(.h-btn):not(.ep-card-link){text-decoration:underline;text-underline-offset:.15em}
 .ep-hero{background:var(--sand);padding:clamp(40px,6vw,88px) 0 clamp(40px,5vw,64px)}
 .ep-eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
 .ep-answer{font-size:clamp(1.08rem,1.6vw,1.28rem);max-width:46em;color:var(--ink)}
@@ -21,6 +22,10 @@
 .ep-sand{background:var(--sand)}
 .ep-deep{background:var(--deep);color:#e6efe8}
 .ep-deep h2{color:#fff}
+.ep-deep p,
+.ep-deep li,
+.ep-deep .ep-small{color:#e6efe8}
+.ep-deep a:not(.h-btn){color:#fff}
 .ep-intro{max-width:48em}
 .ep-sub{margin-top:28px!important;font-family:var(--serif);font-weight:500;font-size:1.3rem!important}
 .ep-center{text-align:center}
@@ -36,6 +41,7 @@
 .ep-qa p{margin:0}
 .ep-tables,.ep-extras{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px;margin-top:18px}
 .ep-table-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;overflow-x:auto}
+.ep-table-card:focus-visible{outline:3px solid var(--primary);outline-offset:3px}
 .ep-white .ep-table-card{background:var(--sand)}
 .ep-wide{margin-top:18px}
 .ep table{width:100%;border-collapse:collapse;font-size:.95rem}
@@ -61,6 +67,7 @@
 .ep-pay{margin-top:20px}
 .ep .h-faq{margin-top:12px}
 .ep .author-box{margin-top:32px}
+.ep .author-box-role,.ep .author-box-name a{color:var(--primary-dark)}
 
 /* Calculator: every option the same size, each row fills the full width */
 .ep-calc{margin-top:28px;display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:20px;align-items:start}

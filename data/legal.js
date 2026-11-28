@@ -79,7 +79,7 @@ module.exports = {
 
   'cookies-policy': {
     title: 'Cookie Policy for Our Website',
-    metaDescription: 'Which cookies and similar technology the SN Cleaning Services website uses, and how to control them.',
+    metaDescription: 'Which cookies and similar technology the SN Cleaning Services website uses, what each is for, and how to accept, refuse or change your choice at any time.',
     updated: UPDATED,
     content: `
 <p>Cookies are small files a website saves in your browser. This page explains what our website uses and why.</p>

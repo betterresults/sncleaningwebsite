@@ -31,7 +31,7 @@ const COPY = {
   },
   'end-of-tenancy-cleaning': {
     h1: 'End of tenancy cleaning, <em>ready for inspection</em>',
-    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against, inside the oven, limescale, skirting boards and all, so you can hand back the keys with confidence.',
+    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against, kitchens and bathrooms, limescale, skirting boards and all, so you can hand back the keys with confidence.',
     tilesEyebrow: 'Who we clean for',
     tilesTitle: 'Moving out, moving in, or between tenants',
     tilesIntro: 'Agents check the same things every time: the oven, limescale in the bathroom, skirting boards, marks on walls and doors. We pay extra attention to all of them, and we work to your moving day.',
@@ -75,7 +75,7 @@ const COPY = {
   },
   'deep-house-cleaning': {
     h1: 'Deep cleaning that gets <em>underneath</em>',
-    lead: 'A top to bottom clean of everything a regular clean doesn’t reach: inside the oven, grout and tiles, skirting boards and behind furniture. Done by our own trained team with professional products.',
+    lead: 'A top to bottom clean of everything a regular clean doesn’t reach: grout and tiles, skirting boards and behind furniture. Oven cleaning is an optional add on, not part of the from price. Done by our own trained team with professional products.',
     tilesEyebrow: 'When to book',
     tilesTitle: 'A proper reset for your home',
     tilesIntro: 'You can book a deep clean for the whole home or just the rooms that need it most. Kitchens and bathrooms are the most popular.',

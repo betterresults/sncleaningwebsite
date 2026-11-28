@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 // Page edits, SEO and colours saved in the website editor (/admin).
 const editorContent = require('./lib/editor-content');
+const pageDates = require('./data/page-dates');
 app.use(editorContent.middleware);
 
 // Hardcoded fallback used only if site_settings has no row yet or Supabase is
@@ -152,6 +153,25 @@ app.locals.bookHref = (service) => {
 // LocalBusiness schema on every page), and sensible defaults for breadcrumbs,
 // social-share image and structured data that routes can override below.
 app.use(async (req, res, next) => {
+  const render = res.render.bind(res);
+  res.render = function (view, options, callback) {
+    let locals = options;
+    let cb = callback;
+    if (typeof options === 'function') {
+      cb = options;
+      locals = {};
+    }
+    locals = Object.assign({}, locals);
+    let date = locals.webPageDateModified || res.locals.webPageDateModified || pageDates.staticDate(req.path);
+    const meta = editorContent.pageMeta(req.path);
+    if (meta && meta.updatedAt) date = pageDates.laterDay(date, meta.updatedAt);
+    const day = pageDates.isoDay(date);
+    if (day) {
+      locals.webPageDateModified = day;
+      res.locals.webPageDateModified = day;
+    }
+    return render(view, locals, cb);
+  };
   res.locals.currentPath = req.path;
   res.locals.linkifyInternal = linkifyInternal;
   // Pages are served with a trailing slash (Netlify redirects /x to /x/), so
@@ -200,6 +220,7 @@ app.use(async (req, res, next) => {
     res.locals.coverageAreas = (coverageAreas || []).map(plainPlaceName);
     res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
+    res.locals.ogImageAlt = 'SN Cleaning Services, domestic cleaning in London and Essex';
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [
       schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas, services: res.locals.navServices }),
@@ -215,6 +236,7 @@ app.use(async (req, res, next) => {
     res.locals.site = SITE_DEFAULTS;
     res.locals.coverageAreas = [];
     res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.defaultOgImage);
+    res.locals.ogImageAlt = 'SN Cleaning Services, domestic cleaning in London and Essex';
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [];
     next();
@@ -253,6 +275,24 @@ const serviceContent = require('./data/service-content');
 const areaMap = require('./lib/area-map');
 app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+const OG_IMAGE_FILE = {
+  'end-of-tenancy-cleaning': 'end-of-tenancy-cleaning',
+  'domestic-cleaning': 'domestic-cleaning',
+  'deep-house-cleaning': 'deep-house-cleaning',
+  'airbnb-cleaning': 'airbnb-cleaning',
+  'after-builders-cleaning': 'after-builders-cleaning',
+  'carpet-cleaning-services': 'carpet-cleaning-services',
+  'upholstery-cleaning': 'carpet-cleaning-services',
+  'mattress-cleaning': 'carpet-cleaning-services'
+};
+function serviceOg(slug, title) {
+  const file = OG_IMAGE_FILE[slug];
+  if (!file) return {};
+  return {
+    ogImage: schema.absoluteUrl('/images/og/' + file + '.jpg'),
+    ogImageAlt: title + ' by SN Cleaning Services in London and Essex'
+  };
+}
 
 function reviewsForService(list, slug) {
   const copy = serviceContent[slug] || serviceContent['domestic-cleaning'] || {};
@@ -262,7 +302,11 @@ function reviewsForService(list, slug) {
     .slice(0, 3);
 }
 function plainContent(value) {
-  if (typeof value === 'string') return plainPlaceName(value);
+  if (typeof value === 'string') {
+    return plainPlaceName(value)
+      .replace(/clean the oven as part of/gi, 'add an oven clean to')
+      .replace(/cleans the oven as part of/gi, 'adds an oven clean to');
+  }
   if (Array.isArray(value)) return value.map(plainContent);
   if (value && typeof value === 'object') {
     const next = {};
@@ -299,12 +343,7 @@ function aiPageDates(published) {
 }
 // Area pages: only a date already stored on the row. A future stamp is left off.
 function recordedDate(value) {
-  if (!value) return null;
-  const d = new Date(value);
-  if (isNaN(d.getTime())) return null;
-  const day = d.toISOString().slice(0, 10);
-  if (day > '2026-11-28') return null;
-  return day;
+  return pageDates.recordedDate(value);
 }
 function areaPageDates(page) {
   const published = recordedDate(page && page.created_at);
@@ -362,7 +401,11 @@ app.get('/our-services', async (req, res) => {
     title: 'Cleaning Services We Offer',
     metaDescription:
       'Domestic, end of tenancy, Airbnb, deep cleaning, after builders, carpet, upholstery and mattress cleaning across London & Essex.',
-    services: services.filter(isDomestic).map((s) => ({ ...s, hasDetailPage: detailSlugs.has(s.slug) })),
+    services: services.filter(isDomestic).map((s) => ({
+      ...s,
+      hasDetailPage: detailSlugs.has(s.slug),
+      features: (s.features || []).map((f) => (/inside oven/i.test(f) ? 'Inside appliances when requested' : f))
+    })),
     checklist,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -379,6 +422,7 @@ app.get('/blog', async (req, res) => {
   res.render('blog/index', {
     title: 'Cleaning Tips & Advice Blog',
     metaDescription: 'Cleaning guides from the SN Cleaning Services team: carpet stains, mould and damp, end of tenancy, Airbnb turnovers and sharing chores at home.',
+    webPageDateModified: pageDates.laterDay(pageDates.DATES['/blog'], posts.map((p) => p.updated_at || p.published_at).filter(Boolean).sort().pop()),
     posts,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), schema.buildBlog({ posts, postUrl })]
@@ -399,7 +443,7 @@ const BLOG_METAS = {
 };
 
 function renderPost(req, res, post) {
-  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: post.title, url: postUrl(post) }];
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: visibleCopy(post.title), url: postUrl(post) }];
   const shown = Object.assign({}, post, {
     title: visibleCopy(post.title),
     excerpt: visibleCopy(post.excerpt),
@@ -410,6 +454,7 @@ function renderPost(req, res, post) {
     title: post.meta_title || post.title,
     noindex: !!post.noindex,
     metaDescription: BLOG_METAS[post.slug] || visibleCopy(post.meta_description || post.excerpt),
+    webPageDateModified: post.updated_at || post.published_at,
     post: shown,
     breadcrumbs,
     ogImage: post.cover_image ? schema.absoluteUrl(post.cover_image) : res.locals.ogImage,
@@ -424,7 +469,7 @@ function renderPost(req, res, post) {
 // Templates the website editor uses to preview a new post or case study before
 // it is published. Not linked anywhere, hidden from Google and the sitemap.
 const SAMPLE = {
-  slug: '_template', title: 'Post title', excerpt: 'Short summary', cover_image: '/images/hero-living-room.jpg',
+  slug: '_template', title: 'Sample post for the editor preview', excerpt: 'Short summary', cover_image: '/images/hero-living-room.jpg',
   published_at: new Date().toISOString(), content: '<p>Text</p>', editor: true, noindex: true, service: 'Service', area: 'Area'
 };
 app.get('/blog/_template', (req, res) => renderPost(req, res, SAMPLE));
@@ -438,6 +483,7 @@ app.get('/case-studies', (req, res, next) => {
   res.render('case-studies/index', {
     title: 'Case Studies: Real Cleaning Jobs',
     metaDescription: 'Real cleaning jobs from SN Cleaning Services in London and Essex: what the client needed, what we did and the result, with before and after photos.',
+    webPageDateModified: cases[0] && (cases[0].updated_at || cases[0].published_at),
     cases,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -459,6 +505,7 @@ function renderCase(req, res, cs) {
   res.render('case-studies/post', {
     title: cs.meta_title || shown.title,
     metaDescription: visibleCopy(cs.meta_description || cs.excerpt),
+    webPageDateModified: cs.updated_at || cs.published_at,
     noindex: !!cs.noindex,
     post: shown,
     breadcrumbs,
@@ -479,6 +526,7 @@ app.get('/questions', async (req, res) => {
   res.render('questions/index', {
     title: 'Cleaning Questions Answered',
     metaDescription: 'Real questions about end of tenancy, deep, carpet and Airbnb cleaning in London and Essex, answered by the SN Cleaning Services team.',
+    webPageDateModified: pageDates.isoDay(answers.map((a) => a.updated_at).filter(Boolean).sort().pop()),
     answers,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), faq].filter(Boolean)
@@ -498,6 +546,7 @@ app.get('/questions/:slug', async (req, res, next) => {
   res.render('questions/answer', {
     title: answer.meta_title || answer.question,
     metaDescription: answer.meta_description || answer.short_answer,
+    webPageDateModified: answer.updated_at,
     answer,
     related,
     serviceLink,
@@ -522,6 +571,7 @@ Object.keys(legalDocs).forEach((slug) => {
     res.render('legal', {
       title: doc.title,
       metaDescription: doc.metaDescription,
+      hideUpdated: true,
       doc,
       breadcrumbs,
       structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -597,7 +647,8 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
   res.render('videos', {
     title: `${serviceName} Job Videos`,
-    metaDescription: `Before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex.`,
+    metaDescription: `Watch before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex, then get a quote for your own home.`,
+    webPageDateModified: pageDates.videoDate(req.params.serviceSlug, allVideos),
     // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
     noindex: allVideos.length <= 3,
     allVideos: withArea,
@@ -611,7 +662,50 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
 
 app.get('/about', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }];
+  const profile = require('./data/business-profile');
+  const support = require('./data/customer-support');
+  const priceList = require('./data/price-pages');
+  const cover = require('./data/airbnb-turnover-checklist').faqs.find((f) => /do not cover Kent/i.test(f.a));
+  const years = require('./data/after-builders-checklist').faqs.find((f) => /12 years/.test(f.a));
+  const vat = require('./data/eot-prices').faqs.find((f) => /VAT/.test(f.q));
+  const addr = profile.address;
+  const order = ['end-of-tenancy-cleaning', 'domestic-cleaning', 'deep-house-cleaning', 'airbnb-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+  const names = {
+    'end-of-tenancy-cleaning': 'End of tenancy cleaning',
+    'domestic-cleaning': 'Domestic cleaning',
+    'deep-house-cleaning': 'Deep house cleaning',
+    'airbnb-cleaning': 'Airbnb cleaning',
+    'after-builders-cleaning': 'After builders cleaning',
+    'carpet-cleaning-services': 'Carpet cleaning',
+    'upholstery-cleaning': 'Upholstery cleaning',
+    'mattress-cleaning': 'Mattress cleaning'
+  };
+  const glance = {
+    address: [addr.streetAddress, addr.addressLocality, addr.addressRegion + ' ' + addr.postalCode].join(', '),
+    covers: cover ? cover.a.split('. ').slice(0, 2).join('. ') + '.' : '',
+    years: years && /12 years/.test(years.a) ? '12 years in business' : '',
+    team: cover ? 'The clean is done by our own trained, insured, DBS checked cleaners. We never send subcontractors.' : '',
+    services: order.map((slug) => {
+      const nav = (res.locals.navServices || []).find((s) => s.slug === slug);
+      const raw = servicePrice(slug) || '';
+      const amount = (raw.match(/£\d+/) || [])[0] || '';
+      const prices = priceList.find((p) => p.slug === slug);
+      return {
+        title: (nav && nav.title) || names[slug],
+        url: '/' + slug + '/',
+        price: amount ? ('from ' + amount + (/hour/i.test(raw) ? ' an hour' : '')) : '',
+        pricesUrl: prices ? prices.url : ''
+      };
+    }),
+    chat: support.channels.find((c) => c.id === 'whatsapp'),
+    phone: support.channels.find((c) => c.id === 'phone'),
+    reclean: (support.steps.find((s) => s.title === 'How long you have to tell us') || {}).text || '',
+    rating: profile.googleRating,
+    ratingUrl: (res.locals.site && res.locals.site.googleBusinessUrl) || profile.googleMapsUrl,
+    vat: vat ? vat.a : ''
+  };
   res.render('about', {
+    glance,
     title: 'About Us — 12 Years Cleaning London & Essex',
     metaDescription:
       'SN Cleaning Services has cleaned London and Essex homes for 12 years. Insured, DBS checked team, and a free re clean guarantee.',
@@ -661,6 +755,7 @@ app.get('/prices', (req, res) => {
     breadcrumbs,
     designV2: true,
     ...aiPageDates(),
+    webPageDateModified: pageDates.DATES['/prices'],
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
   });
 });
@@ -701,7 +796,7 @@ app.get('/areas', async (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Areas', url: '/areas' }];
   res.render('areas', {
     title: 'Areas We Cover in London and Essex',
-    metaDescription: 'Every area we clean in London and Essex, grouped so you can open the page for your borough or town and book online.',
+    metaDescription: 'Every area we clean in London and Essex, grouped by borough and town. Find your area, open its page and get a quote online from our own DBS checked team.',
     areaGroups,
     breadcrumbs,
     designV2: true,
@@ -745,6 +840,7 @@ app.get('/after-builders-cleaning/prices', (req, res) => {
     breadcrumbs,
     designV2: true,
     ...aiPageDates(prices.PUBLISHED),
+    webPageDateModified: pageDates.isoDay(prices.PUBLISHED),
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -778,7 +874,9 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
     p: prices,
     breadcrumbs,
     designV2: true,
+    hideUpdated: true,
     ...aiPageDates(prices.PRICES_LAST_UPDATED),
+    webPageDateModified: prices.PRICES_LAST_UPDATED,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -858,7 +956,7 @@ app.get('/contact', (req, res) => {
 
 app.get('/contact/success', (req, res) => {
   res.render('thank-you', {
-    title: 'Thank You',
+    title: 'Thank you for getting in touch',
     noindex: true,
     structuredData: []
   });
@@ -990,6 +1088,7 @@ app.get('/end-of-tenancy-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: eotChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1039,6 +1138,7 @@ app.get('/domestic-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: domesticChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1116,6 +1216,7 @@ app.get('/clean-home-report', (req, res) => {
       readingMinutes: CLEAN_HOME_READING_MINUTES
     },
     webPageDateModified: CLEAN_HOME_DATE,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData.map((block) => {
         if (!block || block['@type'] !== 'HomeAndConstructionBusiness') return block;
@@ -1160,6 +1261,7 @@ app.get('/house-cleaning-time-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: timeCalc.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1202,6 +1304,7 @@ app.get('/end-of-tenancy-cleaning-cost-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: eotCost.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1243,6 +1346,7 @@ app.get('/airbnb-turnover-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: airbnbChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1291,6 +1395,7 @@ app.get('/after-builders-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: afterBuildersChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1340,6 +1445,7 @@ app.get('/deep-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: deepCleaningChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1393,6 +1499,7 @@ app.get('/carpet-cleaning-cost-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: carpetCost.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1452,8 +1559,11 @@ app.get('/:slug', async (req, res, next) => {
 
   const svcJobVideos = jobVideoLib.section(jobVideoLib.forService(await content.getJobVideos(), page.slug), page.slug, service.title);
   const pickedReviews = reviewsForService(testimonials, page.slug);
+  const caseStudies = editorContent.editorPosts('case').filter((c) => !c.noindex && c.service && service.title && c.service.toLowerCase() === service.title.toLowerCase());
+  const share = serviceOg(page.slug, service.title);
   res.render(v2 ? 'service-v2' : 'service-detail', {
     jobVideos: svcJobVideos,
+    caseStudies,
     designV2: v2,
     heroPreload: v2 ? ((page.images && page.images.length) ? page.images[0] : serviceImage(page.slug)) : null,
     mapLink,
@@ -1469,8 +1579,11 @@ app.get('/:slug', async (req, res, next) => {
     pickedReviews,
     coverageAreas,
     breadcrumbs,
-    ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage,
+    ...(share.ogImage
+      ? share
+      : { ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage }),
     ...(AI_DATED_SERVICES.has(page.slug) ? aiPageDates() : {}),
+    ...(pageDates.serviceDate(page) ? { webPageDateModified: pageDates.serviceDate(page) } : {}),
     structuredData: schema.mergeReviewsIntoBusiness([
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1659,6 +1772,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       areaJobVideos.videos.map((v) => v.id), editorContent.editorPosts('case').filter((c) => !c.noindex));
     const pickedReviews = reviewsForArea(testimonials, service.slug, place);
         return res.render('area-v2', {
+      ...serviceOg(service.slug, (fullService && fullService.title) || service.title),
       jobVideos: areaJobVideos,
       recentCleans,
       ...areaPageDates(page),
@@ -1710,6 +1824,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
   const faqPage = schema.buildFaqPage(page.faqs);
 
   res.render('area-detail', {
+    ...serviceOg(service.slug, service.title),
     ...areaPageDates(page),
     title: plainPlaceName(page.meta_title || `${service.title} in ${region.name}`),
     metaDescription: plainPlaceName(page.meta_description || `${service.title} in ${region.name}.`),
@@ -1733,7 +1848,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
 
 // ---------- 404 ----------
 app.use((req, res) => {
-  res.status(404).render('404', { title: 'Page Not Found', noindex: true, omitCanonical: true, structuredData: [] });
+  res.status(404).render('404', { title: 'Sorry, that page was not found', noindex: true, omitCanonical: true, structuredData: [] });
 });
 
 // Only start a listening server when run directly (local dev / traditional Node hosting).

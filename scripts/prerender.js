@@ -21,6 +21,7 @@ const path = require('path');
 const app = require('../server');
 const content = require('../data/content');
 const editorContent = require('../lib/editor-content');
+const pageDates = require('../data/page-dates');
 const { SITE_URL } = require('../lib/site-config');
 const DIST = path.join(__dirname, '..', 'dist');
 const PORT = 4521;
@@ -33,49 +34,38 @@ const PORT = 4521;
 // sitemap without excluding them from the site itself.
 async function buildRoutes() {
   // Dates are the last real edit of that page, or a published content date.
-  // Not the build date. Sources are noted beside each one.
-  const eotPriceDate = require('../data/eot-prices').PRICES_LAST_UPDATED; // 2026-11-24
-  const abPriceDate = require('../data/after-builders-prices').PUBLISHED; // 2026-11-25
-  const WHY_LASTMOD = {
-    'end-of-tenancy-cleaning': '2026-11-28',
-    'deep-house-cleaning': '2026-11-28',
-    'domestic-cleaning': '2026-11-24',
-    'airbnb-cleaning': '2026-11-24',
-    'after-builders-cleaning': '2026-11-28',
-    'carpet-cleaning-services': '2026-11-28',
-    'upholstery-cleaning': '2026-11-28',
-    'mattress-cleaning': '2026-11-28'
-  };
+  // Not the build date. Static pages share data/page-dates.js with the visible date.
+  const day = (url) => pageDates.DATES[url];
   const fixed = [
-    { url: '/', out: 'index.html', sitemap: true, lastmod: '2026-11-27' }, // views/index.ejs
-    { url: '/our-services', out: 'our-services/index.html', sitemap: true, lastmod: '2026-11-27' }, // views/services.ejs
-    { url: '/about', out: 'about/index.html', sitemap: true, lastmod: '2026-11-28' }, // views/about.ejs in PR #41
-    { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true, lastmod: '2026-11-27' },
-    { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/faq-end-of-tenancy.js
-    { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true, lastmod: eotPriceDate },
-    { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/airbnb-turnover-cleaning-checklist', out: 'airbnb-turnover-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/after-builders-cleaning-checklist', out: 'after-builders-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-27' },
-    { url: '/deep-cleaning-checklist', out: 'deep-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-27' },
-    { url: '/clean-home-report', out: 'clean-home-report/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/house-cleaning-time-calculator', out: 'house-cleaning-time-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/end-of-tenancy-cleaning-cost-calculator', out: 'end-of-tenancy-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
-    { url: '/carpet-cleaning-cost-calculator', out: 'carpet-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-27' },
-    { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true, lastmod: abPriceDate },
-    { url: '/prices', out: 'prices/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/price-hub.js and views/prices-index.ejs
-    { url: '/areas', out: 'areas/index.html', sitemap: true, lastmod: '2026-11-28' }, // went live in PR #41
-    { url: '/reviews', out: 'reviews/index.html', sitemap: true, lastmod: '2026-11-28' }, // went live in PR #41
-    { url: '/our-work', out: 'our-work/index.html', sitemap: true, lastmod: '2026-11-16' }, // views/our-work.ejs
-    { url: '/why-us', out: 'why-us/index.html', sitemap: true, lastmod: '2026-11-28' }, // hub lists the JSON pages edited this day
-    ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true, lastmod: WHY_LASTMOD[p.slug] })),
-    { url: '/blog', out: 'blog/index.html', sitemap: true, lastmod: '2026-11-26' }, // views/blog/index.ejs; raised below if a post is newer
-    { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/legal.js title and copy edit in PR #41
-    { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true, lastmod: '2026-11-28' },
-    { url: '/cookies-policy', out: 'cookies-policy/index.html', sitemap: true, lastmod: '2026-11-28' },
-    { url: '/contact', out: 'contact/index.html', sitemap: true, lastmod: '2026-11-28' },
+    { url: '/', out: 'index.html', sitemap: true, lastmod: day('/') },
+    { url: '/our-services', out: 'our-services/index.html', sitemap: true, lastmod: day('/our-services') },
+    { url: '/about', out: 'about/index.html', sitemap: true, lastmod: day('/about') },
+    { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true, lastmod: day('/about/silvia-nedeva') },
+    { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true, lastmod: day('/end-of-tenancy-cleaning/faq') },
+    { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true, lastmod: day('/end-of-tenancy-cleaning/prices') },
+    { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: day('/end-of-tenancy-cleaning-checklist') },
+    { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: day('/domestic-cleaning-checklist') },
+    { url: '/airbnb-turnover-cleaning-checklist', out: 'airbnb-turnover-cleaning-checklist/index.html', sitemap: true, lastmod: day('/airbnb-turnover-cleaning-checklist') },
+    { url: '/after-builders-cleaning-checklist', out: 'after-builders-cleaning-checklist/index.html', sitemap: true, lastmod: day('/after-builders-cleaning-checklist') },
+    { url: '/deep-cleaning-checklist', out: 'deep-cleaning-checklist/index.html', sitemap: true, lastmod: day('/deep-cleaning-checklist') },
+    { url: '/clean-home-report', out: 'clean-home-report/index.html', sitemap: true, lastmod: day('/clean-home-report') },
+    { url: '/house-cleaning-time-calculator', out: 'house-cleaning-time-calculator/index.html', sitemap: true, lastmod: day('/house-cleaning-time-calculator') },
+    { url: '/end-of-tenancy-cleaning-cost-calculator', out: 'end-of-tenancy-cleaning-cost-calculator/index.html', sitemap: true, lastmod: day('/end-of-tenancy-cleaning-cost-calculator') },
+    { url: '/carpet-cleaning-cost-calculator', out: 'carpet-cleaning-cost-calculator/index.html', sitemap: true, lastmod: day('/carpet-cleaning-cost-calculator') },
+    { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true, lastmod: day('/after-builders-cleaning/prices') },
+    { url: '/prices', out: 'prices/index.html', sitemap: true, lastmod: day('/prices') },
+    { url: '/areas', out: 'areas/index.html', sitemap: true, lastmod: day('/areas') },
+    { url: '/reviews', out: 'reviews/index.html', sitemap: true, lastmod: day('/reviews') },
+    { url: '/our-work', out: 'our-work/index.html', sitemap: true, lastmod: day('/our-work') },
+    { url: '/why-us', out: 'why-us/index.html', sitemap: true, lastmod: day('/why-us') },
+    ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true, lastmod: day(p.url) })),
+    { url: '/blog', out: 'blog/index.html', sitemap: true, lastmod: day('/blog') },
+    { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true, lastmod: day('/privacy-policy') },
+    { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true, lastmod: day('/terms-and-conditions') },
+    { url: '/cookies-policy', out: 'cookies-policy/index.html', sitemap: true, lastmod: day('/cookies-policy') },
+    { url: '/contact', out: 'contact/index.html', sitemap: true, lastmod: day('/contact') },
     { url: '/contact/success', out: 'contact/success/index.html', sitemap: false },
-    { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view
+    { url: '/this-page-does-not-exist', out: '404.html', sitemap: false }
   ];
 
   const [servicePages, blogPosts, areaPages, services] = await Promise.all([
@@ -97,16 +87,15 @@ async function buildRoutes() {
         url: `/videos/${slug}`,
         out: `videos/${slug}/index.html`,
         sitemap: mine.length > 3,
-        // The end of tenancy videos page gained its written list on 28 Nov 2026.
-        lastmod: slug === 'end-of-tenancy-cleaning' ? '2026-11-28' : newest
+        lastmod: pageDates.videoDate(slug, mine)
       };
     });
 
   // Questions answered (Supabase public.faq_answers)
   const faqAnswers = await content.getFaqAnswers();
   const questionRoutes = faqAnswers.length ? [
-    { url: '/questions', out: 'questions/index.html', sitemap: true, lastmod: faqAnswers.map((a) => a.updated_at).sort().pop() },
-    ...faqAnswers.map((a) => ({ url: `/questions/${a.slug}`, out: `questions/${a.slug}/index.html`, sitemap: true, lastmod: a.updated_at }))
+    { url: '/questions', out: 'questions/index.html', sitemap: true, lastmod: pageDates.isoDay(faqAnswers.map((a) => a.updated_at).filter(Boolean).sort().pop()) },
+    ...faqAnswers.map((a) => ({ url: `/questions/${a.slug}`, out: `questions/${a.slug}/index.html`, sitemap: true, lastmod: pageDates.isoDay(a.updated_at) }))
   ] : [];
 
   // Booking pages: the chooser, plus one per service that has an online form.
@@ -125,20 +114,20 @@ async function buildRoutes() {
     url: `/${p.slug}`,
     out: `${p.slug}/index.html`,
     sitemap: true,
-    lastmod: p.updated_at
+    lastmod: pageDates.serviceDate(p)
   }));
 
   const blogRoute = fixed.find((r) => r.url === '/blog');
   if (blogRoute) {
     const newest = blogPosts.map((p) => p.updated_at || p.published_at).filter(Boolean).sort().pop();
-    if (newest && (!blogRoute.lastmod || newest > blogRoute.lastmod)) blogRoute.lastmod = newest;
+    blogRoute.lastmod = pageDates.laterDay(blogRoute.lastmod, newest);
   }
 
   const blogRoutes = blogPosts.map((p) => ({
     url: p.legacy_root ? `/${p.slug}` : `/blog/${p.slug}`,
     out: p.legacy_root ? `${p.slug}/index.html` : `blog/${p.slug}/index.html`,
     sitemap: true,
-    lastmod: p.updated_at
+    lastmod: pageDates.isoDay(p.updated_at || p.published_at)
   }));
 
   // Each area page belongs to one service, so its URL is /{service-slug}/{area-slug}/
@@ -151,7 +140,7 @@ async function buildRoutes() {
       url: `/${p.services.slug}/${p.slug}`,
       out: `${p.services.slug}/${p.slug}/index.html`,
       sitemap: true,
-      lastmod: p.updated_at
+      lastmod: pageDates.recordedDate(p.updated_at)
     }));
 
   // Office and nursery cleaning now live on snclean.co.uk (301s in netlify.toml),
@@ -161,8 +150,8 @@ async function buildRoutes() {
   // editor uses to preview new posts before they are published.
   const cases = editorContent.editorPosts('case');
   const caseRoutes = cases.length
-    ? [{ url: '/case-studies', out: 'case-studies/index.html', sitemap: true, lastmod: cases[0].updated_at },
-       ...cases.map((p) => ({ url: `/case-studies/${p.slug}`, out: `case-studies/${p.slug}/index.html`, sitemap: !p.noindex, lastmod: p.updated_at }))]
+    ? [{ url: '/case-studies', out: 'case-studies/index.html', sitemap: true, lastmod: pageDates.isoDay(cases[0].updated_at || cases[0].published_at) },
+       ...cases.map((p) => ({ url: `/case-studies/${p.slug}`, out: `case-studies/${p.slug}/index.html`, sitemap: !p.noindex, lastmod: pageDates.isoDay(p.updated_at || p.published_at) }))]
     : [];
   const editorTemplates = [
     { url: '/blog/_template', out: 'blog/_template/index.html', sitemap: false },
@@ -175,7 +164,7 @@ async function buildRoutes() {
     const m = editorContent.pageMeta(r.url);
     if (!m) continue;
     if (m.seo && m.seo.noindex) r.sitemap = false;
-    if (m.updatedAt && (!r.lastmod || new Date(m.updatedAt) > new Date(r.lastmod))) r.lastmod = m.updatedAt;
+    if (m.updatedAt) r.lastmod = pageDates.laterDay(r.lastmod, m.updatedAt);
   }
   blogPosts.filter((p) => p.noindex).forEach((p) => { const r = all.find((x) => x.url === `/blog/${p.slug}`); if (r) r.sitemap = false; });
   return all;
@@ -201,13 +190,79 @@ function writeFile(relPath, content) {
 
 // Content photos on a page (inside <main>), for the image sitemap.
 function pageImages(html) {
-  const a = html.indexOf('<main>'), b = html.lastIndexOf('</main>');
+  const open = html.search(/<main[\s>]/);
+  const a = open < 0 ? -1 : html.indexOf('>', open) + 1;
+  const b = html.lastIndexOf('</main>');
   if (a < 0 || b < a) return [];
   const out = new Set();
   for (const m of html.slice(a, b).matchAll(/<img[^>]+src="(\/images\/[^"?]+\.(?:jpe?g|png|webp))[^"]*"/gi)) {
     if (!/\/images\/(_r|favicon)\/|logo/.test(m[1])) out.add(m[1]);
   }
   return [...out].slice(0, 20);
+}
+
+function isoDurationSeconds(value) {
+  const m = String(value || '').match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/);
+  if (!m) return null;
+  return (Number(m[1] || 0) * 3600) + (Number(m[2] || 0) * 60) + Number(m[3] || 0);
+}
+
+// VideoObject blocks in the rendered JSON-LD, for the video sitemap.
+function pageVideos(html) {
+  const out = [];
+  for (const block of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    let data;
+    try { data = JSON.parse(block[1]); } catch (e) { continue; }
+    const nodes = Array.isArray(data) ? data : [data];
+    for (const node of nodes) {
+      if (!node || node['@type'] !== 'VideoObject') continue;
+      const seconds = isoDurationSeconds(node.duration);
+      out.push({
+        title: node.name || '',
+        description: node.description || '',
+        thumbnail: node.thumbnailUrl || '',
+        player: node.embedUrl || '',
+        seconds,
+        published: node.uploadDate || ''
+      });
+    }
+  }
+  return out;
+}
+
+function writeVideoSitemap(routes) {
+  const esc = (value) => String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  const clip = (value, max) => {
+    const text = String(value || '').replace(/\s+/g, ' ').trim();
+    return text.length > max ? text.slice(0, max) : text;
+  };
+  const urls = routes
+    .filter((r) => r.url.startsWith('/videos/') && r.videos && r.videos.length)
+    .map((r) => {
+      const loc = `${SITE_URL}${r.url.replace(/\/?$/, '/')}`;
+      const videos = r.videos.map((v) => {
+        const bits = [
+          `      <video:thumbnail_loc>${esc(v.thumbnail)}</video:thumbnail_loc>`,
+          `      <video:title>${esc(clip(v.title, 100))}</video:title>`,
+          `      <video:description>${esc(clip(v.description, 2048))}</video:description>`,
+          `      <video:player_loc>${esc(v.player)}</video:player_loc>`
+        ];
+        if (v.seconds != null) bits.push(`      <video:duration>${v.seconds}</video:duration>`);
+        if (v.published) bits.push(`      <video:publication_date>${esc(v.published)}</video:publication_date>`);
+        return `    <video:video>\n${bits.join('\n')}\n    </video:video>`;
+      }).join('\n');
+      return `  <url>\n    <loc>${loc}</loc>\n${videos}\n  </url>`;
+    })
+    .join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${urls}\n</urlset>\n`;
+  writeFile('video-sitemap.xml', xml);
+  const count = routes.filter((r) => r.url.startsWith('/videos/') && r.videos && r.videos.length)
+    .reduce((n, r) => n + r.videos.length, 0);
+  console.log(`Wrote dist/video-sitemap.xml (${count} videos)`);
 }
 
 function writeSitemap(routes) {
@@ -270,7 +325,7 @@ function writeRobotsTxt() {
   const ai = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User'];
   const txt = `User-agent: *\nAllow: /\n${priv}\n` +
     ai.map((b) => `User-agent: ${b}\n`).join('') + `Allow: /\n${priv}\n` +
-    `User-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\n`;
+    `User-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\nSitemap: ${SITE_URL}/video-sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
@@ -447,12 +502,14 @@ async function main() {
         }
         writeFile(route.out, cullSvgMaps(await optimiseCss(require('./pictures').wrapPictures(body))));
         route.images = pageImages(body);
+        route.videos = pageVideos(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
 
       writeSitemap(ROUTES);
+      writeVideoSitemap(ROUTES);
       writeFeed(ROUTES);
       writeRobotsTxt();
 

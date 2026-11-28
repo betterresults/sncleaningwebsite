@@ -220,7 +220,7 @@ const realJobs = [
 ];
 
 const faqs = [
-  { q: 'Is the oven included in an end of tenancy clean?', a: "Yes, we clean the oven as part of the service. You choose your oven type when you book because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. That way nobody pays for an oven they don't have: single £49, double £79, range £98, AGA £129." },
+  { q: 'Is the oven included in an end of tenancy clean?', a: "No. Oven cleaning is an optional add on, not part of the from price. You choose your oven type, or no oven, when you book, because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. That way nobody pays for an oven they don't have: single £49, double £79, range £98, AGA £129." },
   { q: 'What is included in the price?', a: 'Everything inside the home, top to bottom: inside every kitchen cupboard and drawer, fridge and freezer, hob, extractor and microwave, bathrooms descaled, internal windows and glass, skirting boards, doors, switches and radiators, carpets vacuumed and hard floors washed. What you select when you book only tells us what your home has, so we can plan the time.' },
   { q: 'Are windows included?', a: 'Inside windows and all internal glass, yes. Outside windows are not included.' },
   { q: 'Why does a furnished property cost more?', a: 'Every wardrobe, chest of drawers, bed and sofa has to be cleaned inside, on top and underneath, and furniture has to be moved to clean behind it. That takes more time, so it costs more.' },

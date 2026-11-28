@@ -6,7 +6,7 @@
     <ul class="cs-meta">
       <% if (post.service) { %><li><span>Service</span><strong data-ed-service><%= post.service %></strong></li><% } %>
       <% if (post.area) { %><li><span>Area</span><strong data-ed-area><%= post.area %></strong></li><% } %>
-      <% if (post.published_at) { %><li><span>Date</span><strong><time data-ed-date datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) %></time></strong></li><% } %>
+      <% if (post.published_at) { %><li><span>Date</span><strong><time data-ed-date datetime="<%= new Date(post.published_at).toISOString() %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { month: 'long', year: 'numeric' }) %></time></strong></li><% } %>
     </ul>
   </div>
 </section>

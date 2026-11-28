@@ -20,7 +20,7 @@
         <% }); %>
       </div>
 
-      <div class="checklist-track" id="checklist-track" tabindex="0" aria-label="Room photos">
+      <div class="checklist-track" id="checklist-track" tabindex="0" role="region" aria-label="Room photos">
         <% checklist.forEach(function(cat, i) { %>
           <div
             class="checklist-slide"
@@ -65,7 +65,7 @@
               class="checklist-pager <%= i === 0 ? 'active' : '' %>"
               data-index="<%= i %>"
               aria-label="<%= cat.label %>"
-              <%= i === 0 ? 'aria-current="true"' : '' %>
+              <%- i === 0 ? 'aria-current="true"' : '' %>
             ></button>
           <% }); %>
         </div>
