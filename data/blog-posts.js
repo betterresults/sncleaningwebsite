@@ -52,7 +52,7 @@ const seed = [
 <p>Oven cleaning is an optional add on. It is not part of the from price, and it is not a standalone oven cleaning service. You choose your oven type, or no oven, when you book, because a single oven takes far less time than a double oven, a range or an AGA, and some homes do not need it at all. The price shows in your total before you confirm. On the prices page the published add on figures are single £49, double £79, range £98 and AGA £129.</p>
 
 <h2>The 7 day re clean guarantee</h2>
-<p>The re clean guarantee is 7 days on an empty end of tenancy clean, because the home is empty and the agent or landlord needs time to inspect. Letting agents and inventory clerks often need more than a day or two to visit and write the report. Tell us within 7 days, through your account or on WhatsApp, ideally with a photo or the agent's note. We come back and clean that area again for free.</p>
+<p>The re clean guarantee is 7 days on an empty end of tenancy clean, because the home is empty and the agent or landlord needs time to inspect. Tell us within 7 days, through your account or on WhatsApp, ideally with a photo or the agent's note. We come back and clean that area again for free.</p>
 <p>The deposit back guarantee covers the clean you booked. If the agent says an area we cleaned is not clean enough, we return and clean it again at no extra cost. It covers what was booked. It does not cover a service you did not book. The standard clean includes vacuuming the carpets, so if the agent asks for professional carpet cleaning and it was not booked, that is not covered.</p>
 <p>Same day and Sunday cleans are £50 extra. Key collection is free within one mile of the property, £15 up to three miles and £25 up to five miles. There is no VAT to add, because SN Cleaning Services is not VAT registered.</p>
 <p>Work through the <a href="/end-of-tenancy-cleaning-checklist/">end of tenancy cleaning checklist</a> before the inspection if you want the room by room list in your hands. <a href="/end-of-tenancy-cleaning/">See what our end of tenancy clean covers</a>, or <a href="/contact/">send the postcode and checkout date</a> and we will come back with a price.</p>
@@ -126,7 +126,7 @@ const seed = [
     published_at: '2026-08-25T09:00:00.000Z',
     updated_at: '2026-11-28T09:00:00.000Z',
     content: `
-<p>People usually come to us for one of three reasons: they want the house kept on a rhythm, they are moving, or they have let it go for a while and need a proper reset. Those are different jobs. Booking the wrong one is how you end up paying for a deep clean every week, or wondering why a two hour regular visit did not touch the oven.</p>
+<p>People usually come to us for one of three reasons: they want the house kept on a rhythm, they are moving, or they have let it go for a while and need a proper reset. Those are different jobs. Booking the wrong one is how you end up paying for a deep clean every week, or wondering why a regular visit did not touch the oven.</p>
 
 <h2>Weekly</h2>
 <p>Best if you work long days, have children or pets, or simply want bathrooms and kitchens kept on top of. We try to send the same cleaner each time so they already know the house. The visit is maintenance, surfaces, floors, bathrooms, kitchen, not emptying the oven every week unless you ask.</p>
@@ -154,7 +154,7 @@ const seed = [
 <p>A regular domestic visit covers kitchens, bathrooms, living areas and bedrooms, kept to a checklist. It also covers what is often skipped: under sofa cushions, small furniture moved, and under rugs. It is maintenance of a home you live in, not an empty property handed back to an agent. If a fortnight starts to feel tight, we can move you to weekly. If it feels like too much, you can drop the rhythm or book one offs instead.</p>
 
 <h2>The oven on a regular visit</h2>
-<p>A regular visit wipes the oven exterior and the control panel. Inside the oven is an add on, not part of the from price, and it is not a standalone oven cleaning service. You choose it when you book if you want the inside done, and the form shows that price before you confirm. A two hour regular visit will not empty and detail an oven unless you have asked for that add on.</p>
+<p>A regular visit wipes the oven exterior and the control panel. Inside the oven is an add on, not part of the from price, and it is not a standalone oven cleaning service. You choose it when you book if you want the inside done, and the form shows that price before you confirm. A regular visit will not empty and detail an oven unless you have asked for that add on.</p>
 
 <h2>The 24 hour re clean guarantee</h2>
 <p>The re clean guarantee is 24 hours on a domestic clean, because the home is lived in. After that, a missed spot cannot be told apart from everyday use. Tell us within 24 hours, through your account or on WhatsApp, ideally with a photo. We come back and re clean that area free of charge. A deep clean of a home you live in uses the same 24 hour window. An empty end of tenancy clean, or an empty after builders clean, is 7 days, because nobody is living there and an agent may need time to look.</p>
