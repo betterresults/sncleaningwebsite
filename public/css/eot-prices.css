@@ -22,6 +22,10 @@
 .ep-sand{background:var(--sand)}
 .ep-deep{background:var(--deep);color:#e6efe8}
 .ep-deep h2{color:#fff}
+.ep-deep p,
+.ep-deep li,
+.ep-deep .ep-small{color:#e6efe8}
+.ep-deep a:not(.h-btn){color:#fff}
 .ep-intro{max-width:48em}
 .ep-sub{margin-top:28px!important;font-family:var(--serif);font-weight:500;font-size:1.3rem!important}
 .ep-center{text-align:center}
