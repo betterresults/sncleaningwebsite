@@ -33,6 +33,7 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 // Page edits, SEO and colours saved in the website editor (/admin).
 const editorContent = require('./lib/editor-content');
+const pageDates = require('./data/page-dates');
 app.use(editorContent.middleware);
 
 // Hardcoded fallback used only if site_settings has no row yet or Supabase is
@@ -152,6 +153,25 @@ app.locals.bookHref = (service) => {
 // LocalBusiness schema on every page), and sensible defaults for breadcrumbs,
 // social-share image and structured data that routes can override below.
 app.use(async (req, res, next) => {
+  const render = res.render.bind(res);
+  res.render = function (view, options, callback) {
+    let locals = options;
+    let cb = callback;
+    if (typeof options === 'function') {
+      cb = options;
+      locals = {};
+    }
+    locals = Object.assign({}, locals);
+    let date = locals.webPageDateModified || res.locals.webPageDateModified || pageDates.staticDate(req.path);
+    const meta = editorContent.pageMeta(req.path);
+    if (meta && meta.updatedAt) date = pageDates.laterDay(date, meta.updatedAt);
+    const day = pageDates.isoDay(date);
+    if (day) {
+      locals.webPageDateModified = day;
+      res.locals.webPageDateModified = day;
+    }
+    return render(view, locals, cb);
+  };
   res.locals.currentPath = req.path;
   res.locals.linkifyInternal = linkifyInternal;
   // Pages are served with a trailing slash (Netlify redirects /x to /x/), so
@@ -319,12 +339,7 @@ function aiPageDates(published) {
 }
 // Area pages: only a date already stored on the row. A future stamp is left off.
 function recordedDate(value) {
-  if (!value) return null;
-  const d = new Date(value);
-  if (isNaN(d.getTime())) return null;
-  const day = d.toISOString().slice(0, 10);
-  if (day > '2026-11-28') return null;
-  return day;
+  return pageDates.recordedDate(value);
 }
 function areaPageDates(page) {
   const published = recordedDate(page && page.created_at);
@@ -399,6 +414,7 @@ app.get('/blog', async (req, res) => {
   res.render('blog/index', {
     title: 'Cleaning Tips & Advice Blog',
     metaDescription: 'Cleaning guides from the SN Cleaning Services team: carpet stains, mould and damp, end of tenancy, Airbnb turnovers and sharing chores at home.',
+    webPageDateModified: pageDates.laterDay(pageDates.DATES['/blog'], posts.map((p) => p.updated_at || p.published_at).filter(Boolean).sort().pop()),
     posts,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), schema.buildBlog({ posts, postUrl })]
@@ -430,6 +446,7 @@ function renderPost(req, res, post) {
     title: post.meta_title || post.title,
     noindex: !!post.noindex,
     metaDescription: BLOG_METAS[post.slug] || visibleCopy(post.meta_description || post.excerpt),
+    webPageDateModified: post.updated_at || post.published_at,
     post: shown,
     breadcrumbs,
     ogImage: post.cover_image ? schema.absoluteUrl(post.cover_image) : res.locals.ogImage,
@@ -458,6 +475,7 @@ app.get('/case-studies', (req, res, next) => {
   res.render('case-studies/index', {
     title: 'Case Studies: Real Cleaning Jobs',
     metaDescription: 'Real cleaning jobs from SN Cleaning Services in London and Essex: what the client needed, what we did and the result, with before and after photos.',
+    webPageDateModified: cases[0] && (cases[0].updated_at || cases[0].published_at),
     cases,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -479,6 +497,7 @@ function renderCase(req, res, cs) {
   res.render('case-studies/post', {
     title: cs.meta_title || shown.title,
     metaDescription: visibleCopy(cs.meta_description || cs.excerpt),
+    webPageDateModified: cs.updated_at || cs.published_at,
     noindex: !!cs.noindex,
     post: shown,
     breadcrumbs,
@@ -499,6 +518,7 @@ app.get('/questions', async (req, res) => {
   res.render('questions/index', {
     title: 'Cleaning Questions Answered',
     metaDescription: 'Real questions about end of tenancy, deep, carpet and Airbnb cleaning in London and Essex, answered by the SN Cleaning Services team.',
+    webPageDateModified: pageDates.isoDay(answers.map((a) => a.updated_at).filter(Boolean).sort().pop()),
     answers,
     breadcrumbs,
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs), faq].filter(Boolean)
@@ -518,6 +538,7 @@ app.get('/questions/:slug', async (req, res, next) => {
   res.render('questions/answer', {
     title: answer.meta_title || answer.question,
     metaDescription: answer.meta_description || answer.short_answer,
+    webPageDateModified: answer.updated_at,
     answer,
     related,
     serviceLink,
@@ -542,6 +563,7 @@ Object.keys(legalDocs).forEach((slug) => {
     res.render('legal', {
       title: doc.title,
       metaDescription: doc.metaDescription,
+      hideUpdated: true,
       doc,
       breadcrumbs,
       structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
@@ -618,6 +640,7 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   res.render('videos', {
     title: `${serviceName} Job Videos`,
     metaDescription: `Watch before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex, then get a quote for your own home.`,
+    webPageDateModified: pageDates.videoDate(req.params.serviceSlug, allVideos),
     // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
     noindex: allVideos.length <= 3,
     allVideos: withArea,
@@ -681,6 +704,7 @@ app.get('/prices', (req, res) => {
     breadcrumbs,
     designV2: true,
     ...aiPageDates(),
+    webPageDateModified: pageDates.DATES['/prices'],
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
   });
 });
@@ -765,6 +789,7 @@ app.get('/after-builders-cleaning/prices', (req, res) => {
     breadcrumbs,
     designV2: true,
     ...aiPageDates(prices.PUBLISHED),
+    webPageDateModified: pageDates.isoDay(prices.PUBLISHED),
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -798,7 +823,9 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
     p: prices,
     breadcrumbs,
     designV2: true,
+    hideUpdated: true,
     ...aiPageDates(prices.PRICES_LAST_UPDATED),
+    webPageDateModified: prices.PRICES_LAST_UPDATED,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1010,6 +1037,7 @@ app.get('/end-of-tenancy-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: eotChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1059,6 +1087,7 @@ app.get('/domestic-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: domesticChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1136,6 +1165,7 @@ app.get('/clean-home-report', (req, res) => {
       readingMinutes: CLEAN_HOME_READING_MINUTES
     },
     webPageDateModified: CLEAN_HOME_DATE,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData.map((block) => {
         if (!block || block['@type'] !== 'HomeAndConstructionBusiness') return block;
@@ -1180,6 +1210,7 @@ app.get('/house-cleaning-time-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: timeCalc.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1222,6 +1253,7 @@ app.get('/end-of-tenancy-cleaning-cost-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: eotCost.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1263,6 +1295,7 @@ app.get('/airbnb-turnover-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: airbnbChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1311,6 +1344,7 @@ app.get('/after-builders-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: afterBuildersChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1360,6 +1394,7 @@ app.get('/deep-cleaning-checklist', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: deepCleaningChecklist.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1413,6 +1448,7 @@ app.get('/carpet-cleaning-cost-calculator', (req, res) => {
     breadcrumbs,
     designV2: true,
     webPageDateModified: carpetCost.PUBLISHED,
+    hideUpdated: true,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
@@ -1494,6 +1530,7 @@ app.get('/:slug', async (req, res, next) => {
       ? share
       : { ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage }),
     ...(AI_DATED_SERVICES.has(page.slug) ? aiPageDates() : {}),
+    ...(pageDates.serviceDate(page) ? { webPageDateModified: pageDates.serviceDate(page) } : {}),
     structuredData: schema.mergeReviewsIntoBusiness([
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),

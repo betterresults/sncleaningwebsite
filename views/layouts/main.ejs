@@ -163,6 +163,9 @@
 
   <main id="content">
     <%- body %>
+    <% if (typeof webPageDateModified !== 'undefined' && webPageDateModified && !(typeof hideUpdated !== 'undefined' && hideUpdated)) { const d = new Date(webPageDateModified); if (!isNaN(d)) { %>
+    <p class="page-updated">Last updated: <time datetime="<%= d.toISOString().slice(0, 10) %>"><%= d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' }) %></time></p>
+    <% } } %>
   </main>
 
   <% if (!isFunnel) { %><%- include('../partials/footer') %><% } %>
