@@ -10,7 +10,7 @@ const PUBLISHED_LABEL = '27 November 2026';
 
 const TITLE = 'After Builders Cleaning Checklist';
 const H1 = 'The room by room after builders cleaning checklist';
-const META_DESCRIPTION = 'Tick our after builders cleaning checklist for London and Essex renovations, or download the printable PDF.';
+const META_DESCRIPTION = 'Tick our after builders cleaning checklist for London and Essex renovations room by room, or download the printable PDF to hand to your cleaner or builder.';
 
 const PATH = '/after-builders-cleaning-checklist';
 const PDF_PATH = '/downloads/sn-cleaning-after-builders-cleaning-checklist.pdf';

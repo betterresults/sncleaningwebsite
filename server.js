@@ -617,7 +617,7 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
   res.render('videos', {
     title: `${serviceName} Job Videos`,
-    metaDescription: `Before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex.`,
+    metaDescription: `Watch before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex, then get a quote for your own home.`,
     // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
     noindex: allVideos.length <= 3,
     allVideos: withArea,
@@ -721,7 +721,7 @@ app.get('/areas', async (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Areas', url: '/areas' }];
   res.render('areas', {
     title: 'Areas We Cover in London and Essex',
-    metaDescription: 'Every area we clean in London and Essex, grouped so you can open the page for your borough or town and book online.',
+    metaDescription: 'Every area we clean in London and Essex, grouped by borough and town. Find your area, open its page and get a quote online from our own DBS checked team.',
     areaGroups,
     breadcrumbs,
     designV2: true,
