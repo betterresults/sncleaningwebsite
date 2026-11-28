@@ -162,6 +162,10 @@
   <% } %>
 
   <main id="content">
+    <% var hasCrumbs = typeof body === 'string' && body.indexOf('aria-label="Breadcrumb"') !== -1; %>
+    <% if (!isFunnel && currentPath !== '/' && !hasCrumbs && typeof breadcrumbs !== 'undefined' && breadcrumbs && breadcrumbs.length > 1) { %>
+      <%- include('../partials/breadcrumbs') %>
+    <% } %>
     <%- body %>
     <% if (typeof webPageDateModified !== 'undefined' && webPageDateModified && !(typeof hideUpdated !== 'undefined' && hideUpdated)) { const d = new Date(webPageDateModified); if (!isNaN(d)) { %>
     <p class="page-updated">Last updated: <time datetime="<%= d.toISOString().slice(0, 10) %>"><%= d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/London' }) %></time></p>

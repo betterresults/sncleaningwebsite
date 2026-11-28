@@ -443,7 +443,7 @@ const BLOG_METAS = {
 };
 
 function renderPost(req, res, post) {
-  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: post.title, url: postUrl(post) }];
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: visibleCopy(post.title), url: postUrl(post) }];
   const shown = Object.assign({}, post, {
     title: visibleCopy(post.title),
     excerpt: visibleCopy(post.excerpt),

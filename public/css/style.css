@@ -1556,6 +1556,12 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 @media (max-width: 1200px) and (min-width: 1025px) { .main-nav { gap: 18px; } }
 
 .page-updated { max-width: 1180px; margin: 8px auto 28px; padding: 0 clamp(16px, 4vw, 24px); font-size: .85rem; color: var(--color-muted); }
+.crumbs { max-width: 1180px; margin: 0 auto; padding: 14px clamp(16px, 4vw, 24px) 0; font-size: .85rem; line-height: 1.4; color: var(--color-muted); }
+.crumbs ol { display: flex; flex-wrap: wrap; align-items: center; margin: 0; padding: 0; list-style: none; }
+.crumbs li { display: inline-flex; align-items: center; }
+.crumbs li:not(:last-child)::after { content: "/"; margin: 0 .45em; }
+.crumbs a { color: inherit; text-decoration: underline; text-underline-offset: 2px; }
+.crumbs [aria-current="page"] { color: var(--color-dark); }
 .blog-corrections { margin-top: 28px; font-size: .95rem; }
 .not-found-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 24px; padding: 0; list-style: none; }
 .not-found-links a { text-decoration: underline; }
