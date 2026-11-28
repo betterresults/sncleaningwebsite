@@ -72,10 +72,10 @@
 
 <section class="ep-band ep-white" id="price-list"><div class="ep-wrap">
   <h2>Full end of tenancy price list</h2>
-  <p class="ep-intro">One bathroom is included in every price. <a href="/files/sn-cleaning-services-end-of-tenancy-price-list.pdf" download>Download the price list (PDF)</a> to save or send to your landlord or agent.</p>
+  <p class="ep-intro">One bathroom is included in every price. <a class="ep-download" href="/files/sn-cleaning-services-end-of-tenancy-price-list.pdf" download>Download the price list (PDF)</a> to save or send to your landlord or agent.</p>
   <div class="ep-tables">
     <% [['Flats', p.flats], ['Houses', p.houses]].forEach(function (t) { %>
-    <div class="ep-table-card">
+    <div class="ep-table-card" tabindex="0" role="region" aria-label="<%= t[0] %> price list">
       <table>
         <caption><%= t[0] %></caption>
         <thead><tr><th scope="col">Home</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
@@ -104,14 +104,14 @@
   <h2>Extra rooms, the oven and other extras</h2>
   <p class="ep-intro">These are optional extras, priced separately so you only pay for what your home has.</p>
   <div class="ep-tables">
-    <div class="ep-table-card">
+    <div class="ep-table-card" tabindex="0" role="region" aria-label="Extra rooms">
       <table>
         <caption>Extra rooms</caption>
         <thead><tr><th scope="col">Room</th><% p.furnishing.forEach(function (f) { %><th scope="col"><%= f %></th><% }); %></tr></thead>
         <tbody><% p.extraRooms.forEach(function (r) { %><tr><th scope="row"><%= r.label %></th><% r.prices.forEach(function (v) { %><td><%= money(v) %></td><% }); %></tr><% }); %></tbody>
       </table>
     </div>
-    <div class="ep-table-card">
+    <div class="ep-table-card" tabindex="0" role="region" aria-label="Oven cleaning">
       <table>
         <caption>Oven cleaning</caption>
         <tbody><% p.ovens.filter(function (o) { return o.price; }).forEach(function (o) { %><tr><th scope="row"><%= o.label %></th><td><%= money(o.price) %></td></tr><% }); %></tbody>
@@ -121,7 +121,7 @@
   </div>
   <div class="ep-extras">
     <% p.extras.forEach(function (g) { %>
-    <div class="ep-table-card">
+    <div class="ep-table-card" tabindex="0" role="region" aria-label="<%= g.group %>">
       <table>
         <caption><%= g.group %></caption>
         <tbody><% g.items.forEach(function (i) { %><tr><th scope="row"><%= i.label %></th><td><%= money(i.price) %></td></tr><% }); %></tbody>
