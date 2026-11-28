@@ -1553,6 +1553,9 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 .reclean-promise a { text-decoration: underline; }
 @media (max-width: 1200px) and (min-width: 1025px) { .main-nav { gap: 18px; } }
 
+.not-found-links { display: flex; flex-wrap: wrap; gap: 8px 18px; margin: 0 0 24px; padding: 0; list-style: none; }
+.not-found-links a { text-decoration: underline; }
+
 @media print {
   .announce, .site-header, .site-footer, .sticky-bar, .cookie-note, .wa-float, .skip-link,
   .h-quote, form, iframe, video, [data-quote-form] { display: none !important; }
