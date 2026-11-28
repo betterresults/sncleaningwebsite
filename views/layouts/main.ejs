@@ -53,17 +53,14 @@
 
   <!-- Booking forms (Dilvon, on our app. subdomain) and their data: connect early so forms open fast -->
   <link rel="preconnect" href="https://app.sncleaningservices.co.uk" />
-  <link rel="preconnect" href="https://app.dilvon.com" />
-  <link rel="preconnect" href="https://pkvihxsdbrwhsbnsqikg.supabase.co" crossorigin />
   <!-- Instant page changes: booking forms (app. subdomain) and the contact page are
        prepared in the background as soon as a page linking to them loads; every
        other internal page is prepared on hover/touch. -->
   <%# Booking forms and pages are prepared in the background, but only after this
       page has fully loaded, so it never slows down the first view. %>
   <script>addEventListener('load',function(){setTimeout(function(){if(!HTMLScriptElement.supports||!HTMLScriptElement.supports('speculationrules'))return;var s=document.createElement('script');s.type='speculationrules';s.textContent=JSON.stringify({     "prefetch": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" }     ],     "prerender": [       { "tag": "booking", "where": { "href_matches": "https://app.sncleaningservices.co.uk/*" }, "eagerness": "immediate" },       { "tag": "contact", "where": { "href_matches": "/contact{/}?" }, "eagerness": "eager" },       { "tag": "site", "where": { "and": [           { "href_matches": "/*" },           { "not": { "href_matches": "/book{/*}?" } },           { "not": { "href_matches": "/contact{/}?" } },           { "not": { "href_matches": "/contact/success{/*}?" } },           { "not": { "selector_matches": "[target=_blank], [download]" } }         ] }, "eagerness": "moderate" }     ]   });document.head.appendChild(s)},300)})</script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/inter-latin-600-normal.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="/fonts/poppins-latin-700-normal.woff2">
   <% if (typeof heroPreload !== 'undefined' && heroPreload) { const lcp = responsiveWebp(heroPreload); %>
     <link rel="preload" as="image" href="<%= lcp.avif || lcp.href %>"<% if (lcp.avif) { %> type="image/avif"<% } %><% if ((lcp.avifSrcset || lcp.srcset)) { %> imagesrcset="<%= lcp.avifSrcset || lcp.srcset %>" imagesizes="100vw"<% } %> fetchpriority="high">
   <% } %>
