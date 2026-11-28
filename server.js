@@ -65,6 +65,7 @@ const jobVideoLib = require('./lib/videos');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
 const urgency = require('./data/urgency-copy');
+const { fixDeepOvenFaqs } = require('./lib/deep-oven-faq');
 app.locals.urgencyCopy = urgency;
 const { serviceImage, GALLERY } = require('./data/media');
 const { servicePrice, priceNote } = require('./data/prices');
@@ -1543,7 +1544,7 @@ app.get('/:slug', async (req, res, next) => {
   const v2 = SERVICE_V2.includes(page.slug);
   const extra = (v2 && serviceContent[page.slug]) || {};
   // Database FAQs plus the service's extra FAQs (data/service-seo.js).
-  const allFaqs = urgency.mergeFaqs([...(page.faqs || []), ...(extra.extraFaqs || [])], page.slug);
+  const allFaqs = fixDeepOvenFaqs(urgency.mergeFaqs([...(page.faqs || []), ...(extra.extraFaqs || [])], page.slug));
   // The FAQ teaser (top questions of the service's live FAQ page) is shown with full answers under
   // the same FAQ heading (partials/faq-teaser.ejs), so the FAQPage schema lists those too: schema matches what is visible.
   const faqTeaser = app.locals.serviceFaqTeaser(page.slug);
@@ -1716,7 +1717,7 @@ async function renderArea(req, res, next, areaSlug) {
     ];
     const servicePage = await content.getServicePageBySlug(service.slug);
     const pageWithCopy = plainContent(applyContentExtras(page, service.slug));
-    const faqs = urgency.mergeFaqs(pageWithCopy.faqs || [], service.slug);
+    const faqs = fixDeepOvenFaqs(urgency.mergeFaqs(pageWithCopy.faqs || [], service.slug));
     const pageWithFaqs = { ...pageWithCopy, faqs };
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
