@@ -52,6 +52,8 @@ async function buildRoutes() {
     { url: '/carpet-cleaning-cost-calculator', out: 'carpet-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-27' },
     { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
     { url: '/prices', out: 'prices/index.html', sitemap: true },
+    { url: '/areas', out: 'areas/index.html', sitemap: true },
+    { url: '/reviews', out: 'reviews/index.html', sitemap: true },
     { url: '/our-work', out: 'our-work/index.html', sitemap: true },
     { url: '/why-us', out: 'why-us/index.html', sitemap: true },
     ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true })),
@@ -408,7 +410,7 @@ async function main() {
         if (status !== 200 && status !== 404) {
           throw new Error(`Unexpected status ${status} for ${route.url}`);
         }
-        writeFile(route.out, cullSvgMaps(await optimiseCss(body)));
+        writeFile(route.out, cullSvgMaps(await optimiseCss(require('./pictures').wrapPictures(body))));
         route.images = pageImages(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);
@@ -427,6 +429,8 @@ async function main() {
       console.log('Copied /public assets into /dist');
 
       fixInternalLinks();
+      const seoCode = require('./check-seo').check(DIST);
+      if (seoCode) process.exitCode = seoCode;
 
       console.log('\nStatic build complete: dist/');
     } catch (err) {

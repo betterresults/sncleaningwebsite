@@ -14,8 +14,8 @@ const seed = [
     published_at: '2026-09-14T09:00:00.000Z',
     updated_at: '2026-09-14T09:00:00.000Z',
     content: `
-<p>An end of tenancy clean is not a tidy-up. Inventory clerks look in the oven, behind the toilet, inside cupboards and along skirting. If those are still greasy or dusty, it shows up on the report, even if the rest of the flat looks fine.</p>
-<p>We do this work across London and Essex with our own staff, not a last-minute subcontractor. Below is what we actually treat as part of a move out clean, and what we need you to tell us so the quote is honest.</p>
+<p>An end of tenancy clean is not a tidy up. Inventory clerks look in the oven, behind the toilet, inside cupboards and along skirting. If those are still greasy or dusty, it shows up on the report, even if the rest of the flat looks fine.</p>
+<p>We do this work across London and Essex with our own staff, not a last minute subcontractor. Below is what we actually treat as part of a move out clean, and what we need you to tell us so the quote is honest.</p>
 
 <h2>What we usually include</h2>
 <ul>
@@ -96,17 +96,17 @@ const seed = [
     published_at: '2026-08-25T09:00:00.000Z',
     updated_at: '2026-08-25T09:00:00.000Z',
     content: `
-<p>People usually come to us for one of three reasons: they want the house kept on a rhythm, they are moving, or they have let it go for a while and need a proper reset. Those are different jobs. Booking the wrong one is how you end up paying for a deep clean every week, or wondering why a two-hour regular visit did not touch the oven.</p>
+<p>People usually come to us for one of three reasons: they want the house kept on a rhythm, they are moving, or they have let it go for a while and need a proper reset. Those are different jobs. Booking the wrong one is how you end up paying for a deep clean every week, or wondering why a two hour regular visit did not touch the oven.</p>
 
 <h2>Weekly</h2>
 <p>Best if you work long days, have children or pets, or simply want bathrooms and kitchens kept on top of. We try to send the same cleaner each time so they already know the house. The visit is maintenance, surfaces, floors, bathrooms, kitchen, not emptying the oven every week unless you ask.</p>
 
 <h2>Fortnightly</h2>
-<p>The most common booking for a busy two-person flat or a family that still does a bit themselves. Dust and bathrooms do not get away from you, but you are not paying for a visit you do not need. If a fortnight starts to feel tight, we can move you to weekly. If it feels like overkill, drop to monthly or book one-offs.</p>
+<p>The most common booking for a busy two person flat or a family that still does a bit themselves. Dust and bathrooms do not get away from you, but you are not paying for a visit you do not need. If a fortnight starts to feel tight, we can move you to weekly. If it feels like overkill, drop to monthly or book one offs.</p>
 
 <h2>A one off or deep clean</h2>
 <p>Use this after a winter of neglect, before guests, after builders, or when you are moving in or out. It is slower, heavier work: ovens, limescale, skirting, insides of cupboards if they are empty enough to do. A regular weekly slot will not replace that in a single visit.</p>
-<p>End of tenancy and after-builders are their own services, not a slightly longer domestic clean. Say which one you need when you enquire.</p>
+<p>End of tenancy and after builders are their own services, not a slightly longer domestic clean. Say which one you need when you enquire.</p>
 
 <h2>How we decide with you</h2>
 <p>Tell us the postcode, how the house is used, and what is bothering you. We will quote the job you described, not upsell a package on the page. Recurring visits are discounted against a one off of the same size; the exact figure is in the quote.</p>

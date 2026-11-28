@@ -1,14 +1,32 @@
-<%# Prices hub (/prices/): one card per service prices page (data/price-pages.js). Styles: public/css/eot-prices.css. %>
+<%# Prices hub (/prices/). From prices: data/price-hub.js, which reads data/prices.js. Styles: public/css/eot-prices.css. %>
 <link rel="stylesheet" href="/css/eot-prices.css?v=<%= assetVersion %>" />
 <div class="ep">
 <header class="ep-hero"><div class="ep-wrap">
   <h1>Cleaning prices in London and Essex</h1>
-  <p class="ep-answer">Choose a service to see the full price list and work out your price.</p>
-  <div class="ep-three ep-methods">
-    <% pricePages.forEach(function (pg) { %>
-    <a class="ep-card ep-card-link" href="<%= pg.url %>"><h2 class="ep-method-title"><%= pg.title %></h2><p><%= pg.text %></p><span class="ep-method-price">See prices →</span></a>
-    <% }); %>
-  </div>
-  <p class="ep-answer-sub">For a standalone carpet, sofa or mattress visit, use the <a href="/carpet-cleaning-cost-calculator/">carpet cleaning cost calculator</a>.</p>
+  <p class="ep-answer">Every domestic service has a from price. The booking form shows the exact total before you confirm. Oven cleaning is an add on on a deep, end of tenancy or after builders clean. It is not a service of its own.</p>
+  <p class="ep-answer-sub">Full price lists are published for <a href="/end-of-tenancy-cleaning/prices/">end of tenancy cleaning</a> and <a href="/after-builders-cleaning/prices/">after builders cleaning</a>. For carpets, sofas and mattresses, use the <a href="/carpet-cleaning-cost-calculator/">cost calculator</a>.</p>
 </div></header>
+
+<div class="ep-wrap" style="padding: 28px 0 64px;">
+  <% priceGuide.forEach(function (service) { %>
+  <section class="ep-block" id="<%= service.slug %>" style="margin: 0 0 28px;">
+    <h2><%= service.name %></h2>
+    <p class="ep-method-price"><%= service.price %></p>
+    <% if (service.note) { %><p><%= service.note %></p><% } %>
+    <p><%= service.summary %></p>
+    <% if (service.included && service.included.length) { %>
+    <h3>What is included</h3>
+    <ul>
+      <% service.included.forEach(function (item) { %>
+        <li><strong><%= item.name %>.</strong> <%= item.text %></li>
+      <% }); %>
+    </ul>
+    <% } %>
+    <p>
+      <% service.links.forEach(function (link, index) { %><% if (index) { %> · <% } %><a href="<%= link.href %>"><%= link.text %></a><% }); %>
+    </p>
+  </section>
+  <% }); %>
+  <p>Same from prices in London and Essex. SN Cleaning Services is not VAT registered, so no VAT is added. 12 years in business, with our own DBS checked team.</p>
+</div>
 </div>

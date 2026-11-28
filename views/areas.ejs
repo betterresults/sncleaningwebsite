@@ -1,0 +1,30 @@
+<section class="a-hero w-hero">
+  <div class="h-wrap w-hero-inner">
+    <p class="h-eyebrow">London and Essex</p>
+    <h1 class="a-display">Areas we cover</h1>
+    <p class="a-lead">Every area page on this site, grouped into London and Essex. Open your borough or town to see the cleaning service there, then book online.</p>
+    <div class="w-hero-actions">
+      <a href="<%= bookUrl() %>" class="h-btn h-btn--primary">Get a quote</a>
+      <a href="/prices/" class="h-btn w-btn-ghost">See prices</a>
+    </div>
+  </div>
+</section>
+
+<% areaGroups.forEach(function (group) { %>
+<section class="h-section h-white">
+  <div class="h-wrap">
+    <div class="h-head">
+      <p class="h-eyebrow">Coverage</p>
+      <h2 class="h-title"><%= group.name %></h2>
+    </div>
+    <% group.places.forEach(function (place) { %>
+    <h3><%= place.place %></h3>
+    <ul>
+      <% place.links.forEach(function (link) { %>
+        <li><a href="<%= link.url %>"><%= link.title %> in <%= place.place %></a></li>
+      <% }); %>
+    </ul>
+    <% }); %>
+  </div>
+</section>
+<% }); %>

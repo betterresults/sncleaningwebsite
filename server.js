@@ -8,7 +8,7 @@ const nodemailer = require('nodemailer');
 
 const { SITE_URL } = require('./lib/site-config');
 const schema = require('./lib/schema');
-const { isPlaceholderSocial, whatsappHref, plainPlaceName } = require('./lib/site-helpers');
+const { isPlaceholderSocial, whatsappHref, plainPlaceName, visibleCopy } = require('./lib/site-helpers');
 const { linkifyInternal, applyLinkPhrasesToPage } = require('./lib/linkify-internal');
 
 const app = express();
@@ -84,12 +84,18 @@ function responsiveWebp(src) {
   if (!clean.startsWith('/images/')) return { href: clean, srcset: '' };
   if (!rsCache.has(clean)) {
     const base = clean.replace(/^\/images\//, '').replace(/\.(jpe?g|png|webp)$/i, '');
-    const have = RS_WIDTHS.filter((w) => fs.existsSync(path.join(__dirname, 'public/images/_r', `${base}-${w}.webp`)));
+    const dir = path.join(__dirname, 'public/images/_r');
+    const have = RS_WIDTHS.filter((w) => fs.existsSync(path.join(dir, `${base}-${w}.webp`)));
     const srcset = have.length ? have.map((w) => `/images/_r/${base}-${w}.webp?v=${ASSET_VERSION} ${w}w`).join(', ') : '';
     const href = have.length
       ? `/images/_r/${base}-${have[have.length - 1]}.webp?v=${ASSET_VERSION}`
       : `${clean}?v=${ASSET_VERSION}`;
-    rsCache.set(clean, { href, srcset });
+    const avifWidths = RS_WIDTHS.filter((w) => fs.existsSync(path.join(dir, `${base}-${w}.avif`)));
+    const avifSrcset = avifWidths.length ? avifWidths.map((w) => `/images/_r/${base}-${w}.avif?v=${ASSET_VERSION} ${w}w`).join(', ') : '';
+    const avif = fs.existsSync(path.join(dir, `${base}.avif`))
+      ? `/images/_r/${base}.avif?v=${ASSET_VERSION}`
+      : (avifWidths.length ? `/images/_r/${base}-${avifWidths[avifWidths.length - 1]}.avif?v=${ASSET_VERSION}` : '');
+    rsCache.set(clean, { href, srcset, avif, avifSrcset });
   }
   return rsCache.get(clean);
 }
@@ -306,7 +312,7 @@ app.get('/', async (req, res) => {
   res.render('index', {
     title: 'Cleaning Services London & Essex',
     metaDescription:
-      'Insured domestic, end of tenancy and Airbnb cleaning across London & Essex. Own staff, a re-clean guarantee, and a quote the same weekday you enquire.',
+      'Insured domestic, end of tenancy and Airbnb cleaning across London and Essex. Own staff, a reclean guarantee, and a quote the same weekday you enquire.',
     // Homepage service cards, in this order.
     services: ['domestic-cleaning', 'end-of-tenancy-cleaning', 'deep-house-cleaning', 'carpet-cleaning-services', 'after-builders-cleaning', 'airbnb-cleaning']
       .map((slug) => services.find((s) => s.slug === slug))
@@ -347,7 +353,10 @@ app.get('/our-services', async (req, res) => {
 });
 
 app.get('/blog', async (req, res) => {
-  const posts = await content.getBlogPosts();
+  const posts = (await content.getBlogPosts()).map((post) => Object.assign({}, post, {
+    title: visibleCopy(post.title),
+    excerpt: visibleCopy(post.excerpt)
+  }));
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }];
 
   res.render('blog/index', {
@@ -365,20 +374,32 @@ app.get('/blog/:slug', async (req, res, next) => {
   renderPost(req, res, post);
 });
 
+const BLOG_METAS = {
+  'how-to-get-rid-of-black-streaks-on-my-carpet': 'Black streaks on carpet along skirting or under doors are usually filtration soiling. See what causes them and how to stop them.',
+  'how-long-does-end-of-tenancy-cleaning-take': 'End of tenancy cleaning takes a few hours for a studio, or a full day for a family house. See what affects the time and plan your move out.',
+  'the-best-cleaning-products-for-end-of-tenancy-what-works': 'The products that matter for an end of tenancy clean: degreaser, oven cleaner, limescale remover and microfibre. See what to use where.',
+  'allergy-proofing-your-holiday-let-a-comprehensive-cleaning-guide': 'Cut dust mites, pet dander and mould in your holiday let with covers, hot washes, HEPA vacuuming and ventilation. Read the guide.'
+};
+
 function renderPost(req, res, post) {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Blog', url: '/blog' }, { name: post.title, url: postUrl(post) }];
+  const shown = Object.assign({}, post, {
+    title: visibleCopy(post.title),
+    excerpt: visibleCopy(post.excerpt),
+    content: visibleCopy(post.content)
+  });
 
   res.render('blog/post', {
     title: post.meta_title || post.title,
     noindex: !!post.noindex,
-    metaDescription: post.meta_description || post.excerpt,
-    post,
+    metaDescription: BLOG_METAS[post.slug] || visibleCopy(post.meta_description || post.excerpt),
+    post: shown,
     breadcrumbs,
     ogImage: post.cover_image ? schema.absoluteUrl(post.cover_image) : res.locals.ogImage,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
-      schema.buildArticle({ post, site: res.locals.site })
+      schema.buildArticle({ post: shown, site: res.locals.site })
     ]
   });
 }
@@ -412,18 +433,23 @@ app.get('/case-studies/:slug', (req, res, next) => {
 });
 function renderCase(req, res, cs) {
   const url = `/case-studies/${cs.slug}`;
-  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Case studies', url: '/case-studies' }, { name: cs.title, url }];
+  const shown = Object.assign({}, cs, {
+    title: visibleCopy(cs.title),
+    excerpt: visibleCopy(cs.excerpt),
+    content: visibleCopy(cs.content)
+  });
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Case studies', url: '/case-studies' }, { name: shown.title, url }];
   res.render('case-studies/post', {
-    title: cs.meta_title || cs.title,
-    metaDescription: cs.meta_description || cs.excerpt,
+    title: cs.meta_title || shown.title,
+    metaDescription: visibleCopy(cs.meta_description || cs.excerpt),
     noindex: !!cs.noindex,
-    post: cs,
+    post: shown,
     breadcrumbs,
     ogImage: cs.cover_image ? schema.absoluteUrl(cs.cover_image) : res.locals.ogImage,
     structuredData: [
       ...res.locals.structuredData,
       schema.buildBreadcrumbList(breadcrumbs),
-      schema.buildArticle({ post: cs, site: res.locals.site, url })
+      schema.buildArticle({ post: shown, site: res.locals.site, url })
     ]
   });
 }
@@ -544,7 +570,7 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   const serviceName = svc ? svc.title : req.params.serviceSlug;
   const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
   res.render('videos', {
-    title: `${serviceName} Videos: Before and After From Our Jobs`,
+    title: `${serviceName} Job Videos`,
     metaDescription: `Before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex.`,
     // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
     noindex: allVideos.length <= 3,
@@ -562,7 +588,7 @@ app.get('/about', (req, res) => {
   res.render('about', {
     title: 'About Us — 12 Years Cleaning London & Essex',
     metaDescription:
-      'SN Cleaning Services has cleaned London & Essex homes for 12 years with its own insured, DBS-checked team, professional products and a free re-clean guarantee.',
+      'SN Cleaning Services has cleaned London and Essex homes for 12 years. Insured, DBS checked team, and a free re clean guarantee.',
     breadcrumbs,
     testimonials,
     designV2: true,
@@ -604,11 +630,74 @@ app.get('/prices', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Prices', url: '/prices' }];
   res.render('prices-index', {
     title: 'Cleaning Prices London & Essex | SN Cleaning Services',
-    metaDescription: 'Cleaning prices from SN Cleaning Services in London and Essex: full price lists and calculators for end of tenancy cleaning and after builders cleaning.',
+    metaDescription: 'Cleaning prices in London and Essex for domestic, end of tenancy, deep, Airbnb, after builders, carpet, sofa and mattress cleaning. Book online.',
+    priceGuide: require('./data/price-hub'),
     breadcrumbs,
     designV2: true,
     ...aiPageDates(),
     structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
+app.get('/areas', async (req, res) => {
+  const [areaPages, regions] = await Promise.all([content.getAreaPages(), content.getAllCoverageRegions()]);
+  const byId = new Map(regions.map((r) => [r.id, r]));
+  const serviceOrder = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'deep-house-cleaning', 'airbnb-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+  const buckets = new Map([['London', new Map()], ['Essex', new Map()], ['Other areas', new Map()]]);
+  for (const page of areaPages) {
+    if (!page.services || !page.coverage_regions) continue;
+    const names = [];
+    const seen = new Set();
+    for (let region = page.coverage_regions; region && !seen.has(region.id); region = region.parent_id ? byId.get(region.parent_id) : null) {
+      seen.add(region.id);
+      names.push(region.name);
+    }
+    const grouped = areaMap.groupFor(names);
+    const bucketName = grouped === 'Essex' || names.some((n) => /^essex\b/i.test(n))
+      ? 'Essex'
+      : (grouped !== 'Other areas' || names.some((n) => /^london$/i.test(n)) || /^london$/i.test(place) ? 'London' : 'Other areas');
+    const place = plainPlaceName(page.coverage_regions.display_name || String(page.coverage_regions.name).replace(/^Essex - /, '').replace(/\s*\/.*$/, ''));
+    const bucket = buckets.get(bucketName);
+    if (!bucket.has(place)) bucket.set(place, []);
+    bucket.get(place).push({
+      title: page.services.title,
+      slug: page.services.slug,
+      url: `/${page.services.slug}/${page.slug}/`
+    });
+  }
+  const areaGroups = [...buckets.entries()].map(([name, places]) => ({
+    name,
+    places: [...places.entries()].map(([place, links]) => ({
+      place,
+      links: links.sort((a, b) => serviceOrder.indexOf(a.slug) - serviceOrder.indexOf(b.slug) || a.title.localeCompare(b.title))
+    })).sort((a, b) => a.place.localeCompare(b.place))
+  })).filter((group) => group.places.length);
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Areas', url: '/areas' }];
+  res.render('areas', {
+    title: 'Areas We Cover in London and Essex',
+    metaDescription: 'Every area we clean in London and Essex, grouped so you can open the page for your borough or town and book online.',
+    areaGroups,
+    breadcrumbs,
+    designV2: true,
+    structuredData: [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)]
+  });
+});
+
+app.get('/reviews', (req, res) => {
+  const breadcrumbs = [...res.locals.breadcrumbs, { name: 'Reviews', url: '/reviews' }];
+  const googleRating = require('./data/business-profile').googleRating;
+  res.render('reviews', {
+    title: 'Google Reviews of Our Cleaning',
+    metaDescription: 'Read real Google reviews of SN Cleaning Services, rated 5.0. The words below are copied from the Google profile. Book a clean in London or Essex.',
+    reviews: testimonials,
+    ratingValue: googleRating.ratingValue,
+    reviewCount: googleRating.reviewCount,
+    breadcrumbs,
+    designV2: true,
+    structuredData: schema.mergeReviewsIntoBusiness(
+      [...res.locals.structuredData, schema.buildBreadcrumbList(breadcrumbs)],
+      testimonials
+    )
   });
 });
 
@@ -625,7 +714,7 @@ app.get('/after-builders-cleaning/prices', (req, res) => {
   res.render('ab-prices', {
     title: 'After Builders Cleaning Prices London & Essex | Calculator',
     metaDescription:
-      'After builders cleaning prices in London and Essex: by the size of an empty home, by the hour for one room, or cleaners by the day for builders. Calculator.',
+      'After builders cleaning prices in London and Essex, by home size, by the hour, or cleaners by the day. Use the calculator and book online.',
     p: prices,
     breadcrumbs,
     designV2: true,
@@ -659,7 +748,7 @@ app.get('/end-of-tenancy-cleaning/prices', (req, res) => {
   res.render('eot-prices', {
     title: 'End of Tenancy Cleaning Prices London & Essex | Calculator',
     metaDescription:
-      'End of tenancy cleaning prices for every flat and house size in London and Essex, with a calculator, worked examples, extras and what is included. No VAT added.',
+      'End of tenancy cleaning prices for every flat and house size in London and Essex, with a calculator, extras and what is included. Book online.',
     p: prices,
     breadcrumbs,
     designV2: true,

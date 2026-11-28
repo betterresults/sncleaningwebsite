@@ -15,7 +15,7 @@ module.exports = {
         h: 'What is domestic cleaning?',
         p: [
           'Domestic cleaning is regular, general cleaning of your home: kitchens, bathrooms, living areas and bedrooms kept clean and tidy on a schedule that suits you. It is the clean that keeps a home on top, week after week, rather than a one time deep reset.',
-          'You can work through our [room-by-room domestic cleaning checklist](/domestic-cleaning-checklist/) to see exactly what a regular visit covers.',
+          'You can work through our [room by room domestic cleaning checklist](/domestic-cleaning-checklist/) to see exactly what a regular visit covers.',
           `SN Cleaning Services has provided domestic cleaning ${LONDON_ESSEX} for 12 years. Every clean is done by our own trained, insured and DBS checked cleaners, never subcontractors, and we send the same cleaner wherever we can so they get to know your home.`
         ]
       },
@@ -67,7 +67,7 @@ module.exports = {
         h: 'What do letting agents check at the end of a tenancy?',
         p: [
           'Agents and inventory clerks look at the same areas every time, so they are where we spend the most time:',
-          'If you are cleaning the property yourself, work through our [room-by-room end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
+          'If you are cleaning the property yourself, work through our [room by room end of tenancy cleaning checklist](/end-of-tenancy-cleaning-checklist/) before the inspection.'
         ],
         list: [
           'Inside the oven, hob and extractor',
@@ -283,7 +283,7 @@ module.exports = {
   'carpet-cleaning-services': {
     metaTitle: 'Carpet Cleaning London and Essex | 5★ Rated on Google',
     metaDescription:
-      'Professional carpet and rug cleaning in London and Essex by our own trained team. Stains treated before cleaning, carpets left to dry fast. Rated 5.0 on Google.',
+      'Professional carpet and rug cleaning in London and Essex by our trained team. Stains treated before cleaning, then a fast dry. Book online.',
     prices: [],
     guide: [
       {
@@ -357,7 +357,7 @@ module.exports = {
   'mattress-cleaning': {
     metaTitle: 'Mattress Cleaning London and Essex | 5★ Rated on Google',
     metaDescription:
-      'Professional mattress cleaning in London and Essex. Stains, odours and dust mites treated by our own trained, insured team, with a 24 hour re clean guarantee.',
+      'Professional mattress cleaning in London and Essex. Stains, odours and dust mites treated by our trained team, with a 24 hour re clean. Book online.',
     prices: [],
     guide: [
       {

@@ -5,6 +5,8 @@
 // prices URL that 404s.
 
 const { FROM_PRICES } = require('./prices');
+const eotPrices = require('./eot-prices');
+const carpetPrices = require('./carpet-cleaning-cost-calculator');
 const { estimate } = require('../public/js/house-cleaning-time-calculator');
 const { rateInputs } = require('./house-cleaning-time-calculator');
 
@@ -65,6 +67,103 @@ const airbnbMinimum = times(2, airbnbRate);
 const airbnbThree = times(3, airbnbRate);
 const deepTwoBed = deepVisit(2);
 const deepThreeBed = deepVisit(3);
+
+function catalogueItem(key) {
+  for (const group of carpetPrices.groups) {
+    const found = group.items.find((item) => item.key === key);
+    if (found) return found;
+  }
+  throw new Error('answer capsule missing carpet catalogue item ' + key);
+}
+
+function endOfTenancyCapsule() {
+  const studio = eotPrices.flats.find((row) => row.key === 'studio').prices[0];
+  const flat = eotPrices.flats.find((row) => row.key === 'flat-2').prices[2];
+  const oven = eotPrices.ovens.find((row) => row.key === 'single').price;
+  const studioRow = times(1, studio);
+  studioRow.label = 'Unfurnished studio flat';
+  studioRow.amount = gbp(studio);
+  const flatRow = { label: 'Furnished 2 bedroom flat', amount: gbp(flat) };
+  return {
+    eyebrow: '2026 prices',
+    title: '2026 answer capsule and worked examples',
+    answer: 'End of tenancy cleaning in London and Essex starts from ' + gbp(studio) + ' for an unfurnished studio. The price depends on bedrooms and whether the home is furnished. Cleaning inside the oven is an optional add on, not a standalone oven cleaning service. A single oven add on is ' + gbp(oven) + '. Empty homes have a 7 day re clean, and no VAT is added.',
+    support: [
+      'The figures below are published list prices. The booking form shows the exact total before you confirm, including any extras the home actually has.'
+    ],
+    examples: [
+      {
+        title: 'Unfurnished studio flat',
+        lines: [studioRow],
+        total: gbp(studio),
+        note: 'This is the published from price. A larger or furnished home costs more. The prices page lists every size.'
+      },
+      {
+        title: 'Furnished 2 bedroom flat',
+        lines: [flatRow],
+        total: gbp(flat),
+        note: 'A furnished 2 bedroom flat on the published price list. Furnishing costs more because furniture is cleaned and moved. The booking form shows the exact total.'
+      }
+    ],
+    facts: [
+      'Own DBS checked team',
+      '7 day re clean on empty homes',
+      'Oven cleaning is an add on only',
+      'No VAT added'
+    ],
+    links: [
+      { href: '/end-of-tenancy-cleaning/prices/', text: 'End of tenancy cleaning prices' },
+      { href: '/end-of-tenancy-cleaning-checklist/', text: 'End of tenancy cleaning checklist' },
+      { href: '/end-of-tenancy-cleaning-cost-calculator/', text: 'End of tenancy cost calculator' }
+    ]
+  };
+}
+
+function machineCapsule(slug, name, firstKey, secondKey, phrase) {
+  const first = catalogueItem(firstKey);
+  const second = catalogueItem(secondKey);
+  const minimum = carpetPrices.MINIMUM;
+  const firstVisit = Math.max(first.price, minimum);
+  const pairTotal = first.price + second.price;
+  return {
+    eyebrow: '2026 prices',
+    title: '2026 answer capsule and worked examples',
+    answer: name + ' in London and Essex starts from ' + gbp(first.price) + ' for ' + phrase + '. There is a minimum visit charge of ' + gbp(minimum) + '. Carpets, sofas and mattresses can be combined in one visit to reach it. A missed spot is covered by a 24 hour re clean guarantee, and no VAT is added.',
+    support: [
+      'The figures below are the published item prices. If the items you choose come to less than ' + gbp(minimum) + ', the visit is ' + gbp(minimum) + '. The booking form shows the exact total.'
+    ],
+    examples: [
+      {
+        title: first.label,
+        lines: [{ label: first.label, amount: gbp(first.price) }],
+        total: gbp(firstVisit),
+        note: first.price < minimum
+          ? 'The item price is ' + gbp(first.price) + '. One item under the minimum is billed at ' + gbp(minimum) + '. Add a carpet, sofa or mattress to use the rest of the minimum.'
+          : 'This is at or above the ' + gbp(minimum) + ' minimum visit, so you pay the item price. The booking form shows the exact total.'
+      },
+      {
+        title: first.label + ' and ' + second.label.toLowerCase(),
+        lines: [
+          { label: first.label, amount: gbp(first.price) },
+          { label: second.label, amount: gbp(second.price) }
+        ],
+        total: gbp(Math.max(pairTotal, minimum)),
+        note: pairTotal < minimum
+          ? 'The two item prices come to ' + gbp(pairTotal) + ', which is under the ' + gbp(minimum) + ' minimum, so the visit is ' + gbp(minimum) + '.'
+          : 'Both prices are on the published list and they meet the minimum. The booking form confirms the total before you book.'
+      }
+    ],
+    facts: [
+      'Own DBS checked team',
+      'Minimum visit ' + gbp(minimum),
+      '24 hour re clean guarantee',
+      'No VAT added'
+    ],
+    links: [
+      { href: '/carpet-cleaning-cost-calculator/', text: 'Carpet, sofa and mattress calculator' }
+    ]
+  };
+}
 
 const CAPSULES = {
   'domestic-cleaning': {
@@ -197,7 +296,11 @@ const CAPSULES = {
       { href: '/after-builders-cleaning-checklist/', text: 'After builders cleaning checklist' },
       { href: '/after-builders-cleaning/prices/', text: 'After builders cleaning prices' }
     ]
-  }
+  },
+  'end-of-tenancy-cleaning': endOfTenancyCapsule(),
+  'carpet-cleaning-services': machineCapsule('carpet-cleaning-services', 'Carpet cleaning', 'single-bedroom', 'living-room', 'a single bedroom carpet'),
+  'upholstery-cleaning': machineCapsule('upholstery-cleaning', 'Upholstery cleaning', '2-seater', '3-seater', 'a 2 seater sofa'),
+  'mattress-cleaning': machineCapsule('mattress-cleaning', 'Mattress cleaning', 'single', 'double', 'a single mattress')
 };
 
 const HYPHEN = /[A-Za-z0-9]+-[A-Za-z0-9]+/;

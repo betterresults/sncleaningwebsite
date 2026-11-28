@@ -233,7 +233,7 @@ for (const [k, v] of Object.entries(nearbyFirst)) {
 }
 
 // Extra guide heading and FAQ for one area page. Kept out of `pages` so it does not change titles, metas or nearby links.
-// After builders from price is data/prices.js. The dependency and the quote sentence are the after-builders FAQ in data/service-seo.js.
+// After builders from price is data/prices.js. The dependency and the quote sentence are the after builders FAQ in data/service-seo.js.
 const AFTER_BUILDERS_LONDON_COST_Q = 'How much does after builders cleaning cost?';
 const AFTER_BUILDERS_LONDON_COST_A = 'After builders cleaning starts from £179. The price depends on the size of the property and the work that was done. Tell us about the job using the form on this page and we will send you a quote.';
 const contentExtras = {
@@ -519,5 +519,11 @@ const contentExtras = {
     }]
   },
 };
+
+const shortMetas = require('./short-metas');
+for (const [key, metaDescription] of Object.entries(shortMetas)) {
+  if (!pages[key]) pages[key] = {};
+  if (!pages[key].metaDescription || pages[key].metaDescription.length > 155) pages[key].metaDescription = metaDescription;
+}
 
 module.exports = { pages, nearbyFirst, contentExtras };

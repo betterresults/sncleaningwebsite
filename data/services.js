@@ -15,7 +15,7 @@ module.exports = [
     short: 'Property preparation that meets landlord and agent standards.',
     description:
       'A detailed clean that meets letting agent and landlord standards, giving you the best chance of a full deposit return, or a spotless start in your new home.',
-    features: ['Full property checklist', 'Carpet & upholstery care', 'Kitchen appliance detailing', 'Agent-standard finish']
+    features: ['Full property checklist', 'Carpet & upholstery care', 'Kitchen appliance detailing', 'Agent standard finish']
   },
   {
     slug: 'airbnb-cleaning',
@@ -23,7 +23,7 @@ module.exports = [
     title: 'Airbnb Cleaning',
     short: 'Guest ready turnovers for short term rentals.',
     description:
-      'Same day turnaround cleaning between guest stays, including linen changes and restocking, so every guest arrives to a spotless space and you keep those 5-star reviews coming.',
+      'Same day turnaround cleaning between guest stays, including linen changes and restocking, so every guest arrives to a spotless space and you keep those 5 star reviews coming.',
     features: ['Same day turnovers', 'Linen change', 'Restocking essentials', 'Photo checklist on request']
   },
   {
@@ -78,6 +78,6 @@ module.exports = [
     short: 'Cleaning services for childcare facilities.',
     description:
       'Extra care and child safe products for nurseries and childcare settings, keeping play areas, kitchens and washrooms hygienic and safe.',
-    features: ['Child safe products', 'Play area sanitising', 'Kitchen & washroom cleaning', 'Flexible out-of-hours slots']
+    features: ['Child safe products', 'Play area sanitising', 'Kitchen & washroom cleaning', 'Flexible out of hours slots']
   }
 ];

@@ -120,7 +120,7 @@
   /* ---------- Google Analytics 4 (every visit) ---------- */
   var gaReady = false;
   function loadGa() {
-    if (gaReady || window.self !== window.top) return;
+    if (gaReady || window.self !== window.top || consent() !== "accepted") return;
     var g = document.createElement("script"); g.async = true;
     g.src = "https://www.googletagmanager.com/gtag/js?id=G-K9GE74MBMB";
     document.head.appendChild(g);
@@ -130,7 +130,7 @@
     window.gtag("config", "G-K9GE74MBMB");
     gaReady = true;
   }
-  loadGa();
+  if (consent() === "accepted") loadGa();
 
   // Count the visit (where they came from only — no name, no IP, no cookies)
   if (firstLoadInTab) {

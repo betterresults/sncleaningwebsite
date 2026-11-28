@@ -1,0 +1,27 @@
+<section class="a-hero w-hero">
+  <div class="h-wrap w-hero-inner">
+    <p class="h-eyebrow">Google reviews</p>
+    <h1 class="a-display">What our customers say</h1>
+    <p class="a-lead">SN Cleaning Services is rated <strong><%= ratingValue %></strong> on Google, from <%= reviewCount %> reviews. The reviews below are copied word for word from that profile.</p>
+    <% if (site.googleBusinessUrl) { %>
+    <div class="w-hero-actions">
+      <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
+      <a href="<%= bookUrl() %>" class="h-btn w-btn-ghost">Get a quote</a>
+    </div>
+    <% } %>
+  </div>
+</section>
+
+<section class="h-section h-sand">
+  <div class="h-wrap">
+    <div class="h-reviews">
+      <% reviews.forEach(function (t) { %>
+        <figure class="h-review">
+          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <blockquote>“<%= t.quote %>”</blockquote>
+          <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
+        </figure>
+      <% }); %>
+    </div>
+  </div>
+</section>

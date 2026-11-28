@@ -31,7 +31,7 @@
                 <% const state = tasks[item.id] || {}; %>
                 <div class="ec-task">
                   <p class="ec-task-name"><%= item.text %></p>
-                  <p class="ec-count"><%= state.done ? 'Done' : 'Not ticked' %><%= state.checkin ? ' · As at check-in' : '' %><%= state.photo ? ' · Photo taken' : '' %></p>
+                  <p class="ec-count"><%= state.done ? 'Done' : 'Not ticked' %><%= state.checkin ? ' · As at check in' : '' %><%= state.photo ? ' · Photo taken' : '' %></p>
                 </div>
               <% }); %>
             <% }); %>

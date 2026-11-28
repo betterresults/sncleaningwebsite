@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "build": "node scripts/build-images.js && node scripts/prerender.js"
+    "build": "node scripts/build-images.js && node scripts/prerender.js",
+    "check:seo": "node scripts/check-seo.js",
+    "test": "node scripts/test-dehyphen.js"
   },
   "keywords": [
     "cleaning-services",

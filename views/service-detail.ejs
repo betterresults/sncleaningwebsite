@@ -22,7 +22,7 @@
     <div class="service-detail">
       <div class="service-detail-media">
         <% const servicePhoto = (page.images && page.images.length) ? page.images[0] : serviceImage(service.slug); %>
-        <img src="<%= responsiveWebp(servicePhoto).href %>"<%- rs(servicePhoto, '(max-width: 800px) 100vw, 600px') %> alt="<%= service.title %>" width="1152" height="864" decoding="async" />
+        <img src="<%= responsiveWebp(servicePhoto).href %>"<%- rs(servicePhoto, '(max-width: 800px) 100vw, 600px') %> alt="<%= service.title %>" width="1152" height="864" decoding="async" fetchpriority="high" />
       </div>
       <div class="service-detail-text">
         <h2>About This Service</h2>
