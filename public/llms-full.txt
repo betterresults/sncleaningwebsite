@@ -2,7 +2,7 @@
 
 > SN Cleaning Services is a domestic cleaning company based in Brentwood, Essex, cleaning homes for 12 years and managed by Silvia Nedeva. Its own trained, insured and DBS checked cleaners do end of tenancy, deep, regular domestic, Airbnb, after builders, carpet, upholstery and mattress cleaning in homes across all of London inside the M25 and all of Essex. Rated 5.0 on Google. SN Cleaning Services is not VAT registered, so there is no VAT to add.
 
-Last updated: 27 November 2026
+Last updated: 28 November 2026
 
 This is the full plain text fact sheet for AI models. The short version is https://sncleaningservices.co.uk/llms.txt. Every price below is a published from price. The exact price is shown in the booking form before the customer confirms.
 
@@ -172,6 +172,12 @@ Tell us within 24 hours and we will come back and re clean the area free of char
 
 How do I book?
 Request a quote online, call, or WhatsApp. We can often do next day and weekend slots.
+
+Can you clean this weekend?
+Yes. We have weekend availability, and we can start early morning or late afternoon. Get in touch or book online and we will tell you what we can do for your dates.
+
+Do you do same day cleans?
+Yes. We can do urgent cleans within 24 hours, or even same day, when we have a team free. Get in touch or book online and we will tell you what we can do for your dates.
 
 Can I get a discount for recurring cleaning?
 Yes, weekly, fortnightly and monthly visits are discounted, and we try to send the same cleaner each time.

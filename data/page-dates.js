@@ -54,9 +54,29 @@ const AI_SERVICES = new Set([
   'end-of-tenancy-cleaning'
 ]);
 
+// 28 Nov 2026: these pages gained the availability line and the two booking FAQs.
+const AVAILABILITY_EDITED = '2026-11-28';
+const AVAILABILITY_SERVICES = new Set([
+  'domestic-cleaning',
+  'end-of-tenancy-cleaning',
+  'deep-house-cleaning',
+  'airbnb-cleaning',
+  'after-builders-cleaning',
+  'carpet-cleaning-services',
+  'upholstery-cleaning',
+  'mattress-cleaning'
+]);
+
 function serviceDate(page) {
   const cms = recordedDate(page && page.updated_at);
-  if (page && AI_SERVICES.has(page.slug)) return laterDay(AI_SERVICE_MODIFIED, cms);
+  let date = page && AI_SERVICES.has(page.slug) ? laterDay(AI_SERVICE_MODIFIED, cms) : cms;
+  if (page && AVAILABILITY_SERVICES.has(page.slug)) date = laterDay(date, AVAILABILITY_EDITED);
+  return date;
+}
+
+function areaContentDate(updatedAt, serviceSlug) {
+  const cms = recordedDate(updatedAt);
+  if (serviceSlug && AVAILABILITY_SERVICES.has(serviceSlug)) return laterDay(cms, AVAILABILITY_EDITED);
   return cms;
 }
 
@@ -67,7 +87,7 @@ function videoDate(slug, videos) {
 }
 
 const DATES = {
-  '/': '2026-11-27',
+  '/': '2026-11-28',
   '/our-services': '2026-11-27',
   '/about': '2026-11-28',
   '/about/silvia-nedeva': '2026-11-27',
@@ -121,6 +141,7 @@ module.exports = {
   staticDate,
   recordedDate,
   serviceDate,
+  areaContentDate,
   videoDate,
   AI_SERVICE_MODIFIED
 };

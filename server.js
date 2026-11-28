@@ -64,6 +64,9 @@ const whyUs = require('./data/why-us');
 const jobVideoLib = require('./lib/videos');
 const checklist = require('./data/checklist');
 const faqs = require('./data/faqs');
+const urgency = require('./data/urgency-copy');
+const { fixDeepOvenFaqs } = require('./lib/deep-oven-faq');
+app.locals.urgencyCopy = urgency;
 const { serviceImage, GALLERY } = require('./data/media');
 const { servicePrice, priceNote } = require('./data/prices');
 
@@ -347,7 +350,7 @@ function recordedDate(value) {
 }
 function areaPageDates(page) {
   const published = recordedDate(page && page.created_at);
-  const modified = recordedDate(page && page.updated_at);
+  const modified = pageDates.areaContentDate(page && page.updated_at, page && page.services && page.services.slug);
   const out = {};
   if (published) out.webPageDatePublished = published;
   if (modified) out.webPageDateModified = modified;
@@ -382,6 +385,7 @@ app.get('/', async (req, res) => {
     isHome: true,
     coverageAreas: res.locals.coverageAreas,
     ...aiPageDates(),
+    webPageDateModified: pageDates.DATES['/'],
     structuredData: schema.mergeReviewsIntoBusiness(
       [...res.locals.structuredData, ...(faqPage ? [faqPage] : [])],
       testimonials
@@ -685,6 +689,7 @@ app.get('/about', (req, res) => {
     covers: cover ? cover.a.split('. ').slice(0, 2).join('. ') + '.' : '',
     years: years && /12 years/.test(years.a) ? '12 years in business' : '',
     team: cover ? 'The clean is done by our own trained, insured, DBS checked cleaners. We never send subcontractors.' : '',
+    insurance: 'Every cleaner is DBS checked, trained and insured before they visit a property. We do not use subcontractors.',
     services: order.map((slug) => {
       const nav = (res.locals.navServices || []).find((s) => s.slug === slug);
       const raw = servicePrice(slug) || '';
@@ -1539,7 +1544,7 @@ app.get('/:slug', async (req, res, next) => {
   const v2 = SERVICE_V2.includes(page.slug);
   const extra = (v2 && serviceContent[page.slug]) || {};
   // Database FAQs plus the service's extra FAQs (data/service-seo.js).
-  const allFaqs = [...(page.faqs || []), ...(extra.extraFaqs || [])];
+  const allFaqs = fixDeepOvenFaqs(urgency.mergeFaqs([...(page.faqs || []), ...(extra.extraFaqs || [])], page.slug));
   // The FAQ teaser (top questions of the service's live FAQ page) is shown with full answers under
   // the same FAQ heading (partials/faq-teaser.ejs), so the FAQPage schema lists those too: schema matches what is visible.
   const faqTeaser = app.locals.serviceFaqTeaser(page.slug);
@@ -1712,7 +1717,8 @@ async function renderArea(req, res, next, areaSlug) {
     ];
     const servicePage = await content.getServicePageBySlug(service.slug);
     const pageWithCopy = plainContent(applyContentExtras(page, service.slug));
-    const faqs = pageWithCopy.faqs || [];
+    const faqs = fixDeepOvenFaqs(urgency.mergeFaqs(pageWithCopy.faqs || [], service.slug));
+    const pageWithFaqs = { ...pageWithCopy, faqs };
     const faq = schema.buildFaqPage(faqs);
     // London / Essex pages: coverage map linking to this service's borough pages.
     // London / Essex pages: the big coverage map linking to this service's pages.
@@ -1788,7 +1794,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       title: plainPlaceName((ov && ov.title) || [`${service.title} ${place} | 5★ Rated on Google`, `${service.title} ${place} | 5★ Rated`, `${service.title} ${place}`].find((t) => t.length <= 60) || `${service.title} ${place}`),
       metaDescription: plainPlaceName((ov && ov.metaDescription) || page.meta_description || `${service.title} in ${place}.`),
       h1Override: ov && ov.h1 ? plainPlaceName(ov.h1) : null,
-      page: plainContent(applyPageOverrides(pageWithCopy, ov)),
+      page: plainContent(applyPageOverrides(pageWithFaqs, ov)),
       region, service: fullService, parent, place,
       servicePage: servicePage || {},
       parentLink: parentPage ? { name: areaName(parent), url: pageUrl(parentPage) } : null,

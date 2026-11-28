@@ -40,6 +40,7 @@
       <p class="h-lead">
         <%= copy.lead %>
       </p>
+      <p class="s-hero-urgency"><%= urgencyCopy.LINE %><% if (service.slug === 'end-of-tenancy-cleaning') { %> <%= urgencyCopy.EOT_PRICE %><% } %></p>
       <div class="s-hero-meta">
         <% if (price) { %><span class="s-price"><%= price %></span><% } %>
         <% if (site.googleBusinessUrl) { %>
@@ -50,7 +51,7 @@
       <% if (pricePages.some(function (pg) { return pg.slug === service.slug; })) { %><p class="s-price-min"><a href="/<%= service.slug %>/prices/" style="color:inherit;text-decoration:underline">See every price and work out yours</a></p><% } %>
     </div>
 
-<%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
+<%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name, serviceSlug: service.slug }) %>
   </div>
 
 <%- include('partials/trust-strip') %>
