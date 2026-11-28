@@ -3,6 +3,7 @@
 // whole site down; routes below handle empty state gracefully.
 const supabase = require('../lib/supabase');
 const localBlogPosts = require('./blog-posts');
+const videoDurations = require('./video-durations');
 
 function publishedLocalPosts() {
   return localBlogPosts
@@ -227,7 +228,11 @@ const getJobVideos = memo(async function getJobVideos() {
     console.error('Error fetching job videos:', error.message);
     return [];
   }
-  return data || [];
+  return (data || []).map((v) => (
+    v && v.youtube_id && videoDurations[v.youtube_id] && !v.duration
+      ? { ...v, duration: videoDurations[v.youtube_id] }
+      : v
+  ));
 });
 
 // Questions answered on the website. Rows: public.faq_answers (published only).

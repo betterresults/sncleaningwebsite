@@ -724,10 +724,12 @@ input:focus, select:focus, textarea:focus {
   margin-top: 12px;
   border-radius: var(--radius);
   overflow: hidden;
-  aspect-ratio: 4 / 3;
   background: #e8ece9;
+  line-height: 0;
 }
-.contact-map iframe { width: 100%; height: 100%; border: 0; display: block; }
+.contact-map a { display: block; }
+.contact-map img { width: 100%; height: auto; display: block; }
+.contact-map-credit { margin: 8px 0 0; font-size: .8rem; line-height: 1.4; color: var(--color-muted); }
 .contact-map-link { margin: 12px 0 0; font-weight: 600; }
 .contact-info-card a:hover { color: var(--color-primary); }
 .contact-info-actions {
@@ -748,8 +750,14 @@ input:focus, select:focus, textarea:focus {
 .site-footer .logo { color: #fff; }
 .footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr 1.2fr; gap: 32px; padding-bottom: 40px; }
 .footer-tagline { color: #9fb3ac; margin-top: 14px; font-size: 0.92rem; }
-.footer-social { display: flex; gap: 16px; margin-top: 16px; }
+.footer-social { display: flex; flex-wrap: wrap; gap: 12px 16px; margin-top: 16px; }
 .footer-social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 48px;
+  min-width: 48px;
   color: #b9cbc4;
   font-size: 0.92rem;
   font-weight: 600;

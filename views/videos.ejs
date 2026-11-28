@@ -10,4 +10,18 @@
     </div>
   </div>
 </section>
+<% if (serviceSlug === 'end-of-tenancy-cleaning') { %>
+<section class="h-section h-sand">
+  <div class="h-wrap" style="max-width:46em">
+    <p>Every video is from a real end of tenancy cleaning job by our own team. The area is shown, never an address. There are <%= allVideos.length %> videos, newest first.</p>
+    <p>Each title is the area we cleaned. We do not show a street or a house number.</p>
+    <ul>
+      <% allVideos.forEach(function (v) { %>
+        <li><%= v.title %><% if (v.town) { %>, in <% if (v.areaUrl) { %><a href="<%= v.areaUrl %>"><%= v.town %></a><% } else { %><%= v.town %><% } %><% if (v.district) { %> (<%= v.district %>)<% } %><% } %>.</li>
+      <% }); %>
+    </ul>
+    <p>Read about the <a href="/end-of-tenancy-cleaning/">end of tenancy cleaning</a> service. Where a town has its own page, the name above links to it.</p>
+  </div>
+</section>
+<% } %>
 <%- include('partials/job-videos', { jobVideos: { videos: allVideos, total: allVideos.length, viewAllUrl: '', serviceName }, videosTitle: allVideos.length + ' videos, newest first' }) %>

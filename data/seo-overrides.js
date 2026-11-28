@@ -241,6 +241,33 @@ const contentExtras = {
     sections: [{ heading: AFTER_BUILDERS_LONDON_COST_Q, body: [AFTER_BUILDERS_LONDON_COST_A] }],
     faqs: [{ question: AFTER_BUILDERS_LONDON_COST_Q, answer: AFTER_BUILDERS_LONDON_COST_A }]
   },
+  // London end of tenancy only. Size table stays on the prices page (data/eot-prices.js).
+  'end-of-tenancy-cleaning/london': {
+    sections: [
+      {
+        heading: 'Price by size',
+        body: [
+          'End of tenancy cleaning in London starts from £179. The same prices apply across London and Essex, and there is no VAT to add. In London the Congestion Charge, if the home is in the zone, and any parking fees are added on top. The exact price still comes from the quote form.',
+          'The price for each property size, and for each extra, is on our [end of tenancy cleaning prices](/end-of-tenancy-cleaning/prices/) page.'
+        ]
+      },
+      {
+        heading: 'What is not included',
+        body: [
+          'Outside windows are not included. Inside windows and internal glass are.',
+          'Carpets are vacuumed as standard. Professional carpet cleaning is separate, and it can be added from the [end of tenancy cleaning prices](/end-of-tenancy-cleaning/prices/) page.',
+          'Oven cleaning is an add on, chosen when you book.'
+        ]
+      },
+      {
+        heading: 'Paperwork for your agent',
+        body: [
+          'The clean is done to inventory standard. The deposit back guarantee covers everything related to the clean that was booked.',
+          'If the agent says something is not clean enough, tell us through your account or on WhatsApp within 7 days, ideally with photos, and we come back at no extra cost. That is the 7 day re clean.'
+        ]
+      }
+    ]
+  },
   'deep-house-cleaning/havering': {
     faqs: [{
       question: 'Do you offer a spring clean in Havering?',
