@@ -11,6 +11,7 @@
 .ep-eyebrow{font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
 .ep-answer{font-size:clamp(1.08rem,1.6vw,1.28rem);max-width:46em;color:var(--ink)}
 .ep-answer-sub{max-width:46em}
+.ep-answer-sub a{color:#0e332f;text-decoration:underline;text-underline-offset:.15em}
 .ep-hero .h-btn{margin-top:10px}
 .ep-facts{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
 .ep-facts li{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px 16px;font-size:.95rem}

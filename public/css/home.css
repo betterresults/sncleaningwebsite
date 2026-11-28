@@ -659,7 +659,7 @@
 
 /* Heavy below-the-fold sections (the map and the room carousel): the browser
    skips their layout/paint until they are about to scroll into view. */
-.is-home main > #areas,
+.home main > #areas,
 .is-home main > .h-checklist {
   content-visibility: auto;
   contain-intrinsic-size: auto none auto 800px;
@@ -728,8 +728,8 @@
 .s-capsule-links a { font-weight: 600; color: var(--h-primary-dark); }
 .s-areas { margin-top: clamp(28px, 4vw, 44px); }
 .s-areas h3 { font-family: var(--h-serif); font-weight: 500; font-size: 1.25rem; color: var(--h-ink); margin: 0 0 12px; }
-.s-area-links { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-.s-area-links a { display: inline-block; padding: 8px 14px; border-radius: 999px; background: var(--h-sand); border: 1px solid var(--h-line); color: var(--h-primary-dark); font-weight: 600; font-size: .9rem; text-decoration: none; }
+.s-area-links { list-style: none; margin: 0 0 22px; padding: 0; display: flex; flex-wrap: wrap; gap: 12px; }
+.s-area-links a { display: inline-flex; align-items: center; justify-content: center; box-sizing: border-box; min-height: 48px; min-width: 48px; padding: 12px 16px; border-radius: 999px; background: var(--h-sand); border: 1px solid var(--h-line); color: var(--h-primary-dark); font-weight: 600; font-size: .9rem; text-decoration: none; }
 .s-area-links a:hover { border-color: var(--h-primary); }
 .s-area-list { color: var(--h-text); line-height: 1.8; margin: 0; }
 @media (max-width: 1000px) {

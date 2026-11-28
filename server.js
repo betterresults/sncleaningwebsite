@@ -297,6 +297,23 @@ function aiPageDates(published) {
     webPageDateModified: AI_DATE_MODIFIED
   };
 }
+// Area pages: only a date already stored on the row. A future stamp is left off.
+function recordedDate(value) {
+  if (!value) return null;
+  const d = new Date(value);
+  if (isNaN(d.getTime())) return null;
+  const day = d.toISOString().slice(0, 10);
+  if (day > '2026-11-28') return null;
+  return day;
+}
+function areaPageDates(page) {
+  const published = recordedDate(page && page.created_at);
+  const modified = recordedDate(page && page.updated_at);
+  const out = {};
+  if (published) out.webPageDatePublished = published;
+  if (modified) out.webPageDateModified = modified;
+  return out;
+}
 
 // ---------- Routes ----------
 app.get('/', async (req, res) => {
@@ -568,13 +585,22 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
   const services = await content.getServices();
   const svc = services.find((x) => x.slug === req.params.serviceSlug);
   const serviceName = svc ? svc.title : req.params.serviceSlug;
+  const placeKey = (s) => String(s || '').toLowerCase().replace(/^essex\s*-\s*/, '').replace(/[^a-z]/g, '');
+  const areaPages = await content.getAreaPages();
+  const withArea = allVideos.map((v) => {
+    const key = placeKey(v.town);
+    const hit = key && areaPages.find((ap) => ap.services && ap.services.slug === req.params.serviceSlug && ap.coverage_regions && (
+      placeKey(ap.coverage_regions.display_name) === key || placeKey(ap.coverage_regions.name) === key
+    ));
+    return hit ? { ...v, areaUrl: `/${req.params.serviceSlug}/${hit.slug}/` } : v;
+  });
   const breadcrumbs = [...res.locals.breadcrumbs, { name: serviceName, url: `/${req.params.serviceSlug}` }, { name: 'Videos', url: `/videos/${req.params.serviceSlug}` }];
   res.render('videos', {
     title: `${serviceName} Job Videos`,
     metaDescription: `Before and after videos from real ${serviceName.toLowerCase().replace(/\bairbnb\b/, 'Airbnb')} jobs by SN Cleaning Services across London and Essex.`,
     // 3 or fewer videos: the service page already shows all of them and does not link here, so keep this copy out of Google.
     noindex: allVideos.length <= 3,
-    allVideos,
+    allVideos: withArea,
     serviceName,
     serviceSlug: req.params.serviceSlug,
     designV2: true,
@@ -1635,6 +1661,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
         return res.render('area-v2', {
       jobVideos: areaJobVideos,
       recentCleans,
+      ...areaPageDates(page),
       mapLink,
       mapCopy,
       mini,
@@ -1683,6 +1710,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
   const faqPage = schema.buildFaqPage(page.faqs);
 
   res.render('area-detail', {
+    ...areaPageDates(page),
     title: plainPlaceName(page.meta_title || `${service.title} in ${region.name}`),
     metaDescription: plainPlaceName(page.meta_description || `${service.title} in ${region.name}.`),
     page,

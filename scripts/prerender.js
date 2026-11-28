@@ -32,15 +32,27 @@ const PORT = 4521;
 // pages (the 404 capture route, the post-submit thank-you page) out of the
 // sitemap without excluding them from the site itself.
 async function buildRoutes() {
+  // Dates are the last real edit of that page, or a published content date.
+  // Not the build date. Sources are noted beside each one.
+  const eotPriceDate = require('../data/eot-prices').PRICES_LAST_UPDATED; // 2026-11-24
+  const abPriceDate = require('../data/after-builders-prices').PUBLISHED; // 2026-11-25
+  const WHY_LASTMOD = {
+    'end-of-tenancy-cleaning': '2026-11-28',
+    'deep-house-cleaning': '2026-11-28',
+    'domestic-cleaning': '2026-11-24',
+    'airbnb-cleaning': '2026-11-24',
+    'after-builders-cleaning': '2026-11-28',
+    'carpet-cleaning-services': '2026-11-28',
+    'upholstery-cleaning': '2026-11-28',
+    'mattress-cleaning': '2026-11-28'
+  };
   const fixed = [
-    { url: '/', out: 'index.html', sitemap: true },
-    // /our-services (not /services) to match the exact URL already indexed
-    // on sncleaningservices.co.uk — see server.js for the route itself.
-    { url: '/our-services', out: 'our-services/index.html', sitemap: true },
-    { url: '/about', out: 'about/index.html', sitemap: true },
-    { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true },
-    { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true },
-    { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true },
+    { url: '/', out: 'index.html', sitemap: true, lastmod: '2026-11-27' }, // views/index.ejs
+    { url: '/our-services', out: 'our-services/index.html', sitemap: true, lastmod: '2026-11-27' }, // views/services.ejs
+    { url: '/about', out: 'about/index.html', sitemap: true, lastmod: '2026-11-28' }, // views/about.ejs in PR #41
+    { url: '/about/silvia-nedeva', out: 'about/silvia-nedeva/index.html', sitemap: true, lastmod: '2026-11-27' },
+    { url: '/end-of-tenancy-cleaning/faq', out: 'end-of-tenancy-cleaning/faq/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/faq-end-of-tenancy.js
+    { url: '/end-of-tenancy-cleaning/prices', out: 'end-of-tenancy-cleaning/prices/index.html', sitemap: true, lastmod: eotPriceDate },
     { url: '/end-of-tenancy-cleaning-checklist', out: 'end-of-tenancy-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/domestic-cleaning-checklist', out: 'domestic-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/airbnb-turnover-cleaning-checklist', out: 'airbnb-turnover-cleaning-checklist/index.html', sitemap: true, lastmod: '2026-11-26' },
@@ -50,18 +62,18 @@ async function buildRoutes() {
     { url: '/house-cleaning-time-calculator', out: 'house-cleaning-time-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/end-of-tenancy-cleaning-cost-calculator', out: 'end-of-tenancy-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-26' },
     { url: '/carpet-cleaning-cost-calculator', out: 'carpet-cleaning-cost-calculator/index.html', sitemap: true, lastmod: '2026-11-27' },
-    { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true },
-    { url: '/prices', out: 'prices/index.html', sitemap: true },
-    { url: '/areas', out: 'areas/index.html', sitemap: true },
-    { url: '/reviews', out: 'reviews/index.html', sitemap: true },
-    { url: '/our-work', out: 'our-work/index.html', sitemap: true },
-    { url: '/why-us', out: 'why-us/index.html', sitemap: true },
-    ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true })),
-    { url: '/blog', out: 'blog/index.html', sitemap: true },
-    { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true },
-    { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true },
-    { url: '/cookies-policy', out: 'cookies-policy/index.html', sitemap: true },
-    { url: '/contact', out: 'contact/index.html', sitemap: true },
+    { url: '/after-builders-cleaning/prices', out: 'after-builders-cleaning/prices/index.html', sitemap: true, lastmod: abPriceDate },
+    { url: '/prices', out: 'prices/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/price-hub.js and views/prices-index.ejs
+    { url: '/areas', out: 'areas/index.html', sitemap: true, lastmod: '2026-11-28' }, // went live in PR #41
+    { url: '/reviews', out: 'reviews/index.html', sitemap: true, lastmod: '2026-11-28' }, // went live in PR #41
+    { url: '/our-work', out: 'our-work/index.html', sitemap: true, lastmod: '2026-11-16' }, // views/our-work.ejs
+    { url: '/why-us', out: 'why-us/index.html', sitemap: true, lastmod: '2026-11-28' }, // hub lists the JSON pages edited this day
+    ...require('../data/why-us').all().map((p) => ({ url: p.url, out: `${p.url.slice(1)}/index.html`, sitemap: true, lastmod: WHY_LASTMOD[p.slug] })),
+    { url: '/blog', out: 'blog/index.html', sitemap: true, lastmod: '2026-11-26' }, // views/blog/index.ejs; raised below if a post is newer
+    { url: '/privacy-policy', out: 'privacy-policy/index.html', sitemap: true, lastmod: '2026-11-28' }, // data/legal.js title and copy edit in PR #41
+    { url: '/terms-and-conditions', out: 'terms-and-conditions/index.html', sitemap: true, lastmod: '2026-11-28' },
+    { url: '/cookies-policy', out: 'cookies-policy/index.html', sitemap: true, lastmod: '2026-11-28' },
+    { url: '/contact', out: 'contact/index.html', sitemap: true, lastmod: '2026-11-28' },
     { url: '/contact/success', out: 'contact/success/index.html', sitemap: false },
     { url: '/this-page-does-not-exist', out: '404.html', sitemap: false } // captures our custom 404 view
   ];
@@ -78,7 +90,17 @@ async function buildRoutes() {
   // Listed in the sitemap only when the service page links to it ("View all", shown above 3 videos);
   // with 3 or fewer the page repeats the service page's own video section (noindex, see server.js).
   const videoRoutes = [...new Set(jobVideos.map((v) => v.service_slug))]
-    .map((slug) => ({ url: `/videos/${slug}`, out: `videos/${slug}/index.html`, sitemap: jobVideos.filter((v) => v.service_slug === slug).length > 3 }));
+    .map((slug) => {
+      const mine = jobVideos.filter((v) => v.service_slug === slug);
+      const newest = mine.map((v) => v.recorded_on || v.created_at).filter(Boolean).sort().pop();
+      return {
+        url: `/videos/${slug}`,
+        out: `videos/${slug}/index.html`,
+        sitemap: mine.length > 3,
+        // The end of tenancy videos page gained its written list on 28 Nov 2026.
+        lastmod: slug === 'end-of-tenancy-cleaning' ? '2026-11-28' : newest
+      };
+    });
 
   // Questions answered (Supabase public.faq_answers)
   const faqAnswers = await content.getFaqAnswers();
@@ -105,6 +127,12 @@ async function buildRoutes() {
     sitemap: true,
     lastmod: p.updated_at
   }));
+
+  const blogRoute = fixed.find((r) => r.url === '/blog');
+  if (blogRoute) {
+    const newest = blogPosts.map((p) => p.updated_at || p.published_at).filter(Boolean).sort().pop();
+    if (newest && (!blogRoute.lastmod || newest > blogRoute.lastmod)) blogRoute.lastmod = newest;
+  }
 
   const blogRoutes = blogPosts.map((p) => ({
     url: p.legacy_root ? `/${p.slug}` : `/blog/${p.slug}`,
@@ -335,7 +363,14 @@ async function optimiseCss(html) {
       const cssDir = path.join(__dirname, '..', 'public', 'css');
       const combined = path.join(cssDir, 'site-home.css');
       if (!fs.existsSync(combined) || !optimiseCss.combinedDone) {
-        fs.writeFileSync(combined, fs.readFileSync(path.join(cssDir, 'style.css'), 'utf8') + '\n' + fs.readFileSync(path.join(cssDir, 'home.css'), 'utf8'));
+        const raw = fs.readFileSync(path.join(cssDir, 'style.css'), 'utf8') + '\n' + fs.readFileSync(path.join(cssDir, 'home.css'), 'utf8');
+        const min = raw
+          .replace(/\/\*[\s\S]*?\*\//g, '')
+          .replace(/\s+/g, ' ')
+          .replace(/\s*([{}:;,>])\s*/g, '$1')
+          .replace(/;}/g, '}')
+          .trim();
+        fs.writeFileSync(combined, min);
         optimiseCss.combinedDone = true;
       }
       doc = doc.replace('<link rel="stylesheet" href="/css/style.css">', '<link rel="stylesheet" href="/css/site-home.css">')

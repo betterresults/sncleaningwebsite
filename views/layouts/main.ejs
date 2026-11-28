@@ -147,7 +147,7 @@
 <% const isHomePage = (typeof isHome !== 'undefined' && isHome) || (typeof designV2 !== 'undefined' && designV2); /* pages on the new design system */ %>
 <% const isFunnel = typeof funnel !== 'undefined' && funnel; /* ad landing funnel: no header, footer or extra buttons */ %>
 <% const hideQuote = typeof hideQuoteCta !== 'undefined' && hideQuoteCta; %>
-<body class="<%= (isFunnel || isHomePage || hideQuote || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %><%= (typeof bodyClass !== 'undefined' && bodyClass) ? ' ' + bodyClass : '' %>">
+<body class="<%= (isFunnel || isHomePage || hideQuote || currentPath === '/contact' || currentPath.indexOf('/contact/') === 0) ? 'no-sticky' : '' %><%= isHomePage ? ' is-home' : '' %><%= (typeof isHome !== 'undefined' && isHome) ? ' home' : '' %><%= (typeof bodyClass !== 'undefined' && bodyClass) ? ' ' + bodyClass : '' %>">
   <a class="skip-link" href="#content">Skip to content</a>
   <% if (!isFunnel) { %>
   <div class="announce"><p>12 years in business · London &amp; Essex · Our own insured, DBS checked team</p></div>

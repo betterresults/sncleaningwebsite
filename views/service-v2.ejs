@@ -228,6 +228,7 @@
         <a href="<%= site.googleBusinessUrl %>" class="h-btn h-btn--primary" target="_blank" rel="noopener">Read all reviews on Google</a>
       <% } %>
     </div>
+    <p class="h-center" style="margin-top:18px"><a href="/reviews/">Read the reviews on our reviews page</a><% if (site.googleBusinessUrl) { %> · <a href="<%= site.googleBusinessUrl %>" target="_blank" rel="noopener">Google profile</a><% } %> · <a href="https://maps.google.com/?cid=16363345078455134139" target="_blank" rel="noopener">Google Maps</a></p>
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">
