@@ -201,13 +201,79 @@ function writeFile(relPath, content) {
 
 // Content photos on a page (inside <main>), for the image sitemap.
 function pageImages(html) {
-  const a = html.indexOf('<main>'), b = html.lastIndexOf('</main>');
+  const open = html.search(/<main[\s>]/);
+  const a = open < 0 ? -1 : html.indexOf('>', open) + 1;
+  const b = html.lastIndexOf('</main>');
   if (a < 0 || b < a) return [];
   const out = new Set();
   for (const m of html.slice(a, b).matchAll(/<img[^>]+src="(\/images\/[^"?]+\.(?:jpe?g|png|webp))[^"]*"/gi)) {
     if (!/\/images\/(_r|favicon)\/|logo/.test(m[1])) out.add(m[1]);
   }
   return [...out].slice(0, 20);
+}
+
+function isoDurationSeconds(value) {
+  const m = String(value || '').match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/);
+  if (!m) return null;
+  return (Number(m[1] || 0) * 3600) + (Number(m[2] || 0) * 60) + Number(m[3] || 0);
+}
+
+// VideoObject blocks in the rendered JSON-LD, for the video sitemap.
+function pageVideos(html) {
+  const out = [];
+  for (const block of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi)) {
+    let data;
+    try { data = JSON.parse(block[1]); } catch (e) { continue; }
+    const nodes = Array.isArray(data) ? data : [data];
+    for (const node of nodes) {
+      if (!node || node['@type'] !== 'VideoObject') continue;
+      const seconds = isoDurationSeconds(node.duration);
+      out.push({
+        title: node.name || '',
+        description: node.description || '',
+        thumbnail: node.thumbnailUrl || '',
+        player: node.embedUrl || '',
+        seconds,
+        published: node.uploadDate || ''
+      });
+    }
+  }
+  return out;
+}
+
+function writeVideoSitemap(routes) {
+  const esc = (value) => String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  const clip = (value, max) => {
+    const text = String(value || '').replace(/\s+/g, ' ').trim();
+    return text.length > max ? text.slice(0, max) : text;
+  };
+  const urls = routes
+    .filter((r) => r.url.startsWith('/videos/') && r.videos && r.videos.length)
+    .map((r) => {
+      const loc = `${SITE_URL}${r.url.replace(/\/?$/, '/')}`;
+      const videos = r.videos.map((v) => {
+        const bits = [
+          `      <video:thumbnail_loc>${esc(v.thumbnail)}</video:thumbnail_loc>`,
+          `      <video:title>${esc(clip(v.title, 100))}</video:title>`,
+          `      <video:description>${esc(clip(v.description, 2048))}</video:description>`,
+          `      <video:player_loc>${esc(v.player)}</video:player_loc>`
+        ];
+        if (v.seconds != null) bits.push(`      <video:duration>${v.seconds}</video:duration>`);
+        if (v.published) bits.push(`      <video:publication_date>${esc(v.published)}</video:publication_date>`);
+        return `    <video:video>\n${bits.join('\n')}\n    </video:video>`;
+      }).join('\n');
+      return `  <url>\n    <loc>${loc}</loc>\n${videos}\n  </url>`;
+    })
+    .join('\n');
+  const xml = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">\n${urls}\n</urlset>\n`;
+  writeFile('video-sitemap.xml', xml);
+  const count = routes.filter((r) => r.url.startsWith('/videos/') && r.videos && r.videos.length)
+    .reduce((n, r) => n + r.videos.length, 0);
+  console.log(`Wrote dist/video-sitemap.xml (${count} videos)`);
 }
 
 function writeSitemap(routes) {
@@ -270,7 +336,7 @@ function writeRobotsTxt() {
   const ai = ['OAI-SearchBot', 'ChatGPT-User', 'Claude-SearchBot', 'Claude-User', 'PerplexityBot', 'Perplexity-User'];
   const txt = `User-agent: *\nAllow: /\n${priv}\n` +
     ai.map((b) => `User-agent: ${b}\n`).join('') + `Allow: /\n${priv}\n` +
-    `User-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\n`;
+    `User-agent: Bytespider\nDisallow: /\n\nSitemap: ${SITE_URL}/sitemap.xml\nSitemap: ${SITE_URL}/feed.xml\nSitemap: ${SITE_URL}/video-sitemap.xml\n`;
   writeFile('robots.txt', txt);
   console.log('Wrote dist/robots.txt');
 }
@@ -447,12 +513,14 @@ async function main() {
         }
         writeFile(route.out, cullSvgMaps(await optimiseCss(require('./pictures').wrapPictures(body))));
         route.images = pageImages(body);
+        route.videos = pageVideos(body);
         route.title = pageTitle(body);
         route.description = pageDescription(body);
         console.log(`Rendered ${route.url} -> dist/${route.out} (${status})`);
       }
 
       writeSitemap(ROUTES);
+      writeVideoSitemap(ROUTES);
       writeFeed(ROUTES);
       writeRobotsTxt();
 
