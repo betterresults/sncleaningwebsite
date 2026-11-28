@@ -1552,3 +1552,15 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 .reclean-promise p { margin: 8px 0 0; }
 .reclean-promise a { text-decoration: underline; }
 @media (max-width: 1200px) and (min-width: 1025px) { .main-nav { gap: 18px; } }
+
+@media print {
+  .announce, .site-header, .site-footer, .sticky-bar, .cookie-note, .wa-float, .skip-link,
+  .h-quote, form, iframe, video, [data-quote-form] { display: none !important; }
+  body { background: #fff !important; color: #000 !important; padding-bottom: 0 !important; }
+  main, .container, .h-wrap { max-width: none !important; }
+  .h-hero, [class*="hero"] { background: none !important; color: #000 !important; min-height: 0 !important; }
+  a { color: #000 !important; text-decoration: underline; }
+  h1, h2, h3 { break-after: avoid; }
+  img, table, details, .h-card { break-inside: avoid; }
+  main::after { content: "SN Cleaning Services, 020 3835 5033, sncleaningservices.co.uk"; display: block; margin-top: 24px; font-weight: 600; }
+}
