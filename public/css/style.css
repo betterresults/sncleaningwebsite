@@ -1481,6 +1481,7 @@ body:not(.no-sticky) .wa-float { bottom: calc(92px + env(safe-area-inset-bottom,
 /* Contact page: customer support (13 Nov 2026) */
 .support-section h2 { margin: 28px 0 14px; }
 .support-table-wrap { overflow-x: auto; }
+.support-table-wrap:focus-visible { outline: 3px solid var(--color-primary); outline-offset: 3px; }
 .support-table { width: 100%; border-collapse: collapse; min-width: 560px; }
 .support-table th, .support-table td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,.1); }
 .support-table thead th { font-size: 14px; opacity: .75; }
