@@ -33,7 +33,7 @@ module.exports = [
     short: 'Intensive cleaning that targets hidden grime and allergens.',
     description:
       'Perfect for spring cleaning, after renovations, or when it has simply been a while. We get into the details, skirting boards, inside appliances, grout and more, for a truly deep clean.',
-    features: ['Inside oven & fridge', 'Grout & tile scrubbing', 'Skirting boards & doors', 'Light fixtures & vents']
+    features: ['Inside appliances when requested', 'Grout & tile scrubbing', 'Skirting boards & doors', 'Light fixtures & vents']
   },
   {
     slug: 'after-builders-cleaning',

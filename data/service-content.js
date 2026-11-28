@@ -31,7 +31,7 @@ const COPY = {
   },
   'end-of-tenancy-cleaning': {
     h1: 'End of tenancy cleaning, <em>ready for inspection</em>',
-    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against, inside the oven, limescale, skirting boards and all, so you can hand back the keys with confidence.',
+    lead: 'We clean the whole property to the checklist letting agents and inventory clerks inspect against, kitchens and bathrooms, limescale, skirting boards and all, so you can hand back the keys with confidence.',
     tilesEyebrow: 'Who we clean for',
     tilesTitle: 'Moving out, moving in, or between tenants',
     tilesIntro: 'Agents check the same things every time: the oven, limescale in the bathroom, skirting boards, marks on walls and doors. We pay extra attention to all of them, and we work to your moving day.',

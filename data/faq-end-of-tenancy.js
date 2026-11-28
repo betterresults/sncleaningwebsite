@@ -37,7 +37,7 @@ module.exports = {
           q: 'Is oven cleaning included?',
           top: true,
           links: [{ text: 'Oven prices', url: '/end-of-tenancy-cleaning/prices/#extras' }],
-          a: "Yes, we clean the oven as part of the service. You choose your oven type when you book, because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. That way nobody pays for an oven they don't have."
+          a: "No. Oven cleaning is an optional add on, not part of the from price. You choose your oven type, or no oven, when you book, because a single oven takes far less time than a double oven, a range or an AGA, and some homes don't need it at all. The price shows in your total before you confirm."
         },
         {
           q: 'Is carpet cleaning included?',
