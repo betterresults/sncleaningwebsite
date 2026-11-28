@@ -26,20 +26,28 @@
 
   <!-- Open Graph / Twitter -->
   <% const ogTitle = (typeof title !== 'undefined' ? title : site.name) + ' | ' + site.name; %>
-  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', professional residential and commercial cleaning services.'; %>
+  <% const ogDesc = (typeof metaDescription !== 'undefined' && metaDescription) ? metaDescription : site.name + ', domestic cleaning in London and Essex.'; %>
+  <% const ogAlt = (typeof ogImageAlt !== 'undefined' && ogImageAlt) ? ogImageAlt : 'SN Cleaning Services, domestic cleaning in London and Essex'; %>
   <meta property="og:type" content="<%= (typeof ogType !== 'undefined' && ogType) ? ogType : (typeof post !== 'undefined' ? 'article' : 'website') %>" />
   <meta property="og:site_name" content="<%= site.name %>" />
+  <meta property="og:locale" content="en_GB" />
   <meta property="og:title" content="<%= ogTitle %>" />
   <meta property="og:description" content="<%= ogDesc %>" />
   <% if (showCanonical) { %><meta property="og:url" content="<%= canonicalUrl %>" /><% } %>
   <% if (typeof ogImage !== 'undefined' && ogImage) { %>
     <meta property="og:image" content="<%= ogImage %>" />
+    <% if (/\/images\/og-image\.jpg$/.test(ogImage) || /\/images\/og\//.test(ogImage)) { %>
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <% } %>
+    <meta property="og:image:alt" content="<%= ogAlt %>" />
   <% } %>
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<%= ogTitle %>" />
   <meta name="twitter:description" content="<%= ogDesc %>" />
   <% if (typeof ogImage !== 'undefined' && ogImage) { %>
     <meta name="twitter:image" content="<%= ogImage %>" />
+    <meta name="twitter:image:alt" content="<%= ogAlt %>" />
   <% } %>
 
   <!-- Booking forms (Dilvon, on our app. subdomain) and their data: connect early so forms open fast -->

@@ -200,6 +200,7 @@ app.use(async (req, res, next) => {
     res.locals.coverageAreas = (coverageAreas || []).map(plainPlaceName);
     res.locals.hasCaseStudies = editorContent.editorPosts('case').length > 0;
     res.locals.ogImage = schema.absoluteUrl(res.locals.site.defaultOgImage || res.locals.site.logoUrl);
+    res.locals.ogImageAlt = 'SN Cleaning Services, domestic cleaning in London and Essex';
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [
       schema.buildLocalBusiness({ site: res.locals.site, coverageAreas: res.locals.coverageAreas, services: res.locals.navServices }),
@@ -215,6 +216,7 @@ app.use(async (req, res, next) => {
     res.locals.site = SITE_DEFAULTS;
     res.locals.coverageAreas = [];
     res.locals.ogImage = schema.absoluteUrl(SITE_DEFAULTS.defaultOgImage);
+    res.locals.ogImageAlt = 'SN Cleaning Services, domestic cleaning in London and Essex';
     res.locals.breadcrumbs = [{ name: 'Home', url: '/' }];
     res.locals.structuredData = [];
     next();
@@ -253,6 +255,24 @@ const serviceContent = require('./data/service-content');
 const areaMap = require('./lib/area-map');
 app.locals.serviceContent = serviceContent;
 const SERVICE_V2 = ['domestic-cleaning', 'end-of-tenancy-cleaning', 'airbnb-cleaning', 'deep-house-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+const OG_IMAGE_FILE = {
+  'end-of-tenancy-cleaning': 'end-of-tenancy-cleaning',
+  'domestic-cleaning': 'domestic-cleaning',
+  'deep-house-cleaning': 'deep-house-cleaning',
+  'airbnb-cleaning': 'airbnb-cleaning',
+  'after-builders-cleaning': 'after-builders-cleaning',
+  'carpet-cleaning-services': 'carpet-cleaning-services',
+  'upholstery-cleaning': 'carpet-cleaning-services',
+  'mattress-cleaning': 'carpet-cleaning-services'
+};
+function serviceOg(slug, title) {
+  const file = OG_IMAGE_FILE[slug];
+  if (!file) return {};
+  return {
+    ogImage: schema.absoluteUrl('/images/og/' + file + '.jpg'),
+    ogImageAlt: title + ' by SN Cleaning Services in London and Essex'
+  };
+}
 
 function reviewsForService(list, slug) {
   const copy = serviceContent[slug] || serviceContent['domestic-cleaning'] || {};
@@ -1452,6 +1472,7 @@ app.get('/:slug', async (req, res, next) => {
 
   const svcJobVideos = jobVideoLib.section(jobVideoLib.forService(await content.getJobVideos(), page.slug), page.slug, service.title);
   const pickedReviews = reviewsForService(testimonials, page.slug);
+  const share = serviceOg(page.slug, service.title);
   res.render(v2 ? 'service-v2' : 'service-detail', {
     jobVideos: svcJobVideos,
     designV2: v2,
@@ -1469,7 +1490,9 @@ app.get('/:slug', async (req, res, next) => {
     pickedReviews,
     coverageAreas,
     breadcrumbs,
-    ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage,
+    ...(share.ogImage
+      ? share
+      : { ogImage: page.images && page.images.length ? schema.absoluteUrl(page.images[0]) : res.locals.ogImage }),
     ...(AI_DATED_SERVICES.has(page.slug) ? aiPageDates() : {}),
     structuredData: schema.mergeReviewsIntoBusiness([
       ...res.locals.structuredData,
@@ -1659,6 +1682,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
       areaJobVideos.videos.map((v) => v.id), editorContent.editorPosts('case').filter((c) => !c.noindex));
     const pickedReviews = reviewsForArea(testimonials, service.slug, place);
         return res.render('area-v2', {
+      ...serviceOg(service.slug, (fullService && fullService.title) || service.title),
       jobVideos: areaJobVideos,
       recentCleans,
       ...areaPageDates(page),
@@ -1710,6 +1734,7 @@ const areaJobVideos = jobVideoLib.section(jobVideoLib.forArea(await content.getJ
   const faqPage = schema.buildFaqPage(page.faqs);
 
   res.render('area-detail', {
+    ...serviceOg(service.slug, service.title),
     ...areaPageDates(page),
     title: plainPlaceName(page.meta_title || `${service.title} in ${region.name}`),
     metaDescription: plainPlaceName(page.meta_description || `${service.title} in ${region.name}.`),
