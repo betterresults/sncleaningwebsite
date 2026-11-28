@@ -654,7 +654,50 @@ app.get('/videos/:serviceSlug', async (req, res, next) => {
 
 app.get('/about', (req, res) => {
   const breadcrumbs = [...res.locals.breadcrumbs, { name: 'About', url: '/about' }];
+  const profile = require('./data/business-profile');
+  const support = require('./data/customer-support');
+  const priceList = require('./data/price-pages');
+  const cover = require('./data/airbnb-turnover-checklist').faqs.find((f) => /do not cover Kent/i.test(f.a));
+  const years = require('./data/after-builders-checklist').faqs.find((f) => /12 years/.test(f.a));
+  const vat = require('./data/eot-prices').faqs.find((f) => /VAT/.test(f.q));
+  const addr = profile.address;
+  const order = ['end-of-tenancy-cleaning', 'domestic-cleaning', 'deep-house-cleaning', 'airbnb-cleaning', 'after-builders-cleaning', 'carpet-cleaning-services', 'upholstery-cleaning', 'mattress-cleaning'];
+  const names = {
+    'end-of-tenancy-cleaning': 'End of tenancy cleaning',
+    'domestic-cleaning': 'Domestic cleaning',
+    'deep-house-cleaning': 'Deep house cleaning',
+    'airbnb-cleaning': 'Airbnb cleaning',
+    'after-builders-cleaning': 'After builders cleaning',
+    'carpet-cleaning-services': 'Carpet cleaning',
+    'upholstery-cleaning': 'Upholstery cleaning',
+    'mattress-cleaning': 'Mattress cleaning'
+  };
+  const glance = {
+    address: [addr.streetAddress, addr.addressLocality, addr.addressRegion + ' ' + addr.postalCode].join(', '),
+    covers: cover ? cover.a.split('. ').slice(0, 2).join('. ') + '.' : '',
+    years: years && /12 years/.test(years.a) ? '12 years in business' : '',
+    team: cover ? 'The clean is done by our own trained, insured, DBS checked cleaners. We never send subcontractors.' : '',
+    services: order.map((slug) => {
+      const nav = (res.locals.navServices || []).find((s) => s.slug === slug);
+      const raw = servicePrice(slug) || '';
+      const amount = (raw.match(/£\d+/) || [])[0] || '';
+      const prices = priceList.find((p) => p.slug === slug);
+      return {
+        title: (nav && nav.title) || names[slug],
+        url: '/' + slug + '/',
+        price: amount ? ('from ' + amount + (/hour/i.test(raw) ? ' an hour' : '')) : '',
+        pricesUrl: prices ? prices.url : ''
+      };
+    }),
+    chat: support.channels.find((c) => c.id === 'whatsapp'),
+    phone: support.channels.find((c) => c.id === 'phone'),
+    reclean: (support.steps.find((s) => s.title === 'How long you have to tell us') || {}).text || '',
+    rating: profile.googleRating,
+    ratingUrl: (res.locals.site && res.locals.site.googleBusinessUrl) || profile.googleMapsUrl,
+    vat: vat ? vat.a : ''
+  };
   res.render('about', {
+    glance,
     title: 'About Us — 12 Years Cleaning London & Essex',
     metaDescription:
       'SN Cleaning Services has cleaned London and Essex homes for 12 years. Insured, DBS checked team, and a free re clean guarantee.',
