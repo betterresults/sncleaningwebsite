@@ -139,7 +139,7 @@
     <div class="h-reviews">
       <% reviews.forEach(function (t) { %>
         <figure class="h-review h-reveal">
-          <div class="h-stars" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
+          <div class="h-stars" role="img" aria-label="<%= t.rating %> out of 5 stars"><%= '★'.repeat(t.rating) %></div>
           <blockquote>“<%= t.quote %>”</blockquote>
           <figcaption><strong><%= t.name %></strong> · <%= t.location %></figcaption>
         </figure>

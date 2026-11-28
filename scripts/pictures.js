@@ -35,8 +35,6 @@ function wrapPictures(html) {
     if (!clean.startsWith('/images/') || clean.includes('/_r/') || !/\.(jpe?g|png|webp)$/i.test(clean)) return tag;
     const base = clean.replace(/^\/images\//, '').replace(/\.(jpe?g|png|webp)$/i, '');
     const version = (srcMatch[1].match(/[?&]v=([^"&]+)/) || [])[1] || '';
-    const sizes = (tag.match(/\bsizes="([^"]+)"/) || [])[1] || '';
-    const sizeAttr = sizes ? ` sizes="${sizes}"` : '';
     let img = tag;
     const info = dims()[clean];
     if (info && info.width && !/\bwidth=/.test(img)) img = img.replace(/<img\b/i, `<img width="${info.width}" height="${info.height}"`);
@@ -45,6 +43,11 @@ function wrapPictures(html) {
     if (eager) img = img.replace(/\sloading="lazy"/i, '');
     else if (!/\bloading=/i.test(img)) img = img.replace(/<img\b/i, '<img loading="lazy"');
     if (!/\bdecoding=/i.test(img)) img = img.replace(/<img\b/i, '<img decoding="async"');
+    const explicitSizes = (img.match(/\bsizes="([^"]+)"/) || [])[1] || '';
+    const w = (img.match(/\bwidth="(\d+)"/) || [])[1] || '';
+    const sizeAttr = explicitSizes
+      ? ` sizes="${explicitSizes}"`
+      : (w ? ` sizes="(max-width: ${w}px) 100vw, ${w}px"` : ' sizes="100vw"');
     const avif = srcset(base, 'avif', version);
     const webpOnImg = (img.match(/\bsrcset="([^"]+)"/) || [])[1] || '';
     const webp = /\.webp/i.test(webpOnImg) ? webpOnImg : srcset(base, 'webp', version);

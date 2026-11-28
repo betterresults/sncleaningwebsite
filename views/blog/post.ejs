@@ -4,7 +4,7 @@
     <h1 data-ed-title><%= post.title %></h1>
     <% if (post.published_at) { %>
       <p>
-        <time data-ed-date datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+        <time data-ed-date datetime="<%= new Date(post.published_at).toISOString() %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
       </p>
     <% } %>
   </div>

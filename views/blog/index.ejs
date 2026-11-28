@@ -29,7 +29,7 @@
             <% } %>
             <div class="service-card-body">
               <% if (post.published_at) { %>
-                <time class="blog-card-date" datetime="<%= post.published_at %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
+                <time class="blog-card-date" datetime="<%= new Date(post.published_at).toISOString() %>"><%= new Date(post.published_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></time>
               <% } %>
               <h2 class="h3"><%= post.title %></h2>
               <p><%= post.excerpt %></p>
