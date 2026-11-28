@@ -10,7 +10,7 @@ const PUBLISHED_LABEL = '26 November 2026';
 
 const TITLE = 'Domestic Cleaning Checklist | London & Essex';
 const H1 = 'The room by room domestic cleaning checklist (London & Essex)';
-const META_DESCRIPTION = 'Work through a room by room domestic cleaning checklist. Tick each task as you clean, or download a printable PDF, then book a regular clean if you would rather hand it to us.';
+const META_DESCRIPTION = 'Work through a room by room domestic cleaning checklist. Tick each task, download the PDF, or book a regular clean with us.';
 
 const PATH = '/domestic-cleaning-checklist';
 const PDF_PATH = '/downloads/sn-cleaning-domestic-cleaning-checklist.pdf';

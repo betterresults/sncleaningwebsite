@@ -10,7 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const pick = (value) => {
         note.hidden = true;
         try { localStorage.setItem('sn-consent', value); } catch (_) {}
-        if (value === 'accepted' && window.snLoadTracker) window.snLoadTracker();
+        if (value === 'accepted') {
+          if (window.snLoadTracker) window.snLoadTracker();
+          if (window.snLoadAnalytics) window.snLoadAnalytics();
+        }
       };
       document.getElementById('cookie-accept').addEventListener('click', () => pick('accepted'));
       document.getElementById('cookie-reject').addEventListener('click', () => pick('rejected'));

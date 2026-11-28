@@ -1,3 +1,6 @@
+/* A picture wrapper must not change layout: the img keeps its own box. */
+picture { display: contents; }
+
 :root {
   --color-primary: #2c7d79;
   --color-primary-dark: #215e5b;

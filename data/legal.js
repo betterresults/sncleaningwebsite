@@ -7,7 +7,7 @@ const EMAIL = 'info@sncleaningservices.co.uk';
 
 module.exports = {
   'privacy-policy': {
-    title: 'Privacy Policy',
+    title: 'Privacy Policy for Our Website',
     metaDescription: 'How SN Cleaning Services collects, uses and protects your personal information when you visit our website, ask for a quote or book a clean.',
     updated: PRIVACY_UPDATED,
     content: `
@@ -18,7 +18,7 @@ module.exports = {
   <li><strong>Quote and contact forms:</strong> your name, email address, phone number, postcode and the details you give us about the property and the clean you need.</li>
   <li><strong>Bookings:</strong> the information you enter in our online booking form, such as your address, property details, the date you choose and your contact details.</li>
   <li><strong>Messages:</strong> anything you send us by email, phone or WhatsApp.</li>
-  <li><strong>Job applications:</strong> the information you give us when you apply to work as a cleaner, such as your contact details, experience, availability and right-to-work and DBS information.</li>
+  <li><strong>Job applications:</strong> the information you give us when you apply to work as a cleaner, such as your contact details, experience, availability and right to work and DBS information.</li>
   <li><strong>Technical information:</strong> like any website, the servers that host our site receive your IP address and basic browser information when you visit.</li>
   <li><strong>Website usage:</strong> our analytics service records which pages you visit, how you arrived at the site, and your device, browser and approximate location.</li>
 </ul>
@@ -78,7 +78,7 @@ module.exports = {
   },
 
   'cookies-policy': {
-    title: 'Cookie Policy',
+    title: 'Cookie Policy for Our Website',
     metaDescription: 'Which cookies and similar technology the SN Cleaning Services website uses, and how to control them.',
     updated: UPDATED,
     content: `
@@ -87,7 +87,7 @@ module.exports = {
 <h2>Cookies we set</h2>
 <p>When you first visit, we ask whether you accept or reject optional cookies. Your choice is saved in your browser so we don't ask again. You can change it at any time by clearing this site's data in your browser.</p>
 <p>If you accept, our quote pages (addresses starting /go/) remember which advert or link brought you to us, so we can see which of our adverts lead to real bookings. If you reject, this is not kept after you leave the page.</p>
-<p>To make pages load faster, the site stores a small note in your browser's session storage once the booking form has been pre-loaded. It contains no personal information and is cleared when you close the browser tab.</p>
+<p>To make pages load faster, the site stores a small note in your browser's session storage once the booking form has been preloaded. It contains no personal information and is cleared when you close the browser tab.</p>
 
 <h2>Cookies set by other services</h2>
 <ul>
@@ -126,7 +126,7 @@ module.exports = {
   <li>If you need to change or cancel a booking, tell us as early as you can.</li>
 </ul>
 
-<h2>Our work and re-cleans</h2>
+<h2>Our work and re cleans</h2>
 <ul>
   <li>Our cleaners are our own trained team. They are insured and DBS checked.</li>
   <li>If anything we cleaned is not right, tell us and we will come back and put it right: within <strong>7 days</strong> for end of tenancy cleaning and for after builders cleaning in an empty property, and within <strong>24 hours</strong> for homes that are lived in.</li>
