@@ -1,8 +1,10 @@
-<%# Hero quote card. Needs: formSlug, article, lower, name. %>
+<%# Hero quote card. Needs: formSlug, article, lower, name. serviceSlug selects the end of tenancy price clause. %>
+<% const bookedSlug = (typeof serviceSlug !== 'undefined' && serviceSlug) || ''; %>
     <div class="h-quote" id="quote">
       <h2 class="h-quote-title">Get <%= article %> <%= lower %> quote</h2>
 <% if (formSlug) { %>
       <p class="h-quote-sub">Enter your postcode and email and we'll take you straight to the booking form.</p>
+      <p class="h-quote-note"><%= urgencyCopy.LINE %><% if (bookedSlug === 'end-of-tenancy-cleaning') { %> <%= urgencyCopy.EOT_PRICE %><% } %></p>
       <form name="quote" method="GET" action="<%= bookUrl(formSlug) %>" data-netlify="true" netlify-honeypot="bot-field"
             class="h-form" data-quote-form>
         <input type="hidden" name="form-name" value="quote" />
@@ -27,6 +29,7 @@
       </form>
       <% } else { %>
       <p class="h-quote-sub">Tell us about the job and we’ll send you a price.</p>
+      <p class="h-quote-note"><%= urgencyCopy.LINE %><% if (bookedSlug === 'end-of-tenancy-cleaning') { %> <%= urgencyCopy.EOT_PRICE %><% } %></p>
       <form name="service-quote" method="POST" action="/contact/success" data-netlify="true" netlify-honeypot="bot-field" class="h-form">
         <input type="hidden" name="form-name" value="service-quote" />
         <input type="hidden" name="service" value="<%= name %>" />

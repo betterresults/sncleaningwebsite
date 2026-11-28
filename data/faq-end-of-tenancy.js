@@ -1,3 +1,5 @@
+const urgency = require('./urgency-copy');
+
 // End of tenancy FAQ page (/end-of-tenancy-cleaning/faq/).
 // Answers come from Silvia (6 Nov 2026) and the site's rules. Do not add answers she has not given.
 // `top: true` marks the questions shown on every end of tenancy page with a link to this page.
@@ -84,7 +86,7 @@ module.exports = {
           a: 'A furnished home always gets at least two cleaners, because furniture has to be moved. An empty one or two bedroom flat with one bathroom can be done by one cleaner working a longer day. Two or three bedroom homes usually get two cleaners, sometimes three for a larger home, and four bedrooms or more usually three.'
         },
         { q: 'How far ahead should I book?', a: 'Whenever suits you. You can book up to around six months ahead.' },
-        { q: 'Do you do same day or weekend cleans?', a: 'Yes, we clean at weekends and can do same day cleans. Same day and Sunday cleans are £50 extra. Just get in touch.' },
+        ...urgency.faqsFor('end-of-tenancy-cleaning').map((faq) => ({ q: faq.question, a: faq.answer })),
         {
           q: "How do you get the keys if I've already moved out?",
           a: "We can collect and return the keys from your office, a neighbour or another place nearby. Within one mile of the property it's free, up to three miles is £15 and up to five miles is £25. If the keys are further away, get in touch first."

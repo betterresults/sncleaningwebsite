@@ -1,4 +1,6 @@
-module.exports = [
+const urgency = require('./urgency-copy');
+
+const faqs = [
   {
     question: 'What areas do you cover?',
     answer:
@@ -34,6 +36,7 @@ module.exports = [
     answer:
       'Request a quote online, call, or WhatsApp. We can often do next day and weekend slots.'
   },
+  ...urgency.faqsFor('home'),
   {
     question: 'Can I get a discount for recurring cleaning?',
     answer:
@@ -45,3 +48,5 @@ module.exports = [
       "Yes, give us as much notice as you can and we'll move it, free of charge."
   }
 ];
+
+module.exports = faqs;

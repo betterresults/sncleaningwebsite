@@ -60,6 +60,7 @@
       <p class="h-eyebrow h-eyebrow--light"><%= parentLink ? place + ', ' + parentLink.name : 'Local service' %></p>
       <h1 class="h-display"><%= (typeof h1Override !== 'undefined' && h1Override) ? h1Override : name + ' in ' + place %></h1>
       <p class="h-lead"><%= lead %></p>
+      <p class="s-hero-urgency"><%= urgencyCopy.LINE %><% if (service.slug === 'end-of-tenancy-cleaning') { %> <%= urgencyCopy.EOT_PRICE %><% } %></p>
       <div class="s-hero-meta">
         <% if (price) { %><span class="s-price"><%= price %></span><% } %>
         <% if (site.googleBusinessUrl) { %>
@@ -69,7 +70,7 @@
       <% if (typeof priceNote === 'function' && priceNote(service.slug)) { %><p class="s-price-min"><%= priceNote(service.slug) %></p><% } %>
       <% if (pricePages.some(function (pg) { return pg.slug === service.slug; })) { %><p class="s-price-min"><a href="/<%= service.slug %>/prices/" style="color:inherit;text-decoration:underline">See every price and work out yours</a></p><% } %>
     </div>
-<%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name }) %>
+<%- include('partials/quote-form', { formSlug: formSlug, article: article, lower: lower, name: name, serviceSlug: service.slug }) %>
   </div>
 <%- include('partials/trust-strip') %>
 </section>

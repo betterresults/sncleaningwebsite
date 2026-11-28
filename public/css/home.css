@@ -123,6 +123,7 @@
   gap: clamp(32px, 5vw, 72px); align-items: center;
 }
 .h-lead { font-size: clamp(1.02rem, 1.4vw, 1.15rem); line-height: 1.65; color: #d9e5dc; margin: 22px 0 26px; max-width: 34em; }
+.s-hero-urgency { margin: -8px 0 22px; max-width: 40em; font-size: .98rem; line-height: 1.6; color: #d9e5dc; }
 .h-hero-points { list-style: none; padding: 0; margin: 0 0 28px; display: grid; gap: 12px; }
 .h-hero-points li { position: relative; padding-left: 32px; color: #fff; font-weight: 500; }
 .h-hero-points li::before {
@@ -146,6 +147,7 @@
 }
 .h-quote-title { font-family: var(--h-serif); font-weight: 500; font-size: 1.7rem; color: var(--h-ink); margin: 0 0 6px; }
 .h-quote-sub { margin: 0 0 16px; font-size: .92rem; color: var(--h-muted); }
+.h-quote-note { margin: -8px 0 16px; font-size: .92rem; line-height: 1.5; color: var(--h-text); }
 .h-area-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
 .h-tag {
   display: inline-flex; align-items: center; gap: 6px;

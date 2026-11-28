@@ -140,7 +140,7 @@ async function buildRoutes() {
       url: `/${p.services.slug}/${p.slug}`,
       out: `${p.services.slug}/${p.slug}/index.html`,
       sitemap: true,
-      lastmod: pageDates.recordedDate(p.updated_at)
+      lastmod: pageDates.areaContentDate(p.updated_at, p.services && p.services.slug)
     }));
 
   // Office and nursery cleaning now live on snclean.co.uk (301s in netlify.toml),
