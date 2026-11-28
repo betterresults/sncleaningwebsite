@@ -49,7 +49,7 @@
   <div class="ep-three">
     <div class="ep-card"><span class="ep-num">1</span><h3>The size of your home</h3><p>Flat or house, and how many bedrooms. A house costs a little more than a flat with the same bedrooms, because of the stairs and landings and because houses are usually bigger. One bathroom is always included.</p></div>
     <div class="ep-card"><span class="ep-num">2</span><h3>How furnished it is</h3><p>Empty, part furnished or furnished. Furniture is cleaned inside, on top and underneath, and moved so we can clean behind it. That takes more time, so a furnished home always gets at least two cleaners.</p></div>
-    <div class="ep-card"><span class="ep-num">3</span><h3>What your home has</h3><p>A second bathroom, the oven, blinds, a balcony. These are all part of the service. You tick what your home has so we know how long to plan for, and you never pay for things you don't have.</p></div>
+    <div class="ep-card"><span class="ep-num">3</span><h3>What your home has</h3><p>A second bathroom, the oven, blinds, a balcony. These are optional extras, priced on their own. You tick what your home has so we know how long to plan for, and you never pay for things you don't have.</p></div>
   </div>
 </div></section>
 
@@ -102,7 +102,7 @@
 
 <section class="ep-band ep-white" id="extras"><div class="ep-wrap">
   <h2>Extra rooms, the oven and other extras</h2>
-  <p class="ep-intro">These are part of the service, priced separately so you only pay for what your home has.</p>
+  <p class="ep-intro">These are optional extras, priced separately so you only pay for what your home has.</p>
   <div class="ep-tables">
     <div class="ep-table-card">
       <table>
@@ -116,7 +116,7 @@
         <caption>Oven cleaning</caption>
         <tbody><% p.ovens.filter(function (o) { return o.price; }).forEach(function (o) { %><tr><th scope="row"><%= o.label %></th><td><%= money(o.price) %></td></tr><% }); %></tbody>
       </table>
-      <p class="ep-small">We clean the oven inside and out as part of the service. The type matters because a single oven takes far less time than a range or an AGA.</p>
+      <p class="ep-small">Oven cleaning is an optional add on, not part of the from price. The type matters because a single oven takes far less time than a range or an AGA.</p>
     </div>
   </div>
   <div class="ep-extras">

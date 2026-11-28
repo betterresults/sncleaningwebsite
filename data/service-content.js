@@ -75,7 +75,7 @@ const COPY = {
   },
   'deep-house-cleaning': {
     h1: 'Deep cleaning that gets <em>underneath</em>',
-    lead: 'A top to bottom clean of everything a regular clean doesn’t reach: inside the oven, grout and tiles, skirting boards and behind furniture. Done by our own trained team with professional products.',
+    lead: 'A top to bottom clean of everything a regular clean doesn’t reach: grout and tiles, skirting boards and behind furniture. Oven cleaning is an optional add on, not part of the from price. Done by our own trained team with professional products.',
     tilesEyebrow: 'When to book',
     tilesTitle: 'A proper reset for your home',
     tilesIntro: 'You can book a deep clean for the whole home or just the rooms that need it most. Kitchens and bathrooms are the most popular.',

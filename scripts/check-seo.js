@@ -134,7 +134,7 @@ function check(dist) {
     }
     const rewritten = dehyphenText(prose);
     if (rewritten !== prose) problems.push(`compound hyphen ${label}`);
-    if (/clean(s)? the oven as part of/i.test(prose)) problems.push(`oven wording ${label}`);
+    if (/clean(s)? the oven as part of/i.test(prose) || /oven inside and out as part of/i.test(prose)) problems.push(`oven wording ${label}`);
     if (!/tel:02038355033/.test(html)) problems.push(`phone link ${label}`);
     if (meta && !noindex) {
       if (!metas.has(meta)) metas.set(meta, label);
